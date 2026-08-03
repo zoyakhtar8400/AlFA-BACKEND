@@ -84,6 +84,7 @@
   },
   "scripts": {
     "start": "electron .",
+    "dev": "node src/com/tmbill/server/Server.js",
     "server": "node src/com/tmbill/server/Server.js",
     "master": "electron .",
     "terminal": "cross-env RUN_AS_TERMINAL=true electron ."
