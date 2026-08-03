@@ -247,17 +247,23 @@ router.get('/', async (req, res) => {
         order: [['id', 'DESC']],
         raw: true
       });
-
       let billItems = [];
       try {
-        const validIds = bills.map(b => b.id).filter(Boolean);
-        if (validIds.length > 0) {
+        const stringIds = Array.from(new Set(bills.flatMap(b => [String(b.id), String(b.order_id)]).filter(Boolean)));
+        const numericIds = Array.from(new Set(bills.flatMap(b => [Number(b.id), Number(b.order_id)]).filter(n => !isNaN(n) && n > 0)));
+
+        const orConditions = [];
+        if (stringIds.length > 0) {
+          orConditions.push({ orderMasterId: { [global.serverdbConnection.Sequelize.Op.in]: stringIds } });
+        }
+        if (numericIds.length > 0) {
+          orConditions.push({ bill_id: { [global.serverdbConnection.Sequelize.Op.in]: numericIds } });
+        }
+
+        if (orConditions.length > 0) {
           billItems = await global.serverdbConnection.BillItem.findAll({
             where: {
-              [global.serverdbConnection.Sequelize.Op.or]: [
-                { orderMasterId: { [global.serverdbConnection.Sequelize.Op.in]: validIds } },
-                { order_id: { [global.serverdbConnection.Sequelize.Op.in]: validIds.map(String) } }
-              ]
+              [global.serverdbConnection.Sequelize.Op.or]: orConditions
             },
             raw: true
           });
@@ -268,7 +274,13 @@ router.get('/', async (req, res) => {
 
       const formatted = bills.map(b => {
         const currentId = b.order_id || b.id;
-        const items = billItems.filter(bi => String(bi.order_id) === String(currentId));
+        const items = billItems.filter(bi =>
+          String(bi.orderMasterId) === String(b.id) ||
+          String(bi.orderMasterId) === String(b.order_id) ||
+          String(bi.bill_id) === String(b.id) ||
+          String(bi.order_id) === String(currentId) ||
+          String(bi.order_id) === String(b.id)
+        );
         return {
           id: currentId,
           order_id: currentId,
@@ -286,36 +298,37 @@ router.get('/', async (req, res) => {
           total_amount: Number(b.total_amount || b.subtotal || b.order_total || 0),
           subtotal: Number(b.subtotal || 0),
           tax_amount: Number(b.total_tax || 0),
+          discount_amount: Number(b.discount_amount || b.total_discount || 0),
           customer_name: b.cust_name || b.customer_name || 'Walk-in',
           customerName: b.cust_name || b.customer_name || 'Walk-in',
           customer_phone: b.phone || b.mobile || '—',
           mobileNo: b.phone || b.mobile || '—',
           waiter_name: b.waiter || b.waiter_name || 'Staff',
           waiter: b.waiter || b.waiter_name || 'Staff',
-          order_status: b.order_state || 'pending',
-          status: b.order_state || 'pending',
+          order_status: b.order_state || 'completed',
+          status: b.order_state || 'completed',
           payment_status: b.order_state === 'completed' ? 'Paid' : 'Unpaid',
           payment_method: b.payment_mode || 'Cash',
           items: items.map(i => ({
             itemId: i.item_id,
-            itemName: i.item_name || i.name || 'Item',
-            name: i.item_name || i.name || 'Item',
-            variantName: i.alternative_title || '',
-            qty: Number(i.quantity || 1),
-            unitPrice: Number(i.price || i.rate || 0),
-            rate: Number(i.price || i.rate || 0),
-            price: Number(i.price || i.rate || 0),
-            total: Number(i.total || (i.quantity * i.price) || 0)
+            itemName: i.title || i.item_name || i.name || 'Item',
+            name: i.title || i.item_name || i.name || 'Item',
+            variantName: i.alternative_title || i.variantName || i.variant || '',
+            qty: Number(i.quantity || i.qty || 1),
+            unitPrice: Number(i.price || i.rate || i.unitPrice || 0),
+            rate: Number(i.price || i.rate || i.unitPrice || 0),
+            price: Number(i.price || i.rate || i.unitPrice || 0),
+            total: Number(i.total || (i.quantity * i.price) || 0),
+            remark: i.notes || i.item_note || i.remark || ''
           }))
         };
       });
 
-      response.orders = formatted;
       response.data = formatted;
+      response.orders = formatted;
     }
-    response.setStatus(200);
   } catch (error) {
-    console.error('❌ Error in GET /api/orders:', error);
+    console.error('Error fetching orders:', error);
     response.setStatus(400);
     response.setMessage(error.message || 'Something went wrong');
   }

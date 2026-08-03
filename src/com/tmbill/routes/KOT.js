@@ -283,6 +283,126 @@ const createKotHandler = async (req, res) => {
 router.post('/', createKotHandler);
 router.post('/save', createKotHandler);
 
+// POST /:id/move — Move KOT to another table, updating both tables in PostgreSQL
+router.post('/:id/move', async (req, res) => {
+  const response = new ResponseMessage(200, '');
+  try {
+    const kotIdParam = req.params.id;
+    const { toTableId, toTableNo } = req.body;
+
+    if (!toTableId && !toTableNo) {
+      response.setStatus(400);
+      response.setMessage('Please provide toTableId or toTableNo');
+      return res.json(response);
+    }
+
+    // Find the KOT record
+    let kot = await global.serverdbConnection.KOT.findOne({
+      where: {
+        [global.serverdbConnection.Sequelize.Op.or]: [
+          { custom_bill_number: kotIdParam },
+          ...(isNaN(Number(kotIdParam)) ? [] : [{ kot_id: Number(kotIdParam) }])
+        ]
+      }
+    });
+
+    if (!kot) {
+      response.setStatus(404);
+      response.setMessage('KOT not found');
+      return res.json(response);
+    }
+
+    const sourceTableId = kot.table_id;
+    const sourceTableName = kot.table_name;
+
+    // Resolve destination table
+    let destTable = null;
+    if (toTableId) {
+      destTable = await global.serverdbConnection.Table.findByPk(toTableId);
+    }
+    if (!destTable && toTableNo) {
+      const cleanNo = String(toTableNo).replace(/[^0-9]/g, '');
+      destTable = await global.serverdbConnection.Table.findOne({
+        where: {
+          [global.serverdbConnection.Sequelize.Op.or]: [
+            { table_name: `Table ${cleanNo}` },
+            { table_name: `T${cleanNo}` }
+          ]
+        }
+      });
+    }
+
+    if (!destTable) {
+      response.setStatus(404);
+      response.setMessage('Destination table not found');
+      return res.json(response);
+    }
+
+    const destTableNo = String(destTable.table_name || destTable.id).replace(/[^0-9]/g, '') || String(destTable.id);
+
+    // Update KOT record to new table
+    await kot.update({
+      table_id: destTable.id,
+      table_name: destTable.table_name || `Table ${destTableNo}`
+    });
+
+    // Update destination table → KOT_CUT (active)
+    const destExtra = destTable.extra_details || {};
+    await destTable.update({
+      order_state: 'KOT_CUT',
+      extra_details: {
+        ...destExtra,
+        kot_status: 'CUT',
+        payment_status: 'UNPAID',
+        amount: destExtra.amount || 0
+      }
+    });
+
+    // Check if source table has any remaining active KOTs (after move, this KOT now belongs to dest)
+    if (sourceTableId) {
+      const remainingKots = await global.serverdbConnection.KOT.count({
+        where: {
+          table_id: sourceTableId,
+          is_active: 1
+        }
+      });
+
+      if (remainingKots === 0) {
+        const srcTable = await global.serverdbConnection.Table.findByPk(sourceTableId);
+        if (srcTable) {
+          const srcExtra = srcTable.extra_details || {};
+          await srcTable.update({
+            order_state: 'AVAILABLE',
+            extra_details: {
+              ...srcExtra,
+              kot_status: 'NONE',
+              payment_status: 'UNPAID',
+              amount: 0,
+              customer: 'Walk-in',
+              waiter: null
+            }
+          });
+        }
+      }
+    }
+
+    response.setStatus(200);
+    response.setMessage(`KOT moved from ${sourceTableName} to ${destTable.table_name} successfully`);
+    response.data = {
+      kotId: kot.kot_id,
+      fromTableId: sourceTableId,
+      fromTableName: sourceTableName,
+      toTableId: destTable.id,
+      toTableName: destTable.table_name
+    };
+  } catch (err) {
+    console.error('Error moving KOT:', err);
+    response.setStatus(400);
+    response.setMessage(err.message || 'Failed to move KOT');
+  }
+  res.json(response);
+});
+
 // PATCH /:id/status & PUT /:id (Update Status)
 const updateStatusHandler = async (req, res) => {
   const response = new ResponseMessage(200, '');

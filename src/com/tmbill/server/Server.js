@@ -126,6 +126,7 @@ expressApp.use(cors());
 
 const menuCatalogRouter = require('../routes/MenuRoutes');
 const billingRouter = require('../routes/Billing');
+const reservationRouter = require('../routes/Reservation');
 
 
 expressApp.use(errorHandler);
@@ -143,6 +144,9 @@ expressApp.use(ROUTES.KOT, kotRouter);
 expressApp.use(ROUTES.CUSTOMER, auth, customerRouter);
 expressApp.use(ROUTES.OLD_KOT, auth, oldkotRouter);
 expressApp.use(ROUTES.MENU, auth, menuRouter);
+
+// Specific /api/* routes must be registered BEFORE the generic /api catch-all handlers
+expressApp.use('/api/reservations', auth, reservationRouter);
 
 expressApp.use('/api', auth, menuCatalogRouter);
 expressApp.use('/api/billing', auth, billingRouter);
