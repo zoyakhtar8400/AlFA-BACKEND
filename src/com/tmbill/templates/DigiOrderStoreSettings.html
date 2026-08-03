@@ -1,0 +1,302 @@
+<div class="onlinestoreSettingsdiv">
+  <link rel="stylesheet" href="../css/Onlinestoresettings.css" />
+  <div class="onlinesettingsTitle">
+    <h5 data-i18n="onlineStoreSetting.onlineOrderSettings" class="has-i18n">
+      Delivery Platform Settings
+    </h5>
+    <i data-dismiss="modal" class="fas fa-times fa-lg" aria-hidden="true"></i>
+  </div>
+  <div class="storesettingsTabwrapper" id="storesettingsTabwrapperid">
+    <div class="container-div-1">
+      <div class="d-flex storeOptionscontainer">
+       <label
+  id="select-store-label"
+  data-i18n="controller:onlineOrderSettings.SelectStore"
+  class="has-i18n"
+  style="display:inline-block; padding-top:10px; margin-bottom:5px;"
+>
+  SELECT OUTLET
+</label>
+       
+        <select id="parentcurrentdigiStoresoptionsid">
+          <option
+            data-i18n="onlineStoreSetting._selectStore"
+            class="has-i18n"
+            disabled
+            selected
+            value
+          >
+            __Select Outlet__
+          </option>
+        </select>
+      </div>
+
+
+      <input
+        data-i18n="[value]controller:onlineOrderSettings.PublishMenu"
+        class="has-i18n"
+        type="button"
+        value="Publish Menu"
+        id="digipublishMenubuttonid"
+      />
+    </div>
+
+
+    <ul
+      class="nav nav-tabs digistoresettingsTabs"
+      role="tablist"
+      id="digistoressettingstabListid"
+    >
+      <li class="nav-item">
+        <a
+          data-i18n="onlineStoreSetting.outletSettings"
+          class="nav-link has-i18n"
+          id="digistoresettingstabId"
+          href="#digistoressettingstabdivId"
+          role="tab"
+          data-toggle="tab"
+          >Outlet Settings</a
+        >
+      </li>
+      <li class="nav-item">
+        <a
+          data-i18n="onlineStoreSetting.itemsSettingsTitle"
+          class="nav-link has-i18n"
+          id="digiitemsettingstabId"
+          href="#digiitemsettingstabdivId"
+          role="tab"
+          data-toggle="tab"
+          >Items Settings</a
+        >
+      </li>
+      <li class="nav-item">
+        <a
+          data-i18n="onlineStoreSetting.categorySettingsTitle"
+          class="nav-link has-i18n"
+          id="digistorecategoryettingstabId"
+          href="#digistorecatssettingstabdivId"
+          role="tab"
+          data-toggle="tab"
+          >Category Settings</a
+        >
+      </li>
+      <li class="nav-item">
+        <a
+          data-i18n="onlineStoreSetting.optionsSettingsTitle"
+          class="nav-link has-i18n"
+          id="digistoreoptionsettingstabId"
+          href="#digistoreoptionsssettingstabdivId"
+          role="tab"
+          data-toggle="tab"
+          >Modifiers Settings</a
+        >
+      </li>
+      <!-- <li class="nav-item">
+                <a data-i18n="onlineStoreSetting.optionsSettingstitle" class="nav-link has-i18n"
+                    id="digistorePublishMenutabId" href="#digipublishMenutabdivId" role="tab" data-toggle="tab">Publish
+                    Menu</a>
+            </li> -->
+    </ul>
+    <div class="tab-content onlinesettingstabsContainer">
+      <div
+        role="tabpanel"
+        class="tab-pane fade storecatssettingstabdiv"
+        id="digistoressettingstabdivId"
+      >
+        <div class="row platformstore-settings-div">
+          <!-- <div class="platform-title-container">Platform Status : </div> -->
+          <div
+            class="digistoresettings-platformstatus-list"
+            id="digistoresettings-direct-platformstatus-list-id"
+          ></div>
+          <div
+            class="digistoresettings-platformstatus-list"
+            id="digistoresettings-platformstatus-list-id"
+          >
+            <div
+              data-i18n="controller:onlineOrderSettings.Pleaseselectthestore"
+              class="has-i18n"
+            >
+              Please select the Outlet
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+  role="tabpanel"
+  class="tab-pane fade itemsettingsTab"
+  id="digiitemsettingstabdivId"
+>
+  <div class="d-flex store-actions-div">
+
+
+    <!-- Get Items -->
+    <button
+      data-i18n="onlineStoreSetting.itemsSettings.getItems"
+      class="normal-button has-i18n"
+      id="getdigistoreItemsbutton"
+    >
+      Get Items
+    </button>
+
+
+    <!-- Search -->
+    <input
+      data-i18n="[value]onlineStoreSetting.itemsSettings.Search"
+      class="has-i18n"
+      type="text"
+      placeholder="Search"
+      id="digitalfilterstoreitemsField"
+    />
+
+
+    <!-- Filter by Category (NATIVE) -->
+    <label
+      data-i18n="onlineStoreSetting.itemsSettings.filterByCategoryTitle"
+      class="has-i18n"
+      for="filterdigistoreitemsbycatOptions"
+    >
+      Filter by Category:
+    </label>
+
+
+    <select
+      id="filterdigistoreitemsbycatOptions"
+      class="native-filter-select"
+    >
+      <option value="" selected>All</option>
+    </select>
+
+
+    <!-- Filter by Status (NATIVE) -->
+    <label
+  data-i18n="onlineStoreSetting.itemsSettings.filterByStatusTitle"
+  class="has-i18n"
+  for="filterdigistoreitemsbystatusOptions">
+  Filter by Status:
+</label>
+<select id="filterdigistoreitemsbystatusOptions" class="native-filter-select">
+  <option value="" selected data-i18n="common.All">All</option>
+  <option value="1" data-i18n="common.Active">Active</option>
+  <option value="0" data-i18n="common.Inactive">Inactive</option>
+</select>
+
+
+
+
+  </div>
+
+
+  <!-- Items table -->
+  <div class="d-flex digitalstoreItemscontainer">
+    <table
+      class="table table-sm storeItemstable"
+      id="digistoreItemstableId"
+    ></table>
+  </div>
+</div>
+
+
+      <div
+        role="tabpanel"
+        class="tab-pane fade storesettingsTab"
+        id="digistoresettingstabdivId"
+      >
+        <div class="platformlistContainer">
+          <ul class="platformList" id="platformListid"></ul>
+          <div class="platformsactionsContainer">
+            <button
+              data-i18n="onlineStoreSetting.Enable"
+              id="enablestoreButton"
+              type="button"
+              class="btn btn-success button-success has-i18n"
+            >
+              Enable
+            </button>
+            <button
+              data-i18n="onlineStoreSetting.Disable"
+              id="disablestoreButton"
+              type="button"
+              class="btn btn-danger has-i18n"
+            >
+              Disable
+            </button>
+          </div>
+        </div>
+      </div>
+      <div
+        role="tabpanel"
+        class="tab-pane fade storecatssettingstabdiv"
+        id="digistorecatssettingstabdivId"
+      >
+        <div class="row storecat-settings-div">
+          <table
+            class="table table-sm storeCategoriestable"
+            id="digistoreCategoriestableId"
+          ></table>
+        </div>
+      </div>
+      <div
+        role="tabpanel"
+        class="tab-pane fade"
+        id="digistoreoptionsssettingstabdivId"
+      >
+        <div class="d-flex store-actions-div">
+          <input
+            data-i18n="[value]onlineStoreSetting.itemsSettings.Search"
+            class="has-i18n"
+            type="text"
+            placeholder="Search"
+            id="digitalfilterstoreoptionsField"
+          />
+
+
+          <button
+            data-i18n="onlineStoreSetting.itemsSettings.getOtions"
+            class="normal-button has-i18n"
+            id="getdigistoreOptionsbutton"
+          >
+             Get Modifiers
+          </button>
+        </div>
+        <div class="row storeoptionsItemscontainer">
+          <table
+            class="table table-sm storeCategoriestable"
+            id="digistoreoptionssTableId"
+          ></table>
+        </div>
+      </div>
+      <div role="tabpanel" class="tab-pane fade" id="digipublishMenutabdivId">
+        <div class="d-flex">
+          <input
+            data-i18n=""
+            class="has-i18n"
+            type="button"
+            value="Publish Menu"
+            id="digipublishMenubuttonid"
+          />
+        </div>
+      </div>
+    </div>
+    <div class="container-div-1">
+      <div class="d-flex justify-content-center">
+        <p
+          data-i18n="onlineStoreSetting.NoteMessage"
+          class="text-success has-i18n"
+        >
+         Note: After turning toggle On/off, click Update and wait 1 minute before proceeding any request.
+        </p>
+      </div>
+      <button
+        data-i18n="controller:onlineOrderSettings.Update"
+        class="normal-button has-i18n"
+        id="digiStoreMenuUpdateButtonid"
+      >
+        Update
+      </button>
+    </div>
+  </div>
+</div>
+<script>
+  require('../js/DigiStoreSettingsController.js');
+</script>

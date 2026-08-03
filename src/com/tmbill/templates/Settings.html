@@ -1,0 +1,1477 @@
+<div class="settingswindoWrapper" id="settingswindoWrapperid">
+  <link rel="stylesheet" href="../css/Settings.css" />
+  <div class="settingstitleDiv">
+    <h3 data-i18n="settingScreen.Settings" class="settingsHeading has-i18n">
+      Settings
+    </h3>
+    <i
+      data-dismiss="modal"
+      class="fas fa-times fa-lg closeSettings"
+      aria-hidden="true"
+    ></i>
+  </div>
+  <div class="settingTabs">
+    <ul class="nav nav-tabs" id="settingsTablistid" role="tablist">
+      <li class="nav-item">
+        <a
+          data-i18n="settingScreen.GeneralHeading"
+          id="generalTablink"
+          class="nav-link has-i18n"
+          href="#generalTab"
+          role="tab"
+          data-toggle="tab"
+          >General</a
+        >
+      </li>
+
+      <li class="nav-item">
+        <a
+          data-i18n="settingScreen.PrinterHeading"
+          id="printerTablink"
+          class="nav-link has-i18n"
+          href="#printerTab"
+          role="tab"
+          data-toggle="tab"
+          >Printer</a
+        >
+      </li>
+      <li class="nav-item">
+        <a
+          data-i18n="settingScreen.ShortcutsHeading"
+          id="shortcutsTablink"
+          class="nav-link has-i18n"
+          href="#shortcutsTab"
+          role="tab"
+          data-toggle="tab"
+          >Shortcuts</a
+        >
+      </li>
+      <li class="nav-item">
+        <a
+          data-i18n="settingScreen.ProfileHeading"
+          id="profileTablink"
+          class="nav-link has-i18n"
+          href="#profileTab"
+          role="tab"
+          data-toggle="tab"
+          >System Details</a
+        >
+      </li>
+      <li class="nav-item">
+        <a
+          data-i18n="settingScreen.FormattingHeading"
+          id="formattingTablink"
+          class="nav-link has-i18n"
+          href="#formattingTab"
+          role="tab"
+          data-toggle="tab"
+          >Formatting</a
+        >
+      </li>
+    </ul>
+    <div class="tab-content settingstabContent">
+      <div
+        role="tabpanel"
+        class="tab-pane fade in active generalTab"
+        id="generalTab"
+      >
+        <div class="d-flex justify-content-end exportimportDiv">
+          <input
+            data-i18n="[value]settingScreen.General.checkForUpdates"
+            type="button"
+            class="has-i18n"
+            value="Check for updates"
+            id="checkforupdatedButton"
+          />
+          <input
+            data-i18n="[value]settingScreen.General.Export"
+            type="button"
+            class="has-i18n"
+            value="Export"
+            id="exportsettingsButton"
+          />
+          <input
+            data-i18n="[value]settingScreen.General.Import"
+            type="button"
+            class="has-i18n"
+            value="Import"
+            id="importsettingsButton"
+          />
+        </div>
+        <div class="d-flex appearanceDiv bordered-div" id="appearanceDivid">
+          <label
+            data-i18n="settingScreen.General.Theme.Theme"
+            class="themeHeading titleLabel has-i18n"
+            for
+            >Theme:</label
+          >
+          <input
+            value="light"
+            name="usertheme"
+            id="lightThemeid"
+            type="radio"
+          />
+          <label
+            data-i18n="settingScreen.General.Theme.Light"
+            class="has-i18n"
+            for="lightThemeid"
+            >Light</label
+          >
+          <input value="dark" name="usertheme" id="darkThemeid" type="radio" />
+          <label
+            data-i18n="settingScreen.General.Theme.Dark"
+            class="has-i18n"
+            for="darkThemeid"
+            >Dark</label
+          >
+          <input
+            value="system"
+            name="usertheme"
+            id="systemThemeid"
+            type="radio"
+          />
+          <label
+            data-i18n="settingScreen.General.Theme.useSystemSetting"
+            class="has-i18n"
+            for="systemThemeid"
+            >Use system setting</label
+          >
+        </div>
+
+        <div
+          class="appearanceDiv bordered-div align-items-center"
+          id="dayCloseRow"
+        >
+          <label
+            class="extendClosedaySettingHeading titleLabel has-i18n"
+            data-i18n="settingScreen.extendDayCloseTimeLabel"
+          >
+            Extend Day Close Time:
+          </label>
+
+          <!-- <input
+            type="time"
+            id="dayCloseTime"
+            class="form-control mx-2"
+            style="max-width: 110px"
+          /> -->
+
+          <select class="labelchecksCombo" id="extendMinutes">
+            <option
+              value="0"
+              disabled
+              selected
+              class="has-i18n"
+              data-i18n="settingScreen.extendTime"
+            >
+              Extend Time
+            </option>
+            <option
+              value="15"
+              class="has-i18n"
+              data-i18n="settingScreen.fifteenMin"
+            >
+              15 min
+            </option>
+            <option
+              value="30"
+              class="has-i18n"
+              data-i18n="settingScreen.thirtyMin"
+            >
+              30 min
+            </option>
+            <option
+              value="45"
+              class="has-i18n"
+              data-i18n="settingScreen.fortyFiveMin"
+            >
+              45 min
+            </option>
+            <option
+              value="60"
+              class="has-i18n"
+              data-i18n="settingScreen.sixtyMinOneHour"
+            >
+              60 min (1 Hour)
+            </option>
+          </select>
+
+          <input
+            data-i18n="[value]settingScreen.update"
+            type="button"
+            class="has-i18n btn mx-2"
+            value="Update"
+            id="updateExtendDayCloseTimeBtn"
+          />
+        </div>
+
+        <div class="viewSettingsdiv bordered-div">
+          <div class="row">
+            <div class="col-6 tableSettingContainer">
+              <div class="d-flex">
+                <label
+                  data-i18n="settingScreen.General.tableSettings"
+                  class="themeHeading titleLabel has-i18n settingheadings"
+                  for
+                  >Table Settings:</label
+                >
+              </div>
+              <div class="d-flex">
+                <label class="themeHeading titleLabel" for>&nbsp;</label>
+                <input
+                  setting-id="2"
+                  post-action="3"
+                  id="showbilldetailscheckId"
+                  type="checkbox"
+                />
+                <label
+                  data-i18n="settingScreen.General.View.showBillDetailsOnTable"
+                  class="has-i18n"
+                  for="showbilldetailscheckId"
+                  >Display Bill Details on Table</label
+                >
+              </div>
+              <div class="d-flex">
+                <label
+                  class="themeHeading titleLabel tablenameascustomerbalnktitle"
+                  for
+                  >&nbsp</label
+                >
+                <input
+                  setting-id="7"
+                  id="tablenameasCustomercheck"
+                  type="checkbox"
+                />
+                <label
+                  data-i18n="settingScreen.General.View.tableNameAsCustomerNameForTakeawayAndHomeDelivery"
+                  class="has-i18n"
+                  for="tablenameasCustomercheck"
+                  >Display Customer Name on Table
+                </label>
+              </div>
+
+              <div class="d-flex">
+                <label class="titleLabel" for>&nbsp;</label>
+                <input
+                  setting-id="84"
+                  id="showtablekotnossettingsCheck"
+                  type="checkbox"
+                  post-action="1"
+                />
+                <label
+                  data-i18n="settingScreen.General.Printing.showkotnumberonbill"
+                  class="has-i18n"
+                  for="showtablekotnossettingsCheck"
+                  >Display KOT number on Table</label
+                >
+              </div>
+              <div class="d-flex">
+                <label class="titleLabel" for>&nbsp</label>
+                <input
+                  setting-id="23"
+                  id="orderstatusontableCheck"
+                  type="checkbox"
+                  post-action="2"
+                />
+                <label
+                  data-i18n="settingScreen.General.View.showOrderStatusOnTable"
+                  class="has-i18n"
+                  for="orderstatusontableCheck"
+                  >Display Order Status on Table
+                </label>
+              </div>
+
+              <div class="d-flex">
+                <label class="titleLabel" for>&nbsp;</label>
+
+                <input
+                  setting-id="54"
+                  id="displaytimeontableCheck"
+                  type="checkbox"
+                  post-action="2"
+                />
+                <label
+                  data-i18n="settingScreen.General.View.displayTimeOnTable"
+                  class="has-i18n"
+                  for="displaytimeontableCheck"
+                  >Display Time on Table</label
+                >
+              </div>
+              <div class="d-flex">
+                <label class="titleLabel" for>&nbsp;</label>
+
+                <input
+                  setting-id="220"
+                  id="displaywaiternameontableCheck"
+                  type="checkbox"
+                  post-action="2"
+                />
+                <label
+                  data-i18n="settingScreen.General.View.displayWaiterNameOnTable"
+                  class="has-i18n"
+                  for="displaywaiternameontableCheck"
+                  >Display Waiter Name on Table</label
+                >
+              </div>
+              <div class="d-flex">
+                <label class="titleLabel" for>&nbsp;</label>
+
+                <input
+                  setting-id="244"
+                  id="displayCaptainNameontableCheck"
+                  type="checkbox"
+                  post-action="2"
+                />
+                <label
+                  data-i18n="settingScreen.General.View.displayCaptainNameOnTable"
+                  class="has-i18n"
+                  for="displayCaptainNameontableCheck"
+                  >Display Captain Name on Table</label
+                >
+              </div>
+            </div>
+            <div class="col-6 itemSettingContainer">
+              <div class="d-flex">
+                <label
+                  data-i18n="settingScreen.General.itemSettings"
+                  class="themeHeading titleLabel has-i18n settingheadings"
+                  for
+                  >Item Settings:</label
+                >
+              </div>
+
+              <div class="d-flex">
+                <label class="themeHeading titleLabel" for>&nbsp;</label>
+
+                <input id="showitemdetailscheckId" type="checkbox" />
+                <label
+                  data-i18n="settingScreen.General.View.showItemsDetails"
+                  class="has-i18n"
+                  for="showitemdetailscheckId"
+                  >Display Item Details</label
+                >
+              </div>
+
+              <div class="d-flex">
+                <label class="titleLabel" for>&nbsp</label>
+                <input id="showitemcodedetailscheckId" type="checkbox" />
+                <label
+                  data-i18n="settingScreen.General.View.showItemsCodeDetails"
+                  class="has-i18n"
+                  for="showitemcodedetailscheckId"
+                  >Display Item Code
+                </label>
+              </div>
+
+              <div class="d-flex">
+                <label class="titleLabel" for>&nbsp</label>
+
+                <input
+                  setting-id="67"
+                  id="showitemsimageCheck"
+                  type="checkbox"
+                  post-action="1"
+                />
+                <label
+                  data-i18n="settingScreen.General.View.showItemImage"
+                  class="has-i18n"
+                  for="showitemsimageCheck"
+                  >Display Item Image</label
+                >
+              </div>
+
+              <div class="d-flex">
+                <label class="titleLabel" for>&nbsp</label>
+                <input
+                  setting-id="33"
+                  id="showitempreptimecheckId"
+                  type="checkbox"
+                  post-action="1"
+                />
+                <label
+                  data-i18n="settingScreen.General.View.showItemsPreTime"
+                  class="has-i18n"
+                  for="showitempreptimecheckId"
+                  >Show items prep time
+                </label>
+              </div>
+
+              <div class="d-flex">
+                <label class="themeHeading titleLabel" for>&nbsp;</label>
+                <input
+                  setting-id="146"
+                  id="showcompactItemviewSettingCheck"
+                  type="checkbox"
+                  post-action="2"
+                />
+                <label
+                  data-i18n="settingScreen.General.Showcompactitemview"
+                  class="has-i18n"
+                  for="showcompactItemviewSettingCheck"
+                  >Display Compact Item View</label
+                >
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-6 viewSettingContainer">
+              <div class="d-flex">
+                <label
+                  class="themeHeading titleLabel has-i18n settingheadings"
+                  data-i18n="settingScreen.General.viewSettings"
+                  >View Settings:</label
+                >
+              </div>
+
+              <div class="d-flex">
+                <label class="titleLabel" for>&nbsp</label>
+                <input
+                  setting-id="50"
+                  id="disablesavekotbuttonCheck"
+                  type="checkbox"
+                  post-action="2"
+                />
+                <label
+                  data-i18n="settingScreen.General.View.disableSaveKOT"
+                  class="has-i18n"
+                  for="disablesavekotbuttonCheck"
+                  >Disable save KOT</label
+                >
+              </div>
+
+              <div class="d-flex">
+                <label class="titleLabel" for>&nbsp</label>
+
+                <input
+                  setting-id="51"
+                  id="disablesavebillbuttonCheck"
+                  type="checkbox"
+                  post-action="2"
+                />
+                <label
+                  data-i18n="settingScreen.General.View.disableSaveBill"
+                  class="has-i18n"
+                  for="disablesavebillbuttonCheck"
+                  >Disable save bill</label
+                >
+              </div>
+
+              <div class="d-flex">
+                <label class="themeHeading titleLabel" for>&nbsp;</label>
+                <input
+                  setting-id="86"
+                  id="useseperateviewSettingcheck"
+                  type="checkbox"
+                  post-action="2"
+                />
+                <label
+                  data-i18n="settingScreen.General.View.useSeprateTableItemView"
+                  class="has-i18n"
+                  for="useseperateviewSettingcheck"
+                  >Disable Split Table & Item View</label
+                >
+              </div>
+              <div class="d-flex">
+                <label class="themeHeading titleLabel" for>&nbsp;</label>
+                <input
+                  setting-id="90"
+                  id="showpreordertableFiltercheck"
+                  type="checkbox"
+                  post-action="2"
+                />
+                <label
+                  data-i18n="settingScreen.General.View.showPreOrderDateFilter"
+                  class="has-i18n"
+                  for="showpreordertableFiltercheck"
+                  >Display Pre-Order Date Filter
+                </label>
+              </div>
+
+              <div class="d-flex">
+                <label class="themeHeading titleLabel" for>&nbsp;</label>
+                <input
+                  setting-id="104"
+                  id="showtableDepartmentSettingCheck"
+                  type="checkbox"
+                />
+                <label
+                  data-i18n="settingScreen.General.View.showTableDepartments"
+                  class="has-i18n"
+                  for="showtableDepartmentSettingCheck"
+                  >Display Table Departments</label
+                >
+              </div>
+
+              <div class="d-flex">
+                <label class="themeHeading titleLabel" for>&nbsp;</label>
+                <input
+                  setting-id="105"
+                  id="showvirtualkeyboardSettingCheck"
+                  type="checkbox"
+                  post-action="2"
+                />
+                <label
+                  data-i18n="settingScreen.General.View.showvirtualKeyboard"
+                  class="has-i18n"
+                  for="showvirtualkeyboardSettingCheck"
+                  >Display Virtual Keyboard</label
+                >
+              </div>
+            </div>
+            <div class="col-6 sortByItemContianer">
+              <div class="d-flex">
+                <label
+                  data-i18n="settingScreen.General.sortItemsByHeading"
+                  class="themeHeading titleLabel has-i18n settingheadings"
+                  for
+                  >Sort Items By:</label
+                >
+              </div>
+              <div class="d-flex">
+                <label class="themeHeading titleLabel" for>&nbsp;</label>
+                <input
+                  value="1"
+                  name="itemsortBy"
+                  id="itemsortBycodeid"
+                  type="radio"
+                />
+                <label
+                  data-i18n="settingScreen.General.sortItemsBy.byShortCode"
+                  class="has-i18n"
+                  for="itemsortBycodeid"
+                  >Short Code</label
+                >
+              </div>
+
+              <div class="d-flex">
+                <label class="themeHeading titleLabel" for>&nbsp;</label>
+                <input
+                  value="2"
+                  name="itemsortBy"
+                  id="itemsortBytopamtId"
+                  type="radio"
+                />
+                <label
+                  data-i18n="settingScreen.General.sortItemsBy.topSoldByAmount"
+                  class="has-i18n"
+                  for="itemsortBytopamtId"
+                  >Top-Selling (By Amount)</label
+                >
+              </div>
+
+              <div class="d-flex">
+                <label class="themeHeading titleLabel" for>&nbsp;</label>
+                <input
+                  value="3"
+                  name="itemsortBy"
+                  id="itemsortBytopqtyId"
+                  type="radio"
+                />
+                <label
+                  data-i18n="settingScreen.General.sortItemsBy.topSoldByQty"
+                  class="has-i18n"
+                  for="itemsortBytopqtyId"
+                  >Top-Selling (By Quantity)</label
+                >
+              </div>
+
+              <div class="d-flex">
+                <label class="themeHeading titleLabel" for>&nbsp;</label>
+                <input
+                  value="4"
+                  name="itemsortBy"
+                  id="itemsortByalphaId"
+                  type="radio"
+                />
+                <label
+                  data-i18n="settingScreen.General.sortItemsBy.alphabeticallyAToz"
+                  class="has-i18n"
+                  for="itemsortByalphaId"
+                  >Alphabetical (A-Z)</label
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="d-flex appearanceDiv bordered-div">
+          <label
+            data-i18n="settingScreen.General.defaultTab.defaultTab"
+            class="themeHeading titleLabel has-i18n"
+            for
+            >Default Tab:</label
+          >
+          <input
+            value="dineintabdivId"
+            name="currentTab"
+            id="defaulttab1"
+            type="radio"
+          />
+          <label
+            data-i18n="settingScreen.General.defaultTab.dinein"
+            class="has-i18n"
+            for="defaulttab1"
+            >Dine In</label
+          >
+          <input
+            value="takeawaytabdivID"
+            name="currentTab"
+            id="defaulttab2"
+            type="radio"
+          />
+          <label
+            data-i18n="settingScreen.General.defaultTab.takeaway"
+            class="has-i18n"
+            for="defaulttab2"
+            >PickUp</label
+          >
+          <input
+            value="deliverytabdivID"
+            name="currentTab"
+            id="defaulttab4"
+            type="radio"
+          />
+          <label
+            data-i18n="settingScreen.General.defaultTab.homeDelivery"
+            class="has-i18n"
+            for="defaulttab4"
+            >Delivery</label
+          >
+          <input
+            value="quickbilltabdivID"
+            name="currentTab"
+            id="defaulttab3"
+            type="radio"
+          />
+          <label
+            data-i18n="settingScreen.General.defaultTab.quickBill"
+            class="has-i18n"
+            for="defaulttab3"
+            >Quick Bill</label
+          >
+        </div>
+
+        <div class="d-flex appearanceDiv bordered-div">
+          <label
+            data-i18n="settingScreen.General.disableTabs"
+            class="themeHeading titleLabel has-i18n"
+            for
+            >Disable Tab:</label
+          >
+          <input
+            name="disableTabcheck"
+            value="dineintabId"
+            id="disabledineinIdcheck"
+            type="checkbox"
+          />
+          <label
+            data-i18n="settingScreen.General.defaultTab.dinein"
+            class="has-i18n"
+            for="disabledineinIdcheck"
+            >Dine In</label
+          >
+          <input
+            name="disableTabcheck"
+            value="takeawaytabID"
+            id="disabletakeawayIdcheck"
+            type="checkbox"
+          />
+          <label
+            data-i18n="settingScreen.General.defaultTab.takeaway"
+            class="has-i18n"
+            for="disabletakeawayIdcheck"
+            >PickUp</label
+          >
+          <input
+            name="disableTabcheck"
+            value="deliverytabID"
+            id="disabledeliveryIdcheck"
+            type="checkbox"
+          />
+          <label
+            data-i18n="settingScreen.General.defaultTab.homeDelivery"
+            class="has-i18n"
+            for="disabledeliveryIdcheck"
+            >Delivery</label
+          >
+          <input
+            name="disableTabcheck"
+            value="quickbilltabID"
+            id="disablequickIdcheck"
+            type="checkbox"
+          />
+          <label
+            data-i18n="settingScreen.General.defaultTab.quickBill"
+            class="has-i18n"
+            for="disablequickIdcheck"
+            >Quick Bill</label
+          >
+        </div>
+
+        <div class="viewSettingsdiv bordered-div">
+          <div class="d-flex">
+            <label
+              data-i18n="settingScreen.General.quickBill.quickBill"
+              class="themeHeading titleLabel has-i18n"
+              for
+              >Quick Bill:</label
+            >
+            <input setting-id="10" id="quickprintkotCheck" type="checkbox" />
+            <label
+              data-i18n="settingScreen.General.quickBill.defaultPrintKOTCheck"
+              class="has-i18n"
+              for="quickprintkotCheck"
+              >Enable "Print KOT" by Default</label
+            >
+            <input setting-id="11" id="quickprintbillCheck" type="checkbox" />
+            <label
+              data-i18n="settingScreen.General.quickBill.defaultPrintBillCheck"
+              class="has-i18n"
+              for="quickprintbillCheck"
+              >Enable "Print Bill" by Default</label
+            >
+          </div>
+        </div>
+
+        <div class="viewSettingsdiv bordered-div">
+          <div class="d-flex">
+            <label
+              data-i18n="settingScreen.General.onlineOrders.onlineOrders"
+              class="themeHeading titleLabel has-i18n"
+              for
+              >Online Orders:</label
+            >
+            <input
+              setting-id="12"
+              id="printkotonorderacceptCheck"
+              type="checkbox"
+            />
+            <label
+              data-i18n="settingScreen.General.onlineOrders.printKOTOnAccept"
+              class="has-i18n"
+              for="printkotonorderacceptCheck"
+              >Auto-Print KOT on Order Acceptance</label
+            >
+            <input
+              setting-id="13"
+              id="printbillonorderacceptCheck"
+              type="checkbox"
+            />
+            <label
+              data-i18n="settingScreen.General.onlineOrders.printBillOnAccept"
+              class="has-i18n"
+              for="printbillonorderacceptCheck"
+              >Auto-Print Bill on Order Acceptance</label
+            >
+          </div>
+          <div class="d-flex">
+            <label class="themeHeading titleLabel" for>&nbsp;</label>
+            <input
+              post-action="2"
+              setting-id="122"
+              id="directCompleteOrderButton"
+              type="checkbox"
+            />
+            <label
+              data-i18n="settingScreen.General.onlineOrders.pullOrderOnAccept"
+              class="has-i18n"
+              for="directCompleteOrderButton"
+              >Enable “Direct Complete Order” Button for Online Orders</label
+            >
+          </div>
+          <div class="d-flex align-items-baseline">
+            <label class="themeHeading titleLabel" for>&nbsp;</label>
+            <label
+              data-i18n="settingScreen.General.onlineOrders.successNotificationSound"
+              class="importlabelTitle has-i18n"
+            >
+              Success Notification Sound:</label
+            >
+            <label
+              data-i18n="settingScreen.General.onlineOrders.upto2MB"
+              class="file-size-indicator has-i18n"
+              >Upto 2MB:</label
+            >
+            <input
+              id="hiddennotificationImport1"
+              accept=".mp3"
+              type="file"
+              style="display: none"
+            />
+            <button
+              data-i18n="settingScreen.General.onlineOrders.Select"
+              class="normal-button has-i18n"
+              id="selectnotification1id"
+            >
+              Select
+            </button>
+            <i
+              class="fas fa-play circular-icon"
+              style="display: none"
+              id="playsoundID1"
+            ></i>
+          </div>
+          <div class="d-flex align-items-baseline">
+            <label class="themeHeading titleLabel" for>&nbsp;</label>
+            <label
+              data-i18n="settingScreen.General.onlineOrders.cancelNotificationSound"
+              class="importlabelTitle has-i18n"
+            >
+              Cancel Notification Sound:</label
+            >
+            <label
+              data-i18n="settingScreen.General.onlineOrders.upto2MB"
+              class="file-size-indicator has-i18n"
+              >Upto 2MB:</label
+            >
+            <input
+              id="hiddennotificationImport2"
+              accept=".mp3"
+              type="file"
+              style="display: none"
+            />
+            <button
+              data-i18n="settingScreen.General.onlineOrders.Select"
+              class="normal-button has-i18n"
+              id="selectnotification2id"
+            >
+              Select
+            </button>
+            <i
+              class="fas fa-play circular-icon"
+              style="display: none"
+              id="playsoundID2"
+            ></i>
+          </div>
+        </div>
+
+        <div class="viewSettingsdiv bordered-div">
+          <div class="printingSettingsdiv">
+            <div class="d-flex">
+              <label
+                data-i18n="settingScreen.General.Printing.Printing"
+                class="themeHeading titleLabel has-i18n"
+                for
+                >Printing:</label
+              >
+              <div class="d-flex label-printer-check-div">
+                <label
+                  data-i18n="settingScreen.General.Printing.printToLablePrinterOnKOTPrintHeading"
+                  class="has-i18n"
+                  for="labelforSelect printlabelwithkotCombo"
+                  >Label Printer for KOT:</label
+                >
+                <select class="labelchecksCombo" id="printlabelwithkotCombo">
+                  <option
+                    data-i18n="settingScreen.General.Printing.printToLablePrinterOnKOTPrint.Disable"
+                    class="has-i18n"
+                    selected
+                    value="0"
+                  >
+                    Disable
+                  </option>
+                  <option
+                    data-i18n="settingScreen.General.Printing.printToLablePrinterOnKOTPrint.bothOfflineOnline"
+                    class="has-i18n"
+                    value="1"
+                  >
+                    Both (Offline/Online)
+                  </option>
+                  <option
+                    data-i18n="settingScreen.General.Printing.printToLablePrinterOnKOTPrint.offlineOnly"
+                    class="has-i18n"
+                    value="2"
+                  >
+                    Offline Only
+                  </option>
+                  <option
+                    data-i18n="settingScreen.General.Printing.printToLablePrinterOnKOTPrint.onlineOnly"
+                    class="has-i18n"
+                    value="3"
+                  >
+                    Online Only
+                  </option>
+                </select>
+              </div>
+            </div>
+            <div class="d-flex">
+              <label class="themeHeading titleLabel" for>&nbsp;</label>
+              <input setting-id="18" id="printkdwiseCheck" type="checkbox" />
+              <label
+                data-i18n="settingScreen.General.Printing.printKOTByKitchenDepartment"
+                class="has-i18n"
+                for="printkdwiseCheck"
+                >Print KOT by Kitchen Department</label
+              >
+            </div>
+            <div class="d-flex">
+              <label class="themeHeading titleLabel" for>&nbsp;</label>
+              <input
+                setting-id="154"
+                id="printkdwisforolOrdereCheck"
+                type="checkbox"
+              />
+              <label
+                data-i18n="settingScreen.General.PrintKotbykitchendepartmentforonlineorder"
+                class="has-i18n"
+                for="printkdwisforolOrdereCheck"
+                >Print KOT by Kitchen Department for Online Orders</label
+              >
+            </div>
+            <div class="d-flex">
+              <label class="themeHeading titleLabel" for>&nbsp;</label>
+              <input setting-id="109" id="printallinonekot" type="checkbox" />
+              <label
+                data-i18n="settingScreen.General.Printing.printallinoneKot"
+                class="has-i18n"
+                for="printallinonekot"
+                >Print All-in-One KOT</label
+              >
+            </div>
+            <div class="d-flex">
+              <label class="themeHeading titleLabel" for>&nbsp;</label>
+              <input
+                setting-id="176"
+                id="printcategorywiseKotCheck"
+                type="checkbox"
+              />
+              <label
+                data-i18n="settingScreen.General.Printing.printKOTByKitchenDepartment"
+                class="has-i18n"
+                for="printcategorywiseKotCheck"
+                >Print Category-wise KOT</label
+              >
+            </div>
+            <div class="d-flex">
+              <label class="themeHeading titleLabel" for>&nbsp;</label>
+              <input
+                setting-id="177"
+                id="printTablewiseKotCheck"
+                type="checkbox"
+              />
+              <label
+                data-i18n="settingScreen.General.Printing.printTablewiseKOT"
+                class="has-i18n"
+                for="printTablewiseKotCheck"
+                >Print Table-wise KOT</label
+              >
+            </div>
+            <div class="d-flex">
+              <label class="themeHeading titleLabel" for>&nbsp;</label>
+              <input
+                setting-id="224"
+                id="printKDwiseAndTablewiseKotCheck"
+                type="checkbox"
+              />
+              <label
+                data-i18n="settingScreen.General.Printing.printKDwiseAndTablewiseKot"
+                class="has-i18n"
+                for="printKDwiseAndTablewiseKotCheck"
+                >KOT Print by kitchen Department and Table department</label
+              >
+            </div>
+            <div class="d-flex">
+              <label class="themeHeading titleLabel" for>&nbsp;</label>
+              <input
+                setting-id="55"
+                id="groupkitchenPrinterscheck"
+                type="checkbox"
+              />
+              <label
+                data-i18n="settingScreen.General.Printing.groupItemsIfDepartmentsHasSamePrinter"
+                class="has-i18n"
+                for="groupkitchenPrinterscheck"
+                >Group Items if Departments has Same Printer</label
+              >
+            </div>
+
+            <div class="d-flex">
+              <label class="themeHeading titleLabel" for>&nbsp;</label>
+              <input
+                setting-id="61"
+                id="enabletablewiseprintingCheck"
+                type="checkbox"
+              />
+              <label
+                data-i18n="settingScreen.General.Printing.tableWiseBillPrinting"
+                class="has-i18n"
+                for="enabletablewiseprintingCheck"
+                >Print Table-wise Bill</label
+              >
+            </div>
+
+            <div class="d-flex">
+              <label class="themeHeading titleLabel" for>&nbsp;</label>
+              <input
+                setting-id="70"
+                id="defaultprintoldkotCheck"
+                type="checkbox"
+              />
+              <label
+                data-i18n="settingScreen.General.Printing.defaultPrintOldKOT"
+                class="has-i18n"
+                for="defaultprintoldkotCheck"
+                >Enable "Print OLD KOT" by Default</label
+              >
+            </div>
+            <div class="d-flex">
+              <label class="themeHeading titleLabel" for>&nbsp;</label>
+              <input
+                setting-id="71"
+                id="defaultcancelprintoldkotCheck"
+                type="checkbox"
+              />
+              <label
+                data-i18n="settingScreen.General.Printing.defaultCancelPrintOldKOT"
+                class="has-i18n"
+                for="defaultcancelprintoldkotCheck"
+                >Enable "Print Cancel KOT" by Default</label
+              >
+            </div>
+
+            <div class="d-flex">
+              <label class="themeHeading titleLabel" for>&nbsp;</label>
+              <input
+                setting-id="123"
+                id="defaulttransferprintoldkotCheck"
+                type="checkbox"
+              />
+              <label
+                data-i18n="settingScreen.General.Printing.defaultCancelPrintOldKOT"
+                class="has-i18n"
+                for="defaulttransferprintoldkotCheck"
+                >Enable "Print Transfer KOT" by Default</label
+              >
+            </div>
+          </div>
+        </div>
+
+        <div class="viewSettingsdiv bordered-div">
+          <div class="d-flex centeredDiv">
+            <label
+              data-i18n="settingScreen.General.GeneralSettingHeading"
+              class="themeHeading titleLabel has-i18n"
+              for
+              >General:</label
+            >
+          </div>
+
+          <div class="d-flex p-2 align-items-baseline">
+            <label class="titleLabel" for>&nbsp;</label>
+            <label
+              data-i18n="settingScreen.General.GeneralSetting.defaultOpenItemName"
+              class="has-i18n"
+              for="defaultitemnameInputid"
+              >Default Open Item Name :</label
+            >
+            <input setting-id="88" id="defaultitemnameInputid" type="text" />
+          </div>
+
+          <div class="d-flex">
+            <label class="titleLabel" for>&nbsp;</label>
+            <input setting-id="114" id="muteNotification" type="checkbox" />
+            <label
+              data-i18n="settingScreen.General.GeneralSetting.muteNotificationSound"
+              class="has-i18n"
+              for="muteNotification"
+              >Mute Notification Sound</label
+            >
+          </div>
+
+          <div class="d-flex p-2 align-items-baseline">
+            <label class="titleLabel" for>&nbsp;</label>
+
+            <label
+              data-i18n="settingScreen.General.GeneralSetting.selectBackupdbpath"
+              class="has-i18n"
+              for
+              >Select Backup Database Path:</label
+            >
+            <button
+              data-i18n="settingScreen.General.GeneralSetting.selectpath"
+              setting-id="113"
+              class="normal-button sm-bn has-i18n"
+              id="selectDbReplicaPath"
+            >
+              Select path
+            </button>
+          </div>
+
+          <div class="d-flex p-2 align-items-baseline">
+            <label class="titleLabel" for>&nbsp;</label>
+
+            <label
+              data-i18n="settingScreen.General.GeneralSetting.updateBillNumber"
+              class="has-i18n"
+              for
+              >Update Bill Number :</label
+            >
+            <button
+              data-i18n="settingScreen.General.GeneralSetting.updateBillNumber"
+              id="setBillNumber"
+              class="normal-button sm-bn has-i18n"
+            >
+              Update Bill Number
+            </button>
+          </div>
+        </div>
+
+        <div class="reportSettingsdiv bordered-div">
+          <div class="d-flex p-2">
+            <label
+              data-i18n="settingScreen.General.resetInfoHeading"
+              class="themeHeading titleLabel has-i18n"
+              for
+              >Reset info:</label
+            >
+            <div class="d-flex flex-column-reverse pl-1">
+              <div>
+                <label
+                  data-i18n="settingScreen.General.resetInfo.nextKOTResetDate"
+                  class="has-i18n"
+                  for="nextkotresetsettingId"
+                  >Next KOT Reset Date:</label
+                >
+                <label id="nextkotresetsettingId"></label>
+              </div>
+              <div>
+                <label
+                  data-i18n="settingScreen.General.resetInfo.nextBillResetDate"
+                  class="has-i18n"
+                  for="nextbillresetsettingId"
+                  >Next Bill Reset Date:</label
+                >
+                <label id="nextbillresetsettingId"></label>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div
+          class="viewSettingsdiv bordered-div"
+          id="cashDrawerSettingsdivContainer"
+        >
+          <div class="cashDrawerSettingsdiv">
+            <div class="d-flex">
+              <!-- <label class="themeHeading titleLabel" for="">&nbsp;</label> -->
+              <label
+                id="cashDrawerTitle"
+                data-i18n="settingScreen.General.CASHDRAWERSETTINGS.CASHDRAWERSETTINGS"
+                class="themeHeading titleLabel has-i18n"
+              >
+                Cash Drawer Settings:
+              </label>
+            </div>
+            <div class="d-flex">
+              <label class="themeHeading titleLabel" for>&nbsp;</label>
+              <input
+                setting-id="195"
+                id="openCashDrawerOnSaveBillId"
+                type="checkbox"
+              />
+              <label
+                data-i18n="settingScreen.General.CASHDRAWERSETTINGS.APPLYONLYFORSAVEBILL"
+                class="has-i18n"
+                for="openCashDrawerOnSaveBillId"
+                >Apply Only for Save Bill</label
+              >
+              <!-- </div>
+            <div class="d-flex"> -->
+              <!-- <label class="themeHeading titleLabel" for="">&nbsp;</label> -->
+              <input
+                setting-id="196"
+                id="openCashDrawerOnSaveAndPrintBillId"
+                type="checkbox"
+              />
+              <label
+                data-i18n="settingScreen.General.CASHDRAWERSETTINGS.APPLYONLYFORSAVEANDPRINTBILL"
+                class="has-i18n"
+                for="openCashDrawerOnSaveAndPrintBillId"
+                >Apply Only for Save & Print Bill</label
+              >
+            </div>
+            <div class="d-flex">
+              <label class="themeHeading titleLabel" for>&nbsp;</label>
+              <input
+                setting-id="197"
+                id="openCashDrawerOnSaveAndSettleBillId"
+                type="checkbox"
+              />
+              <label
+                data-i18n="settingScreen.General.CASHDRAWERSETTINGS.APPLYONLYFORSAVEANDSETTLE"
+                class="has-i18n"
+                for="openCashDrawerOnSaveAndSettleBillId"
+                >Apply Only for Save & Settle</label
+              >
+              <!-- </div>
+            <div class="d-flex">
+              <label class="themeHeading titleLabel" for="">&nbsp;</label> -->
+              <input
+                setting-id="198"
+                id="openCashDrawerOnPrintAndSettleBillId"
+                type="checkbox"
+              />
+              <label
+                data-i18n="settingScreen.General.CASHDRAWERSETTINGS.APPLYONLYFORPRINTANDSETTLE"
+                class="has-i18n"
+                for="openCashDrawerOnPrintAndSettleBillId"
+                >Apply Only for Print & Settle</label
+              >
+            </div>
+            <div class="d-flex">
+              <label class="themeHeading titleLabel" for>&nbsp;</label>
+              <input
+                setting-id="199"
+                id="openCashDrawerOnPrintBillFromReceiptSectionId"
+                type="checkbox"
+              />
+              <label
+                data-i18n="settingScreen.General.CASHDRAWERSETTINGS.APPLYFONLYFORPRINTFROMRECEIPTSECTION"
+                class="has-i18n"
+                for="openCashDrawerOnPrintBillFromReceiptSectionId"
+                >Apply Only for Print From Receipt Section</label
+              >
+              <!-- </div>
+            <div class="d-flex">
+              <label class="themeHeading titleLabel" for="">&nbsp;</label> -->
+              <input
+                setting-id="145"
+                id="openCashDrawerOnOpenPaymentWindowId"
+                type="checkbox"
+              />
+              <label
+                data-i18n="settingScreen.General.CASHDRAWERSETTINGS.APPLYONOPENINGPAYMENTWINDOW"
+                class="has-i18n"
+                for="openCashDrawerOnOpenPaymentWindowId"
+                >Apply On Opening Payment Window</label
+              >
+            </div>
+            <div class="d-flex">
+              <label class="themeHeading titleLabel" for>&nbsp;</label>
+              <input
+                setting-id="200"
+                id="openCashDrawerOnForAllId"
+                type="checkbox"
+              />
+              <label
+                data-i18n="settingScreen.General.CASHDRAWERSETTINGS.APPLYFORALL"
+                class="has-i18n"
+                for="openCashDrawerOnForAllId"
+                >Apply for All</label
+              >
+            </div>
+          </div>
+        </div>
+        <div class="viewSettingsdiv bordered-div p-2">
+          <div class="d-flex">
+            <label
+              data-i18n="settingScreen.General.Customerdisplay"
+              class="themeHeading titleLabel has-i18n"
+              for="postytudePorts"
+              >Customer Display</label
+            >
+            <select
+              class="labelchecksCombo"
+              style="width: 25%"
+              id="postytudePorts"
+            >
+              <option
+                data-i18n="settingScreen.General.GeneralSetting.selectportoption"
+                class="has-i18n"
+                disabled
+                selected
+                value
+              >
+                Select Port Option
+              </option>
+            </select>
+            <input
+              class="posytudeportinput"
+              value="2400"
+              placeholder="Enter baudRate"
+              id="baudRateinputid"
+              type="number"
+            />
+            <input
+              class="posytudeportinput"
+              value="8"
+              placeholder="Enter dataBits"
+              id="dataBitsinputid"
+              type="number"
+            />
+            <!-- <input id="roundoffamountuptoInputid" type="text"> -->
+          </div>
+          <div class="d-flex">
+            <label
+              data-i18n
+              class="themeHeading titleLabel has-i18n"
+              for
+            ></label>
+            <input
+              class
+              value="1"
+              placeholder="Enter stopBits"
+              id="stopBitsinputid"
+              type="number"
+            />
+            <input
+              type="button"
+              id="updatePosytudeportbuttonid"
+              data-i18n="[value]settingScreen.General.Update"
+              class="has-i18n"
+              value="Update"
+            />
+          </div>
+        </div>
+        <!-- </div> -->
+
+        <div class="viewSettingsdiv bordered-div">
+          <div class="d-flex centeredDiv">
+            <label
+              data-i18n="settingScreen.General.GeneralSettingHeading"
+              class="themeHeading titleLabel has-i18n"
+              for
+              >Handheld Device Print Settings:</label
+            >
+          </div>
+
+          <div class="d-flex p-2 align-items-baseline">
+            <label class="titleLabel" for>&nbsp;</label>
+            <label
+              data-i18n=""
+              class="has-i18n"
+              for="handheldDevicePrintWidthInputid"
+              >Print Width :</label
+            >
+            <input
+              setting-id="243"
+              id="handheldDevicePrintWidthInputid"
+              type="number"
+            />
+          </div>
+          <div class="d-flex p-2 align-items-baseline">
+            <label class="titleLabel" for>&nbsp;</label>
+            <label
+              data-i18n=""
+              class="has-i18n"
+              for="handheldDevicePrintMarginBottomInputid"
+              >Margin at bottom :</label
+            >
+            <input
+              setting-id="259"
+              id="handheldDevicePrintMarginBottomInputid"
+              type="number"
+            />
+          </div>
+        </div>
+
+        <div class="viewSettingsdiv bordered-div p-2">
+          <div class="d-flex">
+            <label
+              data-i18n="settingScreen.General.Language"
+              class="themeHeading titleLabel has-i18n"
+              for
+              >Language:</label
+            >
+            <select
+              setting-id="32"
+              class="labelchecksCombo"
+              id="applanguageSettingselect"
+            ></select>
+          </div>
+        </div>
+
+        <div class="viewSettingsdiv bordered-div p-2">
+          <div>
+            <p
+              data-i18n="settingScreen.General.colorIndicators.tableColourIndicators"
+              class="tableColorTitle has-i18n"
+            >
+              Table Colour Indicators
+            </p>
+          </div>
+
+          <div class="colorContainer">
+            <button
+              data-i18n="settingScreen.General.colorIndicators.freeTable"
+              class="grid-item has-i18n"
+              style="background-color: #007c45"
+            >
+              Free Table
+            </button>
+            <button
+              data-i18n="settingScreen.General.colorIndicators.currentTable"
+              class="grid-item has-i18n"
+              style="
+                background-color: #007c45;
+                border: solid;
+                border-width: 3px;
+                border-color: #f8bb5d;
+              "
+            >
+              Selected Table
+            </button>
+            <button
+              data-i18n="settingScreen.General.colorIndicators.KOTSaved"
+              class="grid-item has-i18n"
+              style="background-color: #0095d7"
+            >
+              KOT Saved
+            </button>
+            <button
+              data-i18n="settingScreen.General.colorIndicators.itemsInKOT"
+              class="grid-item has-i18n"
+              style="background-color: #00c9a7"
+            >
+              Items in KOT
+            </button>
+            <button
+              data-i18n="settingScreen.General.colorIndicators.billSaved"
+              class="grid-item has-i18n"
+              style="background-color: #ef5350"
+            >
+              Bill Saved
+            </button>
+            <button
+              data-i18n="settingScreen.General.colorIndicators.billPrinted"
+              class="grid-item has-i18n"
+              style="background-color: #4b4453"
+            >
+              Bill Printed
+            </button>
+            <button
+              data-i18n="settingScreen.General.colorIndicators.draftBillPrinted"
+              class="grid-item has-i18n"
+              style="background-color: #8d6e63"
+            >
+              Draft Bill Printed
+            </button>
+            <button
+              data-i18n="settingScreen.General.colorIndicators.reservedTable"
+              class="grid-item has-i18n"
+              style="background-color: #ffc107"
+            >
+              Reserved Table
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div role="tabpanel" class="tab-pane fade in" id="printerTab">
+        <div id="printersettingDivid"></div>
+      </div>
+      <div role="tabpanel" class="tab-pane fade in" id="shortcutsTab">
+        <div id="shortcutsettingsDivid"></div>
+      </div>
+      <div role="tabpanel" class="tab-pane fade in" id="profileTab">
+        <div id="profilesettingsDivid"></div>
+      </div>
+      <div role="tabpanel" class="tab-pane fade in" id="formattingTab">
+        <div id="billformatSettingsid"></div>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+  require('../js/SettingsController.js');
+</script>

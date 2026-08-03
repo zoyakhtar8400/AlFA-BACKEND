@@ -1,0 +1,571 @@
+ <link rel="stylesheet" href="../css/addupdate.css" />
+<div class="modal fade" data-backdrop="static" id="AddOrUpdateItemmodal">
+
+  <div class="modal-dialog modal-lg modal-dialog-centered AddOrUpdateItemmodal">
+    <div class="modal-content AddOrUpdateItemmodalWrapper">
+      <div class="modal-header">
+        <h4
+          class="modal-title has-i18n"
+          data-i18n="itemManagement.UpdateItem"
+          id="updateItemModalHeading">
+          Update Item
+        </h4>
+        <h4
+          data-i18n="itemManagement.Additem"
+          class="modal-title has-i18n"
+          id="addItemModalHeading">
+          Add Item
+        </h4>
+        <button type="button" class="close" data-dismiss="modal">
+          &times;
+        </button>
+      </div>
+      <div
+        class="modal-body AddOrUpdateItemmodalbody"
+        id="AddOrUpdateItemmodalBodyid">
+        <div class="row">
+          <div class="col-6">
+            <div class="form-group">
+              <label
+                class="menu-item-label-class has-i18n"
+                data-i18n="itemManagement.itemname">Item Name</label>
+              <span class="asterisk">*</span>
+              <input
+                type="text"
+                id="menuItemNameId"
+                class="itemUpdateinputbox has-i18n"
+                placeholder="Enter item name"
+                data-i18n="[placeholder]itemManagement.itemnamePlaceholder" />
+            </div>
+          </div>
+          <div class="col-6">
+            <div class="form-group">
+              <label
+                class="menu-item-label-class has-i18n"
+                data-i18n="itemManagement.Shortcode">Short Code</label>
+              <span class="asterisk">*</span>
+              <input
+                type="text"
+                id="menuitemshortcodeid"
+                class="itemUpdateinputbox has-i18n"
+                placeholder="Enter short code"
+                data-i18n="[placeholder]itemManagement.shortCodePlaceholder" />
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-6">
+            <div class="form-group">
+              <label
+                class="menu-item-label-class has-i18n"
+                data-i18n="itemManagement.saleprice">Base Item Price</label>
+              <span class="asterisk">*</span>
+
+              <input
+                type="number"
+                id="itemSalePriceid"
+                class="itemUpdateinputbox has-i18n"
+                placeholder="Enter price"
+                data-i18n="[placeholder]itemManagement.pricePlaceholder" />
+
+            </div>
+          </div>
+          <div class="col-6">
+            <!-- <div class="form-group">
+              <label class="menu-item-label-class">Current Stock</label>
+              <input
+                type="text"
+                id="itemCurrentStockid"
+                class="itemUpdateinputbox"
+                placeholder="Enter current stock"
+              />
+            </div> -->
+            <div class="form-group">
+              <label
+                class="menu-item-label-class has-i18n"
+                data-i18n="itemManagement.Productgroup">Product Group</label>
+              <span class="asterisk">*</span>
+              <select
+                class="expense-select itemUpdateSelectinputbox has-i18n"
+                id="productGroupslist">
+                <option
+                  data-i18n="itemManagement.selectProductGroup"
+                  class="has-i18n"
+                  disabled
+                  selected
+                  value>
+                  -- Select Product Group --
+                </option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <span id="itemMultipricingCheckContainer">
+            <input id="samePriceForAllOrderTypescheckid" type="checkbox" />
+            <label
+              class="has-i18n"
+              id="showOnBilllabelcheckid"
+              for="samePriceForAllOrderTypescheckid"
+              data-i18n="itemManagement.setSamePriceAllTypes">
+              Set same price for all offline order types - Pickup, Delivery,
+              Quick Bill and Dine-In
+            </label>
+            <label
+              id="addUpdateMultipricingUpdatefrombackofficetitleid"
+              class="has-i18n"
+              data-i18n="itemManagement.separatePricingBackoffice">
+              To Set Separate Pricing for Pickup, Delivery, Quick Bill &
+              Dine-In, Please Add/Update It from backoffice.tmbill.com Panel
+            </label>
+          </span>
+        </div>
+        <!-- <div class="multipricingContainer">
+          ...
+        </div> -->
+        <div class="row">
+          <div class="col-6">
+            <div class="form-group">
+              <label
+                class="menu-item-label-class has-i18n"
+                data-i18n="itemManagement.Category">Category</label>
+              <span class="asterisk">*</span>
+
+              <div class="row align-items-center">
+                <div class="col-8 pr-1">
+                  <select
+                    class="expense-select category-select-class has-i18n"
+                    id="itemCategorieslist">
+
+                    <option
+                      disabled
+                      selected
+                      value
+                      class="has-i18n"
+                      data-i18n="itemManagement.selectCategory">
+                      -- select category --
+                    </option>
+
+                  </select>
+                </div>
+
+                <div class="col-4 pl-1">
+                  <button
+                    type="button"
+                    class="input-group-text w-100 has-i18n"
+                    data-toggle="modal"
+                    data-target="#addCategoryModalId"
+                    id="addCategoryOpenModal"
+                    data-i18n="itemManagement.Addcategory">
+                    Add Category
+                  </button>
+                </div>
+              </div>
+            </div>
+
+          </div>
+          <div class="col-6">
+            <div class="form-group">
+              <label
+                class="menu-item-label-class has-i18n"
+                data-i18n="itemManagement.Subcategory">Sub Category</label>
+
+              <div class="row align-items-center">
+                <div class="col-8 pr-1">
+                  <select
+                    class="expense-select add-sub-catgory-class has-i18n"
+                    id="itemSubCategorieslist">
+                    <option
+                      disabled
+                      selected
+                      value
+                      class="has-i18n"
+                      data-i18n="itemManagement.selectSubCategory">
+                      -- Select Sub Category --
+                    </option>
+                  </select>
+                </div>
+
+                <div class="col-4 pl-1">
+                  <button
+                    type="button"
+                    class="input-group-text w-100 has-i18n"
+                    data-toggle="modal"
+                    data-target="#addSubCategoryModalId"
+                    id="addSubCategoryOpenModal"
+                    data-i18n="itemManagement.Addsubcategory">
+                    Add Sub-Category
+                  </button>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-6">
+            <div class="form-group">
+              <label
+                class="menu-item-label-class has-i18n"
+                data-i18n="itemManagement.Foodtype">Food Type</label>
+              <span class="asterisk">*</span>
+              <select
+                class="expense-select itemUpdateSelectinputbox has-i18n"
+                id="itemFoodTypeslist">
+                <option
+                  data-i18n="masterScreen.addExpenses.selectCategory"
+                  class="has-i18n"
+                  disabled
+                  selected
+                  value>
+                  -- Select Food type --
+                </option>
+                <option value="1">Veg</option>
+                <option value="2">Non Veg</option>
+                <option value="3">Eggetarian</option>
+                <option value="4">Not specified</option>
+              </select>
+            </div>
+          </div>
+          <div class="col-6">
+            <div class="form-group">
+              <label
+                class="menu-item-label-class has-i18n"
+                data-i18n="itemManagement.Kitchendepartment">
+                Kitchen Department
+              </label>
+              <span class="asterisk">*</span>
+
+              <div class="row align-items-center">
+                <!-- Select -->
+                <div class="col-8 pr-1">
+                  <select
+                    class="expense-select add-kitchen-dept-class has-i18n"
+                    id="kitchenDepartmentslist">
+                    <option
+                      data-i18n="itemManagement.selectKitchenDept"
+                      class="has-i18n"
+                      disabled
+                      selected
+                      value>
+                      -- Select Kitchen Department --
+                    </option>
+                  </select>
+                </div>
+
+                <!-- Add Button -->
+                <div class="col-4 pl-1">
+                  <button
+                    type="button"
+                    class="input-group-text w-100 has-i18n"
+                    data-toggle="modal"
+                    data-target="#addKitchenDeptModalId"
+                    data-i18n="itemManagement.Addkitchendepartment">
+                    Add Kitchen Dept
+                  </button>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-6">
+            <div class="form-group">
+              <label class="menu-item-label-class has-i18n"
+                data-i18n="itemManagement.stockStatus">
+                Stock Status
+              </label>
+              <input
+                id="itemCurrentStockid"
+                class="itemUpdateinputbox has-i18n"
+                type="number"
+                placeholder="Enter stock"
+                data-i18n="[placeholder]itemManagement.stockPlaceholder" />
+            </div>
+          </div>
+
+          <div class="col-6">
+            <div class="row item-status-menu-mgmt">
+              <div class="col-3 form-group">
+                <div
+                  class="menu-item-label-class has-i18n"
+                  data-i18n="itemManagement.active">
+                  Active
+                </div>
+                <label class="switch menu-item-switch-container">
+                  <input id="isItemActiveswitchcheckId" type="checkbox"
+                    checked />
+                  <span class="slider round"></span>
+                </label>
+              </div>
+
+              <div class="col-9 form-group">
+                <label
+                  class="menu-item-label-class has-i18n"
+                  data-i18n="itemManagement.alternativeName">
+                  Alternative Item Name
+                </label>
+                <!-- <input
+                  type="text"
+                  id="menuAlternativeItemNameId"
+                  class="itemUpdateinputbox has-i18n"
+                  placeholder="Enter alternative item name" /> -->
+                <input
+                  type="text"
+                  id="menuAlternativeItemNameId"
+                  class="itemUpdateinputbox has-i18n"
+                  placeholder="Enter alternative item name"
+                  data-i18n="[placeholder]itemManagement.alternativeNamePlaceholder" />
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-6" id="reduceItemInventoryContainer">
+            <div class="form-group">
+              <label
+                class="menu-item-label-class has-i18n"
+                data-i18n="itemManagement.reduceInventoryLabel">
+                Reduce Inventory
+              </label>
+
+              <div class="row align-items-center">
+                <!-- Input -->
+                <div class="col-8 pr-1">
+                  <input
+                    id="reduceItemInventoryInputId"
+                    class="itemUpdateinputbox has-i18n"
+                    placeholder="Enter quantity"
+                    data-i18n="[placeholder]itemManagement.reduceInventoryPlaceholder" />
+                </div>
+
+                <!-- Button -->
+                <div class="col-4 pl-1">
+                  <button
+                    class="input-group-text w-100 has-i18n"
+                    type="button"
+                    id="reduceItemInventoryButtonId"
+                    data-i18n="itemManagement.reduceInventoryButton">
+                    Reduce Inventory
+                  </button>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div> <!-- modal-body -->
+      <div class="modal-footer">
+        <button
+          type="button"
+          class="normal-button has-i18n"
+          id="menuItemUpdatebuttonid"
+          data-i18n="itemManagement.Update">
+          Update
+        </button>
+        <button
+          type="button"
+          class="normal-button has-i18n"
+          id="menuItemAddbuttonid"
+          data-i18n="itemManagement.Additem">
+          Add Item
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div
+  class="modal fade addCategory-modal"
+  id="addCategoryModalId"
+  role="dialog"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5
+          class="modal-title has-i18n"
+          id="exampleModalLabel"
+          data-i18n="itemManagement.Addcategory">
+          Add Category
+        </h5>
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-12">
+              <div class="input-group addCatgoryInputgroup">
+                <input
+                  type="text"
+                  class="itemUpdateinputbox has-i18n"
+                  placeholder="Enter Category name"
+                  id="categoryInputField"
+                  data-i18n="[placeholder]itemManagement.addCategoryPlaceholder" />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button
+          type="button"
+          class="normal-button has-i18n"
+          data-dismiss="modal"
+          data-i18n="itemManagement.close">
+          Close
+        </button>
+        <button
+          type="button"
+          class="normal-button has-i18n"
+          id="addCategoryButtonId"
+          data-i18n="itemManagement.Addcategory">
+          Add Category
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- add sub-category -->
+<div
+  class="modal fade addCategory-modal"
+  id="addSubCategoryModalId"
+  role="dialog"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5
+          class="modal-title has-i18n"
+          id="exampleModalLabel"
+          data-i18n="itemManagement.Addsubcategory">
+          Add Sub-Category
+        </h5>
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-12">
+              <div class="input-group addCatgoryInputgroup">
+                <select
+                  class="itemUpdateinputbox has-i18n"
+                  id="addSubCatCategorieslist">
+                  <option
+                    data-i18n="itemManagement.selectCategory"
+                    class="has-i18n"
+                    disabled
+                    selected
+                    value>
+                    -- select category --
+                  </option>
+                </select>
+                <input
+                  type="text"
+                  class="itemUpdateinputbox has-i18n"
+                  placeholder="Enter Category Name"
+                  id="subCategoryInputField"
+                  data-i18n="[placeholder]itemManagement.addSubCategoryPlaceholder" />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button
+          type="button"
+          class="normal-button has-i18n"
+          data-dismiss="modal"
+          data-i18n="itemManagement.close">
+          Close
+        </button>
+        <button
+          type="button"
+          id="addSubCategoryButtonId"
+          class="normal-button has-i18n"
+          data-i18n="itemManagement.Addsubcategory">
+          Add Sub-Category
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- add kitchen department -->
+<div
+  class="modal fade addCategory-modal"
+  id="addKitchenDeptModalId"
+  role="dialog"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title has-i18n" id="exampleModalLabel"
+          data-i18n="itemManagement.Addkitchendepartment">
+          Add Kitchen Department
+        </h5>
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-12">
+              <div class="input-group addCatgoryInputgroup">
+                <input
+                  type="text"
+                  class="itemUpdateinputbox has-i18n"
+                  placeholder="Enter Kitchen Department"
+                  id="addKitchenDepartmentInput"
+                  data-i18n="[placeholder]itemManagement.addKitchenDeptPlaceholder" />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button
+          type="button"
+          class="normal-button has-i18n"
+          data-dismiss="modal"
+          data-i18n="itemManagement.close">
+          Close
+        </button>
+        <button
+          type="button"
+          id="addKitchenDepartmentbuttonid"
+          class="normal-button has-i18n"
+          data-i18n="itemManagement.Addkitchendepartment">
+          Add Kitchen Department
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+  //   require('../../js/MenuManagement/AddOrUpdateItems.js');
+  require('../js/MenuManagement/AddOrUpdateItems.js');
+</script>

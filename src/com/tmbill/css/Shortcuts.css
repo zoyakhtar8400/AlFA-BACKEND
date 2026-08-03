@@ -1,0 +1,33 @@
+#shortcutsettingsDivid {
+    height: 100%;
+}
+
+.shortcutsContainer {
+    height: 100%;
+    overflow-y: auto;
+    padding: 4px;
+}
+
+.shortcutsContainer label, .shortcutsContainer input[type=text] {
+    margin: 0;
+    padding-right: 3px;
+}
+
+.shortcutsContainer label {
+    width: 50%;
+}
+
+.shortcutsContainer input[type=text] {
+    width: 30%;
+}
+
+.shortcutsContainer .d-flex {
+    padding: 6px;
+}
+
+.shortcutsName {
+    font-weight: bolder;
+    letter-spacing: 0.3px;
+    font-size: 14px;
+    text-align: center;
+}

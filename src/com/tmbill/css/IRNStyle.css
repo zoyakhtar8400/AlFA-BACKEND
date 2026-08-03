@@ -1,0 +1,50 @@
+.card-title {
+  float: left;
+  font-size: 1.1rem;
+  font-weight: 400;
+  margin: 0;
+}
+
+.card-header .card-tools {
+  float: right;
+  margin-right: -0.625rem;
+}
+
+#IRNmodal label {
+  margin: 4px;
+}
+
+.irnInput {
+  margin: 0px !important;
+}
+
+.collapsed-card {
+  display: none;
+}
+
+.irncard {
+  margin: 5px 0px;
+}
+
+.IRNmodalbody {
+  height: 570px;
+  overflow-y: scroll;
+}
+
+#generateIrnbuttonId {
+  /* background-color: #1A9A62; */
+  background-color: #1e4936;
+}
+
+@media screen and (max-height: 750px) and (min-height: 600px) {
+  .IRNmodalbody {
+    height: 400px;
+    overflow-y: scroll;
+  }
+}
+@media screen and (max-width: 1200px) and (min-width: 700px) {
+  .IRNmodalbody {
+    height: 540px;
+    overflow-y: scroll;
+  }
+}

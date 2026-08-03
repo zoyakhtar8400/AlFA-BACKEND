@@ -1,0 +1,2176 @@
+#closeDayAndShiftModal .acc-summary-actions {
+  display: flex;
+  flex-direction: column;
+
+  gap: 8px;
+}
+
+#closeDayAndShiftModal #CloseDayAndShiftButtonId {
+  order: 0 !important;
+}
+#closeDayAndShiftModal .closeDayAndShiftModalButton {
+  order: 1 !important;
+}
+
+#closeDayAndShiftModal #closeDayAndShiftTransactionsTableForShiftid {
+  table-layout: fixed;
+  width: 100%;
+}
+
+.modal-content.startDayAndShiftModalwrapper.closeDayAndShiftModalwrapper {
+  margin-top: 35px;
+}
+
+#closeDayAndShiftModal .acc-summary-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+/* Reset EVERYTHING for these two buttons so Bootstrap etc. can't affect them */
+#closeDayAndShiftModal .acc-summary-actions > button,
+#closeDayAndShiftModal .acc-summary-actions > input[type='button'] {
+  all: unset; /* wipe external styles */
+  box-sizing: border-box;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 100%;
+  height: 32px; /* SAME HEIGHT for both */
+  padding: 0 16px;
+
+  border-radius: 10px;
+  border-width: 1px;
+  border-style: solid;
+
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 400; /* no bold */
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  text-align: center;
+
+  background: var(--accent); /* white background */
+  cursor: pointer;
+}
+
+/* Make sure hover/focus do NOT change anything */
+#closeDayAndShiftModal .acc-summary-actions > button:hover,
+#closeDayAndShiftModal .acc-summary-actions > button:focus,
+#closeDayAndShiftModal .acc-summary-actions > input[type='button']:hover,
+#closeDayAndShiftModal .acc-summary-actions > input[type='button']:focus {
+  background: #ffffff;
+  outline: none;
+  box-shadow: none;
+}
+
+/* TOP: CLOSE DAY AND SHIFT (green outline, green text) */
+#closeDayAndShiftModal #CloseDayAndShiftButtonId {
+  order: 0;
+  border-color: var(--accent); /* green border */
+  color: var(--accent); /* green text */
+}
+
+/* BOTTOM: CLOSE (red outline, red text) */
+#closeDayAndShiftModal .closeDayAndShiftModalButton {
+  order: 1;
+  border-color: var(--danger); /* red border */
+  color: var(--danger); /* red text */
+}
+
+#closeDayAndShiftModal {
+  --bg: #fbfcfd;
+  --panel: #ffffff;
+  --muted: #262629;
+  --text: #111827;
+  --accent: #16a34a;
+  --danger: #ef4444;
+  --border: #e5e7eb;
+  --border-soft: #f3f4f6;
+  --shadow-soft: 0 10px 30px rgba(15, 23, 42, 0.06);
+  --shadow-subtle: 0 6px 18px rgba(15, 23, 42, 0.03);
+  --radius-lg: 14px;
+  --radius-md: 10px;
+  --radius-sm: 8px;
+  --pill: 999px;
+  --fs-base: 14px;
+  --fs-sm: 13px;
+  --fs-xs: 12px;
+}
+
+/* ---------------- Modal shell ---------------- */
+
+#closeDayAndShiftModal .startDayAndShiftmodal-dialog,
+#closeDayAndShiftModal .closeDayAndShiftmodal-dialog {
+  width: 95% !important;
+  max-width: 1260px !important;
+  margin: 20px auto !important;
+  height: calc(100vh - 48px) !important;
+}
+
+#closeDayAndShiftModal .startDayAndShiftModalwrapper,
+#closeDayAndShiftModal .closeDayAndShiftModalwrapper {
+  height: 95%;
+  display: flex;
+  flex-direction: column;
+  background: linear-gradient(180deg, #ffffff 0, #fbfcfe 100%);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-soft);
+  border: 0;
+  overflow: hidden;
+}
+
+/* header */
+
+#closeDayAndShiftModal .startDayAndShiftModalHeaderwrapper {
+  display: flex !important;
+  align-items: center;
+  justify-content: center !important;
+  padding: 14px 22px !important;
+  background: transparent !important;
+  border-bottom: 1px solid var(--border-soft);
+}
+
+#closeDayAndShiftModal .startDayAndShiftModalHeaderwrapper h5 {
+  margin: 0;
+  font-weight: 500;
+  font-size: 1.15rem;
+  color: var(--text);
+}
+
+/* body */
+
+#closeDayAndShiftModal .startDayAndShiftModalbody {
+  flex: 1;
+  padding: 18px;
+  background: var(--bg);
+  overflow: hidden;
+}
+
+#closeDayAndShiftModal #closeDayAndShiftModalbodyid,
+#closeDayAndShiftModal #startDayAndShiftModalbodyid {
+  height: 100%;
+}
+
+/* ---------------- 3-column layout ---------------- */
+
+#closeDayAndShiftModal .closeDayAndShiftContainer {
+  height: 100%;
+  display: flex;
+  gap: 18px;
+  align-items: stretch;
+}
+
+#closeDayAndShiftModal .closeDayAndShiftContainer > .col-3 {
+  flex: 0 0 24%;
+  min-width: 230px;
+  max-width: 320px;
+}
+
+#closeDayAndShiftModal .closeDayAndShiftContainer > .col-6 {
+  flex: 1 1 56%;
+  min-width: 560px;
+}
+
+#closeDayAndShiftModal .closeDayAndShiftContainer > .col-3,
+#closeDayAndShiftModal .closeDayAndShiftContainer > .col-6 {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: 0;
+}
+
+/* ---------------- card base ---------------- */
+
+#closeDayAndShiftModal .acc-card {
+  background: var(--panel);
+  border-radius: var(--radius-md);
+  /* border: 1px solid var(--border-soft); */
+  box-shadow: var(--shadow-subtle);
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+}
+
+#closeDayAndShiftModal .acc-card-full {
+  flex: 1 1 auto;
+  min-height: 430px;
+}
+
+#closeDayAndShiftModal .acc-card-main {
+  flex: 0 1 56%;
+  min-height: 200px;
+}
+
+#closeDayAndShiftModal .acc-row-two {
+  display: flex;
+  gap: 12px;
+}
+
+#closeDayAndShiftModal .acc-card-half {
+  flex: 1;
+}
+
+#closeDayAndShiftModal .acc-card-notes {
+  flex: 0 0 170px;
+}
+
+#closeDayAndShiftModal .acc-card-header {
+  font-weight: 600;
+  font-size: 15px;
+  color: var(--muted);
+  margin-bottom: 8px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+#closeDayAndShiftModal .acc-card-subtitle {
+  font-size: 15px;
+  color: var(--muted);
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+/* ---------------- tables: basic ---------------- */
+
+#closeDayAndShiftModal table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: Inter, Arial, sans-serif;
+  font-size: var(--fs-sm);
+  color: var(--text);
+}
+
+#closeDayAndShiftModal th {
+  background: #f8fafc;
+  color: var(--muted);
+  text-transform: uppercase;
+  font-size: 0.78rem;
+  letter-spacing: 0.035em;
+  padding: 12px 14px;
+  border-bottom: 1px solid #e5e7eb;
+  text-align: left;
+}
+
+#closeDayAndShiftModal td {
+  padding: 10px 14px;
+  border-bottom: 1px solid #f3f4f6;
+  vertical-align: middle;
+  text-align: left;
+}
+
+/* inputs inside tables */
+
+#closeDayAndShiftModal input[type='number'] {
+  width: 100%;
+  padding: 6px 10px;
+  border-radius: 8px;
+  border: 1px solid #edf2f7;
+  background: #fbfeff;
+  font-size: 13.5px;
+  color: var(--text);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.7);
+}
+
+/* right-align number inputs for reconciliation tables */
+
+#closeDayAndShiftModal #closeDayAndShiftTransactionsTableForShiftid td input,
+#closeDayAndShiftModal #closeDayAndShiftTransactionsForDayTableId td input {
+  text-align: right;
+}
+
+/* ---------- Currency Denomination (LEFT card) ----------
+   make it a normal table (no inner scroll box) like reference */
+
+#closeDayAndShiftModal #closeDayAndShiftCashDenominationTableId {
+  width: 120%;
+  display: table;
+}
+
+#closeDayAndShiftModal #closeDayAndShiftCashDenominationTableId thead,
+#closeDayAndShiftModal #closeDayAndShiftCashDenominationTableId tbody,
+#closeDayAndShiftModal #closeDayAndShiftCashDenominationTableId tfoot {
+  display: table;
+  width: 100%;
+  table-layout: fixed;
+}
+
+/* tighter rows & left/right alignment similar to reference */
+
+#closeDayAndShiftModal
+  #closeDayAndShiftCashDenominationTableId
+  tbody
+  td:nth-child(1) {
+  width: 28%;
+  padding-left: 16px;
+}
+
+#closeDayAndShiftModal
+  #closeDayAndShiftCashDenominationTableId
+  tbody
+  td:nth-child(2) {
+  width: 40%;
+  text-align: center;
+}
+
+#closeDayAndShiftModal
+  #closeDayAndShiftCashDenominationTableId
+  tbody
+  td:nth-child(3) {
+  width: 20%;
+  text-align: right;
+  color: var(--muted);
+}
+
+/* footer: Total Cash in Drawer */
+
+#closeDayAndShiftModal .currencyDenominationTableFooter td {
+  background: #f9fafb;
+  padding: 10px 14px;
+  border-top: 1px solid #e5e7eb;
+}
+
+#closeDayAndShiftModal .currencyDenominationTableFooter input {
+  width: 130px;
+  float: right;
+  border-radius: 8px;
+  padding: 6px 10px;
+}
+
+/* header inside currency card */
+
+#closeDayAndShiftModal .currencyDenominationTableHeader {
+  /* background: #f9fafb !important; */
+  border-bottom: 1px solid #edf2f7;
+  padding: 10px 14px !important;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--muted);
+}
+
+#closeDayAndShiftModal .currencyDenominationTableHeader i {
+  color: #a1a1aa;
+}
+
+/* ---------- Payment Reconciliation (CENTER top) ---------- */
+
+#closeDayAndShiftModal .closeShiftTransactionTableContainerClass {
+  flex: 1 1 auto;
+  /* padding: 10px; */
+  border-radius: 12px;
+  background: #ffffff;
+  border: 1px solid var(--border-soft);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.7);
+  overflow: auto;
+}
+
+#closeDayAndShiftModal .closeDayShiftTransactionTableHeader th {
+  padding: 12px 14px !important;
+}
+
+/* ---------- Session Info & Account Balance (CENTER bottom) ---------- */
+
+#closeDayAndShiftModal .modal-info-row {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-top: 4px;
+}
+
+/* dark pill for Revenue / Username / Cash Drawer */
+
+#closeDayAndShiftModal .revenueDetails label {
+  background: #f8f9fa;
+  color: black;
+  padding: 8px 14px;
+  border-radius: 20px;
+  font-size: var(--fs-sm);
+  display: inline-flex;
+  align-items: center;
+}
+/* Apply the same pill style to Account Balance labels */
+#closeDayAndShiftModal .acc-card-half .modal-info-row label {
+  /* background: #f8f9fa !important; */
+  color: black !important;
+  padding: 8px 14px !important;
+  border-radius: 20px !important;
+  font-size: var(--fs-sm) !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  width: auto !important;
+}
+/* ============================================================
+   UNIVERSAL PILL STYLE for: 
+   - Session Info
+   - Account Balance (Opening Balance, Expenses)
+   - Order Statistics (Day) section
+   ============================================================ */
+
+#closeDayAndShiftModal .acc-card .modal-info-row label,
+#closeDayAndShiftModal .acc-card-summary .prevDayCloseDayShiftSummary label {
+  background: #f8f9fa !important;
+  color: #000 !important;
+  padding: 8px 14px !important;
+  border-radius: 20px !important;
+  font-size: var(--fs-sm) !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  width: 100% !important;
+  box-sizing: border-box;
+}
+
+/* account balance card more minimal */
+
+#closeDayAndShiftModal #accountStaticsheaderid {
+  /* background: transparent !important; */
+  padding: 0 !important;
+  box-shadow: none !important;
+}
+
+/* ---------- Order Statistics (SHIFT) – RIGHT TOP card ---------- */
+/* make rows flat, no chip backgrounds, like reference */
+
+#closeDayAndShiftModal .acc-card-order {
+  padding: 12px 14px;
+}
+
+#closeDayAndShiftModal .order-stats-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  margin-top: 6px;
+  border-radius: 8px;
+}
+
+/* each row */
+
+#closeDayAndShiftModal .order-stat-line {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 2px;
+  /* border-top: 1px solid #f3f4f6; */
+  background: transparent;
+  border-radius: 0;
+  box-shadow: none;
+}
+
+#closeDayAndShiftModal .order-stat-line:first-child {
+  border-top: none;
+}
+
+/* colored circle on left (like ref) */
+
+#closeDayAndShiftModal .order-stat-line::before {
+  content: '';
+  width: 10px;
+  height: 10px;
+  border-radius: 999px;
+  margin-right: 8px;
+  border: 1.5px solid #d4d4d8;
+}
+
+#closeDayAndShiftModal .order-stat-success::before {
+  border-color: #22c55e;
+}
+
+#closeDayAndShiftModal .order-stat-danger::before {
+  border-color: #ef4444;
+}
+
+#closeDayAndShiftModal .order-stat-muted::before {
+  border-color: #e4e4e7;
+}
+
+/* text */
+
+#closeDayAndShiftModal .order-stat-line span:first-child {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  /* color:#4b5563 !important; */
+  font-weight: 500;
+  font-size: 13px;
+}
+
+#closeDayAndShiftModal .order-stat-value {
+  font-weight: 600;
+  color: var(--text);
+}
+
+/* ---------- Closing Day Summary (RIGHT bottom) ---------- */
+
+#closeDayAndShiftModal .acc-card-summary {
+  padding: 14px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 0px;
+}
+
+#closeDayAndShiftModal #closeDaySummarylabelid {
+  font-weight: 600;
+  font-size: 15px;
+  color: var(--muted);
+  background: transparent;
+  padding: 0;
+  margin-bottom: 4px;
+}
+
+/* labels inside summary: make them look like simple rows */
+
+#closeDayAndShiftModal .acc-card-summary .prevDayCloseDayShiftSummary label,
+#closeDayAndShiftModal .acc-card-summary .modal-info-row label {
+  background: transparent;
+  margin: 0;
+  padding: 4px 0;
+  color: var(--muted);
+  border-radius: 0;
+  width: 100%;
+  max-width: 100%;
+}
+
+/* ---------- actions (Close & Close Day and Shift) ---------- */
+
+#closeDayAndShiftModal .acc-summary-actions {
+  /* margin-top: 300px; */
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+/* Keep action buttons ALWAYS visible */
+#closeDayAndShiftModal .acc-card-order {
+  display: flex;
+  flex-direction: column;
+}
+
+#closeDayAndShiftModal .acc-summary-actions {
+  margin-top: auto !important; /* pushes buttons to bottom safely */
+  padding-top: 10px;
+  /* background: var(--panel); */
+}
+
+/* cancel: light outline */
+
+#closeDayAndShiftModal
+  button.btn.btn-danger.closeDayAndShiftModalButton.has-i18n {
+  display: block;
+  width: 100%;
+  padding: 10px 12px;
+  border-radius: 10px;
+  background: var(--danger);
+  color: #ffffff;
+  border: 1px solid #fee2e2;
+  font-weight: 600;
+  line-height: 12px;
+}
+
+/* primary CTA: outline green, like reference */
+
+#closeDayAndShiftModal #CloseDayAndShiftButtonId {
+  display: block;
+  width: 100%;
+  padding: 12px 18px;
+  border-radius: 10px;
+  background: var(--accent);
+  color: #ffffff;
+  border: 1.5px solid var(--accent);
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  line-height: 1px;
+}
+
+/* #closeDayAndShiftModal #CloseDayAndShiftButtonId::after {
+  content: "→";
+  font-weight: 700;
+  font-size: 0.9rem;
+} */
+
+/* hover feel */
+
+/* #closeDayAndShiftModal #CloseDayAndShiftButtonId:hover {
+  background: var(--accent);
+  color: #ffffff;
+  box-shadow: 0 10px 24px rgba(22,163,74,0.18);
+  transform: translateY(-1px);
+} */
+
+/* ---------- Shift Notes ---------- */
+
+#closeDayAndShiftModal #closeDayAndShiftCommentInputId {
+  border-radius: 12px;
+  border: 1px solid #e5e7eb;
+  padding: 12px 14px;
+  min-height: 70px;
+  background: #f9fafb;
+  color: var(--text);
+  font-size: var(--fs-sm);
+}
+
+/* ---------- focus states ---------- */
+
+#closeDayAndShiftModal input:focus,
+#closeDayAndShiftModal textarea:focus {
+  outline: 2px solid rgba(22, 163, 74, 0.12);
+  box-shadow: 0 0 0 1px rgba(22, 163, 74, 0.12);
+}
+
+/* ---------- desktop breakpoints only ---------- */
+
+@media (max-width: 1366px) {
+  #closeDayAndShiftModal .closeDayAndShiftContainer {
+    gap: 14px;
+  }
+  #closeDayAndShiftModal .closeDayAndShiftContainer > .col-3 {
+    min-width: 220px;
+    flex-basis: 24%;
+  }
+  #closeDayAndShiftModal .acc-card-full {
+    min-height: 400px;
+  }
+}
+
+@media (max-width: 1150px) {
+  #closeDayAndShiftModal .closeDayAndShiftContainer > .col-3 {
+    flex-basis: 26%;
+    min-width: 200px;
+  }
+  #closeDayAndShiftModal .closeDayAndShiftContainer > .col-6 {
+    min-width: 450px;
+  }
+}
+/* ------------------ Currency Denomination: compact pills + unified Total ------------------ */
+
+/* Slightly narrower left column to free space */
+#closeDayAndShiftModal .closeDayAndShiftContainer > .col-3 {
+  flex: 0 0 23%;
+  min-width: 200px;
+  max-width: 280px;
+}
+
+/* Keep left card compact */
+#closeDayAndShiftModal .col-3.acc-layout-col .acc-card-full {
+  padding: 8px;
+  min-height: 340px;
+}
+
+/* Table base - tighter spacing and smaller text */
+#closeDayAndShiftModal #closeDayAndShiftCashDenominationTableId {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0 6px; /* smaller gap for compact pills */
+  font-family: Inter, Arial, sans-serif;
+  font-size: 14px;
+}
+
+/* Header */
+#closeDayAndShiftModal .currencyDenominationTableHeader {
+  display: flex !important;
+  align-items: center;
+  justify-content: space-between;
+  padding: 6px 8px !important;
+  /* background: transparent !important; */
+  border-bottom: none !important;
+  color: var(--muted);
+  font-weight: 700;
+  font-size: 14px;
+}
+
+#closeDayAndShiftModal .currencyDenominationTableHeader i {
+  width: 32px;
+  height: 22px;
+  border-radius: 8px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  /* background: rgba(22,163,74,0.06); */
+  color: var(--accent);
+  /* border: 1px solid rgba(22,163,74,0.06); */
+  font-size: 12px;
+}
+
+/* Pill rows — shorter height and tighter padding */
+#closeDayAndShiftModal #closeDayAndShiftCashDenominationTableId tbody td {
+  /* background: #f8f9fa !important; */
+  border: 1px solid #e9e3e3;
+  padding: 8px 10px;
+  /* box-shadow: 0 4px 8px rgba(2,6,23,0.03); */
+  vertical-align: middle;
+  line-height: 1;
+}
+
+/* Rounded pill edges */
+#closeDayAndShiftModal
+  #closeDayAndShiftCashDenominationTableId
+  tbody
+  tr
+  td:first-child {
+  border-right: 0;
+  border-top-left-radius: 8px;
+  border-bottom-left-radius: 8px;
+  padding-left: 9px;
+  font-weight: 600;
+  font-size: 13.5px;
+  color: var(--muted);
+}
+
+#closeDayAndShiftModal
+  #closeDayAndShiftCashDenominationTableId
+  tbody
+  tr
+  td:last-child {
+  border-left: 0;
+  border-top-right-radius: 8px;
+  border-bottom-right-radius: 8px;
+  padding-right: 14px;
+  text-align: right;
+  font-weight: 700;
+  color: var(--muted);
+}
+
+/* Count column (middle) — compact and centered */
+#closeDayAndShiftModal
+  #closeDayAndShiftCashDenominationTableId
+  tbody
+  tr
+  td:nth-child(2) {
+  width: 14%;
+  text-align: center;
+  font-weight: 800;
+  font-size: 14px;
+  border-left: 0;
+  border-right: 0;
+  padding: 8px 6px;
+}
+
+/* Inputs that JS may inject — compact heights so pills remain short */
+#closeDayAndShiftModal
+  #closeDayAndShiftCashDenominationTableId
+  tbody
+  td
+  input[type='number'],
+#closeDayAndShiftModal
+  #closeDayAndShiftCashDenominationTableId
+  tbody
+  td
+  input[type='text'] {
+  width: 100%;
+  border: none;
+  background: transparent;
+  padding: 0;
+  margin: 0;
+  height: 24px;
+  line-height: 24px;
+  font-size: 13.25px;
+
+  color: inherit;
+  box-shadow: none;
+}
+
+/* Middle column count input: narrow, centered */
+#closeDayAndShiftModal
+  #closeDayAndShiftCashDenominationTableId
+  tbody
+  tr
+  td:nth-child(2)
+  input {
+  width: 40px;
+  height: 24px;
+  text-align: center;
+  margin: 0 auto;
+  font-weight: 600;
+}
+
+/* Amount input: right aligned & compact */
+#closeDayAndShiftModal
+  #closeDayAndShiftCashDenominationTableId
+  tbody
+  tr
+  td:nth-child(3)
+  input {
+  width: 110px;
+  height: 24px;
+  text-align: right;
+  margin-left: auto;
+}
+
+/* Remove default focus ring for calm visuals */
+#closeDayAndShiftModal
+  #closeDayAndShiftCashDenominationTableId
+  tbody
+  td
+  input:focus {
+  outline: none;
+}
+
+/* ---------------- Footer (Total Cash In Drawer) — make it same pill as rows ------------------ */
+
+/* Make footer td visually identical to body pills */
+#closeDayAndShiftModal .currencyDenominationTableFooter td {
+  background: #ffffff;
+  border: 1px solid var(--border-soft);
+  padding: 8px 10px;
+  /* box-shadow: 0 4px 8px rgba(2,6,23,0.03); */
+  vertical-align: middle;
+  line-height: 1;
+}
+
+/* Rounded corners to form a pill across footer cells */
+#closeDayAndShiftModal .currencyDenominationTableFooter td:first-child {
+  border-top-left-radius: 8px;
+  border-bottom-left-radius: 8px;
+  text-align: left;
+  font-weight: 800;
+  color: var(--muted);
+  padding-left: 14px;
+}
+
+#closeDayAndShiftModal .currencyDenominationTableFooter td:last-child {
+  border-top-right-radius: 8px;
+  border-bottom-right-radius: 8px;
+  text-align: right;
+  padding-right: 14px;
+}
+
+/* Total input: look exactly like row amount cell (editable, no special box) */
+#closeDayAndShiftModal #closeDayAndShiftCashInDrawerId {
+  width: 110px;
+  border: none;
+  background: transparent;
+  text-align: right;
+  font-weight: 800;
+  color: var(--accent);
+  height: 24px;
+  line-height: 24px;
+  padding: 0;
+  margin: 0;
+}
+#closeDayAndShiftModal .currencyDenominationTableHeader {
+  font-size: 14.3px;
+  margin-top: -4px;
+}
+/* tiny responsive tweak for smaller desktop widths */
+@media (max-width: 1366px) {
+  #closeDayAndShiftModal #closeDayAndShiftCashDenominationTableId {
+    border-spacing: 0 5px;
+    font-size: 12.3px;
+  }
+  #closeDayAndShiftModal .col-3.acc-layout-col .acc-card-full {
+    min-height: 320px;
+  }
+}
+/* ---------------- Total Cash input: invisible box but editable ------------------ */
+
+/* Make input visually identical to the surrounding pill (no box) */
+#closeDayAndShiftModal #closeDayAndShiftCashInDrawerId {
+  width: 110px; /* same width as amount cells */
+  padding: 0; /* no extra box padding */
+  margin: 0;
+  border: none !important; /* remove border */
+  background: transparent !important; /* transparent background */
+  box-shadow: none !important; /* remove any box-shadow */
+  outline: none !important; /* remove focus ring */
+  text-align: right; /* keep number right-aligned */
+  font-weight: 800;
+  color: var(--accent);
+  height: 24px; /* same compact height as amount cells */
+  line-height: 24px;
+  caret-color: var(--accent); /* caret color matches green */
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+/* Remove browser spin controls for number inputs */
+#closeDayAndShiftModal
+  #closeDayAndShiftCashInDrawerId::-webkit-outer-spin-button,
+#closeDayAndShiftModal
+  #closeDayAndShiftCashInDrawerId::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Hide focus outlines/box-shadows from browsers on focus (double-safety) */
+#closeDayAndShiftModal #closeDayAndShiftCashInDrawerId:focus {
+  outline: none !important;
+  box-shadow: none !important;
+  background: transparent !important;
+}
+
+/* Ensure the footer td still looks like the pill even when the input is focused */
+#closeDayAndShiftModal .currencyDenominationTableFooter td:first-child,
+#closeDayAndShiftModal .currencyDenominationTableFooter td:last-child {
+  background: #ffffff;
+  /* border: 1px solid var(--border-soft); */
+  /* box-shadow: 0 4px 8px rgba(2,6,23,0.03); */
+}
+
+/* If browser autofill colors the input, neutralize it */
+#closeDayAndShiftModal
+  #closeDayAndShiftCashInDrawerId:-internal-autofill-selected,
+#closeDayAndShiftModal #closeDayAndShiftCashInDrawerId:-webkit-autofill {
+  background-color: transparent !important;
+  background-image: none !important;
+  color: var(--accent) !important;
+}
+/* ======================================================================
+   PAYMENT RECONCILIATION TABLE – make it look like the reference
+   (Middle column, table: #closeDayAndShiftTransactionsTableForShiftid)
+   ====================================================================== */
+
+/* Card body: clean frame, no weird scrollbars */
+#closeDayAndShiftModal .closeShiftTransactionTableContainerClass {
+  flex: 1 1 auto;
+  /* padding: 10px 12px; */
+  border-radius: 12px;
+  background: #ffffff;
+  border: 1px solid var(--border-soft);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.8);
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+/* Table layout – flat like the reference */
+#closeDayAndShiftModal #closeDayAndShiftTransactionsTableForShiftid {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed;
+}
+
+/* Header row: MODE / TRANS. / SETTLED / ACTUAL / VARIANCE */
+#closeDayAndShiftModal #closeDayAndShiftTransactionsTableForShiftid thead th {
+  background: #f8fafc;
+  color: var(--muted);
+  font-size: 13px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 8px 12px;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+/* Column widths + alignment */
+#closeDayAndShiftModal
+  #closeDayAndShiftTransactionsTableForShiftid
+  th:nth-child(1),
+#closeDayAndShiftModal
+  #closeDayAndShiftTransactionsTableForShiftid
+  td:nth-child(1) {
+  text-align: left;
+}
+
+#closeDayAndShiftModal
+  #closeDayAndShiftTransactionsTableForShiftid
+  th:nth-child(2),
+#closeDayAndShiftModal
+  #closeDayAndShiftTransactionsTableForShiftid
+  td:nth-child(2) {
+  text-align: center;
+  width: 70px;
+}
+
+#closeDayAndShiftModal
+  #closeDayAndShiftTransactionsTableForShiftid
+  th:nth-child(3),
+#closeDayAndShiftModal
+  #closeDayAndShiftTransactionsTableForShiftid
+  th:nth-child(4),
+#closeDayAndShiftModal
+  #closeDayAndShiftTransactionsTableForShiftid
+  th:nth-child(5),
+#closeDayAndShiftModal
+  #closeDayAndShiftTransactionsTableForShiftid
+  td:nth-child(3),
+#closeDayAndShiftModal
+  #closeDayAndShiftTransactionsTableForShiftid
+  td:nth-child(4),
+#closeDayAndShiftModal
+  #closeDayAndShiftTransactionsTableForShiftid
+  td:nth-child(5) {
+  text-align: right;
+  width: 90px;
+}
+
+/* Body rows: only horizontal separators, compact height */
+#closeDayAndShiftModal #closeDayAndShiftTransactionsTableForShiftid tbody td {
+  padding: 8px 12px;
+  border-bottom: 1px solid #e9e3e3;
+  font-size: 13px;
+  vertical-align: middle;
+}
+
+/* MODE text – normal, left-aligned */
+#closeDayAndShiftModal
+  #closeDayAndShiftTransactionsTableForShiftid
+  tbody
+  td:nth-child(1) {
+  font-weight: 500;
+  color: var(--text);
+}
+
+/* TRANS. chip – small grey pill like in the screenshot */
+#closeDayAndShiftModal
+  #closeDayAndShiftTransactionsTableForShiftid
+  tbody
+  td:nth-child(2) {
+  font-weight: 500;
+  font-size: 13px;
+}
+
+#closeDayAndShiftModal
+  #closeDayAndShiftTransactionsTableForShiftid
+  tbody
+  td:nth-child(2)
+  > * {
+  /* display: inline-flex; */
+  align-items: center;
+  justify-content: center;
+  min-width: 26px;
+  height: 22px;
+  padding: 0 6px;
+  /* border-radius: 999px; */
+  background: #ffffff;
+  /* border: 1px solid #e4e4e7; */
+  /* box-shadow: 0 4px 8px rgba(15, 23, 42, 0.06); */
+}
+
+/* If it's just plain text (no span/input), still give pill look */
+#closeDayAndShiftModal
+  #closeDayAndShiftTransactionsTableForShiftid
+  tbody
+  td:nth-child(2):not(:has(*)) {
+  /* display: inline-flex; */
+  align-items: center;
+  justify-content: center;
+  min-width: 26px;
+  height: 22px;
+  padding: 0 6px;
+  border-radius: 999px;
+  /* background: #ffffff; */
+}
+
+/* SETTLED – bold, dark, right-aligned */
+#closeDayAndShiftModal
+  #closeDayAndShiftTransactionsTableForShiftid
+  tbody
+  td:nth-child(3) {
+  /* font-weight: 700; */
+  color: var(--text);
+}
+
+/* ACTUAL – right aligned, slightly less bold (works for text or input) */
+#closeDayAndShiftModal
+  #closeDayAndShiftTransactionsTableForShiftid
+  tbody
+  td:nth-child(4) {
+  font-weight: 500;
+  color: var(--text);
+}
+
+/* VARIANCE – muted and narrow, like the “–” in the reference */
+#closeDayAndShiftModal
+  #closeDayAndShiftTransactionsTableForShiftid
+  tbody
+  td:nth-child(5) {
+  font-weight: 600;
+  color: var(--muted);
+}
+
+/* Inputs inside amount cells – clean and fixed width so they never shrink weirdly */
+#closeDayAndShiftModal
+  #closeDayAndShiftTransactionsTableForShiftid
+  tbody
+  td:nth-child(3)
+  input,
+#closeDayAndShiftModal
+  #closeDayAndShiftTransactionsTableForShiftid
+  tbody
+  td:nth-child(4)
+  input,
+#closeDayAndShiftModal
+  #closeDayAndShiftTransactionsTableForShiftid
+  tbody
+  td:nth-child(5)
+  input {
+  width: 100%;
+  min-width: 80px;
+  padding: 4px 6px;
+  border-radius: 6px;
+  border: 1px solid #e5e7eb;
+  background: #ffffff;
+  font-size: 13px;
+  text-align: right;
+  box-shadow: none;
+}
+
+/* Generic fix: prevent shrinking */
+#closeDayAndShiftModal
+  #closeDayAndShiftTransactionsTableForShiftid
+  tbody
+  td
+  input[type='number'] {
+  flex-shrink: 0;
+}
+
+/* Optional: make SETTLED inputs look slightly bolder like the text */
+#closeDayAndShiftModal
+  #closeDayAndShiftTransactionsTableForShiftid
+  tbody
+  td:nth-child(3)
+  input {
+  font-weight: 700;
+}
+
+/* Small-screen desktop (1024–1366) – slightly tighter columns but still stable */
+@media (max-width: 1366px) {
+  #closeDayAndShiftModal
+    #closeDayAndShiftTransactionsTableForShiftid
+    th:nth-child(2),
+  #closeDayAndShiftModal
+    #closeDayAndShiftTransactionsTableForShiftid
+    td:nth-child(2) {
+    width: 60px;
+  }
+
+  #closeDayAndShiftModal
+    #closeDayAndShiftTransactionsTableForShiftid
+    th:nth-child(3),
+  #closeDayAndShiftModal
+    #closeDayAndShiftTransactionsTableForShiftid
+    th:nth-child(4),
+  #closeDayAndShiftModal
+    #closeDayAndShiftTransactionsTableForShiftid
+    th:nth-child(5),
+  #closeDayAndShiftModal
+    #closeDayAndShiftTransactionsTableForShiftid
+    td:nth-child(3),
+  #closeDayAndShiftModal
+    #closeDayAndShiftTransactionsTableForShiftid
+    td:nth-child(4),
+  #closeDayAndShiftModal
+    #closeDayAndShiftTransactionsTableForShiftid
+    td:nth-child(5) {
+    width: 80px;
+  }
+}
+/* Force TRANS / SETTLED / ACTUAL / VARIANCE columns to stay visible
+   in the Closing Day & Shift Payment Reconciliation table, even if JS
+   sets style="display:none" on them. Scoped ONLY to closeDay modal. */
+
+#closeDayAndShiftModal
+  #closeDayAndShiftTransactionsTableForShiftid
+  .closeDayTransactionCount,
+#closeDayAndShiftModal
+  #closeDayAndShiftTransactionsTableForShiftid
+  .closeDaySettledAmount,
+#closeDayAndShiftModal
+  #closeDayAndShiftTransactionsTableForShiftid
+  .closeDayActualAmouunt,
+#closeDayAndShiftModal
+  #closeDayAndShiftTransactionsTableForShiftid
+  .closeDayVarianceAmount {
+  /* display: table-cell !important;   */
+}
+
+/* If your JS also hides the same classes on <td> cells in tbody,
+   the rule above will cover them because it targets the class,
+   not just <th>. No change to IDs / HTML structure needed. */
+/* ============================================================
+   PAYMENT RECONCILIATION – final tweaks
+   - Narrow Payment Mode
+   - Wider Trans. Count
+   - No visible box for ACTUAL column inputs
+   ============================================================ */
+
+/* Use fixed layout so widths are respected */
+#closeDayAndShiftModal #closeDayAndShiftTransactionsTableForShiftid {
+  table-layout: fixed;
+}
+
+/* Column widths + alignment
+   1: Mode (smaller now)
+   2: Trans. Count (wider)
+   3: Settled
+   4: Actual
+   5: Variance
+*/
+#closeDayAndShiftModal
+  #closeDayAndShiftTransactionsTableForShiftid
+  th:nth-child(1),
+#closeDayAndShiftModal
+  #closeDayAndShiftTransactionsTableForShiftid
+  td:nth-child(1) {
+  width: 20%;
+  text-align: center;
+}
+
+#closeDayAndShiftModal
+  #closeDayAndShiftTransactionsTableForShiftid
+  th:nth-child(2),
+#closeDayAndShiftModal
+  #closeDayAndShiftTransactionsTableForShiftid
+  td:nth-child(2) {
+  width: 18%;
+  text-align: center;
+}
+
+#closeDayAndShiftModal
+  #closeDayAndShiftTransactionsTableForShiftid
+  th:nth-child(3),
+#closeDayAndShiftModal
+  #closeDayAndShiftTransactionsTableForShiftid
+  td:nth-child(3) {
+  width: 17%;
+  text-align: center;
+}
+
+#closeDayAndShiftModal
+  #closeDayAndShiftTransactionsTableForShiftid
+  th:nth-child(4),
+#closeDayAndShiftModal
+  #closeDayAndShiftTransactionsTableForShiftid
+  td:nth-child(4) {
+  width: 15%;
+  text-align: center;
+}
+
+#closeDayAndShiftModal
+  #closeDayAndShiftTransactionsTableForShiftid
+  th:nth-child(5),
+#closeDayAndShiftModal
+  #closeDayAndShiftTransactionsTableForShiftid
+  td:nth-child(5) {
+  width: 15%;
+  text-align: center;
+}
+
+/* Make body rows a bit tighter so the section looks neat */
+#closeDayAndShiftModal #closeDayAndShiftTransactionsTableForShiftid tbody td {
+  padding: 7px 10px;
+}
+
+/* TRANS. Count pill – uses extra space now */
+#closeDayAndShiftModal
+  #closeDayAndShiftTransactionsTableForShiftid
+  tbody
+  td:nth-child(2)
+  > * {
+  min-width: 34px;
+}
+
+/* ================= ACTUAL column: no visible input box ================= */
+
+/* Base style for amount inputs (kept for Settled + Variance) */
+#closeDayAndShiftModal
+  #closeDayAndShiftTransactionsTableForShiftid
+  tbody
+  td:nth-child(3)
+  input,
+#closeDayAndShiftModal
+  #closeDayAndShiftTransactionsTableForShiftid
+  tbody
+  td:nth-child(5)
+  input {
+  width: 100%;
+  min-width: 80px;
+  padding: 4px 6px;
+  border-radius: 6px;
+  border: 1px solid #e5e7eb;
+  background: #ffffff;
+  font-size: 13px;
+  text-align: right;
+  box-shadow: none;
+}
+
+/* ACTUAL column input – look like plain text (no box) */
+#closeDayAndShiftModal
+  #closeDayAndShiftTransactionsTableForShiftid
+  tbody
+  td:nth-child(4)
+  input {
+  width: 100%;
+  min-width: 80px;
+  padding: 0;
+  margin: 0;
+  border: none !important;
+  border-radius: 0;
+  background: transparent !important;
+  box-shadow: none !important;
+  outline: none !important;
+  text-align: center;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text);
+  caret-color: var(--text);
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+/* Remove spin buttons for ACTUAL number input */
+#closeDayAndShiftModal
+  #closeDayAndShiftTransactionsTableForShiftid
+  tbody
+  td:nth-child(4)
+  input::-webkit-outer-spin-button,
+#closeDayAndShiftModal
+  #closeDayAndShiftTransactionsTableForShiftid
+  tbody
+  td:nth-child(4)
+  input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* On focus, still no box – just caret */
+#closeDayAndShiftModal
+  #closeDayAndShiftTransactionsTableForShiftid
+  tbody
+  td:nth-child(4)
+  input:focus {
+  outline: none !important;
+  box-shadow: none !important;
+  background: transparent !important;
+}
+/* ============================================================
+   PAYMENT RECONCILIATION – sticky header (Payment Mode, Trans.,
+   Settled, Actual, Variance) only for this table
+   ============================================================ */
+
+#closeDayAndShiftModal .closeShiftTransactionTableContainerClass {
+  position: relative; /* needed for sticky children */
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+/* Sticky header cells */
+#closeDayAndShiftModal #closeDayAndShiftTransactionsTableForShiftid thead th {
+  position: sticky;
+  top: 0; /* stick to top of scroll area */
+  z-index: 2; /* above body rows */
+  background: #f8fafc; /* same as current header bg */
+}
+
+/* Little shadow when header is stuck (optional but looks nice) */
+#closeDayAndShiftModal
+  #closeDayAndShiftTransactionsTableForShiftid
+  thead
+  th::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -1px;
+  height: 1px;
+  box-shadow: 0 2px 4px rgba(15, 23, 42, 0.08);
+  pointer-events: none;
+}
+
+#closeDayAndShiftModal .order-stat-line span:first-child {
+  justify-content: flex-start !important;
+  text-align: left !important;
+  width: auto;
+  flex: 0.9; /* ensures it sticks left */
+}
+
+#closeDayAndShiftModal .order-stat-line .order-stat-value {
+  margin-right: 26px;
+  font-weight: 600;
+  font-size: 14px;
+  min-width: 22px;
+  text-align: right;
+}
+
+/* Adjust circle spacing for cleaner layout */
+#closeDayAndShiftModal .order-stat-line::before {
+  margin-right: 6px !important;
+}
+/* SAME styling for all key/value pairs including Cash Drawer ID */
+#closeDayAndShiftModal .info-field {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #f8f9fa !important;
+  padding: 8px 14px !important;
+  border-radius: 20px !important;
+  width: 100% !important;
+  box-sizing: border-box;
+  font-size: 14px !important;
+  font-family: inherit !important;
+}
+
+/* Left (Revenue ID:, Username:, Cash Drawer ID:, etc.) */
+#closeDayAndShiftModal .info-key {
+  font-weight: 500 !important;
+  /* color: #4b5563 !important; */
+  white-space: nowrap;
+  font-size: 13px !important;
+  font-family: inherit !important;
+}
+
+/* Right (5b36, Sawant123, Rs0, drawerID, etc.) */
+#closeDayAndShiftModal .info-value {
+  margin-left: auto !important;
+  font-weight: 600 !important;
+  /* color: #111827 !important; */
+  white-space: nowrap;
+  text-align: right;
+  font-size: 13px !important;
+  font-family: inherit !important;
+}
+/* stack Opening Balance + Expenses vertically in the card */
+#closeDayAndShiftModal .account-balance-info {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-top: 4px;
+}
+
+/* pill row */
+#closeDayAndShiftModal .info-field {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #f8f9fa;
+  padding: 8px 14px;
+  border-radius: 20px;
+  width: 100%;
+  box-sizing: border-box;
+  font-size: 14px;
+}
+
+/* left label (Opening Balance:, Expenses:) */
+#closeDayAndShiftModal .info-key {
+  font-weight: 500;
+  /* color: #4b5563; */
+  white-space: nowrap;
+}
+
+/* right value (Rs 0, 0, etc.) */
+#closeDayAndShiftModal .info-value {
+  margin-left: auto;
+  font-weight: 600;
+  /* color: #111827; */
+  white-space: nowrap;
+  text-align: right;
+}
+/* FINAL FIX for Cash Drawer input size */
+#startShiftCashDrawerInputId,
+#startDayAndShiftCashDrawerInputId,
+#closeDayShiftCashdrawerInputId,
+#closeShiftCashDrawerInputId,
+.cashdrawer-input {
+  margin: 0 !important; /* remove global margin */
+  padding: 0 4px !important; /* small padding only */
+
+  width: 55px !important; /* small width */
+  min-width: 40px !important;
+  max-width: 70px !important;
+
+  border: none !important;
+  background: transparent !important;
+  outline: none !important;
+
+  font-weight: 600 !important;
+  font-size: inherit !important;
+  color: inherit !important;
+
+  text-align: right !important;
+  box-sizing: border-box !important;
+
+  flex: 0 0 auto !important; /* IMPORTANT – prevent stretching */
+  display: inline-block !important;
+}
+#startShiftCashDrawerInputId,
+#startDayAndShiftCashDrawerInputId,
+#closeDayShiftCashdrawerInputId,
+#closeShiftCashDrawerInputId,
+.cashdrawer-input {
+  height: auto !important; /* override 32px */
+  min-height: 0 !important; /* avoid forced height */
+  line-height: 1.2 !important; /* match pill height */
+  padding: 0 4px !important; /* keep small padding */
+}
+/* ---------------------------
+   Insert "×" between Denomination (td1) and Count input (td2)
+   Safe, responsive, non-invasive — add at end of CSS file
+   --------------------------- */
+
+/* make first cell relative so pseudo element can be positioned */
+#closeDayAndShiftModal
+  #closeDayAndShiftCashDenominationTableId
+  tbody
+  tr
+  td:nth-child(1) {
+  position: relative !important;
+  padding-right: 28px !important; /* space for the × */
+  box-sizing: border-box !important;
+}
+
+/* the "×" itself — sits at the right edge of the first cell */
+#closeDayAndShiftModal
+  #closeDayAndShiftCashDenominationTableId
+  tbody
+  tr
+  td:nth-child(1)::after {
+  content: '×' !important;
+  position: absolute !important;
+  right: 8px !important; /* distance from right edge of cell */
+  top: 50% !important;
+  transform: translateY(-50%) !important;
+  color: #6b7280 !important; /* muted gray */
+  font-weight: 700 !important;
+  font-size: 14px !important;
+  line-height: 1 !important;
+  pointer-events: none !important;
+  user-select: none !important;
+  display: inline-block !important;
+}
+
+/* ensure second cell (input) has a little left padding so it never touches the × */
+#closeDayAndShiftModal
+  #closeDayAndShiftCashDenominationTableId
+  tbody
+  tr
+  td:nth-child(2) {
+  padding-left: 12px !important;
+  box-sizing: border-box !important;
+}
+
+/* if the count input occupies full width, keep it constrained so pill layout stays */
+#closeDayAndShiftModal
+  #closeDayAndShiftCashDenominationTableId
+  tbody
+  tr
+  td:nth-child(2)
+  input {
+  width: 52px !important; /* same small pill width you use elsewhere */
+  min-width: 40px !important;
+  max-width: 70px !important;
+  height: 28px !important;
+  box-sizing: border-box !important;
+  padding: 4px 8px !important;
+  border-radius: 8px !important;
+  border: 1px solid #d1d5db !important;
+  /* background: #ffffff !important; */
+  text-align: center !important;
+  font-weight: 600 !important;
+  /* color: #111827 !important; */
+}
+
+/* Small screen adjustments — keep everything fitting */
+@media (max-width: 1150px) {
+  #closeDayAndShiftModal
+    #closeDayAndShiftCashDenominationTableId
+    tbody
+    tr
+    td:nth-child(1) {
+    padding-right: 20px !important;
+  }
+
+  #closeDayAndShiftModal
+    #closeDayAndShiftCashDenominationTableId
+    tbody
+    tr
+    td:nth-child(1)::after {
+    right: 6px !important;
+    font-size: 13px !important;
+  }
+
+  #closeDayAndShiftModal
+    #closeDayAndShiftCashDenominationTableId
+    tbody
+    tr
+    td:nth-child(2)
+    input {
+    width: 39px !important;
+    height: 26px !important;
+    padding: 3px 6px !important;
+  }
+}
+
+/* Optional: if some script resets padding or width inline, force the pill look */
+#closeDayAndShiftModal
+  #closeDayAndShiftCashDenominationTableId
+  tbody
+  tr
+  td:nth-child(2)
+  input[style] {
+  width: 52px !important;
+  min-width: 40px !important;
+}
+
+/* Accessibility: if content is read by assistive tech, preserve logical reading order:
+   The "×" is visual only; screen readers will still read the td contents in order. */
+#closeDayAndShiftModal
+  #closeDayAndShiftCashDenominationTableId
+  tbody
+  tr
+  td:nth-child(1)::after {
+  aria-hidden: true;
+}
+/* =====================================================
+   ADDABLE CSS: Visible small boxes for Actual/Variance,
+   slight right offsets, and Cash Drawer ID box/focus
+   (Drop this at the end of your stylesheet)
+   ===================================================== */
+
+/* ---------- Actual (4th) & Variance (5th) input boxes ---------- */
+/* Make them visible, compact, nicely rounded and readable */
+#closeDayAndShiftModal
+  #closeDayAndShiftTransactionsTableForShiftid
+  tbody
+  td:nth-child(4)
+  input,
+#closeDayAndShiftModal
+  #closeDayAndShiftTransactionsTableForShiftid
+  tbody
+  td:nth-child(5)
+  input {
+  /* background: #ffffff !important; */
+  border: 1px solid #d1d5db !important;
+  border-radius: 8px !important;
+  padding: 4px 8px !important;
+  height: 28px !important;
+  box-sizing: border-box !important;
+  /* color: #111827 !important; */
+  font-weight: 600 !important;
+  font-size: 13px !important;
+  text-align: center !important; /* center numbers visually */
+  min-width: 60px !important;
+  width: 42px !important;
+  outline: none !important;
+  box-shadow: inset 0 1px 2px rgba(2, 6, 23, 0.04) !important;
+}
+
+/* Slight visual nudge to the right for Actual and Variance inputs
+   done with transform to avoid altering table cell widths */
+#closeDayAndShiftModal
+  #closeDayAndShiftTransactionsTableForShiftid
+  tbody
+  td:nth-child(4)
+  input {
+  /* transform: translateX(12px) !important;    */
+}
+
+#closeDayAndShiftModal
+  #closeDayAndShiftTransactionsTableForShiftid
+  tbody
+  td:nth-child(5)
+  input {
+  transform: translateX(8px) !important; /* move Variance slightly less */
+}
+
+/* Make sure the td remains centered so transform just moves the input */
+#closeDayAndShiftModal
+  #closeDayAndShiftTransactionsTableForShiftid
+  tbody
+  td:nth-child(4),
+#closeDayAndShiftModal
+  #closeDayAndShiftTransactionsTableForShiftid
+  tbody
+  td:nth-child(5) {
+  position: relative !important;
+  text-align: center !important;
+  vertical-align: middle !important;
+}
+
+/* Focus state — green border + subtle halo (keeps border visible) */
+#closeDayAndShiftModal
+  #closeDayAndShiftTransactionsTableForShiftid
+  tbody
+  td:nth-child(4)
+  input:focus,
+#closeDayAndShiftModal
+  #closeDayAndShiftTransactionsTableForShiftid
+  tbody
+  td:nth-child(5)
+  input:focus {
+  border-color: rgba(22, 163, 74, 0.75) !important;
+  box-shadow: 0 0 0 4px rgba(22, 163, 74, 0.07) !important;
+  /* background: #ffffff !important; */
+  /* transform: translateX(0) !important;  */
+}
+
+/* If some JS applies inline style, force widths to keep pill shape */
+#closeDayAndShiftModal
+  #closeDayAndShiftTransactionsTableForShiftid
+  tbody
+  td:nth-child(4)
+  input[style],
+#closeDayAndShiftModal
+  #closeDayAndShiftTransactionsTableForShiftid
+  tbody
+  td:nth-child(5)
+  input[style] {
+  width: 72px !important;
+  min-width: 60px !important;
+}
+
+/* ---------- Cash Drawer ID input: visible, compact, and stable ---------- */
+/* Using the ID/class you already have in the markup */
+#closeDayAndShiftModal #closeShiftCashDrawerInputId,
+#closeDayAndShiftModal .cashdrawer-input {
+  display: inline-block !important;
+  width: 64px !important;
+  min-width: 44px !important;
+  max-width: 90px !important;
+  height: 28px !important;
+  padding: 4px 8px !important;
+  box-sizing: border-box !important;
+  border: 1px solid #d1d5db !important;
+  border-radius: 8px !important;
+  /* background: #ffffff !important; */
+  /* color: #111827 !important; */
+  font-weight: 600 !important;
+  text-align: right !important;
+  outline: none !important;
+  -webkit-appearance: none !important;
+  -moz-appearance: none !important;
+}
+
+/* Force visible border on focus so it never disappears */
+#closeDayAndShiftModal #closeShiftCashDrawerInputId:focus,
+#closeDayAndShiftModal .cashdrawer-input:focus {
+  border-color: rgba(22, 163, 74, 0.75) !important;
+  box-shadow: 0 0 0 4px rgba(22, 163, 74, 0.07) !important;
+  /* background: #ffffff !important; */
+  outline: none !important;
+}
+
+/* Prevent parent pill from collapsing input (important in responsive pills) */
+#closeDayAndShiftModal
+  .modal-info-row
+  .info-field
+  input#closeShiftCashDrawerInputId,
+#closeDayAndShiftModal .modal-info-row .info-field .cashdrawer-input {
+  flex: 0 0 auto !important;
+}
+
+/* ---------- Small-screen adjustments ---------- */
+@media (max-width: 1150px) {
+  /* make boxes slightly smaller on narrow desktops */
+  #closeDayAndShiftModal
+    #closeDayAndShiftTransactionsTableForShiftid
+    tbody
+    td:nth-child(4)
+    input,
+  #closeDayAndShiftModal
+    #closeDayAndShiftTransactionsTableForShiftid
+    tbody
+    td:nth-child(5)
+    input {
+    width: 56px !important;
+    min-width: 48px !important;
+    height: 26px !important;
+    /* transform: translateX(6px) !important;  */
+  }
+
+  #closeDayAndShiftModal
+    #closeDayAndShiftTransactionsTableForShiftid
+    tbody
+    td:nth-child(4)
+    input:focus,
+  #closeDayAndShiftModal
+    #closeDayAndShiftTransactionsTableForShiftid
+    tbody
+    td:nth-child(5)
+    input:focus {
+    transform: translateX(0) !important;
+  }
+
+  #closeDayAndShiftModal #closeShiftCashDrawerInputId,
+  #closeDayAndShiftModal .cashdrawer-input {
+    width: 52px !important;
+    height: 32px !important;
+    padding: 3px 6px !important;
+  }
+}
+
+#closeDayAndShiftModal
+  #closeDayAndShiftTransactionsTableForShiftid
+  tbody
+  td:nth-child(4),
+#closeDayAndShiftModal
+  #closeDayAndShiftTransactionsTableForShiftid
+  tbody
+  td:nth-child(5) {
+  min-width: 72px !important;
+  overflow: visible !important;
+}
+
+#closeDayAndShiftModal
+  #closeDayAndShiftCashDenominationTableId
+  tfoot.currencyDenominationTableFooter
+  td {
+  /* background: #ffffff !important; */
+  padding: 8px 12px !important;
+  vertical-align: middle !important;
+  box-sizing: border-box !important;
+  border: 1.5px solid #e9e3e3 !important;
+}
+
+/* Left cell (label) */
+#closeDayAndShiftModal
+  #closeDayAndShiftCashDenominationTableId
+  tfoot.currencyDenominationTableFooter
+  td:first-child {
+  border-right: 0 !important;
+  border-top-left-radius: 8px !important;
+  border-bottom-left-radius: 8px !important;
+  font-weight: 700 !important;
+  /* color: #111827 !important; */
+  white-space: nowrap !important;
+}
+
+/* Right cell (input holder) */
+#closeDayAndShiftModal
+  #closeDayAndShiftCashDenominationTableId
+  tfoot.currencyDenominationTableFooter
+  td:last-child {
+  border-left: 0 !important;
+  border-top-right-radius: 8px !important;
+  border-bottom-right-radius: 8px !important;
+  text-align: right !important;
+}
+
+/* Cash In Drawer input — balanced & responsive */
+#closeDayAndShiftModal #closeDayAndShiftCashInDrawerId {
+  width: clamp(100px, 14vw, 130px) !important; /* 👈 NOT oversized */
+  max-width: 150% !important;
+
+  height: 33px !important;
+  padding: 4px 10px !important;
+  /* 
+  background: #ffffff !important; */
+  border: 1px solid #d1d5db !important;
+  border-radius: 8px !important;
+
+  text-align: right !important;
+  font-weight: 800 !important;
+  color: var(--accent) !important;
+
+  box-sizing: border-box !important;
+  outline: none !important;
+}
+#closeDayAndShiftModal #closeDayAndShiftCashInDrawerId {
+  width: clamp(100px, 14vw, 130px) !important;
+  max-width: 150% !important;
+}
+
+/* Below 1150px width */
+@media (max-width: 1150px) {
+  #closeDayAndShiftModal #closeDayAndShiftCashInDrawerId {
+    width: clamp(80px, 20vw, 110px) !important; /* adjust as you like */
+    max-width: 170% !important;
+  }
+}
+
+/* Focus — clean & visible */
+#closeDayAndShiftModal #closeDayAndShiftCashInDrawerId:focus {
+  border-color: rgba(22, 163, 74, 0.35) !important;
+  box-shadow: 0 0 0 3px rgba(22, 163, 74, 0.07) !important;
+}
+
+/* Small screens safety */
+@media (max-width: 1150px) {
+  #closeDayAndShiftModal #closeDayAndShiftCashInDrawerId {
+    width: 100px !important;
+    height: 32px !important;
+    padding: 3px 8px !important;
+    font-size: 13px !important;
+  }
+}
+/* ---------- Fix: keep header & footer visible, scroll only the tbody ---------- */
+/* Make the left card taller and use flex layout so header/footer remain outside the scroll area */
+#closeDayAndShiftModal .col-3.acc-layout-col .acc-card-full {
+  display: flex !important;
+  flex-direction: column !important;
+  /* make the left card taller (adjust clamp values to taste) */
+  max-height: clamp(420px, 82vh, 880px) !important;
+  min-height: 360px !important;
+  /* remove any earlier "overflow:auto" so only tbody scrolls */
+  overflow: visible !important;
+  padding: 10px !important;
+  box-sizing: border-box !important;
+}
+
+/* Turn the table into a column-flex container:
+   - thead remains at top (flex:0)
+   - tbody becomes the scrollable middle area (flex:1 + overflow)
+   - tfoot stays at bottom (flex:0)
+*/
+#closeDayAndShiftCashDenominationTableId {
+  display: flex !important;
+  flex-direction: column !important;
+  width: 100% !important;
+  height: 100% !important; /* let the table fill the card */
+  border-collapse: separate !important;
+}
+
+/* Header and footer are natural size, not scrollable */
+#closeDayAndShiftCashDenominationTableId thead,
+#closeDayAndShiftCashDenominationTableId tfoot {
+  display: block !important;
+  flex: 0 0 auto !important;
+  width: 100% !important;
+  background: var(--panel) !important;
+  z-index: 3 !important;
+}
+
+/* Make the body the scrollable area */
+#closeDayAndShiftCashDenominationTableId tbody {
+  display: block !important;
+  /* flex: 1 1 auto !important; */
+  overflow-y: auto !important;
+  overflow-x: hidden !important;
+  -webkit-overflow-scrolling: touch;
+  width: 100% !important;
+  /* small top/bottom padding to avoid clipping */
+  padding-top: 6px !important;
+  padding-bottom: 6px !important;
+  box-sizing: border-box !important;
+}
+
+/* Ensure body rows still render like table rows visually */
+#closeDayAndShiftCashDenominationTableId tbody tr,
+#closeDayAndShiftCashDenominationTableId thead tr,
+#closeDayAndShiftCashDenominationTableId tfoot tr {
+  display: table !important;
+  table-layout: fixed !important;
+  width: 100% !important;
+  /* background-color: var(--main-bg-color) !important; */
+}
+
+#closeDayAndShiftCashDenominationTableId
+  thead
+  th.currencyDenominationTableHeader,
+#closeDayAndShiftCashDenominationTableId thead th {
+  /* background: var(--panel) !important; */
+  position: sticky !important;
+  top: 0 !important;
+  z-index: 5 !important;
+}
+
+/* Keep footer visible and styled as the pill */
+#closeDayAndShiftCashDenominationTableId tfoot.currencyDenominationTableFooter {
+  position: relative !important;
+  z-index: 4 !important;
+  background: var(--panel) !important;
+  box-shadow: 0 -2px 8px rgba(15, 23, 42, 0.03) !important;
+}
+
+#closeDayAndShiftCashDenominationTableId tbody td,
+#closeDayAndShiftCashDenominationTableId tfoot td,
+#closeDayAndShiftCashDenominationTableId thead td {
+  box-sizing: border-box !important;
+  vertical-align: middle !important;
+}
+
+#closeDayAndShiftCashDenominationTableId tbody::-webkit-scrollbar {
+  width: 7px;
+}
+#closeDayAndShiftCashDenominationTableId tbody::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  border: 2px solid transparent;
+  background-clip: padding-box;
+}
+
+@media (max-width: 1150px) {
+  #closeDayAndShiftModal .col-3.acc-layout-col .acc-card-full {
+    max-height: clamp(340px, 80vh, 720px) !important;
+    min-height: 300px !important;
+  }
+}
+
+@media (max-width: 1100px) {
+  /* 1️⃣ Reduce horizontal pressure */
+  #closeDayAndShiftModal .closeDayAndShiftContainer {
+    gap: 10px !important;
+  }
+
+  #closeDayAndShiftModal
+    .closeDayAndShiftContainer
+    > .col-3.acc-layout-col:not(.accountStatistics) {
+    flex: 0 0 22% !important;
+    max-width: 22% !important;
+    min-width: 200px !important;
+  }
+
+  #closeDayAndShiftModal .closeDayAndShiftContainer > .col-6.acc-layout-col {
+    flex: 1 1 auto !important;
+    min-width: 0 !important;
+  }
+
+  #closeDayAndShiftModal .closeDayAndShiftContainer > .col-3.accountStatistics {
+    flex: 0 0 26% !important;
+    max-width: 26% !important;
+    min-width: 240px !important;
+  }
+
+  #closeDayAndShiftModal #closeDayAndShiftCashDenominationTableId {
+    width: 100% !important;
+  }
+
+  #closeDayAndShiftModal .acc-card-order {
+    overflow: hidden;
+  }
+
+  #closeDayAndShiftModal .acc-summary-actions {
+    margin-top: auto !important;
+    padding-top: 10px;
+  }
+}
+
+#closeDayAndShiftModal .acc-card-summary table {
+  margin-left: -10px;
+  width: calc(100% + 10px);
+}
+#closeDayAndShiftModal .acc-card-summary {
+  padding-left: 8px !important;
+  padding-right: 2px !important;
+  overflow: hidden;
+}
+#closeDayAndShiftModal .acc-card-summary table {
+  margin-left: 0 !important;
+  width: 100% !important;
+}
+#closeDayAndShiftModal .acc-card-summary th,
+#closeDayAndShiftModal .acc-card-summary td {
+  padding-left: 8px !important;
+  padding-right: 8px !important;
+  box-sizing: border-box;
+}
+#closeDayAndShiftModal .acc-card-summary th {
+  text-align: left;
+}
+
+#closeDayAndShiftModal .acc-card-summary th:nth-child(2),
+#closeDayAndShiftModal .acc-card-summary td:nth-child(2) {
+  text-align: center;
+}
+
+#closeDayAndShiftModal .acc-card-summary th:nth-child(3),
+#closeDayAndShiftModal .acc-card-summary td:nth-child(3) {
+  text-align: right;
+}
+
+#closeDayAndShiftModal .acc-card-summary th:nth-child(2),
+#closeDayAndShiftModal .acc-card-summary td:nth-child(2) {
+  padding-left: 0px !important;
+  padding-right: 10px !important;
+  text-align: center;
+}
+
+#closeDayAndShiftModal .acc-card-summary th:nth-child(3),
+#closeDayAndShiftModal .acc-card-summary td:nth-child(3) {
+  padding-left: 3px !important;
+  padding-right: 4px !important;
+  text-align: center;
+}
+
+@media (max-width: 1200px) {
+  #closeDayAndShiftModal
+    .closeDayAndShiftContainer
+    > .col-3.acc-layout-col:not(.accountStatistics) {
+    flex: 0 0 22%;
+    max-width: 22%;
+  }
+
+  #closeDayAndShiftModal .closeDayAndShiftContainer > .col-6.acc-layout-col {
+    flex: 0 0 50%;
+    max-width: 50%;
+  }
+
+  #closeDayAndShiftModal .closeDayAndShiftContainer > .col-3.accountStatistics {
+    flex: 0 0 28%;
+    max-width: 28%;
+  }
+}
+
+@media (max-width: 1180px) {
+  #closeDayAndShiftModal .acc-card.acc-card-order {
+    padding-left: 8px !important;
+    padding-right: 8px !important;
+  }
+
+  #closeDayAndShiftModal
+    .acc-card.acc-card-order
+    #closeDayAndShiftTransactionsForDayTableId {
+    width: 95% !important;
+  }
+}
+.acc-card.acc-card-summary {
+  margin-top: 15px;
+}
+
+@media screen and (max-width: 1440px) and (max-height: 900px) {
+  #closeDayAndShiftModal .acc-card.acc-card-order {
+    max-width: 100%;
+  }
+}
+
+@media screen and (min-width: 1152px) and (max-width: 1152px) {
+  #closeDayAndShiftModal .acc-card.acc-card-order {
+    width: 80% !important;
+    max-width: 80% !important;
+  }
+}
+
+@media screen and (width: 1024px) and (height: 768px) {
+  #closeDayAndShiftModal .acc-card.acc-card-order {
+    width: 97% !important;
+    max-width: 97% !important;
+  }
+}
+
+#closeDayAndShiftModal #closeDayAndShiftTransactionsForDayTableId {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+#closeDayAndShiftModal #closeDayAndShiftTransactionsForDayTableId tbody {
+  display: block;
+  max-height: calc(4 * 44px);
+  overflow-y: hidden;
+  overflow-x: hidden;
+}
+
+#closeDayAndShiftModal #closeDayAndShiftTransactionsForDayTableId tbody:hover {
+  overflow-y: auto;
+}
+
+#closeDayAndShiftModal #closeDayAndShiftTransactionsForDayTableId thead,
+#closeDayAndShiftModal #closeDayAndShiftTransactionsForDayTableId tbody tr {
+  display: table;
+  width: 100%;
+  table-layout: fixed;
+}
+
+#closeDayAndShiftModal
+  #closeDayAndShiftTransactionsForDayTableId
+  tbody::-webkit-scrollbar {
+  width: 3px;
+}
+
+#closeDayAndShiftModal
+  #closeDayAndShiftTransactionsForDayTableId
+  tbody::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.35);
+  border-radius: 8px;
+  min-height: 8px;
+}
+
+#closeDayAndShiftModal
+  #closeDayAndShiftTransactionsForDayTableId
+  tbody::-webkit-scrollbar-track {
+  background: transparent;
+}

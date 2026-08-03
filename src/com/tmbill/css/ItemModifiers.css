@@ -1,0 +1,490 @@
+.itemModifiersmodal-dialog {
+  height: 70%;
+  width: 90% !important;
+  max-width: none !important;
+}
+
+.itemModifiersModalwrapper {
+  height: 92%;
+}
+
+#modifiersContainerId {
+  border-left: 1px solid;
+  border-right: 1px solid;
+  overflow: scroll;
+  height: 100%;
+  /* min-height: 65%;
+  max-height: 65%; */
+}
+
+.ItemModifiersContainer {
+  height: 100%;
+}
+
+#modifierGroupsContainerWapeerid {
+  height: 100%;
+}
+
+button {
+}
+
+.modifierCardConatiner {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+}
+
+.modifier-qty-and-price {
+  width: 25%;
+  text-align: right;
+}
+
+#modifiersContainerId button {
+  align-items: center;
+  width: 98%;
+  height: 83px;
+  min-width: 18%;
+  border-radius: 4px;
+  box-sizing: border-box;
+  font-size: 14px;
+  margin: 0px 5px 5px 0px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  justify-content: space-evenly;
+  text-align: center;
+  background-size: cover;
+  background-position: center;
+  padding: 0;
+  border: 1px solid var(--items-button-border);
+  background-color: rgba(219, 209, 209, 0.822);
+  color: black;
+  position: relative;
+}
+
+#modifierGroupsContainerId {
+  display: flex;
+  flex-direction: column;
+  /* align-items: end; */
+}
+
+#modifierGroupsContainerId h6 {
+  font-weight: bold;
+}
+
+#modifierGroupsContainerId h6 {
+  cursor: pointer;
+}
+
+.card-custom-body .active {
+  background-color: rgb(245, 144, 144);
+}
+
+.modifier-varient {
+  height: 61px;
+  font-size: initial;
+  font-weight: bold;
+  border: 1px solid whitesmoke;
+  padding: 5px;
+}
+
+.cart-item-details-container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.default-tag {
+  position: absolute;
+  left: 3px;
+  bottom: 3px;
+  background: #0f830f;
+  color: white;
+  padding: 2px 6px;
+  border-radius: 25px;
+  font-size: 10px;
+}
+
+.decrementQtyClass {
+  height: 18px !important;
+  width: 27px !important;
+  border-radius: 10px !important;
+  background: red !important;
+  font-weight: bold;
+  /* position: relative !important; */
+  /* right: -36px; */
+  /* right: -44px; */
+  /* top: 15px; */
+  /* top: 19px; */
+  position: absolute !important;
+  /* top: 21px; */
+  right: -5px;
+  top: 59px;
+}
+
+.addonQtyClass {
+  font-weight: bold;
+  /* position: relative !important;
+  right: -62px;
+  top: -38px; */
+
+  position: absolute;
+  top: -3px;
+  right: 3px;
+}
+
+#itemModifiersModalbodyid {
+  height: 85%;
+}
+
+#modifierCartSummaryWrapperId {
+  height: 80%;
+  border: 1px solid;
+  border-radius: 11px;
+  margin-bottom: 5px;
+}
+
+#baseItemDetailContainerID {
+  padding: 10px;
+}
+#modifiersCartContainerWrapperID {
+  height: 100%;
+}
+#baseItemDescriptionId {
+  height: 25px;
+  overflow: hidden;
+}
+#modifiersCartContainerID {
+  height: 79%;
+  /* border-bottom: 1px solid; */
+  overflow: scroll;
+  padding: 15px;
+}
+
+#modifiersCartContainerID div h6 {
+  font-size: 16px;
+}
+
+#cartDetailsContainerId {
+  height: 10%;
+  border-bottom: 1px solid;
+  /* background-color: #1a9a62; */
+  background-color: #1e4936;
+  color: white;
+}
+
+/* #addModifierToCartButtonId {
+  border: 1px solid white;
+  color: white;
+} */
+
+#cartActionContainerId {
+  margin: 8px;
+  display: flex;
+  justify-content: space-between;
+}
+
+#resetModifierCartButtonId,
+#CloseModifierModalButtonId,
+#addModifierToCartButtonId {
+  width: 48% !important;
+}
+
+/* #addModifierToCartButtonId {
+  margin: 7px;
+  float: right;
+} */
+
+#cartDetailsContainerId {
+  display: flex;
+  justify-content: space-around;
+}
+
+#modifierTotalAmount {
+  align-items: center;
+  display: flex;
+  padding-left: 20px;
+  font-size: 19px;
+  font-weight: bold;
+  line-height: 0.9;
+}
+#modifierTotalQuantity {
+  font-size: 14px;
+  align-items: center;
+  display: flex;
+  padding-left: 20px;
+  font-weight: bold;
+  padding-top: 5px;
+}
+
+#baseItemDetailContainerID {
+  border-bottom: 0.2px solid rgb(242, 238, 246);
+}
+
+#baseItemTitleid {
+  font-size: 18px;
+  font-weight: bold;
+  margin: 1px;
+}
+
+.default-varient {
+  margin-left: 5px;
+  padding: 4px;
+  background: green;
+  color: white;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: normal;
+}
+
+.modifier-card-header {
+  display: flex;
+  flex-direction: column;
+}
+
+.card-sub-title {
+  font-size: 15px;
+  /* font-style: italic; */
+  font-weight: bold;
+}
+
+.modifier-group-title {
+  font-weight: bold;
+}
+
+.varient-price {
+  display: block;
+  color: #605b5bed;
+}
+
+.optionGroup-titles {
+  margin-bottom: 15px;
+  font-size: 16px;
+  font-weight: bold;
+  color: #5d5d5d !important;
+  padding-right: 10px;
+  cursor: pointer;
+}
+
+.active-option-group-title {
+  color: black !important;
+  border-right: 4px solid rgb(6, 65, 6);
+}
+
+::-webkit-scrollbar {
+  width: 5px;
+  height: 3px;
+  background-color: #2b713a;
+}
+
+#modifierGroupsContainerId {
+  height: 98%;
+  overflow: scroll;
+}
+#modifiersContainerId::-webkit-scrollbar {
+  width: 3.5px !important;
+}
+
+#modifierGroupsContainerId::-webkit-scrollbar {
+  width: 8px !important;
+}
+
+#modifiersCartContainerID::-webkit-scrollbar {
+  width: 8px !important;
+}
+
+#baseItemPrice {
+  font-weight: bold;
+  color: #5d5d5d;
+}
+
+#itemModifierBaseitemtitleid {
+  font-weight: bold;
+  font-size: 18px;
+}
+
+.modifier-button {
+  word-wrap: normal !important;
+}
+
+.danger-group-title {
+  color: red !important;
+}
+
+.success-group-title {
+  color: green !important;
+}
+
+/* .varientModifiercardHeader {
+  background: linear-gradient(to right, #f6cccc, 90%, #fff 100%);
+}
+
+.addonModifiercardHeader {
+  background: linear-gradient(28deg, #c7eecf, transparent);
+} */
+@media (max-width: 1024px) and (min-width: 900px) {
+  .optionGroup-titles {
+    font-size: 14px !important; /* slightly smaller for compact screens */
+    margin-bottom: 12px !important; /* reduced gap for tighter layout */
+  }
+}
+
+/* ===== Optional: adjustment for 1024–1280px screens ===== */
+@media (max-width: 1280px) and (min-width: 1024px) {
+  .optionGroup-titles {
+    font-size: 14px !important;
+    margin-bottom: 13px !important;
+  }
+}
+/* ===== Base style (unchanged) ===== */
+.card-title.modifier-group-title {
+  float: left;
+  font-size: 1rem;
+  font-weight: 600;
+  margin: 0;
+}
+
+/* ===== For 1024–1280px screens ===== */
+@media (max-width: 1280px) and (min-width: 1024px) {
+  .card-title.modifier-group-title {
+    font-size: 1rem !important; /* slightly smaller */
+    font-weight: 600 !important;
+  }
+}
+
+/* ===== For 900–1024px screens ===== */
+@media (max-width: 1024px) and (min-width: 900px) {
+  .card-title.modifier-group-title {
+    font-size: 1rem !important; /* more compact for smaller view */
+    font-weight: 600 !important;
+  }
+}
+/* ===== Base style (unchanged) ===== */
+.card-title.card-sub-title {
+  float: left;
+  font-size: 13px;
+  font-weight: 500;
+  margin: 0;
+}
+
+/* ===== For 1024–1280px screens ===== */
+@media (max-width: 1280px) and (min-width: 1024px) {
+  .card-title.card-sub-title {
+    font-size: 13px !important; /* slightly smaller */
+    font-weight: 500 !important;
+  }
+}
+
+/* ===== For 900–1024px screens ===== */
+@media (max-width: 1024px) and (min-width: 900px) {
+  .card-title.card-sub-title {
+    font-size: 13px !important; /* compact size for tighter view */
+    font-weight: 500 !important;
+  }
+}
+/* ===== Base style (unchanged) ===== */
+
+/* ===== For 1024–1280px screens ===== */
+@media (max-width: 1280px) and (min-width: 1024px) {
+  #baseItemTitleid {
+    font-size: 16px !important; /* keep consistent */
+    font-weight: 600 !important;
+  }
+}
+
+/* ===== For 900–1024px screens ===== */
+@media (max-width: 1024px) and (min-width: 900px) {
+  #baseItemTitleid {
+    font-size: 14.5px !important; /* slightly smaller for compact view */
+    font-weight: 600 !important;
+  }
+}
+/* ===== Base style (unchanged) ===== */
+#modifiersCartContainerID div h6 {
+  font-size: 14.5px;
+  font-weight: 500;
+  margin: 0;
+  /* color: #333; */
+}
+
+/* ===== For 1024–1280px screens ===== */
+@media (max-width: 1280px) and (min-width: 1024px) {
+  #modifiersCartContainerID div h6 {
+    font-size: 14.5px !important; /* slightly smaller */
+    font-weight: 500 !important;
+  }
+}
+
+/* ===== For 900–1024px screens ===== */
+@media (max-width: 1024px) and (min-width: 900px) {
+  #modifiersCartContainerID div h6 {
+    font-size: 14.5px !important; /* compact size for smaller view */
+    font-weight: 500 !important;
+  }
+}
+@media (max-width: 1280px) and (min-width: 1024px) {
+  #resetModifierCartButtonId,
+  #CloseModifierModalButtonId,
+  #addModifierToCartButtonId {
+    height: 34px !important;
+    padding: 6px 10px !important;
+    font-size: 14px !important;
+    min-width: 86px !important;
+    max-width: 160px !important;
+  }
+  #cartDetailsContainerId {
+    height: 8%;
+  }
+  #modifierTotalAmount {
+    font-size: 16px;
+  }
+  #modifierTotalQuantity {
+    font-size: 14px;
+  }
+  #itemModifierBaseitemtitleid {
+    font-weight: 600;
+    font-size: 16.5px;
+  }
+}
+
+/* Tighter for 900→1024px (compact) */
+@media (max-width: 1024px) and (min-width: 900px) {
+  #resetModifierCartButtonId,
+  #CloseModifierModalButtonId,
+  #addModifierToCartButtonId {
+    height: 32px !important;
+    padding: 5px 8px !important;
+    font-size: 14px !important;
+    min-width: 78px !important;
+    max-width: 140px !important;
+  }
+  #cartDetailsContainerId {
+    height: 8%;
+  }
+  #modifierTotalAmount {
+    font-size: 16px;
+  }
+  #modifierTotalQuantity {
+    font-size: 14px;
+  }
+  #itemModifierBaseitemtitleid {
+    font-weight: 600;
+    font-size: 16px;
+  }
+}
+/* ===== Add spacing between modifier cart items ===== */
+#modifiersCartContainerID .cart-item-details-container {
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+  padding: 4px 0 !important; /* internal breathing room */
+}
+
+/* Add a small vertical gap between each item */
+#modifiersCartContainerID .cart-item-details-container:not(:last-child) {
+  margin-bottom: 6px !important; /* gap between items */
+  padding-bottom: 4px !important;
+}
+
+/* Keep quantity/price text aligned neatly */
+#modifiersCartContainerID .modifier-qty-and-price {
+  text-align: right !important;
+  min-width: 60px !important;
+}

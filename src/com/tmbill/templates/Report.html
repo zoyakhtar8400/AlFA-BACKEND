@@ -1,0 +1,977 @@
+<div class="reportviewContainer" id="reportviewContainerid">
+  <link rel="stylesheet" href="../css/Report.css" />
+
+  <div id="logo">
+    <div class="titleDiv" id="hotelLogoID"></div>
+  </div>
+  <div class="titleDiv" id="reporthotelnameID"></div>
+  <label class="reporttitleLabel" for="" id="reporttitleLabelID"></label>
+  <label class="reportsubtitleLabel" for="" id="reportsubtitleLabelID"></label>
+  <label class="dateLabel" for="" id="reportOutletLocationlabelID"></label>
+  <label class="dateLabel" for="" id="reportdatelabelID"></label>
+  <label class="dateLabel" for="" id="reportdatelabelID2"></label>
+  <label class="dateLabel" for="" id="taxNamelabelID"></label>
+  <label class="dateLabel" for="" id="salesReportNumber"></label>
+
+  <!-- 1. sales summary / z report summary  -->
+  <div class="billLabelscontainer billsWrapper" id="billLabelscontainerid">
+    <label
+      data-i18n="report.OrderTypeSummaryReport"
+      class="payreportTitle has-i18n"
+      for=""
+      >Sales Summary / Z Report Summary</label
+    >
+    <label class="sales-summary-label" for="" id="reportPrintedByUserLabelID"></label>
+    <label
+      class="sales-summary-label"
+      for=""
+      id="reportRevenueIdLabelID"
+    ></label>
+      <label class="sales-summary-label" id="shiftStartTimelabel"></label>
+      <label class="sales-summary-label" id="shiftEndTimelabel"></label>
+      <label class="sales-summary-label" id="dayStartTimelabel"></label>
+      <label class="sales-summary-label" id="dayEndTimelabel"></label>
+      <br />
+    
+    </label>
+    <label
+      class="reportcancelamountLabel sales-summary-label"
+      for=""
+      id="reportnetsaleLabelID"
+    ></label>
+    <label
+      class="reporttaxLabel sales-summary-label"
+      for=""
+      id="reporttaxLabelID"
+    ></label>
+    <label
+      class="reportfulfillamountLabel sales-summary-label"
+      for=""
+      id="reportfulfillamountLabelID"
+    ></label>
+    <label
+      class="reportTotalTipCollectedLabel sales-summary-label"
+      for=""
+      id="reportTotalTipCollectedLabelID"
+    ></label>
+    <label
+      class="reportfulfillamountLabel sales-summary-label"
+      for=""
+      id="reportSellExemptedTotalLabelID"
+    ></label>
+    <label
+      class="reportfulfillamountLabel sales-summary-label"
+      for=""
+      id="reportLiquorSaleTotalLabelID"
+    ></label>
+    <br />
+
+    <label
+      class="reportdiscountLabel sales-summary-label"
+      for=""
+      id="reportdiscountLabelID"
+    ></label>
+    <label
+      class="reportchargesLabel sales-summary-label"
+      for=""
+      id="reportchargeslabelID"
+    ></label>
+    <label
+      class="reportchargesLabel sales-summary-label"
+      for=""
+      id="reportSellExemptedChargeslabelID"
+    ></label>
+    <label
+      class="reporttaxLabel sales-summary-label"
+      for=""
+      id="reportchargestaxLabelID"
+    ></label>
+    <label
+      class="reportchargesLabel sales-summary-label"
+      for=""
+      id="reportCancelledOrderchargeslabelID"
+    ></label>
+    <br />
+
+    <label
+      class="sales-summary-label"
+      for=""
+      id="reportfreeamountLabelID"
+    ></label>
+    <label
+      class="sales-summary-label"
+      for=""
+      id="reportpendingamountLabelID"
+    ></label>
+    <label
+      class="sales-summary-label"
+      for=""
+      id="reportcancelamountLabelID"
+    ></label>
+    <label
+      class="sales-summary-label"
+      for=""
+      id="reportdeleteamountLabelID"
+    ></label>
+    <br />
+    <!-- <label
+      class="reportcancelamountLabel"
+      for=""
+      id="reportcashinhandLabelID"
+    ></label>
+    <br /> -->
+    <label
+      class="sales-summary-label"
+      for=""
+      id="reportdueamountLabelID"
+    ></label>
+    <label
+      class="sales-summary-label"
+      for=""
+      id="reportduePaymentReceivedLabelID"
+    ></label>
+    <br />
+
+    <label
+      class="sales-summary-label"
+      for=""
+      id="reportPaymentMadeUsingWalletLabelID"
+    ></label>
+
+    <label
+      class="sales-summary-label"
+      for=""
+      id="reportpaymentRecivedThroughWallteLabelID"
+    ></label>
+    <br />
+
+    
+    <label class="sales-summary-label" for="" id="reportTotalBillsLabelID">
+    </label>
+    <label class="sales-summary-label" for="" id="reportBillRangeLabelID">
+    </label>
+
+    <!-- close day shift details  -->
+    <div id="startEndDayShiftReport" class="paymentWrapper">
+      <br />
+      
+      <label class="sales-summary-label" id="shiftusername"></label>
+      <label class="sales-summary-label" id="openingBalance"></label>
+      <label class="sales-summary-label" id="closingBalance"></label>
+      <label class="sales-summary-label" id="totalExpenses"></label>
+      <!-- <label class="sales-summary-label" id="totalSale"></label> -->
+      <!-- <label class="sales-summary-label" id="invoiceRange"></label> -->
+      <label class="sales-summary-label" id="startDayComment"></label>
+      <label class="sales-summary-label" id="endDayComment"></label>
+      <label class="sales-summary-label" id="closeDayAmountReport"></label>
+      <label class="sales-summary-label" id="closeShiftAmountReport"></label>
+      <label class="sales-summary-label" id="cashDifference"></label>
+    </div>
+  </div>
+
+  <!-- 2. order type wise summary  -->
+  <div id="ordertypeSummaryWrapperid" class="paymentWrapper">
+    <label
+      data-i18n="report.OrderTypeSummaryReport"
+      class="payreportTitle has-i18n"
+      for=""
+      >Order Type Summary</label
+    >
+    <table id="reportoredrSummaryTable" style="width: 100%">
+      <thead>
+        <tr>
+          <th data-i18n="report.OrderType" class="has-i18n">Order Type</th>
+          <th data-i18n="report.Orders" class="has-i18n centerTextAlign">
+            Orders
+          </th>
+    <th data-i18n="report.charges" class="has-i18n rightTextAlign">Charges</th>
+<th data-i18n="report.discount" class="has-i18n rightTextAlign">Discount</th>
+          <th data-i18n="report.NetSale" class="has-i18n rightTextAlign">
+            Net Sale
+          </th>
+          <th data-i18n="report.TotalSale" class="has-i18n rightTextAlign">
+            Total Sale
+          </th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+    <!-- <label
+      class="payreportTitle paymentInfo"
+      id="paymentreportOverallinfolabel"
+    ></label> -->
+  </div>
+
+  <!-- 3. payment report  -->
+  <div id="paymentWrapperid" class="paymentWrapper">
+    <label
+      data-i18n="report.paymentReport"
+      class="payreportTitle has-i18n"
+      for=""
+      >Payment Type Summary</label
+    >
+    <table id="reportpayTable" style="width: 100%">
+      <thead>
+        <tr>
+          <th data-i18n="report.Payment" class="has-i18n">Payment</th>
+          <th data-i18n="report.count" class="has-i18n centerTextAlign">
+            Count
+          </th>
+          <th data-i18n="report.Amount" class="has-i18n rightTextAlign">
+            Amount
+          </th>
+          <th
+            data-i18n="report.Status"
+            class="has-i18n"
+            id="paystatusColumnids"
+          >
+            Status
+          </th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+    <!-- <label
+      class="payreportTitle paymentInfo"
+      id="paymentreportOverallinfolabel"
+    ></label> -->
+  </div>
+
+  <!-- 4. Discount summary -->
+  <div id="discountSummaryWrapperid" class="paymentWrapper">
+    <label data-i18n="" class="payreportTitle has-i18n" for=""
+      >Discount Summary</label
+    >
+    <table id="reportdiscountSummaryTable" style="width: 100%">
+      <thead>
+        <tr>
+          <th data-i18n="report.name" class="has-i18n">Name</th>
+          <th data-i18n="report.count" class="has-i18n centerTextAlign">
+            Count
+          </th>
+          <th data-i18n="report.amount" class="has-i18n rightTextAlign">
+            Amount
+          </th>
+          <th data-i18n="report.amount" class="has-i18n rightTextAlign">
+            Order Total
+          </th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+    <span
+      data-i18n="report.Nodataavailable"
+      id="nodiscountreportavaible"
+      class="payreportTitle has-i18n"
+      >No data available</span
+    >
+  </div>
+
+  <!-- 5. expnese summary  -->
+  <div id="expensereportWrapperid" class="">
+    <label
+      data-i18n="report.ExpensesReport"
+      class="payreportTitle has-i18n"
+      for=""
+      >Expense Summary</label
+    >
+    <table id="expensereportTable" style="width: 100%">
+      <thead>
+        <tr>
+          <th data-i18n="report.CategoryName" class="has-i18n">Category</th>
+          <th data-i18n="report.SubcategoryName" class="has-i18n">
+            Sub-category
+          </th>
+          <th data-i18n="report.amount" class="has-i18n rightTextAlign">
+            Amount
+          </th>
+          <th data-i18n="report.payMode" class="has-i18n rightTextAlign">
+            Pay Mode
+          </th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+    <label
+      class="sales-summary-label topBorder"
+      id="expensesOveralllabel"
+    ></label>
+  </div>
+
+  <!-- 6. Bill Summary -->
+  <div class="billsWrapper">
+    <label
+  data-i18n="report.billSummary"
+  class="payreportTitle has-i18n"
+  for=""
+  id="billSummaryLableid"
+>Bill Summary</label>
+
+
+    <table id="billsTable" style="width: 100%">
+      <thead>
+        <tr>
+          <th data-i18n="report.Bill" class="has-i18n">Bill</th>
+          <th data-i18n="report.QTY" class="has-i18n centerTextAlign">Qty</th>
+          <th data-i18n="report.Tax" class="has-i18n rightTextAlign">Tax</th>
+          <th data-i18n="report.Disc" class="has-i18n rightTextAlign">Disc</th>
+          <th data-i18n="report.Amt" class="has-i18n rightTextAlign">Amt</th>
+          <th data-i18n="report.Status" class="has-i18n rightTextAlign">
+            Status
+          </th>
+          <th data-i18n="report.payMode" class="has-i18n rightTextAlign">
+            Pay Mode
+          </th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+  </div>
+
+  <!-- 7. Delivery boys summary -->
+  <div id="deliveryBoySummaryWrapperid" class="paymentWrapper">
+    <label
+      data-i18n="report.Deliveryboysummary"
+      class="payreportTitle has-i18n"
+      for=""
+      >Delivery Boy Summary</label
+    >
+    <table id="reportdeliveryboySummaryTable" style="width: 100%">
+      <thead>
+        <tr>
+          <th data-i18n="report.name" class="has-i18n">Name</th>
+          <th data-i18n="report.count" class="has-i18n centerTextAlign">
+            Count
+          </th>
+          <th data-i18n="report.amount" class="has-i18n rightTextAlign">
+            Amount
+          </th>
+          <th data-i18n="report.Status" class="has-i18n rightTextAlign">
+            Status
+          </th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+    <span
+      data-i18n="report.Nodataavailable"
+      id="nodboyreportavaible"
+      class="payreportTitle has-i18n"
+      >No data available</span
+    >
+  </div>
+
+  <!-- 8. waiter summary -->
+  <div id="waiterSummaryWrapperid" class="paymentWrapper">
+    <label
+      data-i18n="report.waitersummary"
+      class="payreportTitle has-i18n"
+      for=""
+      >Waiter Summary</label
+    >
+    <table id="reportwaiterSummaryTable" style="width: 100%">
+      <thead>
+        <tr>
+          <th data-i18n="report.name" class="has-i18n">Name</th>
+          <th data-i18n="report.count" class="has-i18n centerTextAlign">
+            Count
+          </th>
+          <th data-i18n="report.amount" class="has-i18n rightTextAlign">
+            Order Amount
+          </th>
+          <th data-i18n="report.TipAmount" class="has-i18n rightTextAlign">Tip Amount</th>
+
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+    <span
+      data-i18n="report.Nodataavailable"
+      id="nowaiterreportavaible"
+      class="payreportTitle has-i18n"
+      >No data available</span
+    >
+  </div>
+
+  <!-- 9. kd wise items summary  -->
+  <div id="kdWiseItemummaryWrapperid" class="paymentWrapper">
+  <label
+  data-i18n="report.kitchenDepartmentSummary"
+  class="payreportTitle has-i18n"
+  for=""
+>KITCHEN DEPARTMENT SUMMARY</label>
+
+    <table id="kdwiseItemsSummaryTable" style="width: 100%">
+      <thead>
+        <tr>
+<th data-i18n="report.kitchenDepartment" class="has-i18n">Kitchen Dept</th>
+
+<th data-i18n="report.soldItems" class="has-i18n centerTextAlign">Sold Items</th>
+<th data-i18n="report.amount" class="has-i18n rightTextAlign">Amount</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+    <span
+      data-i18n="report.Nodataavailable"
+      id="noKDWiseItemsSummaryreportavaible"
+      class="payreportTitle has-i18n"
+      >No data available</span
+    >
+  </div>
+
+  <!-- 10. category wise item report  -->
+  <div id="catwisereportWrapperid" class="paymentWrapper">
+    <label
+      data-i18n=""
+      id="categroyReportTitle"
+      class="payreportTitle has-i18n"
+      for=""
+      >Category Summary</label
+    >
+    <table id="catwisereportTable" style="width: 100%">
+      <thead>
+        <tr>
+          <th data-i18n="report.Category" class="has-i18n">Category</th>
+          <th data-i18n="report.soldItems" class="has-i18n centerTextAlign">
+            Sold Items
+          </th>
+          <th data-i18n="report.Amount" class="has-i18n rightTextAlign">
+            Amount
+          </th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+
+    <div
+      class="disposable-catitem-report-container"
+      id="disposable-catitem-report-containerid"
+    ></div>
+  </div>
+
+  <!-- 11. sold item summary  -->
+  <div id="solditemsWrapperid" class="solditemsWrapper">
+    <label
+      data-i18n="report.soldItemsReport"
+      id="solditemsTitleid"
+      class="solditemsTitle has-i18n"
+      for=""
+      >Sold Items Summary</label
+    >
+    <table id="solditemsTable" style="width: 100%">
+      <thead>
+        <tr>
+          <th data-i18n="report.itemName" class="has-i18n">Item Name</th>
+          <th data-i18n="report.QTY" class="has-i18n centerTextAlign">Qty</th>
+          <th data-i18n="report.Amount" class="has-i18n rightTextAlign itemReportAmountColumn">
+            Amount
+          </th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+
+    <!-- <label class="reporttaxLabel" id="totalItemscountlabel"></label>
+    <br />
+    <label class="reporttaxLabel" id="totalItemsamountlabel"></label> -->
+  </div>
+
+  <!-- 12. cancelled item summary  -->
+  <div class="cancelleditemsWrapper" id="cancelleditemsWrapperid">
+   <label
+  data-i18n="report.CancelItemsSummary"
+  id="cancelleditemsTitleid"
+  class="solditemsTitle has-i18n"
+  for=""
+>
+  Cancel Items Summary
+</label>
+
+    <table id="cancelleditemsTable" style="width: 100%">
+      <thead>
+        <tr>
+          <th data-i18n="report.itemName" class="has-i18n">Item Name</th>
+          <th data-i18n="report.QTY" class="has-i18n">Qty</th>
+          <th data-i18n="report.Amt" class="has-i18n itemReportAmountColumn">Amt</th>
+          <th data-i18n="report.User" class="has-i18n">User</th>
+          <th data-i18n="report.reason" class="has-i18n rightTextAlign">
+            Reason
+          </th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+    <label
+      class="sales-summary-label topBorder"
+      id="totalcancelItemscountlabel"
+    ></label>
+    <!-- <br />
+    <label class="reporttaxLabel" id="totalcancelItemsamountlabel"></label> -->
+  </div>
+
+  <!-- 13. wallet summary  -->
+  <div id="walletSummaryWrapperid" class="paymentWrapper">
+    <label
+      data-i18n="report.WalletSummaryReport"
+      class="payreportTitle has-i18n"
+      for=""
+      >Wallet Summary</label
+    >
+    <table id="walletSummaryTable" style="width: 100%">
+      <thead>
+        <tr>
+          <!-- <th data-i18n="report.Name" class="has-i18n">Name</th> -->
+          <th data-i18n="report.WalletSummaryReport" class="has-i18n">
+            Contact No
+          </th>
+          <th data-i18n="report.Credit" class="has-i18n rightTextAlign">
+            Credit
+          </th>
+          <th data-i18n="report.Debit" class="has-i18n rightTextAlign">
+            Debit
+          </th>
+          <th data-i18n="report.Balance" class="has-i18n rightTextAlign">
+            Balance
+          </th>
+          <th data-i18n="report.payMode" class="has-i18n rightTextAlign">
+            Pay Mode
+          </th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+    <label
+      class="sales-summary-label topBorder"
+      id="totalDebitedWalletinfolabel"
+    ></label>
+    <label
+      class="sales-summary-label"
+      id="totalCreditedWalletinfolabel"
+    ></label>
+    <span
+      data-i18n="report.Nodataavailable"
+      id="noWalletSummaryreportavaible"
+      class="payreportTitle has-i18n"
+      >No data available</span
+    >
+  </div>
+
+  <!-- 14. Due payment Received summary -->
+  <div id="duePaymentSummaryWrapperid" class="paymentWrapper">
+    <label
+      data-i18n="report.duePaymentReceivedSummary"
+      class="payreportTitle has-i18n"
+      for=""
+      >Due Payment Received Summary</label
+    >
+    <table id="reportduePaymentSummaryTable" style="width: 100%">
+      <thead>
+        <tr>
+          <th data-i18n="report.billNumber" class="has-i18n">Bill No</th>
+          <th data-i18n="report.orderDateTime" class="has-i18n centerTextAlign">
+            Date
+          </th>
+          <th data-i18n="report.ContactNo" class="has-i18n centerTextAlign">
+            Contact No
+          </th>
+          <th data-i18n="report.amount" class="has-i18n centerTextAlign">
+            Amount
+          </th>
+          <th data-i18n="report.payMode" class="has-i18n rightTextAlign">
+            Pay Mode
+          </th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+    <label
+      class="sales-summary-label topBorder"
+      id="duepaymentreportOverallinfolabel"
+    ></label>
+    <span
+      data-i18n="report.Nodataavailable"
+      id="noduePaymentreportavaible"
+      class="payreportTitle has-i18n"
+      >No data available</span
+    >
+  </div>
+
+  <!-- 15. Due payment Receivable summary -->
+  <div id="duePaymentReceivableSummaryWrapperid" class="paymentWrapper">
+    <label
+      data-i18n="report.duePaymentReceivableSummary"
+      class="payreportTitle has-i18n"
+      for=""
+      >Due Payment Receivable Summary</label
+    >
+    <table id="reportduePaymentReceivableSummaryTable" style="width: 100%">
+      <thead>
+        <tr>
+          <th data-i18n="report.billNumber" class="has-i18n">Bill No</th>
+          <th data-i18n="report.orderDateTime" class="has-i18n centerTextAlign">
+            Date
+          </th>
+          <th data-i18n="report.ContactNo" class="has-i18n centerTextAlign">
+            Contact No
+          </th>
+          <th data-i18n="report.payMode" class="has-i18n rightTextAlign">
+            Amount
+          </th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+    <label
+      class="sales-summary-label topBorder"
+      id="duepaymentReceivablereportOverallinfolabel"
+    ></label>
+    <span
+      data-i18n="report.Nodataavailable"
+      id="noduePaymentReceivablereportavaible"
+      class="payreportTitle has-i18n"
+      >No data available</span
+    >
+  </div>
+
+  <!-- 16. payment variance summary  -->
+  <div id="closingDayShiftTransactionsWrapperid" class="paymentWrapper">
+    <label
+      data-i18n="report.paymentVarienceSummary"
+      class="payreportTitle has-i18n"
+      for=""
+      >Payment Variance Summary</label
+    >
+    <table id="closingDayShiftTransactionsTable" style="width: 100%">
+      <thead>
+        <tr>
+          <th data-i18n="report.payMode" class="has-i18n">Pay Method</th>
+          <th data-i18n="report.count" class="has-i18n centerTextAlign">
+            Count
+          </th>
+          <th data-i18n="report.settledAmount" class="has-i18n rightTextAlign">
+            Settled Amount
+          </th>
+          <th data-i18n="report.actualAmount" class="has-i18n rightTextAlign">
+            Actual Amount
+          </th>
+          <th data-i18n="report.variance" class="has-i18n rightTextAlign">
+            Variance
+          </th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+    <label
+      class="sales-summary-label topBorder"
+      id="transactionVarianceOveralllabel"
+    ></label>
+  </div>
+
+  <!-- 17. cash Denomination  -->
+  <div id="closingCurrencyDenominationWrapperid" class="paymentWrapper">
+    <label
+      data-i18n="report.currencyDenominationSummary"
+      class="payreportTitle has-i18n"
+      for=""
+      >Currency Denominations Summary</label
+    >
+    <table id="closingCurrencyDenominationTable" style="width: 100%">
+      <thead>
+        <tr>
+          <th data-i18n="report.currency" class="has-i18n">Currency</th>
+          <th data-i18n="report.count" class="has-i18n centerTextAlign">
+            Count
+          </th>
+          <th data-i18n="report.amount" class="has-i18n rightTextAlign">
+            Amount
+          </th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+    <label
+      class="sales-summary-label topBorder"
+      id="currencyDenominationOveralllabel"
+    ></label>
+  </div>
+
+  <!-- order from summary  -->
+  <div id="orderfromWrapperid" class="paymentWrapper">
+    <label data-i18n="report.orderReport" class="payreportTitle has-i18n" for=""
+      >Order Report</label
+    >
+    <table id="orderreportTable" style="width: 100%">
+      <thead>
+        <tr>
+          <th data-i18n="report.orderFrom" class="has-i18n">Order From</th>
+          <th data-i18n="report.count" class="has-i18n">Count</th>
+          <th data-i18n="report.Amount" class="has-i18n">Amount</th>
+          <th data-i18n="report.Status" class="has-i18n">Status</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+    <label
+      class="payreportTitle paymentInfo"
+      id="orderreportOverallinfolabel"
+    ></label>
+  </div>
+
+  <!-- discounted item report  -->
+  <div id="discounteditemreportWrapperid" class="paymentWrapper">
+    <table id="discounteditemsreportTable" style="width: 100%">
+      <thead>
+        <tr>
+          <th data-i18n="report.Title" class="has-i18n">Title</th>
+          <th data-i18n="report.QTY" class="has-i18n">Qty</th>
+          <th data-i18n="report.Discount" class="has-i18n">Discount</th>
+          <th data-i18n="report.Price" class="has-i18n">Price</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+  </div>
+
+  <!-- sold item close day report  -->
+  <!-- <div id="solditemsclosedayWrapperid" class="solditemsWrapper">
+    <label
+      data-i18n="report.soldItemsReport"
+      id="solditemsTitleid"
+      class="solditemsTitle has-i18n"
+      for=""
+      >Sold Items Report</label
+    >
+    <table id="solditemsCloseDayTable" style="width: 100%">
+      <thead>
+        <tr>
+          <th data-i18n="report.itemName" class="has-i18n">Item Name</th>
+          <th data-i18n="report.QTY" class="has-i18n">Qty</th>
+          <th data-i18n="report.Amt" class="has-i18n">Amt</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+
+    <label class="reporttaxLabel" id="totalCloasDayItemscountlabel"></label>
+    <br />
+    <label class="reporttaxLabel" id="totalClosedayItemsamountlabel"></label>
+  </div> -->
+
+  <!-- coupon hitstory report  -->
+  <div id="couponhistoryreportWrapperid" class="paymentWrapper">
+    <table id="couponhistoryreportTable" style="width: 100%">
+      <thead>
+        <tr>
+          <th data-i18n="report.Code" class="has-i18n">Code</th>
+          <th data-i18n="report.Customer" class="has-i18n">Customer</th>
+          <th data-i18n="report.Amount" class="has-i18n">Amount</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+    <label
+      class="payreportTitle paymentInfo"
+      id="couponreportOverallinfolabel"
+    ></label>
+  </div>
+
+  <div id="kdwisereportWrapperid" class="paymentWrapper">
+    <table id="kdwisereportTable" style="width: 100%">
+      <thead>
+        <tr>
+          <th data-i18n="report.kitchenDept" class="has-i18n">Kitchen Dept</th>
+          <th data-i18n="report.soldItems" class="has-i18n">Sold Items</th>
+          <th data-i18n="report.Amount" class="has-i18n">Amount</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+    <label class="reporttaxLabel" id="kdwisetotalItemscountlabel"></label>
+    <br />
+    <label class="reporttaxLabel" id="kdwisetotalItemsamountlabel"></label>
+  </div>
+  <div id="expensesWrapperid" class="expensesWrapper">
+    <label
+      data-i18n="report.expensesReport"
+      class="payreportTitle has-i18n"
+      for=""
+      >Expenses Report</label
+    >
+    <table id="expensesTable" style="width: 100%">
+      <thead>
+        <tr>
+          <th data-i18n="report.Name" class="has-i18n">Name</th>
+          <th data-i18n="report.Amount" class="has-i18n">Amount</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+    <label class="payreportTitle paymentInfo" id="expensesOveralllabel"></label>
+  </div>
+
+  <div id="duepaymentreportWrapperid" class="paymentWrapper">
+    <table id="duepaymentreportTable" style="width: 100%">
+      <thead>
+        <tr>
+          <th data-i18n="report.Customer" class="has-i18n">Customer</th>
+          <th data-i18n="report.dueAmount" class="has-i18n">Due Amount</th>
+          <th data-i18n="report.orderID" class="has-i18n">Order ID</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+    <label class="payreportTitle paymentInfo" id="duepayOveralllabel"></label>
+  </div>
+
+  <div id="billprintreportWrapperid" class="paymentWrapper">
+    <table id="billprintreportTable" style="width: 100%">
+      <thead>
+        <tr>
+          <th data-i18n="report.orderID" class="has-i18n">Order ID</th>
+          <th data-i18n="report.Type" class="has-i18n">Type</th>
+          <!-- <th>Amount</th> -->
+          <th data-i18n="report.Status" class="has-i18n">status</th>
+          <th data-i18n="report.Prints" class="has-i18n">Prints</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+  </div>
+
+  <div id="taxprintreportWrapperid" class="paymentWrapper">
+    <table id="taxprintreportTable" style="width: 100%">
+      <thead>
+        <tr style="word-break: break-word">
+          <th data-i18n="report.Category" class="has-i18n">Category</th>
+          <th data-i18n="report.Price" class="has-i18n">Price</th>
+          <th data-i18n="report.Items" class="has-i18n">Items</th>
+          <th data-i18n="report.Taxperc" class="has-i18n">Tax %</th>
+          <th data-i18n="report.TaxVal" class="has-i18n">Tax</th>
+          <th data-i18n="report.TotaltaxVal" class="has-i18n">Total</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+    <label class="taxAnalysisTitle">Tax Analysis</label>
+    <label
+      class="taxReportTitle paymentInfo"
+      id="salesIncludedTaxlabel"
+    ></label>
+    <label class="taxReportTitle paymentInfo" id="salesExludedTaxlabel"></label>
+    <label class="taxReportTitle paymentInfo" id="totalVatlabel"></label>
+    <div id="taxLabels"></div>
+    <label class="taxReportTitle paymentInfo" id="totalOrderslabel"></label>
+    <label class="taxReportTitle paymentInfo" id="totalBillslabel"></label>
+    <label class="taxReportTitle paymentInfo" id="totalChargeslabel"></label>
+    <label class="taxReportTitle paymentInfo" id="totalDiscountlabel"></label>
+
+    <label class="totalWithTaxpaymentWrapperid">Payment Details</label>
+    <div id="paymentWithTax"></div>
+    <label class="taxReportTitle paymentInfo" id="PaymentTotal"></label>
+  </div>
+
+  <!-- <div id="startEndDayShiftReport" class="paymentWrapper">
+    <label class="taxReportTitle paymentInfo" id="shiftStartTimelabel"></label>
+    <label class="taxReportTitle paymentInfo" id="shiftEndTimelabel"></label>
+    <label class="taxReportTitle paymentInfo" id="dayStartTimelabel"></label>
+    <label class="taxReportTitle paymentInfo" id="dayEndTimelabel"></label>
+    <label class="taxReportTitle paymentInfo" id="shiftusername"></label>
+    <label class="taxReportTitle paymentInfo" id="openingBalance"></label>
+    <label class="taxReportTitle paymentInfo" id="closingBalance"></label>
+    <label class="taxReportTitle paymentInfo" id="totalExpenses"></label>
+    <label class="taxReportTitle paymentInfo" id="totalSale"></label>
+    <label class="taxReportTitle paymentInfo" id="invoiceRange"></label>
+    <label class="taxReportTitle paymentInfo" id="startDayComment"></label>
+    <label class="taxReportTitle paymentInfo" id="endDayComment"></label>
+    <label class="taxReportTitle paymentInfo" id="closeDayAmountReport"></label>
+    <label
+      class="taxReportTitle paymentInfo"
+      id="closeShiftAmountReport"
+    ></label>
+    <label class="taxReportTitle paymentInfo" id="cashDifference"></label>
+  </div> -->
+
+  <div id="appliedchargesreportWrapperid" class="paymentWrapper">
+    <table id="appliedchargesreportTable" style="width: 100%">
+      <thead>
+        <tr>
+          <th data-i18n="report.orderID" class="has-i18n">Order ID</th>
+          <th data-i18n="report.Title" class="has-i18n">Title</th>
+          <!-- <th>Amount</th> -->
+          <th data-i18n="report.Amount" class="has-i18n">Amount</th>
+          <th data-i18n="report.Status" class="has-i18n">Status</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+  </div>
+  <div id="preorderreportWrapperid" class="paymentWrapper">
+    <table id="preorderprintreportTableid" style="width: 100%">
+      <thead>
+        <tr>
+          <th data-i18n="report.Customer" class="has-i18n">Customer</th>
+          <th data-i18n="report.Phone" class="has-i18n">Phone</th>
+          <th data-i18n="report.Status" class="has-i18n">Status</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+  </div>
+
+  <!-- delivery boy report -->
+  <div id="deliveryboyreportWrapperid" class="paymentWrapper">
+    <table id="deliveryreportTable" style="width: 100%">
+      <thead>
+        <tr>
+          <th data-i18n="" class="has-i18n">Name</th>
+          <th data-i18n="" class="has-i18n">Orders</th>
+          <th data-i18n="" class="has-i18n">Amount</th>
+          <th data-i18n="" class="has-i18n">Status</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+    <!-- <label class="payreportTitle paymentInfo" id="duepayOveralllabel"></label> -->
+  </div>
+
+  <!-- user report -->
+  <div id="userreportWrapperid" class="paymentWrapper">
+    <table id="userreportTable" style="width: 100%">
+      <thead>
+        <tr>
+          <th data-i18n="" class="has-i18n">Name</th>
+          <th data-i18n="" class="has-i18n">Orders</th>
+          <th data-i18n="" class="has-i18n">Amount</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+    <!-- <label class="payreportTitle paymentInfo" id="duepayOveralllabel"></label> -->
+  </div>
+
+  <div id="orderSettlementDeliveryboyreportWrapperid" class="paymentWrapper">
+    <span id="deliveryBoynameorderSettlementId"></span>
+    <table id="orderSettlementdeliveryreportTable" style="width: 100%">
+      <thead>
+        <tr>
+          <th data-i18n="" class="has-i18n">Sr. No</th>
+          <th data-i18n="" class="has-i18n">Bill Number</th>
+          <th data-i18n="" class="has-i18n">Customer Number</th>
+          <th data-i18n="" class="has-i18n rightTextAlign">Total</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+    <!-- <label class="payreportTitle paymentInfo" id="duepayOveralllabel"></label> -->
+  </div>
+  <div id="reportappversionDivid" class="appversionDiv"></div>
+</div>
+
+<script>
+  require('../js/ReportController.js');
+</script>
+<!-- Insert this line after script imports -->
+<script>
+  if (window.module) module = window.module;
+</script>

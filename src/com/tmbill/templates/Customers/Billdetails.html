@@ -1,0 +1,116 @@
+<!-- Billdetails.html -->
+
+<div>
+  <div id="billModal" class="bill-modal">
+    <div id="billModalContent" class="bill-modal-content">
+      <!-- Two-column wrapper -->
+      <div class="bill-content-wrapper">
+        <!-- Left table -->
+        <div class="left-table">
+          <table class="details-table">
+            <tbody>
+              <tr>
+                <td class="label has-i18n"
+                  data-i18n="[text]BillDetails.orderId">Order ID:</td>
+                <td class="value" id="customerOrderOrderId">-</td>
+              </tr>
+              <tr>
+                <td class="label has-i18n"
+                  data-i18n="[text]BillDetails.outletId">Outlet ID:</td>
+                <td class="value" id="customerOrderOutletId">-</td>
+              </tr>
+
+              <tr>
+                <td class="label has-i18n"
+                  data-i18n="[text]BillDetails.outletName">Outlet Name:</td>
+                <td class="value" id="customerOrderOutletNameId">-</td>
+              </tr>
+
+              <tr>
+                <td class="label has-i18n"
+                  data-i18n="[text]BillDetails.customerName">Customer Name:</td>
+                <td class="value" id="customerOrderCustomerNameId">-</td>
+              </tr>
+
+              <tr>
+                <td class="label has-i18n"
+                  data-i18n="[text]BillDetails.tableName">Table Name:</td>
+                <td class="value" id="customerOrderTableNameId">-</td>
+              </tr>
+              <tr>
+                <td class="label has-i18n"
+                  data-i18n="[text]BillDetails.userName">User Name:</td>
+                <td class="value" id="customerOrderUsernameId">-</td>
+              </tr>
+              <tr>
+                <td class="label has-i18n"
+                  data-i18n="[text]BillDetails.date">Date:</td>
+                <td class="value" id="customerOrderDateId">
+                  04 August 2025 10:07 pm
+                </td>
+              </tr>
+              <tr>
+                <td class="label has-i18n"
+                  data-i18n="[text]BillDetails.orderType">Order Type:</td>
+                <td class="value">
+                  <span class="badge dine-in"
+                    id="customerOrderBillingTypeId"></span>
+                </td>
+              </tr>
+              <tr>
+                <td class="label has-i18n"
+                  data-i18n="[text]BillDetails.deliveryBoyName">Delivery Boy
+                  Name:</td>
+                <td class="value" id="customerOrderDeliveryBoyNameId">-</td>
+              </tr>
+              <tr>
+                <td class="label has-i18n"
+                  data-i18n="[text]BillDetails.deliveryBoyContact">Delivery Boy
+                  Contact:</td>
+                <td class="value" id="customerOrderDeliveryBoyContactId">-</td>
+              </tr>
+              <tr>
+                <td class="label has-i18n"
+                  data-i18n="[text]BillDetails.waiterName">Waiter Name:</td>
+                <td class="value" id="customerOrderDeliveryBoyWaiterId">-</td>
+              </tr>
+              <tr>
+                <td class="label has-i18n"
+                  data-i18n="[text]BillDetails.customerAddress">Customer
+                  Address:</td>
+                <td class="value" id="customerOrderCustomerAddressId">-</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Right table -->
+        <div class="right-table">
+          <table class="items-table" id="customerOrderItemsTableId">
+  <thead>
+    <tr>
+      <th class="has-i18n" data-i18n="[text]BillDetails.itemName">Item Name</th>
+      <th class="has-i18n" data-i18n="[text]BillDetails.qty">QTY</th>
+      <th class="has-i18n" data-i18n="[text]BillDetails.amount">Amount</th>
+    </tr>
+  </thead>
+  <tbody></tbody>
+</table>
+        </div>
+      </div>
+
+      <!-- Footer -->
+      <div class="bill-footer">
+        <div class="totals" id="customerBillOrderTotalId">
+          Amount: 1095.00 AED
+        </div>
+
+        <!-- <div class="modal-actions">
+          <button id="cancelBill" class="btn cancel">Cancel</button>
+          <button class="btn repeat">⟳ Repeat Order</button>
+        </div> -->
+      </div>
+    </div>
+  </div>
+  <link rel="stylesheet" href="./Customers/Billdetails.css" />
+</div>

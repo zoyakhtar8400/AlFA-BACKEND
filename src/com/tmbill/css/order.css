@@ -1,0 +1,4251 @@
+/**
+Preloader CSS:Start
+**/
+
+.no-js #loader {
+  display: none;
+}
+
+.js #loader {
+  display: block;
+  position: absolute;
+  left: 100px;
+  top: 0;
+}
+
+.se-pre-con {
+  position: fixed;
+  left: 0px;
+  top: 0px;
+  width: 100%;
+  height: 100%;
+  z-index: 9999;
+  background: url('../assets/images/Preloader_11.gif') center no-repeat #fff;
+}
+
+/**
+Preloader CSS:END
+**/
+
+html,
+body {
+  height: 100%;
+  overflow: hidden;
+  user-select: none;
+  outline: none;
+}
+
+.userMenuwrapper {
+  height: 4%;
+  max-height: 4%;
+  width: 100%;
+}
+
+.app-meubar {
+  display: inline-block;
+}
+
+.parentContainer {
+  height: 100%;
+  width: 100%;
+  display: block;
+  overflow: hidden;
+}
+
+.menuWrapper {
+  width: 10%;
+  height: 100%;
+  max-width: 50px;
+}
+
+.menu {
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  left: 0;
+  max-width: 50px;
+  height: 97%;
+  list-style-type: none;
+  margin: 0;
+  /* margin-top: 10px; */
+  padding: 0;
+  z-index: 10;
+  overflow: hidden;
+}
+
+.last-menu-item {
+  margin-top: auto !important;
+}
+
+.menu li a {
+  display: block;
+  text-indent: -500em;
+  height: 3em;
+  width: 5em;
+  line-height: 3em;
+  text-align: center;
+  position: relative;
+  /* border-bottom: 1px solid rgba(0, 0, 0, 0.05); */
+}
+
+@font-face {
+  font-family: FontAwesome;
+  src: url(../css/fontawesome/6.5.1/webfonts/fa-solid-900.woff2);
+}
+
+.menu li a:before {
+  font-family: FontAwesome;
+  text-indent: 0em;
+  position: absolute;
+  top: 0;
+  left: 10px;
+  /* width: 100%; */
+  height: 100%;
+  font-size: 1.5em;
+}
+.menu li a:after {
+  font-family: FontAwesome;
+  text-indent: 0em;
+  position: absolute;
+  top: 0;
+  left: 10px;
+  /* width: 100%; */
+  height: 100%;
+  font-size: 1.5em;
+}
+.menu li a.dashboard:before {
+  content: '\f015';
+}
+
+.menu li a.order:before {
+  content: '\f2e7 ';
+}
+
+.menu li a.order-settlement:before {
+  content: '\f15c';
+}
+
+.menu li a.logout:before {
+  content: '\f2f5 ';
+}
+
+.menu li a.receipt:before {
+  content: '\f543 ';
+}
+
+.menu li a.allreports:before {
+  content: '\f080 ';
+  left: 6px;
+  font-size: 1.7em;
+}
+
+.menu li a.changeStore:before {
+  content: '\f54e ';
+  left: 6px;
+  font-size: 1.5em;
+}
+
+.menu li a.masterMenu:before {
+  content: '\f03a ';
+  left: 6px;
+  font-size: 1.7em;
+}
+
+.menu li a.menuManagement:before {
+  content: '\f085';
+  left: 6px;
+  font-size: 1.7em;
+}
+
+.menu li a.online:before {
+  /* content: "\f57e "; */
+  content: '\f0ac ';
+}
+
+.menu li a.digitalOrders:before {
+  /* content: "\f029 "; */
+  content: '\f57e ';
+}
+
+.menu li a.settings:before {
+  content: '\f013 ';
+}
+
+.menu li a.notificationIcon:before {
+  content: '\f0f3 ';
+}
+
+.menu li a.customLinksIcon:before {
+  content: '\f0c1 ';
+}
+
+.titlebar > .window-appicon {
+  background-size: 25px !important;
+}
+
+.logo {
+  vertical-align: top;
+  display: inline-block;
+  text-indent: -500em;
+  height: 25px;
+  width: 25px;
+  position: relative;
+  margin-left: 3px;
+  margin-top: 3px;
+}
+
+.container-after-titlebar {
+  overflow: hidden !important;
+}
+
+.wrapperDiv,
+.orderwindowWrapper,
+.receiptwindowWrapper,
+.dashwindowWrapper,
+.onlineorderswindowWrapper,
+.reportswindowWrapper,
+.mastermenuwindowWrapper,
+.digitalorderswindowWrapper,
+.itemmastermenuwindowWrapper,
+.crmwindowWrapper,
+.userManagementwindowWrapper,
+.walletManagementwindowWrapper {
+  margin-left: 50px;
+  display: inline-block;
+  top: 0;
+  /* right: 0; */
+  width: 97%;
+  height: 100%;
+  max-height: inherit;
+  overflow: hidden;
+}
+
+.receiptwindowWrapper {
+  width: 95%;
+  max-width: 97%;
+}
+
+.orderwindowWrapper,
+.receiptwindowWrapper,
+.digitalorderswindowWrapper,
+.dashwindowWrapper,
+.onlineorderswindowWrapper,
+.reportswindowWrapper,
+.mastermenuwindowWrapper,
+.itemmastermenuwindowWrapper,
+.crmwindowWrapper,
+.userManagementwindowWrapper,
+.walletManagementwindowWrapper {
+  position: absolute;
+}
+
+.tablesParentdivclass {
+  position: static;
+  float: left;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  /* overflow: hidden; */
+  box-shadow: 2px 0 18px rgba(0, 0, 0, 0.26);
+}
+
+.mainWindow {
+  position: static;
+  float: left;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 66%;
+  max-width: 66%;
+  overflow: hidden;
+}
+
+.parentTabs {
+  position: fixed;
+  /* top: 0; */
+  right: 0;
+  height: 96%;
+  width: 30%;
+  max-width: 30%;
+  padding: 0;
+  list-style-type: none;
+  box-shadow: 2px 0 18px rgba(0, 0, 0, 0.26);
+  border: none;
+}
+
+.tabs {
+  position: fixed;
+  /* top: 0; */
+  right: 0;
+  height: 96%;
+  width: 30%;
+  max-width: 30%;
+  padding: 0;
+  list-style-type: none;
+  /* box-shadow: 2px 0 18px rgba(0, 0, 0, 0.26); */
+}
+
+.tableDiv {
+  display: inline-block;
+  width: 100%;
+  height: 34%;
+}
+
+.table_container {
+  width: 100%;
+  height: 99%;
+  padding: 5px 2px 2px 5px;
+  text-align: left;
+  /* overflow-y: scroll; */
+  -webkit-overflow-scrolling: touch;
+}
+
+.table_container .menuItemButton .menuItemButtoncontentwrapper {
+  /* position: absolute;
+  right: 2px; */
+  justify-content: space-between;
+}
+
+.table-title-container {
+  width: 50%;
+  text-wrap: wrap;
+  white-space: break-spaces;
+}
+
+.table_container:focus,
+.table_container:active,
+.itemviewDiv:focus,
+.itemviewDiv:hover,
+.itemviewDiv:active,
+.compactitemviewDiv:focus,
+.compactitemviewDiv:hover,
+.compactitemviewDiv:active {
+  overflow-y: auto;
+}
+
+#tablebillnumberlabel,
+#tableamountlabel {
+  margin-bottom: 0;
+}
+
+#tablebillnumberlabel {
+  position: absolute;
+  top: 3px;
+  /* top: 16px; */
+}
+
+#tablecustomernameLabelid {
+  position: absolute;
+  left: 2px;
+  top: 16px;
+}
+
+.no_tables_label,
+.no_items_label {
+  font-style: italic;
+  width: 96%;
+  height: 96%;
+  text-align: center;
+  padding-top: 15%;
+}
+
+.actionDiv {
+  margin: 5px;
+  margin: 0 auto;
+  text-align: center;
+  width: 100%;
+  height: 7%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-left: 1.5px;
+}
+
+.actionDiv i {
+  /* font-size: 25px; */
+  padding: 6px;
+}
+
+.actionDiv input[type='button'] {
+  /* width: 15%; */
+  /* width: fit-content !important; */
+  padding: 7px;
+}
+
+.searchDiv {
+  margin: 0 auto;
+  text-align: center;
+  overflow: hidden;
+  width: 100%;
+  height: 8%;
+  /* box-shadow:
+    0 3px 6px rgba(0, 0, 0, 0.16),
+    0 3px 6px rgba(0, 0, 0, 0.23); */
+}
+
+.searchDiv:focus,
+.searchDiv:hover,
+.searchDiv:active {
+  overflow-y: auto;
+}
+
+.itemsDiv {
+  width: 100%;
+  /* height: 45%; */
+  height: 50%;
+  display: flex;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* .treeviewDiv {
+  box-shadow:
+    0 3px 6px #00000029,
+    0 3px 6px rgba(0, 0, 0, 0.23);
+  width: 20%;
+  height: 100%; */
+/* overflow: hidden; */
+/* overflow-y: auto; */
+/* font-size: 13px;
+  font-weight: bold;
+  -webkit-overflow-scrolling: touch;
+  touch-action: pan-y;
+} */
+.treeviewDiv {
+  box-shadow:
+    0 3px 6px #00000029,
+    0 3px 6px rgba(0, 0, 0, 0.23);
+  width: 21%;
+  height: 100%;
+  overflow-y: auto; /* ✓ ALWAYS visible - works on all devices */
+  overflow-x: hidden; /* Hide horizontal only */
+  font-size: 13px;
+  font-weight: bold;
+  -webkit-overflow-scrolling: touch;
+  touch-action: pan-y;
+}
+
+/* .treeviewDiv:hover,
+.treeviewDiv:focus,
+.treeviewDiv:active {
+  overflow-y: auto;
+} */
+
+.treeview ul > li {
+  padding-left: 8px !important;
+}
+
+.treeview span.indent {
+  margin-left: 1px !important;
+  margin-right: 1px !important;
+}
+
+.itemviewDiv,
+.compactitemviewDiv {
+  display: flexbox;
+  align-items: center;
+  justify-content: center;
+  text-align: left;
+  /* overflow-y: auto; */
+  padding: 2px 2px 2px 8px;
+  width: 80%;
+  height: 87%;
+}
+
+.itemviewDiv {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  /* grid-template-rows: repeat(1, 1fr); */
+  grid-column-gap: 0;
+  grid-row-gap: 5px;
+  padding-left: 0;
+}
+.repeat-order-btn {
+  background-color: #1e4936;
+  color: white;
+}
+.compactitemviewDiv {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  /* grid-template-rows: repeat(1, 1fr); */
+  grid-column-gap: 0;
+  grid-row-gap: 2px;
+  padding-left: 0;
+}
+
+.itemviewDiv button {
+  display: inline-flex;
+  /* flex-direction: row-reverse; */
+  align-items: center;
+  width: 24%;
+  height: 26%;
+  min-width: 18%;
+  min-height: 22%;
+  /* max-width: 25%;
+  max-height: 28%; */
+  border-radius: 4px;
+  box-sizing: border-box;
+  font-size: 13.5px;
+  margin: 5px 0 5px 5px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  justify-content: space-evenly;
+  text-align: center;
+  background-size: cover;
+  background-position: center;
+  padding: 0;
+}
+
+.itemviewDiv button {
+  width: 97%;
+  height: 20vh;
+}
+
+.compactitemviewDiv button {
+  width: 97%;
+  height: 20vh;
+}
+
+input[type='text'],
+input[type='password'],
+input[type='search'],
+input[type='number'],
+textarea {
+  height: 32.5px;
+  margin: 10px 0 0 5px;
+  padding-left: 10px;
+  border-radius: 7px;
+  box-sizing: border-box;
+  font-size: 13px;
+}
+
+input[type='text'],
+input[type='password']:focus,
+input[type='number'] {
+  outline: none;
+}
+
+input[type='button'],
+.normal-button {
+  /* width: 15%; */
+  height: 35px;
+  margin: 5px 0 5px 10px;
+  border-radius: 5px;
+  box-sizing: border-box;
+  font-size: small;
+  cursor: pointer;
+}
+
+.normal-button {
+  width: fit-content;
+  display: inline-block;
+  text-align: center;
+  /* vertical-align: middle; */
+  user-select: none;
+  padding: 0.375rem 0.75rem;
+  font-size: 0.8rem;
+  line-height: 1.5;
+  border-radius: 0.25rem;
+}
+
+.normal-button:disabled {
+  opacity: 0.5;
+}
+
+/* .onlineOrderbuttondiv {
+  display: flex;
+} */
+
+.onlineOrderbuttondiv label {
+  width: 100%;
+  margin: 0.2rem;
+}
+
+.normal-button span {
+  margin-right: 7px;
+}
+
+#submitcustomerForm {
+  width: 19%;
+  height: 35px;
+  margin: 5px 0 5px 10px;
+  border-radius: 4px;
+  box-sizing: border-box;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.table_container button {
+  margin-left: 3px;
+  min-width: 15%;
+  min-height: 35px;
+  border-radius: 4px;
+  box-sizing: border-box;
+  font-size: 14px;
+  padding: 0px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  margin-top: 1px;
+  /* flex-grow: 1; */
+}
+
+.searchDiv .searchTable {
+  width: 15%;
+}
+
+.searchDiv .searchWrapper {
+  width: 38%;
+  position: relative;
+  text-align: center;
+  display: inline-block;
+}
+
+.sync-indicator {
+  border-radius: 18px;
+  /* background-color: #1a9a62; */
+  background-color: #1e4936;
+  color: white;
+  font-size: 18px;
+  padding: 9px;
+}
+
+.sync-not-needed {
+  /* background-color: #1a9a62; */
+  background-color: #1e4936;
+  color: white;
+}
+
+.sync-needed {
+  background-color: rgb(189, 98, 62);
+  color: white;
+}
+
+.searchDiv .searchWrapper i {
+  position: absolute;
+  right: 0;
+  top: 8px;
+  padding: 12px 15px;
+  transition: 0.3s;
+}
+
+.searchDiv .searchWrapper .searchItem_byname {
+  width: 97%;
+}
+
+.searchDiv .searchItem_bycode {
+  width: 17%;
+}
+
+.searchDiv .deleteItem_bycode {
+  width: 10%;
+}
+
+/**
+Tabs
+**/
+
+.parentTabs .tabsContainer {
+  height: 95%;
+}
+
+.tabs .tabsContainer {
+  height: 94%;
+}
+
+.tabs .sectionTabs > li > a,
+.parentTabs .mainsectionTabs > li > a {
+  font-size: 14px;
+  color: var(--tabs-link-color) !important;
+  font-weight: bold;
+}
+
+.dineinTab {
+  height: 100%;
+}
+
+.dineinTab .tabs {
+  height: 90%;
+  border: none;
+}
+
+.kotTab,
+.billTab,
+.takeawaykotTab,
+.takeawaybillTab,
+.deliverykotTab,
+.deliverybillTab {
+  height: 100%;
+  width: 100%;
+  font-size: 13px;
+  margin: 2px 8px 5px 2px;
+}
+
+.kotcontentDiv,
+.takeawaykotcontentDiv {
+  height: 98%;
+  width: 99.1%;
+  margin: 2px 8px 5px 2px;
+}
+
+.kottableDiv {
+  position: relative;
+  height: 62%;
+  width: 100%;
+  margin: 2px 3px 5px 2px;
+  overflow: auto;
+}
+
+.takeawaykottableDiv {
+  position: relative;
+  /* height: 57%; */
+  height: 60%;
+  width: 100%;
+  margin: 2px 3px 5px 2px;
+  overflow: auto;
+}
+
+.kotLables-div {
+  width: 100%;
+  display: flex;
+  justify-content: left;
+  align-items: center;
+  font-size: 16px;
+  height: 45px;
+}
+
+.kotLables-div .kottitleLabel {
+  min-width: 12%;
+  margin: 0;
+}
+.fa-2x {
+  font-size: 1.5em;
+}
+.kottitleLabel,
+.billtitleLabel {
+  font-weight: bolder;
+  letter-spacing: 1.8px;
+}
+@media (max-width: 1280px) and (min-width: 1024px) {
+  .kottitleLabel,
+  .billtitleLabel {
+    letter-spacing: 1px; /* slightly tighter */
+    font-weight: 600; /* a bit lighter than “bolder” */
+  }
+}
+
+.kotLables-div .currentTablename {
+  min-width: 35%;
+  margin-left: 2px;
+  margin-bottom: 0px;
+  text-align: center;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 50%;
+}
+
+.kotLables-div .kotnoLabel {
+  margin-top: 10px;
+  min-width: 35%;
+  padding: 5px;
+  text-align: center;
+  border-radius: 20px;
+}
+
+.totalsDiv,
+.receiptActiondiv2 {
+  width: 100%;
+  display: flex;
+  justify-content: left;
+  align-items: center;
+  clear: both;
+  height: 40px;
+}
+
+.totalsDiv label,
+.receiptActiondiv2 label {
+  font-size: 16px;
+  font-weight: 600;
+  margin-top: 10px;
+  margin-left: 7px;
+}
+
+.totalsDiv .kottotaltitle_label {
+  padding-left: 20px;
+  /* width: 60%; */
+  justify-content: center;
+  align-items: center;
+}
+
+.totalsDiv .kotAmount_total {
+  /* width: 20%; */
+  display: inline-flex;
+  height: 8%;
+  justify-content: center;
+  align-items: center;
+  text-align: left;
+}
+
+.kotCustomer-div {
+  display: inline-flex;
+  height: 40px;
+  justify-content: left;
+  align-items: center;
+  width: 100%;
+}
+
+.icon-container {
+  display: flex;
+  height: 40px;
+  justify-content: flex-end;
+  align-items: center;
+  width: 100%;
+}
+
+.kot-noteDiv {
+  display: inline-flex;
+  height: 40px;
+  justify-content: left;
+  align-items: center;
+  width: 100%;
+}
+
+.kotCustomer-div input[type='text'],
+.kotCustomer-div input[type='number'],
+.kot-noteDiv input[type='text'],
+.kot-noteDiv input[type='number'] {
+  margin: 0 2px 0 2px;
+  padding: 5px;
+  height: 34px;
+  width: 27%;
+  padding-left: 10px;
+}
+
+.takeway-kot-div-1 input[type='text'],
+.takeway-kot-div-1 input[type='number'],
+.takeway-kot-div-1 input[type='text'],
+.takeway-kot-div-1 input[type='number'] {
+  width: 40%;
+}
+
+.takeway-kot-div-2 input[type='text'],
+.takeway-kot-div-2 input[type='number'],
+.takeway-kot-div-2 input[type='text'],
+.takeway-kot-div-2 input[type='number'] {
+  width: 40%;
+}
+
+.takeway-kot-div-3 input[type='text'],
+.takeway-kot-div-3 input[type='number'],
+.takeway-kot-div-3 input[type='text'],
+.takeway-kot-div-3 input[type='number'] {
+  width: 40%;
+}
+
+.takeway-kot-div-3 {
+  height: 40px;
+}
+
+.clear-kot-icon {
+  font-size: 1.1rem !important;
+}
+
+.kotCustomer-div input[type='checkbox'] {
+  margin: 0 3px 0 5px;
+  padding: 5px;
+  height: 20px;
+  width: 20px;
+}
+
+.kotCustomer-div .fas {
+  margin-right: 3px;
+}
+
+.kot-actionsDiv {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* height: 9%; */
+  height: 40px;
+  /* overflow: scroll; */
+}
+
+.kot-noteDiv input[type='button'] {
+  height: 30px;
+  width: 30%;
+}
+
+.kot-actionsDiv input[type='button'] {
+  height: 35px;
+  width: 95% !important;
+  /* width: 40%; */
+}
+
+/**
+Table tab
+**/
+
+.billLables-div {
+  width: 100%;
+  background-color: var(--kot-header);
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  color: white;
+  font-size: 13px;
+  height: 40px;
+}
+
+.billLables-div .billtitleLabel {
+  /* min-width: 15%; */
+  margin: 0;
+}
+
+/* .billLables-div #currentbilllabelId {
+  min-width: 15%;
+  margin-right: 10px;
+} */
+
+#dineinbillNumbercontainer,
+#takeawaybillcontainerid {
+  margin-right: 10px;
+}
+
+#takeawaycurrentbilllabelId,
+#takeawaycurrentorderNumberlabelId,
+#currentbilllabelId,
+#currentorderNumberlabelId {
+  padding: 0px;
+}
+
+.billLables-div .billnoLabel {
+  min-width: fit-content;
+  text-align: center;
+  margin: 0;
+}
+
+.billLables-div .currentTablename {
+  margin: 0 !important;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 30%;
+}
+
+.oldkotButtonclass {
+  background-color: hsla(0, 0%, 89.8%, 0.1607843137254902) !important;
+  border-radius: 8px !important;
+  width: 13% !important;
+  border: none !important;
+}
+
+.billcontentDiv {
+  height: 98%;
+  width: 100%;
+  margin: 2px 12px 5px 0px;
+}
+
+.tabillcontentDiv,
+.hdbillcontentDiv {
+  height: 100%;
+  width: 100%;
+}
+
+.table-actionsDiv input[type='button'] {
+  height: 35px;
+  /* width: 25%; */
+  width: 100% !important;
+  margin: 3px;
+}
+
+.table-actionsDiv {
+  padding-right: 10px;
+  display: flex;
+  /* flex-wrap: wrap; */
+  /* flex-direction: column; */
+  /* justify-content: center; */
+  align-items: center;
+  /* height: 8%; */
+  height: 40px;
+}
+
+.billtableDiv,
+.billtakeawayDiv,
+.billdeliveryDiv {
+  position: relative;
+  height: 72%;
+  width: 100%;
+  margin: 2px 3px 5px 2px;
+  border: 1px solid #ccc;
+  overflow: auto;
+}
+
+.billtakeawayDiv,
+.billdeliveryDiv {
+  height: 75%;
+}
+
+.bill-misc-div {
+  width: 100%;
+  padding: 5px;
+  font-size: 12.5px;
+  justify-content: flex-end;
+  gap: 8px;
+  height: 35px;
+}
+
+/* For screens up to 1024px */
+@media (max-width: 1024px) {
+  .bill-misc-div {
+    gap: 4px;
+  }
+}
+.grandtotalsDiv {
+  display: flex;
+  width: 100%;
+  padding: 5px;
+  /* background-color: #1a9a62; */
+  /* background-color: #1e4936; */
+  background-color: var(--kot-header);
+  justify-content: left;
+  align-items: end;
+  clear: both;
+  color: #fcf7f7 !important;
+  padding-bottom: 0px;
+  height: 40px;
+}
+
+.grandtotalsDiv label {
+  font-size: 16px;
+  font-weight: 600;
+  color: white;
+  padding-left: 5px;
+  padding-right: 5px;
+  padding-top: 0px;
+  padding-bottom: 3px;
+}
+
+@media (max-width: 1060px) and (min-width: 1000px) {
+  img#deliveryBoyImgId {
+    margin-left: -12px;
+  }
+}
+.faIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  gap: 12px;
+  font-size: 15px;
+  margin-right: 10px;
+}
+
+.faIcon i {
+  font-size: 20.5px !important;
+  width: 25px;
+}
+
+/* ===== Slightly smaller for 900–1024px screens ===== */
+@media (max-width: 1024px) and (min-width: 900px) {
+  .faIcon i {
+    font-size: 18.5px !important;
+    gap: 10px;
+    width: 20px !important;
+    /* margin-left: 10px; */
+  }
+}
+
+.grandtotalsDiv .billGrandtotallabel {
+  width: 100%;
+}
+
+/***
+This is a check box css
+**/
+
+input[type='checkbox'] + label {
+  display: flex;
+  margin: 0.2em;
+  cursor: pointer;
+  align-items: center;
+  /* padding: 0.1em; */
+}
+
+input[type='checkbox'] {
+  display: none;
+}
+
+input[type='checkbox'] + label:before {
+  font-family: FontAwesome;
+  content: '\f00c';
+  border: 1px solid #bdbdbd;
+  border-radius: 0.2em;
+  display: inline-block;
+  padding-left: 0.2em;
+  padding-bottom: 0.3em;
+  vertical-align: bottom;
+  color: transparent;
+  transition: 0.2s;
+  margin-right: 0.5em;
+  height: 20px;
+  width: 20px;
+  line-height: none;
+}
+
+input[type='checkbox'] + label:active:before {
+  transform: scale(0);
+}
+
+input[type='checkbox']:checked + label:before {
+  background-color: var(--checknradio);
+  border-color: var(--checknradio);
+  color: #fff;
+  /* padding-left: 5px; */
+}
+
+input[type='checkbox']:disabled + label:before {
+  transform: scale(1);
+  border-color: #aaa;
+}
+
+input[type='checkbox']:checked:disabled + label:before {
+  transform: scale(1);
+  background-color: #bfb;
+  border-color: #bfb;
+}
+
+@media (min-width: 1024px) and (max-width: 1280px) {
+  input[type='checkbox'] + label {
+    /* display: flex !important; */
+    /* margin: 0.2em !important; */
+    cursor: pointer !important;
+    align-items: center !important;
+    padding: 0 !important;
+  }
+
+  /* hide native checkbox */
+  input[type='checkbox'] {
+    display: none !important;
+  }
+
+  input[type='checkbox'] + label:before {
+    font-family: 'FontAwesome' !important;
+    content: '\f00c' !important;
+    border: 1px solid #bdbdbd !important;
+    border-radius: 4px !important;
+    display: inline-block !important;
+    padding-left: 0em !important;
+    padding-bottom: 0.15em !important;
+    vertical-align: middle !important;
+    color: transparent !important;
+    transition:
+      transform 0.12s ease,
+      color 0.15s ease,
+      border-color 0.15s ease,
+      background 0.15s ease !important;
+    margin-right: 0.5em !important;
+    height: 19px !important;
+    width: 19px !important;
+    font-size: 12px !important;
+    box-sizing: border-box !important;
+    line-height: 18px !important;
+    text-align: center !important;
+    background: #fff !important;
+  }
+
+  /* active press effect */
+  input[type='checkbox'] + label:active:before {
+    transform: scale(0) !important;
+  }
+
+  /* checked state */
+  input[type='checkbox']:checked + label:before {
+    background-color: var(--checknradio) !important;
+    border-color: var(--checknradio) !important;
+    color: #fff !important;
+  }
+
+  /* disabled state */
+  input[type='checkbox']:disabled + label:before {
+    transform: scale(1) !important;
+    border-color: #aaa !important;
+    background: #fff !important;
+    color: transparent !important;
+  }
+
+  input[type='checkbox']:checked:disabled + label:before {
+    transform: scale(1) !important;
+    background-color: #bfb !important;
+    border-color: #bfb !important;
+    color: #fff !important;
+  }
+}
+@media (min-width: 1024px) and (max-width: 1280px) {
+  input[type='checkbox']:checked + label::before {
+    min-width: 16px;
+  }
+}
+@media (min-width: 1024px) and (max-width: 1280px) {
+  ::before {
+    min-width: 16px;
+  }
+}
+/* ===========================
+   Keep previous (larger) look on small screens
+   so we don't break the small-screen UI
+   =========================== */
+@media (max-width: 1023px) {
+  input[type='checkbox'] + label:before {
+    height: 22px !important;
+    width: 22px !important;
+    border-radius: 0.2em !important;
+    padding-left: 0.2em !important;
+    padding-bottom: 0.3em !important;
+    font-size: 13px !important;
+    line-height: 22px !important;
+  }
+}
+
+/**
+Scroll Bar CSS
+**/
+
+::-webkit-scrollbar-track {
+  /* box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3); */
+  background-color: #f5f5f5;
+  /* border-radius: 10px; */
+}
+
+::-webkit-scrollbar {
+  width: 3px;
+  height: 3px;
+  background-color: #2b713a;
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  /* background-color: #2b713a; */
+  background-color: var(--scrollbar-color);
+}
+
+#kotTable tbody::-webkit-scrollbar {
+  width: 8px !important;
+}
+
+ul.split-items-list::-webkit-scrollbar {
+  width: 8px !important;
+}
+
+.billtableDiv::-webkit-scrollbar {
+  width: 7px !important;
+}
+
+.kottableDiv::-webkit-scrollbar {
+  width: 7px !important;
+}
+
+.takeawaykottableDiv::-webkit-scrollbar {
+  width: 7px !important;
+}
+
+.takeawaykottableDiv::-webkit-scrollbar {
+  width: 7px !important;
+}
+
+.billtakeawayDiv::-webkit-scrollbar {
+  width: 7px !important;
+}
+
+.billdeliveryDiv::-webkit-scrollbar {
+  width: 7px !important;
+}
+
+.profileWrapper::-webkit-scrollbar {
+  width: 7px !important;
+}
+
+/* @media (pointer: coarse) { */
+/* ::-webkit-scrollbar {
+    width: 10px;
+    height: 10px
+}
+
+
+::-webkit-scrollbar-track-piece {
+    background: rgb(250, 244, 244)
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  background-color: #53975a; */
+/* } */
+
+/* } */
+
+/* scrollbar for tableContainer, itemsDiv and category */
+div.table_container::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+div.table_container::-webkit-scrollbar-track-piece {
+  background: rgb(250, 244, 244);
+}
+
+div.table_container::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  /* background-color: #53975a; */
+  background-color: var(--scrollbar-color);
+}
+
+div#tablesContainer::-webkit-scrollbar {
+  width: 5px;
+  height: 10px;
+}
+
+div#tablesContainer::-webkit-scrollbar-track-piece {
+  background: rgb(250, 244, 244);
+}
+
+div#tablesContainer::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  /* background-color: #53975a; */
+  background-color: #1e4936;
+}
+
+div.itemviewDiv::-webkit-scrollbar {
+  width: 5px;
+  height: 10px;
+}
+
+div.compactitemviewDiv::-webkit-scrollbar {
+  width: 5px;
+  height: 10px;
+}
+
+div.itemviewDiv::-webkit-scrollbar-track-piece {
+  background: rgb(250, 244, 244);
+}
+
+div.compactitemviewDiv::-webkit-scrollbar-track-piece {
+  background: rgb(250, 244, 244);
+}
+
+div.itemviewDiv::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  /* background-color: #53975a; */
+  background-color: var(--scrollbar-color);
+}
+
+div.compactitemviewDiv::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  /* background-color: #53975a; */
+  background-color: var(--scrollbar-color);
+}
+
+div.treeviewDiv::-webkit-scrollbar {
+  width: 5px;
+  height: 10px;
+}
+
+div.treeviewDiv::-webkit-scrollbar-track-piece {
+  background: rgb(250, 244, 244);
+}
+
+div.treeviewDiv::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  /* background-color: #53975a; */
+  background-color: var(--scrollbar-color);
+}
+
+div#departmentsContainer::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+
+div#departmentsContainer::-webkit-scrollbar-track-piece {
+  background: rgb(250, 244, 244);
+}
+
+div#departmentsContainer::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  /* background-color: #53975a; */
+  background-color: var(--scrollbar-color);
+}
+
+div.searchDiv::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+div.searchDiv::-webkit-scrollbar-track-piece {
+  background: rgb(250, 244, 244);
+}
+
+div.searchDiv::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  /* background-color: #53975a; */
+  background-color: var(--scrollbar-color);
+}
+
+/***
+Suggestions UI
+**/
+
+.ui-autocomplete {
+  max-height: 200px;
+  max-width: 400px;
+  overflow-y: auto;
+  /* prevent horizontal scrollbar */
+  overflow-x: hidden;
+  /* add padding to account for vertical scrollbar */
+  z-index: 1000000 !important;
+}
+
+/**
+Payment Modal
+**/
+
+.paymentBody,
+.discountBody {
+  width: 100%;
+}
+
+.paySelection,
+.discSelection {
+  width: 100%;
+  height: 50px;
+}
+
+.payselectwrapper select,
+.discountBody select {
+  background-color: #0563af;
+  color: white;
+  padding: 12px;
+  border: none;
+  font-size: 16px;
+  box-shadow: 0 5px 25px rgba(0, 0, 0, 0.2);
+  -webkit-appearance: button;
+  appearance: button;
+  outline: none;
+}
+
+.payselectwrapper::before {
+  content: '\f13a';
+  font-family: FontAwesome;
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding-top: 15px;
+  width: 20%;
+  height: 57%;
+  text-align: center;
+  font-size: 28px;
+  line-height: 45px;
+  color: rgba(255, 255, 255, 0.5);
+  margin-right: 10px;
+  background-color: rgba(255, 255, 255, 0.1);
+  pointer-events: none;
+}
+
+.payselectwrapper:hover::before,
+.discountBody:hover::before {
+  color: rgba(255, 255, 255, 0.6);
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+.payselectwrapper select option,
+.discountBody select option {
+  padding: 30px;
+  font-size: 17px;
+}
+
+.paymentGrandtotalclass {
+  margin-top: 20px;
+  /* height: 30px; */
+  text-align: center;
+}
+
+.duepaycheck-wrapper,
+.newduepaymobileWrapper,
+.newduepaycheckWrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.paysplistselectwrapper {
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+.newduepaycheckWrapperClass {
+  display: flex;
+  align-items: center;
+}
+
+.newpaymentTotalClass {
+  margin-left: 6px;
+}
+
+.splitpaylistContainer li {
+  padding-left: 32px;
+  display: flex;
+  justify-content: left;
+  margin-right: 32px;
+  border: 1px solid MediumSeaGreen;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  margin-top: 5px;
+}
+
+.splitaddpayWrapper {
+  width: 100%;
+  text-align: right;
+}
+
+#splitCheckid + label:before {
+  height: 23px;
+}
+
+/**
+Discount List
+**/
+
+#editDiscount {
+  width: 45%;
+  height: 35px;
+  margin-top: 5px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+  background-color: #545557;
+  color: white;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.discountInputs {
+  width: 100%;
+  height: 35px;
+}
+
+.billActions {
+  background-color: white;
+}
+
+.billActions label {
+  width: 100%;
+  text-align: center;
+}
+
+.billstatImage {
+  width: 100%;
+  height: 98%;
+  object-fit: contain;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+}
+
+/**
+Menu Items
+**/
+
+.darkshade {
+  background: rgba(0, 0, 0, 0.38) !important;
+  color: white;
+  font-weight: bolder;
+  font-size: 14px;
+}
+@media (max-width: 1280px) and (min-width: 1024px) {
+  .darkshade {
+    font-size: 11px !important;
+  }
+}
+@media (max-width: 1284px) and (min-width: 900px) {
+  .darkshade {
+    font-size: 11px !important;
+  }
+}
+/* .menuItemButton>div {
+  width: 50%;
+  float: right;
+  align-items: flex-end;
+  max-height: fit-content;
+  padding-left: 2px;
+  display: flex;
+  flex-direction: column;
+  height: 99%;
+  justify-content: center;
+} */
+
+.menuItemButtoncontentwrapper {
+  width: 100% !important;
+  height: 100% !important;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  padding: 3px;
+  position: relative;
+  /* backdrop-filter: blur(0.65px); */
+}
+
+.pre-ordered-table {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.inneritembuttonDiv {
+  width: 50%;
+  float: right;
+  align-items: flex-end;
+  max-height: fit-content;
+  padding-left: 2px;
+  display: flex;
+  flex-direction: column;
+  height: 99%;
+  justify-content: center;
+}
+
+.innertableuttonDiv {
+  width: 50%;
+  float: right;
+  align-items: flex-end;
+  max-height: fit-content;
+  padding-left: 2px;
+  display: flex;
+  flex-direction: column;
+  height: 99%;
+  justify-content: center;
+  overflow: hidden;
+  font-size: 93% !important;
+}
+/* ===== Adjust .innertableuttonDiv font size for 1000–1060px ===== */
+@media (max-width: 1060px) and (min-width: 1000px) {
+  .innertableuttonDiv {
+    font-size: 91% !important;
+  }
+}
+
+.innertableuttonDiv:focus,
+.innertableuttonDiv:hover,
+.innertableuttonDiv:active {
+  overflow-y: auto;
+}
+
+.darkshade .inneritembuttonDiv .item-preptime {
+  background: white;
+  color: #000;
+}
+
+.menuItemButton div img {
+  right: 0;
+  float: left;
+  margin-left: 60%;
+  max-height: 15px;
+  max-width: 15px;
+  margin-top: -45px;
+  /* border-radius: 20px; */
+}
+
+.menuItemButton .itemImage {
+  width: 55px;
+  height: 55px;
+  border-radius: 25px;
+  max-height: 57%;
+  float: left;
+}
+
+.menuItemButton div label,
+.menuItemButton div i {
+  bottom: 0;
+  float: left;
+  width: 100%;
+  text-align: right;
+  clear: left;
+  margin: 0;
+}
+
+.menuItemButton {
+  font-weight: bold;
+}
+
+.compact-menuItemButton-1 {
+  border-left: 4px solid #18ba60 !important;
+}
+
+.compact-menuItemButton-2 {
+  border-left: 4px solid #dd1c1a !important;
+}
+
+.compact-menuItemButton-3 {
+  border-left: 4px solid #f0c808 !important;
+}
+
+.compact-menuItemButton-5 {
+  border-left: 4px solid #442220 !important;
+}
+
+.menuItemButton div label.statusLabel {
+  width: fit-content !important;
+}
+
+/**
+Radio
+**/
+
+input[type='radio'] {
+  width: 18px;
+  height: 18px;
+  display: none;
+}
+
+input[type='radio'] + label:before {
+  font-family: FontAwesome;
+  content: ' ';
+  border: 1px solid #bdbdbd;
+  border-radius: 0.2em;
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  padding-left: 0.2em;
+  padding-bottom: 0.3em;
+  margin-right: 0.2em;
+  vertical-align: bottom;
+  color: transparent;
+  transition: 0.2s;
+  border-radius: 20px;
+  border: 4px solid #bdbdbd;
+}
+
+input[type='radio'] + label:active:before {
+  transform: scale(0);
+}
+
+input[type='radio']:checked + label:before {
+  background-color: var(--checknradio);
+  border-color: var(--checknradio);
+  color: #fff;
+  font-size: 0.8em;
+  padding-left: 4px;
+  border: 4px solid #bdbdbd;
+}
+
+input[type='radio']:disabled + label:before {
+  transform: scale(1);
+  border-color: #aaa;
+}
+
+input[type='radio']:checked:disabled + label:before {
+  transform: scale(1);
+  background-color: #bfb;
+  border-color: #bfb;
+}
+
+/**
+Swal
+**/
+
+.tmbill-swal-actions,
+.swal2-actions {
+  display: flex;
+  gap: 5px;
+}
+
+.tmbill-swal-actions button {
+  font-size: 0.9rem !important;
+}
+
+.tmbill-swal-pop-up {
+  background-color: #fff;
+}
+
+.tmbill-swal-toast-title-class {
+  color: rgb(189, 177, 177) !important;
+}
+
+.tmbill-swal-title-class {
+  color: rgb(75, 72, 72) !important;
+}
+
+.tmbill-swal-content-class {
+  color: rgb(75, 72, 72) !important;
+}
+
+.tmbill-swal-number-content-class {
+  color: rgb(75, 72, 72) !important;
+}
+
+.tmbill-swal-number-content-class .swal2-input[type='number'] {
+  max-width: 100%;
+}
+
+.tmbill-swal-html-container {
+  width: 90%;
+}
+
+.tmbill-swal-input {
+  margin: 1em 2em 0 !important;
+  height: 40px !important;
+}
+
+.startday-swal-input2 {
+  width: 78% !important;
+  margin-top: 10px;
+}
+
+/**
+Remove Outlines
+**/
+
+button:focus {
+  outline: none;
+}
+
+.selected-order {
+  border-left: 4px solid #569bf1 !important;
+}
+
+.normal-label {
+  padding-top: 3px;
+}
+
+#nextkotnumberLabel,
+.billnoLabel,
+#nexttakeawaykotnumberLabel,
+#nextdeliverykotnumberLabel {
+  padding-left: 5px;
+  word-break: break-all;
+  text-align: center;
+  margin: 0;
+  font-size: larger;
+  font-weight: 600;
+}
+
+.current_department::before {
+  font-family: FontAwesome;
+  content: '\f00c';
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 2em;
+  font-size: 1em;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 1;
+  color: #2980b9;
+  text-align: center;
+  transform: translateY(-50%);
+  -webkit-font-smoothing: antialiased;
+}
+
+.department-custom-menu {
+  min-width: 7em !important;
+  width: 108px !important;
+}
+
+.department-custom-menu li {
+  justify-content: left;
+}
+
+.customer-history-icon {
+  position: relative;
+}
+
+.due-badge {
+  position: absolute;
+  top: -10px;
+  right: -11px;
+  font-size: 12px;
+  color: coral;
+}
+
+/**
+Takeaway and HD
+**/
+
+.selectionBox {
+  outline: none;
+  width: 35%;
+  border-radius: 7px;
+}
+
+.orderstateSelect {
+  outline: none;
+  width: 13%;
+  height: 35px;
+  border-radius: 7px;
+  margin-left: 5px;
+  font-size: 14px;
+}
+
+/* For screens around 1024px */
+@media (max-width: 1024px) {
+  .orderstateSelect {
+    width: 14.7%;
+  }
+}
+
+.context-options option {
+  padding: 1em;
+}
+
+.newOrderwrapper {
+  /* width: 30%; */
+  width: 23%;
+}
+
+.neworderButton {
+  width: 90% !important;
+}
+
+.takeawaySwitchdiv {
+  height: 35px;
+  max-height: 35px;
+  padding-top: 5px;
+  display: flex;
+  width: 100%;
+}
+
+.takeawayTab {
+  height: 100%;
+}
+
+.takeawayTabs {
+  height: 95%;
+}
+
+.takeawaykotTab,
+.deliverykotTab {
+  height: 100%;
+}
+
+.takeawaytabsContainer {
+  height: 93%;
+}
+
+.tasectionTabs {
+  height: 42px;
+  /* display: flex;
+  flex-direction: column; */
+}
+
+/* .newOrderwrapper {
+  margin-left: 20px !important;
+} */
+.currentswitchnameLabel {
+  font-weight: bolder;
+  letter-spacing: 2px;
+  /* width: 40%; */
+  color: #545557;
+  padding-left: 3px;
+}
+
+.selectedbillRow {
+  color: rgba(253, 254, 255, 0.6);
+  background-color: var(--selected-color) !important;
+}
+
+select {
+  border: 1px solid #f9f9f9;
+  background-color: #e7e5e582;
+  padding: 5px;
+  color: #716e6e;
+}
+
+/**
+Swal input check id
+**/
+
+#swalinputcheckId + label:before {
+  height: 24px;
+  width: 23px;
+}
+
+#swalinputcheckId:checked + label:before {
+  padding-left: 3px;
+}
+
+.swalinputcheckLabel {
+  margin-left: 96px !important;
+  color: #c31f1fdb !important;
+  font-weight: bolder !important;
+}
+
+/**
+Data tables
+**/
+
+.dataTables_wrapper .dataTables_paginate .paginate_button {
+  background: none !important;
+}
+
+.dataTables_wrapper .dataTables_paginate .paginate_button.current {
+  background-color: #3a4b40 !important;
+  border: none !important;
+  color: white !important;
+  -webkit-text-fill-color: white !important;
+}
+
+.dataTables_wrapper .dataTables_paginate .paginate_button:hover {
+  /* background-color: slateblue !important; */
+  border: 1px solid rgb(107, 104, 104) !important;
+  -webkit-text-fill-color: rgb(107, 104, 104) !important;
+}
+
+.dataTables_wrapper.no-footer .dataTables_scrollBody {
+  border-bottom: 1px solid #d4c3c3 !important;
+}
+
+/**
+Icon Sizes
+**/
+
+.fa-lg {
+  font-size: 1.7em !important;
+  padding: 0px 6px 0px 4px;
+}
+/* ===== Reduce icon size for medium screens (1024–1280px) ===== */
+@media (max-width: 1280px) and (min-width: 1024px) {
+  .fa-lg {
+    font-size: 1.6em !important;
+    padding: 0px 6px 0px 4px !important;
+  }
+}
+@media (min-width: 1024px) and (max-width: 1280px) {
+  .bill-misc-div.d-flex.align-items-center {
+    margin-left: 0px !important;
+  }
+}
+
+/* ===== Slightly tighter for 900–1024px screens ===== */
+/* @media (max-width:1024px) and (min-width:900px) {
+  .fa-lg {
+    font-size: 1.60em !important;
+    padding: 0px 5px 0px 3px !important;
+  }
+}
+@media (max-width:1024px) and (min-width:900px) {
+  label#quickbillGrandtotal {
+        margin-left: -32px;
+    } */
+
+.faIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  /* gap: 9px; */
+  font-size: 12px;
+  margin-right: 0px;
+
+  padding-right: 10px;
+}
+.icon-container.p-1 {
+  margin-left: -6px;
+  gap: 6px;
+}
+/**
+Table font size
+**/
+
+#kotTable,
+#billTable,
+#takebillTable,
+#takeawaykotTable,
+#quickbillTable,
+#deliverybillTable,
+#deliverykotTable {
+  font-size: 13px !important;
+}
+
+.table-filters-list {
+  margin: 0;
+  padding: 0;
+}
+
+.table-filters-list li {
+  padding: 0.3rem;
+  justify-content: left !important;
+}
+
+.table-filters-list li i {
+  margin-left: 10px;
+  color: blueviolet;
+}
+
+.chart-legend {
+  height: 20%;
+  overflow: hidden;
+  font-size: smaller !important;
+}
+
+.chart-legend:hover,
+.chart-legend:focus,
+.chart-legend:active {
+  overflow-y: auto;
+}
+
+.chart-legend ul {
+  display: flex !important;
+  flex-wrap: wrap !important;
+}
+
+.chart-legend ul li span {
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  margin-right: 5px;
+  margin-top: 4px;
+}
+
+.settingsButton-custom-menu {
+  left: 35px !important;
+  bottom: 30px !important;
+  top: '' !important;
+}
+
+.settingsButton-custom-menu li {
+  margin-left: 0;
+  justify-content: flex-start;
+}
+
+.selectable-div {
+  /* padding: 0.5em; */
+  border: 1px solid #bdbdbd;
+  opacity: 0.7;
+  width: 25%;
+  justify-content: center;
+  height: 35px;
+  align-items: center;
+}
+
+.left-bordered {
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
+  margin-right: -1px;
+}
+
+.right-bordered {
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+}
+
+.fill-layer {
+  background: linear-gradient(to right, mediumslateblue 50%, white 50%);
+  background-size: 200% 100%;
+  background-position: right bottom;
+  transition: all 0.5s ease-out;
+  opacity: 1;
+  background: mediumslateblue;
+  color: white;
+}
+
+.rewards-icon {
+  height: 15px;
+  width: 15px;
+}
+
+/**
+New Payment modal
+**/
+
+.newsplitpaylistContainer {
+  padding: 10px;
+  display: flex !important;
+  align-items: center;
+}
+
+.newsplitpaylistContainer li {
+  border: 1px solid MediumSeaGreen;
+  border-radius: 3px;
+  padding: 0.25rem 0.23rem;
+  margin-right: 5px;
+  margin-top: 4px;
+}
+
+.orderwindowPaymentlist {
+  /* max-height: 20vw; */
+  max-height: 20vw;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+.order-payment-container {
+  display: flex;
+  width: max-content;
+  cursor: pointer;
+  border: 1px solid rgb(224, 224, 224);
+  border-radius: 2px;
+  align-items: center;
+  justify-content: space-between;
+  width: 24%;
+  height: 50px;
+  margin-right: 5px;
+}
+
+.order-status-payment-container {
+  display: flex;
+  width: max-content;
+  cursor: pointer;
+  border: 1px solid rgb(224, 224, 224);
+  border-radius: 2px;
+  align-items: center;
+  justify-content: space-between;
+  width: 32%;
+  height: 50px;
+}
+
+.payment-avatar {
+  height: 50px !important;
+  width: 60px !important;
+  object-fit: contain;
+  margin-left: 5px;
+  padding: 4px;
+  font-size: x-small;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.selectedPayment {
+  border: 2px solid #3483bf !important;
+}
+
+.newpaysplistselectwrapper .newsplitaddpayWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-top: 13px;
+}
+
+.newpaysplistselectwrapper .newsplitaddpayWrapper input {
+  margin: 0;
+  margin-right: 10px;
+}
+
+#departmentsContainer {
+  margin-left: 9px;
+  overflow-x: hidden;
+}
+
+#departmentsContainer button {
+  height: 5vh;
+  min-width: 18%;
+  margin: 2px;
+  color: #18ba60;
+  background: #18ba6024;
+  border-radius: 5px;
+  border: none;
+  white-space: nowrap;
+}
+
+.serach-table-department-btn {
+  width: 10% !important;
+  min-width: 10% !important;
+}
+#departmentsContainer:hover {
+  overflow-x: scroll;
+  -webkit-overflow-scrolling: touch;
+}
+
+#departmentsContainer {
+  flex-wrap: nowrap !important;
+  height: 50px;
+}
+
+#tablesContainer {
+  margin-top: 2px;
+  height: 99%;
+  overflow-y: scroll;
+  -webkit-overflow-scrolling: touch;
+}
+
+.editable {
+  display: inline-block;
+  /* width: 31px; */
+  width: 36px;
+}
+
+/* .kotrowItemTitle,
+.itemBillRow {
+  line-break: anywhere;
+} */
+
+.itemsQty {
+  width: 175px;
+  text-align: center;
+}
+
+.billItemQty {
+  width: 60px;
+  text-align: center;
+}
+
+.decrementQty,
+.incrementQty {
+  border-color: green;
+  background-color: #f6f9f6;
+  height: 31px;
+  width: 48px;
+  border: none;
+  border-radius: 5px;
+}
+
+.decrementQty {
+  position: relative;
+  right: 12px;
+}
+
+.incrementQty {
+  position: relative;
+  left: 12px;
+}
+
+.pricetag {
+  display: flex;
+  flex-direction: column;
+  font-size: small !important;
+  font-weight: normal;
+}
+
+.totalAmount {
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.table td {
+  vertical-align: middle !important;
+}
+
+#pickup {
+  margin: auto;
+}
+
+.remoteKotModal {
+  width: 100% !important;
+  height: 100% !important;
+}
+
+#remoteKot {
+  color: white;
+  border: 1px solid white;
+  margin-left: 15px;
+  padding: 3px;
+  font-size: 13px;
+}
+
+#takeawaykotTab,
+#takeawaybillTab,
+#deliverykotTab,
+#deliverybillTab {
+  font-size: 14px;
+}
+
+.neworderButton {
+  width: 72px !important;
+  padding: 2px;
+}
+
+#paymentModesLabel,
+#takeawayPaymentModesLabel,
+#quickPaymentModesLabel,
+#deliveryPaymentModesLabel {
+  height: 45px;
+  display: flex;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+  color: #18ba60;
+  background-color: #18ba6024;
+  color: #000;
+  flex-wrap: nowrap;
+  overflow-x: hidden;
+}
+
+.quickSupportHeading {
+  color: red;
+}
+
+#paymentModesLabel:hover,
+#paymentModesLabel:focus,
+#takeawayPaymentModesLabel:hover,
+#takeawayPaymentModesLabel:focus,
+#quickPaymentModesLabel:hover,
+#quickPaymentModesLabel:focus,
+#deliveryPaymentModesLabel:hover,
+#deliveryPaymentModesLabel:focus {
+  overflow-x: scroll;
+}
+
+/* #print_n_savetakeawayBillbutton,
+#print_n_savebillButton {
+  width: 35%;
+}
+
+#reprint_n_savetakeawayBillbutton,
+#reprint_n_savebillButton,
+#reprint_n_savedeliveryBillbutton {
+  width: 45% !important;
+}
+
+#reprint_n_savetakeawayBillbutton {
+  width: 48% !important;
+} */
+
+.sm-bn {
+  height: fit-content;
+}
+
+#paymentsList,
+#openCashDrawerbuttonid {
+  /* margin-left: 5px; */
+  margin: 0px 5px;
+}
+
+.ui-autocomplete {
+  padding-bottom: 5px !important;
+}
+
+#loadMenuMessage {
+  color: red;
+}
+
+#modifyAactionwrapperid {
+  justify-content: right !important;
+}
+
+#reeloPointsRedeeminputid {
+  display: inline-block;
+  width: 30%;
+}
+
+#storeReelorewardslistContainerid {
+  max-height: 205px;
+  overflow-y: auto;
+}
+
+.billGrandtotallabel {
+  margin: auto;
+}
+
+.billGrandtotallabelclass {
+  margin: auto;
+  padding-top: 0px;
+  padding-bottom: 3px;
+}
+label.has-i18n.billGrandtotallabelclass {
+  margin-left: 10px;
+}
+.quickbillebillchecklabel {
+  display: flex;
+  margin: 0.2em;
+  cursor: pointer;
+  align-items: center !important;
+  padding: 0.2em;
+  max-width: 40%;
+  max-height: 30px;
+}
+
+.mulitPriciningclass {
+  position: absolute;
+  top: 4px;
+  /* bottom: 4px; */
+  left: 4px;
+  margin-left: 2px !important;
+}
+
+.kotrowItemNoteid {
+  display: inline-block;
+  max-width: 91px;
+  word-wrap: break-word;
+}
+
+.disable-click {
+  pointer-events: none;
+}
+
+.selected-table-border {
+  border: solid 3px #f8bb5d !important;
+}
+
+.handle-counter {
+  height: 44px;
+  display: flex;
+  align-items: center;
+  margin-left: 10px;
+  justify-content: center;
+}
+
+.counter-minus,
+.counter-plus {
+  height: 34px !important;
+  border-radius: 0px !important;
+}
+
+.w-82 {
+  width: 82% !important;
+}
+
+.show-loader-container-class {
+  z-index: 1000000;
+}
+
+.discount-row {
+  margin: 4px 0px;
+  background-color: #b1e5c817 !important;
+}
+
+#discountsListCombo {
+  overflow: scroll;
+  min-height: 100px;
+  max-height: 270px;
+}
+
+#itemnote-input {
+  width: 50em;
+  margin: auto;
+  margin-bottom: 5px;
+  margin-top: 5px;
+}
+
+.activeItemNoteGroup {
+  border-left: 5px solid #007c45 !important;
+}
+
+#kotnoteSuggestions,
+#noteGroupTitleSuggestions {
+  overflow: hidden;
+  /* min-height: 100px; */
+  /* max-height: 198px; */
+  max-height: 250px;
+  /* overflow-y: auto; */
+}
+
+#noteGroupTitleSuggestions:hover,
+#kotnoteSuggestions:hover {
+  overflow: auto; /* Show scrollbar on hover */
+}
+
+#kotnoteSuggestions::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+#noteGroupTitleSuggestions::-webkit-scrollbar {
+  width: 4px;
+  height: 4px;
+}
+
+.item_note_class {
+  /* display: inline-block !important; */
+  margin: 5px 3px;
+  padding: 6px 1.9rem !important;
+  border-radius: 5px;
+  /* float: left; */
+}
+.selectedItemNote::after {
+  content: '✔';
+  position: absolute;
+  top: -4px;
+  left: 1px;
+  color: green;
+  font-weight: bold;
+}
+.item-note-delete {
+  position: absolute;
+  top: 1px;
+  right: 2px;
+}
+.swal2-actions {
+  z-index: 0 !important;
+}
+
+.newpaymentsplitCheckClass {
+  margin: 10px 0px 0px 5px !important;
+}
+
+.newpaymentGrandTotalClass {
+  font-weight: bold !important;
+  margin-left: 10px;
+  font-size: 17px;
+}
+
+#newpaymentTotalid {
+  margin-left: 2px;
+}
+
+.paymentRefnumberinputclass,
+.customerPaidamountinputclass {
+  width: 124px;
+}
+
+.returnamountinputclass,
+.tipamontinputclass {
+  width: 80px;
+}
+
+.newwindowduepaymentcontainer,
+.newpaymentwindowgrandtotalcontainer {
+  align-self: center;
+}
+
+#orderwindowPaymentlist {
+  border-bottom: 1px solid black !important;
+}
+
+.waiterNotificationsModalcontent {
+  width: 50vw !important;
+  margin: auto;
+}
+
+.waiter-notification-card-body {
+  width: 100%;
+}
+
+.waiter-notification-actions-container {
+  float: right !important;
+}
+
+.waiter-notification-title {
+  font-size: 15px;
+  font-weight: bold;
+}
+
+#waiterNotificationstListID {
+  /* height: 550px; */
+  height: 61vh;
+  overflow: scroll;
+}
+
+#paginateNotification {
+  display: flex;
+  justify-content: center;
+  margin-top: 7px;
+}
+
+.dialcodeclass {
+  font-weight: bold;
+  font-size: 16px;
+  padding: 3px;
+}
+
+.dialkotcustomermobileField {
+  height: 34px;
+  width: 58px !important;
+  /* border-radius: 15px 0px 0px 15px !important; */
+  margin-right: 0px !important;
+  padding-right: 0px !important;
+  border-radius: 5.5px;
+}
+
+.kotcustomerMobile {
+  border-radius: 5.5px !important;
+  margin-left: 0px !important;
+  /* padding: 0px !important; */
+}
+
+.kotcustomerMobile,
+.kotcustomerName {
+  width: 33% !important;
+}
+
+.custom-order-type-swal-container {
+  width: 60em !important;
+}
+
+#reprint_n_savebillButton,
+#reprint_n_savetakeawayBillbutton,
+#reprint_n_savedeliveryBillbutton {
+  display: none;
+}
+
+.progress-container {
+  width: 100%;
+  background-color: #f5f5f5;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.progress-bar {
+  width: 0%;
+  height: 30px;
+  background-color: #4caf50;
+  border-radius: 5px;
+  text-align: center;
+  line-height: 30px;
+  color: white;
+}
+
+#searchDiscountid {
+  margin: 2px 5px 7px 5px;
+}
+
+#checkSocketConnectionButtonid {
+  width: 100%;
+  margin: 10px;
+}
+
+#preorderdatefilter {
+  margin: 0px 5px;
+}
+
+.baseItemKotbillrow {
+  font-weight: bold;
+}
+
+.kotbillItemAddons {
+  font-size: 14px;
+  color: gray;
+}
+
+#ordermainsectionTabsid {
+  flex-wrap: nowrap !important;
+  /* overflow-x: auto; */
+  /* overflow-y: hidden !important; */
+  white-space: nowrap;
+  font-size: clamp(1rem, 2vw + 1rem, 3rem);
+}
+
+#ordermainsectionTabsid::-webkit-scrollbar {
+  width: 3px;
+  height: 3px;
+}
+.outofstocktag {
+  color: red !important;
+}
+
+#deliveryebillBilllabelcheckid {
+  font-weight: normal !important;
+  margin-left: 0px !important;
+  padding: 0px !important;
+}
+
+.tableButton {
+  position: relative;
+}
+
+.ordertypefortable {
+  position: absolute;
+  top: 0px;
+  left: 10px;
+  font-size: 12px;
+}
+
+.ordertypefortableForPreOrder {
+  position: absolute;
+  top: 12px;
+  left: 2px;
+  font-size: 12px;
+}
+
+.nav-item {
+  font-weight: bold;
+}
+
+#selectdeliveryboybutton {
+  width: 30px !important;
+  height: 30px;
+}
+
+#deliveryBoyImgId {
+  height: 30px;
+}
+
+#Deliveryboymodalheading {
+  font-size: 17px;
+  font-weight: 600;
+}
+
+#deliveryBoylistId,
+#digideliveryBoylistId {
+  height: 230px;
+  overflow: scroll;
+}
+
+#searchDeliveryBoyid {
+  margin: 0px 0px 13px 0px;
+}
+
+.delivery-boy-name-on-table {
+  position: absolute;
+  left: 6px;
+  bottom: 3px;
+}
+
+.waiter-name-on-table {
+  position: absolute;
+  left: 6px;
+  bottom: 20px;
+}
+
+.createdby-on-table {
+  position: absolute;
+  left: 6px;
+  top: 33px;
+}
+
+#sunmiPaymentMessageContainerid {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.loader {
+  border: 4px solid #f3f3f3;
+  border-top: 4px solid #0f2c14;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  margin-bottom: 13px;
+  animation: spin 1s linear infinite;
+}
+
+.sunmiPaymentSuccess {
+  display: block;
+  padding: 10px;
+  background: #b0f1d6;
+}
+
+.sunmiPaymentFailure {
+  display: block;
+  padding: 10px;
+  background: #fa968b;
+}
+.item-note-group-container {
+  display: flex;
+}
+
+#itemNotGroupContainer {
+  display: flex;
+  min-height: 70px;
+  max-height: 500px;
+}
+
+.groupTitleContainer {
+  width: 20%;
+}
+
+.itemNotesContainer {
+  width: 80%;
+}
+
+.item-note-group-label {
+  /* width: 20%; */
+  align-self: center;
+  font-weight: bold;
+  padding: 10px;
+  border: 1px solid #eee;
+}
+
+.customer-name-on-table {
+  position: absolute;
+  top: 1px;
+}
+
+.changeordertypeicon {
+  padding: 0.8rem 1rem;
+}
+
+.delete-rowitem-icon {
+  font-size: 1.2rem;
+}
+
+#changeordertypeid,
+#takeawaychangeordertypeid,
+#deliverychangeordertypeid {
+  display: none;
+}
+
+#newpaymentTipPaymentid {
+  width: 60%;
+}
+
+#curreny-converter-container-body {
+  display: none;
+}
+.curreny-converter-container-body {
+  background-color: #f4f4f4;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.curreny-converter-container {
+  padding: 15px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.curreny-converter-container select,
+.curreny-converter-container input,
+.curreny-converter-container button {
+  height: 40px;
+}
+#currencyresult {
+  font-size: 1.2em;
+  font-weight: bold;
+  margin-left: 15px;
+}
+.curreny-converter-container #currenyamount {
+  margin: 0px;
+}
+#fromCurrency,
+#toCurrency,
+#currenyamount {
+  width: 20%;
+}
+#currenyamount {
+  background: #fff8f882;
+}
+#currency-coversion-title {
+  font-weight: bold;
+  position: relative;
+  top: 8px;
+  padding: 10px;
+  font-size: 17px;
+}
+
+.afteCloseDayExportAndPrintReportButtons {
+  justify-content: center !important;
+}
+.exportAndPrintDayShiftReportBody {
+  padding: 60px;
+}
+
+.exportAndPrintDayShiftReportBody {
+  padding: 60px !important;
+}
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+#tree .node-tree {
+  text-align: center;
+  display: block;
+  width: 100%;
+}
+
+.node-selected {
+  color: white !important;
+  background-color: #f82424 !important;
+}
+
+#tree ul {
+  row-gap: 3px;
+}
+
+.searchDiv i,
+#livetstatusButton {
+  cursor: pointer;
+  font-size: 13px;
+}
+
+.expand-icon {
+  position: absolute;
+  left: 10px;
+  top: 15px;
+}
+.node-itemManagementCategorytree .expand-icon {
+  position: relative;
+  left: 0px;
+  top: 0px;
+}
+
+#changeordertypeAfterSaveKotid,
+#takeawaychangeordertypeAfterSaveKotid,
+#deliverychangeordertypeAfterSaveKotid {
+  display: none;
+}
+
+#openCashDrawerOnExpensesbuttonid {
+  margin-top: 5px;
+}
+.actionDiv img {
+  cursor: pointer;
+}
+
+.fa-cash-register {
+  cursor: pointer;
+}
+@media (max-width: 1280px) and (min-width: 1024px) {
+  .tabs .sectionTabs > li > a,
+  .parentTabs .mainsectionTabs > li > a {
+    font-size: 12px;
+  }
+}
+
+@media (max-width: 1280px) and (min-width: 1024px) {
+  #remoteKot {
+    font-size: 12px;
+    color: white;
+    border: 1px solid white;
+    margin-left: 15px;
+    padding: 4px;
+  }
+}
+@media (max-width: 1366px) {
+  #takeawaykotTab,
+  #takeawaybillTab,
+  #deliverykotTab,
+  #deliverybillTab {
+    font-size: 14px !important;
+    font-weight: bold;
+  }
+}
+@media (max-width: 1024px) {
+  #takeawaykotTab,
+  #takeawaybillTab,
+  #deliverykotTab,
+  #deliverybillTab {
+    font-size: 12px !important;
+  }
+}
+#nextkotnumberLabel,
+.billnoLabel,
+#nexttakeawaykotnumberLabel,
+#nextdeliverykotnumberLabel {
+  /* font-size: medium; */
+}
+
+@media (max-width: 1280px) and (min-width: 1024px) {
+  .dialkotcustomermobileField,
+  #takeawaykotdialcodeFieldid {
+    display: inline-block;
+    width: 48px !important;
+    min-width: 56px !important;
+    height: 30px !important;
+    padding: 4px 22px 4px 6px !important;
+    box-sizing: border-box;
+    vertical-align: middle;
+    border-radius: 10px !important;
+    /* border: 1px solid rgba(0, 0, 0, 0.06) !important;
+    background-color: #f3f3f3 !important; */
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='5' viewBox='0 0 8 5'%3E%3Cpath fill='%23666' d='M0 0l4 5 4-5z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 8px center;
+    background-size: 8px 5px;
+    -webkit-appearance: none !important;
+    appearance: none !important;
+    cursor: pointer;
+  }
+  @media (min-width: 1024px) and (max-width: 1280px) {
+    .table_container button {
+      font-size: 12px !important;
+    }
+  }
+
+  .preorder-label,
+  .preorderDiv,
+  label[for='preorderField'],
+  input[type='checkbox'] + label {
+    align-items: center !important;
+    gap: 0px !important;
+    line-height: 1 !important;
+  }
+
+  #selecttakeawayWaiterbutton,
+  #clearkotButton {
+    margin-left: 2px !important;
+    transform: translateX(-2px);
+  }
+
+  .kotcustomerMobile,
+  .kotcustomerName,
+  #takeawaykotcustomermobileField,
+  #takeawaykotcustomernameField {
+    display: inline-block;
+    height: 30px !important;
+    padding: 4px 10px !important;
+    font-size: 12px !important;
+    box-sizing: border-box;
+    vertical-align: middle;
+    margin-left: 6px !important;
+    border-radius: 10px !important;
+    /* border: 1px solid rgba(0, 0, 0, 0.06) !important;
+    background: #f3f3f3 !important; */
+  }
+
+  .kotcustomerMobile,
+  #takeawaykotcustomermobileField {
+    width: 35% !important;
+    min-width: 70px !important;
+    max-width: 220px !important;
+  }
+
+  .kotcustomerName,
+  #takeawaykotcustomernameField {
+    width: 32% !important;
+    min-width: 80.5px !important;
+    max-width: 220px !important;
+  }
+
+  .kotCustomer-div {
+    flex-wrap: nowrap !important;
+    align-items: center !important;
+  }
+
+  .tm-fa-sm {
+    font-size: 1.3rem !important;
+  }
+
+  @media (max-width: 1060px) and (min-width: 1000px) {
+    #deliveryBoyImgId {
+      height: 26px !important;
+      width: auto !important;
+      object-fit: contain !important;
+      vertical-align: middle !important;
+    }
+  }
+
+  #takotcustomeraddressField,
+  #kotcustomeraddressField {
+    display: inline-block;
+    width: 45% !important;
+    min-width: 100px !important;
+    height: 30px !important;
+    padding: 4px 10px !important;
+    margin-left: 4px !important;
+    font-size: 12px !important;
+    box-sizing: border-box;
+    border-radius: 10px !important;
+    /* border: 1px solid rgba(0, 0, 0, 0.06) !important;
+    background: #f3f3f3 !important; */
+    vertical-align: middle;
+  }
+
+  #takeawaykotnoteField,
+  #kotnoteField {
+    display: inline-block;
+    width: 26% !important;
+    min-width: 85px !important;
+    height: 30px !important;
+    padding: 4px 10px !important;
+    margin-left: 3px !important;
+    font-size: 12px !important;
+    box-sizing: border-box;
+    border-radius: 10px !important;
+    /* border: 1px solid rgba(0, 0, 0, 0.06) !important;
+    background: #f3f3f3 !important; */
+    vertical-align: middle;
+  }
+
+  @media (min-width: 1024px) {
+    #takeawaykotnoteField,
+    #kotnoteField {
+      width: 14% !important;
+      min-width: 80px !important;
+      height: 28px !important;
+      padding: 3px 8px !important;
+      font-size: 11px !important;
+      border-radius: 8px !important;
+      margin-left: 3px !important;
+      flex: 0 0 14% !important;
+    }
+
+    #takeawaynoofpersonsField,
+    #noofpersonsField {
+      width: 60px !important;
+      min-width: 55px !important;
+      height: 28px !important;
+      padding: 3px 6px !important;
+      font-size: 11px !important;
+      border-radius: 8px !important;
+      margin-left: 4px !important;
+      flex: 0 0 60px !important;
+    }
+
+    .clear-kot-icon,
+    #clearkotButton {
+      height: 28px !important;
+      line-height: 28px !important;
+      flex: 0 0 auto !important;
+    }
+  }
+
+  @media (max-width: 1023px) {
+    #takeawaykotnoteField,
+    #kotnoteField,
+    #takeawaynoofpersonsField,
+    #noofpersonsField {
+      width: 100% !important;
+      min-width: 100% !important;
+      display: block !important;
+    }
+  }
+
+  #takeawaynoofpersonsField,
+  #noofpersonsField {
+    display: inline-block;
+    width: 28% !important;
+    min-width: 86px !important;
+  }
+
+  #takeawaynoofpersonsField,
+  #noofpersonsField {
+    display: inline-block;
+    width: 28% !important;
+    min-width: 22px !important;
+    height: 30px !important;
+    padding: 4px 8px !important;
+    margin-left: 6px !important;
+    font-size: 12px !important;
+    box-sizing: border-box;
+    border-radius: 10px !important;
+    /* border: 1px solid rgba(0, 0, 0, 0.06) !important;
+    background: #f3f3f3 !important; */
+    vertical-align: middle;
+  }
+
+  #tashowCustomeraddress,
+  #takeawayclearkotButton,
+  #selecttakeawayWaiterbutton,
+  #clearkotButton {
+    height: 30px !important;
+    min-width: 30px !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    margin-left: 6px !important;
+    vertical-align: middle;
+    box-sizing: border-box;
+  }
+
+  .takeway-kot-div-2,
+  .takeway-kot-div-3 {
+    align-items: center !important;
+    flex-wrap: nowrap !important;
+  }
+
+  .clear-kot-icon {
+    font-size: 1.05rem !important;
+    margin-right: 4px;
+  }
+
+  .kotCustomer-div,
+  .takeway-kot-div-2,
+  .takeway-kot-div-3 {
+    display: flex !important;
+    flex-wrap: nowrap !important;
+    align-items: center !important;
+    gap: 3px !important;
+    row-gap: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    line-height: 1 !important;
+  }
+
+  .takeway-kot-div-2 {
+    margin-top: -8px !important;
+  }
+  .takeway-kot-div-3 {
+    margin-top: -6px !important;
+  }
+
+  .kotcustomerMobile,
+  .kotcustomerName,
+  #takeawaykotcustomermobileField,
+  #takeawaykotcustomernameField,
+  #takotcustomeraddressField,
+  #kotcustomeraddressField,
+  #takeawaykotnoteField,
+  #kotnoteField,
+  #takeawaynoofpersonsField,
+  #noofpersonsField,
+  #tashowCustomeraddress,
+  #takeawayclearkotButton,
+  #selecttakeawayWaiterbutton,
+  #clearkotButton {
+    margin-left: 0 !important;
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+  }
+
+  .kotcustomerMobile,
+  .kotcustomerName,
+  #takeawaykotcustomermobileField,
+  #takeawaykotcustomernameField,
+  #takotcustomeraddressField,
+  #kotcustomeraddressField,
+  #takeawaykotnoteField,
+  #kotnoteField,
+  #takeawaynoofpersonsField,
+  #noofpersonsField {
+    display: inline-flex !important;
+    align-items: center !important;
+    height: 28px !important;
+    padding: 3px 8px !important;
+    font-size: 11.5px !important;
+    box-sizing: border-box !important;
+  }
+
+  #tashowCustomeraddress,
+  #takeawayclearkotButton,
+  #selecttakeawayWaiterbutton,
+  #clearkotButton {
+    height: 28px !important;
+    min-width: 28px !important;
+    padding: 0 6px !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: left !important;
+  }
+
+  .dialkotcustomermobileField,
+  #takeawaykotdialcodeFieldid {
+    padding: 3px 16px 3px 6px !important;
+    height: 28px !important;
+    min-width: 52px !important;
+    display: inline-flex !important;
+    align-items: center !important;
+  }
+
+  .kotCustomer-div > *,
+  .takeway-kot-div-2 > *,
+  .takeway-kot-div-3 > * {
+    vertical-align: middle !important;
+  }
+}
+
+/* @media (max-width:1280px) and (min-width:1024px) {
+  .treeviewDiv {
+    font-size: 11px !important;        
+    line-height: 1.3 !important;      
+    padding: 4px 6px !important;      
+  } */
+
+.treeviewDiv li,
+.treeviewDiv span,
+.treeviewDiv a {
+  font-size: 12.5px;
+}
+.delete-rowitem-icon {
+  padding-top: 16px;
+}
+
+@media (max-width: 1024px) and (min-width: 900px) {
+  .treeviewDiv {
+    font-size: 11.7px !important;
+    line-height: 1.25 !important;
+    padding: 3px 5px !important;
+    font-weight: 600;
+  }
+  #tree .node-tree {
+    text-align: center;
+    display: block;
+    width: 110%;
+  }
+}
+
+.treeviewDiv,
+#tree {
+  -webkit-overflow-scrolling: touch;
+
+  padding-bottom: 10px !important;
+}
+.itemsDiv,
+.itemviewDivContainer,
+.treeviewDiv > *:last-child {
+  margin-bottom: 17px !important;
+}
+@media (max-width: 1024px) and (min-width: 900px) {
+  .treeviewDiv > *:last-child {
+    margin-bottom: 12px !important;
+  }
+}
+
+div#tatable-actions-divid {
+  overflow-x: scroll;
+  overflow-y: hidden;
+}
+
+.itemviewDiv::-webkit-scrollbar,
+.itemviewDivContainer::-webkit-scrollbar,
+.treeviewDiv::-webkit-scrollbar,
+#tree::-webkit-scrollbar {
+  width: 0px;
+  overflow-y: auto !important;
+}
+
+.itemviewDiv,
+.itemviewDivContainer {
+  overflow-y: scroll !important;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(0, 0, 0, 0.18) transparent;
+}
+
+.itemviewDiv::-webkit-scrollbar,
+.itemviewDivContainer::-webkit-scrollbar {
+  width: 8px;
+}
+
+.itemviewDiv::-webkit-scrollbar-thumb,
+.itemviewDivContainer::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.18);
+  border-radius: 6px;
+}
+
+.itemviewDiv::-webkit-scrollbar-track,
+.itemviewDivContainer::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.itemviewDiv::-webkit-scrollbar-track,
+.itemviewDivContainer::-webkit-scrollbar-track,
+.treeviewDiv::-webkit-scrollbar-track,
+#tree::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.itemviewDiv::-webkit-scrollbar-thumb,
+.itemviewDivContainer::-webkit-scrollbar-thumb,
+.treeviewDiv::-webkit-scrollbar-thumb,
+#tree::-webkit-scrollbar-thumb {
+  background: transparent;
+  border-radius: 6px;
+}
+
+.itemviewDiv:hover::-webkit-scrollbar-thumb,
+.itemviewDivContainer:hover::-webkit-scrollbar-thumb,
+.treeviewDiv:hover::-webkit-scrollbar-thumb,
+#tree:hover::-webkit-scrollbar-thumb {
+  background: #1e4936; /* visible thumb on hover */
+}
+@media (max-width: 1280px) and (min-width: 1024px) {
+  .itemviewDiv button {
+    font-size: 12.5px !important;
+  }
+}
+
+@media (max-width: 1024px) and (min-width: 900px) {
+  .itemviewDiv button {
+    font-size: 12.5px !important;
+  }
+}
+
+@media (max-width: 1280px) and (min-width: 1024px) {
+  .actionDiv input[type='button'] {
+    width: auto !important;
+    min-width: 80px !important;
+    max-width: 140px !important;
+    padding: 6px 10px !important;
+    font-size: 12.5px !important;
+    height: 34px !important;
+    box-sizing: border-box !important;
+  }
+}
+
+@media (max-width: 1024px) and (min-width: 900px) {
+  .actionDiv input[type='button'] {
+    /* width: auto !important; */
+    min-width: 82px !important;
+    max-width: 120px !important;
+    padding: 5px 5px !important;
+    font-size: 11.5px !important;
+    height: 32px !important;
+    box-sizing: border-box !important;
+    line-height: 21px;
+  }
+}
+
+@media (max-width: 1280px) and (min-width: 1024px) {
+  .table-actionsDiv input[type='button'] {
+    /* width: auto !important;         
+    min-width: 80px !important;      
+    max-width: 130px !important;     */
+    height: 34px !important;
+    padding: 6px 10px !important;
+    font-size: 12px !important;
+    margin: 3px !important;
+    box-sizing: border-box !important;
+    /* overflow: scroll; */
+  }
+}
+div#table-actions-divid {
+  overflow: scroll;
+}
+div#tatable-actions-divid {
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+
+@media (max-width: 1024px) and (min-width: 900px) {
+  .table-actionsDiv input[type='button'] {
+    /* width: auto !important;
+    min-width: 90px !important;      
+    max-width: 100px !important;
+    height: 32px !important;
+    padding: 5px 8px !important;
+    font-size: 11.5px !important;
+    margin: 3px !important;
+    box-sizing: border-box !important; */
+  }
+
+  #print_n_savebillButton {
+    /* min-width: 90px !important;
+    max-width: 100px !important;
+    height: 32px !important;
+    padding: 5px 8px !important;
+    font-size: 11.5px !important;
+    margin: 3px !important;
+    box-sizing: border-box !important; */
+  }
+}
+
+/* @media (max-width: 1024px) and (min-width: 900px) {
+  
+  #reprint_n_savebillButton {
+    width: auto !important;
+    min-width: 125px !important;     
+    max-width: 160px !important;    
+    height: 32px !important;
+    padding: 5px 10px !important;    
+    font-size: 12px !important;
+    margin: 3px !important;
+    
+    box-sizing: border-box !important;
+  }
+} */
+
+@media (max-width: 1280px) and (min-width: 1024px) {
+  .tm-fa-sm {
+    font-size: 1.3rem !important;
+  }
+}
+
+@media (max-width: 1024px) and (min-width: 900px) {
+  .tm-fa-sm {
+    font-size: 1.3rem !important;
+  }
+}
+
+/* ===== Compact buttons inside .kot-actionsDiv for 1024–1280px ===== */
+@media (max-width: 1280px) and (min-width: 1024px) {
+  /* .kot-actionsDiv input[type='button'] {
+    width: auto !important;        
+    min-width: 80px !important;     
+    max-width: 140px !important;    
+    height: 34px !important;         
+    padding: 6px 10px !important;    
+    font-size: 12px !important;      
+    margin: 3px !important;          
+    box-sizing: border-box !important;
+  } */
+}
+
+@media (max-width: 1024px) and (min-width: 900px) {
+  .kot-actionsDiv input[type='button'] {
+    /* width: auto !important; */
+    /* min-width: 72px !important;
+    max-width: 120px !important; */
+    height: 78%;
+    padding: 5px 8px !important;
+    font-size: 12px !important;
+    margin: 3px !important;
+  }
+}
+
+@media (max-width: 1280px) and (min-width: 1024px) {
+  #kotTable,
+  #billTable,
+  #takebillTable,
+  #takeawaykotTable,
+  #quickbillTable,
+  #deliverybillTable,
+  #deliverykotTable {
+    font-size: 13px !important;
+  }
+
+  .totalAmount {
+    font-size: 13px !important;
+    font-weight: 600;
+  }
+
+  .pricetag {
+    display: flex !important;
+    flex-direction: column !important;
+    font-size: 11.5px !important;
+    font-weight: normal !important;
+  }
+}
+.bill-misc-div.d-flex.align-items-center {
+  margin-left: -10px;
+}
+
+/* @media (max-width:1024px) and (min-width:900px) {
+  .totalsDiv label, .receiptActiondiv2 label {
+    font-size: 13.5px;
+    font-weight: 600;
+    margin-top: 10px;
+}
+.grandtotalsDiv label {
+    font-size: 15px;
+    font-weight: 600;
+    color: white;
+    padding-left: 5px;
+    padding-right: 0px;
+} */
+#kotTable,
+#billTable,
+#takebillTable,
+#takeawaykotTable,
+#quickbillTable,
+#deliverybillTable,
+#deliverykotTable {
+  font-size: 13px !important;
+}
+
+.totalAmount {
+  font-size: 13px !important;
+  font-weight: 600;
+}
+
+.pricetag {
+  font-size: 12px !important;
+  font-weight: normal !important;
+}
+
+.kotCustomer-div,
+.dinein-kot-div-2,
+.dinein-kot-div-3 {
+  display: flex !important;
+  flex-wrap: nowrap !important;
+  align-items: center !important;
+  gap: 3px !important;
+  row-gap: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+.dineinkotCustomer-div {
+  display: flex !important;
+  flex-wrap: nowrap !important;
+  align-items: center !important;
+  gap: 3px !important;
+  row-gap: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  line-height: 1 !important;
+  width: 100% !important;
+}
+
+.dineinkotCustomer-div select.dialkotcustomermobileField {
+  height: 34px !important;
+  padding: 6px 8px !important;
+  font-size: 12px !important;
+  border: 1px solid #ccc !important;
+  border-radius: 4px !important;
+  box-sizing: border-box !important;
+  flex: 0 0 auto !important;
+  min-width: 70px !important;
+  margin: 0 !important;
+}
+
+.dineinkotCustomer-div input.kotcustomerMobile {
+  height: 34px !important;
+  padding: 6px 8px !important;
+  font-size: 12px !important;
+  border: 1px solid #ccc !important;
+  border-radius: 4px !important;
+  box-sizing: border-box !important;
+  flex: 0 0 140px !important;
+  margin: 0 !important;
+}
+
+.dineinkotCustomer-div input.kotcustomerName {
+  height: 34px !important;
+  padding: 6px 8px !important;
+  font-size: 12px !important;
+  border: 1px solid #ccc !important;
+  border-radius: 4px !important;
+  box-sizing: border-box !important;
+  flex: 1 1 auto !important;
+  margin: 0 !important;
+  min-width: 100px !important;
+}
+
+.dineinkotCustomer-div i.customer-history-icon {
+  flex: 0 0 auto !important;
+  font-size: 16px !important;
+  color: #666 !important;
+  cursor: pointer !important;
+  margin: 0 !important;
+  padding: 0 4px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+.dineinkotCustomer-div i#selectdineinWaiterbutton {
+  flex: 0 0 auto !important;
+  font-size: 16px !important;
+  color: #666 !important;
+  cursor: pointer !important;
+  margin: 0 !important;
+  padding: 0 4px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+.dinein-kot-div-2.kot-noteDiv {
+  display: flex !important;
+  flex-wrap: nowrap !important;
+  align-items: center !important;
+  gap: 3px !important;
+  row-gap: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  line-height: 1 !important;
+  width: 100% !important;
+  height: auto !important;
+}
+
+.dinein-kot-div-2 input#kotcustomeraddressField {
+  height: 34px !important;
+  padding: 6px 8px !important;
+  font-size: 12px !important;
+  border: 1px solid #ccc !important;
+  border-radius: 4px !important;
+  box-sizing: border-box !important;
+  flex: 1 1 auto !important;
+  margin: 0 !important;
+  min-width: 120px !important;
+}
+
+.dinein-kot-div-2 i#showCustomeraddress {
+  flex: 0 0 auto !important;
+  font-size: 16px !important;
+  color: #666 !important;
+  cursor: pointer !important;
+  margin: 0 !important;
+  padding: 0 4px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+.dinein-kot-div-2 input.kotNote,
+.dinein-kot-div-2 input#kotnoteField {
+  height: 34px !important;
+  padding: 6px 8px !important;
+  font-size: 12px !important;
+  border: 1px solid #ccc !important;
+  border-radius: 4px !important;
+  box-sizing: border-box !important;
+  flex: 1 1 auto !important;
+  margin: 0 !important;
+  min-width: 100px !important;
+}
+
+.dinein-kot-div-2 i#clearkotButton {
+  flex: 0 0 auto !important;
+  font-size: 16px !important;
+  color: #dc3545 !important;
+  cursor: pointer !important;
+  margin: 0 !important;
+  padding: 0 4px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+.dinein-kot-div-3.kot-noteDiv {
+  display: flex !important;
+  flex-wrap: nowrap !important;
+  align-items: center !important;
+  gap: 3px !important;
+  row-gap: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  line-height: 1 !important;
+  width: 100% !important;
+  height: auto !important;
+}
+
+.dinein-kot-div-3 input.noofpersons,
+.dinein-kot-div-3 input#noofpersonsField {
+  height: 34px !important;
+  padding: 6px 8px !important;
+  font-size: 12px !important;
+  border: 1px solid #ccc !important;
+  border-radius: 4px !important;
+  box-sizing: border-box !important;
+  flex: 0 0 120px !important;
+  margin: 0 !important;
+  width: 120px !important;
+}
+
+.dinein-kot-div-3 input#showOnBillcheckid {
+  flex: 0 0 auto !important;
+  height: 18px !important;
+  width: 18px !important;
+  margin: 0 4px 0 8px !important;
+  cursor: pointer !important;
+  box-sizing: border-box !important;
+}
+
+.dinein-kot-div-3 label#showOnBilllabelcheckid {
+  flex: 0 0 auto !important;
+  font-size: 12px !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  cursor: pointer !important;
+  display: flex !important;
+  align-items: center !important;
+}
+
+.dineinkotCustomer-div input,
+.dineinkotCustomer-div select,
+.dinein-kot-div-2 input,
+.dinein-kot-div-3 input {
+  background-color: #fff !important;
+  color: #333 !important;
+  line-height: 1.4 !important;
+  outline: none !important;
+}
+
+.dineinkotCustomer-div input::placeholder,
+.dinein-kot-div-2 input::placeholder,
+.dinein-kot-div-3 input::placeholder {
+  color: #999 !important;
+  font-size: 12px !important;
+}
+
+.dineinkotCustomer-div input:focus,
+.dineinkotCustomer-div select:focus,
+.dinein-kot-div-2 input:focus,
+.dinein-kot-div-3 input:focus {
+  border-color: #4caf50 !important;
+  box-shadow: 0 0 0 2px rgba(76, 175, 80, 0.1) !important;
+}
+
+.dineinkotCustomer-div i:hover,
+.dinein-kot-div-2 i:hover {
+  color: #4caf50 !important;
+  transition: color 0.2s ease !important;
+}
+
+.dinein-kot-div-2 i#clearkotButton:hover {
+  color: #c82333 !important;
+  transition: color 0.2s ease !important;
+}
+
+@media (max-width: 1200px) {
+  .dineinkotCustomer-div,
+  .dinein-kot-div-2,
+  .dinein-kot-div-3 {
+    gap: 2px !important;
+  }
+
+  .dineinkotCustomer-div select.dialkotcustomermobileField,
+  .dineinkotCustomer-div input.kotcustomerMobile,
+  .dineinkotCustomer-div input.kotcustomerName,
+  .dinein-kot-div-2 input#kotcustomeraddressField,
+  .dinein-kot-div-2 input.kotNote,
+  .dinein-kot-div-2 input#kotnoteField,
+  .dinein-kot-div-3 input.noofpersons,
+  .dinein-kot-div-3 input#noofpersonsField {
+    height: 32px !important;
+    padding: 5px 7px !important;
+    font-size: 11px !important;
+  }
+
+  .dineinkotCustomer-div select.dialkotcustomermobileField {
+    min-width: 65px !important;
+  }
+
+  .dineinkotCustomer-div input.kotcustomerMobile {
+    flex: 0 0 130px !important;
+  }
+
+  .dinein-kot-div-3 input.noofpersons,
+  .dinein-kot-div-3 input#noofpersonsField {
+    flex: 0 0 110px !important;
+    width: 110px !important;
+  }
+
+  .dineinkotCustomer-div i,
+  .dinein-kot-div-2 i {
+    font-size: 14px !important;
+    padding: 0 3px !important;
+  }
+}
+
+@media (min-width: 1024px) and (max-width: 1280px) {
+  .takeway-kot-div-2 input[type='text'],
+  .takeway-kot-div-2 input[type='number'] {
+    width: 35% !important;
+    box-sizing: border-box !important;
+    padding: 5px 8px !important;
+    height: 26px !important;
+    font-size: 12px !important;
+    border-radius: 10px !important;
+    /* border: 1px solid rgba(0, 0, 0, 0.06) !important;
+    background: #f3f3f4 !important; */
+    margin: 0 4px 0 0 !important;
+  }
+
+  input#deliverykotcustomeraddressField {
+    height: 28px !important;
+    margin: 0 2px !important;
+    padding: 5px 10px !important;
+    width: 39% !important;
+    font-size: 12px !important;
+    box-sizing: border-box !important;
+    border-radius: 12px !important;
+    /* border: 1px solid rgba(0, 0, 0, 0.08) !important;
+    background: #f3f3f4 !important; */
+  }
+
+  .takeway-kot-div-2 i,
+  .takeway-kot-div-2 .clear-kot-icon,
+  #deliveryshowCustomeraddress,
+  #deliveryclearkotButton {
+    height: 26px !important;
+    line-height: 26px !important;
+    vertical-align: middle !important;
+    margin-left: 6px !important;
+  }
+}
+
+@media (max-width: 1023px) {
+  .takeway-kot-div-2 input[type='text'],
+  .takeway-kot-div-2 input[type='number'],
+  input#deliverykotcustomeraddressField {
+    width: 100% !important;
+    min-width: 100% !important;
+    display: block !important;
+    margin: 6px 0 !important;
+    box-sizing: border-box !important;
+  }
+}
+
+@media (min-width: 1024px) {
+  #deliverynoofpersonsField {
+    width: 54px !important;
+    min-width: 89px !important;
+    flex: 0 0 48px !important;
+    /* height: 26px !important; */
+    /* padding: 2px 6px !important; */
+    font-size: 12px !important;
+    line-height: 22px !important;
+    /* text-align: center !important;   */
+    border-radius: 12px !important;
+    border: 1px solid rgba(0, 0, 0, 0.08) !important;
+    /* background: #f3f3f4 !important; */
+    box-sizing: border-box !important;
+    margin-left: 6px !important;
+  }
+
+  #deliverynoofpersonsField::-webkit-outer-spin-button,
+  #deliverynoofpersonsField::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+  #deliverynoofpersonsField {
+    -moz-appearance: textfield;
+    appearance: textfield;
+  }
+
+  .takeway-kot-div-2.kot-noteDiv i,
+  .takeway-kot-div-2.kot-noteDiv .clear-kot-icon,
+  #deliveryclearkotButton,
+  #deliveryshowCustomeraddress {
+    height: 26px !important;
+    line-height: 26px !important;
+    vertical-align: middle !important;
+  }
+}
+
+@media (max-width: 1023px) {
+  #deliverynoofpersonsField {
+    width: 100% !important;
+    min-width: 132px !important;
+    display: block !important;
+    margin: 6px 0 !important;
+    text-align: left !important;
+  }
+}
+@media (min-width: 1024px) and (max-width: 1280px) {
+  .kotCustomer-div input[type='text'],
+  .kotCustomer-div input[type='number'],
+  .kot-noteDiv input[type='text'],
+  .kot-noteDiv input[type='number'] {
+    margin: 0 2px !important;
+    padding: 5px 10px !important;
+    height: 28px !important;
+    width: 34% !important;
+    font-size: 12px !important;
+    box-sizing: border-box !important;
+
+    /* nice rounded + clean background */
+    border-radius: 10px !important;
+    /* border: 1px solid rgba(0, 0, 0, 0.08) !important;
+    background: #f3f3f4 !important; */
+    vertical-align: middle !important;
+  }
+}
+@media (min-width: 1024px) and (max-width: 1280px) {
+  /* Customer Mobile */
+  input#kotcustomermobileField {
+    min-width: 80px !important;
+  }
+
+  /* Customer Name */
+  input#kotcustomernameField {
+    min-width: 70px !important;
+  }
+}
+
+@media (min-width: 1000px) and (max-width: 1060px) {
+  .actionDiv {
+    display: flex;
+  }
+}
+@media (min-width: 769px) and (max-width: 1024px) {
+  .actionDiv input[type='button'],
+  .actionDiv select {
+    padding: 6px 10px !important;
+    font-size: 12px !important;
+    margin: 0 3px !important;
+    line-height: 2.5px;
+  }
+
+  .actionDiv input[type='text'] {
+    width: 65px !important;
+    padding: 6px 8px !important;
+    font-size: 12px !important;
+  }
+
+  .actionDiv .orderstateSelect {
+    max-width: 120px !important;
+    font-size: 12px !important;
+    padding: 6px 8px !important;
+  }
+
+  .actionDiv i {
+    font-size: 20px !important;
+    margin: 2px 4px !important;
+  }
+
+  .actionDiv .live-status-button {
+    width: 22px !important;
+    height: 22px !important;
+    margin: 2px 4px !important;
+  }
+}
+@media (min-width: 1000px) and (max-width: 1060px) {
+  .sync-indicator,
+  .getintouch {
+    font-size: 16px;
+  }
+}
+label#tableamountlabel {
+  padding-top: 5px;
+}
+
+.col-2.newpaymentwindowgrandtotalcontainer {
+  position: relative;
+  left: -10px; /* adjust value */
+}
+
+.newpaymentModal .row {
+  align-items: center;
+}
+
+#newpaymentreferenceid,
+#newpaymentTipAmountid,
+#newpaymentCustomerPaidamtid {
+  display: inline-block;
+  width: 78px;
+  height: 28px;
+  margin-left: 6px;
+  margin-top: -2px;
+  padding: 2px 5px;
+  border: 1px solid #cfd6dd;
+  border-radius: 4px;
+  background: #fff8f882;
+  vertical-align: middle;
+  font-size: 13px;
+  box-sizing: border-box;
+}
+
+label[for='newpaymentreferenceid'],
+label[for='newpaymentTipAmountid'],
+label[for='newpaymentCustomerPaidamtid'] {
+  display: inline;
+  white-space: nowrap;
+  vertical-align: middle;
+}
+
+.newpaymentwindowgrandtotalcontainer {
+  white-space: nowrap;
+}
+
+#newpaymentTotalid {
+  margin-left: 6px;
+}
+
+label[for='newpaymentTipPaymentid'] {
+  display: inline-block;
+  margin-right: 6px;
+  white-space: nowrap;
+  vertical-align: middle;
+  transition: transform 0.12s ease;
+}
+
+#newpaymentTipPaymentid {
+  display: inline-block;
+  width: 140px;
+  max-width: 140px;
+  vertical-align: middle;
+  transition: transform 0.12s ease;
+  box-sizing: border-box;
+  border-radius: 7px;
+  padding: 4px 6px;
+}
+
+@media (max-width: 1366px) {
+  #newpaymentcustomerpaidamtcontainer {
+    position: relative;
+    left: 26px;
+    display: inline-block;
+  }
+
+  #newpaymentreturnamtcontainer {
+    position: relative;
+    left: 24px;
+    display: inline-block;
+  }
+
+  label[for='newpaymentTipPaymentid'] {
+    transform: translateX(-24px);
+  }
+
+  #newpaymentTipPaymentid {
+    transform: translateX(-14px);
+    width: 110px;
+    max-width: 110px;
+  }
+}
+
+@media (max-width: 1100px) {
+  #newpaymentcustomerpaidamtcontainer {
+    left: 20px;
+  }
+
+  #newpaymentreturnamtcontainer {
+    left: 18px;
+  } /* <-- increased from 10px to 18px */
+  label[for='newpaymentTipPaymentid'] {
+    transform: translateX(-18px);
+  }
+  #newpaymentTipPaymentid {
+    transform: translateX(-10px);
+    width: 100px;
+    max-width: 100px;
+  }
+}
+
+#currenyamount {
+  width: 80px;
+  height: 36px;
+  padding: 2px 6px;
+  border: 1px solid #cfd6dd;
+  border-radius: 4px;
+  background: #fff8f882;
+  vertical-align: middle;
+  box-sizing: border-box;
+  font-size: 13px;
+}
+#newpaymentreturnamtcontainer {
+  top: -5px;
+}
+label[for='newpaymentTipPaymentid'] {
+  margin-bottom: 2px;
+}
+
+#switchviewButtonid {
+  position: relative;
+  right: 10px;
+}
+#syncIndicatorid {
+  font-size: 12px !important;
+}
+#selectdineinWaiterbutton {
+  font-size: 44px;
+  line-height: 1;
+}
+.offerItemBlue {
+  background-color: #007bff !important;
+  color: #fff !important;
+}
+
+.itemsDiv {
+  touch-action: pan-y;
+}
+
+.itemsDiv .treeviewDiv,
+.itemsDiv .list-group {
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  touch-action: pan-y;
+}
+
+.itemsDiv .treeviewDiv *,
+.itemsDiv .list-group * {
+  touch-action: pan-y;
+}
+/* NUCLEAR OVERRIDE - 1400x1050 ONLY - NOTHING ELSE */
+@media screen and (width: 1400px) and (height: 1050px) {
+  .quickBillwrapperdiv .billtitleLabel,
+  .quickBillwrapperdiv .billnoLabel {
+    font-size: 11px !important;
+  }
+}
+
+@media screen and (min-width: 1398px) and (max-width: 1402px) and (min-height: 1048px) and (max-height: 1052px) {
+  .quickBillwrapperdiv .billtitleLabel,
+  .quickBillwrapperdiv .billnoLabel {
+    font-size: 11px !important;
+  }
+}
+/* ONLY this div */
+#itemsDivid {
+  overflow: hidden;
+}
+
+/* SCROLLABLE LEFT PANEL */
+.itemsDiv {
+  touch-action: pan-y;
+}
+
+.itemsDiv .treeviewDiv,
+.itemsDiv .list-group {
+  overflow-y: auto;
+  touch-action: pan-y;
+}
+
+.itemsDiv .treeviewDiv *,
+.itemsDiv .list-group * {
+  touch-action: pan-y;
+}
+.kottableDiv {
+  overflow-y: auto;
+  will-change: scroll-position;
+}
+.kottableDiv {
+  scroll-behavior: auto;
+}
+.kottableDiv.lock-scroll {
+  overflow: hidden !important;
+}

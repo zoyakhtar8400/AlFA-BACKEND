@@ -1,0 +1,403 @@
+.order-reject {
+  background-color: #ebeeff;
+  color: #e23744;
+  outline: none;
+  border: none;
+  width: 30%;
+  height: 40px;
+  margin-left: 5px;
+  margin-right: 5px;
+  border-radius: 5px;
+}
+
+.order-accept,
+.order-ready,
+.order-dispatch,
+.order-complete {
+  background-color: mediumseagreen;
+  color: white;
+  outline: none;
+  border: none;
+  border-radius: 5px;
+  margin-left: 5px;
+  margin-right: 5px;
+  width: 30%;
+  height: 40px;
+}
+
+.reject-refund {
+  background-color: #ed3133;
+  color: white;
+  outline: none;
+  border: none;
+  width: 30%;
+  height: 40px;
+  margin-left: 5px;
+  margin-right: 5px;
+  border-radius: 5px;
+}
+
+.partial-order-accept {
+  background-color: #4c9983;
+  color: white;
+  outline: none;
+  border: none;
+  border-radius: 5px;
+  margin-left: 5px;
+  margin-right: 5px;
+  width: 30%;
+  height: 40px;
+}
+
+.order-details {
+  background-color: #1e4936;
+  color: white;
+  width: 30%;
+  outline: none;
+  border: none;
+  height: 40px;
+  margin-right: 15px;
+  margin-left: 5px;
+  border-radius: 5px;
+}
+
+.rbt-btn {
+  background-color: rgb(204, 82, 60);
+  color: white;
+  width: fit-content;
+  outline: none;
+  border: 2px solid rgba(235, 60, 30, 0.849);
+  height: 40px;
+  margin-right: 5px;
+  margin-left: 5px;
+  border-radius: 5px;
+  font-size: 2em !important;
+  padding: 2px 5px;
+}
+
+.rbt-btn i {
+  margin-left: 20px;
+}
+
+.order-paid-status {
+  outline: none;
+  border: 2px solid mediumseagreen;
+  color: mediumseagreen;
+  background: transparent;
+  height: 40px;
+  width: 60px;
+  /* padding: 1rem; */
+  margin-right: 5px;
+  margin-left: 5px;
+  border-radius: 5px;
+}
+/* Original styles remain unchanged for 1920x1080 */
+.order-reject {
+  background-color: #ebeeff;
+  font-weight: 500;
+  color: #e23744;
+  outline: none;
+  border: none;
+  width: 30%;
+  height: 40px;
+  margin-left: 5px;
+  margin-right: 5px;
+  border-radius: 5px;
+}
+
+.order-accept,
+.order-ready,
+.order-dispatch,
+.order-complete {
+  background-color: mediumseagreen;
+  color: white;
+  outline: none;
+  border: none;
+  border-radius: 5px;
+  margin-left: 5px;
+  margin-right: 5px;
+  width: 30%;
+  height: 40px;
+}
+
+.reject-refund {
+  background-color: #ed3133;
+  color: white;
+  outline: none;
+  border: none;
+  width: 30%;
+  height: 40px;
+  margin-left: 5px;
+  margin-right: 5px;
+  border-radius: 5px;
+}
+
+.partial-order-accept {
+  background-color: #4c9983;
+  color: white;
+  outline: none;
+  border: none;
+  border-radius: 5px;
+  margin-left: 5px;
+  margin-right: 5px;
+  width: 30%;
+  height: 40px;
+}
+
+.order-details {
+  background-color: #1e4936;
+  color: white;
+  width: 30%;
+  outline: none;
+  border: none;
+  height: 40px;
+  margin-right: 15px;
+  margin-left: 5px;
+  border-radius: 5px;
+}
+
+.rbt-btn {
+  background-color: rgb(204, 82, 60);
+  color: white;
+  width: fit-content;
+  outline: none;
+  border: 2px solid rgba(235, 60, 30, 0.849);
+  height: 40px;
+  margin-right: 5px;
+  margin-left: 5px;
+  border-radius: 5px;
+  font-size: 2em !important;
+  padding: 2px 5px;
+}
+
+.rbt-btn i {
+  margin-left: 20px;
+}
+
+.order-paid-status {
+  outline: none;
+  border: 2px solid mediumseagreen;
+  color: mediumseagreen;
+  background: transparent;
+  height: 40px;
+  width: 60px;
+  margin-right: 5px;
+  margin-left: 5px;
+  border-radius: 5px;
+}
+
+/* ========================================
+   RESPONSIVE CSS FOR 1024x768 SCREENS
+   ======================================== */
+
+@media screen and (max-width: 1024px) {
+  /* Order action buttons - specific IDs from rawbuttons.js */
+  #orderacceptButton,
+  #orderrejectButton,
+  #orderreadyButton,
+  #orderdispatchButton,
+  #ordercompletetButton,
+  #orderdetailsButton,
+  #refundAcceptButton,
+  #refundRejectBtton,
+  #partialorderacceptButton,
+  #orderreturnButton,
+  #orderMerchantAgreementCancellationButton {
+    width: auto;
+    min-width: 100px;
+    max-width: 130px;
+    height: 34px;
+    padding: 8px 10px;
+    font-size: 12px;
+    margin-left: 3px;
+    margin-right: 3px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  /* Specific adjustments for inline buttons */
+  #orderreadyButton,
+  #orderdispatchButton {
+    width: auto;
+    min-width: 110px;
+    max-width: 135px;
+  }
+
+  #orderdetailsButton,
+  #orderMerchantAgreementCancellationButton {
+    width: auto;
+    min-width: 90px;
+    max-width: 120px;
+    margin-right: 8px;
+  }
+
+  #orderacceptButton,
+  #refundAcceptButton {
+    width: auto;
+    min-width: 95px;
+    max-width: 125px;
+  }
+
+  #orderrejectButton,
+  #refundRejectBtton,
+  #orderreturnButton {
+    width: auto;
+    min-width: 85px;
+    max-width: 110px;
+  }
+
+  #ordercompletetButton,
+  #directOrdercompletetButton {
+    width: auto;
+    min-width: 100px;
+    max-width: 125px;
+  }
+
+  #partialorderacceptButton {
+    width: auto;
+    min-width: 105px;
+    max-width: 130px;
+  }
+}
+
+/* Extra small screens (768px and below) */
+@media screen and (max-width: 768px) {
+  #orderacceptButton,
+  #orderrejectButton,
+  #orderreadyButton,
+  #orderdispatchButton,
+  #ordercompletetButton,
+  #orderdetailsButton,
+  #refundAcceptButton,
+  #refundRejectBtton,
+  #partialorderacceptButton,
+  #orderreturnButton,
+  #orderMerchantAgreementCancellationButton {
+    width: auto;
+    min-width: 85px;
+    max-width: 110px;
+    height: 36px;
+    padding: 6px 8px;
+    font-size: 0.8rem;
+    margin-left: 2px;
+    margin-right: 2px;
+  }
+
+  #orderreadyButton,
+  #orderdispatchButton {
+    min-width: 95px;
+    max-width: 115px;
+  }
+
+  #orderdetailsButton,
+  #orderMerchantAgreementCancellationButton {
+    min-width: 75px;
+    max-width: 100px;
+  }
+}
+/* Logo/Home Icon Responsive Sizing */
+
+/* 1920x1080 - Large Desktop (Original size) */
+@media screen and (min-width: 1920px) {
+  .onlineordersWrapper .home-icon,
+  .order-state-wrapper img,
+  [class*='logo'],
+  .sidebar-logo {
+    width: 50px;
+    height: 50px;
+    max-width: 60px;
+    max-height: 60px;
+  }
+}
+
+/* 1600x900 - Desktop */
+@media screen and (min-width: 1600px) and (max-width: 1919px) {
+  .onlineordersWrapper .home-icon,
+  .order-state-wrapper img,
+  [class*='logo'],
+  .sidebar-logo {
+    width: 48px;
+    height: 48px;
+    max-width: 55px;
+    max-height: 55px;
+  }
+}
+
+/* 1366x768 - Laptop */
+@media screen and (min-width: 1366px) and (max-width: 1599px) {
+  .onlineordersWrapper .home-icon,
+  .order-state-wrapper img,
+  [class*='logo'],
+  .sidebar-logo {
+    width: 44px;
+    height: 44px;
+    max-width: 50px;
+    max-height: 50px;
+  }
+}
+
+/* 1280x1024 - Common Desktop */
+@media screen and (min-width: 1280px) and (max-width: 1365px) {
+  .onlineordersWrapper .home-icon,
+  .order-state-wrapper img,
+  [class*='logo'],
+  .sidebar-logo {
+    width: 42px;
+    height: 42px;
+    max-width: 48px;
+    max-height: 48px;
+  }
+}
+
+/* 1024x768 - Most Common (TARGET) */
+@media screen and (max-width: 1024px) {
+  .onlineordersWrapper .home-icon,
+  .order-state-wrapper img,
+  [class*='logo'],
+  .sidebar-logo {
+    width: 38px;
+    height: 38px;
+    max-width: 42px;
+    max-height: 42px;
+  }
+}
+
+/* 768x1024 - iPad/Tablet Portrait */
+@media screen and (max-width: 768px) and (orientation: portrait) {
+  .onlineordersWrapper .home-icon,
+  .order-state-wrapper img,
+  [class*='logo'],
+  .sidebar-logo {
+    width: 32px;
+    height: 32px;
+    max-width: 36px;
+    max-height: 36px;
+  }
+}
+
+/* 768x1024 - iPad/Tablet Landscape */
+@media screen and (max-width: 1024px) and (orientation: landscape) {
+  .onlineordersWrapper .home-icon,
+  .order-state-wrapper img,
+  [class*='logo'],
+  .sidebar-logo {
+    width: 36px;
+    height: 36px;
+    max-width: 40px;
+    max-height: 40px;
+  }
+}
+
+/* 480x854 - Mobile Large */
+@media screen and (max-width: 480px) {
+  .onlineordersWrapper .home-icon,
+  .order-state-wrapper img,
+  [class*='logo'],
+  .sidebar-logo {
+    width: 28px;
+    height: 28px;
+    max-width: 32px;
+    max-height: 32px;
+  }
+}

@@ -1,0 +1,159 @@
+.inputWrapperdiv {
+  max-height: 90%;
+  overflow-y: auto;
+}
+
+.customerModalwrapper {
+  height: 100%;
+}
+
+.customerDatadiv .dataTables_scrollBody {
+  height: 80% !important;
+}
+
+.customerDatadiv {
+  width: 100%;
+  height: 46vh;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  overflow-y: auto;
+}
+
+.customersTable {
+  width: 90%;
+}
+
+.customerModalbody {
+  height: 60%;
+}
+
+/* .customerAddresslabel {
+  display: block;
+} */
+
+.customerAddressInput {
+  width: 95%;
+  margin-bottom: 8px !important;
+  margin-top: 4px !important;
+}
+
+#createNewCustomerAddress,
+#editCustomerAddress {
+  width: 100%;
+}
+
+#editCustomerAddress {
+  display: none;
+}
+
+#customerAddressinputWrapperdivid {
+  display: none;
+}
+
+#customerAddressModal {
+  z-index: 100000;
+}
+
+.location-label-class {
+  font-size: large;
+  font-weight: bold;
+}
+
+#selectedaddresslabel {
+  display: none;
+  padding-left: 15px;
+}
+
+.showaddcustoerAddressForm {
+  padding-left: 26px !important;
+}
+
+.delete-address-confirmation {
+  z-index: 1000000;
+}
+
+.customer-address-loader {
+  position: relative;
+  left: 50%;
+  top: 33%;
+}
+
+#customerAddressDatadivid {
+  height: 506px;
+  overflow: hidden;
+  overflow: scroll;
+}
+
+.customeraddressmodal-dialog {
+  max-width: 630px !important;
+}
+
+.address-card-body {
+  padding: 2px 5px 20px 10px;
+}
+
+.customerAddressModalwrapper {
+  max-height: 700px;
+  /* overflow: hidden;
+    overflow: scroll; */
+}
+
+.update-address-class {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  /* top: 25%;
+    right: 9px; */
+  bottom: 4px;
+  right: 8px;
+}
+
+.editaddressicon {
+  padding: 4px !important;
+}
+
+.deleteaddressicon {
+  padding: 4px;
+  color: red;
+}
+
+.selectaddressbutton {
+  display: block;
+  margin-top: 2px;
+  margin-bottom: -14px;
+  position: relative;
+  left: 394px;
+}
+
+#customerAddressModalbodyid {
+  font-size: 15px;
+  overflow: scroll;
+}
+
+.iconlabel {
+  padding: 0px 3px 0px 0px;
+}
+
+#maxaddresswarningid {
+  display: none;
+}
+
+/* #mgmt_customerFormDialCodeId,
+#customerFormDialCodeId,
+#customerFormalternateDialCodeId,
+#customerFormSalutationId,
+#customerFormCustTypeId,
+#mgmt_customerSalutationId,
+#mgmt_customerFormAlternateDialCodeId,
+#mgmt_customerUserTypeId {
+  width: 60%;
+  margin: 10px 0 0 5px;
+  border-radius: 15px;
+} */
+
+#customerFormDialCodeId,
+#customerFormalternateDialCodeId {
+  width: 22%;
+}
+/* #customerFormSalutationId, */
+/* #customerFormCustTypeId  */

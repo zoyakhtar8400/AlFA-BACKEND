@@ -1,0 +1,740 @@
+<div class="printersettingsWrapper">
+  <link rel="stylesheet" href="../css/Printer.css" />
+  <div class="printersWrapper">
+    <div class="printersdivWrapper">
+      <label
+        data-i18n="settingScreen.Printer.KOTOffline"
+        class="printerTitles has-i18n"
+        for=""
+        >KOT (Offline)</label
+      >
+      <div class="kotPrinterwrapper">
+        <select class="kotprintersClass" id="kotprintersCombo">
+          <option
+            data-i18n="settingScreen.Printer.selectPrinter"
+            class="has-i18n"
+            disabled
+            selected
+            value
+          >
+            Select Printer
+          </option>
+        </select>
+        <select class="kotpapersizeClass" id="kotpapersizeCombo">
+          <option
+            data-i18n="settingScreen.Printer.Size"
+            class="has-i18n"
+            disabled
+            selected
+            value
+          >
+            Size
+          </option>
+        </select>
+        <input type="text" id="kotprintCopiesid" placeholder="No. of Copies" />
+        <div class="switchWrapper">
+          <label class="switch" title="Enable/Disable">
+            <input id="switchkotprinterCheck" type="checkbox" checked />
+            <span class="slider round"></span>
+          </label>
+        </div>
+        <input
+          data-i18n="[value]settingScreen.Printer.Update"
+          class="has-i18n"
+          type="button"
+          value="Update"
+          id="updatekotPrinterbutton"
+        />
+      </div>
+    </div>
+
+    <div class="printersdivWrapper">
+      <label
+        data-i18n="settingScreen.Printer.lablePrinterOfflineOnline"
+        class="printerTitles has-i18n"
+        for=""
+        >Label Printer (Offline & Online)</label
+      >
+      <div class="billPrinterwrapper">
+        <select class="billprintersClass" name="" id="labelbillPrintersCombo">
+          <option
+            data-i18n="settingScreen.Printer.selectPrinter"
+            class="has-i18n"
+            disabled
+            selected
+            value
+          >
+            Select Printer
+          </option>
+        </select>
+        <input
+          data-i18n="[value]settingScreen.Printer.paperWidth"
+          class="has-i18n"
+          type="text"
+          id="labelPrinterwidth"
+          placeholder="Paper Width"
+        />
+        <input
+          type="text"
+          id="labelbillprintCopiesid"
+          placeholder="No. of Copies"
+        />
+        <div class="switchWrapper">
+          <label class="switch" title="Enable/Disable">
+            <input id="switchlabelprinterCheck" type="checkbox" checked />
+            <span class="slider round"></span>
+          </label>
+        </div>
+        <input
+          data-i18n="[value]settingScreen.Printer.Update"
+          class="has-i18n"
+          type="button"
+          value="Update"
+          id="labelupdatebillPrinterbutton"
+        />
+      </div>
+    </div>
+
+    <div class="printersdivWrapper">
+      <label
+        data-i18n="settingScreen.Printer.dineInOffline"
+        class="printerTitles has-i18n"
+        for=""
+        >Dine in (Offline)</label
+      >
+      <div class="billPrinterwrapper">
+        <select class="billprintersClass" name="" id="billPrintersCombo">
+          <option
+            data-i18n="settingScreen.Printer.selectPrinter"
+            class="has-i18n"
+            disabled
+            selected
+            value
+          >
+            Select Printer
+          </option>
+        </select>
+        <select class="billpapersizeClass" id="billpapersizeCombo">
+          <option
+            data-i18n="settingScreen.Printer.Size"
+            class="has-i18n"
+            disabled
+            selected
+            value
+          >
+            Size
+          </option>
+        </select>
+        <input type="text" id="billprintCopiesid" placeholder="No. of Copies" />
+        <div class="switchWrapper">
+          <label class="switch" title="Enable/Disable">
+            <input id="switchbillsprinterCheck" type="checkbox" checked />
+            <span class="slider round"></span>
+          </label>
+        </div>
+
+        <input
+          data-i18n="[value]settingScreen.Printer.Update"
+          class="has-i18n"
+          type="button"
+          value="Update"
+          id="updatebillPrinterbutton"
+        />
+      </div>
+    </div>
+
+    <div class="printersdivWrapper">
+      <label
+        data-i18n="settingScreen.Printer.takeawayOffline"
+        class="printerTitles has-i18n"
+        for=""
+        >PickUp (Offline)</label
+      >
+      <div class="billPrinterwrapper">
+        <select class="billprintersClass" name="" id="tabillPrintersCombo">
+          <option
+            data-i18n="settingScreen.Printer.selectPrinter"
+            class="has-i18n"
+            disabled
+            selected
+            value
+          >
+            Select Printer
+          </option>
+        </select>
+        <select class="billpapersizeClass" id="tabillpapersizeCombo">
+          <option
+            data-i18n="settingScreen.Printer.Size"
+            class="has-i18n"
+            disabled
+            selected
+            value
+          >
+            Size
+          </option>
+        </select>
+        <input
+          type="text"
+          id="tabillprintCopiesid"
+          placeholder="No. of Copies"
+        />
+        <div class="switchWrapper">
+          <label class="switch" title="Enable/Disable">
+            <input id="switchtaprinterCheck" type="checkbox" checked />
+            <span class="slider round"></span>
+          </label>
+        </div>
+        <input
+          data-i18n="[value]settingScreen.Printer.Update"
+          class="has-i18n"
+          type="button"
+          value="Update"
+          id="taupdatebillPrinterbutton"
+        />
+      </div>
+    </div>
+
+    <div class="printersdivWrapper">
+      <label
+        data-i18n="settingScreen.Printer.homeDeliveryOffline"
+        class="printerTitles has-i18n"
+        for=""
+        >Delivery (Offline)</label
+      >
+      <div class="billPrinterwrapper">
+        <select class="billprintersClass" name="" id="hdbillPrintersCombo">
+          <option
+            data-i18n="settingScreen.Printer.selectPrinter"
+            class="has-i18n"
+            disabled
+            selected
+            value
+          >
+            Select Printer
+          </option>
+        </select>
+        <select class="billpapersizeClass" id="hdbillpapersizeCombo">
+          <option
+            data-i18n="settingScreen.Printer.Size"
+            class="has-i18n"
+            disabled
+            selected
+            value
+          >
+            Size
+          </option>
+        </select>
+        <input
+          type="text"
+          id="hdbillprintCopiesid"
+          placeholder="No. of Copies"
+        />
+        <div class="switchWrapper">
+          <label class="switch" title="Enable/Disable">
+            <input id="switchhdprinterCheck" type="checkbox" checked />
+            <span class="slider round"></span>
+          </label>
+        </div>
+        <input
+          data-i18n="[value]settingScreen.Printer.Update"
+          class="has-i18n"
+          type="button"
+          value="Update"
+          id="hdupdatebillPrinterbutton"
+        />
+      </div>
+    </div>
+
+    <div class="printersdivWrapper">
+      <label
+        data-i18n="settingScreen.Printer.quickBillOffline"
+        class="printerTitles has-i18n"
+        for=""
+        >Quick Bill (Offline)</label
+      >
+      <div class="billPrinterwrapper">
+        <select class="billprintersClass" name="" id="quickbillPrintersCombo">
+          <option
+            data-i18n="settingScreen.Printer.selectPrinter"
+            class="has-i18n"
+            disabled
+            selected
+            value
+          >
+            Select Printer
+          </option>
+        </select>
+        <select class="billpapersizeClass" id="quickbillpapersizeCombo">
+          <option
+            data-i18n="settingScreen.Printer.Size"
+            class="has-i18n"
+            disabled
+            selected
+            value
+          >
+            Size
+          </option>
+        </select>
+        <input
+          type="text"
+          id="quickbillprintCopiesid"
+          placeholder="No. of Copies"
+        />
+        <div class="switchWrapper">
+          <label class="switch" title="Enable/Disable">
+            <input id="switchquickprinterCheck" type="checkbox" checked />
+            <span class="slider round"></span>
+          </label>
+        </div>
+        <input
+          data-i18n="[value]settingScreen.Printer.Update"
+          class="has-i18n"
+          type="button"
+          value="Update"
+          id="quickupdatebillPrinterbutton"
+        />
+      </div>
+    </div>
+
+    <div class="printersdivWrapper">
+      <label
+        data-i18n="settingScreen.Printer.reportPrinter"
+        class="printerTitles has-i18n"
+        for=""
+        >Reports Printer</label
+      >
+      <div class="billPrinterwrapper">
+        <select class="billprintersClass" name="" id="reportsPrintersCombo">
+          <option
+            data-i18n="settingScreen.Printer.selectPrinter"
+            class="has-i18n"
+            disabled
+            selected
+            value
+          >
+            Select Printer
+          </option>
+        </select>
+        <select class="billpapersizeClass" id="reportspapersizeCombo">
+          <option
+            data-i18n="settingScreen.Printer.Size"
+            class="has-i18n"
+            disabled
+            selected
+            value
+          >
+            Size
+          </option>
+        </select>
+        <input
+          type="text"
+          id="reportsprintCopiesid"
+          placeholder="No. of Copies"
+        />
+        <div class="switchWrapper">
+          <label class="switch" title="Enable/Disable">
+            <input id="reportsprinterCheck" type="checkbox" checked />
+            <span class="slider round"></span>
+          </label>
+        </div>
+        <input
+          data-i18n="[value]settingScreen.Printer.Update"
+          class="has-i18n"
+          type="button"
+          value="Update"
+          id="reportsPrinterbutton"
+        />
+      </div>
+    </div>
+    <div class="printersdivWrapper">
+      <label
+        data-i18n="settingScreen.Printer.onlineKOT"
+        class="printerTitles has-i18n"
+        for=""
+        >Online KOT</label
+      >
+      <div class="billPrinterwrapper">
+        <select class="billprintersClass" name="" id="onlinekotPrintersCombo">
+          <option
+            data-i18n="settingScreen.Printer.selectPrinter"
+            class="has-i18n"
+            disabled
+            selected
+            value
+          >
+            Select Printer
+          </option>
+        </select>
+        <select class="billpapersizeClass" id="onlinekotpapersizeCombo">
+          <option
+            data-i18n="settingScreen.Printer.Size"
+            class="has-i18n"
+            disabled
+            selected
+            value
+          >
+            Size
+          </option>
+        </select>
+        <input
+          type="text"
+          id="onlinekotprintCopiesid"
+          placeholder="No. of Copies"
+        />
+        <div class="switchWrapper">
+          <label class="switch" title="Enable/Disable">
+            <input id="onlinekotsprinterCheck" type="checkbox" checked />
+            <span class="slider round"></span>
+          </label>
+        </div>
+        <input
+          data-i18n="[value]settingScreen.Printer.Update"
+          class="has-i18n"
+          type="button"
+          value="Update"
+          id="onlinekotPrinterbutton"
+        />
+      </div>
+    </div>
+
+    <div class="printersdivWrapper">
+      <label class="printerTitles has-i18n" for="">Online Order</label>
+      <div class="billPrinterwrapper">
+        <select class="billprintersClass" name="" id="onlineOrderPrintersCombo">
+          <option
+            data-i18n="settingScreen.Printer.selectPrinter"
+            class="has-i18n"
+            disabled
+            selected
+            value
+          >
+            Select Printer
+          </option>
+        </select>
+        <select class="billpapersizeClass" id="onlineOrderpapersizeCombo">
+          <option
+            data-i18n="settingScreen.Printer.Size"
+            class="has-i18n"
+            disabled
+            selected
+            value
+          >
+            Size
+          </option>
+        </select>
+        <input
+          type="text"
+          id="onlineOrderprintCopiesid"
+          placeholder="No. of Copies"
+        />
+        <div class="switchWrapper">
+          <label class="switch" title="Enable/Disable">
+            <input id="onlineOrdersprinterCheck" type="checkbox" checked />
+            <span class="slider round"></span>
+          </label>
+        </div>
+        <input
+          data-i18n="[value]settingScreen.Printer.Update"
+          class="has-i18n"
+          type="button"
+          value="Update"
+          id="onlineOrderPrinterbutton"
+        />
+      </div>
+    </div>
+
+    <div class="printersdivWrapper">
+      <label
+        data-i18n="settingScreen.Printer.kitchenDepartmentwiseKOTPrintersOffline"
+        class="printerTitles has-i18n"
+        for=""
+        >Kitchen department wise KOT printers (Offline)</label
+      >
+      <div class="kitchenprinterDiv">
+        <select
+          class="kitchenprinterCombo"
+          name=""
+          id="kitchenbillPrintersCombo"
+        >
+          <option
+            data-i18n="settingScreen.Printer.selectPrinter"
+            class="has-i18n"
+            disabled
+            selected
+            value
+          >
+            Select Printer
+          </option>
+        </select>
+        <select
+          class="kitchenprinterCombo"
+          name=""
+          id="kitchendepartmentsCombo"
+        >
+          <option
+  data-i18n='settingScreen.Printer.selectDepartment'
+  class='has-i18n'
+  disabled
+  selected
+  value=''>
+  Select Department
+</option>
+
+        </select>
+        <select
+          class="kitchenprinterCombo"
+          name=""
+          id="kitchendepartmentssizesCombo"
+        >
+          <option
+            data-i18n="settingScreen.Printer.selectSize"
+            class="has-i18n"
+            disabled
+            selected
+            value
+          >
+            Select Size
+          </option>
+        </select>
+        <input
+          data-i18n="[value]settingScreen.Printer.noOfCopies"
+          class="printCopies has-i18n"
+          type="text"
+          id="kitchenprintCopiesid"
+          placeholder="No. of Copies"
+        />
+        <input
+          data-i18n="[value]settingScreen.Printer.remarkNote"
+          class="has-i18n"
+          type="text"
+          id="kitchenprintremarkid"
+          placeholder="Remark / Note"
+        />
+        <input
+          data-i18n="[value]settingScreen.Printer.Add"
+          class="has-i18n"
+          type="button"
+          value="Add"
+          id="addkitchendepButton"
+        />
+        <input
+          data-i18n="[value]settingScreen.Printer.Clear"
+          class="has-i18n"
+          type="button"
+          value="Clear"
+          id="clearkitcheninfoButton"
+        />
+      </div>
+      <div class="kitchenPrinterslistdiv">
+        <label
+          data-i18n="settingScreen.Printer.ListHeading"
+          class="printerTitles has-i18n"
+          for=""
+          >Printers List
+        </label>
+        <table class="table table-sm" id="kitchenprintersListid">
+          <thead>
+            <tr>
+              <th data-i18n="settingScreen.Printer.List.Title" class="has-i18n">
+                Title
+              </th>
+              <th
+                data-i18n="settingScreen.Printer.List.Printer"
+                class="has-i18n"
+              >
+                Printer
+              </th>
+              <th data-i18n="settingScreen.Printer.List.Size" class="has-i18n">
+                Size
+              </th>
+              <th
+                data-i18n="settingScreen.Printer.List.Copies"
+                class="has-i18n"
+              >
+                Copies
+              </th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="printersdivWrapper" title="Kitchen Department Printers">
+      <label
+        data-i18n="settingScreen.Printer.kitchenDepartmentwiseKOTPrintersOffline"
+        class="printerTitles has-i18n"
+        for=""
+        >Kitchen department wise KDS (Offline)</label
+      >
+      <div class="kitchenprinterDiv">
+        <select
+          class="kitchenprinterCombo"
+          name=""
+          id="ksdwisekitchendepartmentsCombo"
+        >
+          <!-- <option disabled selected value> __Select Department__ </option> -->
+        </select>
+        <select class="kitchenprinterCombo" name="" id="kdssettingsusersCombo">
+          <option
+            data-i18n="settingScreen.Printer.selectUser"
+            class="has-i18n"
+            disabled
+            selected
+            value
+          >
+            __Select User__
+          </option>
+        </select>
+        <input
+          data-i18n="[value]settingScreen.Printer.Add"
+          type="button"
+          class="has-i18n"
+          value="Add"
+          id="addkdswisekitchendepButton"
+        />
+        <input
+          data-i18n="[value]settingScreen.Printer.Clear"
+          type="button"
+          class="has-i18n"
+          value="Clear"
+          id="clearkdswisekitcheninfoButton"
+        />
+      </div>
+      <div class="kitchenPrinterslistdiv">
+        <label
+          data-i18n="settingScreen.Printer.ListHeading"
+          class="printerTitles has-i18n"
+          for=""
+          >Printers List
+        </label>
+        <table class="table table-sm" id="kdswiseassignedUserslistid">
+          <thead>
+            <tr>
+              <th
+                data-i18n="settingScreen.Printer.kdsList.Username"
+                class="has-i18n"
+              >
+                Username
+              </th>
+              <th
+                data-i18n="settingScreen.Printer.kdsList.Department"
+                class="has-i18n"
+              >
+                Departments
+              </th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="printersdivWrapper" title="Table wise Bill printers Printers">
+      <label
+        data-i18n="settingScreen.Printer.tableWiseBillPrintersOffline"
+        class="printerTitles has-i18n"
+        for=""
+        >Table wise Bill printers (Offline)</label
+      >
+      <div class="kitchenprinterDiv">
+        <select class="kitchenprinterCombo" name="" id="tablewisePrintersCombo">
+          <option
+            data-i18n="settingScreen.Printer.selectPrinter"
+            class="has-i18n"
+            disabled
+            selected
+            value
+          >
+            Select Printer
+          </option>
+        </select>
+        <select class="kitchenprinterCombo" name="" id="tableslistCombo">
+          <option
+            data-i18n="settingScreen.Printer.selectTable"
+            class="has-i18n"
+            disabled
+            selected
+            value
+          >
+            __Select Table__
+          </option>
+        </select>
+        <select
+          class="kitchenprinterCombo"
+          name=""
+          id="tablwiseprintssizesCombo"
+        >
+          <option
+            data-i18n="settingScreen.Printer.selectSize"
+            class="has-i18n"
+            disabled
+            selected
+            value
+          >
+            Select Size
+          </option>
+        </select>
+        <input
+          class="printCopies"
+          type="text"
+          id="tablewiseprintCopiesid"
+          placeholder="No. of Copies"
+        />
+        <input
+          data-i18n="[value]settingScreen.Printer.Add"
+          class="has-i18n"
+          type="button"
+          value="Add"
+          id="addtablewiseprinterButton"
+        />
+        <input
+          data-i18n="[value]settingScreen.Printer.Clear"
+          class="has-i18n"
+          type="button"
+          value="Clear"
+          id="cleartablwiseprinterButton"
+        />
+      </div>
+      <div class="kitchenPrinterslistdiv">
+        <label
+          data-i18n="settingScreen.Printer.ListHeading"
+          class="printerTitles has-i18n"
+          for=""
+          >Printers List
+        </label>
+        <table class="table table-sm" id="tablewiseprintersListid">
+          <thead>
+            <tr>
+              <th data-i18n="settingScreen.Printer.List.Title" class="has-i18n">
+                Title
+              </th>
+              <th
+                data-i18n="settingScreen.Printer.List.Printer"
+                class="has-i18n"
+              >
+                Printer
+              </th>
+              <th data-i18n="settingScreen.Printer.List.Size" class="has-i18n">
+                Size
+              </th>
+              <th
+                data-i18n="settingScreen.Printer.List.Copies"
+                class="has-i18n"
+              >
+                Copies
+              </th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+  require('../js/PrinterController.js');
+</script>

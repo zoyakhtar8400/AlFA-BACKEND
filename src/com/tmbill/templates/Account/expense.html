@@ -1,0 +1,479 @@
+<div class="expense-container">
+  <link rel="stylesheet" href="../css/Mastermenu.css" />
+  <link rel="stylesheet" href="../css/expense.css" />
+
+  <div class="expense-screen">
+    <h5 class="MenuHeading has-i18n"
+      data-i18n="masterScreen.expenseManagement">Expense Management</h5>
+
+    <header class="expense-header">
+      <button
+        class="btn-back expense-back-btn"
+        id="gobacktomenumangemtfromexpenseview">
+        <i class="fa-solid fa-arrow-left"></i>
+      </button>
+
+      <div class="expense-header-actions">
+        <i
+          class="fas fa-cash-register fa-2x"
+          id="openCashDrawerOnExpensesbuttonid"
+          aria-hidden="true">
+        </i>
+        <button
+          data-i18n="masterScreen.addExpensesHeading"
+          id="openaddExpensebutton"
+          class="normal-button has-i18n">
+          <i class="fas fa-plus"></i>
+          Add Expense
+        </button>
+
+        <button
+          data-i18n="masterScreen.addCategoryHeading"
+          id="openaddCategorybutton"
+          class="normal-button has-i18n">
+          <i class="fas fa-plus"></i>Add Category
+        </button>
+
+        <button
+          data-i18n="masterScreen.addSubCategoryHeading"
+          id="openaddSubcategorybutton"
+          class="normal-button has-i18n">
+          <i class="fas fa-plus"></i>
+          Add Sub-category
+        </button>
+      </div>
+    </header>
+
+    <ul class="nav nav-tabs mainsectionTabs expense-tabs">
+      <li class="active">
+        <a
+          id="expensesOverviewtabid"
+          data-i18n="masterScreen.overviewHeading"
+          class="nav-link has-i18n"
+          data-toggle="tab"
+          href="#home">Overview</a>
+      </li>
+      <li>
+        <a
+          id="expensesalltabid"
+          data-i18n="masterScreen.allExpensesHeading"
+          class="nav-link has-i18n"
+          data-toggle="tab"
+          href="#menu1">All Expenses</a>
+      </li>
+      <li>
+        <a
+          id="expensesGraphstabid"
+          data-i18n="masterScreen.GraphHeading"
+          class="nav-link has-i18n"
+          data-toggle="tab"
+          href="#menu2">Graph</a>
+      </li>
+      <li>
+        <a
+          id="expensesncrReporttabid"
+          data-i18n="masterScreen.NCRReportHeading"
+          class="nav-link has-i18n"
+          data-toggle="tab"
+          href="#menu3">NCR Report</a>
+      </li>
+    </ul>
+    <div class="tab-content expense-tab-content" id="expensestabContentdivid">
+      <div id="home" class="overviewDiv tab-pane fade in active">
+        <div class="expenses-stats-container">
+          <div class="card expenses-stats-card card-1">
+            <h6 data-i18n="masterScreen.Overview.todaysExpenses"
+              class="has-i18n">
+              Today's expenses
+            </h6>
+            <h4 id="todaysexpenseTotalid">0</h4>
+          </div>
+          <div class="card expenses-stats-card card-2">
+            <h6
+              data-i18n="masterScreen.Overview.thisMonthExpenses"
+              class="has-i18n">
+              This month expenses
+            </h6>
+            <h4 id="monthsexpenseTotalid">0</h4>
+          </div>
+          <div class="card expenses-stats-card card-3">
+            <h6 data-i18n="masterScreen.Overview.totalExpenses"
+              class="has-i18n">
+              Total expenses
+            </h6>
+            <h4 id="totalexpenseTotalid">0</h4>
+          </div>
+        </div>
+
+        <div class="row overview-data-container">
+          <div class="expense-overviewtable-container col-sm-5">
+            <div class="overview-window-actions">
+              <input
+                data-i18n="[value]masterScreen.Overview.Refresh"
+                class="has-i18n"
+                id="refeshexpenseOverviewbutton"
+                type="button"
+                value="Refresh" />
+              <input
+                data-i18n="[placeholder]masterScreen.Overview.Search"
+                type="text"
+                class="has-i18n"
+                placeholder="Search"
+                id="overviewexpenseSearchid" />
+              <input id="deleteselectedExpense" type="button" value="Delete" />
+            </div>
+            <table
+              class="table table-sm table-striped overviewexpensesTableclass"
+              id="overviewexpensesTable"></table>
+          </div>
+          <div class="expense-overviewtable-graphcontainer col-sm-7">
+            <canvas
+              class="lineChart"
+              id="lineChartid"
+              width="300"
+              height="300"></canvas>
+          </div>
+        </div>
+      </div>
+      <div id="menu1" class="tab-pane fade">
+        <div class="all-expenses-container">
+          <div class="all-expenses-actions">
+            <input
+              data-i18n="[value]masterScreen.allExpenses.All"
+              class="has-i18n"
+              type="button"
+              value="All"
+              id="fetchallexpensesButton" />
+            <input
+              data-i18n="[placeholder]masterScreen.fromDate"
+              class="has-i18n"
+              type="text"
+              placeholder="From Date"
+              id="allexpensefromdateField" />
+            <input
+              data-i18n="[value]masterScreen.allExpenses.Fetch"
+              class="has-i18n"
+              type="button"
+              value="Fetch"
+              id="fetchexpensebydateButton" />
+            <input
+              data-i18n="[value]masterScreen.allExpenses.exportToExcel"
+              class="has-i18n"
+              type="button"
+              value="Export to Excel"
+              id="exportallExpenses" />
+          </div>
+          <table
+            class="table table-sm table-striped allexpensesTableclass"
+            id="allexpensesTable"></table>
+        </div>
+      </div>
+      <div id="menu2" class="tab-pane fade">
+        <div class="graph-actions">
+          <input
+            data-i18n="[placeholder]masterScreen.fromDate"
+            class="has-i18n"
+            type="text"
+            placeholder="From Date"
+            id="graphdateField" />
+          <input
+            data-i18n="[value]masterScreen.Overview.Refresh"
+            class="has-i18n"
+            type="button"
+            value="Refresh"
+            id="refreshgraphsButton" />
+        </div>
+        <div class="graph-container">
+          <div class="row expenses-graph-container">
+            <div class="col-sm-5">
+              <div id="js-legend-2" class="chart-legend"></div>
+              <canvas
+                class="expensepieChart"
+                id="expensepieChartid"
+                width="300"
+                height="230"></canvas>
+            </div>
+            <div class="col-sm-7">
+              <canvas
+                class="expenseLinechart"
+                id="expenseLinechart"
+                width="300"
+                height="230"></canvas>
+            </div>
+          </div>
+          <div class="row nceexpenses-graph-container">
+            <div class="col-sm-5">
+              <div id="js-legend-3" class="chart-legend"></div>
+              <canvas
+                class="nceexpensepieChart"
+                id="nceexpensepieChartid"
+                width="300"
+                height="230"></canvas>
+            </div>
+            <div class="col-sm-7">
+              <canvas
+                class="nceexpenseLinechart"
+                id="nceexpenseLinechartid"
+                width="300"
+                height="230"></canvas>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div id="menu3" class="tab-pane fade">
+        <div class="nce-expenses-container">
+          <div class="nce-expenses-actions">
+            <input
+              data-i18n="[value]masterScreen.allExpenses.All"
+              class="has-i18n"
+              type="button"
+              value="All"
+              id="fetchallnceexpensesButton" />
+            <input
+              data-i18n="[placeholder]masterScreen.fromDate"
+              class="has-i18n"
+              type="text"
+              placeholder="From Date"
+              id="allnceexpensefromdateField" />
+            <input
+              data-i18n="[value]masterScreen.allExpenses.Fetch"
+              class="has-i18n"
+              type="button"
+              value="Fetch"
+              id="fetchnceexpensebydateButton" />
+            <input
+              data-i18n="[value]masterScreen.allExpenses.exportToExcel"
+              class="has-i18n"
+              type="button"
+              value="Export to Excel"
+              id="exportnceExpenses" />
+          </div>
+          <table
+            class="table table-sm table-striped nceexpensesTableclass"
+            id="nceexpensesTable"></table>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal fade" id="expensesModal">
+      <div class="modal-dialog expensemodal-container modal-dialog-centered">
+        <div class="modal-content expensesModalclass">
+          <div class="modal-header">
+            <h4
+              data-i18n="masterScreen.addExpensesHeading"
+              class="modal-title has-i18n">
+              Add Expense
+            </h4>
+            <button type="button" class="close" data-dismiss="modal">
+              &times;
+            </button>
+          </div>
+
+          <!-- Modal body -->
+          <div class="modal-body expensesModalBody" id="expensesModalBodyid">
+            <select class="expense-select" id="expenseCategorieslist">
+              <option
+                data-i18n="masterScreen.addExpenses.selectCategory"
+                class="has-i18n"
+                disabled
+                selected
+                value>
+                -- select category --
+              </option>
+            </select>
+            <select class="expense-select" id="expensesubCategorieslist">
+              <option
+                data-i18n="masterScreen.addExpenses.selectSubCategory"
+                class="has-i18n"
+                disabled
+                selected
+                value>
+                -- select sub-category --
+              </option>
+            </select>
+            <select class="expense-select" id="expensePaymentMode">
+              <option
+                data-i18n="masterScreen.addExpenses.selectpaymentmode"
+                class="has-i18n"
+                disabled
+                selected
+                value>
+                -- select payment mode --
+              </option>
+            </select>
+            <input
+              data-i18n="[placeholder]masterScreen.addExpenses.amount"
+              class="has-i18n"
+              type="text"
+              id="expenseamountField"
+              placeholder="Amount" />
+            <input
+              data-i18n="[placeholder]masterScreen.addExpenses.date"
+              class="has-i18n"
+              type="text"
+              placeholder="Date"
+              id="expensedateField" />
+            <input
+              data-i18n="[placeholder]masterScreen.addExpenses.Description"
+              class="has-i18n"
+              type="text"
+              id="expensedescField"
+              placeholder="Description" />
+            <input id="nonchargableCheck" type="checkbox" />
+            <label
+              data-i18n="masterScreen.addExpenses.nonChargable"
+              class="has-i18n"
+              for="nonchargableCheck">
+              Non-chargeable</label>
+          </div>
+
+          <!-- Modal footer -->
+          <div class="modal-footer">
+            <button
+              data-i18n="masterScreen.addExpenses.Add"
+              type="button"
+              class="btn btn-secondary has-i18n"
+              id="addExpensebutton">
+              Add
+            </button>
+            <button
+              data-i18n="masterScreen.addExpenses.Close"
+              type="button"
+              class="btn btn-secondary has-i18n"
+              data-dismiss="modal">
+              Close
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal fade" id="expensescategoryModal">
+      <div
+        class="modal-dialog expensemodal-cat-container modal-dialog-centered">
+        <div class="modal-content expensescategoryModalclass">
+          <div class="modal-header">
+            <h4
+              data-i18n="masterScreen.addCategory.expenseCategory"
+              class="modal-title has-i18n">
+              Expense Category
+            </h4>
+            <button type="button" class="close" data-dismiss="modal">
+              &times;
+            </button>
+          </div>
+
+          <!-- Modal body -->
+          <div
+            class="modal-body expensescategoryModalBody"
+            id="expensescategoryModalBodyid">
+            <input
+              data-i18n="[placeholder]masterScreen.addCategory.addExpenseCategory"
+              class="textField has-i18n"
+              type="text"
+              name
+              id="expensecatFieldid"
+              placeholder="Add expense category" />
+            <ul
+              class="expense-category-list-container"
+              id="expense-category-list-containerid"></ul>
+          </div>
+
+          <!-- Modal footer -->
+          <div class="modal-footer">
+            <button
+              data-i18n="masterScreen.addCategory.Add"
+              type="button"
+              class="btn btn-secondary has-i18n"
+              id="addnewExpensecatbutton">
+              Add
+            </button>
+            <button
+              data-i18n="masterScreen.addCategory.Update"
+              type="button"
+              class="btn btn-secondary has-i18n"
+              id="updateExpensecatbutton">
+              Update
+            </button>
+            <button
+              data-i18n="masterScreen.addCategory.close"
+              type="button"
+              class="btn btn-secondary has-i18n"
+              data-dismiss="modal">
+              Close
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="modal fade" id="expensesubcategoryModal">
+      <div
+        class="modal-dialog expensemodal-subcat-container modal-dialog-centered">
+        <div class="modal-content expensesubcategoryModalclass">
+          <div class="modal-header">
+            <h4
+              data-i18n="masterScreen.addSubCategory.expenseSubCategory"
+              class="modal-title has-i18n">
+              Expense Sub-category
+            </h4>
+            <button type="button" class="close" data-dismiss="modal">
+              &times;
+            </button>
+          </div>
+          <!-- Modal body -->
+          <div
+            class="modal-body expensesubcategoryModalBody"
+            id="expensesubcategoryModalBodyid">
+            <select class="expense-select" id="expenseCategorieslistforsub">
+              <option
+                data-i18n="masterScreen.addExpenses.selectCategory"
+                class="has-i18n"
+                disabled
+                selected
+                value>
+                -- select category --
+              </option>
+            </select>
+            <input
+              data-i18n="[placeholder]masterScreen.addSubCategory.addExpenseSubCategory"
+              class="textField has-i18n"
+              type="text"
+              name
+              id="expensesubcatFieldid"
+              placeholder="Add expense sub-category" />
+            <ul
+              class="expense-subcategory-list-container"
+              id="expense-subcategory-list-containerid"></ul>
+          </div>
+
+          <!-- Modal footer -->
+          <div class="modal-footer">
+            <button
+              data-i18n="masterScreen.addSubCategory.Add"
+              type="button"
+              class="btn btn-secondary has-i18n"
+              id="addnewExpensesubcatbutton">
+              Add
+            </button>
+            <button
+              data-i18n="masterScreen.addSubCategory.Update"
+              type="button"
+              class="btn btn-secondary has-i18n"
+              id="updateExpensesubcatbutton">
+              Update
+            </button>
+            <button
+              data-i18n="masterScreen.addSubCategory.close"
+              type="button"
+              class="btn btn-secondary has-i18n"
+              data-dismiss="modal">
+              Close
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script>
+  require('../js/ExpensesController.js');
+</script>

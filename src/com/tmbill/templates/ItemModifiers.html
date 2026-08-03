@@ -1,0 +1,46 @@
+<div class="ItemModifiersContainer">
+  <div class="row" id="modifierGroupsContainerWapeerid">
+    <div class="col-3" id="modifierGroupsContainerId"></div>
+    <div class="col-6" id="modifiersContainerId"></div>
+    <div class="col-3" id="modifiersCartContainerWrapperID">
+      <div id="modifierCartSummaryWrapperId">
+        <div id="baseItemDetailContainerID"></div>
+        <div id="modifiersCartContainerID"></div>
+      </div>
+      <div id="cartDetailsContainerId">
+        <!-- <div> -->
+        <div id="modifierTotalQuantity"></div>
+        <!-- <div id="modifierTotalAmount"></div> -->
+        <!-- </div> -->
+        <div id="modifierTotalAmount"></div>
+
+        <!-- <button class="btn btn-outline-success" id="addModifierToCartButtonId">
+          ADD
+        </button> -->
+      </div>
+      <div id="cartActionContainerId">
+        <button
+          class="btn btn-outline-danger has-i18n"
+          id="resetModifierCartButtonId"
+          data-i18n="controller:itemModifier.reset"
+        >
+          Reset
+        </button>
+        <button
+          class="btn btn-outline-success has-i18n"
+          id="addModifierToCartButtonId"
+          data-i18n="controller:itemModifier.ADD"
+        >
+          ADD
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+  require('../js/ItemModifiers/index.js');
+</script>
+<!-- Insert this line after script imports -->
+<script>
+  if (window.module) module = window.module;
+</script>

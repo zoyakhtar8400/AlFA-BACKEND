@@ -1,0 +1,115 @@
+<div class="receiptactionsWrapper">
+  <link rel="stylesheet" href="../css/ReceiptActions.css" />
+  <div class="paymentWrapper" id="receiptmodalpaymentWrapperid">
+    <label data-i18n="paymentStatus.paymentMode" class="has-i18n" for=""
+      >Payment Mode:
+    </label>
+    <ul id="receiptpaymentList" class="paylistClass"></ul>
+
+    <div class="splitSectiondiv">
+      <div class="splitDiv">
+        <input id="receiptsplitCheckid" type="checkbox" />
+        <label
+          data-i18n="paymentStatus.splitPayment"
+          class="has-i18n"
+          for="receiptsplitCheckid"
+          >Split Payment</label
+        >
+      </div>
+      <div class="receiptsplitaddpayWrapper">
+        <input
+          data-i18n="[placeholder]paymentStatus.Amount"
+          class="has-i18n"
+          type="text"
+          name=""
+          id="receiptsplitpayAmount"
+          placeholder="Amount"
+        />
+        <input
+          data-i18n="[value]paymentStatus.Add"
+          class="has-i18n"
+          id="receiptaddpayMethodbutton"
+          type="button"
+          value="Add"
+        />
+      </div>
+
+      <div
+        class="receiptpaysplistselectwrapper"
+        id="receiptpaysplistselectwrapperId"
+      >
+        <div class="receiptremainingsplitWrapper">
+          <label
+            data-i18n="paymentStatus.remainingAmount"
+            class="has-i18n"
+            for="receiptremainingPayableamount"
+            >Remaining Amount:</label
+          >
+          <label id="receiptremainingPayableamount" for=""></label>
+        </div>
+        <ul id="receiptsplitpaylistId"></ul>
+      </div>
+      <div class="receiptpaymentGrandtotalclass">
+        <label
+          data-i18n="paymentStatus.grandTotal"
+          class="has-i18n"
+          for="receiptpaymentTotalid"
+          >Grand Total:</label
+        >
+        <label for="" id="receiptpaymentTotalid"></label>
+      </div>
+    </div>
+  </div>
+
+  <div class="receiptbillstatusWrapper" id="receiptmodalbillstatusWrapperid">
+    <label data-i18n="paymentStatus.billStatus" class="has-i18n" for=""
+      >Bill Status:
+    </label>
+    <ul id="receiptbillstatList" class="receiptbillstatListclass"></ul>
+  </div>
+  <div class="receiptCommentwrapper">
+    <input
+      data-i18n=""
+      type="text"
+      name="Comment"
+      id="receiptPaymentReferencenumberid"
+      class="receiptCommentclass has-i18n"
+      placeholder="Payment Reference No"
+    />
+  </div>
+  <div class="receiptCommentwrapper">
+    <input
+      data-i18n=""
+      type="text"
+      name="Comment"
+      id="receipttipAmountid"
+      class="receiptCommentclass has-i18n"
+      placeholder="Tip Amount"
+    />
+  </div>
+  <div class="receiptCommentwrapper">
+    <input
+      data-i18n="[placeholder]paymentStatus.Comment"
+      type="text"
+      name="Comment"
+      id="receiptCommentid"
+      class="receiptCommentclass has-i18n"
+      placeholder="Comment"
+    />
+  </div>
+  
+  <!-- <div class="receiptCommentwrapper">
+    <input
+      data-i18n="[placeholder]paymentStatus.Comment"
+      type="text"
+      name="Comment"
+      id="receiptTipAmountid"
+      class="receiptCommentclass has-i18n"
+      placeholder="Tip Amount"
+    /> -->
+  </div>
+</div>
+
+<script>
+  require('../js/ReceiptActionsController.js');
+</script>

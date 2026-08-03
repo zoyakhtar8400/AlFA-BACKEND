@@ -1,0 +1,128 @@
+<div class="oldkotContainer">
+  <link rel="stylesheet" href="../css/Oldkot.css" />
+  <div class="listWrapper">
+    <ul class="checksWrapper">
+      <li>
+        <input id="printkotCheck" type="checkbox" name="Print KOT" id />
+        <label
+          data-i18n="oldKOT.printKOT"
+          id="printkotlabelCheck"
+          class="has-i18n"
+          for="printkotCheck"
+          >Print KOT</label
+        >
+      </li>
+      <li>
+        <input id="cancelkotCheck" type="checkbox" name="Cancel KOT" id />
+        <label
+          data-i18n="oldKOT.printCancelledKOT"
+          id="cancelkotlabelCheck"
+          class="has-i18n"
+          for="cancelkotCheck"
+          >Print Cancelled KOT</label
+        >
+      </li>
+      <li>
+        <input id="transferkotCheck" type="checkbox" name="Transfer KOT" id />
+        <label
+          data-i18n="oldKOT.printtransferredkot"
+          id="transferkotlabelCheck"
+          class="has-i18n"
+          for="transferkotCheck"
+          >Print Transferred KOT</label
+        >
+      </li>
+      <li>
+        <input id="selectallCheck" type="checkbox" name="Select All" id />
+        <label
+          data-i18n="oldKOT.selectAll"
+          for="selectallCheck"
+          class="has-i18n"
+          >Select All</label
+        >
+      </li>
+    </ul>
+    <div class="tableWrapper oldkotItemContainer">
+      <table
+        class="table table-striped table-bordered table-sm"
+        id="oldbillTable"
+      >
+        <thead class="mdb-color darken-3 table-header">
+          <tr>
+            <th
+              data-i18n="oldKOT.itemName"
+              class="has-i18n"
+              style="width: 300px"
+            >
+              Item Name
+            </th>
+            <th data-i18n="oldKOT.QTY" class="has-i18n">Qty</th>
+            <th data-i18n="oldKOT.Amount" class="has-i18n">Amount</th>
+            <th data-i18n="oldKOT.KOT" class="has-i18n">KOT</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
+    <div class="actionsWrapper">
+      <input
+        data-i18n="[value]oldKOT.markAsComplimentary"
+        class="has-i18n"
+        id="oldkotmakecomplimentaryButtonid"
+        title="Mark as Complimentary"
+        type="button"
+        value="Complementary"
+      />
+      <input
+        data-i18n="[value]oldKOT.Print"
+        class="has-i18n"
+        id="printoldkotButton"
+        type="button"
+        value="Print" />
+
+      <!-- <input
+        data-i18n="[value]oldKOT.deleteKOT"
+        class="has-i18n"
+        id="deleteoldkotButton"
+        type="button"
+        value="Delete KOT" /> -->
+      <input
+        data-i18n="[value]oldKOT.cancelKOT"
+        class="has-i18n"
+        id="canceloldkotButton"
+        type="button"
+        value="Cancel KOT"
+      />
+      <input
+        data-i18n="[value]oldKOT.transferItem"
+        class="has-i18n"
+        id="transferitemButton"
+        type="button"
+        value="Transfer Item"
+      />
+      <input
+        data-i18n="[value]oldKOT.CHECKKOTPRINT"
+        class="has-i18n"
+        id="checkKotsPrintButton"
+        type="button"
+        value="Check KOTs Print"
+      />
+      <input
+        data-i18n="[value]oldKOT.printUpdatedKOT"
+        class="has-i18n"
+        id="oldkotupdatedprintButton"
+        type="button"
+        value="Print Updated KOT"
+      />
+    </div>
+  </div>
+</div>
+
+<script>
+  require('../js/OldKotController.js');
+</script>
+<!-- Insert this line after script imports -->
+<script>
+  if (window.module) module = window.module;
+</script>

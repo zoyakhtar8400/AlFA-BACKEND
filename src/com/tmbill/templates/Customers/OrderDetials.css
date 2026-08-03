@@ -1,0 +1,290 @@
+/* .bill-content-wrapper {
+  display: flex;
+  gap: 20px;
+  padding: 20px;
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+.left-table,
+.right-table {
+  flex: 1;
+}
+
+.details-table,
+.items-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+
+.details-table td.label {
+  font-weight: bold;
+  color: #555;
+  padding: 5px;
+  width: 150px;
+}
+
+.details-table td.value {
+  color: #333;
+  padding: 5px;
+}
+
+.items-table th {
+  background: #f5f5f5;
+  padding: 8px;
+  text-align: left;
+  font-weight: bold;
+  border-bottom: 2px solid #ddd;
+}
+
+.items-table td {
+  padding: 8px;
+  border-bottom: 1px solid #eee;
+}
+
+.badge.dine-in {
+  background: #e5e3ff;
+  color: #4f46e5;
+  font-size: 12px;
+  padding: 3px 8px;
+  border-radius: 12px;
+}
+
+.bill-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 20px;
+  border-top: 1px solid #eee;
+  background: #f9f9f9;
+}
+
+.bill-footer .totals {
+  font-size: 16px;
+  font-weight: bold;
+  color: #333;
+}
+
+.modal-actions .btn {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.modal-actions .btn.cancel {
+  background: #f44336;
+  color: #fff;
+}
+
+.modal-actions .btn.repeat {
+  background: #2e7d32;
+  color: #fff;
+} */
+
+Main Structure .bill-details-modal {
+  display: flex;
+  flex-direction: column;
+  height: 95%;
+}
+
+/* Header */
+.h2bill {
+  text-align: left;
+  margin-bottom: 2px;
+  font-size: 1.3rem;
+  padding-top: 10px;
+  margin-top: -27px;
+}
+
+.h2bill {
+  font-size: 20px; /* Main heading size */
+  font-weight: bold;
+}
+
+.h2bill .subinfo {
+  font-size: 15px; /* Smaller size for extra info */
+  font-weight: normal; /* Optional: lighter weight */
+  margin-left: 3px; /* Space between main and subtext */
+  /* color: #555; */
+}
+/* Tables */
+.details-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 12px; /* Smaller font */
+  margin-bottom: 10px;
+  height: 230px;
+  margin-top: 7px;
+}
+
+.details-table td {
+  padding: 6px 8px; /* Tighter padding */
+  border: 1px solid #e0e0e0;
+}
+
+/* Scrollable Items Section */
+.items-scroll-container {
+  flex: 1;
+  min-height: 100px; /* Minimum height */
+  max-height: 23vh; /* Flexible height */
+  overflow-y: auto;
+  margin: 8px 0;
+  border: 1px solid #e0e0e0;
+  margin-top: 0px;
+}
+
+.items-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 12px; /* Smaller font */
+}
+
+.items-table th,
+.items-table td {
+  padding: 6px 8px; /* Tighter padding */
+  border: 1px solid #e0e0e0;
+  text-align: center;
+}
+.items-table td:first-child,
+.items-table th:first-child {
+  text-align: left;
+}
+
+.items-table thead th {
+  position: sticky;
+  top: 0;
+  background: #f5f5f5;
+}
+
+/* Bottom Sections */
+.totals {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end; /* Align children to the right */
+  font-size: 12px;
+  padding: 0;
+  height: 55px;
+  gap: 2px;
+  padding-top: 7px;
+}
+
+.porder {
+  margin-top: -10px; /* Reduce vertical gap */
+  font-size: 13px;
+  text-align: right; /* Align text inside the <p> */
+  width: 100%; /* Ensures text-align works properly */
+}
+.modal-actions12 {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  padding-top: 0px;
+  margin-top: -11px;
+}
+
+/* Buttons */
+.btn1,
+.btn12 {
+  padding: 8px 16px; /* Slightly smaller */
+  font-size: 12px; /* Smaller font */
+}
+
+/* Badge */
+.badge {
+  font-size: 11px; /* Smaller */
+  padding: 2px 8px;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 480px) {
+  .details-table,
+  .items-table {
+    font-size: 11px;
+  }
+
+  h2 {
+    font-size: 1.1rem;
+  }
+
+  .modal-actions12 {
+    flex-direction: column;
+  }
+}
+.items-scroll-container {
+  flex: 1;
+  min-height: 100px;
+  max-height: 23vh;
+  overflow-y: auto; /* This enables scroll ONLY when needed */
+}
+.items-table thead th {
+  position: sticky;
+  top: 0;
+}
+.btn1.green {
+  background-color: #1e4936; /* Your specified green */
+  /* color: white; */
+  border: none;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 5px rgba(30, 73, 54, 0.2);
+}
+.btn1-icon {
+  margin-right: 3px;
+  vertical-align: middle;
+  height: 12px;
+}
+.btn1.green:hover {
+  /* background-color: #153b2a; */
+  transform: translateY(-1px);
+}
+
+/* Cancel Button (Red) */
+.btn12 {
+  background-color: #d32f2f;
+  color: white;
+  border: none;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 5px rgba(211, 47, 47, 0.2);
+}
+
+.btn12:hover {
+  background-color: #b71c1c; /* Material Red 900 */
+  transform: translateY(-1px);
+}
+
+/* For modern flat design */
+.modal-actions12 button {
+  border-radius: 4px;
+  font-weight: 500px;
+  letter-spacing: 0.5px;
+  padding: 6.5px 9.5px;
+  font-size: 12.5px;
+  cursor: pointer;
+  border: none;
+  outline: none;
+}
+.badge {
+  display: inline-block;
+  /* background-color: #e6e0ff;  */
+  /* color: #5b3fff;  */
+  font-size: 11px;
+  font-weight: bold;
+  padding: 4px 10px;
+  border-radius: 12px;
+  text-align: center;
+  white-space: nowrap;
+}
+
+/* Focus states (accessibility) */
+.modal-actions12 button:focus {
+  box-shadow: 0 0 0 3px rgba(30, 73, 54, 0.3);
+}
+
+.btn12:focus {
+  box-shadow: 0 0 0 3px rgba(211, 47, 47, 0.3);
+}
+
+/* #customerOrderDetialsModal {
+  display: flex !important;
+} */

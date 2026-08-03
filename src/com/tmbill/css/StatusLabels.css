@@ -1,0 +1,506 @@
+.statusLabel {
+  display: inline;
+  font-size: 75%;
+  line-height: 1;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: baseline;
+  color: white;
+  letter-spacing: 0.05em;
+  border-radius: 60px;
+  padding: 4px 12px 3px;
+  font-weight: 800;
+}
+
+/* .statusLabel {
+} */
+
+.open-item {
+  color: #c29a4f !important;
+  background: #c29a4f3d !important;
+  margin-top: 3px !important;
+}
+
+.reduce-label2 {
+  color: blueviolet !important;
+  background: #8a2be23b !important;
+  border: none;
+  border-radius: 5px;
+  color: white;
+  /* padding: 0.4rem; */
+  width: 90%;
+  height: 30px;
+}
+
+.reduce-label {
+  color: #ad5444 !important;
+  background-color: #ad544452 !important;
+}
+
+.reduced-label {
+  background-color: #2a9b7540 !important;
+  color: #2a9b75 !important;
+}
+
+.reversed-label {
+  background-color: #97499e4d !important;
+  color: #97499e !important;
+}
+
+.fulfilled,
+.completed,
+.success,
+.captured,
+.paid,
+.payment_recv,
+.applied {
+  color: #18ba60 !important;
+  background: #18ba6024 !important;
+}
+
+.terminal-user {
+  background-color: #7460ee52 !important;
+  color: #7460ee !important;
+}
+
+.credited {
+  color: #18ba60 !important;
+  background: #18ba6024 !important;
+}
+
+.debited {
+  background-color: #ff634726 !important;
+  color: tomato !important;
+}
+
+.Acknowledged {
+  background-color: #ff634726 !important;
+  color: tomato !important;
+}
+
+.dispatched {
+  background-color: rgb(117 48 145 / 28%) !important;
+  color: rgb(117, 48, 145) !important;
+}
+
+.free {
+  background-color: #41b3f921 !important;
+  color: #41b3f9 !important;
+}
+
+.pending,
+.created,
+.authorized {
+  color: #c29a4f !important;
+  background: #c29a4f3d !important;
+}
+
+.deleted,
+.cancelled,
+.Cancelled,
+.failed {
+  background-color: #ff634726 !important;
+  color: tomato !important;
+}
+
+.dine-in,
+.razorpay,
+.foodpanda,
+.grab,
+.dinein {
+  background-color: #7460ee40 !important;
+  color: #7460ee !important;
+}
+
+.quickbill,
+.wolt {
+  background-color: #7777772b !important;
+  color: #777 !important;
+}
+
+.pickup,
+.yemeksepeti {
+  background-color: #47795447 !important;
+  color: #477954 !important;
+}
+
+.homedelivery,
+.delivery,
+.paytm,
+.getir,
+.khedmahdelivery {
+  background-color: #41b3f938 !important;
+  color: #41b3f9 !important;
+}
+
+.zomato,
+.up,
+.zomatomarket,
+.takeout,
+.theentertainer,
+.ontario {
+  background-color: #ff634726 !important;
+  color: tomato !important;
+}
+
+.dunzo,
+.elmenus,
+.ordert {
+  background-color: #47795447 !important;
+  color: #477954 !important;
+}
+
+.swiggy,
+.himenus,
+.waleem {
+  background-color: #e68a2124 !important;
+  color: #e68a21 !important;
+}
+
+.item-preptime,
+.talabna {
+  background-color: #80808030 !important;
+  color: gray !important;
+}
+
+.ubereats,
+.feedygo,
+.tabsquare,
+.wongnai,
+.corporatepartnership {
+  color: #18ba60 !important;
+  background: #18ba6024 !important;
+}
+
+.digitalorder,
+.jumia,
+.laaaaa,
+.hishopping {
+  background-color: #80808030 !important;
+  color: gray !important;
+}
+
+.captain-user {
+  background-color: #ee964b33 !important;
+  color: #ee964b !important;
+  margin-right: 2px !important;
+}
+
+.billing-user {
+  background-color: #9dd64233 !important;
+  color: #16290b !important;
+  margin-right: 2px !important;
+}
+
+.passcode-user {
+  background-color: #6b7df033 !important;
+  color: #110b29 !important;
+  margin-right: 2px !important;
+}
+
+.customer-display-user {
+  background-color: #f57ec533 !important;
+  color: #4c153a !important;
+  margin-right: 2px !important;
+}
+.kds-user,
+.googlepay {
+  background-color: #0d3b6640 !important;
+  color: #0d3b66 !important;
+  margin-right: 2px !important;
+}
+
+.selforder-user,
+.selforder {
+  color: #18ba60 !important;
+  background: #18ba6024 !important;
+  margin-right: 2px !important;
+}
+
+.activeItems {
+  background-color: #7460ee36 !important;
+  color: #7460ee !important;
+  letter-spacing: 0.05em;
+  border-radius: 60px;
+  padding: 4px 12px 3px;
+  font-weight: 500;
+}
+
+.inactiveItems {
+  background-color: #ff634726 !important;
+  color: tomato !important;
+  letter-spacing: 0.05em;
+  border-radius: 60px;
+  padding: 4px 12px 3px;
+  font-weight: 500;
+}
+
+/* KDS Item status labels */
+
+.placed {
+  color: #18ba60 !important;
+  background: #18ba6024 !important;
+}
+
+.placed {
+  background-color: #80808030 !important;
+  color: gray !important;
+}
+
+.preparing,
+.mathaqi,
+.acknowledged,
+.curry-yadeliveroo,
+.nownow {
+  background-color: #ee964b33 !important;
+  color: #ee964b !important;
+}
+
+.ready,
+.careem,
+.snoonu,
+.baladiexpress,
+.lezzoo,
+.curry-yatalabat {
+  color: #18ba60 !important;
+  background: #18ba6024 !important;
+}
+
+.cancelled,
+.rejected,
+.irctc,
+.deliverypartner,
+.tour,
+.katch,
+.cofe,
+.curry-yacareem,
+.athletekitchen {
+  background-color: #ff634726 !important;
+  color: tomato !important;
+}
+
+.dineout,
+.eazydiner,
+.walem,
+.ezhalha,
+.wizzy,
+.mychharo,
+.drivethru,
+.toters,
+.tkyr,
+.website {
+  background-color: #ff634726 !important;
+  color: tomato !important;
+}
+
+.gupshup,
+.tmt,
+.rafeeq,
+.mrd,
+.salon,
+.getcari,
+.carhop,
+.otlobfs,
+.outdoorcatering,
+.yalah,
+.curry-yanoon,
+.yuprestaurant {
+  background-color: #7460ee36 !important;
+  color: #7460ee !important;
+}
+
+.lugmety,
+.accounts,
+.smiles,
+.deliveroo,
+.employemeal,
+.instashopfs,
+.inhousecatering,
+.digibytes {
+  background: #bb9654 !important;
+  color: white !important;
+}
+
+.peppo,
+.doordash,
+.catering,
+.cari,
+.landlinedelivery,
+.restlabs,
+.lineman {
+  color: #18ba60 !important;
+  background: #bde0cc24 !important;
+}
+
+.amazonfood,
+.foodboy,
+.trialtrain,
+.getcari_fs,
+.patho,
+.greeb {
+  background-color: #ff634726 !important;
+  color: tomato !important;
+}
+
+.dotpe,
+.walaan,
+.noonfood,
+.ctrevents,
+.foodmandu,
+.ninjasides {
+  background-color: #80808030 !important;
+  color: gray !important;
+}
+
+.dukaan,
+.wassel,
+.gatoes,
+.ondc,
+.ctrngpei,
+.bhojmandu,
+.mannasat,
+.superfoods {
+  background: #016fb1 !important;
+  color: white !important;
+}
+
+.jungleworks,
+.mrsool,
+.ctrngsei,
+.rappo,
+.combostreet,
+.potafo,
+.party,
+.ciao,
+.eggspertcareem {
+  color: #18ba60 !important;
+  background: #18ba6024 !important;
+}
+
+.yumzy,
+.yummy,
+.skipthedishes,
+.swiggystore,
+.ctrseo,
+.deliveryinhouse,
+.taker,
+.momomania-noon,
+.v-thru {
+  background-color: #ff634726 !important;
+  color: tomato !important;
+}
+
+.magicpin,
+.eats,
+.subscription,
+.ctrngpeo,
+.dukadirect,
+.keeta,
+.wrapstreet,
+.grubtechm .goldenwokdeliveroo,
+.momomania-deliveroo {
+  background: #2a86f6 !important;
+  color: white !important;
+}
+
+.thrive,
+.vubavuba,
+.entertainer,
+.scootsy,
+.ctrfoodei,
+.piki,
+.vbapp,
+.takeawayinhouse,
+.crisfood,
+.goldenwoknoon,
+.momomania-careem,
+.selfservice {
+  background: #592d8c !important;
+  color: white !important;
+}
+
+.talabat,
+.chatfood,
+.inresto,
+.ctrfoodeo,
+.takeawayduka,
+.jedlo,
+.golderwokcareem,
+.anindianaffair-noon {
+  background: #f75801 !important;
+  color: white !important;
+}
+
+.radyes,
+.toyou,
+.payumoney,
+.payu,
+.shopeefood,
+.kioskdinein,
+.takeawaypiki,
+.sageandthymedeliveroo,
+.anindianaffair-deliveroo,
+.served {
+  background: #028bb0 !important;
+  color: white !important;
+}
+
+.mymenu,
+.jahez,
+.rushfood,
+.glovo,
+.cultfit,
+.grabfood,
+.kiosktakeout,
+.drivu,
+.sageandthymenoon,
+.anindianaffair-careem {
+  background: #b7174e !important;
+  color: white !important;
+}
+
+.deliverect,
+.payumoney,
+.flipdish,
+.careemmp,
+.beanz,
+.instashop,
+.ninja,
+.sageandthymecareem,
+.anindianaffair-talabat {
+  background: #02cd64 !important;
+  color: white !important;
+}
+
+.hungerstation,
+.tmdone,
+.justeat,
+.noonfs,
+.thechefz,
+.sageandthymetalabat {
+  background: #f7c505 !important;
+  color: white !important;
+}
+
+.chefz,
+.cod,
+.fidoo,
+.talabatgo,
+.online,
+.ordable,
+.fishcove-careem {
+  background: #3c1a3d !important;
+  color: white !important;
+}
+
+.upsale,
+.ahlan,
+.otlob,
+.eateasy,
+.dca,
+.nikartfooddeliveryservice,
+.foc,
+.fishcove-talabat {
+  background: #3c1a3d !important;
+  color: white !important;
+}

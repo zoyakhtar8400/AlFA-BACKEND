@@ -1,0 +1,134 @@
+.reservation-card-header {
+  display: flex;
+  justify-content: space-between;
+}
+
+.header-content,
+.left-padding {
+  padding-left: 4px;
+}
+
+.allocate-table-btn {
+  /* float: right; */
+  /* width: 100%; */
+  margin-top: 7px;
+}
+
+#tableReservationtListID * {
+  /* font-family: 'FontAwesome'; */
+
+  font-size: 15px !important;
+}
+
+.selected-reservation {
+  border-left: 4px solid #1d9569 !important;
+}
+
+.tableReservationModalBody {
+  /* height: 41vh; */
+  max-height: 67vh !important;
+  overflow: scroll;
+}
+
+.reservation-card {
+  margin-bottom: 4px;
+  padding: 5px;
+}
+
+.reservation-card-row {
+  justify-content: center;
+}
+
+.tablereservation-modal-footer {
+  justify-content: center;
+}
+
+.table-reservation-card-body {
+  padding: 10px;
+}
+
+.tableReservationModalcontent {
+  min-height: 40vh;
+}
+
+.reservation-occasion-class {
+  display: flex;
+  justify-content: space-between;
+}
+
+#submitReservatioDataButtonid,
+#updateReservatioDataButtonid {
+  width: 100%;
+}
+
+#noreservationfoundid {
+  position: absolute;
+  top: 50%;
+  left: 43%;
+}
+
+.reservation-card-body .fa-phone-alt {
+  transform: scaleX(-1);
+}
+.allocate-table-btn {
+  background-color: var(--button-background) !important;
+  color: #fff !important;
+  border: 1px solid var(--button-background) !important;
+}
+
+.tableReservationModalBody .reservation-tabs-wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.tableReservationModalBody .reservation-tabs-only {
+  border-bottom: none;
+}
+
+.tableReservationModalBody .create-reservation-btn {
+  white-space: nowrap;
+  height: 38px;
+}
+.tableReservationModalBody .reservation-tabs-wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #dee2e6;
+  padding-bottom: 6px;
+}
+
+.tableReservationModalBody .reservation-tabs-only {
+  border-bottom: none !important;
+  margin-bottom: 0;
+}
+
+.tableReservationModalBody .reservation-create-btn {
+  background: var(--button-background);
+  border: 1px solid var(--button-background);
+  color: #fff;
+  padding: 6px 16px;
+  height: 36px;
+  font-weight: 500;
+  border-radius: 4px;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.tableReservationModalBody .reservation-create-btn:hover {
+  background: var(--button-background);
+  border: 1px solid var(--button-background);
+  opacity: 0.9;
+}
+
+.tableReservationModalBody #createRservationbuttonid {
+  background: var(--button-background);
+  border: 1px solid var(--button-background);
+  color: #fff;
+}
+
+.tableReservationModalBody #createRservationbuttonid:hover {
+  background: var(--button-background);
+  border: 1px solid var(--button-background);
+  opacity: 0.9;
+}

@@ -1,0 +1,169 @@
+.remoteKotModal {
+  overflow: hidden !important;
+}
+
+.remoteKotModaldialog {
+  height: 80%;
+  width: 80%;
+  min-width: 500px;
+  overflow: hidden !important;
+}
+
+.waiterNotificationsModaldialog {
+  height: 80%;
+  width: 60%;
+  min-width: 500px;
+  overflow: hidden !important;
+}
+
+.remotekotBody {
+  height: 100%;
+}
+
+.remoteKotModaldialog .modal-header {
+  padding: 10px 20px 10px 20px;
+}
+
+.remotekotBody {
+  /* height: 100%; */
+}
+
+.remoteKotModaldialog .remoteKot {
+  height: 100%;
+  /* margin-top: 29px; */
+}
+
+.waiterNotificationsModaldialog .waiterNotifications {
+  height: 90%;
+}
+
+.remoteKotModaldialog .orderslistWrapeer {
+  padding: 5px;
+  border-right: 1px solid rgba(0, 0, 0, 0.125);
+  overflow-y: auto;
+  height: 100%;
+}
+
+.remoteKotModaldialog #remoteKotListID {
+  position: relative;
+  overflow-y: auto;
+  height: 80%;
+}
+
+.remoteKotModaldialog .main-order-wrapper {
+  height: 100%;
+  margin-left: 5px;
+  /* border-left: 1px solid #4a4a4a; */
+}
+
+.remoteKotModaldialog .remoteKotCard {
+  margin: 3px 0px 3px 0px;
+  align-items: baseline;
+  width: 99% !important;
+}
+
+.remoteKotModaldialog .remotkotid {
+  position: absolute;
+  top: 1px;
+  right: 1px;
+  background: #f3fff3;
+  font-size: 12px;
+  padding: 3px;
+  text-transform: uppercase;
+}
+
+.remoteKotModaldialog #remotekotdetail-wrapper-div {
+  position: relative;
+}
+
+.remoteKotModaldialog .remotekotdetail-items-div {
+  width: 100%;
+  max-width: 100%;
+  height: 65vh;
+  padding: 3px;
+  border: 1px solid rgba(194, 191, 191, 0.901);
+  border-bottom: none;
+  overflow-x: auto;
+}
+
+.remoteKotModaldialog .orderdetails-actionsDiv {
+  width: 100%;
+  max-width: 100%;
+  padding: 3px;
+  text-align: center;
+  height: 10%;
+  border: 1px solid rgba(194, 191, 191, 0.901);
+  border-top: none;
+}
+
+.remoteKotCard {
+  margin: 3px 0px 3px 0px;
+  align-items: baseline;
+  width: 99% !important;
+}
+
+.remoteKotModaldialog .orderDetail-wrapper-div {
+  padding-right: 2px !important;
+  padding-left: 2px !important;
+}
+
+.kotactions-container {
+  justify-content: space-evenly;
+  margin-top: 5px;
+}
+
+.remoteKotCard button {
+  margin-right: 8px;
+}
+
+.remoteKotCard.selected-order {
+  background-color: #e5fae5 !important;
+  border-left: 4px solid #096f1e !important;
+}
+
+#pullRemotekotButton {
+  width: 50%;
+}
+
+/* .remoteKotModaldialog #remoteKotdetailsTable {
+    height: 90%;
+} */
+
+.remoteKotModaldialog .orderdetails-actionsDiv {
+  height: 9%;
+}
+
+.remoteKotModaldialog .loadmoreElement {
+  text-align: center;
+  color: #6363d2;
+  margin: 12px;
+  letter-spacing: 2px;
+  font-weight: bold;
+  border: 1px solid #bfb8b8;
+}
+
+#kotNotFound {
+  position: absolute;
+  top: 50%;
+  left: 33.33%;
+  font-family: sans-serif;
+}
+.remoteKotModaldialog #remotekotdetail-wrapper-div {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+/* Items section should take remaining space */
+.remoteKotModaldialog .remotekotdetail-items-div {
+  flex: 1;
+  height: auto; /* override fixed vh */
+  overflow-y: auto;
+}
+
+/* Button section stays fixed and slightly up */
+.remoteKotModaldialog .orderdetails-actionsDiv {
+  flex-shrink: 0;
+  padding-bottom: 10px;
+  background: #fff;
+}

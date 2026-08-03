@@ -1,0 +1,171 @@
+.customerHistorymodalbody {
+    padding: 15px;
+}
+
+.stat-card {
+    display: inline-block;
+    float: none;
+}
+
+.customerHistorymodalWrapper {
+    height: 550px;
+    width: 80%;
+}
+
+.custmerhistoryWrapper {
+    height: 100%;
+}
+
+.customerHistorymodal {
+    max-width: 80%;
+    justify-content: center;
+}
+
+.settingstitleDiv {
+    width: 100%;
+    display: flex;
+}
+
+.settingsHeading {
+    width: 95%;
+}
+
+.closeSettings {
+    height: 35px;
+    width: 35px;
+    text-align: center;
+    padding-top: 10px;
+    font-size: 27px;
+}
+
+/**
+Stats
+**/
+
+.stat-container {
+    display: inline-block !important;
+    height: 95px;
+    padding-left: 5px;
+    overflow: hidden;
+    width: 100%;
+    white-space: nowrap;
+}
+
+.stat-container:hover,
+.stat-container:focus,
+.stat-container:active {
+    overflow-x: auto;
+}
+
+.orders-count-card {
+    background-color: #21D4FD;
+    background-image: linear-gradient(19deg, #21D4FD 0%, #B721FF 100%);
+    border-radius: 5px;
+    color: white;
+    height: 80px;
+    margin: 5px;
+}
+
+.lastorder-date-card {
+    background-color: #08AEEA;
+    background-image: linear-gradient(0deg, #08AEEA 0%, #2AF598 100%);
+    border-radius: 5px;
+    color: white;
+    height: 80px;
+    margin: 5px;
+}
+
+.duepay-card {
+    /* background-color: #08AEEA; */
+    background-image: linear-gradient(to right top, #a7251c, #be2a52, #c34387, #b664b8, #9884df);
+    border-radius: 5px;
+    color: white;
+    height: 80px;
+    margin: 5px;
+}
+
+.stat-card h6 {
+    padding-top: 5px;
+}
+
+.orders-count-card h4,
+.fav-item-card h4 {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.fav-item-card {
+    background-color: #FBAB7E;
+    background-image: linear-gradient(62deg, #FBAB7E 0%, #F7CE68 100%);
+    border-radius: 5px;
+    color: white;
+    height: 80px;
+    margin: 5px;
+}
+
+/**
+Table
+**/
+
+.stat-container2 {
+    height: 75%;
+    padding: 10px;
+    max-height: 400px;
+}
+
+.customer-orders-container {
+    height: 97%;
+    overflow-y: auto;
+    font-size: 0.9rem;
+}
+
+.customHeading {
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+
+#customerordersTable {
+    color: #4e5052;
+}
+
+#customerordersTable td {
+    border: none;
+}
+
+.pieChart {
+    max-height: 350px !important;
+    max-width: 350px !important;
+}
+
+#customerordersTable thead {
+    color: #969292;
+    border: none;
+    background-color: transparent;
+}
+
+#customerordersTable>thead>tr>th {
+    border: none;
+    text-align: center;
+}
+
+#customerordersTable>tbody>tr>td {
+    text-align: center
+}
+
+#customerordersTable input[type=button] {
+    widows: 40px;
+    height: 35px;
+}
+
+.customer-orders-container::-webkit-scrollbar {
+    width: 7px !important;
+}
+
+.customerordereditemsclass::-webkit-scrollbar {
+    width: 7px !important;
+}
+
+.customerhistorycontainer::-webkit-scrollbar {
+    height: 7px !important;
+}

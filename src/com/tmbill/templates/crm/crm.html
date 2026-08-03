@@ -1,0 +1,68 @@
+ <link rel="stylesheet" href="../css/CustomerManagement.css" />
+<div class="crmManagementWrapper" id="crmmainWrappperid">
+
+  <div class="customer-mgmt-container">
+    <h5 class="MenuHeading has-i18n"
+      data-i18n="masterScreen.customerManagement.crm">
+      Customer Management
+    </h5>
+    <div class="crm-header-bar">
+      <button
+        class="btn btn-outline-secondary back-btn crm-back-btn"
+        id="gobacktomenumangemtfromitemview">
+        <i class="fa-solid fa-arrow-left"></i>
+      </button>
+      <div class="crm-header-actions">
+        <input
+          data-i18n="[placeholder]masterScreen.customerManagement.Search"
+          class="has-i18n crm-search-input"
+          type="text"
+          id="searchCustomermgmtid"
+          placeholder="Search" />
+        <input
+          id="hiddenFileimport"
+          type="file"
+          accept=".xlsx"
+          style="position:absolute; opacity:0; width:1px; height:1px;" />
+
+        <button
+          data-i18n="masterScreen.customerManagement.AddHeading"
+          id="openaddcustomerModal"
+          class="normal-button has-i18n">
+          <i class="fas fa-plus"></i> Add
+        </button>
+
+        <button
+          data-i18n="masterScreen.customerManagement.Refresh"
+          id="refreshcustomermgmtButton"
+          class="normal-button has-i18n">
+          <i class="fas fa-sync-alt"></i> Refresh
+        </button>
+
+        <button
+          data-i18n="masterScreen.customerManagement.Import"
+          id="importCustomersbutton"
+          class="normal-button has-i18n">
+          <i class="fas fa-file-import"></i> Import
+        </button>
+
+        <button
+          data-i18n="masterScreen.customerManagement.Export"
+          id="exportCustomersbutton"
+          class="normal-button has-i18n">
+          <i class="fas fa-file-export"></i> Export
+        </button>
+
+      </div>
+    </div>
+
+    <div class="customer-data-div">
+      <table
+        class="table table-sm table-striped customermgmtDattableclass"
+        id="customermgmtDattable"></table>
+    </div>
+  </div>
+</div>
+<script>
+  require('../js/CustomerManagement.js');
+</script>

@@ -1,0 +1,901 @@
+<div class="modal fade" data-backdrop="static" id="IRNmodal">
+  <div class="modal-dialog modal-xl modal-dialog-centered IRNmodal">
+    <div class="modal-content IRNmodalWrapper">
+      <div class="modal-header">
+        <h5 class="modal-title">Generate IRN</h5>
+        <button type="button" class="close" data-dismiss="modal">
+          &times;
+        </button>
+      </div>
+      <div class="modal-body IRNmodalbody" id="IRNmodalBodyid">
+        <div id="documentDetails">
+          <div class="row">
+            <!-- document details -->
+            <div class="col-md-12 irncard">
+              <div class="card card-secondary">
+                <div class="card-header card-custom-header">
+                  <h3 class="card-title">Document Details</h3>
+                  <div class="card-tools">
+                    <button
+                      type="button"
+                      aria-label="Toggle"
+                      data-card-widget="collapse"
+                      class="btn btn-tool"
+                    >
+                      <i class="fas fa-minus"></i>
+                    </button>
+                  </div>
+                </div>
+                <div class="card-body card-custom-body">
+                  <div class="row">
+                    <div class="form-group col-md-3">
+                      <label>Store</label>
+                      <span class="asterisk">*</span>
+                      <input
+                        type="text"
+                        id="docTypeStoreId"
+                        disabled="disabled"
+                        placeholder="Enter store"
+                        class="form-control irnInput"
+                      />
+                    </div>
+                    <div class="form-group col-md-3">
+                      <label>Document Type</label>
+                      <span class="asterisk">*</span>
+                      <select class="form-control" id="docTypeDropdownid">
+                        <option value="">Select Document Type</option>
+                        <option value="INV">INV</option>
+                        <!-- <option value="CRN">CRN</option> 
+                                                <option value="DBN">DBN</option> -->
+                      </select>
+                    </div>
+                    <div class="form-group col-md-3">
+                      <label>Document Number</label>
+                      <span class="asterisk">*</span>
+                      <input
+                        type="text"
+                        disabled="disabled"
+                        id="documentDeatilsNumberid"
+                        placeholder="Enter document number"
+                        class="form-control irnInput"
+                      />
+                    </div>
+                    <div class="form-group col-md-3">
+                      <label>Document Date</label>
+                      <span class="asterisk">*</span>
+                      <input
+                        type="text"
+                        placeholder="Date"
+                        id="irnDocumentdateField"
+                        class="irnInput"
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- transaction details -->
+            <div class="col-md-12 irncard">
+              <div class="card card-secondary">
+                <div class="card-header card-custom-header">
+                  <h3 class="card-title">Transaction Deatils</h3>
+                  <div class="card-tools">
+                    <button
+                      type="button"
+                      aria-label="Toggle"
+                      data-card-widget="collapse"
+                      class="btn btn-tool"
+                    >
+                      <i class="fas fa-plus"></i>
+                    </button>
+                  </div>
+                </div>
+
+                <div class="card-body card-custom-body collapsed-card">
+                  <div class="row">
+                    <div class="form-group col-md-6">
+                      <label>Supplier Type:</label>
+                      <span class="asterisk">*</span>
+                      <select
+                        class="form-control"
+                        id="transDetailSupplieTypeid"
+                      >
+                        <option value="">Select Supplier</option>
+                        <option value="B2B">B2B</option>
+                        <option value="SEZWP">SEZWP</option>
+                        <option value="SEZWOP">SEZWOP</option>
+                        <option value="EXPWP">EXPWP</option>
+                        <option value="EXPWOP">EXPWOP</option>
+                        <option value="DEXP">DEXP</option>
+                      </select>
+                    </div>
+                    <div class="form-group col-md-6">
+                      <label for="">ECM GSTIN: </label>
+                      <input
+                        placeholder="Enter ecm gstin"
+                        class="form-control"
+                      />
+                    </div>
+                    <div class="form-group col-md-6">
+                      <fieldset class="form-group" id="__BVID__200">
+                        <legend
+                          tabindex="-1"
+                          class="bv-no-focus-ring col-form-label pt-0"
+                          id="__BVID__200__BV_label_"
+                        >
+                          Tax liability is payable under reverse charge
+                        </legend>
+                        <div>
+                          <div
+                            id="tax_liablity"
+                            role="radiogroup"
+                            tabindex="-1"
+                            class="bv-no-focus-ring"
+                          >
+                            <div
+                              class="custom-control custom-control-inline custom-radio"
+                            >
+                              <input
+                                id="tax_liablity_option_0"
+                                type="radio"
+                                name="tax_liablity"
+                                class="custom-control-input"
+                                value="Y"
+                              />
+                              <label
+                                for="tax_liablity_option_0"
+                                class="custom-control-label"
+                              >
+                                <span>Yes</span>
+                              </label>
+                            </div>
+                            <div
+                              class="custom-control custom-control-inline custom-radio"
+                            >
+                              <input
+                                id="tax_liablity_option_1"
+                                type="radio"
+                                name="tax_liablity"
+                                class="custom-control-input"
+                                value="N"
+                              />
+                              <label
+                                for="tax_liablity_option_1"
+                                class="custom-control-label"
+                              >
+                                <span>No</span>
+                              </label>
+                            </div>
+                          </div>
+                        </div>
+                      </fieldset>
+                    </div>
+                    <div class="form-group col-md-6">
+                      <fieldset class="form-group" id="__BVID__204">
+                        <legend
+                          tabindex="-1"
+                          class="bv-no-focus-ring col-form-label pt-0"
+                          id="__BVID__204__BV_label_"
+                        >
+                          Supply is intra state but chargeable to IGST
+                        </legend>
+                        <div>
+                          <div
+                            id="IgstOnIntra"
+                            role="radiogroup"
+                            tabindex="-1"
+                            class="bv-no-focus-ring"
+                          >
+                            <div
+                              class="custom-control custom-control-inline custom-radio"
+                            >
+                              <input
+                                id="IgstOnIntra_option_0"
+                                type="radio"
+                                name="IgstOnIntra"
+                                class="custom-control-input"
+                                value="Y"
+                              />
+                              <label
+                                for="IgstOnIntra_option_0"
+                                class="custom-control-label"
+                              >
+                                <span>Yes</span>
+                              </label>
+                            </div>
+                            <div
+                              class="custom-control custom-control-inline custom-radio"
+                            >
+                              <input
+                                id="IgstOnIntra_option_1"
+                                type="radio"
+                                name="IgstOnIntra"
+                                class="custom-control-input"
+                                value="N"
+                              />
+                              <label
+                                for="IgstOnIntra_option_1"
+                                class="custom-control-label"
+                              >
+                                <span>No</span>
+                              </label>
+                            </div>
+                          </div>
+                        </div>
+                      </fieldset>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- seller detail and buyer details -->
+            <!-- seller details -->
+            <div class="col-md-6 irncard">
+              <div class="card card-secondary">
+                <div class="card-header card-custom-header">
+                  <h3 class="card-title">Seller Details</h3>
+                  <div class="card-tools">
+                    <button
+                      type="button"
+                      aria-label="Toggle"
+                      data-card-widget="collapse"
+                      class="btn btn-tool"
+                    >
+                      <i class="fas fa-plus"></i>
+                    </button>
+                  </div>
+                </div>
+                <div class="card-body card-custom-body collapsed-card">
+                  <div class="row">
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label>Legal Name</label>
+                        <span class="asterisk">*</span>
+                        <input
+                          type="text"
+                          id="sellerLegalNameid"
+                          placeholder="Enter legal name"
+                          class="form-control irnInput"
+                        />
+                      </div>
+                      <div class="form-group">
+                        <label>GSTIN of supplier: </label>
+                        <span class="asterisk">*</span>
+                        <input
+                          type="text"
+                          id="sellerGstid"
+                          placeholder="Enter GSTIN number"
+                          class="form-control irnInput"
+                        />
+                      </div>
+                      <div class="form-group">
+                        <label>Addr1: </label>
+                        <span class="asterisk">*</span>
+                        <textarea
+                          type="text"
+                          id="selleraddrOneid"
+                          placeholder="Enter Addr1"
+                          class="form-control irnInput"
+                        ></textarea>
+                      </div>
+                      <div class="form-group">
+                        <label>Pincode: </label>
+                        <span class="asterisk">*</span>
+                        <input
+                          type="text"
+                          id="sellerPincodeid"
+                          placeholder="Enter Pincode"
+                          class="form-control irnInput"
+                        />
+                      </div>
+                      <div class="form-group">
+                        <label>Phone or Mobile No.: </label>
+                        <span class="asterisk">*</span>
+                        <input
+                          type="text"
+                          id="sellerPhoneid"
+                          placeholder="Enter phone"
+                          class="form-control irnInput"
+                        />
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label>Trader Name: </label>
+                        <input
+                          type="text"
+                          id="sellerTraderNameid"
+                          placeholder="Enter trader name"
+                          class="form-control irnInput"
+                        />
+                      </div>
+                      <div class="form-group">
+                        <label>Location: </label>
+                        <span class="asterisk">*</span>
+                        <input
+                          type="text"
+                          id="sellerlocationid"
+                          placeholder="Enter Location"
+                          class="form-control irnInput"
+                        />
+                      </div>
+                      <div class="form-group">
+                        <label>Addr2: </label>
+                        <textarea
+                          type="text"
+                          id="sellerAdddressTwoid"
+                          placeholder="Enter Addr2"
+                          class="form-control irnInput"
+                        ></textarea>
+                      </div>
+                      <div class="form-group">
+                        <label>State Code of the supplier: </label>
+                        <span class="asterisk">*</span>
+                        <input
+                          type="text"
+                          id="sellerStateCodeid"
+                          placeholder="Enter Stcd"
+                          class="form-control irnInput"
+                        />
+                      </div>
+                      <div class="form-group">
+                        <label>Email-Id: </label>
+                        <input
+                          type="text"
+                          id="sellerEmailid"
+                          placeholder="Enter Email"
+                          class="form-control irnInput"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- buyer details -->
+            <div class="col-md-6 irncard">
+              <div class="card card-secondary">
+                <div class="card-header card-custom-header">
+                  <h3 class="card-title">Buyer Details</h3>
+                  <div class="card-tools">
+                    <button
+                      type="button"
+                      aria-label="Toggle"
+                      data-card-widget="collapse"
+                      class="btn btn-tool"
+                    >
+                      <i class="fas fa-plus"></i>
+                    </button>
+                  </div>
+                </div>
+                <div class="card-body card-custom-body collapsed-card">
+                  <div class="row">
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label>Legal Name</label>
+                        <span class="asterisk">*</span>
+                        <input
+                          type="text"
+                          placeholder="Enter legal name"
+                          id="buyerLegalNameid"
+                          class="form-control irnInput"
+                        />
+                      </div>
+                      <div class="form-group">
+                        <label>GSTIN of buyer: </label>
+                        <span class="asterisk">*</span>
+                        <input
+                          type="text"
+                          placeholder="Enter GSTIN number"
+                          id="buyerGstid"
+                          class="form-control irnInput"
+                        />
+                      </div>
+                      <div class="form-group">
+                        <label>Addr1: </label>
+                        <span class="asterisk">*</span>
+                        <textarea
+                          type="text"
+                          placeholder="Enter Addr1"
+                          id="buyerAddrOneid"
+                          class="form-control irnInput"
+                        ></textarea>
+                      </div>
+                      <div class="form-group">
+                        <label>Pincode: </label>
+                        <span class="asterisk">*</span>
+                        <input
+                          type="text"
+                          placeholder="Enter Pincode"
+                          id="buyerPincodeid"
+                          class="form-control irnInput"
+                        />
+                      </div>
+                      <div class="form-group">
+                        <label>Phone or Mobile No.: </label>
+                        <span class="asterisk">*</span>
+                        <input
+                          type="text"
+                          placeholder="Enter phone"
+                          id="buyerPhoneid"
+                          class="form-control irnInput"
+                        />
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label>Trader Name: </label>
+                        <input
+                          type="text"
+                          placeholder="Enter trader name"
+                          id="buyerTradernameid"
+                          class="form-control irnInput"
+                        />
+                      </div>
+                      <div class="form-group">
+                        <label>Location: </label>
+                        <span class="asterisk">*</span>
+                        <input
+                          type="text"
+                          placeholder="Enter Location"
+                          id="buyerLocationid"
+                          class="form-control irnInput"
+                        />
+                      </div>
+                      <div class="form-group">
+                        <label>Addr2: </label>
+                        <textarea
+                          type="text"
+                          placeholder="Enter Addr2"
+                          id="buyerAddrTwoid"
+                          class="form-control irnInput"
+                        ></textarea>
+                      </div>
+                      <div class="row">
+                        <div class="form-group col-md-6">
+                          <label>State code: </label>
+                          <span class="asterisk">*</span>
+                          <input
+                            type="text"
+                            disabled="true"
+                            placeholder="Enter Stcd"
+                            id="buyerStatecodeid"
+                            class="form-control irnInput"
+                          />
+                        </div>
+                        <div class="form-group col-md-6">
+                          <label>POS code: </label>
+                          <span class="asterisk">*</span>
+                          <input
+                            type="text"
+                            disabled="true"
+                            placeholder="Enter POS code"
+                            id="buyerPoscodeid"
+                            class="form-control irnInput"
+                          />
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label>Email-Id: </label>
+                        <input
+                          type="text"
+                          placeholder="Enter Email"
+                          id="buyerEmailid"
+                          class="form-control irnInput"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- item details table -->
+            <div class="col-md-12 irncard">
+              <div class="card card-secondary">
+                <div class="card-header card-custom-header">
+                  <h3 class="card-title">Items Deatils</h3>
+                  <div class="card-tools">
+                    <button
+                      type="button"
+                      aria-label="Toggle"
+                      data-card-widget="collapse"
+                      class="btn btn-tool"
+                    >
+                      <i class="fas fa-plus"></i>
+                    </button>
+                  </div>
+                </div>
+                <div class="card-body card-custom-body p-0 collapsed-card">
+                  <div class="table-responsive-sm">
+                    <table
+                      role="table"
+                      aria-busy="false"
+                      aria-colcount="14"
+                      class="table b-table table-striped"
+                      id="_BVID_461"
+                    >
+                      <thead role="rowgroup">
+                        <tr role="row">
+                          <th
+                            role="columnheader"
+                            scope="col"
+                            aria-colindex="1"
+                            class=""
+                          >
+                            <div>Sr No</div>
+                          </th>
+                          <th
+                            role="columnheader"
+                            scope="col"
+                            aria-colindex="2"
+                            class=""
+                          >
+                            <div>HSN Code</div>
+                          </th>
+                          <th
+                            role="columnheader"
+                            scope="col"
+                            aria-colindex="3"
+                            class=""
+                          >
+                            <div>Item</div>
+                          </th>
+                          <th
+                            role="columnheader"
+                            scope="col"
+                            aria-colindex="4"
+                            class=""
+                          >
+                            <div>Qty</div>
+                          </th>
+                          <th
+                            role="columnheader"
+                            scope="col"
+                            aria-colindex="5"
+                            class=""
+                          >
+                            <div>Unit</div>
+                          </th>
+                          <th
+                            role="columnheader"
+                            scope="col"
+                            aria-colindex="6"
+                            class=""
+                          >
+                            <div>Price</div>
+                          </th>
+                          <th
+                            role="columnheader"
+                            scope="col"
+                            aria-colindex="7"
+                            class=""
+                          >
+                            <div>Disc</div>
+                          </th>
+                          <th
+                            role="columnheader"
+                            scope="col"
+                            aria-colindex="8"
+                            class=""
+                          >
+                            <div>Tax</div>
+                          </th>
+                          <!-- <th role="columnheader" scope="col" aria-colindex="9" class="">
+                                                        <div>CGST Amt</div>
+                                                    </th>
+                                                    <th role="columnheader" scope="col" aria-colindex="10" class="">
+                                                        <div>IGST Amt</div>
+                                                    </th>
+                                                    <th role="columnheader" scope="col" aria-colindex="11" class="">
+                                                        <div>IGST Amt</div>
+                                                    </th>
+                                                    <th role="columnheader" scope="col" aria-colindex="12" class="">
+                                                        <div>Gross Amt</div>
+                                                    </th>
+                                                    <th role="columnheader" scope="col" aria-colindex="13" class="">
+                                                        <div>ASS Amt</div>
+                                                    </th> -->
+                          <th
+                            role="columnheader"
+                            scope="col"
+                            aria-colindex="14"
+                            class=""
+                          >
+                            <div>Show Details</div>
+                          </th>
+                        </tr>
+                      </thead>
+                      <tbody id="irnItemDetailstableid" role="rowgorup"></tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- value details -->
+            <div class="col-md-12 irncard">
+              <div class="card card-secondary">
+                <div class="card-header card-custom-header">
+                  <h3 class="card-title">Value Deatils</h3>
+                  <!-- <div class="card-tools">
+                                        <button type="button" aria-label="Toggle" data-card-widget="collapse" class="btn btn-tool">
+                                            <i class="fas fa-minus"></i>
+                                        </button>
+                                    </div> -->
+                </div>
+
+                <div class="card-body card-custom-body">
+                  <div class="row">
+                    <div class="form-group col-md-4">
+                      <label>Total Assessable value of all items:</label>
+                      <span class="asterisk">*</span>
+                      <input
+                        class="form-control"
+                        id="totalAccesableAmtid"
+                        disabled
+                      />
+                    </div>
+                    <div class="form-group col-md-4">
+                      <label>Total CGST value of all items:</label>
+                      <input
+                        class="form-control"
+                        id="totalCgstValueid"
+                        disabled
+                      />
+                    </div>
+                    <div class="form-group col-md-4">
+                      <label>Total SGST value of all items:</label>
+                      <input
+                        class="form-control"
+                        id="totalSgstValueid"
+                        disabled
+                      />
+                    </div>
+                    <div class="form-group col-md-4">
+                      <label>Total IGST value of all items:</label>
+                      <input
+                        class="form-control"
+                        id="totalIgstvalueid"
+                        disabled
+                      />
+                    </div>
+                    <div class="form-group col-md-4">
+                      <label>Total CESS value of all items:</label>
+                      <input class="form-control" id="totalcessid" disabled />
+                    </div>
+                    <div class="form-group col-md-4">
+                      <label>Total State CESS value of all items:</label>
+                      <input
+                        class="form-control"
+                        id="totalCessofitemid"
+                        disabled
+                      />
+                    </div>
+                    <div class="form-group col-md-4">
+                      <label>Discount:</label>
+                      <input
+                        class="form-control"
+                        id="discountValueid"
+                        disabled
+                      />
+                    </div>
+                    <div class="form-group col-md-4">
+                      <label>Other Charges:</label>
+                      <input
+                        class="form-control"
+                        id="totalChargesValueId"
+                        disabled
+                      />
+                    </div>
+                    <div class="form-group col-md-4">
+                      <label>Rounded off amount:</label>
+                      <input
+                        class="form-control"
+                        id="roundedoffamtValueid"
+                        disabled
+                      />
+                    </div>
+                    <div class="form-group col-md-4">
+                      <label>Final Invoice value:</label>
+                      <span class="asterisk">*</span>
+                      <input
+                        class="form-control"
+                        id="finalInvoiceValueid"
+                        disabled
+                      />
+                    </div>
+                    <div class="form-group col-md-4">
+                      <label>Final Invoice value in Additional Currency:</label>
+                      <input
+                        class="form-control"
+                        id="finalinvoicevalueinOthCurrencyid"
+                        disabled
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- dispatch details -->
+            <div class="col-md-12 irncard">
+              <div class="card card-secondary">
+                <div class="card-header card-custom-header">
+                  <h3 class="card-title">Dispatch Details</h3>
+                  <div class="card-tools">
+                    <button
+                      type="button"
+                      aria-label="Toggle"
+                      data-card-widget="collapse"
+                      class="btn btn-tool"
+                    >
+                      <i class="fas fa-plus"></i>
+                    </button>
+                  </div>
+                </div>
+                <div class="card-body card-custom-body collapsed-card">
+                  <div class="row">
+                    <div class="form-group col-md-6">
+                      <label>Name:</label>
+                      <input
+                        placeholder="Name"
+                        id="dispatchDetailNameid"
+                        class="form-control"
+                      />
+                    </div>
+                    <div class="form-group col-md-6">
+                      <label>Location:</label>
+                      <input
+                        placeholder="Location"
+                        ix="dispatchLocDetailid"
+                        class="form-control"
+                      />
+                    </div>
+                    <div class="form-group col-md-6">
+                      <label>Addr1:</label>
+                      <input
+                        placeholder="Address 1"
+                        id="dispatchDetailAddroneid"
+                        class="form-control"
+                      />
+                    </div>
+                    <div class="form-group col-md-6">
+                      <label>Addr2:</label>
+                      <input
+                        placeholder="Address 2"
+                        id="dispatchDetailAddrtwoid"
+                        class="form-control"
+                      />
+                    </div>
+                    <div class="form-group col-md-6">
+                      <label>Pincode:</label>
+                      <input
+                        placeholder="Pincode"
+                        id="dispatchDetailsPincodeid"
+                        class="form-control"
+                      />
+                    </div>
+                    <div class="form-group col-md-6">
+                      <label>State code:</label>
+                      <input
+                        placeholder="State code"
+                        id="dispatchDetailStateid"
+                        class="form-control"
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Shipment details -->
+            <div class="col-md-12 irncard">
+              <div class="card card-secondary">
+                <div class="card-header card-custom-header">
+                  <h3 class="card-title">Shipment Details</h3>
+                  <div class="card-tools">
+                    <button
+                      type="button"
+                      aria-label="Toggle"
+                      data-card-widget="collapse"
+                      data-target="#shifmentDetailsId"
+                      class="btn btn-tool"
+                    >
+                      <i class="fas fa-plus"></i>
+                    </button>
+                  </div>
+                </div>
+                <div
+                  class="card-body card-custom-body collapsed-card"
+                  id="shifmentDetailsId"
+                >
+                  <div class="row">
+                    <div class="col-md-6">
+                      <label>GSTIN :</label>
+                      <input
+                        placeholder="GSTIN"
+                        id="shipmentDetailgstid"
+                        class="form-control"
+                      />
+                    </div>
+                    <div class="col-md-6">
+                      <label>Location :</label>
+                      <input
+                        placeholder="Location"
+                        id="shipmentDetailLocationid"
+                        class="form-control"
+                      />
+                    </div>
+                    <div class="col-md-6">
+                      <label>Legal Name :</label>
+                      <input
+                        placeholder="Legal Name"
+                        id="shipmentDetailLegalnameid"
+                        class="form-control"
+                      />
+                    </div>
+                    <div class="col-md-6">
+                      <label>Trade Name :</label>
+                      <input
+                        placeholder="Trade Name"
+                        id="shipmentDetailtradenameid"
+                        class="form-control"
+                      />
+                    </div>
+                    <div class="col-md-6">
+                      <label>Addr1 :</label>
+                      <input
+                        placeholder="Address 1"
+                        id="shipmentDetailsaddroneid"
+                        class="form-control"
+                      />
+                    </div>
+                    <div class="col-md-6">
+                      <label>Addr2 :</label>
+                      <input
+                        placeholder="Address 2"
+                        id="shipmentDetailsaddrtwoid"
+                        class="form-control"
+                      />
+                    </div>
+                    <div class="col-md-6">
+                      <label>Pincode :</label>
+                      <input
+                        placeholder="Pincode"
+                        id="shipmentDetailsPincodeid"
+                        class="form-control"
+                      />
+                    </div>
+                    <div class="col-md-6">
+                      <label>State Code :</label>
+                      <input
+                        placeholder="State Code"
+                        id="shipmentDetailStatecodeid"
+                        class="form-control"
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <div class="col-md-12">
+          <button class="btn float-right btn-success" id="generateIrnbuttonId">
+            Generate IRN
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    require('../js/IRN/generateIRN.js');
+  </script>
+</div>

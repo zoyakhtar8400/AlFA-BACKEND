@@ -1,0 +1,803 @@
+<div class="reportsmainWrappper" id="reportsmainWrappperid">
+  <link rel="stylesheet" href="../css/Allreports.css" />
+
+  <div class="row reportscontainer-1">
+    <div class="col-sm-3 reporttypeContainer" id="reporttypeContainerid">
+      <div class="card reportscard salesReportcard">
+        <div
+          data-i18n="reportScreen.salesReportHeading"
+          report-action="1"
+          class="card-body has-i18n">
+          Sales Report
+        </div>
+      </div>
+      <div class="card reportscard todaysReportcard">
+        <div
+          data-i18n="reportScreen.todaysReportHeading"
+          report-action="7"
+          class="card-body has-i18n">
+          Todays Report
+        </div>
+      </div>
+      <div class="card reportscard itemsReportcard">
+        <div
+          data-i18n="reportScreen.itemReportHeading"
+          report-action="2"
+          class="card-body has-i18n">
+          Items Report
+        </div>
+      </div>
+      <div class="card reportscard paymentReportcard">
+        <div
+          data-i18n="reportScreen.paymentReportHeading"
+          report-action="9"
+          class="card-body has-i18n">
+          Payment Report
+        </div>
+      </div>
+      <div class="card reportscard taxReportcard">
+        <div
+          data-i18n="reportScreen.taxReport"
+          report-action="25"
+          class="card-body has-i18n">
+          Tax Report
+        </div>
+      </div>
+      <div class="card reportscard orderReportcard">
+        <div
+          data-i18n="reportScreen.orderReportHeading"
+          report-action="10"
+          class="card-body has-i18n">
+          Order Report
+        </div>
+      </div>
+      <div class="card reportscard catwiseReportcard">
+        <div
+          data-i18n="reportScreen.categoryWiseReportHeading"
+          report-action="11"
+          class="card-body has-i18n">
+          Category-wise Report
+        </div>
+      </div>
+      <div class="card reportscard kdwiseReportcard">
+        <div
+          data-i18n="reportScreen.kitchenDeptWiseReportHeading"
+          report-action="12"
+          class="card-body has-i18n">
+          Kitchen Dept. wise Report
+        </div>
+      </div>
+      <div class="card reportscard kotReportcard">
+        <div
+          data-i18n="reportScreen.kotReportHeading"
+          report-action="27"
+          class="card-body has-i18n">
+          KOT Report
+        </div>
+      </div>
+      <div class="card reportscard couponReportcard">
+        <div
+          data-i18n="reportScreen.couponHistoryHeading"
+          report-action="13"
+          class="card-body has-i18n">
+          Coupon History
+        </div>
+      </div>
+      <div class="card reportscard dayendReportcard">
+        <div
+          data-i18n="reportScreen.startCloseDayReportHeading"
+          report-action="14"
+          class="card-body has-i18n">
+          Start-Close day Report
+        </div>
+      </div>
+      <div class="card reportscard usershiftReportcard">
+        <div
+          data-i18n="reportScreen.userShiftReportHeading"
+          report-action="15"
+          class="card-body has-i18n">
+          User Shift Report
+        </div>
+      </div>
+      <div class="card reportscard duepayReportcard">
+        <div
+          data-i18n="reportScreen.duePaymentReportHeading"
+          report-action="16"
+          class="card-body has-i18n">
+          Due Payment Report
+        </div>
+      </div>
+      <div class="card reportscard deliveryboyReportcard">
+        <div
+          data-i18n="reportScreen.DeliveryBoyReportHeading"
+          report-action="29"
+          class="card-body has-i18n">
+          Delivery Boy Report
+        </div>
+      </div>
+
+      <div class="card reportscard userReportcard">
+        <div
+          data-i18n="reportScreen.userReportHeading"
+          report-action="30"
+          class="card-body has-i18n">
+          User Report
+        </div>
+      </div>
+      <div class="card reportscard preOrderReportcard">
+        <div
+          data-i18n="reportScreen.preOrderReportHeading"
+          report-action="24"
+          class="card-body has-i18n">
+          Pre-Order Report
+        </div>
+      </div>
+      <div class="card reportscard reservationReportcard">
+        <div
+          data-i18n="reportScreen.reservationReportHeading1"
+          report-action="28"
+          class="card-body has-i18n">
+          Reservation Report
+        </div>
+      </div>
+      <div class="card reportscard miscReportcard">
+        <div
+          data-i18n="reportScreen.MicsReportHeading"
+          report-action="22"
+          class="card-body has-i18n">
+          Misc Reports
+        </div>
+      </div>
+      <div class="card reportscard mallReportcard">
+        <div
+          data-i18n="reportScreen.MicsReportHeading"
+          report-action="26"
+          class="card-body has-i18n">
+          Mall Reports
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-9">
+      <div class="reportFiltersdiv">
+        <input
+          data-i18n="[placeholder]reportScreen.fromDate"
+          class="has-i18n"
+          placeholder="From Date"
+          id="reportfromdateButton" />
+        <div id="fetchReportasperclosedaycheckDiv">
+          <input
+            id="fetchReportasperclosedayCheckid"
+            title="As per Close Day"
+            type="checkbox" />
+          <label
+            data-i18n
+            class="has-i18n"
+            for="fetchReportasperclosedayCheckid"
+            title="As per Close Day"></label>
+        </div>
+        <!-- <input type="text" placeholder="To Date" id="reportodateButton"> -->
+        <input
+          data-i18n="[placeholder]reportScreen.Limit"
+          class="has-i18n"
+          type="text"
+          placeholder="Limit"
+          id="limitFieldid" />
+        <div class="byamountcheckDiv">
+          <input id="byamountCheckid" type="checkbox" />
+          <label
+            data-i18n="reportScreen.byAmount"
+            class="has-i18n"
+            for="byamountCheckid">By amount</label>
+        </div>
+        <div class="byamountcheckDiv" id="GroupByBaseItemCheckDiv">
+          <input id="groupByBaseItemCheckid" type="checkbox" />
+          <label data-i18n="reportScreen.itemGrouping" class="has-i18n"
+            for="groupByBaseItemCheckid">
+            Item Grouping
+          </label>
+
+        </div>
+        <input
+          data-i18n="[value]reportScreen.Fetch"
+          type="button"
+          class="has-i18n"
+          id="fetchreportsButton"
+          type="button"
+          value="Fetch" />
+        <input
+          data-i18n="[value]reportScreen.clearSelection"
+          class="has-i18n"
+          style="display: none"
+          type="button"
+          id="clearfilterSelection"
+          value="Clear selection" />
+        <input
+          data-i18n="[value]reportScreen.exportToExcel"
+          type="button"
+          class="has-i18n"
+          id="exportreportButton"
+          value="Export to excel" />
+        <input
+          data-i18n="[value]reportScreen.Print"
+          type="button"
+          class="has-i18n"
+          id="printreportButton"
+          value="Print" />
+        <input
+          data-i18n="[value]reportScreen.printPDF"
+          type="button"
+          class="has-i18n"
+          id="printtopdfreportButton"
+          value="Print to PDF" />
+        <input
+          data-i18n
+          type="button"
+          class="has-i18n"
+          id="exporttotxtreportbutton"
+          value="Export to .txt" />
+      </div>
+      <div class="reportInfodiv">
+        <!-- <div class="reportactionsDiv">
+
+                </div> -->
+        <ul id="reportsListid" class="reportsList">
+          <li report-action="1">
+            <div class="salesReportdiv">
+              <div class="row sales-report-filters">
+                <input
+                  data-i18n="[placeholder]reportScreen.Search"
+                  type="text"
+                  class="has-i18n"
+                  name
+                  id="salesreportFilterinputid"
+                  placeholder="Search" />
+                <select
+                  class="reportselect_container"
+                  id="salesreportFiltercombo1">
+                  <option
+                    data-i18n="reportScreen.salesReport.filterByOrderTypeHeading"
+                    class="has-i18n"
+                    disabled
+                    selected
+                    value>
+                    Filter by order type
+                  </option>
+                </select>
+                <select
+                  class="reportselect_container"
+                  id="salesreportFiltercombo2">
+                  <option
+                    data-i18n="reportScreen.salesReport.filiterByBillStatusHeading"
+                    class="has-i18n"
+                    disabled
+                    selected
+                    value>
+                    Filter by bill status
+                  </option>
+                </select>
+                <select
+                  title="Filter by terminal user"
+                  class="reportselect_container"
+                  id="salesreportFilterbyterminalcombo">
+                  <option
+                    data-i18n="reportScreen.salesReport.filterByTerminalUser"
+                    class="has-i18n"
+                    disabled
+                    selected
+                    value>
+                    Filter by terminal user
+                  </option>
+                </select>
+                <select
+                  title="Filter by terminal user"
+                  class="reportselect_container"
+                  id="salesreportFilterbyusercombo">
+                  <option
+                    data-i18n="reportScreen.salesReport.filterByUser"
+                    class="has-i18n"
+                    disabled
+                    selected
+                    value>
+                    Filter by user
+                  </option>
+                </select>
+                <!-- <label title="Filter by delivery boy" class="reportselect_container" style="width:159px"></label> -->
+                <select
+                  title="Filter by delivery boy"
+                  class="reportselect_container"
+                  id="salesreportFilterbydeliveryboycombo">
+                  <option
+                    data-i18n="orderScreen.FilterbyDelivery"
+                    class="has-i18n"
+                    disabled
+                    selected
+                    value>
+                    Filter by delivery boy
+                  </option>
+                </select>
+
+                <input
+                  data-i18n="[value]reportScreen.salesReport.clearSelection"
+                  class="has-i18n"
+                  type="button"
+                  value="Clear Selection"
+                  id="salesreport_clearselection" />
+              </div>
+              <table
+                class="table table-sm table-striped report-table"
+                id="salesreportTableid">
+                <tfoot>
+                  <tr>
+                    <th
+                      data-i18n="reportScreen.Total"
+                      class="has-i18n"
+                      colspan="2">
+                      Total :
+                    </th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <!-- <th></th> -->
+                    <th></th>
+
+                    <!-- <th colspan="2"></th> -->
+                    <!-- <th></th> -->
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                  </tr>
+                </tfoot>
+              </table>
+            </div>
+          </li>
+          <li report-action="2">
+            <div class="itemsReportdiv">
+              <section id="itemsreportsectionId" class="horizontal-scroll">
+                <div
+                  data-i18n="reportScreen.itemReport.topItems"
+                  report-action="2"
+                  class="reportitem selectedItemreport has-i18n">
+                  Top Items
+                </div>
+                <div
+                  data-i18n="reportScreen.itemReport.cancelledItems"
+                  report-action="3"
+                  class="reportitem has-i18n">
+                  Cancelled Items
+                </div>
+                <div
+                  data-i18n="reportScreen.itemReport.soldItems"
+                  report-action="4"
+                  class="reportitem has-i18n">
+                  Sold Items
+                </div>
+                <div
+                  data-i18n="reportScreen.itemReport.complementaryItems"
+                  report-action="5"
+                  class="reportitem has-i18n">
+                  Complementary Items
+                </div>
+                <!-- <div report-action='7' class="reportitem" style="display: none !important;">Sectionwise Items</div> -->
+                <div
+                  data-i18n="reportScreen.itemReport.deadItems"
+                  report-action="6"
+                  class="reportitem has-i18n">
+                  Dead Items
+                </div>
+                <div
+                  data-i18n="reportScreen.itemReport.deletedItems"
+                  report-action="18"
+                  class="reportitem has-i18n">
+                  Deleted Items
+                </div>
+                <div
+                  data-i18n="reportScreen.itemReport.addonItems"
+                  report-action="19"
+                  class="reportitem has-i18n">
+                  Addon Items
+                </div>
+                <div
+                  data-i18n="reportScreen.itemReport.discountedItemsHeading"
+                  report-action="21"
+                  class="reportitem has-i18n">
+                  Discounted Items
+                </div>
+              </section>
+              <table
+                class="table table-sm table-striped report-table"
+                id="itemsreportTableid">
+                <tfoot>
+                  <tr>
+                    <th data-i18n="reportScreen.Total" class="has-i18n">
+                      Total :
+                    </th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                  </tr>
+                </tfoot>
+              </table>
+              <table
+                class="table table-sm table-striped report-table"
+                id="complementaryitemsreportTableid">
+                <tfoot>
+                  <tr>
+                    <th data-i18n="reportScreen.Total" class="has-i18n">
+                      Total :
+                    </th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                  </tr>
+                </tfoot>
+              </table>
+
+              <table
+                class="table table-sm table-striped"
+                id="deaditemsreportTableid"></table>
+              <table
+                class="table table-sm table-striped"
+                id="discounteditemsreportTableid"></table>
+            </div>
+          </li>
+          <li report-action="9">
+            <div class="salesReportdiv">
+              <table
+                class="table table-sm table-striped report-table"
+                id="paymentreportTableid">
+                <tfoot>
+                  <tr>
+                    <th data-i18n="reportScreen.Total" class="has-i18n">
+                      Total :
+                    </th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                  </tr>
+                </tfoot>
+              </table>
+            </div>
+          </li>
+
+          <!-- tax report -->
+          <li report-action="25">
+            <div class="salesReportdiv">
+              <table
+                class="table table-sm table-striped report-table"
+                id="vatreportTableid">
+                <tfoot>
+                  <tr>
+                    <th data-i18n="reportScreen.Total" class="has-i18n">
+                      Total :
+                    </th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                  </tr>
+                </tfoot>
+              </table>
+            </div>
+          </li>
+
+          <!-- mall report -->
+          <li report-action="26">
+            <div class="salesReportdiv">
+              <table
+                class="table table-sm table-striped report-table"
+                id="mallreportTableid">
+                <!-- <tfoot>
+                                    <tr>
+                                        <th data-i18n="reportScreen.Total" class="has-i18n">Total : </th>
+                                        <th></th>
+                                        <th></th>
+                                        <th></th>
+                                        <th></th>
+                                        <th></th>
+                                    </tr>
+                                </tfoot> -->
+              </table>
+            </div>
+          </li>
+
+          <!-- kot report -->
+          <li report-action="27">
+            <div class="salesReportdiv">
+              <table
+                class="table table-sm table-striped report-table"
+                id="kotreportTableid"></table>
+            </div>
+          </li>
+
+          <!-- reservation report -->
+          <li report-action="28">
+            <div class="salesReportdiv">
+              <table
+                class="table table-sm table-striped report-table"
+                id="reservationReportTableid"></table>
+            </div>
+          </li>
+
+          <li report-action="10">
+            <div class="salesReportdiv">
+              <table
+                class="table table-sm table-striped report-table"
+                id="orderreportTableid">
+                <tfoot>
+                  <tr>
+                    <th data-i18n="reportScreen.Total" class="has-i18n">
+                      Total :
+                    </th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                  </tr>
+                </tfoot>
+              </table>
+            </div>
+          </li>
+          <li report-action="11">
+            <div class="categorywiseReportdiv">
+              <div>
+                <input id="reportcatwithItemscheckid" type="checkbox" />
+                <label
+                  data-i18n="reportScreen.categoryWiseReport.printWithItems"
+                  class="has-i18n"
+                  for="reportcatwithItemscheckid">Print with items</label>
+              </div>
+              <table
+                class="table table-sm table-striped report-table"
+                id="catwisereportTableid">
+                <tfoot>
+                  <tr>
+                    <th data-i18n="reportScreen.Total" class="has-i18n">
+                      Total :
+                    </th>
+                    <th></th>
+                    <th></th>
+                  </tr>
+                </tfoot>
+              </table>
+            </div>
+          </li>
+          <li report-action="12">
+            <div class="kitchendepwiseReportdiv">
+              <table
+                class="table table-sm table-striped report-table"
+                id="kitchendepreportTableid">
+                <tfoot>
+                  <tr>
+                    <th data-i18n="reportScreen.Total" class="has-i18n">
+                      Total :
+                    </th>
+                    <th></th>
+                    <th></th>
+                  </tr>
+                </tfoot>
+              </table>
+            </div>
+          </li>
+          <li report-action="13">
+            <div class="couponhistoryReportdiv">
+              <div class="coupons-container-2">
+                <table
+                  class="table table-sm table-striped"
+                  id="couponreportTableid"></table>
+              </div>
+            </div>
+          </li>
+          <li report-action="14">
+            <div class="dayendReportdiv">
+              <table
+                class="table table-sm table-striped"
+                id="dayendreportTableid"></table>
+            </div>
+          </li>
+          <li report-action="15">
+            <div class="usershiftReportdiv">
+              <table
+                class="table table-sm table-striped"
+                id="usershiftreportTableid"></table>
+            </div>
+          </li>
+          <li report-action="16">
+            <div class="duepay-report-div">
+              <div
+                class="d-flex due-sections-container"
+                id="due-sections-container-id">
+                <div
+                  data-i18n="reportScreen.duePaymentReport.dueOrders"
+                  class="reportitem selectedSection subdueOrderscard has-i18n"
+                  report-action="16">
+                  Due Orders
+                </div>
+                <div
+                  data-i18n="reportScreen.duePaymentReport.customerDueOrders"
+                  class="reportitem subdueOrdershistorycard has-i18n"
+                  report-action="20">
+                  Customer Due Orders
+                </div>
+                <div
+                  data-i18n="reportScreen.duePaymentReport.dueOrdersHistoryHeading"
+                  class="reportitem subdueOrdershistorycard has-i18n"
+                  report-action="17">
+                  Due Orders History
+                </div>
+              </div>
+              <div
+                class="duepayreportTable-wrapper"
+                id="duepayreportTable-wrapper-id">
+                <table
+                  class="table table-sm table-striped"
+                  id="duepayreportTableid">
+                  <tfoot>
+                    <tr>
+                      <th
+                        data-i18n="reportScreen.Total"
+                        class="has-i18n"
+                        colspan="2">
+                        Total :
+                      </th>
+                      <th></th>
+                      <th></th>
+                      <th></th>
+                      <!-- <th></th> -->
+                      <th></th>
+
+                      <th></th>
+                    </tr>
+                  </tfoot>
+                </table>
+              </div>
+              <div
+                class="duepayreportTable-wrapper"
+                id="customerduepayreportTable-wrapper-id">
+                <table
+                  class="table table-sm table-striped"
+                  id="customerduepayreportTableid"></table>
+              </div>
+
+              <div
+                class="duepayhistoryreportTable-wrapper"
+                id="duepayhistoryreportTable-wrapper-id">
+                <table
+                  class="table table-sm table-striped"
+                  id="duepayhistoryreportTableid"></table>
+              </div>
+            </div>
+          </li>
+          <li report-action="22">
+            <div class="misc-report-div">
+              <div
+                class="d-flex misc-sections-container"
+                id="misc-sections-container-id">
+                <div
+                  data-i18n="reportScreen.todaysReportHeading"
+                  class="reportitem selectedSection has-i18n"
+                  report-action="22">
+                  Bill Print Report
+                </div>
+                <div
+                  data-i18n="reportScreen.MicsReport.appliedChargesReportHeading"
+                  class="reportitem has-i18n"
+                  report-action="23">
+                  Applied Charges Report
+                </div>
+              </div>
+              <div
+                class="miscreportTable-wrapper"
+                id="billprintreportTable-wrapper-id">
+                <table
+                  class="table table-sm table-striped"
+                  id="billprintreportTableid"></table>
+              </div>
+              <div
+                class="miscreportTable-wrapper"
+                id="appliedchargesreportTable-wrapper-id">
+                <table
+                  class="table table-sm table-striped"
+                  id="appliedchargesreportTableid"></table>
+              </div>
+            </div>
+          </li>
+          <li report-action="24">
+            <div class="preorderreportsDiv">
+              <table
+                class="table table-sm table-striped display tablenowrap"
+                id="preorderreportTableid"></table>
+            </div>
+          </li>
+          <li report-action="29">
+            <div class="preorderreportsDiv">
+              <table
+                class="table table-sm table-striped display tablenowrap"
+                id="deliveryBoyreportTableid"></table>
+            </div>
+          </li>
+          <li report-action="30">
+            <div class="preorderreportsDiv">
+              <table
+                class="table table-sm table-striped display tablenowrap"
+                id="userreportTableid"></table>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- delivery boy window -->
+  <div class="modal fade" id="preOrderDetailsModal">
+    <div class="modal-dialog modal-md modal-dialog-centered">
+      <div class="modal-content preOrderDetailsModalclass">
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h4
+            data-i18n
+            class="modal-title has-i18n"
+            id
+            style="font-weight: bold">
+            Order details
+          </h4>
+          <button type="button" class="close" data-dismiss="modal">
+            &times;
+          </button>
+        </div>
+
+        <!-- Modal body -->
+        <div class="modal-body preOrderDetailsBody" id="preOrderDetailsBodyid">
+          <h6>Order Items</h6>
+          <ul id="preOrderItemsContainerId"></ul>
+          <div id="preOrderInstruction">Instruction</div>
+          <div id="preOrderPaymentInstruction">Payment Instruction</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div
+  class="duepay-hidden-container"
+  id="duepay-hidden-container-id"
+  style="display: none">
+  <div class="duepay-parent-container">
+    <div class="d-flex center-flex">
+      <label data-i18n="reportScreen.orderAmount" class="bold has-i18n">Order
+        Amount:</label>
+      <input type="text" name id="duepay-orderamountInputid" disabled />
+    </div>
+    <div class="d-flex center-flex">
+      <label data-i18n="reportScreen.receivedAmount"
+        class="bold has-i18n">Received Amount:</label>
+      <input type="text" name id="duepay-receivedamountInputid" disabled />
+    </div>
+    <div class="d-flex center-flex">
+      <label data-i18n="reportScreen.amountToPay" class="bold has-i18n">Amount
+        to pay:</label>
+      <input type="number" name id="duepay-amounttopayInputid" />
+    </div>
+    <div class="d-flex center-flex p-2">
+      <label data-i18n="reportScreen.payMode" class="bold has-i18n">Pay
+        mode:</label>
+      <select class="selectionBox w-75" id="swal-duepay-paymentoptionsid">
+        <option
+          data-i18n="reportScreen.selectMode"
+          class="has-i18n"
+          disabled
+          selected
+          value>
+          -select mode-
+        </option>
+      </select>
+    </div>
+  </div>
+</div>
+
+<script>
+  require('../js/Allreportscontroller.js');
+</script>

@@ -1,0 +1,208 @@
+<div class="customermgmtContainer">
+  <div class="row">
+    <input type="checkbox" name="" id="showaddcustoerForm" />
+    <label
+      data-i18n="masterScreen.customerManagement.Add.addNewCustomer"
+      class="has-i18n"
+      for="showaddcustoerForm"
+      >Add new customer</label
+    >
+    <input
+      data-i18n="[value]masterScreen.customerManagement.Refresh"
+      class="has-i18n"
+      type="button"
+      value="Refresh"
+      id="refreshCustomersbutton"
+    />
+  </div>
+
+  <div class="inputWrapperdiv" id="inputWrapperdivid">
+    <select class="reportselect_container" id="customerFormSalutationId">
+      <option data-i18n="" value="-1" class="has-i18n" disabled selected value>
+        -- Select Salutation --
+      </option>
+    </select>
+    <input
+      data-i18n="[placeholder]masterScreen.customerManagement.Add.Name"
+      class="has-i18n"
+      type="text"
+      id="customeFormnameid"
+      placeholder="Name *"
+    />
+    <select class="reportselect_container" id="customerFormDialCodeId"></select>
+    <input
+      data-i18n="[placeholder]masterScreen.customerManagement.Add.Mobile"
+      class="has-i18n"
+      type="number"
+      id="customeFormmobileid"
+      placeholder="Mobile *"
+    />
+    <input
+      data-i18n="[placeholder]masterScreen.customerManagement.Add.Email"
+      class="has-i18n"
+      type="text"
+      id="customeFormmaild"
+      placeholder="Email"
+    />
+    <select
+      class="reportselect_container"
+      id="customerFormalternateDialCodeId"
+    ></select>
+    <input
+      data-i18n="[placeholder]masterScreen.customerManagement.Add.Mobile"
+      class="has-i18n"
+      type="number"
+      id="customeFormalternatemobileid"
+      placeholder="Alternate mobile"
+    />
+    <input
+      data-i18n="[placeholder]masterScreen.customerManagement.Add.dateOfBirth"
+      class="has-i18n"
+      type="text"
+      id="customeFormbirthld"
+      placeholder="Birthdate"
+      readonly
+    />
+    <input
+      data-i18n="[placeholder]masterScreen.customerManagement.Add.Business"
+      class="has-i18n"
+      type="text"
+      id="customeFormbusinessid"
+      placeholder="Business"
+    />
+    <input
+      data-i18n="[placeholder]masterScreen.customerManagement.Add.address1"
+      class="has-i18n"
+      type="text"
+      id="customeFormadd1id"
+      placeholder="Address 1"
+    />
+    <input
+      data-i18n="[placeholder]masterScreen.customerManagement.Add.address2"
+      class="has-i18n"
+      type="text"
+      id="customeFormadd2id"
+      placeholder="Address 2"
+    />
+    <input
+      data-i18n="[placeholder]masterScreen.customerManagement.Add.City"
+      class="has-i18n"
+      type="text"
+      name=""
+      id="customeFormcityid"
+      placeholder="City"
+    />
+    <input
+      data-i18n=""
+      class="has-i18n"
+      type="text"
+      name=""
+      id="customeFormStateid"
+      placeholder="State"
+    />
+    <input
+      data-i18n=""
+      class="has-i18n"
+      type="text"
+      name=""
+      id="customeFormPincodeid"
+      placeholder="Pincode"
+    />
+    <input
+      data-i18n="[placeholder]masterScreen.customerManagement.Add.GSTNo"
+      class="has-i18n"
+      type="text"
+      name=""
+      id="customeFormgstid"
+      placeholder="VAT No/ GST No/ TRN No:"
+    />
+    <input
+      data-i18n="[placeholder]masterScreen.customerManagement.Add.Anniversary"
+      class="has-i18n"
+      type="text"
+      name=""
+      id="customeFormannivid"
+      placeholder="Anniversary"
+      readonly
+    />
+    <input
+      data-i18n="[placeholder]masterScreen.customerManagement.Add.FSSAI"
+      class="has-i18n"
+      type="text"
+      name=""
+      id="customeFormfssaiid"
+      placeholder="FSSAI"
+    />
+    <input
+      data-i18n="[placeholder]masterScreen.customerManagement.Add.panNo"
+      class="has-i18n"
+      type="text"
+      name=""
+      id="customeFormpanid"
+      placeholder="PAN No."
+    />
+    <input
+      data-i18n="[placeholder]masterScreen.customerManagement.Add.aadharNo"
+      class="has-i18n"
+      type="text"
+      name=""
+      id="customeFormadharid"
+      placeholder="Aadhar No."
+    />
+    <input
+      data-i18n="[placeholder]masterScreen.customerManagement.Add.Description"
+      class="has-i18n"
+      type="text"
+      name=""
+      id="customeFormdescid"
+      placeholder="Description"
+    />
+    <input
+      data-i18n=""
+      class="has-i18n"
+      type="text"
+      name=""
+      id="custCreatedDate"
+      placeholder="Created date"
+      readonly
+    />
+    <select class="reportselect_container" id="customerFormCustTypeId">
+      <option data-i18n="" value="-1" class="has-i18n" disabled selected value>
+        -- Select Type --
+      </option>
+    </select>
+    <input
+      data-i18n=""
+      class="has-i18n"
+      type="text"
+      name=""
+      id="customeFormCommentid"
+      placeholder="Comment"
+    />
+    <!-- <input type="button" name="" id="submitcustomerForm" value="Add"> -->
+    <input type="checkbox" name="" id="createcustomerWalletcheck" />
+    <label
+      data-i18n="masterScreen.customerManagement.Add.createWallet"
+      class="has-i18n"
+      for="createcustomerWalletcheck"
+      >Create wallet</label
+    >
+    <button
+      data-i18n="masterScreen.customerManagement.AddHeading"
+      class="has-i18n"
+      id="submitcustomerForm"
+    >
+      Add
+    </button>
+  </div>
+  <div class="customerDatadiv" id="customerDatadivid">
+    <table class="table table-sm customersTable" id="customersTableid"></table>
+  </div>
+</div>
+<script>
+  require('../js/CustomerController.js');
+</script>
+<!-- Insert this line after script imports -->
+<script>
+  if (window.module) module = window.module;
+</script>

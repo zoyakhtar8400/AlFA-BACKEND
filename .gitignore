@@ -1,0 +1,45 @@
+# Dependencies
+node_modules/
+jspm_packages/
+
+# Environment & Secrets
+.env
+.env.local
+.env.*.local
+*.env
+
+# Logs & Debug
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Runtime data & DB files
+*.sqlite
+*.db
+pids
+*.pid
+*.seed
+*.pid.lock
+
+# Operating System Files
+.DS_Store
+Thumbs.db
+ehthumbs.db
+
+# Editor / IDE directories
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# Build & Coverage
+dist/
+build/
+coverage/
+.nyc_output/

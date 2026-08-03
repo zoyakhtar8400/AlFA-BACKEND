@@ -1,0 +1,31 @@
+.preorderModalbody {
+    width: 100%;
+}
+
+.preorderModalcontainer {
+    width: 50% !important;
+    max-width: 70% !important;
+}
+
+.preorderModalcontainer .form-group {
+    margin-bottom: 0.3rem;
+}
+
+.preorderModalcontainer .form-group label {
+    margin-bottom: 0.1rem !important;
+}
+
+.preorder-container {
+    height: 50vh;
+    overflow: hidden;
+    overflow-y: scroll;
+    padding: 3px 5px 5px 5px;
+}
+
+.w-85 {
+    width: 85% !important;
+}
+
+.w-15 {
+    width: 15% !important;
+}

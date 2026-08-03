@@ -1,0 +1,86 @@
+{
+  "app": "TMBill Atlantic POS",
+  "changelogs": [
+    {
+      "releaseDate": "04 September 2021",
+      "version": "6.1.132",
+      "logs": {
+        "Features": [
+          "Custom bill number with prefix support added.",
+          "Pre-Order Feature added.",
+          "BuyX-GetY Feature added.",
+          "Re-Sync Bills Feature added.",
+          "Malfunction Report added for charges applied and Bill print.",
+          "Item as complementary access level added.",
+          "Customer Paid Amount Added on Bill.",
+          "Due payment access level added."
+        ],
+        "Changes": [
+          "Draft print for TA/HD",
+          "Pull online orders on complete or cancelled.",
+          "Tax on charges showing separately.",
+          "Reason of cancel item, discount, cancel bill, free bill changes are added."
+        ],
+        "Bug Fixes": [
+          "Dashboard Calculation issues fixed.",
+          "Online Order Notification changes in POS bug fixed.",
+          "Open item inclusive tax calculation bug fixed.",
+          "If we split the bill prefix is not showing on the bill issue fixed.",
+          "Bill preview not opening sometimes bug fixed."
+        ]
+      }
+    },
+    {
+      "releaseDate": "27 November 2020",
+      "version": "6.0.7",
+      "logs": {
+        "Features": [
+          "Category report print with items option added.",
+          "Allow payment mode while making due payment.",
+          "Show payment mode and bill type on digital orders print."
+        ],
+        "Changes": ["Minor UI changes"],
+        "Bug Fixes": ["Item with options had some inventory sync issues.Fixed"]
+      }
+    },
+    {
+      "releaseDate": "17 November 2020",
+      "version": "6.0.6",
+      "logs": {
+        "Features": [
+          "You can now reset KOT and Bill after a specific interval.",
+          "Item level discount added.",
+          "Item level discount report added.",
+          "Add and remove new store made easier.",
+          "You can now assign a waiter to the table.",
+          "Now you can recognize if KOT is new or running. ",
+          "Multiple KDS live notification support added.",
+          "Fast settle window added."
+        ],
+        "Changes": ["Minor UI changes"],
+        "Bug Fixes": [
+          "Complimentary item tax issues fixed.",
+          "Customer address update while placing KOT is fixed ",
+          "Sometimes all deleted KOT items weren't in sync with backend."
+        ]
+      }
+    },
+    {
+      "releaseDate": "17 September 2020",
+      "version": "5.0.16",
+      "logs": {
+        "Features": [
+          "If you use old kot print frequently you can set the default check for kot print as well as for cancel kot print.",
+          "Now you can show the customer GST no on bill if the setting is turned on.\n (<b>Note: This will work only if the customer  has GST number</b>)"
+        ],
+        "Changes": ["Minor UI changes"],
+        "Bug Fixes": [
+          "Item split bill issue fixed.",
+          "Sometimes the tax values in bill preview were wrong <b>(not the calculation)</b>.Fixed. ",
+          "In online orders menu items after enable/disable were still selected.Fixed.",
+          "Now on the free bill's payment mode won't be displayed in reports."
+        ]
+      }
+    }
+  ]
+}

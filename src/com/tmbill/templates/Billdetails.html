@@ -1,0 +1,121 @@
+<div class="bill-details-container" id="bill-details-containerid">
+  <link rel="stylesheet" href="../css/Billdetails.css" />
+  <div class="row bill-details-info-container">
+    <div class="row bill-details-info-1">
+      <div class="col-sm-3 billinfo-card p-2 font-bold">
+        <label data-i18n="billDetails.orderID" class="has-i18n" for=""
+          >Order ID:</label
+        >
+      </div>
+      <div class="col-sm-3 billinfo-card p-2">
+        <label id="billdetails-orderid"></label>
+      </div>
+      <div class="col-sm-3 billinfo-card p-2 font-bold">
+        <label data-i18n="billDetails.outletID" class="has-i18n" for=""
+          >Outlet ID :</label
+        >
+      </div>
+      <div class="col-sm-3 billinfo-card p-2">
+        <label id="billdetails-storeid"></label>
+      </div>
+    </div>
+    <div class="row bill-details-info-2">
+      <div class="col-sm-3 billinfo-card p-2 font-bold">
+        <label data-i18n="billDetails.outletName" class="has-i18n"
+          >Outlet name:</label
+        >
+      </div>
+      <div class="col-sm-3 billinfo-card p-2">
+        <label id="billdetails-outletnameid"></label>
+      </div>
+      <div class="col-sm-3 billinfo-card p-2 font-bold">
+        <label data-i18n="billDetails.customerName" class="has-i18n" for=""
+          >Customer name :</label
+        >
+      </div>
+      <div class="col-sm-3 billinfo-card p-2">
+        <label for="" id="billdetails-customerid"></label>
+      </div>
+    </div>
+    <div class="row bill-details-info-3">
+      <div class="col-sm-3 billinfo-card p-2 font-bold">
+        <label data-i18n="billDetails.tableName" class="has-i18n" for=""
+          >Table name:</label
+        >
+      </div>
+      <div class="col-sm-3 billinfo-card p-2">
+        <label for="" id="billdetails-tablenameid"></label>
+      </div>
+      <div class="col-sm-3 billinfo-card font-bold p-2">
+        <label data-i18n="billDetails.userName" class="has-i18n" for=""
+          >User name :</label
+        >
+      </div>
+      <div class="col-sm-3 billinfo-card p-2">
+        <label for="" id="billdetails-usernameid"></label>
+      </div>
+    </div>
+    <div class="row bill-details-info-4">
+      <div class="col-sm-3 billinfo-card p-2 font-bold">
+        <label data-i18n="billDetails.Date" class="has-i18n" for=""
+          >Date:</label
+        >
+      </div>
+      <div class="col-sm-3 billinfo-card p-2">
+        <label for="" id="billdetails-dateid"></label>
+      </div>
+      <div
+        data-i18n="billDetails.orderType"
+        class="col-sm-3 billinfo-card p-2 font-bold has-i18n"
+      >
+        <label for="">Order type :</label>
+      </div>
+      <div
+        class="col-sm-3 billinfo-card p-2"
+        id="billdetails-ordertypeid"
+      ></div>
+    </div>
+    <div class="row bill-details-info-5">
+      <div class="col-sm-3 billinfo-card p-2 font-bold">
+        <label class="has-i18n" for="" data-i18n="billDetails.deliveryBoy"
+          >Delivery Boy:</label
+        >
+      </div>
+      <div class="col-sm-3 billinfo-card p-2">
+        <label for="" id="billdetails-deliveryBoy-id"></label>
+      </div>
+      <div class="col-sm-3 billinfo-card p-2 font-bold has-i18n">
+        <label for="" class="has-i18n" data-i18n="billDetails.address"
+          >Address :</label
+        >
+      </div>
+      <div class="col-sm-3 billinfo-card p-2" id="billdetails-address-id"></div>
+    </div>
+  </div>
+
+  <div class="billitems-container">
+    <table
+      class="table table-bordered table-striped"
+      id="billdetailsitemTableid"
+    >
+      <thead>
+        <tr>
+          <th data-i18n="billDetails.itemName" class="has-i18n">Item Name</th>
+          <th data-i18n="billDetails.QTY" class="has-i18n">Qty</th>
+          <th data-i18n="billDetails.Amount" class="has-i18n">Amount</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+  </div>
+
+  <div class="billdetails-overall-info">
+    <label for="" id="bill-total-id"></label>
+    <label for="" id="bill-totaltax-id"></label>
+    <label for="" id="bill-totaldiscount-id"></label>
+  </div>
+</div>
+
+<script>
+  require('../js/BilldetailsController.js');
+</script>

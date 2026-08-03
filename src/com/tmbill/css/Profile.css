@@ -1,0 +1,192 @@
+.profileWrapper, #profilesettingsDivid, #profileTab {
+    width: 100%;
+    height: 100%;
+}
+
+.profileWrapper {
+    overflow-y: auto;
+    padding-top: 5px;
+}
+
+.hotelinfoWrapper {
+    display: grid;
+    margin-top: 5px;
+    margin-right: 5px;
+    text-align: center;
+    height: 70%;
+}
+
+.hotelLogodiv {
+    max-height: 200px;
+}
+
+.hotelLogodiv img {
+    height: 130px;
+    width: 130px;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    border-radius: 75px;
+    background-color: #E0E5EC;
+    box-shadow: 9px 9px 16px rgb(163, 177, 198, 0.6), -9px -9px 16px rgba(255, 255, 255, 0.5);
+}
+
+.storeUsernamediv {
+    display: grid;
+}
+
+.storestaticInfodiv {
+    margin: 0;
+    max-width: 100%;
+    padding: 10px;
+    display: flex;
+    margin-right: 6px;
+    min-height: 80px;
+}
+
+.updatabledataDiv {
+    display: grid;
+}
+
+.updatabledataDiv label, .updatabledataDiv input[type=text] {
+    width: 80%;
+}
+
+#hoteltitleheadingId {
+    font-weight: 600;
+    letter-spacing: 1px;
+}
+
+.info-card {
+    width: 30%;
+    margin-left: 5px;
+}
+
+.info-card h5 {
+    word-break: break-word;
+}
+
+.inlineContainer {
+    display: inline-flex;
+    justify-content: flex-end;
+    margin-top: 2px;
+}
+
+.inlineContainer .btn {
+    width: fit-content;
+    background-color: #dc3545;
+    border-color: #dc3545;
+}
+
+.neumorphismEffect {
+    padding: 10px;
+    border-radius: .5em;
+    background-color: #E0E5EC;
+    box-shadow: 9px 9px 16px rgb(163, 177, 198, 0.6), -9px -9px 16px rgba(255, 255, 255, 0.5);
+}
+
+@media (max-width: 1366px) and (min-width: 1024px) {
+
+  .profileWrapper {
+    padding: 10px 14px;
+  }
+
+  .hotelinfoWrapper {
+    height: auto;
+    margin-right: 0;
+  }
+  .hotelLogodiv { max-height: 180px; }
+  .hotelLogodiv img {
+    width: 112px;
+    height: 112px;
+    border-radius: 56px;
+  }
+  #hoteltitleheadingId {
+    font-size: 22px;  
+    letter-spacing: .6px;
+  }
+
+  .storestaticInfodiv {
+    padding: 8px 10px;
+    display: flex;
+    gap: 12px;                   
+    justify-content: space-between;
+    flex-wrap: nowrap;   
+  }
+  .info-card {
+    flex: 0 0 calc(33.333% - 8px);  
+    width: calc(33.333% - 8px);
+    margin-left: 0;
+  }
+
+  
+  .info-card h6 {             
+    font-size: 13px;
+    line-height: 1.2;
+    margin-bottom: 4px;
+  }
+  .info-card h5 {            
+    font-size: 16px;
+    line-height: 1.25;
+    word-break: break-word;
+    margin-bottom: 0;
+  }
+
+  /* Expiry strip text a touch smaller so it fits neatly */
+  .alert.profileExpiryinfo {
+    font-size: 13px;
+    padding: 8px 10px;
+    margin-bottom: 10px !important;
+  }
+
+  /* Form rows: two columns on small desktops, aligned and tidy */
+  .updatabledataDiv { gap: 10px; }
+  .inlineContainer {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* stay two columns at 1024 */
+    gap: 12px;
+    width: 100%;
+    
+  }
+
+
+  .updatabledataDiv input[type=text] {
+    width: 100%;
+    padding: 8px 10px;
+    font-size: 14px;
+  }
+
+  /* Buttons remain right-aligned and compact */
+  .inlineContainer .btn,
+  .updatabledataDiv input[type=button] {
+    width: auto;
+    padding: 8px 14px;
+    font-size: 14px;
+    justify-self: end;
+  }
+}
+
+/* Optional: if someone resizes below ~990px (still desktop window),
+   allow graceful wrap to 2 cards per row without touching true mobiles. */
+@media (max-width: 990px) and (min-width: 900px) {
+  .storestaticInfodiv { flex-wrap: wrap; }
+  .info-card { flex: 0 0 calc(50% - 8px); width: calc(50% - 8px); }
+}
+/* Keep the two action buttons side-by-side and right-aligned at 1024–1366 */
+@media (max-width: 1366px) and (min-width: 1024px) {
+  .updatabledataDiv .inlineContainer:last-child {
+    display: inline-flex !important;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 0px;                          /* reduced space here */
+    width: 100%;
+  }
+
+  .updatabledataDiv .inlineContainer:last-child input[type=button],
+  .updatabledataDiv .inlineContainer:last-child .btn {
+    width: auto;
+    padding: 8px 14px;
+    font-size: 12.8px;
+  }
+}
+

@@ -1,0 +1,197 @@
+
+    <div class="modal fade" data-backdrop="static" id="IRNItemmodal">
+        <div class="modal-dialog modal-lg modal-dialog-centered IRNItemmodal">
+            <div class="modal-content IRNItemmodalWrapper">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body IRNItemmodalbody" id="IRNItemmodalBodyid">
+                    <div id="irnItemDetails">
+                        <div class="row mb-2">
+                            <div class="text-sm-right col-sm-3">
+                                <b>Serial No. of Item :</b>
+                            </div>
+                            <div class="col" id="srNoItemDetailId"></div>
+                            <div class="text-sm-right col-sm-3">
+                                <b>Product Description :</b>
+                            </div>
+                            <div class="col" id="descItemdetailid"></div>
+                        </div>
+                        <div class="row mb-2">
+                            <div class="text-sm-right col-sm-3">
+                                <b>Specify whether the supply is service :</b>
+                            </div>
+                            <div class="col">N</div>
+                            <div class="text-sm-right col-sm-3">
+                                <b>HSN Code :</b>
+                            </div>
+                            <div class="col" id="hsnCodeItemdetailid"></div>
+                        </div>
+                        <div class="row mb-2">
+                            <div class="text-sm-right col-sm-3">
+                                <b>Bar Code :</b>
+                            </div>
+                            <div class="col">N/A</div>
+                            <div class="text-sm-right col-sm-3">
+                                <b>Quantity :</b>
+                            </div>
+                            <div class="col" id="qtyItemdetailid"></div>
+                        </div>
+                        <div class="row mb-2">
+                            <div class="text-sm-right col-sm-3">
+                                <b>Free Quantity :</b>
+                            </div>
+                            <div class="col">0</div>
+                            <div class="text-sm-right col-sm-3">
+                                <b>Unit :</b>
+                            </div>
+                            <div class="col">
+                                <select class="custom-select custom-select-sm" id="itemUnitid">
+                                    <option value="Bags">BAG</option>
+                                    <option value="OTH">Barrel</option>
+                                    <option value="BDL">Bundles</option>
+                                    <option value="BOX">Boxes</option>
+                                    <option value="BTL">Bottles</option>
+                                    <option value="DOZ">Duzen</option>
+                                    <option value="DRM">Drum</option>
+                                    <option value="GMS">Grams</option>
+                                    <option value="KGS">Kilograms</option>
+                                    <option value="MLT">Milli Litres</option>
+                                    <option value="LTR">Litres</option>
+                                    <option value="NOS">Numbers</option>
+                                    <option value="PAC">Packs</option>
+                                    <option value="PCS">Pieces</option>
+                                    <option value="CAN">Cans</option>
+                                    <option value="BUN">BUNCHES</option>
+                                    <option value="SET">SETS</option>
+                                    <option value="UNT">UNITS</option>
+                                    <option value="OTH">OTHER</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row mb-2">
+                            <div class="text-sm-right col-sm-3">
+                                <b>Unit Price - Rate :</b>
+                            </div>
+                            <div class="col" id="priceItemDetailid"></div>
+                            <div class="text-sm-right col-sm-3">
+                                <b>Gross Amount (Unit Price * Quantity) :</b>
+                            </div>
+                            <div class="col" id="totalItemdetailid"></div>
+                        </div>
+                        <div class="row mb-2">
+                            <div class="text-sm-right col-sm-3">
+                                <b>Discount :</b>
+                            </div>
+                            <div class="col" id="discountItemdetailid"></div>
+                            <div class="text-sm-right col-sm-3">
+                                <b>Pre tax value:</b>
+                            </div>
+                            <div class="col">0</div>
+                        </div>
+                        <div class="row mb-2">
+                            <div class="text-sm-right col-sm-3">
+                                <b>Tax Value (Total Amount -Discount):</b>
+                            </div>
+                            <div class="col" id="taxValueitemdetailid"></div>
+                            <div class="text-sm-right col-sm-3">
+                                <b>GST rate  :</b>
+                            </div>
+                            <div class="col" id="gstItemdetailid"></div>
+                        </div>
+                        <div class="row mb-2">
+                            <div class="text-sm-right col-sm-3">
+                                <b>Amount of IGST payable:</b>
+                            </div>
+                            <div class="col" id="totalIgstPaybleid"></div>
+                            <div class="text-sm-right col-sm-3">
+                                <b>Amount of CGST payable:</b>
+                            </div>
+                            <div class="col" id="totalCgstPaybleid"></div>
+                        </div>
+                        <div class="row mb-2">
+                            <div class="text-sm-right col-sm-3">
+                                <b>Amount of SGST payable:</b>
+                            </div>
+                            <div class="col" id="totalSgstPaybleid"></div>
+                            <div class="text-sm-right col-sm-3">
+                                <b>Cess Rate:</b>
+                            </div>
+                            <div class="col">0</div>
+                        </div>
+                        <div class="row mb-2">
+                            <div class="text-sm-right col-sm-3">
+                                <b>Cess Amount:</b>
+                            </div>
+                            <div class="col">0</div>
+                            <div class="text-sm-right col-sm-3">
+                                <b>Cess Non-Advol Amount:</b>
+                            </div>
+                            <div class="col">0</div>
+                        </div>
+                        <div class="row mb-2">
+                            <div class="text-sm-right col-sm-3">
+                                <b>State CESS Rate:</b>
+                            </div>
+                            <div class="col">0</div>
+                            <div class="text-sm-right col-sm-3">
+                                <b>State CESS Amount:</b>
+                            </div>
+                            <div class="col">0</div>
+                        </div>
+                        <div class="row mb-2">
+                            <div class="text-sm-right col-sm-3">
+                                <b>State CESS Non Adval Amount :</b>
+                            </div>
+                            <div class="col">0</div>
+                            <div class="text-sm-right col-sm-3">
+                                <b>Other Charges:</b>
+                            </div>
+                            <div class="col">0</div>
+                        </div>
+                        <div class="row mb-2">
+                            <div class="text-sm-right col-sm-3">
+                                <b>Total Item Value :</b>
+                            </div>
+                            <div class="col" id="totalwithtaxItemdetailid"></div>
+                            <div class="text-sm-right col-sm-3">
+                                <b>Order line reference:</b>
+                            </div>
+                            <div class="col">N/A</div>
+                        </div>
+                        <div class="row mb-2">
+                            <div class="text-sm-right col-sm-3">
+                                <b>Origin Country :</b>
+                            </div>
+                            <div class="col"></div>
+                            <div class="text-sm-right col-sm-3">
+                                <b>Serial number:</b>
+                            </div>
+                            <div class="col"></div>
+                        </div>
+                        <div class="row mb-2">
+                            <div class="text-sm-right col-sm-3">
+                                <b>Batch Details :</b>
+                            </div>
+                            <div class="col"> <b>Batch number :</b></div>
+                            <div class="col"><b>Batch Expiry Date :</b></div>
+                            <div class="col"><b>Warranty Date :</b></div>
+                        </div>
+                        <div class="row mb-2">
+                            <div class="text-sm-right col-sm-3">
+                                <b>Attribute Details :</b>
+                            </div>
+                            <div class="col"> <b>Name of item :</b></div>
+                            <div class="col" id="nameItemdetailid"></div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <script>
+        require('../js/IRN/itemDetails.js');
+    </script>
+y

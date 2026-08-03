@@ -1,0 +1,1695 @@
+#closeShiftModal {
+  --bg: #fbfcfd;
+  --panel: #ffffff;
+  --muted: #262629;
+  --text: #111827;
+  --accent: #16a34a;
+  --danger: #ef4444;
+  --border: #e5e7eb;
+  --border-soft: #f3f4f6;
+  --shadow-soft: 0 10px 30px rgba(15, 23, 42, 0.06);
+  --shadow-subtle: 0 6px 18px rgba(15, 23, 42, 0.03);
+  --radius-lg: 14px;
+  --radius-md: 10px;
+  --radius-sm: 8px;
+  --pill: 999px;
+  --fs-base: 14px;
+  --fs-sm: 13px;
+  --fs-xs: 12px;
+} /* ---------------- Modal shell ---------------- */
+#closeShiftModal .closeShiftmodal-dialog {
+  width: 97% !important;
+  max-width: 1260px !important;
+  margin: 20px auto !important;
+  height: calc(100vh - 48px) !important;
+}
+#closeShiftModal .closeShiftModalwrapper,
+#closeShiftModal .startDayAndShiftModalwrapper {
+  height: 95%;
+  display: flex;
+  flex-direction: column;
+  background: linear-gradient(180deg, #ffffff 0, #fbfcfe 100%);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-soft);
+  border: 0;
+  overflow: hidden;
+} /* header */
+#closeShiftModal .startDayAndShiftModalHeaderwrapper {
+  display: flex !important;
+  align-items: center;
+  justify-content: center !important;
+  padding: 14px 22px !important;
+  background: transparent !important;
+  border-bottom: 1px solid #e9e3e3;
+}
+#closeShiftModal .startDayAndShiftModalHeaderwrapper h5 {
+  margin: 0;
+  font-weight: 500;
+  font-size: 1.15rem;
+  color: var(--text);
+} /* body */
+#closeShiftModal .startDayAndShiftModalbody {
+  flex: 1;
+  padding: 18px;
+  background: var(--bg);
+  overflow: hidden;
+}
+#closeShiftModal #closeDayAndShiftModalbodyid {
+  height: 100%;
+} /* ---------------- 3-column layout ---------------- */
+#closeShiftModal .closeDayAndShiftContainer {
+  height: 100%;
+  display: flex;
+  gap: 18px;
+  align-items: stretch;
+}
+#closeShiftModal .closeDayAndShiftContainer > .col-3 {
+  flex: 0 0 24%;
+  min-width: 230px;
+  max-width: 320px;
+}
+#closeShiftModal .closeDayAndShiftContainer > .col-6 {
+  flex: 1 1 56%;
+  min-width: 560px;
+}
+#closeShiftModal .closeDayAndShiftContainer > .col-3,
+#closeShiftModal .closeDayAndShiftContainer > .col-6 {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: 0;
+} /* ---------------- card base ---------------- */
+#closeShiftModal .acc-card {
+  background: var(--panel);
+  border-radius: var(--radius-md);
+  border: 1px solid #e9e3e3;
+  box-shadow: var(--shadow-subtle);
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+}
+#closeShiftModal .acc-card-full {
+  flex: 1 1 auto;
+  min-height: 430px;
+}
+#closeShiftModal .acc-card-main {
+  flex: 0 1 40%;
+  min-height: 188px;
+}
+.acc-card.acc-card-half {
+  height: 205px;
+}
+#closeShiftModal .acc-card-notes {
+  flex: 0 0 170px;
+}
+#closeShiftModal .acc-card-header {
+  font-weight: 600;
+  font-size: 15px;
+  color: var(--muted);
+  margin-bottom: 8px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+#closeShiftModal .acc-card-subtitle {
+  font-size: 15px;
+  color: var(--muted);
+  font-weight: 600;
+  margin-bottom: 8px;
+} /* two-half row (Session Info + Account Stats) */
+#closeShiftModal .acc-row-two {
+  display: flex;
+  gap: 12px;
+}
+#closeShiftModal .acc-card-half {
+  flex: 1;
+} /* ---------------- tables base ---------------- */
+#closeShiftModal table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: Inter, Arial, sans-serif;
+  font-size: var(--fs-sm);
+  color: var(--text);
+}
+#closeShiftModal th {
+  background: #f8fafc;
+  color: var(--muted);
+  text-transform: uppercase;
+  font-size: 0.78rem;
+  letter-spacing: 0.035em;
+  padding: 12px 14px;
+  border-bottom: 1px solid #e5e7eb;
+  text-align: left;
+}
+#closeShiftModal td {
+  padding: 10px 14px;
+  border-bottom: 1px solid #f3f4f6;
+  vertical-align: middle;
+  text-align: left;
+} /* number inputs */
+#closeShiftModal input[type='number'] {
+  width: 100%;
+  padding: 6px 10px;
+  border-radius: 8px;
+  border: 1px solid #edf2f7;
+  background: #fbfeff;
+  font-size: 13.5px;
+  color: var(--text);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.7);
+} /* ============================================================ CURRENCY DENOMINATION – EXACT COPY OF CLOSE DAY & SHIFT (IDs adapted to #closeShiftCashDenominationTableId) ============================================================ */ /* Slightly narrower left column to free space */
+#closeShiftModal .closeDayAndShiftContainer > .col-3 {
+  flex: 0 0 23%;
+  min-width: 200px;
+  max-width: 280px;
+} /* Keep left card compact */
+#closeShiftModal .col-3.acc-layout-col .acc-card-full {
+  padding: 8px;
+  min-height: 340px;
+} /* Table base - tighter spacing and smaller text */
+#closeShiftModal #closeShiftCashDenominationTableId {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0 6px; /* smaller gap for compact pills */
+  font-family: Inter, Arial, sans-serif;
+  font-size: 14px;
+} /* Header */
+#closeShiftModal .currencyDenominationTableHeader {
+  display: flex !important;
+  align-items: center;
+  justify-content: space-between;
+  padding: 6px 8px !important;
+  /* background: transparent !important; */
+  border-bottom: none !important;
+  color: var(--muted);
+  font-weight: 700;
+  font-size: 14px;
+}
+#closeShiftModal .currencyDenominationTableHeader i {
+  width: 32px;
+  height: 22px;
+  border-radius: 8px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--accent);
+  font-size: 12px;
+} /* Pill rows — shorter height and tighter padding */
+#closeShiftModal #closeShiftCashDenominationTableId tbody td {
+  border: 1px solid #e9e3e3;
+  padding: 8px 10px;
+  vertical-align: middle;
+  line-height: 1;
+} /* Rounded pill edges */
+#closeShiftModal #closeShiftCashDenominationTableId tbody tr td:first-child {
+  border-right: 0;
+  border-top-left-radius: 8px;
+  border-bottom-left-radius: 8px;
+  padding-left: 14px;
+  font-weight: 600;
+  font-size: 13.5px;
+  color: #494951;
+} /* Count column (middle) — compact and centered */
+#closeShiftModal #closeShiftCashDenominationTableId tbody tr td:nth-child(2) {
+  width: 16%;
+  text-align: center;
+  font-weight: 800;
+  font-size: 14px;
+  border-left: 0;
+  border-right: 0;
+  padding: 8px 6px;
+} /* Amount column (right) */
+#closeShiftModal #closeShiftCashDenominationTableId tbody tr td:nth-child(3) {
+  width: 24%;
+  text-align: right;
+  color: var(--muted);
+  border-left: 0;
+  border-top-right-radius: 8px;
+  border-bottom-right-radius: 8px;
+  padding-right: 14px;
+  font-weight: 700;
+} /* Inputs that JS may inject — compact heights so pills remain short */
+#closeShiftModal
+  #closeShiftCashDenominationTableId
+  tbody
+  td
+  input[type='number'],
+#closeShiftModal
+  #closeShiftCashDenominationTableId
+  tbody
+  td
+  input[type='text'] {
+  width: 100%;
+  border: none;
+  background: transparent;
+  padding: 0;
+  margin: 0;
+  height: 24px;
+  line-height: 24px;
+  font-size: 13.25px;
+  color: inherit;
+  box-shadow: none;
+} /* Middle column count input: narrow, centered */
+#closeShiftModal
+  #closeShiftCashDenominationTableId
+  tbody
+  tr
+  td:nth-child(2)
+  input {
+  width: 40px;
+  height: 24px;
+  text-align: center;
+  margin: 0 auto;
+  font-weight: 600;
+} /* Amount input: right aligned & compact */
+#closeShiftModal
+  #closeShiftCashDenominationTableId
+  tbody
+  tr
+  td:nth-child(3)
+  input {
+  width: 110px;
+  height: 24px;
+  text-align: right;
+  margin-left: auto;
+} /* Remove default focus ring for calm visuals */
+#closeShiftModal #closeShiftCashDenominationTableId tbody td input:focus {
+  outline: none;
+} /* Footer (Total Cash in Drawer) — same pill as rows */
+#closeShiftModal .currencyDenominationTableFooter td {
+  background: #ffffff;
+  /* border: 1px solid #e9e3e3; */
+  padding: 8px 10px;
+  vertical-align: middle;
+  line-height: 1;
+} /* Rounded corners across footer cells */
+#closeShiftModal .currencyDenominationTableFooter td:first-child {
+  border-top-left-radius: 8px;
+  border-bottom-left-radius: 8px;
+  text-align: left;
+  font-weight: 800;
+  color: var(--muted);
+  padding-left: 14px;
+}
+#closeShiftModal .currencyDenominationTableFooter td:last-child {
+  border-top-right-radius: 8px;
+  border-bottom-right-radius: 8px;
+  text-align: right;
+  padding-right: 14px;
+} /* Total input: like row amount cell */
+#closeShiftModal #closeShiftCashInDrawerId {
+  width: 110px;
+  border: none !important;
+  background: transparent !important;
+  text-align: right;
+  font-weight: 800;
+  color: var(--accent);
+  height: 24px;
+  line-height: 24px;
+  padding: 0;
+  margin: 0;
+  caret-color: var(--accent);
+  -webkit-appearance: none;
+  appearance: none;
+} /* Remove browser spin controls for number inputs */
+#closeShiftModal #closeShiftCashInDrawerId::-webkit-outer-spin-button,
+#closeShiftModal #closeShiftCashInDrawerId::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+} /* Hide focus outlines/box-shadows from browsers on focus (double-safety) */
+#closeShiftModal #closeShiftCashInDrawerId:focus {
+  outline: none !important;
+  box-shadow: none !important;
+  background: transparent !important;
+} /* tiny responsive tweak for smaller desktop widths */
+@media (max-width: 1366px) {
+  #closeShiftModal #closeShiftCashDenominationTableId {
+    border-spacing: 0 5px;
+    font-size: 12.3px;
+  }
+  #closeShiftModal .col-3.acc-layout-col .acc-card-full {
+    min-height: 320px;
+  }
+} /* ============================================================ PAYMENT RECONCILIATION ============================================================ */
+#closeShiftModal .closeShiftTransactionTableContainerClass {
+  flex: 1 1 auto;
+  border-radius: 12px;
+  background: #ffffff;
+  border: 1px solid #e9e3e3;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.8);
+  overflow-y: auto;
+  overflow-x: hidden;
+  position: relative;
+}
+#closeShiftModal #closeShiftTransactionsTableId {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed;
+  font-family: Inter, Arial, sans-serif;
+  font-size: var(--fs-sm);
+  color: var(--text);
+} /* sticky header */
+#closeShiftModal #closeShiftTransactionsTableId thead th {
+  background: #f8fafc;
+  color: var(--muted);
+  text-transform: uppercase;
+  font-size: 13px;
+  letter-spacing: 0.08em;
+  padding: 8px 12px;
+  border-bottom: 1px solid #e5e7eb;
+  position: sticky;
+  top: 0;
+  z-index: 2;
+} /* column widths */
+#closeShiftModal #closeShiftTransactionsTableId th:nth-child(1),
+#closeShiftModal #closeShiftTransactionsTableId td:nth-child(1) {
+  width: 18%;
+  text-align: center;
+}
+#closeShiftModal #closeShiftTransactionsTableId th:nth-child(2),
+#closeShiftModal #closeShiftTransactionsTableId td:nth-child(2) {
+  width: 18%;
+  text-align: center;
+}
+#closeShiftModal #closeShiftTransactionsTableId th:nth-child(3),
+#closeShiftModal #closeShiftTransactionsTableId td:nth-child(3),
+#closeShiftModal #closeShiftTransactionsTableId th:nth-child(4),
+#closeShiftModal #closeShiftTransactionsTableId td:nth-child(4),
+#closeShiftModal #closeShiftTransactionsTableId th:nth-child(5),
+#closeShiftModal #closeShiftTransactionsTableId td:nth-child(5) {
+  width: 19%;
+  text-align: right;
+} /* body rows */
+#closeShiftModal #closeShiftTransactionsTableId tbody td {
+  padding: 8px 12px;
+  border-bottom: 1px solid #e9e3e3;
+  vertical-align: middle;
+  font-size: 13px;
+}
+#closeShiftModal #closeShiftTransactionsTableId tbody td:nth-child(1) {
+  font-weight: 500;
+  color: var(--text);
+} /* Trans. Count pill */
+#closeShiftModal #closeShiftTransactionsTableId tbody td:nth-child(2) {
+  font-weight: 500;
+  font-size: 13px;
+}
+#closeShiftModal #closeShiftTransactionsTableId tbody td:nth-child(2) > * {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 26px;
+  height: 22px;
+  padding: 0 6px;
+  background: #ffffff;
+  border-radius: 999px;
+  border: 1px solid #e4e4e7;
+} /* numeric inputs */
+#closeShiftModal #closeShiftTransactionsTableId tbody td input[type='number'],
+#closeShiftModal #closeShiftTransactionsTableId tbody td input[type='text'] {
+  width: 100%;
+  min-width: 80px;
+  padding: 4px 6px;
+  border-radius: 6px;
+  border: 1px solid #e5e7eb;
+  background: #ffffff;
+  font-size: 13px;
+  text-align: right;
+  box-shadow: none;
+  color: var(--text);
+} /* actual column like text */
+#closeShiftModal #closeShiftTransactionsTableId tbody td:nth-child(4) input {
+  border: none;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+  padding: 0;
+  text-align: right;
+  font-weight: 600;
+} /* hide spin */
+#closeShiftModal
+  #closeShiftTransactionsTableId
+  tbody
+  td
+  input::-webkit-outer-spin-button,
+#closeShiftModal
+  #closeShiftTransactionsTableId
+  tbody
+  td
+  input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+} /* keep columns visible */
+#closeShiftModal #closeShiftTransactionsTableId .closeShiftTransactionCount,
+#closeShiftModal #closeShiftTransactionsTableId .closeShiftSettledAmount,
+#closeShiftModal #closeShiftTransactionsTableId .closeShiftActualAmount,
+#closeShiftModal #closeShiftTransactionsTableId .closeShiftVarianceAmount {
+  /* display: table-cell !important; */
+} /* ---------------- Session / Stats / Notes ---------------- */
+#closeShiftModal .modal-info-row {
+  display: flex;
+  flex-direction: column; /* gap: 6px; */
+  margin-top: 0;
+} /* pill labels */
+#closeShiftModal .acc-card .modal-info-row label,
+#closeShiftModal .acc-card .prevDayCloseDayShiftSummary label {
+  background: #f8f9fa !important;
+  color: #000 !important;
+  padding: 8px 14px !important;
+  border-radius: 20px !important;
+  font-size: 13px;
+  display: inline-flex !important;
+  align-items: center !important;
+  width: 100% !important;
+  box-sizing: border-box;
+} /* Shift notes input */
+#closeShiftModal #closeShiftCommentInputId {
+  border-radius: 12px;
+  border: 1px solid #e5e7eb;
+  padding: 12px 14px;
+  min-height: 70px;
+  background: #f9fafb;
+  color: var(--text);
+  font-size: var(--fs-sm);
+  width: 100%;
+  box-sizing: border-box;
+} /* ---------------- Buttons ---------------- */
+#closeShiftModal .acc-summary-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 392px;
+}
+@media screen and (min-width: 1024px) {
+  #closeShiftModal .acc-summary-actions {
+    margin-top: 292px;
+  }
+}
+@media screen and (min-width: 1200px) and (max-width: 1399px) {
+  /* #closeShiftModal .acc-summary-actions {
+    margin-top: 352px;
+  } */
+}
+#closeShiftModal .acc-summary-actions {
+  display: flex;
+  flex-direction: column;
+} /* CLOSE SHIFT (green) should be FIRST */
+#closeShiftModal #CloseShiftButtonId {
+  order: 0 !important;
+} /* CLOSE (red) should be SECOND */
+#closeShiftModal .closeDayAndShiftModalButton {
+  order: 1 !important;
+} /* reset */
+#closeShiftModal .acc-summary-actions > button,
+#closeShiftModal .acc-summary-actions > input[type='button'] {
+  all: unset;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 32px;
+  padding: 0 16px;
+  border-radius: 10px;
+  border-width: 1px;
+  border-style: solid;
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  text-align: center;
+  cursor: pointer;
+  background-color: #ef4444;
+  color: #fff;
+} /* Close (top) */
+#closeShiftModal .closeDayAndShiftModalButton {
+  order: 0;
+  background: #ffffff;
+  border-color: #d4d4d8;
+  color: #111827;
+} /* Close Shift (bottom) */
+#closeShiftModal #CloseShiftButtonId {
+  order: 1;
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #ffffff;
+  font-weight: 600;
+} /* hover */
+#closeShiftModal .acc-summary-actions > button:hover,
+#closeShiftModal .acc-summary-actions > button:focus,
+#closeShiftModal .acc-summary-actions > input[type='button']:hover,
+#closeShiftModal .acc-summary-actions > input[type='button']:focus {
+  box-shadow: 0 10px 24px rgba(15, 23, 42, 0.08); /* transform: translateY(-1px); */
+} /* ---------------- Focus states ---------------- */
+#closeShiftModal input:focus,
+#closeShiftModal textarea:focus {
+  outline: 2px solid rgba(22, 163, 74, 0.12);
+  box-shadow: 0 0 0 1px rgba(22, 163, 74, 0.12);
+} /* ---------------- desktop breakpoints ---------------- */
+@media (max-width: 1366px) {
+  #closeShiftModal .closeDayAndShiftContainer {
+    gap: 14px;
+  }
+  #closeShiftModal .closeDayAndShiftContainer > .col-3 {
+    min-width: 220px;
+    flex-basis: 24%;
+  }
+  #closeShiftModal .acc-card-full {
+    min-height: 400px;
+  }
+}
+@media (max-width: 1150px) {
+  #closeShiftModal .closeDayAndShiftContainer > .col-3 {
+    flex-basis: 26%;
+    min-width: 200px;
+  }
+  #closeShiftModal .closeDayAndShiftContainer > .col-6 {
+    min-width: 450px;
+  }
+} /* ================================================================ CURRENCY DENOMINATION – EXACT COPY OF CLOSE DAY & SHIFT (IDs adapted to Close Shift) ================================================================ */ /* ---------- Currency Denomination (LEFT card) ---------- */ /* make it a normal table (no inner scroll box) like reference */
+#closeShiftModal #closeShiftCashDenominationTableId {
+  width: 120%;
+  display: table;
+}
+#closeShiftModal #closeShiftCashDenominationTableId thead,
+#closeShiftModal #closeShiftCashDenominationTableId tbody,
+#closeShiftModal #closeShiftCashDenominationTableId tfoot {
+  display: table;
+  width: 100%;
+  table-layout: fixed;
+} /* tighter rows & left/right alignment similar to reference */
+#closeShiftModal #closeShiftCashDenominationTableId tbody td:nth-child(1) {
+  width: 37%;
+  padding-left: 16px;
+}
+#closeShiftModal #closeShiftCashDenominationTableId tbody td:nth-child(2) {
+  width: 40%;
+  text-align: center;
+}
+#closeShiftModal #closeShiftCashDenominationTableId tbody td:nth-child(3) {
+  width: 20%;
+  text-align: right;
+  color: var(--muted);
+} /* footer: Total Cash in Drawer */
+#closeShiftModal .currencyDenominationTableFooter td {
+  background: #f9fafb;
+  padding: 10px 14px;
+  border-top: 1px solid #e5e7eb;
+}
+#closeShiftModal .currencyDenominationTableFooter input {
+  width: 130px;
+  float: right;
+  border-radius: 8px;
+  padding: 6px 10px;
+} /* header inside currency card */
+#closeShiftModal .currencyDenominationTableHeader {
+  /* background: #f9fafb !important; */
+  border-bottom: 1px solid #edf2f7;
+  padding: 10px 14px !important;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--muted);
+}
+#closeShiftModal .currencyDenominationTableHeader i {
+  color: #a1a1aa;
+} /* ------------------ Currency Denomination: compact pills + unified Total ------------------ */ /* Slightly narrower left column to free space */
+#closeShiftModal .closeDayAndShiftContainer > .col-3 {
+  flex: 0 0 23%;
+  min-width: 200px;
+  max-width: 280px;
+} /* Keep left card compact */
+#closeShiftModal .col-3.acc-layout-col .acc-card-full {
+  padding: 8px;
+  min-height: 340px;
+} /* Table base - tighter spacing and smaller text */
+#closeShiftModal #closeShiftCashDenominationTableId {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0 6px; /* smaller gap for compact pills */
+  font-family: Inter, Arial, sans-serif;
+  font-size: 14px;
+} /* Header (override above for compact) */
+#closeShiftModal .currencyDenominationTableHeader {
+  display: flex !important;
+  align-items: center;
+  justify-content: space-between;
+  padding: 6px 8px !important;
+  /* background: transparent !important; */
+  border-bottom: none !important;
+  color: var(--muted);
+  font-weight: 700;
+  font-size: 14px;
+}
+#closeShiftModal .currencyDenominationTableHeader i {
+  width: 32px;
+  height: 22px;
+  border-radius: 8px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center; /* background: rgba(22,163,74,0.06); */
+  color: var(--accent); /* border: 1px solid rgba(22,163,74,0.06); */
+  font-size: 12px;
+} /* Pill rows — shorter height and tighter padding */
+#closeShiftModal #closeShiftCashDenominationTableId tbody td {
+  /* background: #f8f9fa !important; */
+  /* border: 1px solid #e9e3e3; */
+  padding: 8px 10px; /* box-shadow: 0 4px 8px rgba(2,6,23,0.03); */
+  vertical-align: middle;
+  line-height: 1;
+} /* Rounded pill edges */
+#closeShiftModal #closeShiftCashDenominationTableId tbody tr td:first-child {
+  border-right: 0;
+  border-top-left-radius: 8px;
+  border-bottom-left-radius: 8px;
+  padding-left: 14px;
+  font-weight: 600;
+  font-size: 13.5px;
+  color: var(--muted);
+}
+#closeShiftModal #closeShiftCashDenominationTableId tbody tr td:last-child {
+  border-left: 0;
+  border-top-right-radius: 8px;
+  border-bottom-right-radius: 8px;
+  padding-right: 14px;
+  text-align: right;
+  font-weight: 700;
+  color: var(--muted);
+} /* Count column (middle) — compact and centered */
+#closeShiftModal #closeShiftCashDenominationTableId tbody tr td:nth-child(2) {
+  width: 16%;
+  text-align: center;
+  font-weight: 800;
+  font-size: 14px;
+  border-left: 0;
+  border-right: 0;
+  padding: 8px 6px;
+} /* Inputs that JS may inject — compact heights so pills remain short */
+#closeShiftModal
+  #closeShiftCashDenominationTableId
+  tbody
+  td
+  input[type='number'],
+#closeShiftModal
+  #closeShiftCashDenominationTableId
+  tbody
+  td
+  input[type='text'] {
+  width: 100%;
+  border: none;
+  background: transparent;
+  padding: 0;
+  margin: 0;
+  height: 24px;
+  line-height: 24px;
+  font-size: 13.25px;
+  color: inherit;
+  box-shadow: none;
+} /* Middle column count input: narrow, centered */
+#closeShiftModal
+  #closeShiftCashDenominationTableId
+  tbody
+  tr
+  td:nth-child(2)
+  input {
+  width: 40px;
+  height: 24px;
+  text-align: center;
+  margin: 0 auto;
+} /* Amount input: right aligned & compact */
+#closeShiftModal
+  #closeShiftCashDenominationTableId
+  tbody
+  tr
+  td:nth-child(3)
+  input {
+  width: 110px;
+  height: 24px;
+  text-align: right;
+  margin-left: auto;
+} /* Remove default focus ring for calm visuals */
+#closeShiftModal #closeShiftCashDenominationTableId tbody td input:focus {
+  outline: none;
+} /* ---------------- Footer (Total Cash In Drawer) — make it same pill as rows ------------------ */ /* Make footer td visually identical to body pills */
+#closeShiftModal .currencyDenominationTableFooter td {
+  background: #ffffff;
+  /* border: 1px solid #e9e3e3; */
+  padding: 8px 10px; /* box-shadow: 0 4px 8px rgba(2,6,23,0.03); */
+  vertical-align: middle;
+  line-height: 1;
+} /* Rounded corners to form a pill across footer cells */
+#closeShiftModal .currencyDenominationTableFooter td:first-child {
+  border-top-left-radius: 8px;
+  border-bottom-left-radius: 8px;
+  text-align: left;
+  font-weight: 800;
+  color: var(--muted);
+  padding-left: 14px;
+}
+#closeShiftModal .currencyDenominationTableFooter td:last-child {
+  border-top-right-radius: 8px;
+  border-bottom-right-radius: 8px;
+  text-align: right;
+  padding-right: 14px;
+} /* Total input: look exactly like row amount cell (editable, no special box) */
+#closeShiftModal #closeShiftCashInDrawerId {
+  width: 110px; /* same width as amount cells */
+  padding: 0; /* no extra box padding */
+  margin: 0;
+  border: none !important; /* remove border */
+  background: transparent !important; /* transparent background */
+  box-shadow: none !important; /* remove any box-shadow */
+  outline: none !important; /* remove focus ring */
+  text-align: right; /* keep number right-aligned */
+  font-weight: 800;
+  color: var(--accent);
+  height: 24px; /* same compact height as amount cells */
+  line-height: 24px;
+  caret-color: var(--accent); /* caret color matches green */
+  -webkit-appearance: none;
+  appearance: none;
+} /* Remove browser spin controls for number inputs */
+#closeShiftModal #closeShiftCashInDrawerId::-webkit-outer-spin-button,
+#closeShiftModal #closeShiftCashInDrawerId::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+} /* Hide focus outlines/box-shadows from browsers on focus (double-safety) */
+#closeShiftModal #closeShiftCashInDrawerId:focus {
+  outline: none !important;
+  box-shadow: none !important;
+  background: transparent !important;
+} /* Ensure the footer td still looks like the pill even when the input is focused */
+#closeShiftModal .currencyDenominationTableFooter td:first-child,
+#closeShiftModal .currencyDenominationTableFooter td:last-child {
+  background: #ffffff;
+  border: 1px solid black;
+  /* box-shadow: 0 4px 8px rgba(2,6,23,0.03); */
+} /* If browser autofill colors the input, neutralize it */
+#closeShiftModal #closeShiftCashInDrawerId:-internal-autofill-selected,
+#closeShiftModal #closeShiftCashInDrawerId:-webkit-autofill {
+  background-color: transparent !important;
+  background-image: none !important;
+  color: var(--accent) !important;
+} /* tiny responsive tweak for smaller desktop widths */
+@media (max-width: 1366px) {
+  #closeShiftModal #closeShiftCashDenominationTableId {
+    border-spacing: 0 5px;
+    font-size: 12.3px;
+  }
+  #closeShiftModal .col-3.acc-layout-col .acc-card-full {
+    min-height: 320px;
+  }
+} /* ================================================================ CLOSE SHIFT – remove black input boxes (currency + payment) ================================================================ */ /* Currency Denomination: make count & amount look like plain text */
+#closeShiftModal #closeShiftCashDenominationTableId tbody td:nth-child(2) input,
+#closeShiftModal
+  #closeShiftCashDenominationTableId
+  tbody
+  td:nth-child(3)
+  input {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  outline: none !important;
+  color: inherit;
+} /* Even on focus, keep them clean (no box) */
+#closeShiftModal
+  #closeShiftCashDenominationTableId
+  tbody
+  td:nth-child(2)
+  input:focus,
+#closeShiftModal
+  #closeShiftCashDenominationTableId
+  tbody
+  td:nth-child(3)
+  input:focus {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+} /* Payment Reconciliation: remove box from ACTUAL column input */
+#closeShiftModal #closeShiftTransactionsTableId tbody td:nth-child(4) input {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  outline: none !important;
+  color: var(--text);
+} /* Keep it clean on focus as well */
+#closeShiftModal
+  #closeShiftTransactionsTableId
+  tbody
+  td:nth-child(4)
+  input:focus {
+  /* background: transparent !important; */
+  border: none !important;
+  box-shadow: none !important;
+} /* ============================================================ PAYMENT RECONCILIATION – FINAL CLEAN + CENTERED VERSION ============================================================ */ /* Compact row height + remove wrapping */
+#closeShiftModal #closeShiftTransactionsTableId tbody tr {
+  height: 44px;
+  max-height: 44px;
+}
+#closeShiftModal #closeShiftTransactionsTableId tbody td {
+  padding: 6px 10px;
+  white-space: nowrap;
+  vertical-align: middle;
+  line-height: 1;
+} /* Trans. Count pill neat & centered */
+#closeShiftModal #closeShiftTransactionsTableId tbody td:nth-child(2) > * {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 26px;
+  height: 28px;
+  line-height: 28px;
+  padding: 0 6px;
+} /* Default numeric input cleanup */
+#closeShiftModal #closeShiftTransactionsTableId tbody td input[type='number'],
+#closeShiftModal #closeShiftTransactionsTableId tbody td input[type='text'] {
+  padding: 2px 6px;
+  height: auto;
+  min-width: 40px;
+  box-shadow: none;
+  border: none;
+  background: transparent;
+  font-size: 13px;
+  text-align: right;
+}
+#closeShiftModal #closeShiftTransactionsTableId tbody td:nth-child(4),
+#closeShiftModal #closeShiftTransactionsTableId tbody td:nth-child(5) {
+  /* display: table-cell !important; */
+  text-align: center !important;
+  vertical-align: middle !important;
+  padding: 6px 12px;
+  font-weight: 600;
+} /* Center the input text inside Actual & Variance cells */
+#closeShiftModal #closeShiftTransactionsTableId tbody td:nth-child(4) input,
+#closeShiftModal #closeShiftTransactionsTableId tbody td:nth-child(5) input {
+  /* text-align: center !important; */
+  margin: 0 auto !important;
+  width: 60px;
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+#closeShiftModal #closeShiftTransactionsTableId tbody td:nth-child(5) {
+  text-align: center !important;
+  padding-right: 2px !important; /* adjust this number as you like */
+}
+.modal-content.startDayAndShiftModalwrapper.closeShiftModalwrapper {
+  margin-top: 40px;
+} /* Slightly cleaner payment mode text */
+#closeShiftModal #closeShiftTransactionsTableId tbody td:nth-child(1) {
+  font-size: 13px;
+  font-weight: 500;
+  overflow: hidden;
+  text-overflow: ellipsis;
+} /* Header consistency */
+#closeShiftModal #closeShiftTransactionsTableId thead th {
+  padding: 8px 12px;
+} /* Ensure fixed layout to prevent width jumps */
+#closeShiftModal #closeShiftTransactionsTableId {
+  table-layout: fixed;
+} /* Responsive adjustments for screens >= 1024px */
+@media screen and (min-width: 1024px) {
+  #closeShiftModal,
+  #closeShiftCommentInputId {
+    min-height: unset;
+  }
+  #closeShiftModal .acc-card-notes {
+    flex: none;
+  }
+} /* Pill layout for Close Shift info lines */
+#closeShiftModal .modal-info-row {
+  display: flex;
+  flex-direction: column;
+  gap: 2px; /* spacing between pills */
+} /* shared pill style */
+#closeShiftModal .info-field {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #f8f9fa;
+  padding: 8px 14px;
+  border-radius: 20px;
+  width: 100%;
+  box-sizing: border-box;
+  font-size: 14px;
+} /* left side label */
+#closeShiftModal .info-key {
+  font-weight: 500;
+  /* color: #4b5563; */
+  white-space: nowrap;
+} /* right side value */
+#closeShiftModal .info-value {
+  margin-left: auto;
+  font-weight: 700;
+  /* color: #111827; */
+  white-space: nowrap;
+  text-align: right;
+} /* cash drawer input base rules - small, non-stretching */
+.cashdrawer-input {
+  display: inline-block !important;
+  box-sizing: border-box !important; /* small fixed width so it never expands the row */
+  width: 52px !important;
+  max-width: 80px !important;
+  min-width: 36px !important; /* prevent flex expansion */
+  flex: 0 0 auto !important; /* remove native chrome */
+  border: none !important;
+  background: transparent !important;
+  outline: none !important;
+  -webkit-appearance: none !important;
+  -moz-appearance: none !important; /* right align text and bold */
+  text-align: right !important;
+  font-weight: 600 !important;
+  padding: 0 6px !important; /* we will override with JS to match exact pill */
+  margin: 0 !important;
+  color: inherit !important;
+} /* ensure container rows behave properly */
+.info-field {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  min-width: 0;
+}
+.info-field .info-key {
+  flex: 1 1 auto;
+  min-width: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+} /* --------------------------- Make currency denomination inputs visible (override the 'transparent' rules) --------------------------- */ /* Count (middle) and Amount (right) inputs in each denomination row */
+#closeShiftModal #closeShiftCashDenominationTableId tbody td:nth-child(2) input,
+#closeShiftModal
+  #closeShiftCashDenominationTableId
+  tbody
+  td:nth-child(3)
+  input {
+  border: 1px solid #d1d5db !important; /* subtle neutral border */
+  border-radius: 8px !important; /* pill-like corners */
+  padding: 4px 8px !important; /* breathing room */
+  height: 28px !important; /* fixed comfortable height */
+  box-sizing: border-box !important;
+  /* color: #111827 !important;  */
+  font-weight: 600 !important;
+  box-shadow: inset 0 1px 2px rgba(2, 6, 23, 0.04) !important;
+  outline: none !important;
+} /* Make sure the centered count input remains visually centered */
+#closeShiftModal
+  #closeShiftCashDenominationTableId
+  tbody
+  td:nth-child(2)
+  input {
+  width: 52px !important;
+  text-align: center !important;
+  margin: 0 auto !important;
+} /* Amount input (right column) width & alignment */
+#closeShiftModal
+  #closeShiftCashDenominationTableId
+  tbody
+  td:nth-child(3)
+  input {
+  width: 110px !important;
+  text-align: right !important;
+} /* Footer total input (Total Cash In Drawer) — visible and consistent */
+#closeShiftModal #closeShiftCashInDrawerId {
+  /* background: #ffffff !important; */
+  /* border: 1px solid #d1d5db !important; */
+  border-radius: 8px !important;
+  padding: 4px 10px !important;
+  height: 28px !important; /* width: 130px !important; */
+  text-align: right !important;
+  color: var(--accent) !important;
+  font-weight: 800 !important;
+  box-shadow: inset 0 1px 2px rgba(2, 6, 23, 0.04) !important;
+} /* Keep focus state clear but visible */
+#closeShiftModal
+  #closeShiftCashDenominationTableId
+  tbody
+  td:nth-child(2)
+  input:focus,
+#closeShiftModal
+  #closeShiftCashDenominationTableId
+  tbody
+  td:nth-child(3)
+  input:focus,
+#closeShiftModal #closeShiftCashInDrawerId:focus {
+  border-color: rgba(22, 163, 74, 0.35) !important;
+  box-shadow: 0 0 0 3px rgba(22, 163, 74, 0.07) !important;
+  /* background: #ffffff !important; */
+} /* Small screens — keep sizes sensible */
+@media (max-width: 1150px) {
+  #closeShiftModal
+    #closeShiftCashDenominationTableId
+    tbody
+    td:nth-child(2)
+    input {
+    width: 44px !important;
+    height: 26px !important;
+  }
+  #closeShiftModal
+    #closeShiftCashDenominationTableId
+    tbody
+    td:nth-child(3)
+    input {
+    width: 90px !important;
+    height: 26px !important;
+  }
+  #closeShiftModal #closeShiftCashInDrawerId {
+    width: 110px !important;
+    height: 26px !important;
+  }
+}
+/* =============================================================================
+   FIX: Cash Drawer ID input should NOT lose border on focus
+   ============================================================================= */
+
+#closeShiftModal #closeShiftCashDrawerInputId,
+#closeShiftModal .cashdrawer-input {
+  display: inline-block !important;
+  width: 64px !important;
+  max-width: 90px !important;
+  min-width: 44px !important;
+  height: 28px !important;
+  padding: 4px 8px !important;
+  /* background: #ffffff !important; */
+  border: 1px solid #d1d5db !important; /* visible border */
+  border-radius: 8px !important;
+  font-weight: 600 !important;
+  /* color: #111827 !important; */
+  text-align: right !important;
+  outline: none !important;
+  box-sizing: border-box !important;
+}
+
+/* FORCE BORDER ON FOCUS — strongest override */
+#closeShiftModal #closeShiftCashDrawerInputId:focus,
+#closeShiftModal .cashdrawer-input:focus {
+  border: 1px solid #16a34a !important; /* green highlight border */
+  /* background: #ffffff !important; */
+  box-shadow: 0 0 0 3px rgba(22, 163, 74, 0.15) !important;
+  outline: none !important;
+}
+
+/* STOP parent pill from collapsing input */
+#closeShiftModal .modal-info-row .info-field input#closeShiftCashDrawerInputId,
+#closeShiftModal .modal-info-row .info-field .cashdrawer-input {
+  flex: 0 0 auto !important;
+}
+
+/* smaller on small screens */
+@media (max-width: 1150px) {
+  #closeShiftModal #closeShiftCashDrawerInputId,
+  #closeShiftModal .cashdrawer-input {
+    width: 52px !important;
+    height: 26px !important;
+    padding: 3px 6px !important;
+  }
+}
+/* ---------------------------
+   Total Cash In Drawer – visible compact box
+   --------------------------- */
+#closeShiftModal #closeShiftCashInDrawerId {
+  /* background: #ffffff !important; */
+  /* border: 1px solid #d1d5db !important; */
+  border-radius: 8px !important;
+  padding: 4px 10px !important;
+  height: 28px !important;
+  text-align: right !important;
+  color: var(--accent) !important;
+  font-weight: 800 !important;
+  box-shadow: inset 0 1px 2px rgba(2, 6, 23, 0.04) !important;
+  outline: none !important;
+}
+
+/* focus */
+#closeShiftModal #closeShiftCashInDrawerId:focus {
+  border-color: rgba(22, 163, 74, 0.35) !important;
+  box-shadow: 0 0 0 3px rgba(22, 163, 74, 0.07) !important;
+}
+
+/* ---------------------------
+   Payment Reconciliation — Actual & Variance visible inputs
+   --------------------------- */
+#closeShiftModal #closeShiftTransactionsTableId tbody td:nth-child(4) input,
+#closeShiftModal #closeShiftTransactionsTableId tbody td:nth-child(5) input {
+  /* background: #ffffff !important; */
+  border: 1px solid #d1d5db !important;
+  border-radius: 8px !important;
+  padding: 4px 8px !important;
+  height: 28px !important;
+  min-width: 40px !important;
+  box-sizing: border-box !important;
+  text-align: center !important;
+  font-weight: 600 !important;
+  /* color: #111827 !important; */
+  box-shadow: inset 0 1px 2px rgba(2, 6, 23, 0.04) !important;
+  outline: none !important;
+}
+
+#closeShiftModal #closeShiftTransactionsTableId tbody td:nth-child(4) input {
+  width: 52px !important;
+}
+#closeShiftModal #closeShiftTransactionsTableId tbody td:nth-child(5) input {
+  width: 72px !important;
+}
+
+/* focus */
+#closeShiftModal
+  #closeShiftTransactionsTableId
+  tbody
+  td:nth-child(4)
+  input:focus,
+#closeShiftModal
+  #closeShiftTransactionsTableId
+  tbody
+  td:nth-child(5)
+  input:focus {
+  border-color: rgba(22, 163, 74, 0.35) !important;
+  box-shadow: 0 0 0 3px rgba(22, 163, 74, 0.07) !important;
+}
+
+/* responsive */
+@media (max-width: 1150px) {
+  #closeShiftModal #closeShiftTransactionsTableId tbody td:nth-child(4) input,
+  #closeShiftModal #closeShiftTransactionsTableId tbody td:nth-child(5) input {
+    width: auto;
+    height: 26px !important;
+    text-align: center;
+  }
+}
+
+/* ---------------------------
+   Cash Drawer ID — visible, compact box
+   --------------------------- */
+#closeShiftModal #closeShiftCashDrawerInputId,
+#closeShiftModal .cashdrawer-input {
+  display: inline-block !important;
+  width: 64px !important;
+  max-width: 90px !important;
+  min-width: 44px !important;
+  height: 28px !important;
+  padding: 4px 8px !important;
+  /* background: #ffffff !important; */
+  border: 1px solid #d1d5db !important;
+  border-radius: 8px !important;
+  font-weight: 600 !important;
+  /* color: #111827 !important; */
+  text-align: right !important;
+  outline: none !important;
+  box-sizing: border-box !important;
+}
+
+/* no flex-grow */
+#closeShiftModal .modal-info-row .info-field input#closeShiftCashDrawerInputId,
+#closeShiftModal .modal-info-row .info-field .cashdrawer-input {
+  flex: 0 0 auto !important;
+}
+
+/* focus */
+#closeShiftModal #closeShiftCashDrawerInputId:focus,
+#closeShiftModal .cashdrawer-input:focus {
+  border-color: rgba(22, 163, 74, 0.35) !important;
+  box-shadow: 0 0 0 3px rgba(22, 163, 74, 0.06) !important;
+}
+
+/* small screen */
+@media (max-width: 1150px) {
+  #closeShiftModal #closeShiftCashDrawerInputId,
+  #closeShiftModal .cashdrawer-input {
+    width: 52px !important;
+    height: 26px !important;
+    padding: 3px 6px !important;
+  }
+}
+/* ============================================================
+   FORCE Actual & Variance input boxes to move right
+   (ignores table layout + ignores earlier overrides)
+   ============================================================ */
+
+/* Actual column (4th) */
+#closeShiftModal #closeShiftTransactionsTableId tbody td:nth-child(4) {
+  position: relative !important;
+}
+
+#closeShiftModal #closeShiftTransactionsTableId tbody td:nth-child(4) input {
+  position: relative !important;
+  left: 20px !important; /* <-- move Actual input right */
+}
+
+/* Variance column (5th) */
+#closeShiftModal #closeShiftTransactionsTableId tbody td:nth-child(5) {
+  position: relative !important;
+}
+
+#closeShiftModal #closeShiftTransactionsTableId tbody td:nth-child(5) input {
+  position: relative !important;
+  left: 8px !important; /* <-- move Variance input right */
+}
+/* ===============================
+   Denomination: add "×" between
+   label (col 1) and count input (col 2)
+   — non-invasive: does NOT change td display
+   — absolute pseudo-element inside col-2
+   =============================== */
+
+/* make sure second column is a positioned container (no display change) */
+#closeShiftModal #closeShiftCashDenominationTableId tbody td:nth-child(2) {
+  position: relative !important;
+  vertical-align: middle !important;
+  padding-left: 6px !important; /* small nudge so input doesn't touch left edge */
+  text-align: center !important;
+}
+
+/* add the multiply symbol inside the middle cell, positioned slightly left so it appears between columns */
+#closeShiftModal
+  #closeShiftCashDenominationTableId
+  tbody
+  td:nth-child(2)::before {
+  content: '×' !important;
+  position: absolute !important;
+  left: -10px !important; /* moves × slightly into the gap between col1 & col2 */
+  top: 50% !important;
+  transform: translateY(-50%) !important;
+  color: #6b7280 !important;
+  font-weight: 700 !important;
+  font-size: 14px !important;
+  line-height: 1 !important;
+  pointer-events: none !important;
+  user-select: none !important;
+  display: inline-block !important;
+}
+
+/* keep the count input compact and stable — no flex or margin changes */
+#closeShiftModal
+  #closeShiftCashDenominationTableId
+  tbody
+  td:nth-child(2)
+  input {
+  width: 52px !important;
+  height: 28px !important;
+  padding: 4px 8px !important;
+  box-sizing: border-box !important;
+  text-align: center !important;
+  margin: 0 !important;
+  /* background: #ffffff !important; */
+  border: 1px solid #d1d5db !important;
+  border-radius: 8px !important;
+  font-weight: 600 !important;
+  /* color: #111827 !important; */
+  box-shadow: inset 0 1px 2px rgba(2, 6, 23, 0.04) !important;
+}
+
+/* ensure the rightmost amount column still aligns - keep it untouched but reduce overflow risks */
+#closeShiftModal #closeShiftCashDenominationTableId tbody td:nth-child(3) {
+  white-space: nowrap !important;
+  text-align: right !important;
+  padding-right: 14px !important;
+}
+
+/* responsive adjustments: slightly reduce left offset & input size on narrow screens */
+@media (max-width: 1150px) {
+  #closeShiftModal
+    #closeShiftCashDenominationTableId
+    tbody
+    td:nth-child(2)::before {
+    left: -7px !important;
+    font-size: 13px !important;
+  }
+  #closeShiftModal
+    #closeShiftCashDenominationTableId
+    tbody
+    td:nth-child(2)
+    input {
+    width: 44px !important;
+    height: 26px !important;
+    padding: 3px 6px !important;
+  }
+}
+
+/* Extra guard: avoid pseudo-element overlapping interactive areas on extremely narrow widths */
+@media (max-width: 900px) {
+  #closeShiftModal
+    #closeShiftCashDenominationTableId
+    tbody
+    td:nth-child(2)::before {
+    left: -4px !important;
+    opacity: 0.95 !important;
+  }
+}
+#closeShiftModal
+  #closeShiftCashDenominationTableId
+  tbody
+  td:nth-child(2)::before {
+  content: '×' !important;
+  position: absolute !important;
+  left: -26px !important; /* 👈 moved further left (was -10px) */
+  top: 50% !important;
+  transform: translateY(-50%) !important;
+  color: #6b7280 !important;
+  font-weight: 700 !important;
+  font-size: 14px !important;
+  line-height: 1 !important;
+  pointer-events: none !important;
+  user-select: none !important;
+  display: inline-block !important;
+}
+/* ====== CloseShift: Payment Reconciliation only ======
+   Paste at the END of CloseShift.css
+   Only targets #closeShiftTransactionsTableId (no other inputs)
+   =====================================================*/
+
+/* stable fixed table layout for the payment table */
+#closeShiftModal #closeShiftTransactionsTableId {
+  table-layout: fixed;
+  width: 100% !important;
+  box-sizing: border-box;
+}
+
+/* allow the middle card to scroll horizontally rather than push layout */
+#closeShiftModal .closeShiftTransactionTableContainerClass {
+  overflow-x: auto !important;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* center numeric headers and numeric cells (3: Settled, 4: Actual, 5: Variance) */
+#closeShiftModal #closeShiftTransactionsTableId thead th:nth-child(3),
+#closeShiftModal #closeShiftTransactionsTableId thead th:nth-child(4),
+#closeShiftModal #closeShiftTransactionsTableId thead th:nth-child(5),
+#closeShiftModal #closeShiftTransactionsTableId tbody td:nth-child(3),
+#closeShiftModal #closeShiftTransactionsTableId tbody td:nth-child(4),
+#closeShiftModal #closeShiftTransactionsTableId tbody td:nth-child(5) {
+  text-align: center !important;
+  vertical-align: middle !important;
+  white-space: nowrap !important;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Only adjust inputs INSIDE the payment table — do NOT change visual styles (borders/background) */
+#closeShiftModal #closeShiftTransactionsTableId tbody td:nth-child(3) input,
+#closeShiftModal #closeShiftTransactionsTableId tbody td:nth-child(4) input,
+#closeShiftModal #closeShiftTransactionsTableId tbody td:nth-child(5) input {
+  display: inline-block !important;
+  margin: 0 auto !important;
+  box-sizing: border-box !important;
+  text-align: center !important; /* center the caret and text */
+  min-width: 44px !important;
+  max-width: 110px !important;
+  width: clamp(48px, 3.8vw, 84px) !important; /* responsive width only */
+  height: auto !important;
+  padding: 0.25rem 0.5rem !important;
+  font-weight: 600 !important;
+  /* Cancel prior position nudges so inputs remain centered */
+  position: static !important;
+  left: auto !important;
+  transform: none !important;
+}
+
+/* specifically cancel earlier forced offsets for Actual/Variance */
+#closeShiftModal #closeShiftTransactionsTableId tbody td:nth-child(4),
+#closeShiftModal #closeShiftTransactionsTableId tbody td:nth-child(5),
+#closeShiftModal #closeShiftTransactionsTableId tbody td:nth-child(4) input,
+#closeShiftModal #closeShiftTransactionsTableId tbody td:nth-child(5) input {
+  position: static !important;
+  left: auto !important;
+}
+
+/* ensure cells don't wrap into multiple lines and use ellipsis when necessary */
+#closeShiftModal #closeShiftTransactionsTableId tbody td {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* sticky header safe z-index */
+#closeShiftModal #closeShiftTransactionsTableId thead th {
+  position: sticky !important;
+  top: 0 !important;
+  z-index: 10 !important;
+  /* background: #f8fafc !important; */
+}
+
+/* Responsive adjustments: slightly shrink inputs on smaller desktop widths */
+@media (max-width: 1366px) {
+  #closeShiftModal #closeShiftTransactionsTableId tbody td:nth-child(3) input,
+  #closeShiftModal #closeShiftTransactionsTableId tbody td:nth-child(4) input,
+  #closeShiftModal #closeShiftTransactionsTableId tbody td:nth-child(5) input {
+    width: 60px !important;
+    min-width: 40px !important;
+  }
+}
+
+/* On narrower desktops/tablets allow horizontal scroll instead of compressing numbers too far */
+@media (max-width: 1150px) {
+  #closeShiftModal .closeShiftTransactionTableContainerClass {
+    overflow-x: auto !important;
+    padding-bottom: 6px;
+  }
+  #closeShiftModal #closeShiftTransactionsTableId tbody td:nth-child(3) input,
+  #closeShiftModal #closeShiftTransactionsTableId tbody td:nth-child(4) input,
+  #closeShiftModal #closeShiftTransactionsTableId tbody td:nth-child(5) input {
+    width: 52px !important;
+    min-width: 40px !important;
+    height: 26px !important;
+    padding: 0.15rem 0.4rem !important;
+  }
+}
+/* =========================================================
+   FIX — Total Cash In Drawer (ALL screen sizes)
+   Dark borders, no cut, no overlap
+   ========================================================= */
+
+/* Make footer row behave like a single pill */
+#closeShiftModal
+  #closeShiftCashDenominationTableId
+  tfoot.currencyDenominationTableFooter
+  tr {
+  display: table;
+  width: 100%;
+  table-layout: fixed;
+}
+
+/* Base footer cells */
+#closeShiftModal
+  #closeShiftCashDenominationTableId
+  tfoot.currencyDenominationTableFooter
+  td {
+  padding: 10px 12px;
+  background: #ffffff;
+  vertical-align: middle;
+  box-sizing: border-box;
+  border: 1.5px solid #e9e3e3; /* DARK border (intentional) */
+}
+
+/* LEFT — label */
+#closeShiftModal
+  #closeShiftCashDenominationTableId
+  tfoot.currencyDenominationTableFooter
+  td:first-child {
+  border-right: 0; /* remove middle cut */
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+
+  font-weight: 700;
+  color: #111827;
+
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* RIGHT — value */
+#closeShiftModal
+  #closeShiftCashDenominationTableId
+  tfoot.currencyDenominationTableFooter
+  td:last-child {
+  border-left: 0; /* remove middle cut */
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+
+  text-align: right;
+}
+
+/* Input — NEVER cut, responsive width */
+#closeShiftModal #closeShiftCashInDrawerId {
+  width: clamp(96px, 18vw, 140px) !important;
+  max-width: 135% !important;
+
+  padding: 6px 10px !important;
+  height: 38px !important;
+
+  /* background: #ffffff !important; */
+  border: 1.5px solid #e9e3e3 !important; /* dark border */
+  border-radius: 8px !important;
+
+  text-align: right !important;
+  font-weight: 600 !important;
+  color: #16a34a !important;
+
+  box-sizing: border-box !important;
+  outline: none !important;
+}
+
+/* Focus — visible but clean */
+#closeShiftModal #closeShiftCashInDrawerId:focus {
+  border-color: #e9e3e3 !important;
+  box-shadow: 0 1px 2px rgba(2, 6, 23, 0.04) !important;
+}
+
+/* -------- Screen-specific safety -------- */
+
+/* 1024 × 768 and below */
+@media (max-width: 1100px) {
+  #closeShiftModal #closeShiftCashInDrawerId {
+    width: 110px !important;
+    height: 28px !important;
+    padding: 5px 8px !important;
+    font-size: 13px !important;
+  }
+}
+
+/* Ultra-wide safety */
+@media (min-width: 1600px) {
+  #closeShiftModal #closeShiftCashInDrawerId {
+    width: 140px !important;
+  }
+}
+/* =========================
+   Addable: Denomination card
+   — Keep header + footer visible, scroll only tbody
+   Targets: startShiftModal & closeShiftModal
+   Paste at END of CloseShift.css / StartShift.css
+   =========================*/
+
+/* Left card: make taller and use flex so header/footer don't scroll */
+#startShiftModal .col-3.acc-layout-col .acc-card-full,
+#closeShiftModal .col-3.acc-layout-col .acc-card-full {
+  display: flex !important;
+  flex-direction: column !important;
+  /* sensible growth across viewports (adjust clamp values if you want) */
+  max-height: clamp(420px, 80vh, 880px) !important;
+  min-height: 360px !important;
+  /* don't let the whole card scroll — tbody will handle scroll */
+  overflow: visible !important;
+  padding: 10px !important;
+  box-sizing: border-box !important;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Convert table into a column flex container: thead (top), tbody (scroll), tfoot (bottom) */
+#startShiftCashDenominationTableId,
+#closeShiftCashDenominationTableId {
+  display: flex !important;
+  flex-direction: column !important;
+  width: 100% !important;
+  height: 100% !important;
+  border-collapse: separate !important;
+}
+
+/* Header and footer should be natural size and outside the scroll area */
+#startShiftCashDenominationTableId thead,
+#startShiftCashDenominationTableId tfoot,
+#closeShiftCashDenominationTableId thead,
+#closeShiftCashDenominationTableId tfoot {
+  display: block !important;
+  flex: 0 0 auto !important;
+  width: 100% !important;
+  /* background: var(--panel) !important; */
+  z-index: 4 !important;
+}
+
+/* tbody becomes the only scrollable area */
+#startShiftCashDenominationTableId tbody,
+#closeShiftCashDenominationTableId tbody {
+  display: block !important;
+  /* flex: 1 1 auto !important; */
+  overflow-y: auto !important;
+  overflow-x: hidden !important;
+  width: 100% !important;
+  /* padding-top: 6px !important; */
+  padding-bottom: 6px !important;
+  box-sizing: border-box !important;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Keep rows visually like table rows */
+#startShiftCashDenominationTableId tbody tr,
+#startShiftCashDenominationTableId thead tr,
+#startShiftCashDenominationTableId tfoot tr,
+#closeShiftCashDenominationTableId tbody tr,
+#closeShiftCashDenominationTableId thead tr,
+#closeShiftCashDenominationTableId tfoot tr {
+  display: table !important;
+  table-layout: fixed !important;
+  width: 100% !important;
+}
+
+/* Strengthen header visually and keep it pinned (safe even though it's outside scroll) */
+#startShiftCashDenominationTableId thead th.currencyDenominationTableHeader,
+#closeShiftCashDenominationTableId thead th.currencyDenominationTableHeader,
+#startShiftCashDenominationTableId thead th,
+#closeShiftCashDenominationTableId thead th {
+  /* background: var(--panel) !important; */
+  position: sticky !important;
+  top: 0 !important; /* harmless — keeps header safe if nested differently */
+  z-index: 8 !important;
+}
+
+/* Ensure footer stays visible and looks like the pill */
+#startShiftCashDenominationTableId tfoot.currencyDenominationTableFooter,
+#closeShiftCashDenominationTableId tfoot.currencyDenominationTableFooter {
+  position: relative !important;
+  z-index: 6 !important;
+  /* background: var(--panel) !important; */
+  box-shadow: 0 -2px 8px rgba(15, 23, 42, 0.03) !important;
+}
+
+/* Make sure footer row uses table rendering to avoid cut borders */
+#startShiftCashDenominationTableId tfoot.currencyDenominationTableFooter tr,
+#closeShiftCashDenominationTableId tfoot.currencyDenominationTableFooter tr {
+  display: table !important;
+  width: 100% !important;
+  table-layout: fixed !important;
+}
+
+/* Footer cells box sizing & spacing safety */
+#startShiftCashDenominationTableId tfoot.currencyDenominationTableFooter td,
+#closeShiftCashDenominationTableId tfoot.currencyDenominationTableFooter td {
+  box-sizing: border-box !important;
+  padding: 10px 12px !important;
+  /* background: #ffffff !important; */
+}
+
+/* Keep inputs/pills stable inside the scroll area */
+#startShiftCashDenominationTableId tbody td,
+#startShiftCashDenominationTableId thead td,
+#startShiftCashDenominationTableId tfoot td,
+#closeShiftCashDenominationTableId tbody td,
+#closeShiftCashDenominationTableId thead td,
+#closeShiftCashDenominationTableId tfoot td {
+  vertical-align: middle !important;
+  box-sizing: border-box !important;
+}
+
+/* Optional: thin WebKit scrollbar for the tbody */
+#startShiftCashDenominationTableId tbody::-webkit-scrollbar,
+#closeShiftCashDenominationTableId tbody::-webkit-scrollbar {
+  width: 7px;
+}
+#startShiftCashDenominationTableId tbody::-webkit-scrollbar-thumb,
+#closeShiftCashDenominationTableId tbody::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  border: 2px solid transparent;
+  background-clip: padding-box;
+}
+
+/* Small-screen adjustment: slightly reduce left card height so layout remains balanced */
+@media (max-width: 1150px) {
+  #startShiftModal .col-3.acc-layout-col .acc-card-full,
+  #closeShiftModal .col-3.acc-layout-col .acc-card-full {
+    max-height: clamp(340px, 80vh, 720px) !important;
+    min-height: 300px !important;
+  }
+}

@@ -1,0 +1,12 @@
+.chargeslistClass{
+    padding: 0px;
+}
+.chargeslistClass li {
+    justify-content: left;
+    padding-left: 10px;
+}
+
+.chargeslistClass li input[type=checkbox]+label:before {
+    height: 23px;
+    width: 23px;
+}

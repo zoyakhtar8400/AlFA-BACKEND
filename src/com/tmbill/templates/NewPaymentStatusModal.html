@@ -1,0 +1,181 @@
+<div class="receiptactionsWrapper">
+  <link rel="stylesheet" href="../css/ReceiptActions.css" />
+  <div class="orderStatusWrapper" id="receiptOrderstatusWrapperid">
+    <h5 data-i18n="paymentStatus.billStatus" class="has-i18n" for="">
+      Bill Status:
+    </h5>
+    <div>
+      <ul id="receiptbillstatList" class="receiptbillstatListclass"></ul>
+    </div>
+  </div>
+  <div class="paymentWrapper" id="receiptmodalpaymentWrapperid">
+    <h5 data-i18n="paymentStatus.paymentMode" class="has-i18n" for="">
+      Payment Mode:
+    </h5>
+    <div id="receiptpaymentList" class="paylistClass"></div>
+  </div>
+  <div class="container" style="margin-top: 10px; width: 100%">
+    <div class="row">
+      <div class="col-2">
+        <input id="receiptsplitCheckid" type="checkbox" />
+        <label
+          data-i18n="orderScreen.splitPayment"
+          class="has-i18n newpaymentsplitCheckClass"
+          for="receiptsplitCheckid"
+          >Split Payment</label
+        >
+      </div>
+      <div class="col-3">
+        <!-- <select
+          class="expense-select category-select-class"
+          id="receiptCommentid"
+        >
+          <option data-i18n="" class="has-i18n" disabled selected value>
+            -- select reson --
+          </option>
+        </select> -->
+        <input id="receiptCommentid" type="text" placeholder="comment" />
+      </div>
+      <div class="col-4">
+        <label
+          data-i18n="orderScreen.PaymentReferenceNo"
+          class="has-i18n"
+          for="receiptPaymentReferencenumberid"
+          >Payment Reference No:</label
+        >
+        <input
+          class="paymentRefnumberinputclass"
+          id="receiptPaymentReferencenumberid"
+          type="text"
+        />
+      </div>
+      <div class="col-3">
+        <label
+          data-i18n="orderScreen.TipAmount"
+          class="has-i18n"
+          for="receipttipAmountid"
+          >Tip Amount:</label
+        >
+        <input
+          class="tipamontinputclass"
+          id="receipttipAmountid"
+          type="number"
+        />
+      </div>
+    </div>
+    <!-- </div> -->
+
+    <!-- <div class="paymentGrandtotalclass"> -->
+    <div class="row">
+      <div class="col-2 newpaymentwindowgrandtotalcontainer">
+        <label
+          data-i18n="orderScreen.grandTotal"
+          class="has-i18n reciptpaymentGrandTotalClass"
+          for="receiptpaymentTotalid"
+          >Grand Total:</label
+        >
+        <label
+          class="receiptpaymentGrandTotalClass"
+          for=""
+          id="receiptpaymentTotalid"
+        ></label>
+      </div>
+
+      <div class="col-3">
+        <div id="receiptpaymentcustomerpaidamtcontainer">
+          <label
+            data-i18n="orderScreen.Customerpaidamount"
+            class="has-i18n"
+            for="receiptpaymentCustomerPaidamtid"
+            >Customer Paid Amount:</label
+          >
+          <input
+            class="customerPaidamountinputclass"
+            id="receiptpaymentCustomerPaidamtid"
+            type="text"
+          />
+        </div>
+      </div>
+      <div class="col-4">
+        <div id="receiptpaymentreturnamtcontainer">
+          <label
+            data-i18n="orderScreen.Returnamount"
+            class="has-i18n"
+            for="receiptpaymentReturnAmountid"
+            data-i18n="orderScreen.remainingAmount"
+            >Return Amount:</label
+          >
+          <input
+            class="returnamountinputclass"
+            id="receiptpaymentReturnAmountid"
+            type="number"
+            disabled
+          />
+        </div>
+      </div>
+      <div class="col-3">
+        <label data-i18n="" class="has-i18n" for="receiptTipPaymentid"
+          >Tip Payment:</label
+        >
+
+        <select class="expense-select" id="receiptTipPaymentid">
+          <option data-i18n="" class="has-i18n" disabled selected value>
+            select payment
+          </option>
+        </select>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-2" id="receiptdeliveryBoyContainerId">
+        <label id="deliveryboylabelid">Delivery boy</label>
+        <select
+          class="expense-select category-select-class"
+          id="receiptdeliveryBoylistId"
+          style="width: 100%"
+        >
+          <option data-i18n="" class="has-i18n" disabled selected value="0">
+            -- select delivery boy --
+          </option>
+        </select>
+      </div>
+    </div>
+    <div class="newpaysplistselectwrapper" id="newpaysplistselectwrapperid">
+      <div class="newsplitaddpayWrapper w-100">
+        <input
+          data-i18n="[placeholder]orderScreen.Amount"
+          type="text"
+          class="has-i18n"
+          name=""
+          id="receiptsplitpayAmount"
+          placeholder="Amount"
+        />
+        <input
+          data-i18n="[value]orderScreen.Add"
+          id="receiptaddpayMethodbutton"
+          class="has-i18n"
+          type="button"
+          value="Add"
+        />
+        <div class="newremainingsplitWrapper pl-2">
+          <label
+            data-i18n="orderScreen.remainingAmount"
+            class="has-i18n"
+            for="receiptremainingPayableamount"
+            >Remaining Amount:</label
+          >
+          <label id="receiptremainingPayableamount" for=""></label>
+        </div>
+      </div>
+      <div class="text-center">
+        <ul
+          class="flex-wrap newsplitpaylistContainer"
+          id="receiptsplitpaylistId"
+        ></ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  require('../js/NewReceiptActionController.js');
+</script>

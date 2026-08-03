@@ -1,0 +1,223 @@
+<div class="onlineordersWrapper" id="onlineordersWrapperid">
+    <link rel="stylesheet" href="../css/Onlineorders.css">
+    <link rel="stylesheet" href="../css/OrderButtons.css">
+    <link rel="stylesheet" href="../css/Order-item-template.css">
+    <link href="../css/Step-Progress.css" rel="stylesheet" />
+    <div class="row main-order-wrapper">
+        <div class="col-sm-2 order-state-wrapper touch-scroll">
+            <input id="storeSettingsbuttonid" class="storeSettingsbutton"
+                type="button" value="Store Settings">
+            <div data-i18n="[title]onlineOrdersScreen.nextActionIsAllowedAfter"
+                title="Next action is allowed after"
+                id="nextactionCountdownid" class="countdown has-i18n">
+                <div class="values"></div>
+            </div>
+            <label data-i18n="onlineOrdersScreen.Filters"
+                class="has-i18n">Filters:</label>
+            <br>
+            <div class="sort-order-option-container"
+                id="sort-order-option-container-id">
+                <label data-i18n="onlineOrdersScreen.sortBy"
+                    class="has-i18n">Sort By:</label>
+                <select class="custom-select" id="onlineordersSortfilterid">
+                    <option selected value="newest-orders"
+                        data-i18n="onlineOrdersScreen.newstFirst"
+                        class="has-i18n">
+                        Newst First</option>
+                    <option value="oldest-orders"
+                        data-i18n="onlineOrdersScreen.oldestFirst"
+                        class="has-i18n">Oldest
+                        First</option>
+                </select>
+                <br />
+            </div>
+
+            <label data-i18n="onlineOrdersScreen.byOrderState"
+                class="has-i18n">By Order State:</label>
+            <ul id="order-states-list-id" class="list-group order-states">
+                <li data-i18n="[append]onlineOrdersScreen.New" action-type="0"
+                    id="neworderButton"
+                    class="list-group-item has-i18n"><i class="fas fa-check"
+                        aria-hidden="true"></i></li>
+                <li data-i18n="[append]onlineOrdersScreen.Running"
+                    action-type="1" id="runningordersButton"
+                    class="list-group-item has-i18n"><i class="fas fa-check"
+                        aria-hidden="true"></i></li>
+                <li data-i18n="[append]onlineOrdersScreen.foodReady"
+                    action-type="5" id="runningordersButton"
+                    class="list-group-item has-i18n"><i class="fas fa-check"
+                        aria-hidden="true"></i></li>
+                <li data-i18n="[append]onlineOrdersScreen.Completed"
+                    action-type="2" id="completedorderButton"
+                    class="list-group-item has-i18n"><i class="fas fa-check"
+                        aria-hidden="true"></i></li>
+                <li data-i18n="[append]onlineOrdersScreen.Cancelled"
+                    action-type="3" id="cancelledordersButton"
+                    class="list-group-item has-i18n"><i class="fas fa-check"
+                        aria-hidden="true"></i></li>
+            </ul>
+            <br>
+            <div id="more-filters-divid">
+                <label for data-i18n="onlineOrdersScreen.moreFilters"
+                    class="has-i18n">More Filters:</label>
+                <div id="running-filers-div-id" class="running-filers-div">
+                    <button data-i18n="onlineOrdersScreen.All" class="has-i18n"
+                        is_sub_filter=true action-type="1"
+                        id="allordersButton">All</button>
+                    <button data-i18n="onlineOrdersScreen.foodReady"
+                        class="has-i18n" is_sub_filter=true action-type="5"
+                        id="foodreadyButton">Food Ready</button>
+                    <button data-i18n="onlineOrdersScreen.Dispatched"
+                        class="has-i18n" is_sub_filter=true
+                        action-type="6"
+                        id="dispatchedButton">Dispatched</button>
+                    <button data-i18n="onlineOrdersScreen.Acknowledge"
+                        class="has-i18n" is_sub_filter=true
+                        action-type="4" id="ackButton">Acknowledge</button>
+                </div>
+            </div>
+            <label for data-i18n="onlineOrdersScreen.byPlatform"
+                class="has-i18n">By Platform:</label>
+            <div id="platform-filters-div-id">
+                <img is_platform_filter=true action-type="7"
+                    id="zomatofilterButton"
+                    src="../assets/images/aggrs/tmbill_zomato.png" alt>
+                <img is_platform_filter=true action-type="8"
+                    id="swiggyfilterButton"
+                    src="../assets/images/aggrs/tmbill_swiggy.png" alt>
+                <img is_platform_filter=true action-type="10"
+                    id="uberfilterButton"
+                    src="../assets/images/aggrs/tmbill_ubereats.png" alt>
+                <img is_platform_filter=true action-type="11"
+                    id="dunzofilterButton"
+                    src="../assets/images/aggrs/tmbill_dunzo.png" alt>
+            </div>
+
+        </div>
+        <div class="col-sm-6 orderslistWrapeer" id>
+            <div class="onlineorders-search-container">
+                <div class="d-flex search-input-container">
+                    <input id="onlineordersearchInputid"
+                        data-i18n="[placeholder]onlineOrdersScreen.searchOnlineOrder"
+                        class="first has-i18n" type="text"
+                        placeholder="Search Order">
+                    <button id="onlineordersearchButtonid">
+                        <i class="fas fa-search" aria-hidden="true"></i>
+                    </button>
+                </div>
+                <input data-i18n="[placeholder]onlineOrdersScreen.searchByDate"
+                    class="second has-i18n"
+                    title="Search by date" type="text"
+                    id="onlineorderdatefilter" placeholder="Search by date">
+            </div>
+            <ul class="list-group orders-list-container touch-scroll"
+                id="onlineorderslistID">
+
+            </ul>
+        </div>
+        <div id="orderdetail-wrapper-div"
+            class="col-sm-4 orderDetail-wrapper-div">
+            <label data-i18n="[append]onlineOrdersScreen.ORDERDETAILS"
+                class="order-details-label has-i18n" for>
+                <i class="fas fa-sign-out-alt" id="channellogoutButton"
+                    aria-hidden="true"></i>
+            </label>
+
+            <div class="orderdetail-items-div">
+                <label data-i18n="onlineOrdersScreen.Items"
+                    class="orderdetail-itemsdetails-label has-i18n"
+                    for>Items</label>
+                <table class="table table-sm onlineorders-table"
+                    id="orderdetailsTable">
+                    <thead class>
+                        <tr>
+                            <th data-i18n="onlineOrdersScreen.Name"
+                                class="has-i18n">Name</th>
+                            <th data-i18n="onlineOrdersScreen.Qty"
+                                class="has-i18n">Qty</th>
+                            <th data-i18n="onlineOrdersScreen.Price"
+                                class="has-i18n">Price</th>
+                            <th data-i18n="onlineOrdersScreen.Amount"
+                                class="has-i18n">Amount</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+            </div>
+            <div class="orderdetail-calculation-details">
+                <label id="current-orderdetail-subtotal" for></label>
+                <label id="current-orderdetail-totaldiscount" for></label>
+                <label id="current-orderdetail-totaltax" for></label>
+                <label id="current-orderdetail-totalcharges" for></label>
+                <label id="current-orderdetail-grandTotal" for></label>
+                <label id="current-orderdetail-receivabletotal" for></label>
+            </div>
+
+            <div class="orderdetails-status-div">
+                <label data-i18n="onlineOrdersScreen.Status"
+                    class="orderdetails-status-label progress-label has-i18n"
+                    for>Status</label>
+                <div id="step-progress-id"
+                    class="progress-bar-wrapper-div"></div>
+            </div>
+
+            <div class="orderdetails-dboyinfo-div">
+                <select class="deliveryBoycombo" id="onlinedeliveryboyCombo">
+                    <option data-i18n="onlineOrdersScreen.selectDeliveryBoy"
+                        class="has-i18n" disabled selected value>
+                        __Select Delivery Boy__</option>
+                </select>
+
+                <label data-i18n="onlineOrdersScreen.deliveryPersonDetails"
+                    class="orderdetails-dboyinfo-label has-i18n"
+                    for>Delivery Person Details</label>
+                <div class="orderdetails-person-name-div">
+                    <i class="fas fa-user col-sm-1" aria-hidden="true"></i>
+                    <label class="col-sm-10" id="orderdetails-dboyname-id"
+                        for></label>
+                </div>
+                <div class="orderdetails-person-phone-div">
+                    <i class="fas fa-mobile col-sm-1" aria-hidden="true"></i>
+                    <label class="col-sm-10" id="orderdetails-dboyphone-id" for>
+                    </label>
+                </div>
+                <label class="col-sm-10" id="orderdetails-dboystate-id"
+                    for></label>
+
+            </div>
+
+            <div class="orderdetails-actionsDiv">
+                <button data-i18n="[append]onlineOrdersScreen.pullOrder"
+                    id="pullorderButton"
+                    class="normal-button has-i18n">
+                    <span class="fas fa-level-down-alt"></span>
+                </button>
+                <input data-i18n=" [value]onlineOrdersScreen.printKOT"
+                    class="has-i18n" id="printonlinekotButton"
+                    type="button" value="Print KOT">
+                <input data-i18n="[value]onlineOrdersScreen.printBill"
+                    class="has-i18n" id="printonlinebillButton"
+                    type="button" value="Print Bill">
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<div class="modal fade" id="onlinesettingsModal">
+    <div
+        class="modal-dialog modal onlinesettingsModalclass modal-dialog-centered">
+        <div class="modal-content onlinesettingsModalcontent ">
+            <div class="modal-body onlinesettingsModalBody"
+                id="onlinesettingsModalBodyid">
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    require('../js/OnlineOrdersController.js');
+</script>
+<script>if (window.module) module = window.module;</script>

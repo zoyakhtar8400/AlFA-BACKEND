@@ -1,0 +1,482 @@
+.settingsModalclass {
+  height: 70%;
+  max-width: 60%;
+  min-width: 500px;
+  overflow: hidden !important;
+}
+
+.settingsModalBody {
+  height: 100%;
+}
+
+.settingstabContent .tab-pane {
+  -webkit-overflow-scrolling: touch;
+}
+
+.settingTabs {
+  height: 90%;
+}
+
+#settingsTablistid li a {
+  color: var(--tabs-link-color);
+}
+
+.settingstabContent {
+  height: 95%;
+}
+
+.settingstitleDiv {
+  width: 100%;
+  display: flex;
+}
+
+#shortcutsTab {
+  height: 100%;
+}
+
+.settingsHeading {
+  width: 95%;
+}
+
+.closeSettings {
+  height: 35px;
+  width: 35px;
+  text-align: center;
+  padding-top: 10px;
+  font-size: 27px;
+}
+
+.settingsModalcontent {
+  height: 90%;
+}
+
+.settingswindoWrapper {
+  width: 100%;
+  height: 100%;
+}
+
+.importlabelTitle {
+  width: 35%;
+  margin-left: 6px;
+}
+
+.file-size-indicator {
+  margin: 0;
+  font-size: smaller;
+  color: gray;
+}
+
+.appearanceDiv {
+  height: 50px;
+}
+
+.bordered-div {
+  border: 1px solid #80808075;
+  margin-top: 2px;
+  border-radius: 5px;
+}
+
+.generalTab,
+#printerTab {
+  height: 100%;
+  padding: 5px;
+  overflow-y: auto;
+}
+
+.generalTab label {
+  font-size: 13px;
+  font-weight: bold;
+}
+
+.generalTab input[type='radio'] + label {
+  display: flex;
+  margin: 0.2em;
+  cursor: pointer;
+  align-items: center;
+  padding: 0.2em;
+}
+
+.showdetailsDiv {
+  margin: 0;
+  width: 100%;
+  display: inherit;
+}
+
+.quickbillSettings input[type='text'] {
+  margin-top: 3px;
+  margin-right: 3px;
+}
+
+.quickbilllabel,
+.quickkotlabel {
+  margin-top: auto;
+  width: 130px;
+  margin-left: 10px;
+}
+
+/**
+Export import div
+**/
+
+.exportimportDiv {
+  padding-right: 10px;
+  margin-top: 3px;
+}
+
+/* .exportimportDiv input[type=button] {
+    background: #5d83c1;
+} */
+
+.centeredDiv {
+  align-items: center !important;
+}
+
+.nomarginlabel {
+  margin: 0;
+  margin-right: 5px;
+}
+
+.labelchecksCombo {
+  width: 35%;
+  height: 30px;
+  margin-left: 6px;
+  background-color: #c9c5c5b9;
+  border: none;
+  border-radius: 16px;
+  padding: 5px;
+}
+
+.label-printer-check-div {
+  align-items: center;
+  margin-left: 5px;
+}
+
+#customeronkotCombo {
+  width: 45%;
+}
+
+.labelforSelect {
+  margin: 0;
+}
+
+.sortby {
+  width: 30%;
+}
+
+#roundoffamountuptoInputid {
+  width: 60px;
+}
+
+.colorContainer {
+  display: grid;
+  grid-template-columns: auto auto auto;
+  margin: 6px;
+}
+
+.grid-item {
+  background-color: rgba(255, 255, 255, 0.8);
+  border: 1px solid rgba(0, 0, 0, 0.8);
+  /* padding: 20px; */
+  border-radius: 5px;
+  border: none;
+  margin: 2px;
+  height: 35px;
+  font-size: 16px;
+  text-align: center;
+  color: white;
+}
+
+.tableColorTitle {
+  margin-top: 0;
+  margin-bottom: 0 !important;
+  text-align: center;
+  font-weight: bold;
+}
+
+#updatePaymentOptions {
+  position: relative;
+  left: 355px;
+}
+
+.paymentOptionLabel {
+  padding: 12px 0px 0px 18px;
+}
+
+.posytudeportinput {
+  width: 25%;
+  height: 35px;
+  margin-left: 6px;
+  background-color: #c9c5c5b9;
+  border: none;
+  border-radius: 16px;
+  padding: 5px;
+  margin-top: 0px !important;
+}
+
+.settingheadings {
+  width: 50%;
+}
+
+.tableSettingContainer,
+.viewSettingContainer,
+.sortByItemContianer,
+.itemSettingContainer {
+  position: relative;
+  width: 50%;
+  /* height: 200px; */
+}
+
+.tableSettingContainer::after {
+  content: '';
+  position: absolute;
+  height: 80%; /* Border height (80% of parent) */
+  border-right: 2px dashed #80808075;
+  right: 0; /* Position on the right */
+  top: 10%; /* Center the border ( (100% - 80%) / 2 ) */
+}
+
+.viewSettingContainer::after {
+  content: '';
+  position: absolute;
+  width: 80%; /* Border height (80% of parent) */
+  border-top: 2px dashed #80808075;
+  left: 10%; /* Position on the right */
+  top: 0; /* Center the border ( (100% - 80%) / 2 ) */
+}
+
+.itemSettingContainer::after {
+  content: '';
+  position: absolute;
+  width: 80%; /* Border height (80% of parent) */
+  border-bottom: 2px dashed #80808075;
+  left: 10%; /* Position on the right */
+  bottom: 0; /* Center the border ( (100% - 80%) / 2 ) */
+}
+
+.sortByItemContianer::after {
+  content: '';
+  position: absolute;
+  height: 80%; /* Border height (80% of parent) */
+  border-left: 2px dashed #80808075;
+  left: 0; /* Position on the right */
+  top: 10%; /* Center the border ( (100% - 80%) / 2 ) */
+}
+
+.itemSettingContainer {
+  padding-bottom: 10px;
+}
+
+.tablenameascustomerbalnktitle {
+  width: 23%;
+}
+/* #updatequickLabelsid{
+    position: relative;
+    left: 224px;
+  } */
+
+div#generalTab::-webkit-scrollbar {
+  width: 5px !important;
+}
+
+div.shortcutsContainer::-webkit-scrollbar {
+  width: 5px !important;
+}
+
+div#printerTab::-webkit-scrollbar {
+  width: 5px !important;
+}
+
+label.file-size-indicator.has-i18n {
+  margin-left: -30px;
+}
+
+/* 1024x768 → 1024x720 */
+@media (width: 1024px) and (min-height: 720px) and (max-height: 768px) {
+  label.file-size-indicator.has-i18n {
+    margin-left: -25px;
+  }
+}
+
+/* 1400px → 1920px widths */
+@media (min-width: 1400px) and (max-width: 1920px) {
+  label.file-size-indicator.has-i18n {
+    margin-left: -130px;
+  }
+}
+
+/* exactly 1280 × 1024 */
+@media (width: 1280px) and (height: 1024px) {
+  label.file-size-indicator.has-i18n {
+    margin-left: 90px;
+  }
+}
+.d-flex.label-printer-check-div {
+  margin-top: 8px;
+}
+/* CSS-ONLY patch for current markup */
+.cashDrawerSettingsdiv {
+  display: grid;
+  grid-template-columns: 110px 1fr;
+  gap: 12px 20px;
+}
+.cashDrawerSettingsdiv > .d-flex {
+  grid-column: 2; /* rows land in the right column */
+  align-items: center;
+  margin-left: 0 !important;
+}
+.cashDrawerSettingsdiv > .d-flex:first-child {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: 240px 1fr;
+  align-items: start;
+}
+
+.cashDrawerSettingsdiv > .d-flex label.titleLabel:not(.has-i18n) {
+  display: none;
+}
+
+.cashDrawerSettingsdiv input[type='checkbox'] {
+  margin: 0 8px 0 0;
+}
+.cashDrawerSettingsdiv label.has-i18n {
+  margin: -8px 14px 0px -10px;
+}
+
+@media (min-width: 1280px) {
+  .cashDrawerSettingsdiv {
+    grid-template-columns: 240px 1fr;
+  }
+  .cashDrawerSettingsdiv > .d-flex {
+    display: flex;
+  }
+  .cashDrawerSettingsdiv label.has-i18n {
+    width: calc(44% - 24px);
+  }
+}
+
+@media (max-width: 1279px) {
+  .cashDrawerSettingsdiv label.has-i18n {
+    width: 100%;
+  }
+}
+@media (min-width: 1280px) {
+  .cashDrawerSettingsdiv {
+    margin-left: -70px;
+  }
+}
+
+@media (min-width: 1280px) {
+  .cashDrawerSettingsdiv {
+    margin-left: -18px !important;
+    margin-left: 12px;
+  }
+}
+
+.cashDrawerSettingsdiv > .d-flex:first-child {
+  display: flex !important;
+  justify-content: flex-start !important;
+  align-items: flex-start !important;
+  text-align: left !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+.cashDrawerSettingsdiv > .d-flex:first-child .titleLabel.has-i18n {
+  display: inline-block;
+  text-align: left !important;
+  white-space: nowrap;
+  margin: 0 !important;
+  width: auto;
+  max-width: 100%;
+}
+#cashDrawerTitle {
+  margin-left: 37px !important;
+}
+
+@media (width: 1400px) and (height: 1050px) {
+  #cashDrawerTitle {
+    margin-left: 28px !important;
+  }
+}
+@media (width: 1280px) and (height: 1024px) {
+  #cashDrawerTitle {
+    margin-left: 40px !important;
+  }
+}
+
+@media (min-width: 1024px) and (max-width: 1280px) and (max-height: 1050px) {
+  .cashDrawerSettingsdiv {
+    grid-template-columns: 110px 1fr !important;
+  }
+}
+
+.settingsModalclass .viewSettingsdiv {
+  --settings-opt-left: -55px;
+}
+
+.settingsModalclass
+  .viewSettingsdiv
+  .tableSettingContainer
+  > .d-flex:not(:first-child),
+.settingsModalclass
+  .viewSettingsdiv
+  .itemSettingContainer
+  > .d-flex:not(:first-child),
+.settingsModalclass
+  .viewSettingsdiv
+  .viewSettingContainer
+  > .d-flex:not(:first-child),
+.settingsModalclass
+  .viewSettingsdiv
+  .sortByItemContianer
+  > .d-flex:not(:first-child) {
+  margin-left: var(--settings-opt-left) !important;
+  align-items: center;
+  gap: 8px;
+}
+
+.settingsModalclass .viewSettingsdiv input[type='checkbox'],
+.settingsModalclass .viewSettingsdiv input[type='radio'] {
+  margin: 0 8px 0 0;
+}
+
+@media (min-width: 1400px) {
+  .settingsModalclass .viewSettingsdiv {
+    --settings-opt-left: -50px;
+  }
+}
+.generalTab,
+#printerTab {
+  height: 100%;
+  padding: 5px;
+  padding-bottom: 30px;
+  overflow-y: auto;
+  overflow-x: hidden !important;
+}
+
+.extendClosedaySettingHeading {
+  width: 36% !important;
+}
+
+.temrinalExtendCloseDayClass {
+  display: none !important;
+}
+#settingsTablistid li a {
+  font-weight: 600;
+}
+
+#settingsTablistid li a.active {
+  font-weight: bold;
+}
+
+#settingsTablistid li a.active {
+  font-weight: bold;
+}
+
+#dayCloseRow {
+  display: none;
+}
+#updateExtendDayCloseTimeBtn:hover {
+  background: var(--button-background);
+  color: white;
+}

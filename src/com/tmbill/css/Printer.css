@@ -1,0 +1,181 @@
+.printer-modal {
+  justify-content: center;
+}
+
+.printersWrapper {
+  max-height: 100%;
+}
+
+.printersModalclass {
+  /* height: 200px; */
+  width: 600px;
+}
+
+.printersModalBody {
+  justify-content: center;
+}
+
+.lablePrintercheck {
+  font-weight: 600 !important;
+  width: 30%;
+}
+
+.kotPrinterwrapper,
+.billPrinterwrapper {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.kotprintersClass,
+.billprintersClass {
+  width: 33%;
+  height: 35px;
+  margin-left: 3px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  outline: none;
+}
+
+.kitchenprinterCombo {
+  width: 30%;
+  height: 35px;
+  margin-left: 3px;
+  border: 1px solid #e7e5e582;
+  border-radius: 4px;
+  outline: none;
+}
+
+.printCopies {
+  width: 80px;
+}
+
+#labelPrinterwidth {
+  width: 80px;
+  margin: 0 !important;
+}
+
+.kitchenprinterDiv {
+  text-align: center;
+}
+
+.kotpapersizeClass,
+.billpapersizeClass {
+  width: 80px;
+  height: 35px;
+  margin-left: 3px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.printersdivWrapper {
+  display: grid;
+  border: 1px solid #80808075;
+  margin-top: 2px;
+  border-radius: 5px;
+}
+
+.printerTitles {
+  width: 100%;
+  padding-top: 10px;
+  font-weight: bolder;
+  letter-spacing: 1.3px;
+  text-align: center;
+  margin-bottom: 0.2rem;
+  text-underline-position: under;
+}
+
+.printerSwitch {
+  display: inline-flex;
+  text-align: center;
+}
+
+.printerSwitch label.switch {
+  margin: 0;
+  display: inline-table;
+  align-items: center;
+}
+
+.kotPrinterwrapper input[type='text'],
+.billPrinterwrapper input[type='text'] {
+  width: 12%;
+  margin: 0 !important;
+}
+
+.ordertypeWiseprinters .kitchenPrinterslistdiv {
+  max-height: 30dvh;
+  overflow: hidden;
+  overflow-y: auto;
+}
+/**
+**/
+.printerTables tbody tr td {
+  max-width: 120px !important;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-wrap: balance;
+}
+
+.printerTables tbody tr {
+  text-align: center !important;
+}
+
+#kitchenprintersListid,
+#tablewiseprintersListid,
+#kdswiseassignedUserslistid {
+  font-size: small;
+  font-size: 14px;
+}
+
+#kitchenprintersListid thead,
+#tablewiseprintersListid thead,
+#kdswiseassignedUserslistid thead {
+  color: #969292;
+  border: none;
+  background-color: transparent;
+}
+
+#kitchenprintersListid td,
+#tablewiseprintersListid td,
+#kdswiseassignedUserslistid td {
+  border-top: 1px solid transparent;
+}
+
+#kitchenprintersListid tbody tr,
+#tablewiseprintersListid tbody tr,
+#kdswiseassignedUserslistid tbody tr {
+  text-align: center !important;
+}
+
+/* .kotPrinterwrapper label, .billPrinterwrapper label {
+    
+} */
+
+/**
+Label printer pending work
+**/
+
+/* .labelprinterFlex {
+    display: none !important;
+} */
+
+#ksdwisekitchendepartmentsCombo {
+  width: 40%;
+}
+
+.s2kdssettingsusersCombo {
+  height: 35px !important;
+  background-color: #e7e5e582 !important;
+  color: #716e6e !important;
+}
+
+.categoryMultiselect,
+.tablesMultiselect,
+.billtablesMultiselect {
+  margin-top: 10px;
+  margin-left: 10px;
+  margin-right: 10px;
+  margin-bottom: 15px;
+}

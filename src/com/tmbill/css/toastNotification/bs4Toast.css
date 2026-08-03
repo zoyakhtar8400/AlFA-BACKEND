@@ -1,0 +1,49 @@
+.bs4ToastWrapper {
+  position: fixed;
+  z-index: 1;
+  /* right: 78%;
+    bottom: 2%; */
+  background-color: var(--background);
+  left: 52px;
+  bottom: -1%;
+  width: 320px;
+}
+
+.bs4ToastWrapper .toast-header {
+  color: var(--kot-header);
+  font-weight: 900;
+}
+
+.bs4ToastWrapper .toast-actions {
+  display: flex !important;
+  /* justify-content: flex-end; */
+  justify-content: center;
+}
+
+.bs4Toasticonimage {
+  height: 15px;
+}
+
+.bs4Toasticon {
+  margin-right: 0.5rem;
+}
+
+.viweNotification {
+  background: black;
+  color: white;
+  margin: 0px 5px;
+  height: 35px;
+  font-size: 14px;
+}
+
+.viweNotification:hover {
+  color: white;
+}
+
+.paymentNotificationwrapper {
+  padding-left: 12px;
+  font-weight: bold;
+}
+.viweMessgaeFromCskNotification {
+  margin-left: auto;
+}

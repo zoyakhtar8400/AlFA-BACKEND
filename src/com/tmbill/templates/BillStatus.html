@@ -1,0 +1,55 @@
+<div class="billstatusWrapper">
+  <link rel="stylesheet" href="../css/Billstatus.css" />
+  <img
+    class="billstatImage"
+    src="../assets/images/cancelgif.gif"
+    alt="Bill Status image"
+    srcset=""
+  />
+
+  <div class="billActions">
+    <label
+      data-i18n="billStatus.makeBillStatusCancelFree"
+      class="has-i18n"
+      for=""
+      >Make Bill Status Cancel/Complementary
+    </label>
+    <input
+      data-i18n="[placeholder]billStatus.reason"
+      class="has-i18n"
+      type="text"
+      name=""
+      placeholder="Reason"
+      id="reasonFieldid"
+    />
+    <!-- <select class="expense-select category-select-class" id="reasonFieldid">
+      <option data-i18n="" class="has-i18n" disabled selected value>
+        -- select reson --
+      </option>
+    </select> -->
+    <input
+      data-i18n="[value]billStatus.freeBill"
+      class="has-i18n"
+      type="button"
+      id="freebillButtonid"
+      value="Complementary Bill"
+    />
+    <input
+      data-i18n="[value]billStatus.cancelBill"
+      class="has-i18n"
+      type="button"
+      id="cancelbillButtonid"
+      value="Cancel Bill"
+    />
+    <input
+      data-i18n="[value]billStatus.Close"
+      class="has-i18n"
+      type="button"
+      value="Close"
+      data-dismiss="modal"
+    />
+  </div>
+</div>
+<script>
+  require('../js/BillStatusController.js');
+</script>

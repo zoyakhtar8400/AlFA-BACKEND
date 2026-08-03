@@ -1,0 +1,792 @@
+<main class="dashboardparentDiv" id="dashboardparentDivid">
+  <link rel="stylesheet" href="../css/Dashboard.css" />
+  <div class="d-flex flex-wrap dashboard-stat-container-1">
+    <div class="d-flex overall-sales-info">
+      <div class="card statcard todays-sales-card">
+        <label
+          data-i18n="dashboard.todaysSales"
+          class="statcard-title has-i18n"
+          for="todayssalesLabelid">Today's Sales</label>
+        <label class="statcard-value" for id="todaysalesLabelid">$ 0</label>
+      </div>
+      <div class="card statcard total-sales-card">
+        <label
+          data-i18n="dashboard.totalSales"
+          class="statcard-title has-i18n"
+          for="totalsalesLabelid">Total Sales</label>
+        <label class="statcard-value" for id="totalsalesLabelid">$ 0</label>
+      </div>
+      <div class="card statcard total-sales-card">
+        <label
+          data-i18n="dashboard.thisMonth"
+          class="statcard-title has-i18n"
+          for="totalsalesLabelid">This Month</label>
+        <label class="statcard-value" for id="monthsalesLabelid">$ 0</label>
+      </div>
+      <div class="card statcard total-sales-card dash-ip-container">
+        <label
+          data-i18n="dashboard.IPAddress"
+          class="statcard-title has-i18n"
+          for="totalsalesLabelid">IP Address</label>
+        <label class="statcard-value" for id="dashboardIplabelid"></label>
+      </div>
+    </div>
+    <div class="overall-sales-bar-chart" id="overall-sales-bar-chart-id">
+      <div class="d-flex">
+        <label
+          data-i18n="dashboard.salesAnalysis"
+          class="sales-bar-title has-i18n">Sales Analysis</label>
+        <label
+          data-i18n="dashboard.thisWeeksData"
+          class="sales-bar-subtitle has-i18n">
+          This weeks data</label>
+      </div>
+      <div class="d-flex sales-data">
+        <div class="progress-item">
+          <div class="vprogress-bar-wrapper">
+            <div class="blank-space-forvbar" id="mondayblankbarId">&nbsp;</div>
+            <div class="progress-bar-veticle" id="mondaybarId">&nbsp;</div>
+          </div>
+          <label data-i18n="dashboard.M"
+            class="vprogress-bar-title has-i18n">M</label>
+        </div>
+        <div class="progress-item">
+          <div class="vprogress-bar-wrapper">
+            <div class="blank-space-forvbar" id="tuesdayblankbarId">&nbsp;</div>
+            <div class="progress-bar-veticle" id="tuesdaybarId">&nbsp;</div>
+          </div>
+          <label data-i18n="dashboard.T"
+            class="vprogress-bar-title has-i18n">T</label>
+        </div>
+        <div class="progress-item">
+          <div class="vprogress-bar-wrapper">
+            <div class="blank-space-forvbar" id="wednesdayblankbarId">
+              &nbsp;
+            </div>
+            <div class="progress-bar-veticle" id="wednesdaybarId">&nbsp;</div>
+          </div>
+          <label data-i18n="dashboard.W"
+            class="vprogress-bar-title has-i18n">W</label>
+        </div>
+        <div class="progress-item">
+          <div class="vprogress-bar-wrapper">
+            <div class="blank-space-forvbar" id="thursdayblankbarId">
+              &nbsp;
+            </div>
+            <div class="progress-bar-veticle" id="thursdaybarId">&nbsp;</div>
+          </div>
+          <label data-i18n="dashboard.T"
+            class="vprogress-bar-title has-i18n">T</label>
+        </div>
+        <div class="progress-item">
+          <div class="vprogress-bar-wrapper">
+            <div class="blank-space-forvbar" id="fridayblankbarId">&nbsp;</div>
+            <div class="progress-bar-veticle" id="fridaybarId">&nbsp;</div>
+          </div>
+          <label data-i18n="dashboard.F"
+            class="vprogress-bar-title has-i18n">F</label>
+        </div>
+        <div class="progress-item">
+          <div class="vprogress-bar-wrapper">
+            <div class="blank-space-forvbar" id="saturdayblankbarId">
+              &nbsp;
+            </div>
+            <div class="progress-bar-veticle" id="saturdaybarId">&nbsp;</div>
+          </div>
+          <label data-i18n="dashboard.S"
+            class="vprogress-bar-title has-i18n">S</label>
+        </div>
+        <div class="progress-item">
+          <div class="vprogress-bar-wrapper">
+            <div class="blank-space-forvbar" id="sundayblankbarId">&nbsp;</div>
+            <div class="progress-bar-veticle" id="sundaybarId">&nbsp;</div>
+          </div>
+          <label data-i18n="dashboard.S"
+            class="vprogress-bar-title has-i18n">S</label>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="dashboard-stat-container-2" id="dashboard-stat-container-2-id">
+    <div
+      class="d-flex align-content-start flex-wrap overall-stat-container card"
+      id="allsales-stat-container-id">
+      <div class="stat-card-wrapper">
+        <img
+          class="statcard-img"
+          src="../assets/images/transparent/offline.png"
+          alt="Offline" />
+        <!-- <i class="fas dash-icons">O</i> -->
+        <div class="statcard2 totaltax-card">
+          <label
+            data-i18n="dashboard.offlineSales"
+            class="statcard2-title has-i18n">Offline Sales</label>
+          <label class="statcard2-value" id="offlinesaleslabelid"> 0</label>
+        </div>
+      </div>
+
+      <div class="stat-card-wrapper">
+        <img
+          class="statcard-img"
+          src="../assets/images/transparent/online.png"
+          alt="Online" />
+        <!-- <i class="fas dash-icons">O</i> -->
+        <div class="statcard2 totaltax-card">
+          <label
+            data-i18n="dashboard.onlineSales"
+            class="statcard2-title has-i18n">Online Sales</label>
+          <label class="statcard2-value" id="onlinesaleslabelid"> 0</label>
+        </div>
+      </div>
+
+      <div class="stat-card-wrapper">
+        <img
+          class="statcard-img"
+          src="../assets/images/transparent/online.png"
+          alt="Online" />
+        <!-- <i class="fas dash-icons">O</i> -->
+        <div class="statcard2 totaltax-card">
+          <label
+            data-i18n="dashboard.digitalSales"
+            class="statcard2-title has-i18n">Digital Sales</label>
+          <label class="statcard2-value" id="digitalsaleslabelid"> 0</label>
+        </div>
+      </div>
+
+      <div class="stat-card-wrapper">
+        <img
+          class="statcard-img"
+          src="../assets/images/transparent/tax.png"
+          alt="Tax" />
+        <!-- <i class="fas dash-icons">%</i> -->
+        <div class="statcard2 totaltax-card">
+          <label data-i18n="dashboard.totalTax"
+            class="statcard2-title has-i18n">Total Tax</label>
+          <label class="statcard2-value" id="totalTaxlabelid"> 0</label>
+        </div>
+      </div>
+
+      <div class="stat-card-wrapper">
+        <img
+          class="statcard-img"
+          src="../assets/images/transparent/discount.png"
+          alt="Discount" />
+        <!-- <i class="fas fa-tag dash-icons"></i> -->
+        <div class="statcard2 totaldisount-card">
+          <label
+            data-i18n="dashboard.totalDiscount"
+            class="statcard2-title has-i18n">Total Discount</label>
+          <label class="statcard2-value" id="totalDiscountlabelid">0</label>
+        </div>
+      </div>
+      <div class="stat-card-wrapper">
+        <!-- <i class="fas dash-icons">D</i> -->
+        <img
+          class="statcard-img"
+          src="../assets/images/transparent/dine.png"
+          alt="Dunzo" />
+        <div class="statcard2 totaldinein-card">
+          <label data-i18n="dashboard.dineIn"
+            class="statcard2-title has-i18n">Dine in</label>
+          <label class="statcard2-value" id="dineintotallabelid">0</label>
+        </div>
+      </div>
+      <div class="stat-card-wrapper">
+        <img
+          class="statcard-img"
+          src="../assets/images/transparent/quickbill.png"
+          alt="Tax" />
+        <!-- <i class="fas dash-icons">Q</i> -->
+        <div class="statcard2 totalquickbill-card">
+          <label
+            data-i18n="dashboard.quickBill"
+            class="statcard2-title has-i18n">Quick Bill</label>
+          <label class="statcard2-value" id="quickbillTotallabelid">0</label>
+        </div>
+      </div>
+      <div class="stat-card-wrapper">
+        <!-- <i class="fas dash-icons">T</i> -->
+        <img
+          class="statcard-img"
+          src="../assets/images/transparent/takeaway.png"
+          alt="Takeaway" />
+        <div class="statcard2 totaltakeaway-card">
+          <label data-i18n="dashboard.Takeaway"
+            class="statcard2-title has-i18n">PickUp</label>
+          <label class="statcard2-value" id="takeawaytotalLabelid">0</label>
+        </div>
+      </div>
+      <div class="stat-card-wrapper">
+        <img
+          class="statcard-img"
+          src="../assets/images/transparent/homedelivery.png"
+          alt="homedelivery" />
+        <!-- <i class="fas dash-icons">H</i> -->
+        <div class="statcard2 totalhomedel-card">
+          <label
+            data-i18n="dashboard.homeDelivery"
+            class="statcard2-title has-i18n">Delivery</label>
+          <label class="statcard2-value" id="homdedelTotallabelid">0</label>
+        </div>
+      </div>
+
+      <div class="stat-card-wrapper">
+        <img
+          class="statcard-img"
+          src="../assets/images/transparent/cancel.png"
+          alt="homedelivery" />
+        <!-- <i class="fas dash-icons">C</i> -->
+        <div class="statcard2 totalhomedel-card">
+          <label
+            data-i18n="dashboard.cancelledBill"
+            class="statcard2-title has-i18n">Cancelled Bill</label>
+          <label class="statcard2-value"
+            id="cancelledordersTotallabelid">0</label>
+        </div>
+      </div>
+      <div class="stat-card-wrapper">
+        <img
+          class="statcard-img"
+          src="../assets/images/transparent/free.png"
+          alt="homedelivery" />
+        <!-- <i class="fas dash-icons">F</i> -->
+        <div class="statcard2 totalhomedel-card">
+          <label data-i18n="dashboard.freeBill"
+            class="statcard2-title has-i18n">Free Bill</label>
+          <label class="statcard2-value" id="freeordersTotallabelid">0</label>
+        </div>
+      </div>
+      <div class="stat-card-wrapper">
+        <!-- <i class="fas fa-trash-alt dash-icons"></i> -->
+        <img
+          class="statcard-img"
+          src="../assets/images/transparent/deleted.png"
+          alt="homedelivery" />
+        <div class="statcard2 totalhomedel-card">
+          <label
+            data-i18n="dashboard.deletedBill"
+            class="statcard2-title has-i18n">Deleted Bill</label>
+          <label class="statcard2-value"
+            id="deletedordersTotallabelid">0</label>
+        </div>
+      </div>
+      <div class="stat-card-wrapper">
+        <img
+          class="statcard-img"
+          src="../assets/images/transparent/cancel.png"
+          alt="homedelivery" />
+        <!-- <i class="fas dash-icons">C</i> -->
+        <div class="statcard2 totalhomedel-card">
+          <label
+            data-i18n="dashboard.cancelledBillOnline"
+            class="statcard2-title has-i18n">Cancelled Bill(Online)</label>
+          <label class="statcard2-value"
+            id="olcancelledordersTotallabelid">0</label>
+        </div>
+      </div>
+      <div class="stat-card-wrapper">
+        <img
+          class="statcard-img"
+          src="../assets/images/transparent/cancel.png"
+          alt="homedelivery" />
+        <!-- <i class="fas dash-icons">C</i> -->
+        <div class="statcard2 totalhomedel-card">
+          <label
+            data-i18n="dashboard.cancelledBillDigital"
+            class="statcard2-title has-i18n">Cancelled Bill(Digital)</label>
+          <label class="statcard2-value"
+            id="digitalcancelledordersTotallabelid">0</label>
+        </div>
+      </div>
+
+      <div class="stat-card-wrapper">
+        <img
+          class="statcard-img"
+          src="../assets/images/transparent/tax.png"
+          alt="Tax" />
+        <div class="statcard2 totalhomedel-card">
+          <label
+            data-i18n="dashboard.totalTaxOnline"
+            class="statcard2-title has-i18n">Total tax(Online)</label>
+          <label class="statcard2-value" id="oltotalTaxlabelid">0</label>
+        </div>
+      </div>
+      <div class="stat-card-wrapper">
+        <img
+          class="statcard-img"
+          src="../assets/images/transparent/discount.png"
+          alt="Discount" />
+        <div class="statcard2 totalhomedel-card">
+          <label
+            data-i18n="dashboard.totalDiscountOnline"
+            class="statcard2-title has-i18n">Total Discount (Online)</label>
+          <label class="statcard2-value" id="oltotalDiscountlabelid">0</label>
+        </div>
+      </div>
+
+      <div class="stat-card-wrapper">
+        <img
+          class="statcard-img"
+          src="../assets/images/transparent/tax.png"
+          alt="Tax" />
+        <div class="statcard2 totalhomedel-card">
+          <label
+            data-i18n="dashboard.totalTaxDigital"
+            class="statcard2-title has-i18n">Total Tax(Digital)</label>
+          <label class="statcard2-value" id="digitaltotalTaxlabelid">0</label>
+        </div>
+      </div>
+      <div class="stat-card-wrapper">
+        <img
+          class="statcard-img"
+          src="../assets/images/transparent/discount.png"
+          alt="Discount" />
+        <div class="statcard2 totalhomedel-card">
+          <label
+            data-i18n="dashboard.totalDiscountDigital"
+            class="statcard2-title has-i18n">Total Discount (Digital)</label>
+          <label class="statcard2-value"
+            id="digitaltotalDiscountlabelid">0</label>
+        </div>
+      </div>
+
+      <div class="stat-card-wrapper" id="zomatoordersTotalContianerid">
+        <img
+          class="statcard-img"
+          src="../assets/images/transparent/zomato.png"
+          alt />
+        <!-- <i class="fas dash-icons">Z</i> -->
+        <div class="statcard2 totalhomedel-card">
+          <label data-i18n="dashboard.Zomato"
+            class="statcard2-title has-i18n">Zomato</label>
+          <label class="statcard2-value" id="zomatoordersTotallabelid">0</label>
+        </div>
+      </div>
+      <div class="stat-card-wrapper" id="swiggyordersTotalContianerid">
+        <!-- <i class="fas dash-icons">S</i> -->
+        <img
+          class="statcard-img"
+          src="../assets/images/transparent/swiggy.png"
+          alt="Swiggy" />
+        <div class="statcard2 totalhomedel-card">
+          <label data-i18n="dashboard.Swiggy"
+            class="statcard2-title has-i18n">Swiggy</label>
+          <label class="statcard2-value" id="swiggyordersTotallabelid">0</label>
+        </div>
+      </div>
+      <div class="stat-card-wrapper" id="ondcordersTotalContianerid">
+        <img
+          class="statcard-img"
+          src="../assets/images/transparent/ondc.png"
+          alt="Dunzo" />
+        <!-- <i class="fas dash-icons">D</i> -->
+        <div class="statcard2 totalhomedel-card">
+          <label data-i18n class="statcard2-title has-i18n">ONDC</label>
+          <label class="statcard2-value" id="ondcordersTotallabelid">0</label>
+        </div>
+      </div>
+      <div class="stat-card-wrapper" id="dunzoordersTotalContianerid">
+        <img
+          class="statcard-img"
+          src="../assets/images/transparent/dunzo.png"
+          alt="Dunzo" />
+        <!-- <i class="fas dash-icons">D</i> -->
+        <div class="statcard2 totalhomedel-card">
+          <label data-i18n="dashboard.Dunzo"
+            class="statcard2-title has-i18n">Dunzo</label>
+          <label class="statcard2-value" id="dunzoordersTotallabelid">0</label>
+        </div>
+      </div>
+      <div class="stat-card-wrapper" id="ubereatsordersTotalContianerid">
+        <img
+          class="statcard-img"
+          src="../assets/images/transparent/ubereats.png"
+          alt="Dunzo" />
+        <!-- <i class="fas dash-icons">U</i> -->
+        <div class="statcard2 totalhomedel-card">
+          <label data-i18n="dashboard.Ubereats"
+            class="statcard2-title has-i18n">Uber Eats</label>
+          <label class="statcard2-value" id="uberordersTotallabelid">0</label>
+        </div>
+      </div>
+
+      <div class="stat-card-wrapper" id="dineoutsordersTotalContianerid">
+        <img class="statcard-img" alt="Dunzo" />
+        <!-- <i class="fas dash-icons">U</i> -->
+        <div class="statcard2 totalhomedel-card">
+          <label data-i18n class="statcard2-title has-i18n">Dineout</label>
+          <label class="statcard2-value"
+            id="dineoutordersTotallabelid">0</label>
+        </div>
+      </div>
+
+      <div class="stat-card-wrapper" id="googlepaysordersTotalContianerid">
+        <img class="statcard-img" alt="Google pay total" />
+        <!-- <i class="fas dash-icons">U</i> -->
+        <div class="statcard2 totalhomedel-card">
+          <label data-i18n class="statcard2-title has-i18n">Google Pay</label>
+          <label class="statcard2-value"
+            id="googlepayordersTotallabelid">0</label>
+        </div>
+      </div>
+
+      <div class="stat-card-wrapper" id="gupshupordersTotalContianerid">
+        <img class="statcard-img" alt="gupshup" />
+        <!-- <i class="fas dash-icons">U</i> -->
+        <div class="statcard2 totalhomedel-card">
+          <label data-i18n class="statcard2-title has-i18n">gupshup</label>
+          <label class="statcard2-value"
+            id="gupshupordersTotallabelid">0</label>
+        </div>
+      </div>
+
+      <div class="stat-card-wrapper" id="peppoordersTotalContianerid">
+        <img class="statcard-img" alt="peppo" />
+        <!-- <i class="fas dash-icons">U</i> -->
+        <div class="statcard2 totalhomedel-card">
+          <label data-i18n class="statcard2-title has-i18n">peppo</label>
+          <label class="statcard2-value" id="peppoordersTotallabelid">0</label>
+        </div>
+      </div>
+
+      <div class="stat-card-wrapper" id="amazonfoodordersTotalContianerid">
+        <img class="statcard-img" alt="amazonfood" />
+        <!-- <i class="fas dash-icons">U</i> -->
+        <div class="statcard2 totalhomedel-card">
+          <label data-i18n class="statcard2-title has-i18n">amazon food</label>
+          <label class="statcard2-value"
+            id="amazonfoodordersTotallabelid">0</label>
+        </div>
+      </div>
+
+      <div class="stat-card-wrapper" id="DotpesordersTotalContianerid">
+        <img class="statcard-img" alt="Dot pe" />
+        <!-- <i class="fas dash-icons">U</i> -->
+        <div class="statcard2 totalhomedel-card">
+          <label data-i18n class="statcard2-title has-i18n">Dot pe</label>
+          <label class="statcard2-value" id="DotpeordersTotallabelid">0</label>
+        </div>
+      </div>
+
+      <div class="stat-card-wrapper" id="eazydinerordersTotalContianerid">
+        <img class="statcard-img" alt="eazydiner" />
+        <!-- <i class="fas dash-icons">U</i> -->
+        <div class="statcard2 totalhomedel-card">
+          <label data-i18n class="statcard2-title has-i18n">eazydiner</label>
+          <label class="statcard2-value"
+            id="eazydinerordersTotallabelid">0</label>
+        </div>
+      </div>
+
+      <div class="stat-card-wrapper" id="dukaanordersTotalContianerid">
+        <img class="statcard-img" alt="dukaan" />
+        <!-- <i class="fas dash-icons">U</i> -->
+        <div class="statcard2 totalhomedel-card">
+          <label data-i18n="dashboard.DUKAAN_d"
+            class="statcard2-title has-i18n">dukaan</label>
+          <label class="statcard2-value" id="dukaanordersTotallabelid">0</label>
+        </div>
+      </div>
+
+      <div class="stat-card-wrapper" id="jungleworksordersTotalContianerid">
+        <img class="statcard-img" alt="jungleworks" />
+        <!-- <i class="fas dash-icons">U</i> -->
+        <div class="statcard2 totalhomedel-card">
+          <label data-i18n class="statcard2-title has-i18n">jungleworks</label>
+          <label class="statcard2-value"
+            id="jungleworksordersTotallabelid">0</label>
+        </div>
+      </div>
+
+      <div class="stat-card-wrapper" id="YUMZYordersTotalContianerid">
+        <img class="statcard-img" alt="YUMZY" />
+        <!-- <i class="fas dash-icons">U</i> -->
+        <div class="statcard2 totalhomedel-card">
+          <label data-i18n class="statcard2-title has-i18n">YUMZY</label>
+          <label class="statcard2-value" id="YUMZYordersTotallabelid">0</label>
+        </div>
+      </div>
+
+      <div class="stat-card-wrapper" id="magicpinordersTotalContianerid">
+        <img class="statcard-img" alt="magicpin" />
+        <!-- <i class="fas dash-icons">U</i> -->
+        <div class="statcard2 totalhomedel-card">
+          <label data-i18n class="statcard2-title has-i18n">magicpin</label>
+          <label class="statcard2-value"
+            id="magicpinordersTotallabelid">0</label>
+        </div>
+      </div>
+
+      <div class="stat-card-wrapper" id="THRIVEordersTotalContianerid">
+        <img class="statcard-img" alt="THRIVE" />
+        <!-- <i class="fas dash-icons">U</i> -->
+        <div class="statcard2 totalhomedel-card">
+          <label data-i18n class="statcard2-title has-i18n">THRIVE</label>
+          <label class="statcard2-value" id="THRIVEordersTotallabelid">0</label>
+        </div>
+      </div>
+
+      <div class="stat-card-wrapper" id="talabatordersTotalContianerid">
+        <img class="statcard-img" alt="THRIVE" />
+        <!-- <i class="fas dash-icons">U</i> -->
+        <div class="statcard2 totalhomedel-card">
+          <label data-i18n class="statcard2-title has-i18n">Talabat</label>
+          <label class="statcard2-value"
+            id="talabatordersTotallabelid">0</label>
+        </div>
+      </div>
+
+      <div class="stat-card-wrapper" id="RADYESordersTotalContianerid">
+        <img class="statcard-img" alt="RADYES" />
+        <!-- <i class="fas dash-icons">U</i> -->
+        <div class="statcard2 totalhomedel-card">
+          <label data-i18n class="statcard2-title has-i18n">RADYES</label>
+          <label class="statcard2-value" id="RADYESordersTotallabelid">0</label>
+        </div>
+      </div>
+
+      <div class="stat-card-wrapper" id="MYMENUTotalContianerid">
+        <img class="statcard-img" alt="MYMENU" />
+        <!-- <i class="fas dash-icons">U</i> -->
+        <div class="statcard2 totalhomedel-card">
+          <label data-i18n class="statcard2-title has-i18n">MYMENU</label>
+          <label class="statcard2-value" id="MYMENUTotallabelid">0</label>
+        </div>
+      </div>
+
+      <div class="stat-card-wrapper" id="deliverectordersTotalContianerid">
+        <img class="statcard-img" alt="deliverect" />
+        <!-- <i class="fas dash-icons">U</i> -->
+        <div class="statcard2 totalhomedel-card">
+          <label data-i18n class="statcard2-title has-i18n">deliverect</label>
+          <label class="statcard2-value"
+            id="deliverectordersTotallabelid">0</label>
+        </div>
+      </div>
+
+      <div class="stat-card-wrapper" id="FoodPandaordersTotalContianerid">
+        <img class="statcard-img" alt="FoodPanda" />
+        <!-- <i class="fas dash-icons">U</i> -->
+        <div class="statcard2 totalhomedel-card">
+          <label data-i18n class="statcard2-title has-i18n">FoodPanda</label>
+          <label class="statcard2-value"
+            id="FoodPandaordersTotallabelid">0</label>
+        </div>
+      </div>
+
+      <div class="stat-card-wrapper" id="HungerStationordersTotalContianerid">
+        <img class="statcard-img" alt="HungerStation" />
+        <!-- <i class="fas dash-icons">U</i> -->
+        <div class="statcard2 totalhomedel-card">
+          <label data-i18n
+            class="statcard2-title has-i18n">HungerStation</label>
+          <label class="statcard2-value"
+            id="HungerStationordersTotallabelid">0</label>
+        </div>
+      </div>
+
+      <div class="stat-card-wrapper" id="JahezordersTotalContianerid">
+        <img class="statcard-img" alt="Jahez" />
+        <!-- <i class="fas dash-icons">U</i> -->
+        <div class="statcard2 totalhomedel-card">
+          <label data-i18n class="statcard2-title has-i18n">Jahez</label>
+          <label class="statcard2-value" id="JahezordersTotallabelid">0</label>
+        </div>
+      </div>
+
+      <div class="stat-card-wrapper">
+        <!-- <i class="fas dash-icons">E</i> -->
+        <img
+          class="statcard-img"
+          src="../assets/images/transparent/expense.png"
+          alt="Dunzo" />
+        <div class="statcard2 totalhomedel-card">
+          <label
+            data-i18n="dashboard.totalExpenses"
+            class="statcard2-title has-i18n">Total Expenses</label>
+          <label class="statcard2-value" id="expensesTotallabelid">0</label>
+        </div>
+      </div>
+
+      <div class="stat-card-wrapper">
+        <img
+          class="statcard-img"
+          src="../assets/images/transparent/customer.png"
+          alt="Customers" />
+        <div class="statcard2 totalhomedel-card">
+          <label
+            data-i18n="dashboard.Customers"
+            class="statcard2-title has-i18n">Customers</label>
+          <label class="statcard2-value" id="customersTotallabelid">0</label>
+        </div>
+      </div>
+
+      <div class="stat-card-wrapper">
+        <img
+          class="statcard-img"
+          src="../assets/images/transparent/due payment.png"
+          alt="Offline" />
+        <div class="statcard2 totalhomedel-card">
+          <label
+            data-i18n="dashboard.duePayments"
+            class="statcard2-title has-i18n">Due Payments Received</label>
+          <label class="statcard2-value" id="duepayTotallabelid">0</label>
+        </div>
+      </div>
+
+      <div class="stat-card-wrapper">
+        <img
+          class="statcard-img"
+          src="../assets/images/transparent/due payment.png"
+          alt="Offline" />
+        <div class="statcard2 totalhomedel-card">
+
+          <label
+            data-i18n="dashboard.DUE_PAYMENT_RECEIVABLE"
+            class="statcard2-title has-i18n">Due Payments Receivable</label>
+          <label class="statcard2-value"
+            id="duepayReceivableTotallabelid">0</label>
+        </div>
+      </div>
+
+      <div class="stat-card-wrapper">
+        <img
+          class="statcard-img"
+          src="../assets/images/transparent/due payment.png"
+          alt="Offline" />
+        <div class="statcard2 totalhomedel-card">
+          <label data-i18n="dashboard.WALLET_DEBIT"
+            class="statcard2-title has-i18n">Wallet Debit</label>
+          <label class="statcard2-value"
+            id="walletDebitedTotallabelid">0</label>
+        </div>
+      </div>
+
+      <div class="stat-card-wrapper">
+        <img
+          class="statcard-img"
+          src="../assets/images/transparent/due payment.png"
+          alt="Offline" />
+        <div class="statcard2 totalhomedel-card">
+          <label data-i18n="dashboard.WALLET_CREDITED"
+            class="statcard2-title has-i18n">Wallet Credit</label>
+          <label class="statcard2-value"
+            id="walletCreditedTotallabelid">0</label>
+        </div>
+      </div>
+      <div class="stat-card-wrapper">
+        <img
+          class="statcard-img"
+          src="../assets/images/transparent/customer.png"
+          alt="Average sale per person" />
+        <div class="statcard2 totalhomedel-card">
+          <label
+            data-i18n="dashboard.averageSalePerPerson"
+            class="statcard2-title has-i18n">Average Sale per person</label>
+          <label class="statcard2-value" id="averagesalesperplabelid">0</label>
+        </div>
+      </div>
+      <div class="stat-card-wrapper">
+        <img
+          class="statcard-img"
+          src="../assets/images/transparent/due payment.png"
+          alt="Offline" />
+        <div class="statcard2 totalhomedel-card">
+          <label data-i18n="dashboard.CLOSING_BALANCE"
+            class="statcard2-title has-i18n">Closing Balance</label>
+          <label class="statcard2-value"
+            id="todaysClosingBalancelabelid">0</label>
+        </div>
+      </div>
+    </div>
+    <div class="dashboard-pay-stats" id="dashboard-pay-statsid">
+      <ul class="dashboardPaymentList" id="dashboardPaymentListid"></ul>
+    </div>
+  </div>
+
+  <div
+    class="row dashboard-stat-container-3 card"
+    id="dashboard-stat-container-3-id">
+    <div
+      class="col-sm-4 dashboard-chart-container-3"
+      id="piechart-container-id">
+      <div class="d-flex chart-actions">
+        <input
+          data-i18n="[placeholder]dashboard.Limit"
+          type="text"
+          class="has-i18n"
+          id="itemslimitfieldId"
+          placeholder="Limit" />
+        <input class="chart-date" id="itemsdaterangeId" />
+        <input
+          data-i18n="[value]dashboard.Fetch"
+          class="has-i18n"
+          type="button"
+          value="Fetch"
+          id="fetchtopitemsButton" />
+      </div>
+      <div id="js-legend" class="chart-legend">
+        <ul></ul>
+      </div>
+      <canvas
+        class="topitemspieChart allsalesBarchart"
+        id="topitemspieChartid"></canvas>
+    </div>
+
+    <div
+      class="col-sm-4 dashboard-chart-container-1"
+      id="linesaleschart-container-id">
+      <div class="d-flex chart-actions">
+        <select class="sales-option" id="saleschartOptionsid">
+          <option
+            data-i18n="dashboard.Daily"
+            class="has-i18n"
+            value="default"
+            selected>
+            Daily
+          </option>
+          <option data-i18n="dashboard.Monthly" class="has-i18n" value="month">
+            Monthly
+          </option>
+          <option data-i18n="dashboard.Yealy" class="has-i18n" value="year">
+            Yearly
+          </option>
+        </select>
+        <input class="chart-date" id="salesdaterangeId" />
+        <input
+          data-i18n="[value]dashboard.Fetch"
+          class="has-i18n"
+          type="button"
+          value="Fetch"
+          id="fetchsalesdataButton" />
+      </div>
+      <canvas class="allsalesLinechart" id="allsalesLinechartid"></canvas>
+    </div>
+    <div
+      class="col-sm-4 dashboard-chart-container-2"
+      id="barsaleschart-container-id">
+      <canvas class="allsalesBarchart" id="allsalesBarchartid"></canvas>
+      <div class="d-flex dashboard-actions">
+        <label
+          data-i18n="dashboard.Filter;[title]dashboard.filterDashboardDataByDate"
+          class="has-i18n"
+          title="Filter dashboard data by date"
+          for="dashboarddateFilterid">Filter:</label>
+        <input
+          data-i18n="[title]dashboard.filterDashboardDataByDate"
+          title="Filter dashboard data by date"
+          class="dashboard-date-filter has-i18n"
+          id="dashboarddateFilterid" />
+        <i
+          data-i18n="[title]dashboard.refreshDashboard"
+          title="Refresh Dashboard"
+          id="refreshDashboard"
+          class="fas fa-sync-alt dash-icons has-i18n"></i>
+      </div>
+    </div>
+  </div>
+</main>
+
+<script>
+  require('../js/DashboardController.js');
+</script>

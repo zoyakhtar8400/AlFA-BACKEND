@@ -1,0 +1,167 @@
+.paymentWrapper,
+.receiptbillstatusWrapper {
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+/* .paylistClass,
+.receiptbillstatListclass {
+    margin-left: 60px;
+} */
+
+.paylistClass > li,
+.receiptbillstatListclass > li {
+  margin-left: 3px;
+  display: flex;
+  justify-content: left;
+  align-items: center;
+}
+
+.paylistClass > li label,
+.receiptbillstatListclass > li label {
+  margin-left: 5px;
+  margin-top: 6px;
+}
+
+#receiptsplitCheckid + label:before {
+  height: 23px;
+}
+
+#receiptsplitpaylistId li {
+  padding-left: 32px;
+  display: flex;
+  justify-content: left;
+  /* margin-right: 32px; */
+  border: 1px solid MediumSeaGreen;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  margin-top: 5px;
+  padding: 6px;
+}
+
+.receiptCommentclass {
+  width: 90%;
+}
+
+.form-radio {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  display: inline-block;
+  position: relative;
+  background-color: #f1f1f1;
+  color: #666;
+  top: 10px;
+  height: 30px;
+  width: 30px;
+  border: 0;
+  border-radius: 50px;
+  cursor: pointer;
+  margin-right: 7px;
+  outline: none;
+}
+
+.form-radio:checked::before {
+  position: absolute;
+  font:
+    13px/1 'Open Sans',
+    sans-serif;
+  left: 11px;
+  top: 7px;
+  content: '\02143';
+  transform: rotate(40deg);
+}
+
+.form-radio:hover {
+  background-color: #f7f7f7;
+}
+
+.form-radio:checked {
+  background-color: #f1f1f1;
+}
+
+/* label {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    cursor: pointer;
+} */
+
+div.modifybillItemContainer::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+#receiptpaymentList {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+#receiptbillstatList {
+  display: flex;
+}
+
+.orderStatusWrapper {
+  border-bottom: 1px solid;
+  margin-bottom: 10px;
+  padding-bottom: 10px;
+}
+
+.neworderstatus-modal-dialog {
+  width: 90% !important;
+  max-width: none !important;
+}
+
+#receiptbillstatList li {
+  padding: 0px 15px;
+}
+
+.receipt-order-status {
+  background: #18ba6024;
+}
+
+.receiptpaymentGrandTotalClass {
+  font-weight: bold !important;
+  font-size: 17px;
+}
+
+.receiptwindowduepaymentcontainer {
+  margin-top: 14px;
+}
+
+#receiptmodalpaymentWrapperid {
+  border-bottom: 1px solid;
+}
+
+.reciptpaymentGrandTotalClass {
+  font-weight: bold !important;
+  /* margin-left: 20px; */
+  font-size: 17px;
+}
+
+.newpaymentwindowgrandtotalcontainer {
+  margin-top: 5px;
+}
+
+#receiptbillstatList #fulfilled {
+  border: 1px solid green;
+}
+
+#receiptbillstatList #cancelled {
+  border: 1px solid red;
+}
+
+#receiptbillstatList #free {
+  border: 1px solid blue;
+}
+
+#receiptbillstatList #deleted {
+  border: 1px solid red;
+}
+
+#receiptCommentid {
+  width: 80%;
+}
+
+#receiptTipPaymentid {
+  width: 60%;
+}

@@ -1,0 +1,1151 @@
+:root {
+  --primary-color: #2d7a7e;
+  --primary-hover: var(--button-background);
+  --primary-dark: #1f5557;
+  --white: #ffffff;
+  --light-bg: #f8f9fa;
+  --border-color: #e0e0e0;
+  --text-color: #333333;
+  --text-muted: #666666;
+  --transition-speed: 0.2s ease;
+}
+.digistoresettingsTabs .nav-link.active {
+  /* background-color: var(--light-bg) !important; */
+  color: #000;
+  border-radius: 4px;
+}
+
+ /* BASE STYLES */
+.modal-dialog.modal.onlinesettingsModalclass.modal-dialog-centered {
+    margin-top: 43px;
+}
+.onlinesettingsModalclass {
+  width: 80% !important;
+  max-width: 80%;
+  height: 90%;
+  background: var(--white);
+  border-radius: 8px;
+}
+.onlinesettingsModalcontent {
+  border: none !important;   /* removes the border */
+}
+
+#digiordersettingsModal {
+  overflow-y: hidden !important;  
+}
+.onlinesettingsModalcontent,
+.onlinestoreSettingsdiv {
+  height: 100%;
+  width: 100%;
+  background: var(--white);
+  display: flex;
+  flex-direction: column;
+} /* HEADER */
+.onlinesettingsTitle {
+  display: inline-flex;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 24px;
+  background: var(--button-background);
+  border-bottom: 1px solid var(--border-color);
+  flex-shrink: 0;
+}
+.onlinesettingsTitle h5 {
+  margin: 0;
+  color: white;
+  font-size: 18px;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+}
+.onlinesettingsTitle i {
+  color: white;
+  cursor: pointer;
+  padding: 8px;
+  border-radius: 4px;
+  transition: background var(--transition-speed);
+}
+.onlinesettingsTitle i:hover {
+  background: rgba(255, 255, 255, 0.1);
+} /* TAB WRAPPER */
+.storesettingsTabwrapper {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+} /* CONTROLS BAR */
+.container-div-1 {
+  display: inline-flex;
+  width: 100%;
+  /* height: 58px; */
+  justify-content: center;
+  align-items: baseline;
+  padding: 0px 24px;
+  background: var(--white);
+  border-bottom: 1px solid var(--border-color);
+  gap: 16px;
+  flex-wrap: wrap;
+  flex-shrink: 0;
+}
+
+.storeOptionscontainer {
+  width: auto;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex: 1;
+}
+.storeOptionscontainer select {
+  width: auto;
+  min-width: 200px;
+  height: 35px;
+  padding: 8px 12px;
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  background: var(--white);
+  color: var(--text-color);
+  font-size: 14px;
+  cursor: pointer;
+  transition: all var(--transition-speed);
+}
+.storeOptionscontainer select:focus {
+  border-color: var(--button-background);
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(45, 122, 126, 0.1);
+}
+.storeOptionscontainer label {
+  margin-right: 10px;
+  margin-left: 10px;
+  font-weight: 900;
+  font-size: 13px;
+  color: var(--text-color);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+#digipublishMenubuttonid {
+  padding: 8px 20px;
+  background: var(--button-background);
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all var(--transition-speed);
+  white-space: nowrap;
+}
+#digipublishMenubuttonid:hover {
+  background: var(--primary-hover);
+  /* transform: translateY(-1px); */
+  box-shadow: 0 4px 12px rgba(45, 122, 126, 0.2);
+} /* TAB NAVIGATION */
+.digistoresettingsTabs {
+  display: flex;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  background: var(--white);
+  border-bottom: 2px solid var(--border-color);
+  gap: 0;
+  flex-shrink: 0;
+}
+.nav-item {
+  margin: 0;
+  padding: 0;
+}
+.nav-link {
+  display: flex;
+  align-items: center;
+  /* padding: 12px 24px; */
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-muted);
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  transition: all var(--transition-speed);
+  border-bottom: 3px solid transparent;
+  /* margin-bottom: -2px; */
+  position: relative;
+  text-decoration: none;
+}
+.nav-link:hover {
+  color: var(--text-color);
+  background: rgba(45, 122, 126, 0.05);
+}
+.nav-link.active {
+  color: var(--button-background);
+  border-bottom-color: var(--button-background);
+  background: var(--light-bg);
+} /* TAB CONTENT */
+.onlinesettingstabsContainer {
+  flex: 1;
+  overflow-y: auto;
+  background: var(--white);
+  height: calc(100% - 120px);
+  display: flex;
+}
+.tab-pane {
+  width: 100%;
+  display: none;
+  flex-direction: column;
+  overflow-y: auto;
+  /* padding: 20px 24px; */
+}
+.tab-pane.active,
+.tab-pane.show {
+  display: flex;
+}
+.itemsettingsTab,
+.storesettingsTab,
+.storecatssettingstabdiv {
+  height: 100%;
+  padding: 5px;
+  overflow-y: auto;
+} /* PLATFORM STATUS SECTION - HORIZONTAL LAYOUT */
+.platformstore-settings-div {
+  margin: 0;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  padding: 20px 24px;
+}
+.platform-status-label {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-color);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--border-color);
+  margin-bottom: 16px;
+}
+/* .digistoresettings-platformstatus-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  width: 100%;
+  align-content: start;
+}  */
+.platform-status-container {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 16px;
+  background: var(--white);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  transition: all var(--transition-speed);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  /* flex: 0 1 auto;
+  min-width: 200px; */
+}
+.platform-status-container:hover {
+  border-color: var(--button-background);
+  box-shadow: 0 4px 12px rgba(45, 122, 126, 0.12);
+  background: var(--light-bg);
+}
+.platform-status-container img {
+  width: 40px;
+  height: 40px;
+  object-fit: contain;
+  flex-shrink: 0;
+}
+.platform-title-container {
+  flex: 1;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-color);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  min-width: 80px;
+} /* TOGGLE SWITCH - SMALLER SIZE */
+.switch {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 24px;
+  flex-shrink: 0;
+}
+.switch input[type='checkbox'] {
+  opacity: 0;
+  width: 0;
+  height: 0;
+  position: absolute;
+}
+.slider {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  border-radius: 20px;
+  transition: 0.3s;
+  cursor: pointer;
+}
+.slider:before {
+  position: absolute;
+  content: '';
+  height: 18px;
+  width: 18px;
+  left: 3px;
+  bottom: 3px;
+  background-color: white;
+  border-radius: 50%;
+  transition: 0.3s;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+input[type='checkbox']:checked + .slider {
+  background-color: var(--button-background);
+}
+input[type='checkbox']:checked + .slider:before {
+  /* transform: translateX(18px); */
+} /* ITEMS SETTINGS */
+.store-actions-div {
+  align-items: baseline;
+  justify-content: flex-start;
+  gap: 10px;
+  height: 50px;
+  margin-bottom: 5px;
+  margin-top: -4px;
+  flex-wrap: wrap;
+  padding: 3px;
+  /* background: var(--light-bg); */
+  border-radius: 6px;
+}
+.normal-button {
+  padding: 8px 16px;
+  background: var(--button-background);
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 13px;
+  /* font-weight: 600; */
+  cursor: pointer;
+  transition: all var(--transition-speed);
+  white-space: nowrap;
+}
+.normal-button:hover {
+  background: var(--primary-hover);
+}
+#digitalfilterstoreitemsField,
+#digitalfilterstoreoptionsField {
+  /* flex: 1; */
+  min-width: 150px;
+  padding: 8px 12px;
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  font-size: 14px;
+  background: var(--white);
+  color: var(--text-color);
+}
+#digitalfilterstoreitemsField:focus,
+#digitalfilterstoreoptionsField:focus {
+  border-color: var(--button-background);
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(45, 122, 126, 0.1);
+}
+.selectpicker-custom {
+  min-width: 150px;
+  padding: 8px 12px;
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  background: var(--white);
+  font-size: 14px;
+  color: var(--text-color);
+} /* TABLE CONTAINER */
+.digitalstoreItemscontainer {
+  height: 85%;
+  margin-top: 4px;
+  overflow-y: auto;
+  flex: 1;
+}
+.storecat-settings-div,
+.storeoptionsItemscontainer {
+  margin: 0;
+  height: 100%;
+} /* TABLES */
+#digistoreItemstableId_wrapper,
+#digistoreCategoriestableId_wrapper,
+#digistoreoptionssTableId_wrapper {
+  width: 100% !important;
+}
+.storeItemstable,
+.storeCategoriestable {
+  width: 90%;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+.storeItemstable thead,
+.storeCategoriestable thead {
+  /* color: var(--text-muted); */
+  border: none;
+  background-color: var(--light-bg);
+  position: sticky;
+  top: 0;
+}
+.storeItemstable > thead > tr > th,
+.storeCategoriestable > thead > tr > th {
+  border: none;
+  text-align: left;
+  padding: 8px 14px;
+  font-weight: 600;
+  font-size: 13px;
+  /* text-transform: uppercase; */
+  letter-spacing: 0.5px;
+}
+.storeItemstable td,
+.storeCategoriestable td {
+  border: none;
+  padding: 12px 16px;
+  border-bottom: 1px solid #f0f0f0;
+}
+.storeItemstable tbody tr:hover,
+.storeCategoriestable tbody tr:hover {
+  background-color: var(--light-bg);
+} /* PLATFORM LIST */
+.platformlistContainer {
+  width: 100%;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+.platformList {
+  flex: 1;
+  overflow-y: auto;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.platformsactionsContainer {
+  width: 100%;
+  margin-top: auto;
+  padding-top: 16px;
+  border-top: 1px solid var(--border-color);
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  flex-shrink: 0;
+}
+.platformsactionsContainer button {
+  margin-right: 10px;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all var(--transition-speed);
+}
+.btn-success {
+  background-color: mediumseagreen !important;
+  color: white;
+}
+.btn-success:hover {
+  background-color: #3d9d7f !important;
+}
+.btn-danger {
+  background-color: #dc3545 !important;
+  color: white;
+}
+.btn-danger:hover {
+  background-color: #c82333 !important;
+}
+.button-success {
+  background-color: mediumseagreen !important;
+  color: white;
+} /* BOTTOM BAR */
+.d-flex {
+  display: flex;
+}
+.justify-content-center {
+  justify-content: center;
+}
+.text-danger {
+  margin: 0;
+  font-size: 13px;
+  color: #d97706;
+  font-weight: 500;
+}
+/* div#digistoreoptionsssettingstabdivId {
+    margin-top: -15px;
+} */
+
+#digiStoreMenuUpdateButtonid {
+  padding: 10px 24px;
+  background: var(--button-background);
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all var(--transition-speed);
+  line-height: 2px;
+}
+#digiStoreMenuUpdateButtonid:hover {
+  background: var(--primary-hover);
+  /* transform: translateY(-1px); */
+  box-shadow: 0 4px 12px rgba(45, 122, 126, 0.2);
+} /* SCROLLBARS */
+.onlinesettingstabsContainer::-webkit-scrollbar,
+.digitalstoreItemscontainer::-webkit-scrollbar,
+.platformList::-webkit-scrollbar {
+  width: 8px;
+}
+.onlinesettingstabsContainer::-webkit-scrollbar-track,
+.digitalstoreItemscontainer::-webkit-scrollbar-track,
+.platformList::-webkit-scrollbar-track {
+  background: var(--light-bg);
+}
+.onlinesettingstabsContainer::-webkit-scrollbar-thumb,
+.digitalstoreItemscontainer::-webkit-scrollbar-thumb,
+.platformList::-webkit-scrollbar-thumb {
+  background: #ccc;
+  border-radius: 4px;
+}
+.onlinesettingstabsContainer::-webkit-scrollbar-thumb:hover,
+.digitalstoreItemscontainer::-webkit-scrollbar-thumb:hover,
+.platformList::-webkit-scrollbar-thumb:hover {
+  background: #999;
+} /* RESPONSIVE */
+@media (max-width: 1200px) {
+  .platformstore-settings-div {
+    padding: 20px 16px;
+  }
+  .digistoresettings-platformstatus-list {
+    gap: 10px;
+  }
+  .platform-status-container {
+    flex: 0 1 calc(50% - 5px);
+  }
+  .container-div-1 {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .storeOptionscontainer {
+    /* flex-direction: column; */
+  }
+  .storeOptionscontainer select {
+    width: 100%;
+  }
+  #digipublishMenubuttonid {
+    width: 100%;
+  }
+}
+@media (max-width: 768px) {
+  .onlinesettingsModalclass {
+    width: 95% !important;
+    max-width: 95%;
+    height: 95%;
+  }
+  .onlinesettingsTitle {
+    padding: 12px 16px;
+  }
+  .onlinesettingsTitle h5 {
+    font-size: 16px;
+  }
+  .container-div-1 {
+    padding: 8px 16px;
+    gap: 8px;
+  }
+  .store-actions-div {
+    flex-direction: column;
+    align-items: stretch;
+    height: auto;
+  }
+  #digitalfilterstoreitemsField,
+  #digitalfilterstoreoptionsField,
+  .selectpicker-custom,
+  .storeOptionscontainer select {
+    width: 100%;
+  }
+  .normal-button {
+    width: 100%;
+  }
+  .nav-link {
+    padding: 10px 16px;
+    font-size: 13px;
+  }
+  .tab-pane {
+    padding: 16px 12px;
+  }
+  .platformstore-settings-div {
+    padding: 16px 12px;
+  }
+  .digistoresettings-platformstatus-list {
+    flex-direction: column;
+  }
+  .platform-status-container {
+    flex: 1;
+    width: 100%;
+  }
+} /* DARK MODE */
+
+ 
+
+  .platformsactionsContainer {
+    border-top-color: #444;
+  }
+/* FOCUS */
+input:focus,
+select:focus,
+button:focus {
+  outline: none;
+}
+*:focus-visible {
+  outline: 2px solid var(--button-background);
+  outline-offset: 2px;
+}
+/* =========================================================
+   STORE SETTINGS – GRID FIX FOR REAL POS SCREENS
+   CSS ONLY – NO LOGIC / NO CLASS CHANGES
+   ========================================================= */
+
+/* DEFAULT (Large desktop: 1600px and above) → 4 cards */
+
+/* ==== COMMENTED (REPLACED) =================================
+   Commenting out this earlier grid rule so a single grid
+   definition (at the bottom) can control layout coherently.
+   This avoids multiple conflicting grid-template-columns rules.
+   ========================================================= */
+/*
+.digistoresettings-platformstatus-list {
+  display: grid !important;
+  grid-template-columns: repeat(4, minmax(220px, 1fr));
+  gap: 16px !important;
+  align-items: stretch;
+}
+*/
+.row.platformstore-settings-div {
+    gap: 16px;
+}
+/* 1366px – 1599px → STILL 4 cards */
+@media (max-width: 1599px) {
+  .digistoresettings-platformstatus-list {
+    grid-template-columns: repeat(4, minmax(200px, 1fr));
+  }
+}
+
+/* 1024px – 1365px → 3 cards (THIS FIXES YOUR SS1) */
+@media (max-width: 1365px) {
+  .digistoresettings-platformstatus-list {
+    grid-template-columns: repeat(3, minmax(200px, 1fr));
+  }
+}
+
+/* Below 1024px → 2 cards */
+@media (max-width: 1023px) {
+  .digistoresettings-platformstatus-list {
+    grid-template-columns: repeat(2, minmax(200px, 1fr));
+  }
+}
+
+/* Tablet / very small → 1 card */
+@media (max-width: 640px) {
+  .digistoresettings-platformstatus-list {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* =========================================================
+   CARD POLISH (safe, compact, desktop POS friendly)
+   ========================================================= */
+
+.platform-status-container {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  padding: 12px 14px !important;
+  border-radius: 10px !important;
+}
+
+/* Logo stays left */
+.platform-status-container img {
+  width: 42px !important;
+  height: 42px !important;
+  object-fit: contain !important;
+}
+
+/* Toggle ALWAYS right */
+.platform-status-container .switch {
+  margin-left: auto !important;
+  width: 42px !important;
+  height: 22px !important;
+}
+
+/* Toggle knob */
+.platform-status-container .slider:before {
+  width: 16px !important;
+  height: 16px !important;
+  left: 3px !important;
+  bottom: 3px !important;
+}
+
+/* Checked movement */
+.platform-status-container input:checked + .slider:before {
+  /* transform: translateX(20px) !important; */
+}
+
+/* Hide unused title text safely */
+.platform-title-container {
+  display: none !important;
+}
+/* =========================================================
+   PUBLISH MENU POSITION FIX
+   → Stays on same row till 1024px
+   → Stacks only below 1024px
+   ========================================================= */
+
+/* DESKTOP + POS SCREENS (>=1024px) */
+@media (min-width: 1024px) {
+  .container-div-1 {
+    flex-wrap: nowrap !important;              /* NEVER wrap */
+    justify-content: space-between !important; /* left + right */
+    align-items: center !important;
+    gap: 16px;
+  }
+
+  /* LEFT SIDE (label + select) */
+  .storeOptionscontainer {
+    flex: 1 1 auto !important;
+    min-width: 0; /* important for flex shrink */
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .storeOptionscontainer label {
+    white-space: nowrap;
+  }
+#select-store-label {
+  display: inline-block;   /* ensures padding works properly */
+       /* moves it a little down */
+  /* optional extras */
+  margin-bottom: 5px;      /* space below if needed */
+}
+  .storeOptionscontainer select {
+    min-width: 140px;
+    max-width: 60%;
+    width: auto;
+  }
+
+  /* RIGHT SIDE (Publish menu button) */
+  #digipublishMenubuttonid {
+    flex: 0 0 auto !important;
+    margin-left: auto !important;
+    white-space: nowrap;
+  }
+}
+
+/* TABLET + MOBILE (<1024px) – EXISTING STACKING */
+@media (max-width: 1023px) {
+  .container-div-1 {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .storeOptionscontainer {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .storeOptionscontainer select {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  #digipublishMenubuttonid {
+    width: 100%;
+  }
+}
+ /* =========================================================
+   CONTROLS BAR – HARD FIX (1280 → 1024 SAFE)
+   Uses GRID instead of FLEX
+   ========================================================= */
+
+/* DEFAULT: DESKTOP / POS / LAPTOP */
+.container-div-1 {
+  display: grid !important;
+  grid-template-columns: 1fr auto; /* LEFT | PUBLISH */
+  align-items: center;
+  gap: 16px;
+}
+
+/* LEFT SIDE (store select area) */
+.storeOptionscontainer {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 0;              /* VERY IMPORTANT */
+}
+
+/* Prevent label from breaking layout */
+.storeOptionscontainer label {
+  white-space: nowrap;
+}
+
+/* HARD LIMIT select width so it NEVER pushes button */
+.storeOptionscontainer select {
+  width: 100%;
+  max-width: 220px;          /* KEY FIX */
+  min-width: 220px;
+}
+
+/* RIGHT SIDE (Publish Menu) */
+#digipublishMenubuttonid {
+  justify-self: end;         /* ALWAYS RIGHT */
+  white-space: nowrap;
+}
+ /* =========================================================
+   STACK ONLY BELOW 1024
+   ========================================================= */
+
+@media (max-width: 1023px) {
+  .container-div-1 {
+    grid-template-columns: 1fr; /* stack */
+  }
+
+  .storeOptionscontainer {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .storeOptionscontainer select {
+    max-width: 100%;
+    width: 100%;
+  }
+
+  #digipublishMenubuttonid {
+    width: 100%;
+    justify-self: stretch;
+  }
+}
+ /* ==== FINAL GRID FIX FOR PLATFORM CARDS (NO TOUCH / NO OVERLAP) ==== */
+
+/* Base: always grid, never flex */
+/* ==== COMMENTED (REPLACED) =================================
+   Commented earlier duplicate rules. Single definitive grid
+   defined at the very end of this file to avoid conflicts.
+   ========================================================= */
+/*
+.digistoresettings-platformstatus-list {
+  display: grid !important;
+  grid-auto-rows: auto;
+  grid-template-columns: repeat(4, minmax(220px, 1fr));
+  column-gap: 24px;
+  row-gap: 24px;
+  align-items: stretch;
+}
+*/
+
+/* Card itself never stretches weirdly */
+.platform-status-container {
+  width: 100% !important;
+  max-width: 100% !important;
+  box-sizing: border-box;
+}
+
+/* 1600px–1366px → 4 cards per row */
+@media (max-width: 1599px) {
+  .digistoresettings-platformstatus-list {
+    grid-template-columns: repeat(4, minmax(220px, 1fr));
+  }
+}
+
+/* 1365px–1200px → 3 cards per row */
+@media (max-width: 1365px) {
+  .digistoresettings-platformstatus-list {
+    grid-template-columns: repeat(3, minmax(220px, 1fr));
+  }
+}
+
+/* 1199px–900px → 2 cards per row */
+@media (max-width: 1199px) {
+  .digistoresettings-platformstatus-list {
+    grid-template-columns: repeat(3, minmax(220px, 1fr));
+  }
+}
+
+/* <900px → 1 card per row */
+@media (max-width: 899px) {
+  .digistoresettings-platformstatus-list {
+    grid-template-columns: 1fr;
+  }
+}
+ /* REMOVE if still there */
+.digistoresettings-platformstatus-list {
+  /* display: flex;
+     flex-wrap: wrap;
+     gap: 12px;
+     align-content: start;
+     width: 100%; */
+}
+
+/* Also remove this from .platform-status-container if present */
+.platform-status-container {
+  /* flex: 0 1 auto;
+     min-width: 200px; */
+}
+
+/* ------------------------------
+   PLATFORM CARDS — RELIABLE GRID
+   Small helper that was used earlier — COMMENTED to avoid duplicates
+   ------------------------------ */
+/*
+.digistoresettings-platformstatus-list {
+  display: grid !important;
+  gap: 24px !important;
+  grid-auto-flow: dense !important;            / * backfill small gaps * /
+  align-items: start !important;               / * align cards to top * /
+  grid-auto-rows: minmax(64px, auto) !important;
+  grid-template-columns: repeat(4, minmax(220px, 1fr)) !important;
+  width: 100% !important;
+  box-sizing: border-box !important;
+}
+*/
+
+/* ------------------------------
+   PLATFORM CARDS — RELIABLE GRID (responsive sections also commented earlier)
+   ------------------------------ */
+
+/* End of original file content - now adding the single overriding grid block below */
+
+/* =========================================================
+   SINGLE SOURCE OF TRUTH FOR PLATFORM GRID (FINAL)
+   - All previous .digistoresettings-platformstatus-list rules are commented out above.
+   - This block is the ONLY DEFINITIVE grid definition.
+   - If you want to revert, uncomment the earlier blocks and remove this one.
+   ========================================================= */
+
+.digistoresettings-platformstatus-list {
+  display: grid !important;
+  width: 100% !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  gap: 16px !important;
+  align-items: stretch !important; /* ensures rows behave consistently */
+  box-sizing: border-box !important;
+
+  /* Default desktop layout: 4 columns */
+  grid-template-columns: repeat(4, minmax(220px, 1fr)) !important;
+}
+
+/* Desktop wide: keep 4 columns */
+@media (min-width: 1366px) {
+  .digistoresettings-platformstatus-list {
+    grid-template-columns: repeat(4, minmax(220px, 1fr)) !important;
+  }
+}
+
+/* 1024px–1365px → 3 columns (this is the important breakpoint for your 1024 case) */
+@media (max-width: 1365px) and (min-width: 1024px) {
+  .digistoresettings-platformstatus-list {
+    grid-template-columns: repeat(3, minmax(220px, 1fr)) !important;
+  }
+}
+
+/* 768px–1023px → 2 columns */
+@media (max-width: 1023px) and (min-width: 768px) {
+  .digistoresettings-platformstatus-list {
+    grid-template-columns: repeat(2, minmax(220px, 1fr)) !important;
+  }
+}
+
+/* <768px → 1 column */
+@media (max-width: 767px) {
+  .digistoresettings-platformstatus-list {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+
+.platform-status-container {
+  box-sizing: border-box !important;
+  align-self: start !important;
+  width: 100% !important;
+  max-width: 100% !important;
+
+  min-height: 64px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  padding: 12px 14px !important;
+}
+
+.digistoresettings-platformstatus-list {
+  display: grid !important;
+  grid-auto-flow: row !important;        
+  align-items: stretch !important;
+}
+
+.platform-status-container {
+  height: 72px !important;
+  min-height: 72px !important;
+  max-height: 72px !important;
+
+  overflow: hidden !important;           
+  box-sizing: border-box !important;
+
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+}
+
+
+.platform-status-container * {
+  max-height: 100% !important;
+}
+
+
+.platform-status-container [style*="display:none"],
+.platform-status-container [style*="visibility:hidden"],
+.platform-status-container [style*="opacity:0"] {
+  display: none !important;
+  height: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+
+.platform-status-container > * {
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+}
+
+#digistoreItemstableId .switch,
+#digistoreCategoriestableId .switch,
+#digistoreoptionssTableId .switch {
+  position: relative;
+  top: 8px;  
+}
+#digistoresettingstabId,
+#digiitemsettingstabId,
+#digistorecategoryettingstabId,
+#digistoreoptionsettingstabId {
+  font-weight: 600;
+}
+.digistoresettingsTabs .nav-link.active{
+  font-weight: bold;
+}
+.tab-pane.active,
+.tab-pane.show {
+  overflow-y: auto !important;
+}
+/* =========================================================
+   ONLINE STORE SETTINGS – COMPACT DATATABLE ROW HEIGHT
+   (jQuery default padding is commented globally)
+========================================================= */
+
+/* FORCE compact body rows */
+.onlinestoreSettingsdiv table.dataTable tbody td,
+.onlinestoreSettingsdiv table.dataTable tbody th {
+    padding: 2px 14px !important;   /* 🔑 controls row height */
+    line-height: 1.1 !important;
+    font-size: 13px !important;
+    vertical-align: middle !important;
+}
+
+/* Compact headers */
+.onlinestoreSettingsdiv table.dataTable thead th,
+.onlinestoreSettingsdiv table.dataTable thead td {
+    font-weight: 600 !important;   /* 🔑 REAL bold */
+    font-size: 13.5px !important;
+    line-height: 1.2 !important;
+    /* color: #c8bdbd !important; */
+}
+
+/* Kill artificial row height */
+.onlinestoreSettingsdiv table.dataTable tbody tr {
+    height: auto !important;
+    min-height: unset !important;
+}
+/* ONLY CATEGORY & STATUS FILTER DROPDOWNS */
+
+#filterdigistoreitemsbycatOptions,
+#filterdigistoreitemsbystatusOptions {
+  width: 89px;        /* ⬅ reduced width */
+  min-width: 89px;
+  height: 34px;
+
+  padding: 4px 10px;
+  font-size: 13px;
+
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  background-color: #fff;
+  color: #333;
+
+  cursor: pointer;
+}
+#filterdigistoreitemsbycatOptions{
+   width: 119px;        /* ⬅ reduced width */
+  min-width: 119px;
+
+}
+/* Focus state */
+#filterdigistoreitemsbycatOptions:focus,
+#filterdigistoreitemsbystatusOptions:focus {
+  outline: none;
+  border-color: var(--button-background, #2d7a7e);
+  box-shadow: 0 0 0 2px rgba(45, 122, 126, 0.15);
+}
+
+@media (min-width: 1024px) {
+    #digitalfilterstoreitemsField,
+    #digitalfilterstoreoptionsField {
+        flex: 0.6;
+    }
+}
+/* PLATFORM CARD LAYOUT: icon | name | toggle */
+.platform-status-container {
+  display: flex !important;
+  align-items: center !important;
+  gap: 12px !important;
+  padding: 12px 14px !important;
+  box-sizing: border-box !important;
+}
+
+/* Platform icon */
+.platform-status-container img {
+  width: 42px !important;
+  height: 42px !important;
+  object-fit: contain !important;
+  flex: 0 0 auto !important;
+}
+
+/* Platform name (slightly shifted right, proper spacing) */
+.platform-status-container .platform-name {
+  flex: 1 1 auto !important;
+  min-width: 0;
+  font-weight: 600;
+  font-size: 14px;
+  /* color: var(--text-color, #2d7a7e); */
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+
+  /* ⬅️ move text slightly to the right */
+  margin-left: 10px;
+}
+
+
+/* .platform-status-container .switch {
+  margin-left: auto !important;
+  flex: 0 0 auto !important;
+  width: 44px !important;
+  height: 24px !important;
+} */
+@media (max-width: 1280px) and (min-width: 1020px) {
+  .digiorderstoreSettingsbutton {
+    font-size: 12px !important;
+    padding-left: 5px !important;
+  }
+}

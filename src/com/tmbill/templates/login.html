@@ -1,0 +1,309 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <title data-i18n="[value]login.Login" class="has-i18n">Login</title>
+    <link rel="stylesheet" href="../css/fontawesome/6.5.1/css/all.css" />
+    <link rel="stylesheet" href="../css/bootstrap/4.3.1/css/bootstrap.css" />
+    <link
+      rel="stylesheet"
+      href="../css/bootstrap/4.3.1/css/bootstrap.min.css"
+    />
+    <link rel="stylesheet" href="../css/fontawesome/6.5.1/css/v4-shims.css" />
+    <link rel="stylesheet" href="../css/datepicker/daterangepicker.min.css" />
+    <link rel="stylesheet" href="../thirdparty/flatpickr/css/index.css" />
+    <link rel="stylesheet" href="../css/login.css" />
+    <link
+      rel="stylesheet"
+      href="../../../../node_modules/simple-keyboard/build/css/index.css"
+    />
+    <link rel="stylesheet" href="../css/keyboard.css" />
+    <link rel="stylesheet" href="../css/jquery/jquery-ui.min.css" />
+  </head>
+
+  <body>
+    <div class="loginWindowwrapper row">
+      <div class="col-md-6 loginimages">
+        <img class="p-5 w-75" src="../assets/TMBill_ROS.png" alt="Group" />
+        <img class="p-5 w-75" src="../assets/group974.png" alt="Group" />
+        <div class="requestdemoContainer">
+          <i
+            data-i18n="[title]login.liveSupport"
+            title="Live support"
+            id="help-button-id"
+            class="fas fa-question-circle getintouch has-i18n"
+          ></i>
+          <button
+            data-i18n="login.requestForDemoHeading"
+            class="request-demo-button has-i18n"
+            id="requestdemoButton"
+          >
+            Request for demo
+          </button>
+          <button
+            data-i18n="login.contactUs"
+            id="contactusButton"
+            class="contact-us has-i18n"
+          >
+            Contact Us
+          </button>
+        </div>
+      </div>
+      <div class="col-md-6 logincard">
+        <div class="loginformwrapper">
+          <div class="tmbill-logo">
+            <img
+              class="thumb-lg img-circle"
+              src="../assets/TMBIll New Logo-05.png"
+              alt="TMBill"
+            />
+          </div>
+
+          <h3
+            data-i18n="login.atlanticPOSLogin"
+            id="loginWindowTitleLabelId"
+            class="login-title has-i18n"
+          >
+            Login to Master System
+          </h3>
+
+          <form method="post" class="login-form" onsubmit="return false;">
+            <!-- Mode Switch Buttons (from other branch) -->
+            <div class="name-field1">
+              <div class="mode-selection">
+                <button type="button" class="password">Password</button>
+                <button type="button" class="access">Access Code</button>
+                <button type="button" class="card1">Card</button>
+              </div>
+            </div>
+
+            <!-- Master POS Selection -->
+            <div
+              class="name-field hide"
+              id="masterposSelectwrapper"
+              style="display: none"
+            >
+              <i class="fas fa-solid fa-computer form-icon"></i>
+              <select class="masterposSelect" id="masterposSelectid">
+                <option
+                  data-i18n="login.discoveredMasterposlist"
+                  class="has-i18n"
+                  disabled
+                  selected
+                  value
+                >
+                  __Discovered Master POS__
+                </option>
+              </select>
+            </div>
+            <div class="name-field hide" id="masterposSelectInputwrapper">
+              <i class="fas fa-solid fa-computer form-icon"></i>
+              <input type="text" id="masterposSelectInputid" />
+            </div>
+
+            <!-- PASSWORD LOGIN SECTION (main branch) -->
+            <div class="loginmode" id="login-password">
+              <div class="name-field">
+                <i class="fas fa-user form-icon"></i>
+                <input
+                  data-i18n="[placeholder]login.Username"
+                  class="has-i18n"
+                  type="text"
+                  id="user_name"
+                  name="user_name"
+                  placeholder="Username"
+                  required
+                />
+              </div>
+              <div class="password-field">
+                <i class="fas fa-key form-icon"></i>
+                <input
+                  data-i18n="[placeholder]login.Password"
+                  class="has-i18n"
+                  type="password"
+                  id="user_password"
+                  name="user_password"
+                  placeholder="Password"
+                  required
+                />
+              </div>
+            </div>
+
+            <!-- ACCESS CODE LOGIN SECTION (from other branch) -->
+            <div class="loginmode hide" id="login-accesscode">
+              <div class="name-field">
+                <i class="fas fa-qrcode form-icon"></i>
+                <input
+                  type="text"
+                  id="access_code"
+                  name="access_code"
+                  placeholder="Enter Access Code"
+                />
+              </div>
+            </div>
+
+            <!-- CARD LOGIN SECTION (from other branch) -->
+            <div class="loginmode hide" id="login-card">
+              <div class="name-field">
+                <label class="login-card">Login with card</label>
+              </div>
+            </div>
+
+            <div class="show-password-div">
+              <i
+                class="fa-solid fa-keyboard"
+                id="loginSceenvirtualkeyboard"
+              ></i>
+              <input id="showpasswordCheck" type="checkbox" />
+              <label
+                data-i18n="login.showPassword"
+                class="has-i18n"
+                for="showpasswordCheck"
+                >Show Password</label
+              >
+            </div>
+
+            <div class="login-button">
+              <button
+                data-i18n="login.Login"
+                class="has-i18n"
+                type="button"
+                id="login"
+              >
+                Login
+              </button>
+            </div>
+
+            <div class="versionDivcontainer">
+              <label data-i18n="" class="has-i18n" for="tmbillversionLabel">
+                &nbsp;
+              </label>
+              <label id="tmbillversionLabel"></label>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <div class="simple-keyboard-container login-simple-keyboard">
+      <div class="simple-keyboard" id="simplekeyboardId"></div>
+    </div>
+
+    <div class="modal fade" data-backdrop="static" id="requestModal">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content requestModalclass">
+          <div class="modal-body requestmodalBody" id="requestmodalBodyid">
+            <div class="request-info-container">
+              <h4
+                data-i18n="login.requestForDemo.registrationForDemo"
+                class="has-i18n"
+              >
+                Registration for demo
+              </h4>
+
+              <div class="inline">
+                <input
+                  data-i18n="[placeholder]login.requestForDemo.restaurantName"
+                  class="has-i18n"
+                  type="text"
+                  placeholder="Restaurant name"
+                  id="restaurantinputnameId"
+                />
+                <input
+                  data-i18n="[placeholder]login.requestForDemo.ownerName"
+                  class="has-i18n"
+                  type="text"
+                  placeholder="Owner name"
+                  id="ownernameinputId"
+                />
+              </div>
+              <div class="inline">
+                <input
+                  data-i18n="[placeholder]login.requestForDemo.ownerMobile"
+                  class="has-i18n"
+                  type="text"
+                  placeholder="Owner mobile"
+                  id="ownerinputmobileId"
+                />
+                <input
+                  data-i18n="[placeholder]login.requestForDemo.ownerEmail"
+                  class="has-i18n"
+                  type="text"
+                  placeholder="Owner email"
+                  id="emailinputId"
+                />
+              </div>
+              <div class="inline">
+                <input
+                  data-i18n="[placeholder]login.requestForDemo.City"
+                  class="has-i18n"
+                  type="text"
+                  placeholder="City"
+                  id="cityinputId"
+                />
+                <input
+                  data-i18n="[placeholder]login.requestForDemo.Address"
+                  class="has-i18n"
+                  type="text"
+                  placeholder="Address"
+                  id="addressinputId"
+                />
+              </div>
+              <div class="inline">
+                <input
+                  data-i18n="[placeholder]login.requestForDemo.Message"
+                  class="has-i18n"
+                  type="text"
+                  placeholder="Message"
+                  id="messageinputId"
+                />
+              </div>
+            </div>
+
+            <div class="actionsDiv">
+              <button
+                data-i18n="login.requestForDemo.Request"
+                type="button"
+                class="request-button has-i18n"
+                id="requestdemobutton"
+              >
+                Request
+              </button>
+              <button
+                data-i18n="login.requestForDemo.Close"
+                class="has-i18n"
+                type="button"
+                data-dismiss="modal"
+              >
+                Close
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+
+  <script>
+    if (typeof module === 'object') {
+      window.module = module;
+      module = undefined;
+    }
+  </script>
+  <script src="../css/jquery/jquery-3.6.0.js"></script>
+  <script src="../css/bootstrap/4.3.1/js/bootstrap.js"></script>
+  <script src="../thirdparty/flatpickr/index.js"></script>
+  <script src="../js/renderer.js"></script>
+  <script src="../css/datepicker/daterangepicker.js"></script>
+  <script src="../css/jquery/jquery-ui.min.js"></script>
+  <script src="../css/jquery/context-menu/jquery.ui.position.js"></script>
+  <script src="../css/bootstrap/4.3.1/js/popper.min.js"></script>
+  <script src="../css/bootstrap/4.3.1/js/bootstrap-treeview.min.js"></script>
+  <script>
+    require('../js/LoginController.js');
+  </script>
+</html>

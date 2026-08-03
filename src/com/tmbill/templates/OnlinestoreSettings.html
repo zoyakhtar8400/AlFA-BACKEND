@@ -1,0 +1,171 @@
+<div class="onlinestoreSettingsdiv">
+    <link rel="stylesheet" href="../css/Onlinestoresettings.css">
+    <div class="onlinesettingsTitle">
+        <h5 data-i18n="onlineStoreSetting.onlineOrderSettings" class="has-i18n">Online Store Settings</h5>
+        <i data-dismiss="modal" class="fas fa-times fa-lg" aria-hidden="true"></i>
+    </div>
+    <div class="storesettingsTabwrapper" id="storesettingsTabwrapperid">
+        <div class="container-div-1">
+            <div class="d-flex storeOptionscontainer">
+                <label data-i18n="onlineStoreSetting.selectStore" class="has-i18n">SELECT STORE</label>
+                <select id="parentcurrentStoresoptionsid">
+                    <option data-i18n="onlineStoreSetting._selectStore" class="has-i18n" disabled selected value>
+                        __Select Store__</option>
+                </select>
+            </div>
+            <input data-i18n="[value]onlineStoreSetting.Refresh" class="has-i18n" type="button" value="Refresh"
+                id="refreshstoresButton2">
+        </div>
+
+        <ul class="nav nav-tabs storesettingsTabs" role="tablist">
+            <li class="nav-item">
+                <a data-i18n="onlineStoreSetting.storeSettings" class="nav-link has-i18n" id="storesettingstabId"
+                    href="#storesettingstabdivId" role="tab" data-toggle="tab">Store
+                    Settings</a>
+            </li>
+            <li class="nav-item">
+                <a data-i18n="onlineStoreSetting.itemsSettingstitle" class="nav-link has-i18n" id="itemsettingstabId"
+                    href="#itemsettingstabdivId" role="tab" data-toggle="tab">Items
+                    Settings</a>
+            </li>
+            <li class="nav-item">
+                <a data-i18n="onlineStoreSetting.categorySettingstitle" class="nav-link has-i18n"
+                    id="storecategoryettingstabId" href="#storecatssettingstabdivId" role="tab"
+                    data-toggle="tab">Category Settings</a>
+            </li>
+            <li class="nav-item">
+                <a data-i18n="onlineStoreSetting.optionsSettingstitle" class="nav-link has-i18n"
+                    id="storeoptionsettingstabId" href="#storeoptionsssettingstabdivId" role="tab"
+                    data-toggle="tab">Options Settings</a>
+            </li>
+            <li class="nav-item">
+                <a data-i18n="onlineStoreSetting.optionsSettingstitle" class="nav-link has-i18n" id="otherettingstabId"
+                    href="#othersettingstabdivId" role="tab" data-toggle="tab">Other
+                    Settings</a>
+            </li>
+
+        </ul>
+        <div class="tab-content onlinesettingstabsContainer">
+            <div role="tabpanel" class="tab-pane fade itemsettingsTab " id="itemsettingstabdivId">
+                <div class="d-flex store-actions-div">
+                    <button data-i18n="onlineStoreSetting.itemsSettings.getItems" class="normal-button" class="has-i18n"
+                        id="getstoreItemsbutton">Get Items</button>
+                    <input data-i18n="[value]onlineStoreSetting.itemsSettings.Search" class="has-i18n" type="text"
+                        placeholder="Search" id="filterstoreitemsField">
+                    <label data-i18n="onlineStoreSetting.itemsSettings.filterByCategory" class="has-i18n"
+                        for="filterstoreitemsbycatOptions">Filter by Category:</label>
+                    <select class="selectpicker selectpicker-custom " id="filterstoreitemsbycatOptions">
+                        <option data-i18n="onlineStoreSetting.itemsSettings.filterByCategory.selectCategory"
+                            class="has-i18n" disabled selected value>__Select Category__</option>
+                    </select>
+                </div>
+                <div class="d-flex storeItemscontainer">
+                    <table class="table  table-sm storeItemstable" id="storeItemstableId">
+                    </table>
+                </div>
+                <div class="platformsactionsContainer">
+                    <button accesslevel-value='1' data-i18n="onlineStoreSetting.Enable" id="enableitemsButton"
+                        type="button" class="btn btn-success button-success normal-button has-i18n">Enable</button>
+                    <button accesslevel-value='2' data-i18n="onlineStoreSetting.Disable" id="disableitemsButton"
+                        type="button" class="btn btn-danger normal-button has-i18n">Disable</button>
+                    <button accesslevel-value='3' data-i18n="onlineStoreSetting.enableAll" id="enableallitemsButton"
+                        type="button" class="btn btn-success button-success normal-button has-i18n">Enable
+                        All</button>
+                    <button accesslevel-value='4' data-i18n="onlineStoreSetting.disableAll" id="disableallitemsButton"
+                        type="button" class="btn btn-danger normal-button has-i18n">Disable
+                        All</button>
+                </div>
+            </div>
+            <div role="tabpanel" class="tab-pane fade storesettingsTab" id="storesettingstabdivId">
+
+                <div class="platformlistContainer">
+                    <ul class="platformList" id="platformListid">
+
+                    </ul>
+                    <div class="platformsactionsContainer">
+                        <button data-i18n="onlineStoreSetting.Enable" id="enablestoreButton" type="button"
+                            class="btn btn-success button-success has-i18n">Enable</button>
+                        <button data-i18n="onlineStoreSetting.Disable" id="disablestoreButton" type="button"
+                            class="btn btn-danger has-i18n">Disable</button>
+                    </div>
+                </div>
+            </div>
+            <div role="tabpanel" class="tab-pane fade storecatssettingstabdiv" id="storecatssettingstabdivId">
+                <div class="d-flex">
+                    <input data-i18n="[value]onlineStoreSetting.categorySettings.getCategory" type="button"
+                        class="has-i18n" value="Get Categories" id="getstoreCategoriesbutton">
+                </div>
+
+                <div class="row storecat-settings-div">
+                    <table class="table  table-sm storeCategoriestable" id="storeCategoriestableId">
+                    </table>
+                </div>
+
+            </div>
+            <div role="tabpanel" class="tab-pane fade" id="storeoptionsssettingstabdivId">
+                <div class="d-flex">
+                    <input data-i18n="[value]onlineStoreSetting.optionsSettings.getOptions" class="has-i18n"
+                        type="button" value="Get Options" id="getstoreOptionsbutton">
+                    <input data-i18n="[placeholder]onlineStoreSetting.optionsSettings.Search" class="has-i18n"
+                        type="text" placeholder="Search" id="filterstoreoptionsField">
+                </div>
+
+                <div class="row">
+                    <table class="table  table-sm storeCategoriestable" id="storeoptionssTableId">
+                    </table>
+                </div>
+                <div class="platformsactionsContainer">
+                    <button accesslevel-value='1' data-i18n="onlineStoreSetting.Enable" id="enableOptionsButton"
+                        type="button" class="btn btn-success button-success normal-button has-i18n">Enable</button>
+                    <button accesslevel-value='2' data-i18n="onlineStoreSetting.Disable" id="disableoptionsButton"
+                        type="button" class="btn btn-danger normal-button has-i18n">Disable</button>
+                    <button accesslevel-value='3' data-i18n="onlineStoreSetting.enableAll" id="enablealloptionsButton"
+                        type="button" class="btn btn-success button-success normal-button has-i18n">Enable
+                        All</button>
+                    <button accesslevel-value='4' data-i18n="onlineStoreSetting.disableAll" id="disablealloptionsButton"
+                        type="button" class="btn btn-danger normal-button has-i18n">Disable
+                        All</button>
+                </div>
+
+            </div>
+            <div role="tabpanel" class="tab-pane fade othersettingsTab" id="othersettingstabdivId">
+                <div class="row other-settings-div">
+                    <div class="d-flex store-other-settings-container-1" id="notificationSettingsWrapperid">
+                        <label data-i18n="onlineStoreSetting.otherSettings.sendNotificationTo"
+                            class="titleLabel has-i18n" for="">Send Notification to:</label>
+                        <input value="0" name='notification-type' id="notifyAdminradioid" type="radio">
+                        <label data-i18n="onlineStoreSetting.otherSettings.sendNotificationTo.webAdmin" class="has-i18n"
+                            for="notifyAdminradioid">Web Admin</label>
+                        <input value="3" name='notification-type' id="notifystoreradioid" type="radio">
+                        <label data-i18n="onlineStoreSetting.otherSettings.sendNotificationTo.atlnaticDesktop"
+                            class="has-i18n" for="notifystoreradioid">Atlantic Desktop</label>
+                        <input value="2" name='notification-type' id="notifymobileradioid" type="radio">
+                        <label data-i18n="onlineStoreSetting.otherSettings.sendNotificationTo.Mobile" class="has-i18n"
+                            for="notifymobileradioid">Mobile</label>
+                        <input data-i18n="[value]onlineStoreSetting.otherSettings.sendNotificationTo.Update"
+                            class="has-i18n" id="updatenotifiationPrefbutton" type="button" value="Update">
+                    </div>
+
+                    <div class="d-flex store-other-settings-container-2" id="autoacceptSettingsWrapperid">
+                        <label data-i18n="onlineStoreSetting.otherSettings.sendNotificationTo.autoAcceptOrder"
+                            class="titleLabel has-i18n" for="">Auto accept order:</label>
+                        <label class="switch">
+                            <input id="autoacceptorderforStoreid" type="checkbox">
+                            <span class="slider round"></span>
+                        </label>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <div class="d-flex justify-content-center">
+            <p data-i18n="onlineStoreSetting.warningYouCanOnlyMakeUpTo15UpdatesInAMinutes"
+                class="text-danger  has-i18n">Please ensure you click the Update button after turning any toggle on or off.</p>
+                <p data-i18n="onlineStoreSetting.warningYouCanOnlyMakeUpTo15UpdatesInAMinutes"
+                class="text-danger  has-i18n">After clicking Update, wait for 1 minute before performing any further action.</p>
+        </div>
+    </div>
+</div>
+<script>
+    require('../js/OnlinstoresettingsController.js');
+</script>

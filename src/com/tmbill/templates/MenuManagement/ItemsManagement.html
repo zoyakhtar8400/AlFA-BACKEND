@@ -1,0 +1,105 @@
+<div class="menuManagementmainWrappper item-page" id="menuManagementmainWrappperid">
+
+  <link rel="stylesheet" href="../css/ItemManagement.css" />
+   <link rel="stylesheet" href="../css/MenuManagement.css" />
+  <h5 class="MenuHeading has-i18n" data-i18n="itemManagement.Itemmanagement">
+    Items Management
+  </h5>
+
+  <div class="searchDiv searchDivForMenu">
+    <div id="goBackButtonContainer">
+      <button
+        class="btn btn-outline-secondary"
+        id="gobacktomenumangemtfromitemview"
+      >
+        <i class="fa-solid fa-arrow-left"></i>
+      </button>
+    </div>
+    <div class="searchWrapperContainer">
+      <select class="reportselect_container" id="filterMenuItemsId">
+  <option 
+  data-i18n="orderScreen.filterItems" 
+  class="has-i18n" 
+  disabled 
+  selected 
+  value>
+  Filter Items
+</option>
+        <option data-i18n="" class="has-i18n" value="All">All</option>
+        <option 
+  data-i18n="orderScreen.outOfStock" 
+  class="has-i18n" 
+  value="outOfStock">
+  Out of stock
+</option>
+        <option data-i18n="" class="has-i18n" value="disabled">Disabled</option>
+      </select>
+      <div class="searchWrapper searchWrapper-for-item-management">
+        <input
+          data-i18n="[placeholder]orderScreen.searchByName"
+          class="searchItem_bycode has-i18n"
+          type="text"
+          id="searchByname_item_in_item_management"
+          placeholder="Search by Name"
+        />
+        <i class="fas fa-search" aria-hidden="true"></i>
+      </div>
+      <input
+        data-i18n="[placeholder]orderScreen.searchByCode"
+        class="searchItem_bycode has-i18n"
+        id="searchitembyCode-for-item-management"
+        type="text"
+        name="FirstName"
+        placeholder="Search by Code"
+      />
+
+      <!-- <li id="pickup">
+        <div class="d-flex justify-content-center takeawaySwitchdiv">
+          <label class="switch">
+            <input id="outofstockcheckId" type="checkbox" checked />
+            <span class="slider round"></span>
+          </label>
+          <label
+            data-i18n="orderScreen.TakeAway"
+            class="currentswitchnameLabel has-i18n"
+            id="currentSwitchname"
+            >All</label
+          >
+        </div>
+      </li> -->
+
+      <input
+        data-i18n="[value]itemManagement.Additem"
+        class="has-i18n"
+        type="button"
+        id="addItemInMenuManagement"
+        value="Add Item"
+      />
+      <input
+        data-i18n="[value]orderScreen.loadMenu"
+        class="has-i18n loadmentButton"
+        id="syncButton"
+        type="button"
+        value="Load Menu From Backoffice"
+      />
+    </div>
+  </div>
+
+  <div class="menuManagementItemsDiv" id="menuManagementItemsDivid">
+    <div class="treeviewDiv" id="itemManagementCategorytree"></div>
+    <div class="itemviewDiv" id="itemManagementItemviewContainer">
+      <!-- <label
+        data-i18n="orderScreen.ItWillTakeOnlyFewSecondsToAddMenu"
+        id="no_items_label_id"
+        class="no_items_label has-i18n"
+        for=""
+      >
+        It'll take only few seconds to add Menu.</label
+      > -->
+    </div>
+  </div>
+</div>
+
+<script>
+  require('../js/MenuManagement/ItemsManagement.js');
+</script>

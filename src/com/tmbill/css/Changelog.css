@@ -1,0 +1,99 @@
+.changelogModal-dialog {
+    width: 70%;
+    max-width: 80%;
+    overflow: hidden;
+    height: 70%;
+}
+
+.changelogModalcontent {
+    max-height: 80%;
+}
+
+#changelog-container {
+    width: 100%;
+    margin: 0 auto;
+    /* color: #1a3754; */
+}
+
+#changelog-container a {
+    color: #1c9bdd;
+    text-decoration: none;
+}
+
+#changelogModalBodyid {
+    overflow-y: auto;
+}
+
+#changelog-container .logo {
+    margin-bottom: 50px;
+    text-align: center;
+}
+
+#changelog-container .header {
+    padding: 2rem;
+    font-size: 30px;
+    font-weight: bold;
+    text-align: center;
+}
+
+#changelog-container .changelog-item {
+    padding-top: 35px;
+    padding-bottom: 35px;
+    border-top: 1px solid #eee;
+    display: flex;
+    flex-direction: column;
+}
+
+#changelog-container .changelog-item .date {
+    display: inline-block;
+    vertical-align: top;
+    opacity: 0.7;
+    padding-left: 2.5rem;
+}
+
+#changelog-container .changelog-item .version {
+    font-weight: 600;
+    padding-left: 2.5rem;
+}
+
+#changelog-container .changelog-item .content {
+    display: inline-block;
+    padding: 0.5rem 2.5rem;
+}
+
+#changelog-container .changelog-item .content .title {
+    font-size: 20px;
+    /* font-weight: 600; */
+    line-height: 28px;
+    padding-left: 15px;
+}
+
+#changelog-container .changelog-item .content .type {
+    display: inline-block;
+    color: white;
+    border-radius: 30px;
+    padding: 4px 15px 4px 15px;
+    margin-top: 12px;
+    margin-bottom: 12px;
+    font-size: 15px;
+    font-weight: bold;
+    width: fit-content;
+}
+
+#changelog-container .changelog-item .content .features {
+    background-color: #1c9bdd;
+}
+
+#changelog-container .changelog-item .content .changes {
+    background-color: #2cb967;
+}
+
+#changelog-container .changelog-item .content .bugfixes {
+    background-color: #ffb400;
+}
+
+#changelog-container .changelog-item .content .body {
+    font-size: 18px;
+    font-weight: 300;
+    line-height: 26px;
+}

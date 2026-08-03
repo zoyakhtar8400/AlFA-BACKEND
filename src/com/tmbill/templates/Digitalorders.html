@@ -1,0 +1,470 @@
+<div class="digitalordersWrapper" id="digitalordersWrapperid">
+  <link rel="stylesheet" href="../css/Onlineorders.css" />
+  <link rel="stylesheet" href="../css/OrderButtons.css" />
+  <link rel="stylesheet" href="../css/Order-item-template.css" />
+  <link href="../css/Step-Progress.css" rel="stylesheet" />
+  <div class="row main-order-wrapper">
+    <div class="col-sm-2 order-state-wrapper touch-scroll">
+      <input
+        data-i18n="[value]controller:onlineOrderSettings.DeliveryStoresettings"
+        id="digiorderstoreSettingsbuttonid"
+        style="width: 97%; margin-left: 0px; padding-left: 5px;"
+        class="digiorderstoreSettingsbutton has-i18n"
+        type="button"
+        value="Delivery Store Settings" />
+
+      <div
+        data-i18n="[title]onlineOrdersScreen.nextActionIsAllowedAfter"
+        title="Next action is allowed after"
+        id="digitalnextactionCountdownid"
+        class="countdown has-i18n">
+        <div class="values"></div>
+      </div>
+      <label data-i18n="digitalOrderScreen.Filters"
+        class="has-i18n">Filters:</label>
+      <br />
+      <label data-i18n="digitalOrderScreen.byOrderState" class="has-i18n">By
+        Order State:</label>
+      <ul id="digital-states-list-id" class="list-group digital-order-states">
+        <li
+          data-i18n="[append]digitalOrderScreen.New"
+          action-type="placed"
+          id="newdigitalorderButton"
+          class="list-group-item has-i18n">
+          <i class="fas fa-check" aria-hidden="true"></i>
+        </li>
+        <li
+          data-i18n="[append]digitalOrderScreen.Running"
+          action-type="running"
+          id="runningdigitalordersButton"
+          class="list-group-item has-i18n">
+          <i class="fas fa-check" aria-hidden="true"></i>
+        </li>
+        <li
+          data-i18n="[append]digitalOrderScreen.foodReady"
+          action-type="food ready"
+          id="runningdigitalordersButton"
+          class="list-group-item has-i18n">
+          <i class="fas fa-check" aria-hidden="true"></i>
+        </li>
+        <li
+          data-i18n="[append]digitalOrderScreen.completed"
+          action-type="fulfilled"
+          id="completeddigitalorderButton"
+          class="list-group-item has-i18n">
+          <i class="fas fa-check" aria-hidden="true"></i>
+        </li>
+        <li
+          data-i18n="[append]digitalOrderScreen.cancelled"
+          action-type="cancelled"
+          id="cancelleddigitalordersButton"
+          class="list-group-item has-i18n">
+          <i class="fas fa-check" aria-hidden="true"></i>
+        </li>
+      </ul>
+      <br />
+      <div id="more-digitalfilters-divid">
+        <label
+          data-i18n="digitalOrderScreen.moreFilters"
+          class="has-i18n"
+          for>More Filters:</label>
+        <div id="running-digitalfilers-div-id" class="running-filers-div">
+          <button
+            data-i18n="digitalOrderScreen.All"
+            class="has-i18n"
+            is_sub_filter="true"
+            action-type="running"
+            id="alldigitalordersButton">
+            All
+          </button>
+          <button
+            data-i18n="digitalOrderScreen.foodReady"
+            class="has-i18n"
+            is_sub_filter="true"
+            action-type="food ready"
+            id="digitalfoodreadyButton">
+            Food Ready
+          </button>
+          <button
+            data-i18n="digitalOrderScreen.Dispatched"
+            class="has-i18n"
+            is_sub_filter="true"
+            action-type="dispatched"
+            id="digitaldispatchedButton">
+            Dispatched
+          </button>
+          <button
+            data-i18n="digitalOrderScreen.Acknowledged"
+            class="has-i18n"
+            is_sub_filter="true"
+            action-type="acknowledged"
+            id="digitalackButton">
+            Acknowledge
+          </button>
+        </div>
+      </div>
+      <label for data-i18n="onlineOrdersScreen.byPlatform" class="has-i18n">By
+        Platform:</label>
+      <div id="digiplatform-filters-div-id">
+        <img
+          is_platform_filter="true"
+          action-type="4"
+          id="digizomatofilterButton"
+          src="https://cdn.tmbill.com/backoffice/transparent/zomato.png"
+          alt />
+        <img
+          is_platform_filter="true"
+          action-type="5"
+          id="digiswiggyfilterButton"
+          src="https://cdn.tmbill.com/backoffice/transparent/swiggy.png"
+          alt />
+        <img
+          is_platform_filter="true"
+          action-type="104"
+          id="digiONDCfilterButton"
+          src="../assets/images/aggrs/ondc_logo.svg"
+          alt />
+
+        <div>
+          <img
+            is_platform_filter="true"
+            action-type="21"
+            id="digitalabatfilterButton"
+            src="../assets/images/aggrs/talabat.png"
+            alt />
+
+          <img
+            is_platform_filter="true"
+            action-type="177"
+            id="digiKeetafilterButton"
+            src="../assets/images/aggrs/keeta.jpg"
+            alt />
+
+          <img
+            is_platform_filter="true"
+            action-type="33"
+            id="digicareemfilterButton"
+            src="../assets/images/aggrs/careem.png"
+            alt />
+
+          <img
+            is_platform_filter="true"
+            action-type="107"
+            id="diginoonfoodfilterButton"
+            src="../assets/images/aggrs/noon.png"
+            alt />
+          <img
+            is_platform_filter="true"
+            action-type="108"
+            id="digideliveroofilterButton"
+            src="../assets/images/aggrs/deliveroo.png"
+            alt />
+          <img
+            is_platform_filter="true"
+            action-type="26"
+            id="digiHungerStationfilterButton"
+            src="../assets/images/aggrs/hunger_station.png"
+            alt />
+          <img
+            is_platform_filter="true"
+            action-type="27"
+            id="digiJahezfilterButton"
+            src="../assets/images/aggrs/jahez.png"
+            alt />
+
+          <img
+            is_platform_filter="true"
+            action-type="43"
+            id="digirafeeqfilterButton"
+            src="../assets/images/aggrs/rafeeq.jpg"
+            alt />
+          <img
+            is_platform_filter="true"
+            action-type="106"
+            id="digiSmilesfilterButton"
+            src="../assets/images/aggrs/smiles.png"
+            alt />
+          <!-- <img
+            is_platform_filter="true"
+            action-type="8"
+            id="digitmbillfilterButton"
+            src="../assets/images/aggrs/tmbill.png"
+            alt=""
+          /> -->
+          <img
+            is_platform_filter="true"
+            action-type="7"
+            id="digidunzofilterButton"
+            src="https://cdn.tmbill.com/backoffice/transparent/dunzo.png"
+            alt />
+          <img
+            is_platform_filter="true"
+            action-type="14"
+            id="digidotpefilterButton"
+            src="https://cdn.tmbill.com/channel/dotpe.png"
+            alt />
+          <img
+            is_platform_filter="true"
+            action-type="19"
+            id="digimagicpinfilterButton"
+            src="https://cdn.tmbill.com/channel/magicpin.png"
+            alt />
+
+          <img
+            is_platform_filter="true"
+            action-type="8"
+            id="digitmbillordersfilterButton"
+            src="../assets/images/aggrs/tmbill.png"
+            alt />
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-6 orderslistWrapeer">
+      <div class="onlineorders-search-container">
+        <div class="d-flex search-input-container">
+          <input
+            data-i18n="[placeholder]digitalOrderScreen.searchDigitalOrder"
+            id="digitalordersearchInputid"
+            class="first has-i18n"
+            type="text"
+            placeholder="Search Order" />
+          <button id="digitalordersearchButtonid">
+            <i class="fas fa-search" aria-hidden="true"></i>
+          </button>
+        </div>
+        <input
+          data-i18n="[placeholder]digitalOrderScreen.searchByDate"
+          class="second has-i18n"
+          title="Search by date"
+          type="text"
+          id="digitalordersdatefilter"
+          placeholder="Search by date" />
+      </div>
+      <ul
+        class="list-group digitalorders-list-container touch-scroll"
+        id="digitalorderslistID"></ul>
+    </div>
+    <div id="orderdetail-wrapper-div" class="col-sm-4 orderDetail-wrapper-div">
+      <div class="orderdetail-itemsdetails">
+        <label
+          data-i18n="digitalOrderScreen.ItemsHeading"
+          class="has-i18n"
+          for>Items</label>
+      </div>
+      <div class="orderdetail-items-div">
+        <table class="table table-sm" id="digitalorderdetailsTable">
+          <thead class>
+            <tr>
+              <th data-i18n="digitalOrderScreen.Items.name" class="has-i18n">
+                Name
+              </th>
+              <th data-i18n="digitalOrderScreen.Items.QTY" class="has-i18n">
+                Qty
+              </th>
+              <th data-i18n="digitalOrderScreen.Items.Price" class="has-i18n">
+                Price
+              </th>
+              <th data-i18n="digitalOrderScreen.Items.Amount" class="has-i18n">
+                Amount
+              </th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+      <div class="orderdetail-calculation-details">
+        <label id="current-digitalorderdetails-subtotal" for></label>
+        <label id="current-digitalorderdetails-totaldiscount" for></label>
+        <label id="current-digitalorderdetails-totaltax" for></label>
+        <label id="current-digitalorderdetails-totalcharges" for></label>
+        <label id="current-digitalorderdetails-grandTotal" for></label>
+      </div>
+      <div class="orderdetails-dunzo-msg">
+        <label id="current-digitalorderdetails-dunzomsg" for></label>
+      </div>
+
+      <div class="orderdetails-status-div">
+        <label
+          data-i18n="digitalOrderScreen.Status"
+          class="orderdetails-status-label progress-label has-i18n"
+          for>Status</label>
+        <div
+          id="digitalstep-progress-id"
+          class="progress-bar-wrapper-div"></div>
+      </div>
+
+      <div class="orderdetails-dboyinfo-div">
+        <!-- <select class="deliveryBoycombo" id="digitaldeliveryboyCombo">
+          <option
+            data-i18n="digitalOrderScreen.selectDeliveryBoyHeading"
+            class="has-i18n"
+            disabled
+            selected
+            value
+          >
+            __Select Delivery Boy__
+          </option>
+        </select> -->
+        <i
+          data-i18n="[title]orderScreen.KOTSection.Adddelieveryboy"
+          title="Select Delivery boy"
+          id="digitaldeliveryboyCombo"
+          class="has-i18n"
+          aria-hidden="true"><img
+            id="deliveryBoyImgId"
+            src="../assets/images/fast-delivery.png" />
+        </i>
+        <label
+          data-i18n="digitalOrderScreen.deliveryPersonDetailsHeading"
+          class="orderdetails-dboyinfo-label has-i18n"
+          for>Delivery Person Details</label>
+        <div class="orderdetails-person-name-div">
+          <i class="fas fa-user col-sm-1" aria-hidden="true"></i>
+          <label
+            class="col-sm-10"
+            id="digitalorderdetails-dboyname-id"
+            for></label>
+          <label
+            class="col-sm-10"
+            id="digitalorderdetails-dboystate-id"
+            for></label>
+        </div>
+        <div class="orderdetails-person-phone-div">
+          <i class="fas fa-mobile col-sm-1" aria-hidden="true"></i>
+          <label class="col-sm-10" id="digitalorderdetails-dboyphone-id" for>
+          </label>
+        </div>
+
+        <!-- <div class="orderdetails-person-name-div"> -->
+        <!-- <label class="col-sm-10" id="list-order-dunzodetailsmessagelabel-id" for=""></label> -->
+        <!-- </div> -->
+      </div>
+
+      <div class="orderdetails-actionsDiv digital-action-grid">
+
+        <!-- Row 1 Wrapper -->
+        <div class="digital-row-1">
+
+          <button
+            id="pulldigitalorderButton"
+            class="normal-button action-btn has-i18n"
+            data-i18n="controller:onlineOrderSettings.pullOrder">
+            <span class="fas fa-level-down-alt"></span> Pull Order
+          </button>
+
+          <button id="canceldigitalorderdunzoTaskbuttonid"
+            class="normal-button action-btn">
+            Cancel Dunzo Task
+          </button>
+
+          <button
+            id="updatepaystatDigitalorder"
+            class="normal-button action-btn has-i18n"
+            data-i18n="controller:onlineOrderSettings.updatePayment">
+            Update Payment
+          </button>
+
+        </div>
+
+        <!-- Row 2 Wrapper -->
+        <div class="digital-row-2">
+
+          <input
+            id="printdigitalonlinekotButton"
+            class="action-btn has-i18n"
+            type="button"
+            value="Print KOT"
+            data-i18n="[value]controller:onlineOrderSettings.printKOT" />
+
+          <input
+            id="printdigitalonlinebillButton"
+            class="action-btn has-i18n"
+            type="button"
+            value="Print Bill"
+            data-i18n="[value]controller:onlineOrderSettings.printBill" />
+
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="onlinesettingsModal">
+  <div
+    class="modal-dialog modal onlinesettingsModalclass modal-dialog-centered">
+    <div class="modal-content onlinesettingsModalcontent">
+      <div
+        class="modal-body onlinesettingsModalBody"
+        id="onlinesettingsModalBodyid"></div>
+    </div>
+  </div>
+</div>
+
+<div
+  class="modal fade"
+  id="digiordersettingsModal"
+  data-backdrop="static"
+  data-keyboard="false">
+  <div
+    class="modal-dialog modal onlinesettingsModalclass modal-dialog-centered">
+    <div class="modal-content onlinesettingsModalcontent">
+      <div
+        class="modal-body onlinesettingsModalBody"
+        id="digisettingsModalBodyid"></div>
+    </div>
+  </div>
+</div>
+
+<!-- delivery boy window -->
+<div class="modal fade" id="digideliveryBoyModal">
+  <div class="modal-dialog modal-sm modal-dialog-centered">
+    <div class="modal-content digideliveryBoyModalclass">
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4
+          data-i18n
+          class="modal-title has-i18n"
+          id="Deliveryboymodalheading">
+          Assign Delivery Boy/Rider
+        </h4>
+        <button type="button" class="close" data-dismiss="modal">
+          &times;
+        </button>
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body deliveryBoyBody" id="deliveryBoyBodyid">
+        <input
+          data-i18n
+          class="form-control input-sm has-i18n"
+          type="text"
+          id="searchdigiDeliveryBoyid"
+          placeholder="Search Delivery Boy/Rider" />
+        <ul id="digideliveryBoylistId" class="chargeslistClass"></ul>
+      </div>
+
+      <!-- Modal footer -->
+      <div class="modal-footer">
+        <button
+          data-i18n="orderScreen.Close"
+          type="button"
+          class="normal-button has-i18n"
+          data-dismiss="modal">
+          Close
+        </button>
+        <button
+          data-i18n="orderScreen.Apply"
+          type="button"
+          class="normal-button has-i18n"
+          id="applydigiDeliveryBoyButton">
+          Update Details
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  require('../js/DigitalOrdersController.js');
+</script>

@@ -1,0 +1,64 @@
+.userpasscodeBody, .userpasscodeModalclass {
+    background: transparent !important;
+    color: white;
+}
+
+.userpasscodeModal-dialog {
+    width: 90% !important;
+    max-width: none !important;
+}
+
+.userpasscodeModalclass {
+    height: 90vh;
+    width: 98% !important;
+
+}
+
+.userpasscodeModalclass button.close {
+    color: white;
+    font-size: 2.5rem;
+    position: absolute;
+    top: 0;
+    right: 0;
+
+}
+
+.userpasscodeModalclass .modal-header {
+    border: none !important;
+}
+
+.newpaymentModal-dialog {
+    width: 90% !important;
+    max-width: none !important;
+}
+
+
+.userpasscodeBody {
+    display: flex;
+    flex-direction: column !important;
+    justify-content: center;
+}
+
+.userpasscodeBody div.passcodeTitlecontainer {
+    justify-content: center;
+}
+
+#userpasscodeModalid {
+    background: #000000bd;
+}
+
+.passcode-group input {
+    height: 80px;
+    width: 80px;
+    border: 1px solid rgba(255, 255, 255, 0.418);
+    background: transparent !important;
+    font-size: 3rem !important;
+    color: white !important;
+    padding: 0 !important;
+    text-align: center !important;
+}
+
+.swal2-html-container .passcode-group input {
+    color: inherit !important;
+    border: 1px solid var(--items-button-border);
+}

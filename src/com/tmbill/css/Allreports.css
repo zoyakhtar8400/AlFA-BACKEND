@@ -1,0 +1,454 @@
+.reportsmainWrappper {
+  height: 99%;
+  width: 100%;
+  /* background-color: blueviolet; */
+}
+
+.reportscontainer-1 {
+  height: 100%;
+  margin: 0;
+}
+
+.reportselect_container {
+  outline: none;
+  width: 16%;
+  height: 35px;
+  border-radius: 7px;
+  margin-left: 5px;
+  font-size: 0.88rem;
+}
+
+.reporttypeContainer {
+  border-right: 2px solid #d6d2d2;
+  font-size: 1.3rem;
+  background: #cecece6e;
+  padding-top: 10px;
+  height: 100%;
+  overflow: hidden;
+  overflow-x: hidden;
+  -webkit-overflow-scrolling: touch;
+}
+
+div.reporttypeContainer::-webkit-scrollbar {
+  width: 5px;
+  height: 10px;
+}
+
+div.dataTables_scrollBody::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+
+.reportscard {
+  width: 100%;
+  display: inline-block;
+  margin: 3px;
+  border-radius: 0;
+  border: none;
+}
+
+.selectedReport {
+  /* border: 4px solid #185b80; */
+  border-right: 4px solid #131212;
+  /* box-shadow: 0 19px 38px rgba(0, 0, 0, 0.30), 0 15px 12px rgba(0, 0, 0, 0.22); */
+}
+
+.sales-report-filters {
+  margin: 0;
+  align-items: baseline;
+}
+
+#salesreport_clearselection {
+  width: fit-content;
+}
+
+.reportInfodiv {
+  height: 90%;
+}
+
+.reportFiltersdiv {
+  height: 50px;
+  width: 100%;
+  display: inline-flex;
+  align-items: baseline;
+}
+
+#reportfromdateButton {
+  width: 30%;
+}
+
+.horizontal-scroll {
+  background-color: #d4d1d1;
+  overflow: hidden;
+  white-space: nowrap;
+  padding: 0.8rem;
+}
+
+.horizontal-scroll:hover,
+.horizontal-scroll:focus,
+.horizontal-scroll:active {
+  overflow-x: auto;
+}
+
+.selectedItemreport {
+  border: 2px solid var(--selected-color);
+}
+
+#dayendreportTableid {
+  /* width: 100%; */
+  table-layout: fixed !important;
+}
+
+.reportitem {
+  display: inline-block;
+  width: max-content;
+  background-color: #f5f5f5;
+  text-align: center;
+  padding: 0.5rem;
+  border-radius: 2rem;
+}
+
+.reportsList {
+  height: 93%;
+  overflow: hidden;
+  margin: 0;
+  padding: 0;
+}
+
+.reportsList li {
+  height: 100%;
+}
+
+.reportsList li > div {
+  width: 100%;
+  height: 95%;
+}
+
+.itemsReportdiv {
+  overflow-y: auto;
+}
+
+.reportsList li table tbody > tr {
+  background-color: transparent;
+}
+
+.reportsList li table.dataTable thead th,
+.reportsList li table.dataTable thead td {
+  border-bottom: none !important;
+}
+
+.reportsList li table tbody tr {
+  text-align: center;
+}
+
+.reportsList li table tbody tr:nth-of-type(odd) {
+  background-color: rgba(0, 0, 0, 0.05) !important;
+}
+
+.reportsList li table td,
+.reportsList li table thead tr th {
+  border: none;
+}
+
+#billprintreportTableid tbody td {
+  user-select: text;
+}
+
+table.report-table tbody tr td {
+  border-left: 1px solid #cecece6e !important;
+}
+
+table.report-table tfoot tr th {
+  border: 1px solid #cecece6e !important;
+}
+
+table.report-table tfoot tr th:not(:first-child) {
+  text-align: center;
+}
+
+.reportsList li table thead tr {
+  background-color: #007548;
+  color: white;
+}
+
+#fetchreportsButton {
+  width: 90px;
+}
+
+.reportactionsDiv {
+  display: flex;
+  justify-content: flex-end;
+  height: 7%;
+}
+
+.clipboard:hover,
+.clipboard:focus,
+.clipboard:active {
+  color: rgb(84, 105, 199);
+}
+
+.salesReportcard {
+  border-left: 5px solid #80cfa9;
+}
+
+.todaysReportcard {
+  border-left: 5px solid #ff9671;
+}
+
+.paymentReportcard {
+  border-left: 5px solid rgb(84, 105, 199);
+}
+
+.orderReportcard {
+  border-left: 5px solid rgb(172, 84, 175);
+}
+
+.itemsReportcard {
+  border-left: 5px solid #4c6663;
+}
+
+.dayendReportcard {
+  border-left: 5px solid gray;
+}
+
+.usershiftReportcard {
+  border-left: 5px solid rgb(69, 93, 136);
+}
+
+#usershiftreportTableid tbody td {
+  white-space: nowrap;
+}
+
+.catwiseReportcard {
+  border-left: 5px solid burlywood;
+}
+
+.kdwiseReportcard {
+  border-left: 5px solid lightcoral;
+}
+
+.couponReportcard {
+  border-left: 5px solid rgb(48, 146, 113);
+}
+
+.reporttypeContainer:hover,
+.reporttypeContainer:focus,
+.reporttypeContainer:active {
+  overflow-y: auto;
+}
+
+#dayendreportTableid {
+  font-size: 15px;
+}
+
+.reportscard {
+  border-left: 2px solid rgb(48, 146, 113) !important;
+}
+
+/**
+Coupons report
+**/
+
+.couponhistoryReportdiv {
+  height: 100% !important;
+}
+
+.coupons-container-2 {
+  margin: 0;
+  height: 100%;
+  width: 100%;
+  max-height: 100%;
+  padding-top: 3px;
+  /* background-color: mediumslateblue; */
+}
+
+.center-flex {
+  justify-content: center;
+  align-items: flex-end;
+}
+
+.center-flex label {
+  font-weight: 600;
+  width: 50%;
+  text-align: end;
+}
+
+element.style {
+  width: 95%;
+}
+.due-sections-container,
+.misc-sections-container {
+  padding: 14px;
+}
+
+.selectedSection {
+  border: 2px solid var(--selected-color) !important;
+}
+
+.duepayhistoryreportTable-wrapper,
+.duepayreportTable-wrapper,
+.miscreportTable-wrapper {
+  height: 88%;
+}
+
+.due-sections-container div {
+  background-color: transparent;
+  border: none;
+  border-radius: 20px;
+  margin-right: 4px;
+  padding: 0.3rem;
+}
+
+#reportfromdateButton {
+  height: 35px;
+  padding-left: 10px;
+  border-radius: 15px;
+  box-sizing: border-box;
+  font-size: 13px;
+  border: 1px solid var(--input-border-color);
+  background-color: var(--input-background);
+}
+
+#limitFieldid {
+  width: 50px !important;
+}
+
+#preOrderDetailsBodyid {
+  height: 500px;
+}
+
+#preOrderItemsContainerId {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  border: 1px solid;
+  height: 300px;
+  border-radius: 5px;
+  padding: 5px;
+}
+
+.editDuePaymentReport {
+  font-size: 25px;
+  padding: 3px;
+}
+.salesReportdiv {
+  margin-top: -45px;
+}
+.misc-report-div {
+  margin-top: -50px;
+}
+.duepay-report-div {
+  margin-top: -58px;
+}
+.categorywiseReportdiv {
+  margin-top: -33px;
+}
+#duepayreportTableid_filter {
+  margin-top: -62px;
+}
+@media (max-width: 1024px) {
+  .reporttypeContainer {
+    border-right: 2px solid #d6d2d2;
+    font-size: 13.8px;
+    background: #cecece6e;
+    padding-top: 8px;
+  }
+}
+#orderreportTable thead th {
+  vertical-align: middle !important; /* fix the “a little upper” look */
+  text-align: center; /* optional: center text horizontally */
+  height: 44px; /* optional: consistent header height */
+  line-height: 1.2; /* tweak if needed */
+  padding-top: 80px; /* keep some breathing room */
+  padding-bottom: 80px;
+}
+.card-body.has-i18n {
+  font-weight: 600;
+}
+.table-sm table-striped report-table {
+  font-size: 14px;
+}
+.body {
+  width: none;
+}
+/* ===================================================== */
+/* Start–Close Day Report – Header padding fix (FINAL)  */
+/* ===================================================== */
+
+/* ===================================================== */
+/* Start–Close Day Report – Header padding FINAL FIX     */
+/* ===================================================== */
+
+/* Base header styling (only for day end report) */
+/* ===================================================== */
+/* Start–Close Day Report – FINAL Header Alignment CSS  */
+/* ===================================================== */
+
+/* Base header styling */
+#dayendreportTableid_wrapper .dataTables_scrollHead table.dataTable thead th {
+  padding-top: 8px !important;
+  padding-bottom: 8px !important;
+  vertical-align: middle !important;
+  white-space: nowrap;
+  box-sizing: border-box;
+}
+
+/* 1st column – Start Date */
+#dayendreportTableid_wrapper
+  .dataTables_scrollHead
+  table.dataTable
+  thead
+  th:nth-child(1) {
+  text-align: left !important;
+  padding-left: 65px !important;
+  padding-right: 24px !important;
+}
+
+/* 2nd column – End Date */
+#dayendreportTableid_wrapper
+  .dataTables_scrollHead
+  table.dataTable
+  thead
+  th:nth-child(2) {
+  text-align: left !important;
+  padding-left: 56px !important;
+  padding-right: 24px !important;
+}
+
+/* 3rd & 4th columns – Started By, Closed By */
+#dayendreportTableid_wrapper
+  .dataTables_scrollHead
+  table.dataTable
+  thead
+  th:nth-child(3),
+#dayendreportTableid_wrapper
+  .dataTables_scrollHead
+  table.dataTable
+  thead
+  th:nth-child(4) {
+  text-align: left !important;
+  padding-left: 33px !important;
+  padding-right: 16px !important;
+}
+
+/* 12th column – Cash Diff */
+#dayendreportTableid_wrapper
+  .dataTables_scrollHead
+  table.dataTable
+  thead
+  th:nth-child(12) {
+  text-align: left !important;
+  padding-left: 18px !important;
+  padding-right: 12px !important;
+}
+
+#dayendreportTableid_wrapper table.dataTable tbody th,
+#dayendreportTableid_wrapper table.dataTable tbody td {
+  padding: 9px 15px !important;
+}
+
+#duepayreportTableid_wrapper,
+#customerduepayreportTableid_wrapper,
+#duepayhistoryreportTableid_wrapper {
+  display: none;
+}

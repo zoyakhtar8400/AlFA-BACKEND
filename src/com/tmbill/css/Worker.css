@@ -1,0 +1,597 @@
+@import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro&display=swap');
+
+* {
+  font-family: 'Source Sans Pro', calibri, sans-serif;
+  /* font-family: -apple-system, BlinkMacSystemFont, 'Source Sans Pro', calibri, sans-serif; */
+}
+
+:root {
+  --dash-size: 0.113rem;
+  --border-size: 1px;
+}
+
+html,
+body {
+  /* max-width: 79mm; */
+  min-width: 79mm;
+  font-family: Calibri;
+  font-size: 18px;
+  height: auto;
+  overflow: visible;
+  /* margin: 0; */
+}
+
+* {
+  page-break-before: avoid;
+  page-break-after: avoid;
+  page-break-inside: avoid;
+}
+
+.kotpreviewContainer,
+.reportviewContainer {
+  max-width: 76mm;
+  /* max-width: 76mm; */
+}
+
+.sectionsWrapper {
+  display: grid;
+}
+
+.preview-label-for-total {
+  width: 100%;
+  text-align: end;
+}
+
+.bottom-dash {
+  /* border-bottom: var(--dash-size) dashed; */
+  border-bottom: var(--border-size) solid;
+}
+
+.bold-label {
+  font-weight: 600;
+}
+
+.previewBody,
+.kotpreviewBody {
+  display: flex;
+  justify-content: center;
+  align-items: baseline;
+  text-align: center;
+  width: 79mm;
+  height: 400px;
+  overflow-y: scroll;
+}
+
+.titleDiv,
+.addressDiv,
+#ordertypeLabel,
+.dateLabel,
+.kotLabelclass,
+.kotdateLabel,
+#draftBilllabelid,
+#billnumberlabelid,
+.scanqrTitle,
+.invoiceQrtitle,
+#preOrderKotIdlabel {
+  display: flex;
+  justify-content: center !important;
+  align-items: center;
+  text-align: center;
+  font-weight: bold;
+  margin-left: 30px;
+  margin-right: 30px;
+}
+
+.kotordertypeImagecontainer {
+  position: absolute;
+}
+
+.kotordertypeImagecontainer img {
+  height: 45px;
+  width: 45px;
+}
+
+.titleDiv {
+  word-break: break-word;
+}
+
+.customerinfo-div {
+  display: flex;
+  justify-content: start;
+  /* font-size: 22px; */
+  font-size: 18px;
+}
+
+.addressDiv,
+.dateLabel,
+.kotaddressDiv,
+.kotdateLabel,
+.customerinfo-div {
+  font-weight: normal;
+}
+
+#kotnoteLabelid {
+  /* font-size: 23px; */
+  font-size: 18px;
+}
+
+#totalQtyDIvid {
+  font-weight: bold;
+}
+
+.parentWrapper {
+  font-weight: normal;
+  /* border-top: dashed;
+  border-bottom: dashed;
+  border-width: var(--dash-size); */
+  border-top: 1px solid;
+  border-bottom: 1px solid;
+}
+
+.wrapper1,
+.payWrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  text-align: left;
+}
+
+.kotwrapper1 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  font-weight: normal;
+  /* border-top: dashed;
+  border-bottom: dashed;
+  border-width: var(--dash-size); */
+  /* height: 35px; */
+}
+
+.kotwrapper3 {
+  display: flex;
+  /* justify-content: space-between; */
+  justify-content: center;
+  align-items: center;
+  font-weight: normal;
+  /* border-bottom: dashed;
+  border-width: var(--dash-size); */
+  border-bottom: var(--border-size) solid;
+
+  /* height: 35px; */
+}
+
+.kitchendept {
+  display: flex;
+  align-items: center;
+  font-weight: normal;
+  justify-content: center;
+  /* border-bottom: dashed;
+  border-width: var(--dash-size); */
+  border-bottom: var(--border-size) solid;
+
+  height: 35px;
+}
+
+.kotNoteBorder {
+  /* border-top: dashed;
+  border-width: var(--dash-size); */
+  border-bottom: var(--border-size) solid;
+}
+
+.previewchargesWrapper {
+  margin-top: 6px;
+  border-width: var(--dash-size);
+  text-align: right !important;
+}
+
+/* #previewchargesListid li {
+  width: 100%;
+  justify-content: right !important;
+} */
+
+#previewitemchargesListid li {
+  width: 100%;
+  justify-content: right !important;
+}
+
+.customerInfodiv {
+  margin-top: 6px;
+  padding-top: 3px;
+  padding-bottom: 3px;
+  /* border-top: dashed; */
+  /* border-bottom: dashed; */
+  /* border-width: var(--dash-size); */
+  border-top: var(--border-size) solid;
+}
+
+#previewTable,
+#kotpreviewTable,
+#disposableDivid {
+  /* border-top: dashed;
+  border-bottom: dashed;
+  border-width: var(--dash-size); */
+  border-top: var(--border-size) solid;
+  border-bottom: var(--border-size) solid;
+}
+
+#kotpreviewTable tbody tr {
+  /* white-space: pre-line; */
+}
+
+#kotpreviewTable:empty {
+  border-bottom: none !important;
+}
+
+.taxnamediv {
+  text-align: right !important;
+  height: 20px;
+}
+
+/* .totalDiv,
+.taxDiv,
+.grandtotaldiv,
+.tax_divided_div1,
+.tax_divided_div2 {
+  text-align: right;
+  height: 20px;
+} */
+
+/* .discountDiv label {
+  width: fit-content;
+  text-align: right;
+} */
+
+.grandtotaldiv {
+  margin-top: 5px;
+}
+
+.grandtotaldiv label {
+  font-weight: bolder;
+  font-size: 1.18rem !important;
+}
+
+#tablenameLabel,
+.kottablenameLabel {
+  margin-right: 20px;
+}
+
+.kottableClass {
+  text-align: center;
+  font-size: 18px;
+}
+
+.kottableClass tbody tr td:first-of-type {
+  text-align: left;
+}
+
+.disposablekotLabelclass {
+  font-size: 16px !important;
+  font-weight: normal !important;
+}
+
+.disposablekotitemnameclass {
+  font-size: 19px !important;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  margin-left: 10px;
+  margin-right: 10px;
+  font-weight: 600;
+}
+
+.kotitem-addon-title {
+  padding-left: 5px;
+  margin: 0;
+}
+
+.disposableDiv {
+  margin-top: 5px;
+}
+
+/**
+Hotel Logo
+**/
+
+/* .hotellogoDiv {
+  height: 100px;
+  width: 79mm;
+  max-height: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.hotellogoDiv img {
+  height: 100%;
+  width: 50%;
+  max-height: 100px;
+  max-width: 100px;
+} */
+
+.hotellogoDiv {
+  width: 80mm;
+  /* max-width: 100%; */
+  /* margin: 0 auto; Center the div */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+.hotellogoDiv img {
+  width: 100%;
+  height: auto;
+  max-width: 80mm;
+  max-height: 53mm;
+  object-fit: contain;
+  display: block;
+}
+.item-charges-label {
+  font-size: smaller !important;
+}
+
+#billpreviewcustomerpaidContainer {
+  display: flex;
+  flex-direction: column;
+  margin-top: 5px;
+  /* border-top: var(--dash-size) dashed; */
+  border-top: var(--border-size) solid;
+}
+
+.d-flex {
+  display: flex !important;
+}
+
+.d-flex-reverse {
+  display: flex !important;
+  justify-content: flex-end !important;
+}
+
+.catreport-overallitems-count {
+  font-size: 15px;
+  width: 20%;
+  /* border-top: var(--dash-size) dashed; */
+  border-top: var(--border-size) solid;
+  padding-top: 0.25rem;
+  margin-top: 8px;
+}
+
+.catreport-category-container {
+  /* border-bottom: var(--dash-size) dashed; */
+  border-top: var(--border-size) solid;
+  padding: 0.7rem 0 0.7rem 0;
+}
+
+.catreport-itemcontainer-title {
+  width: 60%;
+}
+
+.catreport-itemcontainer-qty {
+  width: 20%;
+}
+
+.catreport-itemcontainer-total {
+  width: 20%;
+}
+
+.catreport-itemcontainer {
+  font-size: 15px;
+  justify-content: space-between;
+}
+
+.reportcat-title {
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.mb-2 {
+  margin-bottom: 0.5rem !important;
+}
+
+.mb-4 {
+  margin-bottom: 1rem !important;
+}
+
+.pl-2 {
+  padding-left: 0.5rem !important;
+}
+
+.pr-2 {
+  padding-right: 0.5rem !important;
+}
+
+.pl-4 {
+  padding-left: 1rem !important;
+}
+
+.allcatoverallinfo-container {
+  padding: 0.5rem;
+}
+
+.allcatoverallinfo-container .total-label,
+.allcatoverallinfo-container .total-amount {
+  font-weight: 600;
+  font-size: 17px;
+}
+
+.qrcodeContainer,
+.custom-qrcode-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  break-inside: avoid;
+  /* width: 95%; */
+}
+
+.qrcodeContainer img {
+  width: 145px;
+  height: 145px;
+}
+
+.previewmiscContainer {
+  /* border-top: dashed;
+  border-bottom: dashed;
+  border-width: var(--dash-size); */
+  border-top: var(--border-size) solid;
+  border-bottom: var(--border-size) solid;
+
+  font-size: 0.8rem;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+}
+
+.top-dashed {
+  /* border-top: dashed;
+  border-width: var(--dash-size); */
+  border-top: var(--border-size) solid;
+}
+
+.botton-dashed {
+  /* border-bottom: dashed;
+  border-width: var(--dash-size); */
+  border-bottom: var(--border-size) solid;
+}
+
+.top-dash {
+  /* border-top: var(--dash-size) dashed; */
+  border-top: var(--border-size) solid;
+
+  font-size: 0.8rem;
+  padding-top: 0.5rem;
+}
+
+.bottom-dash {
+  /* border-bottom: var(--dash-size) dashed; */
+  border-top: var(--border-size) solid;
+
+  font-size: 0.8rem;
+  padding-bottom: 0.5rem;
+}
+
+.catgrp-container {
+  display: flex !important;
+  flex-direction: column !important;
+  margin-bottom: 0.7rem;
+}
+
+.catgrp-container .category {
+  font-size: 0.8rem;
+}
+
+.previewmiscContainer:empty,
+#billpreviewcustomerpaidContainer:empty {
+  display: none !important;
+}
+
+.flex-column {
+  flex-direction: column !important;
+}
+
+.justify-content-between {
+  justify-content: space-between !important;
+}
+
+.w-80 {
+  width: 80% !important;
+}
+
+.w-80 {
+  width: 90% !important;
+}
+
+.w-40 {
+  width: 40% !important;
+}
+
+.w-60 {
+  width: 60% !important;
+}
+
+.no-wrap {
+  white-space: nowrap !important;
+}
+
+.align-self-center {
+  align-self: center !important;
+}
+
+@media only screen and (max-width: 57mm) {
+}
+
+@media print {
+  body {
+    height: auto;
+    overflow: visible;
+  }
+
+  .printableDiv {
+    page-break-before: avoid;
+    page-break-after: avoid;
+    page-break-inside: avoid;
+  }
+
+  div.qrcodeDiv,
+  .qrcodeContainer {
+    break-inside: avoid;
+  }
+}
+
+h6,
+.h6 {
+  font-size: 1rem;
+  margin: 0 !important;
+}
+
+#kotitemNoteId {
+  display: inline-block;
+  max-width: 175px;
+  word-wrap: break-word;
+}
+
+#kotnoteLabelid {
+  display: inline-block;
+  width: 185px;
+  word-wrap: break-word;
+}
+
+#kotLabelid {
+  padding-left: 15px !important;
+}
+
+.kotbillItemAddonsForPrint {
+  font-size: 14px;
+}
+
+.cancelledItemAddonsForPrint {
+  text-decoration: line-through;
+  font-size: 14px;
+}
+
+.kotbillBaseItemForPrint {
+  font-weight: bold;
+}
+
+#kotwrapper1id {
+  padding: 4px 0px;
+}
+
+.kot-itemqty {
+  margin-left: 5px;
+}
+
+#kotonlineorderTagsContainerid {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  flex-direction: column;
+  font-size: initial !important;
+}
+
+.cancelledItemForPrint {
+  text-decoration: line-through;
+}

@@ -1,0 +1,46 @@
+* TMBill Software License Agreement
+
+PLEASE READ THIS AGREEMENT CAREFULLY. BY COPYING, INSTALLING, OR USING ALL OR ANY PORTION OF THIS SOFTWARE, YOU (HEREINAFTER “CUSTOMER”) ACCEPT ALL THE TERMS AND CONDITIONS OF THIS AGREEMENT, THE PROVISIONS ON LICENSE WARRANTY, LIMITATION OF LIABILITY , PAYMENT, CONFIDENTIALITY, MODIFICATION & GOVERNING LAW. THIS AGREEMENT IS ENFORCEABLE AGAINST CUSTOMER. IF CUSTOMER DOES NOT AGREE TO THE TERMS OF THIS AGREEMENT, CUSTOMER MAY NOT USE THE SOFTWARE.
+
+TMbill software is developed by TechMainstay software private limited, India. The Software is LICENSED, Only TechMainstay can SOLD, in accordance with the terms of this agreement. 
+
+The Software also run without internet. The Software require internet to register & activation. Software is free for 15 day, After 15 days customer will have to buy subscription for atleast one year compulsory. 
+
+1. Warranties:
+- If TMBill software is corrupt or damage, TechMainstay guarantee you to give fresh copy of software.
+- TechMainstay will not be responsible if your operating system gets corrupt or damage.
+- TechMainstay will provide full support to their customers about software issues.
+- If software mistakenly get uninstall from PC at the time of active subscription, TechMainstay is responsible to provide serial key.
+
+2. Payments:
+- After the 15 days of trial, Customer should buy subscription for TMBill.
+- First one year customer have do first payment to buy TMBill Software License.
+- After first year for every year there will be charges.
+- Once payment is done it cannot be refund.
+
+3. Confidentiality:
+- TMBill provide user login & password to protect your data. We are not responsible if someone breach of your password.
+- TMBill is safe & secure it doesn't harm your computer. Drive backup option is safe, secure & It store your TMBill data to your Google Drive account.
+- Your sensitive data related to TMBill will be safe on your computer & Google Drive.
+- TMBill runs on your PC, Data will be safely stored on your PC.
+- TechMainstay will not be responsible for breach of your sensitive data.
+- TechMainstay is not using your sensitive data.
+- User of TMBill software should not share their serial key with third parties.
+- TechMainstay will send serial key to your registered email id & mobile number.
+- TechMainstay will not be responsible for breach of your serial key.
+- TMBill software will send bugs report to TechMainstay to improve TMBill.
+
+4. Limitation of Liability:
+- TMBill run smoothly on 2 core 2 GB RAM and 80 GB HDD.
+- TMBill support on winndow 7, 8, 8.1, 10.
+- JRE-8 (Java Runtime Environment) software required to install on your PC to run TMBill.
+
+5. Modification:
+- TechMainstay team will update there product with new features, more functionalities & more security.
+- TMBill software will notify you to install new updates.
+- Updation & Installation of TMBill software is totally safe.
+
+6. Governing law:
+- In India, the copyright of computer software is protected under the Indian Copyright Act of 1957. 
+- Copyright protection for software with an individual author lasts for the duration of the author's life and continues 60 years after the author's death. 
+- Government agencies such as the Ministry of Information Technology and the Ministry of Human Resource Development have played an active role in aiding the Indian law enforcement authorities in protecting software copyright holders.

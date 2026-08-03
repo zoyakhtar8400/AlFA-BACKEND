@@ -1,0 +1,132 @@
+.splitbillModalBody {
+    height: 74%;
+    /* overflow-y: auto; */
+}
+
+.splitbillModalBody input[type=checkbox]+label:before {
+    height: 25px !important;
+    width: 24px !important;
+}
+
+.split-items-part-list {
+    width: 45%;
+    min-width: 45%;
+    height: 98%;
+    margin: 0;
+    margin-top: 2px;
+    margin-right: 2px;
+    overflow: hidden;
+    padding: 2px;
+    border: 1px solid #BDBDBD;
+}
+
+.split-items-part-list:hover, .split-items-part-list:focus, .split-items-part-list:active {
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+.split-percentageswise-actions {
+    justify-content: center;
+}
+
+.split-items-part-list li {
+    justify-content: start !important;
+    padding: 5px;
+    background-color: blueviolet;
+    border: 1px solid blueviolet;
+    margin: 4px;
+    color: white;
+    border-radius: 3px;
+}
+
+.split-itemwise-splitedparts {
+    display: inline-flex;
+    overflow: hidden;
+    height: 76%;
+    border: 1px solid #BDBDBD;
+    margin-top: 4%;
+}
+
+.split-itemwise-splitedparts:hover, .split-itemwise-splitedparts:focus, .split-itemwise-splitedparts:active {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+.split-items-part-list li label {
+    margin: 0;
+    width: 90%;
+}
+
+.split-items-part-list li i {
+    float: right;
+}
+
+.splitbillModalclass {
+    height: 80vh;
+}
+
+.split-by-portion-icon {
+    background-color: mediumseagreen !important;
+}
+
+.portionwisetab-content {
+    height: 100%;
+}
+
+.portion-wise-title-label {
+    width: 100%;
+}
+
+.faded-label {
+    color: gray;
+    text-align: center;
+}
+
+.split-portionwise-content {
+    display: grid;
+    justify-content: center;
+}
+
+.split-percentageswise-content {
+    display: grid;
+    text-align: center;
+}
+
+.split-percentage-content-inputs {
+    max-height: 35vh;
+    overflow-y: auto;
+}
+
+.split-percent-input {
+    width: 50%;
+}
+
+.split-itemwise-container {
+    height: 52vh;
+}
+
+.split-itemwise-items-container {
+    height: 100%;
+    margin: 0;
+}
+
+.split-items-list {
+    /* background-color: green; */
+    height: 75%;
+    overflow-y: auto;
+    margin: 0;
+    padding: 0;
+    border: 1px solid #BDBDBD;
+}
+
+.split-items-list li {
+    justify-content: flex-start !important;
+}
+
+.create-part-button {
+    width: 90% !important;
+}
+
+.split-itemwise-allitems {
+    height: 100%;
+}

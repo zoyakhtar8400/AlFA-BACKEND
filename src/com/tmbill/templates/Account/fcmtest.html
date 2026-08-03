@@ -1,0 +1,137 @@
+<link rel="stylesheet" href="../css/fcm.css" />
+
+<div class="tmb-fcm-root">
+  <button
+    class="tmb-fcm-back-btn"
+    id="gobacktomenumanagementfromfcmview">
+    <i class="fa-solid fa-arrow-left"></i>
+  </button>
+  <div class="tmb-fcm-container">
+
+    <div class="tmb-fcm-card">
+
+      <!-- HEADER -->
+      <div class="tmb-fcm-header">
+        <div>
+          <div class="tmb-fcm-title">Notification Test</div>
+          <div class="tmb-fcm-subtitle" id="tmbFcmSubtitle">
+            Verify your Notification test.
+          </div>
+        </div>
+        <div class="tmb-fcm-badge tmb-fcm-badge-ready" id="tmbFcmBadge">
+          <span class="tmb-fcm-badge-dot"></span>
+          <span id="tmbFcmBadgeText">READY</span>
+        </div>
+      </div>
+
+      <!-- STEPS -->
+      <div class="tmb-fcm-steps">
+
+        <!-- STEP 1 -->
+        <div class="tmb-fcm-step" id="tmbFcmStep1">
+          <div class="tmb-fcm-step-line"></div>
+          <div class="tmb-fcm-step-icon">
+            <div class="tmb-fcm-step-pending"></div>
+          </div>
+          <div>
+            <div class="tmb-fcm-step-name">Verify Device Token</div>
+            <div class="tmb-fcm-step-status">PENDING</div>
+          </div>
+        </div>
+
+        <!-- STEP 2 -->
+        <div class="tmb-fcm-step" id="tmbFcmStep2">
+          <div class="tmb-fcm-step-line"></div>
+          <div class="tmb-fcm-step-icon">
+            <div class="tmb-fcm-step-pending"></div>
+          </div>
+          <div>
+            <div class="tmb-fcm-step-name">Trigger Server Request</div>
+            <div class="tmb-fcm-step-status">PENDING</div>
+          </div>
+        </div>
+
+        <!-- STEP 3 -->
+        <div class="tmb-fcm-step" id="tmbFcmStep3">
+          <div class="tmb-fcm-step-line"></div>
+          <div class="tmb-fcm-step-icon">
+            <div class="tmb-fcm-step-pending"></div>
+          </div>
+          <div>
+            <div class="tmb-fcm-step-name">Server Notification Sent</div>
+            <div class="tmb-fcm-step-status">PENDING</div>
+          </div>
+        </div>
+
+        <!-- STEP 4 -->
+        <div class="tmb-fcm-step" id="tmbFcmStep4">
+          <div class="tmb-fcm-step-line"></div>
+          <div class="tmb-fcm-step-icon">
+            <div class="tmb-fcm-step-pending"></div>
+          </div>
+          <div>
+            <div class="tmb-fcm-step-name">Waiting for Notification</div>
+            <div class="tmb-fcm-step-status">PENDING</div>
+          </div>
+        </div>
+
+        <!-- STEP 5 -->
+        <div class="tmb-fcm-step" id="tmbFcmStep5">
+          <div class="tmb-fcm-step-icon">
+            <div class="tmb-fcm-step-pending"></div>
+          </div>
+          <div>
+            <div class="tmb-fcm-step-name">Result</div>
+            <div class="tmb-fcm-step-status">PENDING</div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- ALERT -->
+      <div class="tmb-fcm-alert" id="tmbFcmAlert">
+        <div class="tmb-fcm-alert-icon" id="tmbFcmAlertIcon">⚠️</div>
+        <div>
+          <div class="tmb-fcm-alert-title" id="tmbFcmAlertTitle"></div>
+          <div class="tmb-fcm-alert-desc" id="tmbFcmAlertDesc"></div>
+        </div>
+      </div>
+
+      <!-- PROGRESS -->
+      <div class="tmb-fcm-progress-section">
+        <div class="tmb-fcm-progress-label">OVERALL PROGRESS</div>
+
+        <div class="tmb-fcm-progress-top">
+          <div id="tmbFcmProgressMsg">Waiting to start...</div>
+          <div id="tmbFcmProgressPct">0%</div>
+        </div>
+
+        <div class="tmb-fcm-progress-bar">
+          <div id="tmbFcmProgressFill"></div>
+        </div>
+      </div>
+
+      <!-- FOOTER -->
+      <div class="tmb-fcm-footer">
+        <button class="tmb-fcm-btn tmb-fcm-btn-ghost" id="tmbFcmCancelBtn">
+          Cancel
+        </button>
+        <button
+          class="tmb-fcm-btn tmb-fcm-btn-ghost"
+          id="resetFCMTokenButton"
+          style="display:none;">
+          Reset FCM Token
+        </button>
+        <button class="tmb-fcm-btn tmb-fcm-btn-primary" id="tmbFcmStartBtn">
+          Start Test
+        </button>
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+<script>
+  require('../js/MenuManagement/fcm.js');
+</script>

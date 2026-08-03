@@ -1,0 +1,142 @@
+<div>
+  <div class="wallet-mgmt-container">
+    <link rel="stylesheet" href="../css/Wallet.css" />
+    <!-- <link rel="stylesheet" href="./crm.css" /> -->
+    <link rel="stylesheet" href="../css/Mastermenu.css" />
+
+    <h5 class="MenuHeading has-i18n"
+      data-i18n="masterScreen.walletManagement.walletManagement">Wallet
+      Management</h5>
+
+    <!-- Wallet header (back left, search+buttons right) -->
+    <div class="wallet-actions-container">
+
+      <!-- BACK (left) -->
+      <button
+        class="btn-back wallet-back-btn"
+        id="gobacktomenumangemtfromwalletview"
+        aria-label="Back to Menu">
+        <i class="fa-solid fa-arrow-left"></i>
+      </button>
+
+      <!-- ACTIONS (search + buttons) aligned to the right -->
+      <div class="wallet-actions-right">
+
+        <input
+          data-i18n="[placeholder]receipt.Search"
+          class="has-i18n wallet-search-input"
+          type="text"
+          placeholder="Search"
+          id="walletmgmtsearchreceiptField" />
+
+        <input
+          data-i18n="[value]masterScreen.walletManagement.createWalletHeading"
+          class="has-i18n normal-button"
+          type="button"
+          value="Create Wallet"
+          id="opencreateWalletbutton" />
+
+        <input
+          data-i18n="[value]masterScreen.walletManagement.Refresh"
+          class="has-i18n normal-button"
+          type="button"
+          value="Refresh"
+          id="refreshWalletbutton" />
+      </div>
+    </div>
+
+    <div class="wallet-info-container">
+      <table
+        class="table table-sm table-striped normal-table"
+        id="wallettableID"></table>
+    </div>
+  </div>
+
+  <div
+    class="create-wallet-view-container"
+    id="create-wallet-view-container-id">
+    <div class="create-wallet-form" id="create-wallet-form-id">
+      <input
+        data-i18n="[placeholder]masterScreen.walletManagement.createWallet.customerMobile"
+        type="text"
+        autocomplete
+        class="wallet_customerPhone has-i18n"
+        id="wallet_customerPhoneid"
+        placeholder="Customer Mobile" />
+      <input
+        data-i18n="[placeholder]masterScreen.walletManagement.createWallet.Name"
+        type="text"
+        name
+        class="wallet_customerName has-i18n"
+        id="wallet_nameid"
+        placeholder="Name" />
+      <input
+        data-i18n="[placeholder]masterScreen.walletManagement.createWallet.availableBalance"
+        class="has-i18n"
+        type="number"
+        name
+        id="wallet_availbalanceid"
+        placeholder="Available Balance" />
+      <!-- <select id="wallet_paymentmode">
+      <option selected disabled>Select payment mode</option>
+    </select> -->
+    </div>
+  </div>
+
+  <div
+    class="topup-wallet-container"
+    id="topup-wallet-containerid"
+    style="display: none">
+    <div class="create-wallet-form" id="topup-wallet-form-id">
+      <input
+        data-i18n="[placeholder]masterScreen.walletManagement.addcredit.enterAmount"
+        class="has-i18n"
+        type="text"
+        name
+        id="topup-wallet-amountid"
+        placeholder="Enter amount" />
+    </div>
+    <!-- <div class="wallet-amount-suggestions">
+        <label class="statusLabel quickbill">100</label>
+        <label class="statusLabel quickbill">300</label>
+        <label class="statusLabel quickbill">500</label>
+    </div> -->
+  </div>
+
+  <div class="modal fade" id="wallettransModal">
+    <div
+      class="modal-dialog modal-lg modal-dialog-centered wallettransmodal-dialog">
+      <div class="modal-content wallettransModalclass">
+        <!-- Modal Header -->
+        <div class="modal-header transactions-header">
+          <h4
+            data-i18n="masterScreen.walletManagement.TransactionsHeading"
+            class="modal-title has-i18n">
+            Transactions
+          </h4>
+          <label
+            data-i18n="masterScreen.walletManagement.Transactions.walletID"
+            for="currentwalletId"
+            class="trans-wallet-header statusLabel fulfilled has-i18n">Wallet
+            ID:</label>
+          <label class="statusLabel quickbill" id="currentwalletId"></label>
+          <button type="button" class="close" data-dismiss="modal">
+            &times;
+          </button>
+        </div>
+
+        <!-- Modal body -->
+        <div
+          class="modal-body wallettransmodalBody"
+          id="wallettransmodalBodyid">
+          <table
+            class="table table-sm table-striped normal-table wallettransactionstable"
+            id="wallettransactionstableID"></table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+  require('../js/WalletManagement.js');
+</script>

@@ -1,0 +1,170 @@
+.reportprintBody {
+  display: flex;
+  justify-content: baseline;
+  align-items: baseline;
+  text-align: baseline;
+  width: 300px;
+  max-width: 300px;
+  height: 400px;
+  overflow-y: scroll;
+  top: 0;
+}
+
+/* .reporttaxLabel,
+.reportchargesLabel,
+.reportdiscountLabel,
+.reportfulfillamountLabel,
+.reportfreeamountLabel,
+.reportpendingamountLabel,
+.reportcancelamountLabel {
+  text-align: right;
+  font-weight: bold;
+  width: 90%;
+  font-size: 15px;
+  margin: 0;
+} */
+
+.titleDiv,
+.dateLabel,
+.reporttitleLabel,
+.reportsubtitleLabel,
+.payreportTitle,
+.solditemsTitle {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  font-weight: bold;
+  margin-left: 30px;
+  margin-right: 30px;
+}
+
+.taxReportTitle {
+  display: flex;
+  font-weight: bold;
+  /* margin-left: 30px; */
+  margin-right: 30px;
+}
+
+.taxAnalysisTitle,
+.totalWithTaxpaymentWrapperid {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  font-weight: bold;
+  /* border-top: dashed;
+  border-width: 2px; */
+  border-top: 1px solid;
+}
+
+.taxTotal {
+  font-weight: bold;
+}
+
+.reportsubtitleLabel {
+  font-size: 13px;
+}
+
+.paymentInfo {
+  font-size: 15px;
+}
+
+.dateLabel {
+  font-size: 14px;
+  font-weight: normal;
+}
+
+.billsWrapper {
+  margin-top: 5px;
+  margin-bottom: 5px;
+  /* border-top: dashed;
+  border-bottom: dashed;
+  border-width: 2px; */
+  border-top: 1px solid;
+  border-bottom: 1px solid;
+}
+
+.paymentWrapper,
+.solditemsWrapper,
+.expensesWrapper,
+.cancelleditemsWrapper {
+  margin-top: 5px;
+  margin-bottom: 5px;
+  /* border-bottom: dashed;
+  border-width: 2px; */
+  border-bottom: 1px solid;
+}
+
+.reportviewContainer table thead tr {
+  font-size: 14px;
+  text-align: left;
+}
+
+.reportviewContainer table tbody tr {
+  font-size: 14px;
+  font-weight: normal;
+  /* text-align: center; */
+}
+
+.appversionDiv {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 3px;
+  font-size: 14px;
+}
+
+#saleReportImg {
+  height: 80px;
+  width: 80px;
+}
+
+.summaryTopBorder {
+  border-top: 1px solid #ccc;
+  font-weight: bold;
+}
+
+.topBorder {
+  border-top: 1px solid #ccc;
+}
+.summaryBottomBorder {
+  border-top: 1px solid #ccc;
+  font-weight: bold;
+}
+
+.sales-summary-label {
+  display: flex;
+  justify-content: space-between;
+  font-size: 15px;
+  text-align: right;
+}
+
+.sales-summary-amount {
+  font-weight: bold;
+}
+
+.centerTextAlign {
+  text-align: center;
+}
+
+.rightTextAlign {
+  text-align: right;
+}
+/* Center the table headers for this table */
+#orderreportTable thead th {
+  vertical-align: middle !important; /* fix the “a little upper” look */
+  text-align: center; /* optional: center text horizontally */
+  height: 44px; /* optional: consistent header height */
+  line-height: 1.2; /* tweak if needed */
+  padding-top: 80px; /* keep some breathing room */
+  padding-bottom: 80px;
+}
+
+#deliveryBoynameorderSettlementId,
+.report-summary-footer {
+  font-weight: bold;
+}

@@ -1,0 +1,586 @@
+@import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro&display=swap');
+
+* {
+  font-family: 'Source Sans Pro', calibri, sans-serif;
+  /* font-family: -apple-system, BlinkMacSystemFont, 'Source Sans Pro', calibri, sans-serif; */
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+:root {
+  --background: white;
+  --loader-background: #fff;
+  --icon-fill-color: #a9a9aa;
+  --icon-hover-color: rgb(76, 107, 165);
+  --selected-color: #394b41;
+  --border-color: #f2f2f2;
+  --items-button-border: rgb(235, 229, 229);
+  --primary-text-color: black;
+  --input-background: #f3f3f4;
+  --input-border-color: #e4e4e436;
+  /* --button-background: #1d1d35; */
+  --button-background: #1e4936;
+  --disabled-button-background: #989090;
+  --button-text: white;
+  --white-color: white;
+  --button-border: #f2f2f2;
+  /* --kot-header: #499876; */
+  /* --kot-header: #1e4936; */
+  --kot-header: #007c45;
+  /* --scrollbar-color: #53975a; */
+  --scrollbar-color: #1e4936;
+  /* --table-button-background: #1a9a62; */
+  /* --table-button-background: #1e4936; */
+  --table-button-background: #007c45;
+  --search-icon: #6767aa;
+  --tabs-link-color: #002e06;
+  --main-bg-color: #1c1c1e;
+  --light-border-color: #7c7878;
+  --label-color: #b6b2b2;
+  --light-dark-border-color: #333;
+  --light-button-color: aliceblue;
+  --transparent-background: #3535356e;
+  --autocomplete-text-color: #fefefe;
+  --button-label-color: #cfcece;
+  --tabs-border-color: #636161;
+  --date-background: #999;
+  --table-header-border: #4a4a4a;
+  --switch-background: #827d7d;
+  --checknradio: #499876;
+  /* --checknradio: #1E4936; */
+  --dash-size: 0.127rem;
+  --border-size: 1px;
+}
+
+.table_container button label {
+  color: white !important;
+}
+
+.userMenuwrapper,
+.parentContainer {
+  background-color: var(--background);
+}
+
+.menu li a,
+.settingsDiv a {
+  color: var(--icon-fill-color);
+}
+
+.menu li a:hover,
+.settingsDiv a:hover {
+  color: var(--icon-hover-color);
+}
+
+.selected-menu {
+  /* border-left: 1.5px solid var(--selected-color); */
+  background: #41c17a47 !important;
+}
+
+.parentTabs ul.nav li a.active {
+  background: #41c17a47 !important;
+  color: var(--tabs-link-color) !important;
+  font-weight: bold;
+  border-color: #dee2e6 #dee2e6 #fff;
+}
+
+.tablesParentdivclass,
+.mainWindow,
+.parentTabs,
+.tabs,
+.tableDiv,
+.actionDiv {
+  background-color: var(--background);
+}
+
+.searchDiv,
+.treeviewDiv,
+.itemviewDiv {
+  background-color: var(--background);
+  border: 1px solid var(--border-color);
+}
+
+.itemsDiv {
+  background-color: var(--background);
+}
+
+.wrapperDiv,
+.orderwindowWrapper,
+.receiptwindowWrapper,
+.dashwindowWrapper,
+.onlineorderswindowWrapper,
+.reportswindowWrapper,
+.mastermenuwindowWrapper,
+.itemmastermenuwindowWrapper,
+.crmwindowWrapper,
+.userManagementwindowWrapper,
+.walletManagementwindowWrapper {
+  background-color: var(--background);
+}
+
+.tableDiv {
+  border: 1px solid var(--border-color);
+}
+
+.table_container div label {
+  color: var(--label-color);
+}
+
+.itemviewDiv button {
+  border: 1px solid var(--items-button-border);
+  background-color: var(--background);
+  color: var(--primary-text-color);
+}
+
+input[type='text'],
+input[type='password'],
+input[type='search'],
+input[type='number'],
+textarea {
+  border: 1px solid var(--input-border-color);
+  background-color: var(--input-background);
+}
+
+input[type='radio'] + label:before {
+  margin-right: 0.5em;
+  height: 22px;
+  content: ' ';
+  width: 22px;
+  border: 4px solid #bdbdbd;
+}
+
+input[type='radio'] + label {
+  display: flex;
+  margin: 0.2em;
+  cursor: pointer;
+  align-items: center;
+  padding: 0.2em;
+}
+
+input[type='radio']:checked + label:before {
+  background-color: var(--checknradio);
+  border-color: var(--checknradio);
+  color: #fff;
+  padding-left: 5px;
+  border: 4px solid #bdbdbd;
+}
+
+input[type='number']::-webkit-inner-spin-button,
+input[type='number']::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* input[type=number]:invalid {
+    border: 2px dashed red;
+}
+
+input[type=number]:invalid:focus {
+    background-image: linear-gradient(pink, lightgreen);
+} */
+
+input[type='button'],
+.normal-button,
+#submitcustomerForm {
+  border: 1px solid var(--button-border);
+  background-color: var(--button-background);
+  color: var(--white-color);
+  box-shadow: 0 2px 0 rgba(0, 0, 0, 0.045);
+  transition:
+    color 0.15s ease-in-out,
+    background-color 0.15s ease-in-out,
+    border-color 0.15s ease-in-out,
+    box-shadow 0.15s ease-in-out;
+}
+
+.small-button {
+  font-size: 14px !important;
+  height: 35px !important;
+  padding: 0.4rem !important;
+}
+
+.circular-icon {
+  background: rgb(117, 92, 205);
+  font-size: 1rem;
+  padding: 0.7rem;
+  border-radius: 35px;
+  color: white;
+  margin-left: 5px;
+}
+
+.success-button {
+  border: 2px solid mediumseagreen;
+  color: mediumseagreen !important;
+  background-color: transparent;
+}
+
+input[type='button']:disabled {
+  background-color: var(--disabled-button-background);
+}
+
+.table_container button {
+  border: 1px solid var(--button-border);
+  background-color: var(--table-button-background);
+  color: var(--white-color);
+}
+
+.totalsDiv,
+.receiptActiondiv2 {
+  background-color: var(--table-button-background);
+}
+
+.totalsDiv label,
+.receiptActiondiv2 label {
+  color: var(--white-color);
+}
+
+.searchDiv .searchWrapper i {
+  color: var(--search-icon);
+}
+
+.tabs .sectionTabs > li > a,
+.tasectionTabs > li > a,
+.parentTabs .mainsectionTabs > li > a {
+  color: var(--tabs-link-color) !important;
+}
+
+.kottableDiv,
+.takeawaykottableDiv,
+.takeawaykottableDiv {
+  border: 1px solid var(--button-border);
+}
+
+.kotLables-div {
+  background-color: var(--kot-header);
+  color: var(--white-color);
+}
+
+.kotLables-div .kotnoLabel {
+  color: var(--primary-text-color);
+  background-color: var(--background);
+}
+
+.kot-noteDiv input[type='button'] {
+  color: #e87070;
+  border: 1px solid #e87070;
+  background-color: white;
+}
+
+.bootstrap-select button {
+  background-color: var(--input-background) !important;
+  border: none;
+  border-radius: 16px;
+}
+
+.add-button {
+  border: 2px solid mediumseagreen;
+  background-color: mediumseagreen;
+  color: white;
+}
+
+.receiptTableclass thead tr,
+.receiptitemsTableclass thead tr {
+  background: #f9f9f9 !important;
+}
+
+.normal-table thead tr,
+.expense-container table thead tr,
+.captains-container table thead tr,
+.customermgmtDattableclass thead tr {
+  background: rgb(232, 231, 231) !important;
+}
+
+.normal-table tbody tr td {
+  text-align: center;
+}
+
+.option-subtitle {
+  font-size: smaller;
+  color: #716f6f;
+}
+
+.treeview span.icon {
+  width: 15px !important;
+  margin-right: 0px !important;
+  font-size: 1rem;
+}
+
+.treeview ul > li {
+  background-color: white;
+  color: black;
+  overflow: hidden;
+  /* text-overflow: ellipsis;
+    white-space: nowrap; */
+}
+
+.titleLabel {
+  width: 21%;
+  padding-top: 10px;
+  font-weight: bolder;
+  margin: 1px;
+  letter-spacing: 0.5px;
+  text-align: center;
+}
+
+.bold-label {
+  font-weight: 600;
+}
+
+.edit-icon-on-left {
+  margin: 0;
+  padding: 0;
+}
+
+.edit-icon-on-left:before {
+  font-family: FontAwesome;
+  content: '\f304';
+  float: left;
+  padding-right: 42px;
+}
+
+.getintouch {
+  background: indianred;
+  font-size: 14.5px;
+  padding: 0.5rem;
+  border-radius: 27px;
+  color: white;
+}
+
+.material-button {
+  background-color: blueviolet;
+  color: white;
+  border: none;
+  font-size: small;
+  padding: 8px;
+  border-radius: 4px;
+}
+
+.dash-icons {
+  background: #c1bdbd61;
+  font-size: 1.3rem;
+  padding: 0.5rem;
+  border-radius: 27px;
+  color: mediumseagreen;
+  margin-right: 5px;
+}
+
+.full-width {
+  width: 100%;
+}
+
+.animated-div {
+  border: 2px solid black !important;
+  border-image: url("data:image/svg+xml;charset=utf-8,%3Csvg width='100' height='100' viewBox='0 0 100 100' fill='none' xmlns='http://www.w3.org/2000/svg'%3E %3Cstyle%3Epath%7Banimation:stroke 5s infinite linear%3B%7D%40keyframes stroke%7Bto%7Bstroke-dashoffset:776%3B%7D%7D%3C/style%3E%3ClinearGradient id='g' x1='0%25' y1='0%25' x2='0%25' y2='100%25'%3E%3Cstop offset='0%25' stop-color='%233BB78F' /%3E%3Cstop offset='25%25' stop-color='%233BB78F' /%3E%3Cstop offset='50%25' stop-color='%233BB78F' /%3E%3Cstop offset='100%25' stop-color='%233BB78F' /%3E%3C/linearGradient%3E %3Cpath d='M1.5 1.5 l97 0l0 97l-97 0 l0 -97' stroke-linecap='square' stroke='url(%23g)' stroke-width='3' stroke-dasharray='388'/%3E %3C/svg%3E")
+    1 !important;
+}
+
+/**
+Online orders
+**/
+.running-filers-div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.running-filers-div button {
+  background-color: white;
+  border: 1px solid rgba(240, 239, 239, 0);
+  border-color: mediumseagreen;
+  height: 40px;
+  width: 90%;
+  border-radius: 7px;
+  margin: 2px;
+}
+
+/* selectable list */
+
+.selectable-list-container {
+  overflow-y: auto;
+}
+
+.selectable-list {
+  margin: 0;
+  padding: 0;
+}
+
+.selectable-list li {
+  border-radius: 5px;
+  background-color: #cecece6e;
+  margin-top: 4px;
+  justify-content: start;
+  border: 1px solid #bdbdbd75;
+}
+
+.selectable-list li button {
+  border: none;
+  background: transparent;
+  padding: 1rem;
+  width: 90%;
+}
+
+.selectable-list li.selected {
+  border: 2px solid #6464bb;
+}
+
+.selectable-list li button:focus {
+  /* border: 1px solid #6464bb4f;
+    background: #6464bb;
+    color: white; */
+  outline: none;
+}
+
+.success-button {
+  background-color: var(--table-button-background) !important;
+  color: white !important;
+}
+
+.error-button {
+  background-color: #dc3545 !important;
+  color: white !important;
+}
+
+.striked {
+  text-decoration: line-through !important;
+}
+
+.tm-fa-sm {
+  font-size: 1.4rem !important;
+}
+
+.tablenowrap {
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+.has-floating-label {
+  position: relative !important;
+}
+
+.bogo-label {
+  position: absolute;
+  bottom: 4px;
+  right: 3px;
+}
+
+.swal2-toast {
+  width: 75% !important;
+}
+
+.tmbill-swal-input2 {
+  margin: 1em 2em 0 !important;
+  height: 40px !important;
+}
+
+.scrollable {
+  overflow-y: auto !important;
+}
+
+.w-85 {
+  width: 85% !important;
+}
+
+.activeElement {
+  /* border-left: 2px solid #1a9a62 !important; */
+  border-left: 2px solid #1e4936 !important;
+}
+
+.mxhv-25 {
+  max-height: 25vh !important;
+}
+
+.w-23 {
+  width: 23% !important;
+}
+
+.w-32px {
+  width: 32px !important;
+}
+
+.delete-rowitem-icon {
+  color: #de3341 !important;
+  font-size: 1.4rem;
+  margin-bottom: 13.5px;
+  /* background: mediumvioletred; */
+}
+
+.edit-rowitem-icon {
+  /* color: #7bf783 !important; */
+  font-size: 1.4rem;
+  /* background: mediumvioletred; */
+}
+
+.touch-scroll {
+  -webkit-overflow-scrolling: touch;
+}
+
+/* #fullSceenIcon {
+  color: var(--button-background) !important;
+} */
+
+.bill-misc-div,
+.actionDiv i,
+.sectionTabs a,
+.icon-container,
+.kotCustomer-div,
+#showCustomeraddress,
+#selecttakeawayWaiterbutton,
+#tashowCustomeraddress,
+#deliveryshowCustomeraddress,
+#selectdeliveryWaiterbutton {
+  color: var(--button-background);
+  cursor: pointer;
+}
+
+.choices__list .is-highlighted {
+  background-color: rgb(0, 102, 255) !important;
+}
+.fcmTestwindowWrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #fff;
+}
+
+#stagingTagId {
+  display: none;
+}
+.pill-b {
+  z-index: 999;
+  position: absolute;
+  bottom: 0px;
+  left: 55px;
+  display: flex !important;
+  align-items: center;
+  gap: 8px;
+  background: #d97706;
+  border-radius: 10px 10px 0 0;
+  padding: 7px 14px 7px 10px;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 13px;
+  font-weight: 600;
+  color: #1c1107;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  box-shadow:
+    0 0 0 3px rgba(217, 119, 6, 0.2),
+    0 4px 20px rgba(217, 119, 6, 0.25);
+  user-select: none;
+  pointer-events: none;
+}
+.pill-b-icon {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.pill-b-icon svg {
+  width: 14px;
+  height: 14px;
+}

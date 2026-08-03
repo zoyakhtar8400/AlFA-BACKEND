@@ -1,0 +1,117 @@
+<div class="mastermenuWrapper row" id="mastermenuWrapperid">
+  <link rel="stylesheet" href="../css/Mastermenu.css" />
+  <div class="row main-container">
+    <div class="col-sm-3 menu-types-container">
+      <ul class="menu-types-list" id="menu-types-list-id">
+        <li class="card menu-types-list-item" id="ipaddressField">
+          <i class="fas fa-server"></i>
+        </li>
+        <li menu-type="1" class="card menu-types-list-item">
+          <i class="fas fa-plus"></i>
+          <span data-i18n="masterScreen.addExpensesHeading" class="has-i18n"
+            >Add Expense</span
+          >
+        </li>
+        <li menu-type="2" class="card menu-types-list-item">
+          <i data-i18n="" class="fas fa-user"></i>
+          <span data-i18n="masterScreen.userManagementHeading" class="has-i18n"
+            >User Management</span
+          >
+        </li>
+        <li menu-type="3" class="card menu-types-list-item has-i18n">
+          <i data-i18n="" class="fas fa-users"></i>
+          <span
+            data-i18n="masterScreen.customerManagementHeading"
+            class="has-i18n"
+          >
+            Customer Management</span
+          >
+        </li>
+        <li menu-type="4" class="card menu-types-list-item">
+          <i data-i18n="" class="fas fa-wallet"></i>
+          <span
+            data-i18n="masterScreen.walletManagementHeading"
+            class="has-i18n"
+            >Wallet Management</span
+          >
+        </li>
+        <!-- <li
+          class="accordion card menu-types-list-item"
+          id="accordionExample"
+          data-toggle="collapse"
+          data-target="#collapseOne"
+          aria-expanded="true"
+          aria-controls="collapseOne"
+        >
+          <i data-i18n="" class="fas fa-arrow-down"></i>
+          <span data-i18n="masterScreen.AccountHeading" class="has-i18n"
+            >Account</span
+          >
+
+          <div
+            id="collapseOne"
+            class="collapse"
+            aria-labelledby="headingOne"
+            data-parent="#accordionExample"
+          >
+            <div class="card-body">
+              <ul
+                id="acount-submenu-id"
+                class="acount-submenu list-sub-menu menu-types-list"
+              >
+                <li
+                  sub-menu-type="sub-menu-closeday popup"
+                  id="accountCloseDay"
+                  class="card menu-types-list-item"
+                >
+                  <i class="fas fa-door-closed"></i>
+                  <span
+                    data-i18n="masterScreen.Account.closeDayHeading"
+                    class="has-i18n"
+                    >Close Day</span
+                  >
+                  <label id="currnetstartdayendLabelid"></label>
+                </li>
+                <li
+                  sub-menu-type="sub-menu-startusershift popup"
+                  class="card menu-types-list-item"
+                >
+                  <i class="fas fa-hourglass-start"></i>
+                  <span
+                    data-i18n="masterScreen.Account.startShiftHeading"
+                    class="has-i18n"
+                    >Start Shift</span
+                  >
+                </li>
+                <li
+                  sub-menu-type="sub-menu-closeusershift popup"
+                  id="accountCloseShift"
+                  class="card menu-types-list-item"
+                >
+                  <i class="fas fa-hourglass-end"></i>
+                  <span
+                    data-i18n="masterScreen.Account.closeShiftHeading"
+                    class="has-i18n"
+                    >Close Shift</span
+                  >
+                </li>
+              </ul>
+            </div>
+          </div>
+        </li> -->
+      </ul>
+    </div>
+    <div class="col-sm-9 menu-container">
+      <ul class="menu-data-container" id="menu-data-container-id">
+        <li menu-type="1" class="menu-data-container-item"></li>
+        <li menu-type="2" class="menu-data-container-item"></li>
+        <li menu-type="3" class="menu-data-container-item"></li>
+        <li menu-type="4" class="menu-data-container-item"></li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<script>
+  require('../js/MastermenuController.js');
+</script>

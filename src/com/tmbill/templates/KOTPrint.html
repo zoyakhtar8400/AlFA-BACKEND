@@ -1,0 +1,119 @@
+<div class="kotpreviewContainer" id="kotpreviewContainerid">
+  <div class="kotordertypeImagecontainer" id="kotordertypeImagecontainerid">
+    <img src="" alt="" />
+  </div>
+  <div class="kotLabelclass" id="tablestatuskotprinttagLabel"></div>
+  <div class="kotLabelclass" id="changeTableAlertkotprinttagLabel"></div>
+  <div class="kotLabelclass" id="kotLabelid"></div>
+  <div class="kotLabelclass" id="kotOrderNumberLabelid"></div>
+  <div
+    class="kottablenameLabel kotLabelclass"
+    for=""
+    id="kottablenameLabel"
+  ></div>
+  <div class="kotLabelclass" id="orderNumberLabelid"></div>
+  <div class="kotLabelclass" id="kotordertypeLabelid"></div>
+  <div class="kotLabelclass" id="kotordertypeModeLabelid"></div>
+  <div class="kotLabelclass" id="kotonlineorderTagsContainerid"></div>
+  <div class="kotLabelclass" id="kotstorenameId"></div>
+  <div class="kotLabelclass" id="kotorderIdlabel"></div>
+  <label class="kotLabelclass" id="kotparentorderidlabel"></label>
+  <div class="kotLabelclass" id="kotexternalOrderIdlabel"></div>
+  <div class="kotLabelclass" id="kotPickupedAtIdlabel"></div>
+  <div id="preOrderKotIdlabel">Pre-Order</div>
+
+  <!-- <div class="kotLabelclass" id="kotDeliveredAtIdlabel"></div> -->
+  <div class="kotLabelclass" id="kotdelveryorderIdlabel"></div>
+  <div class="kotLabelclass" id="kotremarkLabelid"></div>
+  <label class="kotdateLabel" for="" id="kotdatelabelID"></label>
+  <div class="kotwrapper1" id="kotwrapper1id">
+    <label class="kottablenameLabel" for="" id="kotcoversLabelid"></label>
+    <label class="kottablenameLabel" for="" id="kotonlineOTPLabelid"></label>
+    <label for="" class="kotuserlabelClass" id="kotUsername"></label>
+  </div>
+  <div class="kotwrapper3" id="kotwrapper3id">
+    <label class="kottablenameLabel" for="" id="kotwaiternameLabelid"></label>
+  </div>
+  <div class="kotwrapper3" id="kotwrapper4id">
+    <label
+      class="kottablenameLabel"
+      for=""
+      id="kotCaptainUsernameLabelid"
+    ></label>
+  </div>
+  <div class="kotwrapper3" id="kotwrapper5id">
+    <label
+      class="kottablenameLabel"
+      for=""
+      id="kotTerminalUsernameLabelid"
+    ></label>
+  </div>
+  <div id="kitchenDepartmentDiv">
+    <div class="kotLabelclass" id="kotprintkitchenDepartmentlabelid"></div>
+  </div>
+  <div class="kotwrapper2 kotitemswrapper" id="kotprintItemscontainerid">
+    <table id="kotpreviewTable" class="kottableClass" style="width: 100%">
+      <tr class="item-row-heading">
+        <th data-i18n="KOTPrint.Item" class="has-i18n" style="width: 65%">
+          Item
+        </th>
+        <th data-i18n="KOTPrint.Qty" class="has-i18n">Qty</th>
+        <th data-i18n="" class="has-i18n" id="itemtotalkotprint">Total</th>
+      </tr>
+    </table>
+  </div>
+
+  <div
+    class="kotwrapper2 kotitemswrapperforbothlanguages"
+    id="kotprintItemscontainerid"
+  >
+    <table id="kotpreviewTable" class="kottableClass" style="width: 100%">
+      <thead>
+        <tr class="item-row-heading">
+          <th data-i18n="bothLanguage.Item" class="has-i18n w-60">
+            Item<br />
+            غرض
+          </th>
+          <th data-i18n="bothLanguage.Qty" class="has-i18n">
+            Qty<br />
+            الكمية
+          </th>
+          <th
+            data-i18n="bothLanguage.Total"
+            class="has-i18n"
+            id="itemtotalkotprintbothlang"
+          >
+            Total<br />
+            الاجمالي
+          </th>
+        </tr>
+      </thead>
+    </table>
+  </div>
+  <!-- <div class="kotLabelclass" id="kotprintkitchenDepartmentlabelid"></div> -->
+  <div class="disposableDiv" id="disposableDivid"></div>
+  <div id="totalQtyDIvid" class="">
+    <label
+      data-i18n="controller:previewController.TotalQty"
+      class="has-i18n"
+      for="totalkotQtylabel"
+      id="totalkotitemqtyid"
+      >Total Qty :
+    </label>
+    <label
+      data-i18n="controller:previewController.TotalQty"
+      class="has-i18n"
+      for="totalkotQtylabel"
+      id="totalkotitemqtyidforbothlang"
+      >Total Qty<br />
+      اجمالي الكمية:
+    </label>
+    <label id="totalkotQtylabel" class="totalAmount"></label>
+  </div>
+  <span class="kotdateLabel" id="kotnoteLabelid"></span>
+  <label class="customerinfo-div" id="customerinfoId"></label>
+</div>
+
+<script>
+  require('../js/KOTPrintController.js');
+</script>

@@ -1,0 +1,21 @@
+.live-status-button {
+  height: 30px;
+  width: 27px;
+  margin: 0.3rem;
+}
+
+.livestatus-actions {
+  height: 45px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.livestatus-actions select {
+  height: 35px;
+}
+#switchviewButtonid {
+  height: 26px;
+  width: 26px;
+  line-height: 20px;
+}

@@ -1,0 +1,9 @@
+const TAX_CALCULATION_ON = {
+  SUBTOTAL: 1,
+  SUBTOTAL_AND_PREVIOUSTAX: 2,
+  PREVIOUSTAX: 3,
+};
+
+module.exports = {
+  TAX_CALCULATION_ON,
+};

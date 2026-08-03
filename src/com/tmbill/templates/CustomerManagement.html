@@ -1,0 +1,394 @@
+<link rel="stylesheet" href="../css/CustomerManagement.css">
+
+<div class="customer-mgmt-container">
+  <div class="actions-div">
+    <input
+      data-i18n="[placeholder]masterScreen.customerManagement.Search"
+      class="has-i18n"
+      type="text"
+      id="searchCustomermgmtid"
+      placeholder="Search"
+      style="margin: 0 !important;" />
+
+    <input
+      id="hiddenFileimport"
+      accept=".xlsx"
+      type="file"
+      style="position:absolute; opacity:0; width:1px; height:1px;" />
+    <button
+      data-i18n="masterScreen.customerManagement.AddHeading"
+      id="openaddcustomerModal"
+      class="normal-button has-i18n">
+      <i class="fas fa-plus"></i>Add
+    </button>
+    <button
+      data-i18n="masterScreen.customerManagement.Refresh"
+      id="refreshcustomermgmtButton"
+      class="normal-button has-i18n">
+      <i class="fas fa-sync-alt"></i>Refresh
+    </button>
+    <button
+      data-i18n="masterScreen.customerManagement.Import"
+      id="importCustomersbutton"
+      class="normal-button has-i18n">
+      <i class="fas fa-file-import"></i>Import
+    </button>
+    <button
+      data-i18n="masterScreen.customerManagement.Import"
+      id="exportCustomersbutton"
+      class="normal-button has-i18n">
+      <i class="fas fa-file-export"></i>Export
+    </button>
+  </div>
+  <div class="customer-data-div">
+    <table
+      class="table table-sm table-striped customermgmtDattableclass"
+      id="customermgmtDattable"></table>
+  </div>
+</div>
+
+<!-- Custmor history analysis window -->
+<div class="modal fade" id="addCusomermodalid">
+  <div class="modal-dialog modal-dialog-centered addCusomermodal-dialog">
+    <div class="modal-content addCusomermodalWrapper">
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4
+          data-i18n="masterScreen.customerManagement.Add.customerForm"
+          class="modal-title has-i18n">
+          Customer Form
+        </h4>
+        <button type="button" class="close" data-dismiss="modal">
+          &times;
+        </button>
+      </div>
+      <!-- Modal body -->
+      <div class="modal-body addCusomermodalbody" id="addCusomermodalBodyid">
+        <div class="input-container">
+          <label
+            data-i18n="masterScreen.customerManagement.Add.Salutation"
+            class="titleLabel has-i18n"
+            for="mgmt_customerSalutationId">
+            Salutation:
+          </label>
+
+          <select class id="mgmt_customerSalutationId">
+            <option
+              data-i18n="masterScreen.customerManagement.Add.SelectSalutation"
+              value="-1"
+              class="has-i18n"
+              disabled
+              selected>
+              -- Select Salutation --
+            </option>
+          </select>
+        </div>
+        <div class="input-container">
+          <label
+            data-i18n="masterScreen.customerManagement.Add.Name"
+            class="titleLabel has-i18n"
+            for="mgmt_customernameId">Name:</label>
+          <input
+            data-i18n="[placeholder]masterScreen.customerManagement.Add.Name"
+            class="has-i18n"
+            type="text"
+            id="mgmt_customernameId"
+            placeholder="Name *" />
+        </div>
+        <div class="input-container">
+          <label data-i18n="masterScreen.customerManagement.Add.CountryCode"
+            class="titleLabel has-i18n" for="mgmt_customerFormDialCodeId">
+            Country code:
+          </label>
+          <select class id="mgmt_customerFormDialCodeId"></select>
+        </div>
+        <div class="input-container">
+          <label
+            data-i18n="masterScreen.customerManagement.Add.Mobile"
+            class="titleLabel has-i18n"
+            for="mgmt_customermobileid">Mobile:</label>
+          <input
+            data-i18n="[placeholder]masterScreen.customerManagement.Add.Mobile"
+            class="has-i18n"
+            type="text"
+            id="mgmt_customermobileid"
+            placeholder="Mobile *" />
+        </div>
+        <div class="input-container">
+          <label
+            data-i18n="masterScreen.customerManagement.Add.AlternateCountryCode"
+            class="titleLabel has-i18n"
+            for="mgmt_customerFormAlternateDialCodeId">
+            Alternate Country code:
+          </label>
+          <select class id="mgmt_customerFormAlternateDialCodeId"></select>
+        </div>
+        <div class="input-container">
+          <label data-i18n="masterScreen.customerManagement.Add.AlternateMobile"
+            class="titleLabel has-i18n" for="mgmt_customeralternatemobileid">
+            Alternate Mobile:
+          </label>
+          <input
+            data-i18n="[placeholder]masterScreen.customerManagement.Add.AlternateMobile"
+            class="has-i18n"
+            type="text"
+            id="mgmt_customeralternatemobileid"
+            placeholder="Alternate Mobile" />
+        </div>
+        <div class="input-container">
+          <label
+            data-i18n="masterScreen.customerManagement.Add.Email"
+            class="titleLabel has-i18n"
+            for="mgmt_customermobileid">Email:</label>
+          <input
+            data-i18n="[placeholder]masterScreen.customerManagement.Add.Email"
+            class="has-i18n"
+            type="text"
+            id="mgmt_customermaild"
+            placeholder="Email" />
+        </div>
+        <div class="input-container">
+          <label
+            data-i18n="masterScreen.customerManagement.Add.dateOfBirth"
+            class="titleLabel has-i18n"
+            for="mgmt_customermobileid">Date of birth:</label>
+          <input
+            data-i18n="[placeholder]masterScreen.customerManagement.Add.dateOfBirth"
+            class="has-i18n"
+            type="text"
+            id="mgmt_customerdobId"
+            placeholder="Date of birth" />
+        </div>
+        <div class="input-container">
+          <label
+            data-i18n="masterScreen.customerManagement.Add.Business"
+            class="titleLabel has-i18n"
+            for="mgmt_customermobileid">Business:</label>
+          <input
+            data-i18n="[placeholder]masterScreen.customerManagement.Add.Business"
+            class="has-i18n"
+            type="text"
+            id="mgmt_customerbusinessid"
+            placeholder="Business" />
+        </div>
+
+        <div class="input-container">
+          <label
+            data-i18n="masterScreen.customerManagement.Add.address1"
+            class="titleLabel has-i18n"
+            for="mgmt_customermobileid">Address 1:</label>
+          <input
+            data-i18n="[placeholder]masterScreen.customerManagement.Add.address1"
+            class="has-i18n"
+            type="text"
+            id="mgmt_customeradd1id"
+            placeholder="Address 1" />
+        </div>
+
+        <div class="input-container">
+          <label
+            data-i18n="masterScreen.customerManagement.Add.address2"
+            class="titleLabel has-i18n"
+            for="mgmt_customermobileid">Address 2:</label>
+          <input
+            data-i18n="[placeholder]masterScreen.customerManagement.Add.address2"
+            class="has-i18n"
+            type="text"
+            id="mgmt_customeradd2id"
+            placeholder="Address 2" />
+        </div>
+        <div class="input-container">
+          <label
+            data-i18n="masterScreen.customerManagement.Add.City"
+            class="titleLabel has-i18n"
+            for="mgmt_customermobileid">City:</label>
+          <input
+            data-i18n="[placeholder]masterScreen.customerManagement.Add.City"
+            class="has-i18n"
+            type="text"
+            name
+            id="mgmt_customercityid"
+            placeholder="City" />
+        </div>
+        <div class="input-container">
+          <label data-i18n="masterScreen.customerManagement.Add.State"
+            class="titleLabel has-i18n" for="mgmt_customermobileid">
+            State:
+          </label>
+          <input
+            data-i18n="[placeholder]masterScreen.customerManagement.Add.State"
+            class="has-i18n"
+            type="text"
+            name
+            id="mgmt_customerstateid"
+            placeholder="State" />
+        </div>
+        <div class="input-container">
+          <label data-i18n="masterScreen.customerManagement.Add.Pincode"
+            class="titleLabel has-i18n" for="mgmt_customerPincodeid">
+            Pincode:
+          </label>
+          <input
+            data-i18n="[placeholder]masterScreen.customerManagement.Add.City"
+            class="has-i18n"
+            type="text"
+            name
+            id="mgmt_customerPincodeid"
+            placeholder="Pincode" />
+        </div>
+        <div class="input-container">
+          <label
+            data-i18n="masterScreen.customerManagement.Add.GSTNo"
+            class="titleLabel has-i18n"
+            for="mgmt_customermobileid">VAT No/ GST No/ TRN No:</label>
+          <input
+            data-i18n="[placeholder]masterScreen.customerManagement.Add.GSTNo"
+            class="has-i18n"
+            type="text"
+            name
+            id="mgmt_customergstid"
+            placeholder="VAT No/ GST No/ TRN No:" />
+        </div>
+        <div class="input-container">
+          <label
+            data-i18n="masterScreen.customerManagement.Add.Anniversary"
+            class="titleLabel has-i18n"
+            for="mgmt_customermobileid">Anniversary:</label>
+          <input
+            data-i18n="[placeholder]masterScreen.customerManagement.Add.Anniversary"
+            class="has-i18n"
+            type="text"
+            name
+            id="mgmt_customerannivid"
+            placeholder="Anniversary" />
+        </div>
+        <div class="input-container">
+          <label
+            data-i18n="masterScreen.customerManagement.Add.FSSAI"
+            class="titleLabel has-i18n"
+            for="mgmt_customermobileid">FSSAI:</label>
+          <input
+            data-i18n="[placeholder]masterScreen.customerManagement.Add.FSSAI"
+            class="has-i18n"
+            type="text"
+            name
+            id="mgmt_customerfssaiid"
+            placeholder="FSSAI" />
+        </div>
+        <div class="input-container">
+          <label
+            data-i18n="masterScreen.customerManagement.Add.panNo"
+            class="titleLabel has-i18n"
+            for="mgmt_customermobileid">PAN No:</label>
+          <input
+            data-i18n="[placeholder]masterScreen.customerManagement.Add.panNo"
+            class="has-i18n"
+            type="text"
+            name
+            id="mgmt_customerpanid"
+            placeholder="PAN No." />
+        </div>
+        <div class="input-container">
+          <label
+            data-i18n="masterScreen.customerManagement.Add.aadharNo"
+            class="titleLabel has-i18n"
+            for="mgmt_customermobileid">Aadhar No:</label>
+          <input
+            data-i18n="[placeholder]masterScreen.customerManagement.Add.aadharNo"
+            class="has-i18n"
+            type="text"
+            name
+            id="mgmt_customeradharid"
+            placeholder="Aadhar No." />
+        </div>
+        <div class="input-container">
+          <label
+            data-i18n="masterScreen.customerManagement.Add.Description"
+            class="titleLabel has-i18n"
+            for="mgmt_customermobileid">Description:</label>
+          <input
+            data-i18n="[placeholder]masterScreen.customerManagement.Add.Description"
+            class="has-i18n"
+            type="text"
+            name
+            id="mgmt_customerdescid"
+            placeholder="Description" />
+        </div>
+        <div class="input-container">
+          <label data-i18n="masterScreen.customerManagement.Add.UserType"
+            class="titleLabel has-i18n" for="mgmt_customerUserTypeId">
+            User Type:
+          </label>
+          <select class id="mgmt_customerUserTypeId">
+            <option
+              data-i18n
+              value="-1"
+              class="has-i18n"
+              disabled
+              selected
+              value>
+              -- Select User Type --
+            </option>
+          </select>
+        </div>
+        <div class="input-container">
+          <label data-i18n="masterScreen.customerManagement.Add.Comment"
+            class="titleLabel has-i18n" for="mgmt_customerCommentid">
+            Comment:
+          </label>
+          <input
+            data-i18n="[placeholder]masterScreen.customerManagement.Add.Comment"
+            class="has-i18n"
+            type="text"
+            name
+            id="mgmt_customerCommentid"
+            placeholder="Comment" />
+
+        </div>
+        <div class="input-container">
+          <label
+            data-i18n="masterScreen.customerManagement.Add.CreatedDate"
+            class="titleLabel has-i18n"
+            for="mgmt_customercreatedDate">
+            Created Date:
+          </label>
+
+          <input
+            data-i18n="[placeholder]masterScreen.customerManagement.Add.CreatedDate"
+            class="has-i18n"
+            type="text"
+            id="mgmt_customercreatedDate"
+            placeholder="Created Date" />
+
+        </div>
+        <div class="input-container">
+          <input type="checkbox" name id="createcustomerWalletcheck2" />
+          <label
+            data-i18n="masterScreen.customerManagement.Add.createWallet"
+            class="has-i18n"
+            for="createcustomerWalletcheck2">Create wallet</label>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button
+          data-i18n="masterScreen.customerManagement.AddHeading"
+          id="addCustomermgmtbutton"
+          type="button"
+          class="btn btn-secondary has-i18n">
+          Add
+        </button>
+        <button
+          data-i18n="masterScreen.customerManagement.Add.Close"
+          type="button"
+          class="btn btn-secondary has-i18n"
+          data-dismiss="modal">
+          Close
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  require('../js/CustomerManagement.js');
+</script>

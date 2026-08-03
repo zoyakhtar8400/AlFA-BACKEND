@@ -1,0 +1,617 @@
+.previewBody {
+  display: flex;
+  justify-content: baseline;
+  align-items: baseline;
+  text-align: baseline;
+  width: 300px;
+  max-width: 300px;
+  height: 400px;
+  overflow-y: scroll;
+  top: 0;
+}
+
+.preview-footer {
+  justify-content: center;
+}
+
+.preview-footer > div {
+  width: 250px;
+}
+
+.preview-footer-actions {
+  display: inline-block;
+  width: 200px;
+}
+
+.preview-margin-title {
+  width: 48%;
+}
+
+.counter-background {
+  background: blueviolet;
+  color: white;
+  padding: 5px;
+  border-radius: 16px;
+}
+
+.count-label {
+  font-weight: 600;
+  font-size: 18px;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+.preview-footer {
+  display: grid;
+}
+
+.previewContainer {
+  width: 100%;
+}
+
+/* .hotellogoDiv {
+  height: 225px;
+  width: 100%;
+  max-height: 150px;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.hotellogoDiv img {
+  height: 250px;
+  width: 205px;
+  max-height: 150px;
+  max-width: 205px;
+} */
+
+.hotellogoDiv {
+  /* width: 80mm; */
+  /* width: 69mm; */
+  /* max-width: 100%; */
+  /* margin: 0 auto; Center the div */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+.hotellogoDiv img {
+  width: 100%;
+  height: auto;
+  max-width: 80mm;
+  max-height: 53mm;
+  object-fit: contain;
+  display: block;
+}
+.previewContainer label {
+  font-size: 15px;
+  margin-bottom: 0.2rem;
+}
+
+.titleDiv,
+.addressDiv,
+#ordertypeLabel,
+.dateLabel,
+.footerDiv,
+.qrcodeDiv,
+#draftBilllabelid,
+#billnumberlabelid,
+#kotnumberlabelid,
+.scanqrTitle,
+.invoiceQrtitle,
+.appversionDiv,
+#orderidlabel,
+#irnNumberidlabel,
+#ordernumberlabelid,
+#externalorderidlabel,
+#parentorderidlabel,
+#orderPickupedAtIdlabel,
+#orderDeliveredAtIdlabel,
+#preOrderKotIdlabel {
+  display: flex;
+  justify-content: center !important;
+  align-items: center;
+  text-align: center;
+  font-weight: bold;
+  margin-left: auto;
+  margin-right: auto;
+  word-break: break-word;
+}
+
+#ordernumberlabelid {
+  /* font-size: 28px; */
+  font-size: 25px;
+}
+
+#billnumberlabelid {
+  /* font-size: 22px; */
+  font-size: 20px;
+}
+
+#kotnumberlabelid {
+  font-size: 16px;
+}
+
+.qrcodeContainer,
+.custom-qrcode-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  break-inside: avoid;
+  /* width: 95%; */
+}
+
+#zatcaQrcodeCanvascontainer {
+  text-align: center;
+}
+
+.qrcodeContainer img {
+  width: 170px;
+  height: 170px;
+}
+
+.tablenameLabel {
+  font-weight: bolder !important;
+}
+
+.grandtotaldiv label {
+  font-weight: bolder;
+  font-size: 1.2rem !important;
+}
+
+.grandtotalForignCurrencylabel {
+  font-weight: bold;
+  font-size: 0.9rem !important;
+}
+
+.sectionsWrapper {
+  display: grid;
+}
+
+.preview-label-for-total {
+  width: 100%;
+  text-align: end;
+}
+
+.bottom-dash {
+  /* border-bottom: var(--dash-size) dashed; */
+  border-bottom: var(--border-size) solid;
+}
+
+.bottom-border {
+  border-bottom: var(--border-size) solid;
+}
+
+.bold-label {
+  font-weight: 600;
+}
+
+#billnumberlabelid,
+#oldbilllabelid {
+  margin-bottom: 0;
+}
+
+/* #orderidlabel {
+    font-weight: normal;
+    font-size: 12px;
+    margin-bottom: 4px;
+} */
+
+.qrcodeDiv {
+  margin-top: 5px;
+}
+
+.addressDiv,
+.dateLabel,
+.footerDiv,
+.qrcodeDiv,
+.scanqrTitle,
+.appversionDiv,
+.invoiceQrtitle {
+  font-weight: normal;
+}
+
+.appversionDiv {
+  margin-top: 3px;
+  font-size: 14px;
+}
+
+.scanqrTitle,
+.invoiceQrtitle {
+  margin-top: 3px;
+  margin-bottom: 3px;
+  font-size: 14px;
+}
+
+.footerDiv {
+  margin-top: 3px;
+  font-size: 15px;
+}
+
+.parentWrapper {
+  font-weight: normal;
+  /* border-top: dashed;
+  border-bottom: dashed; */
+  border-top: var(--border-size) solid;
+  border-bottom: var(--border-size) solid;
+  border-width: var(--border-size);
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+
+.wrapper1,
+.payWrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  text-align: left;
+}
+
+#previewTable,
+#grpItemsByCat {
+  /* border-bottom: dashed; */
+  /* border-width: var(--dash-size); */
+  border-bottom: 1px solid;
+  font-size: 15px;
+  table-layout: fixed;
+  /* counter-reset: Serial; */
+}
+
+#previewTable tbody tr td:not(:first-of-type),
+#previewTable tbody tr:first-child th:not(:first-of-type) {
+  text-align: center;
+  /* width: 16%; */
+  word-wrap: break-word;
+}
+
+#previewTable tbody tr th:first-child,
+#previewTable tbody tr td:first-child {
+  width: 47%;
+  /* line-break: anywhere; */
+}
+
+#previewTable tbody tr td:nth-child(2) {
+  width: 1%;
+}
+#previewTable tbody tr th:nth-child(2) {
+  width: 11%;
+}
+#previewTable tbody tr {
+  white-space: pre-line;
+}
+
+#previewchargesListid,
+#previewitemchargesListid {
+  margin: 0;
+}
+
+#previewitemchargesListid li {
+  display: block;
+}
+
+#previewchargesListid {
+  list-style: none;
+}
+
+/* #previewTable tbody tr td:first-child:before {
+    counter-increment: Serial;
+    content: counter(Serial);
+} */
+
+#orderOtplabelid {
+  font-weight: 600;
+}
+
+.previewchargesWrapper,
+.customerInfodiv {
+  margin-top: 6px;
+  border-width: var(--dash-size);
+  width: 100%;
+}
+
+.previewchargesWrapper {
+  text-align: right !important;
+}
+
+.customerInfodiv {
+  padding-top: 3px;
+  padding-bottom: 3px;
+  /* border-top: dashed; */
+  border-top: var(--border-size) solid;
+  /* border-bottom: dashed;
+    border-width: var(--dash-size); */
+}
+
+.deliveryboyInfodiv {
+  margin-top: 6px;
+  border-width: var(--dash-size);
+  width: 100%;
+}
+
+#previewchargesListid {
+  padding: 0;
+}
+
+#previewchargesListid li {
+  width: 100%;
+  /* justify-content: right !important; */
+}
+
+#previewitemchargesListid li {
+  width: 100%;
+  /* justify-content: right !important; */
+}
+
+/* #previewchargesListid li .chargename {
+    width: 60%; */
+
+/* max-width: 70%;
+    
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap; */
+
+/* } */
+
+.taxDiv {
+  height: fit-content;
+  text-align: right;
+}
+
+.taxnamediv {
+  text-align: right !important;
+  height: fit-content;
+}
+
+/* .totalDiv,
+.grandtotaldiv,
+.tax_divided_div1,
+.tax_divided_div2,
+.discountDiv {
+  text-align: right;
+  height: fit-content;
+} */
+
+/* .discountDiv label {
+  width: fit-content;
+  text-align: right;
+} */
+
+/* #previewchargesListid li {
+  display: block;
+} */
+
+.grandtotalwordclass {
+  /* text-align: right; */
+  font-style: italic;
+  font-size: 15px;
+}
+
+.roundedTotalcontainer {
+  text-align: right;
+}
+
+.customerInfodiv label {
+  max-width: 250px;
+  word-wrap: break-word;
+  display: block;
+  margin-bottom: 0rem;
+}
+
+.deliveryboynameLabel {
+  text-align: end;
+}
+
+.item-charges-label {
+  font-size: smaller !important;
+}
+
+.previewmiscContainer {
+  border-width: var(--dash-size);
+  font-size: 0.8rem;
+}
+
+.previewmiscContainer:empty {
+  display: none !important;
+}
+
+.top-dashed {
+  /* border-top: dashed;
+  border-width: var(--dash-size); */
+  border-top: var(--border-size) solid;
+}
+
+.botton-dashed {
+  /* border-bottom: dashed;
+  border-width: var(--dash-size); */
+  border-bottom: var(--border-size) solid;
+}
+
+#billpreviewcustomerpaidContainer {
+  display: flex;
+  flex-direction: column;
+  margin-top: 5px;
+  /* border-top: var(--dash-size) dashed; */
+  border-top: var(--border-size) solid;
+}
+
+#totaldivid {
+  float: right;
+}
+
+.section-total-items {
+  float: right;
+}
+
+#kotitemNoteId {
+  display: inline-block;
+  max-width: 200px;
+  word-wrap: break-word;
+}
+
+/* #storeinfoField4 {
+  font-weight: bold;
+} */
+
+#totalqtylableidforbothlang,
+#totalamountlableidforbothlang {
+  display: none;
+  white-space: pre-line;
+}
+
+.orderItemBysection,
+.bothlangelem,
+#grandtotallabelidforbothlang {
+  white-space: pre-line;
+}
+
+#sectionwisegrandtotalidforbothlang,
+#grandtotallabelidforbothlang,
+#sectionwisegrandtotalidforbothlang,
+#totalwithouttaxinbothlangid,
+#totalkotitemqtyidforbothlang {
+  display: none;
+}
+
+/* th {
+  white-space: nowrap
+} */
+
+#billpreviewtipAmountlabelid,
+#billpreviewtipAmountlabelidforsection {
+  display: block;
+  /* border-top: var(--dash-size) dashed; */
+  border-top: var(--border-size) solid;
+}
+
+#footerDivid,
+#storeinfoField5,
+#storeinfoField6,
+#billprintFooter5,
+#billprintFooter6 {
+  border-top: var(--border-size) solid;
+  border-bottom: var(--border-size) solid;
+  margin-bottom: 0px;
+  font-weight: bold;
+}
+
+#storeinfoField6,
+#billprintFooter6 {
+  margin-top: -1px;
+}
+#taxlistContainerid {
+  display: flex;
+  flex-direction: column;
+  align-items: end;
+}
+
+.qtyAndTotalSection {
+  display: flex;
+  justify-content: space-between;
+}
+
+#taxlistContainerid {
+  font-size: 15px;
+}
+
+#taxDivid {
+  display: none;
+}
+
+.cancelledItemAddonsForPrint {
+  text-decoration: line-through;
+  font-size: 14px;
+}
+
+.cancelledItemForPrint {
+  text-decoration: line-through;
+}
+
+#orderNoteDivId {
+  /* border-top: dashed;
+  border-width: var(--dash-size); */
+  border-top: var(--border-size) solid;
+}
+
+#onlineorderTagsContainerid,
+#kotonlineorderTagsContainerid {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  flex-direction: column;
+  font-size: initial !important;
+}
+
+.centerTextAlign {
+  text-align: center !important;
+}
+
+.rightTextAlign {
+  text-align: right !important;
+}
+
+.lefTextAlign {
+  text-align: left !important;
+}
+
+.billMiscDetailsWrapper {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  /* flex-direction: column; */
+  column-gap: 30px;
+  flex-wrap: wrap;
+}
+
+.billMiscDetailsWrapper label {
+  min-width: 20px;
+}
+#totalQtyAndAmountDivId {
+  display: flex;
+  /* justify-content: space-between; */
+}
+
+#totalQtyAndAmountLabel {
+  width: 47%;
+  font-weight: bold;
+}
+
+#totalQtylabel {
+  width: 11%;
+  text-align: right;
+}
+
+#totalAmountlabel {
+  text-align: right;
+  /* float: right; */
+  width: 42%;
+}
+
+.duePaymentContainer {
+  width: 100% !important;
+  max-width: 100% !important;
+}
+
+#zatcaQrcodeCanvascontainer {
+  display: none;
+}
+
+.bill-preview-item-title {
+  word-break: break-word;
+}
+
+#hotelnameID {
+  white-space: pre-line;
+}
+
+.billSummaryPrint {
+  display: flex;
+  justify-content: space-between;
+}
+
+#orderidBarcodeCanvasid {
+  width: 250px !important;
+}

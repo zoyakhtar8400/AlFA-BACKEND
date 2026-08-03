@@ -1,0 +1,81 @@
+ul {
+  list-style: none;
+}
+
+ul li {
+  margin-left: 3px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.inlineFlexclass {
+  display: inline-flex;
+}
+
+.oldkotContainer {
+  min-height: 300px;
+}
+
+.checksWrapper,
+.actionsWrapper {
+  display: flex;
+  justify-content: left;
+  align-items: center;
+}
+
+.tableWrapper {
+  min-height: 250px;
+  max-height: 250px;
+  overflow-y: auto;
+}
+
+#oldbillTable tbody td input[type='checkbox'] + label:before {
+  width: 23px;
+  height: 23px;
+}
+
+.actionsWrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.oldkotContainer input[type='button'] {
+  width: 16%;
+}
+
+.oldkot-swal-action {
+  z-index: inherit !important;
+}
+
+.oldkotItemContainer::-webkit-scrollbar {
+  width: 5px !important;
+}
+
+.olditem-qty-row {
+  text-align: center;
+}
+.preOrderReportItemInfo {
+  display: block !important;
+}
+#oldkotModal .btn-close {
+  background-color: #dc3545 !important;
+  border-radius: 50%;
+  opacity: 1;
+}
+/* ✅ ONLY FOR OLD KOT SCREEN */
+.oldkotContainer .reason-error-highlight {
+  border: 2px solid red !important;
+  background-color: #ffe6e6 !important;
+}
+
+.oldkotContainer .reason-error-highlight {
+  border: 2px solid red !important;
+  background-color: #ffe6e6 !important;
+}
+.oldkotContainer .reason-error-highlight {
+  border: 2px solid red !important;
+  background-color: #ffe6e6 !important;
+  box-shadow: 0 0 6px red !important;
+}

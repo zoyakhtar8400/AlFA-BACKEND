@@ -1,0 +1,411 @@
+
+
+:root
+{
+  --main-padding: 30px;
+  --card-width: 40vw;
+  --fields-width: 22vw;
+}
+.card {
+  display: flex;
+}
+.loginimages {
+  background-image: url(../assets/loginpath.png);
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+.loginWindowwrapper {
+  height: 90vh;
+  display: flex;
+  width: 100%;
+}
+.logincard {
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.login-title {
+  text-align: center;
+  color: #1c4934;
+  margin: 10px 20px;
+} /* Match other .name-field behavior */
+.mode-button-wrapper {
+  width: 74.5%;
+  max-width: 545px;
+  min-width: 200px;
+  margin: 5px auto;
+  box-sizing: border-box;
+}
+.name-field1 {
+  width: 75.5%;
+  max-width: 545px;
+  min-width: 200px;
+  margin: 0 auto;
+  box-sizing: border-box;
+}
+.mode-selection {
+  width: 100%; /* Match exactly to wrapper width */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #f5f8fb;
+  border-radius: 6px;
+  padding: 4px;
+  gap: 5px;
+  height: 40px;
+  box-sizing: border-box;
+  margin-top: 15.5px;
+  margin-bottom: 17px;
+}
+.mode-selection button {
+  line-height: 1;
+  flex: 1;
+  min-width: 0; /* Prevent button from forcing container width */
+  height: 100%;
+  border: none;
+  background: transparent;
+  min-width: 0; /* Prevent button from forcing container width */
+  font-size: clamp(8px, 6vw, 10px);
+  font-weight: 500;
+  color: #6b7280;
+  border-radius: 4px;
+  transition: all 0.2s ease-in-out;
+  cursor: pointer;
+  margin-top: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-top: 16px;
+} /* Active button */
+.mode-selection button.active {
+  background: #ffffff;
+  color: #111827;
+  font-weight: 600;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+.mode-selection button:hover {
+  background-color: #ffffff;
+}
+.mode-selection button:focus,
+.mode-selection button:active {
+  outline: none;
+} /* Mid-screen adjustments */ /* ✅ Mobile: Up to 761px */
+@media screen and (max-width: 761px) {
+  .mode-selection {
+    height: 36px;
+  }
+  .mode-selection button {
+    font-size: 10px;
+  }
+} /* ✅ Tablet & Small Desktop: 768px to 1194px */
+@media screen and (min-width: 768px) and (max-width: 1194px) {
+  .name-field1,
+  .mode-button-wrapper {
+    width: 75.5% !important;
+    max-width: 547px !important;
+    margin: 0 auto;
+    box-sizing: border-box;
+  }
+  .mode-selection {
+    width: 100%;
+    padding: 2px 4px;
+    gap: 4px;
+    box-sizing: border-box;
+  }
+  .mode-selection button {
+    font-size: clamp(9px, 5vw, 10px);
+    padding: 0 4px;
+    min-width: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    height: 31.5px;
+  }
+}
+button,
+.button {
+  margin-bottom: 1rem;
+}
+.password-field input,
+.name-field input {
+  width: 70% !important;
+}
+.login-button button {
+  width: 74% !important;
+  margin: 0;
+  color: white !important;
+  background-color: #1c4934;
+}
+.login-button {
+  display: flex !important;
+  justify-content: center;
+}
+.password-field,
+.name-field {
+  text-align: center;
+  display: flex !important;
+  justify-content: center;
+  margin: 5px;
+}
+.show-password-div {
+  width: 76%;
+  display: flex;
+  margin: auto;
+  justify-content: flex-end; /* margin-right: 70px; */
+}
+.show-password-fa {
+  margin-left: -30px;
+  position: relative;
+  right: 0;
+}
+.password-field {
+  display: flex;
+  align-items: center;
+} /* Buttons –––––––––––––––––––––––––––––––––––––––––––––––––– */
+.button,
+button,
+input[type='submit'],
+input[type='reset'],
+input[type='button'] {
+  display: inline-block;
+  padding: 0 30px;
+  height: 38px;
+  width: var(--fields-width); /* min-width: 200px; */
+  color: #555;
+  text-align: center;
+  font-size: 10px;
+  font-weight: 600;
+  line-height: 38px;
+  letter-spacing: 0.1rem;
+  text-transform: uppercase;
+  text-decoration: none;
+  white-space: nowrap;
+  background-color: transparent; /* border-radius: 4px; */
+  border: 1px solid #bbb;
+  cursor: pointer;
+  box-sizing: border-box;
+  margin-top: var(--main-padding);
+}
+input[type='email'],
+input[type='number'],
+input[type='search'],
+input[type='text'],
+input[type='tel'],
+input[type='url'],
+input[type='password'],
+textarea,
+select {
+  height: 38px;
+  width: var(--fields-width);
+  min-width: 200px;
+  padding: 6px 10px;
+  font-size: 14px;
+  background-color: #fff;
+  border: 1px solid #d1d1d1; /* border-radius: 4px; */
+  box-shadow: none;
+  box-sizing: border-box;
+}
+input[type='email']:focus,
+input[type='number']:focus,
+input[type='search']:focus,
+input[type='text']:focus,
+input[type='tel']:focus,
+input[type='url']:focus,
+input[type='password']:focus,
+textarea:focus,
+select:focus {
+  border: 1px solid #33c3f0;
+  outline: 0;
+}
+input[type='submit'] {
+  color: #fff;
+  background-color: #33c3f0;
+  border-color: #33c3f0;
+} /** Label CSS */
+label,
+legend {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-size: 12px;
+  font-weight: 600;
+  color: rgb(31, 110, 134);
+}
+.forgot-pass-label {
+  float: right;
+  margin-right: 40px;
+  padding-right: 10px;
+}
+.tmbill-logo {
+  text-align: center;
+  margin: 20px 0;
+} /* .img-circle { height: 100px; width: 280px; } */
+.img-circle {
+  /* height: 120px; width: 269px; */
+  width: 38%; /* width: 23% */
+}
+body {
+  height: 100vh;
+  display: flex;
+}
+.versionDivcontainer {
+  display: flex;
+  justify-content: center;
+  padding: 15px;
+}
+.versionDivcontainer label {
+  margin-bottom: 0;
+}
+.requestdemoContainer {
+  display: flex;
+  justify-content: center;
+  height: 35px;
+  margin-top: -10px;
+}
+.contact-us {
+  margin: 0;
+  width: fit-content;
+  background-color: #1c4934;
+  color: white;
+  border: none;
+}
+.requestdemoContainer .request-demo-button {
+  width: 80px; /* border-radius: 20px; */ /* border: 2px solid mediumseagreen; */ /* color: mediumseagreen; */
+  margin: 0;
+  width: fit-content;
+  margin-left: 3px;
+  margin-right: -3px;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+.getintouch {
+  background: indianred;
+  font-size: 1.3rem;
+  padding: 0.5rem;
+  border-radius: 27px;
+  color: white;
+}
+.form-icon {
+  background-color: #1c4934;
+  color: white !important;
+  padding: 10px;
+} /** Request form **/
+.inline {
+  display: inline-flex;
+  width: 100%;
+}
+.inline input[type='text'] {
+  margin: 5px;
+}
+.request-button {
+  border: 2px solid mediumseagreen;
+  background-color: mediumseagreen;
+  color: white;
+}
+.request-info-container input {
+  width: 50%;
+  margin: 5px;
+}
+.actionsDiv {
+  width: 100%;
+  justify-content: space-around;
+}
+.actionsDiv button {
+  width: 30%;
+}
+.actionsDiv {
+  display: inline-flex;
+}
+.swal2-actions button {
+  width: fit-content !important;
+  height: max-content !important;
+}
+.getintouch-div input[type='text'],
+.getintouch-div select {
+  width: 99% !important;
+} /*** This is a check box css **/
+input[type='checkbox'] + label {
+  display: flex;
+  margin: 0.2em;
+  cursor: pointer;
+  align-items: center;
+  padding: 0.2em;
+}
+input[type='checkbox'] {
+  display: none;
+}
+input[type='checkbox'] + label:before {
+  font-family: FontAwesome;
+  content: '\f00c';
+  border: 1px solid #bdbdbd;
+  border-radius: 0.2em;
+  display: inline-block;
+  padding-left: 0.1em;
+  padding-bottom: 0.3em;
+  vertical-align: bottom;
+  color: transparent;
+  transition: 0.2s;
+  margin-right: 0.5em;
+  height: 20px;
+  width: 20px;
+}
+input[type='checkbox'] + label:active:before {
+  transform: scale(0);
+}
+input[type='checkbox']:checked + label:before {
+  background-color: rgb(36, 117, 90);
+  border-color: rgb(36, 117, 90);
+  color: #fff; /* padding-left: 5px; */
+}
+input[type='checkbox']:disabled + label:before {
+  transform: scale(1);
+  border-color: #aaa;
+}
+input[type='checkbox']:checked:disabled + label:before {
+  transform: scale(1);
+  background-color: #bfb;
+  border-color: #bfb;
+}
+@font-face {
+  font-family: FontAwesome;
+  src: url(../css/fontawesome/6.5.1/webfonts/fa-solid-900.woff2);
+}
+.callmeback {
+  color: white !important;
+  background-color: #1c4934;
+}
+.swal2-actions button {
+  line-height: normal !important;
+}
+.swal2-actions .swal2-confirm {
+  height: fit-content !important;
+  line-height: normal !important;
+  color: white !important;
+  background-color: #1c4934 !important;
+}
+.modal-backdrop {
+  /* Set display to none to disable the backdrop */
+  display: none !important;
+}
+.hide {
+  display: none !important;
+}
+.masterposSelect {
+  width: 70%;
+}
+#masterposSelectwrapper {
+  display: none;
+}
+#loginSceenvirtualkeyboard {
+  font-size: 2em;
+}
+.fa-keyboard {
+  color: #1e4936;
+}
+#loginSceenvirtualkeyboard {
+  cursor: pointer;
+}
+.mode-selection button.card1 {
+  cursor: not-allowed;
+  opacity: 0.5;
+}

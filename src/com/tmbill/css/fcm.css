@@ -1,0 +1,307 @@
+.tmb-fcm-root {
+  background: #f4f6f5;
+  padding: 40px;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.tmb-fcm-container {
+  display: flex;
+  justify-content: center;
+}
+
+.tmb-fcm-card {
+  width: 520px;
+  background: #ffffff;
+  border-radius: 14px;
+  padding: 20px 32px 32px 32px;
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.08);
+  border: 1px solid #e6ece8;
+}
+
+/* HEADER */
+.tmb-fcm-header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 24px;
+}
+
+.tmb-fcm-title {
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+
+.tmb-fcm-subtitle {
+  font-size: 13px;
+  color: #7a8c83;
+  max-width: 300px;
+}
+
+.tmb-fcm-badge {
+  padding: 4px 10px;
+  border-radius: 16px;
+  font-size: 10px;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  height: 26px;
+}
+
+.tmb-fcm-badge-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #999;
+}
+.tmb-fcm-badge-ready {
+  background: #e8f1ff;
+  color: #267af6;
+}
+.tmb-fcm-badge-ready .tmb-fcm-badge-dot {
+  background: #267af6;
+}
+.tmb-fcm-badge-success {
+  background: #1db87a;
+  color: white;
+}
+
+.tmb-fcm-badge-failed {
+  background: #fce8e8;
+  color: #d23c3c;
+}
+
+/* STEPS */
+.tmb-fcm-step {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 20px;
+  position: relative;
+  background: transparent !important;
+}
+
+.tmb-fcm-step-line {
+  position: absolute;
+  left: 14px;
+  top: 30px;
+  bottom: -20px;
+  width: 2px;
+  background: #e2ebe6;
+}
+
+.tmb-fcm-step-icon {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  border: 2px solid #e2ebe6;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.tmb-fcm-step-pending {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #d9e1dc;
+}
+
+.tmb-fcm-step-name {
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.tmb-fcm-step-status {
+  font-size: 11px;
+  color: #dc3545;
+  margin-top: 2px;
+}
+
+/* ALERT */
+.tmb-fcm-alert {
+  display: none;
+  background: #fff4f4;
+  border-radius: 8px;
+  padding: 12px;
+  margin-bottom: 20px;
+  gap: 10px;
+  align-items: center;
+}
+
+.tmb-fcm-alert.show {
+  display: flex;
+}
+
+.tmb-fcm-alert-title {
+  font-weight: 600;
+  font-size: 13px;
+}
+
+.tmb-fcm-alert-desc {
+  font-size: 12px;
+  opacity: 0.8;
+}
+
+/* PROGRESS */
+.tmb-fcm-progress-section {
+  margin-top: 20px;
+}
+
+.tmb-fcm-progress-label {
+  font-size: 10px;
+  font-weight: 600;
+  color: #7a8c83;
+  margin-bottom: 6px;
+}
+
+.tmb-fcm-progress-top {
+  display: flex;
+  justify-content: space-between;
+  font-size: 13px;
+  margin-bottom: 8px;
+}
+
+.tmb-fcm-progress-bar {
+  height: 6px;
+  background: #e2ebe6;
+  border-radius: 50px;
+  overflow: hidden;
+}
+
+#tmbFcmProgressFill {
+  height: 100%;
+  width: 0%;
+  background: #1db87a;
+  transition: width 0.4s ease;
+}
+
+/* FOOTER */
+.tmb-fcm-footer {
+  margin-top: 24px;
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+.tmb-fcm-btn {
+  padding: 8px 18px;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 590;
+}
+
+.tmb-fcm-btn-ghost {
+  background: #dc3545;
+  color: white;
+}
+
+.tmb-fcm-btn-primary {
+  background: #1db87a;
+  color: white;
+}
+
+.tmb-fcm-btn-primary:hover {
+  background: #179b65;
+}
+/* FCM Back Button (same structure as expense) */
+/* Header bar alignment (right side like expense) */
+.tmb-fcm-header-bar {
+  display: flex;
+  justify-content: flex-end;
+  padding: 8px 10px 2px 0;
+}
+
+/* Back button */
+/* Move back button to right */
+.tmb-fcm-back-btn {
+  margin-left: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 62px;
+  min-width: 62px;
+  height: 36px;
+
+  border-radius: 5px;
+  border: 1px solid #6c757d;
+  background-color: #ffffff;
+  color: #6c757d;
+
+  cursor: pointer;
+}
+
+.tmb-fcm-back-btn i {
+  font-size: 14px;
+  line-height: 1;
+}
+
+.tmb-fcm-back-btn:hover {
+  color: #ffffff;
+  background-color: #6c757d;
+  border-color: #6c757d;
+}
+.tmb-fcm-card {
+  margin-left: 8px;
+  margin-top: 9px;
+}
+.tmb-fcm-spinner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.active .tmb-fcm-spinner i {
+  color: #1db87a;
+  font-size: 14px;
+}
+.done .tmb-fcm-step-line {
+  background: #1db87a;
+}
+.done .tmb-fcm-step-icon {
+  border-color: #1db87a;
+  color: #1db87a;
+}
+.done .tmb-fcm-step-status {
+  color: #1db87a;
+}
+
+.active .tmb-fcm-step-status {
+  color: #1db87a;
+}
+.tmb-fcm-step:not(.done):not(.active):not(.failed) .tmb-fcm-step-icon {
+  border-color: #f8ac43;
+}
+
+.tmb-fcm-step:not(.done):not(.active):not(.failed) .tmb-fcm-step-pending {
+  background: #f8ac43;
+}
+
+.tmb-fcm-step:not(.done):not(.active):not(.failed) .tmb-fcm-step-status {
+  color: #f8ac43;
+}
+
+.tmb-fcm-step:not(.done):not(.active):not(.failed) .tmb-fcm-step-line {
+  background: #f8ac43;
+}
+
+.tmb-fcm-step.failed .tmb-fcm-step-icon {
+  border-color: tomato !important;
+}
+
+.tmb-fcm-step.failed .tmb-fcm-step-pending {
+  background: tomato !important;
+}
+
+.tmb-fcm-step.failed .tmb-fcm-step-status {
+  color: tomato !important;
+}
+
+.tmb-fcm-step.failed .tmb-fcm-step-line {
+  background: tomato !important;
+}

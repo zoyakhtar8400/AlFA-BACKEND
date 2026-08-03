@@ -1,0 +1,72 @@
+/**
+This is a css for Table's in window
+**/
+
+table.dataTable thead th,
+table.dataTable thead td {
+  border-bottom: 1px solid transparent !important;
+}
+
+table.dataTable tfoot th,
+table.dataTable thead td {
+  border: 1px solid transparent !important;
+}
+
+table.dataTable tfoot tr th {
+  padding: 5px !important;
+}
+
+table.dataTable td {
+  overflow: hidden;
+  /* this is what fixes the expansion */
+  text-overflow: ellipsis;
+  /* not supported in all browsers, but I accepted the tradeoff */
+  white-space: nowrap;
+}
+
+.table-header {
+  /* background-color: #67757C; */
+  color: #605c5c;
+  text-align: center;
+  font-size: 13px;
+  font-weight: normal !important;
+}
+table thead {
+  /* background-color: #67757C; */
+  color: #605c5c;
+  text-align: center;
+  font-size: 14px;
+  font-weight: normal !important;
+}
+
+/* .table thead tr th {
+    font-weight: normal !important;
+} */
+
+table tbody tr {
+  background-color: transparent !important;
+}
+
+.dataTables_scrollHeadInner {
+  width: 100% !important;
+}
+
+.dataTables_scrollHeadInner table {
+  width: 100% !important;
+}
+
+/* Hide search boxes */
+
+#salesreportTableid_filter,
+#customermgmtDattable_filter,
+#wallettableID_filter {
+  display: none !important;
+}
+
+#orderduepaytransactionstableID_wrapper .dataTables_scrollHeadInner {
+  width: 100% !important;
+}
+
+#orderduepaytransactionstableID_wrapper .dataTables_scrollHeadInner table {
+  width: 100% !important;
+}

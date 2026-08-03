@@ -1,0 +1,3188 @@
+<div class="tablesParentdivclass" id="tablesParentdivclassid">
+  <div class="mainWindow">
+    <div id="deptcontainer">
+      <div
+        class="d-flex align-content-start flex-wrap"
+        id="departmentsContainer"></div>
+    </div>
+    <div class="tableDiv" id="tableDiv_container">
+      <div class="table_container" id="tableContainer">
+        <!-- d-flex align-content-start flex-wrap -->
+        <div class="d-flex align-content-start flex-wrap" id="tablesContainer">
+          <label
+            data-i18n="orderScreen.UhOhNoTablesForCustomers"
+            id="no-tables-id"
+            class="no_tables_label has-i18n"
+            for>
+            Uh-Oh! No Tables For Customers.</label>
+        </div>
+      </div>
+    </div>
+    <div class="actionDiv">
+      <!-- fas fa-exchange-alt -->
+      <!-- <span
+        title="Switch View"
+        id="switchviewButtonid"
+        class="material-symbols-outlined switchview pb-1"
+        >grid_view</span
+      > -->
+      <img
+        src="../assets/images/grid_view.png"
+        alt="Grid View"
+        title="Switch View"
+        id="switchviewButtonid"
+        class="live-status-button has-i18n"
+        data-i18n="[title]orderScreen.switchView"
+        title="Switch View" />
+
+      <i
+        class="fa fa-search fa-2x has-i18n"
+        id="searchTablebuttonid"
+        data-i18n
+        title="Search Order"
+        aria-hidden="true"></i>
+
+      <select class="orderstateSelect" id="orderstateSelectid">
+        <option
+          data-i18n="orderScreen.selectOrderState"
+          class="has-i18n"
+          disabled
+          selected
+          value>
+          Order State
+        </option>
+      </select>
+      <input
+        title="Filter Pre-Orders by delivery date"
+        type="text"
+        id="preorderdatefilter"
+        placeholder="Filter Pre-Order" />
+      <input
+        data-i18n="[value]orderScreen.filtersTables"
+        class="has-i18n"
+        type="button"
+        value="Filter tables"
+        id="filterButton"
+        data-toggle="popover"
+        data-placement="bottom" />
+
+      <input
+        data-i18n="[value]orderScreen.changeTable"
+        class="has-i18n input"
+        id="changeTablebutton"
+        type="button"
+        value="Change Table" />
+      <!-- <input
+        data-i18n=""
+        class="has-i18n input"
+        id="changeOredrTypebutton"
+        type="button"
+        value="Change Order Type"
+      /> -->
+      <input
+        data-i18n="[value]orderScreen.addCustomer"
+        class="has-i18n"
+        type="button"
+        id="openCustomerbtn"
+        value="Add Customer" />
+      <input
+        data-i18n="[value]common:order.Refresh"
+        id="refreshButton"
+        class="searchItem_byname has-i18n"
+        type="button"
+        value="Refresh" />
+      <!-- <input
+        data-i18n="[value]common:order.Refresh"
+        id="customerDetailsButton"
+        class="searchItem_byname has-i18n"
+        type="button"
+        value="Customer Details"
+      /> -->
+      <!-- <input
+        data-i18n="[value]orderScreen.loadMenu"
+        class="has-i18n loadmentButton"
+        id="syncButton"
+        type="button"
+        value="Load Menu"
+      /> -->
+      <!-- <input data-i18n="" class="has-i18n" id="paymentsList" type=""
+                value="">  -->
+      <i
+        class="fas fa-cash-register fa-2x has-i18n"
+        id="openCashDrawerbuttonid"
+        data-i18n="[title]orderScreen.openCashDrawer"
+        title="Open cash drawer"
+        aria-hidden="true"></i>
+
+      <i
+        class="fa fa-credit-card fa-2x has-i18n"
+        style="font-size: 23px;"
+        id="paymentsList"
+        aria-hidden="true"
+        data-i18n="[title]orderScreen.payments"
+        title="Payments"></i>
+
+      <i
+        class="fa fa-bell has-i18n"
+        style="font-size: 23px; margin: 4px"
+        id="waiterNotificationsid"
+        data-i18n="[title]orderScreen.waiterNotifications"
+        title="Waiter notification"></i>
+
+      <img
+        src="../assets/images/live-news.png"
+        alt="Live Status"
+        id="livetstatusButton"
+        class="live-status-button has-i18n"
+        data-i18n="[title]orderScreen.liveStatus"
+        title="Live Status" />
+
+    </div>
+    <div class="searchDiv">
+      <i
+        data-i18n="[title]orderScreen.liveSupport"
+        title="Live support"
+        id="help-button-id"
+        class="fas fa-question-circle getintouch has-i18n"></i>
+      <!-- <input
+        data-i18n="[placeholder]orderScreen.searchTable"
+        class="searchTable has-i18n"
+        id="searchTablebycustomerphone"
+        type="text"
+        name="FirstName"
+        placeholder="Search by phone"
+      /> -->
+      <input
+        data-i18n="[placeholder]orderScreen.searchTable"
+        class="searchTable has-i18n"
+        id="searchTablebyname"
+        type="text"
+        name="FirstName"
+        placeholder="Search Table" />
+      <input
+        data-i18n="[placeholder]orderScreen.searchByCode"
+        class="searchItem_bycode has-i18n"
+        id="searchitembyCode"
+        type="text"
+        name="FirstName"
+        placeholder="Search by Code" />
+      <div class="searchWrapper" id="serachItemBynamewrapper">
+        <input
+          data-i18n="[placeholder]orderScreen.searchByName"
+          class="searchItem_byname form-control input-sm has-i18n"
+          type="text"
+          id="searchByname_item"
+          placeholder="Search by Name" />
+        <i class="fas fa-search" aria-hidden="true"></i>
+      </div>
+      <input
+        data-i18n="[placeholder]orderScreen.Delete"
+        id="deleteItembyindex"
+        class="deleteItem_bycode has-i18n"
+        type="number"
+        name="FirstName"
+        placeholder="Delete" />
+      <i
+        data-i18n="[title]orderScreen.Synced"
+        title="Synced"
+        id="syncIndicatorid"
+        class="fas fa-sync-alt sync-indicator has-i18n"
+        aria-hidden="true"></i>
+
+    </div>
+    <div class="itemsDiv" id="itemsDivid">
+      <div class="treeviewDiv" id="tree"></div>
+      <div class="itemviewDiv itemviewDivContainer" id="itemviewContainer">
+        <label
+          data-i18n="orderScreen.ItWillTakeOnlyFewSecondsToAddMenu"
+          id="no_items_label_id"
+          class="no_items_label has-i18n"
+          for>
+          It'll take only few seconds to add Menu.</label>
+      </div>
+    </div>
+  </div>
+  <div class="parentTabs tabsWrappper" id="parentTabsid">
+    <ul
+      class="nav nav-tabs mainsectionTabs"
+      role="tablist"
+      id="ordermainsectionTabsid">
+      <li class="nav-item">
+        <a
+          data-i18n="orderScreen.dineIn"
+          class="nav-link has-i18n"
+          id="dineintabId"
+          href="#dineintabdivId"
+          role="tab"
+          data-toggle="tab"
+          orderType="dinein">Dine-In</a>
+      </li>
+      <li class="nav-item">
+        <a
+          data-i18n="orderScreen.PICKUP"
+          class="nav-link has-i18n"
+          id="takeawaytabID"
+          href="#takeawaytabdivID"
+          role="tab"
+          data-toggle="tab"
+          orderType="pickup">PickUp</a>
+      </li>
+      <li class="nav-item">
+        <a
+          data-i18n="orderScreen.DELIVERY"
+          class="nav-link has-i18n"
+          id="deliverytabID"
+          href="#deliverytabdivID"
+          role="tab"
+          data-toggle="tab"
+          orderType="delivery">Delivery</a>
+      </li>
+      <li class="nav-item">
+        <a
+          data-i18n="orderScreen.quickBill"
+          class="nav-link has-i18n"
+          id="quickbilltabID"
+          href="#quickbilltabdivID"
+          role="tab"
+          data-toggle="tab"
+          orderType="quickbill">Quick Bill</a>
+      </li>
+    </ul>
+    <div class="tab-content tabsContainer">
+      <div
+        role="tabpanel"
+        class="tab-pane fade in active dineinTab"
+        id="dineintabdivId">
+        <div class="tabs">
+          <ul class="nav nav-tabs sectionTabs" role="tablist">
+            <li class="nav-item" id="kot-nav-item-id">
+              <a
+                data-i18n="orderScreen.tabKOTlabel"
+                class="nav-link has-i18n"
+                id="kottabID"
+                href="#tab1"
+                role="tab"
+                data-toggle="tab">Order/KOT</a>
+            </li>
+            <li class="nav-item">
+              <a
+                data-i18n="orderScreen.Billing"
+                class="nav-link has-i18n"
+                id="billtabID"
+                href="#tab2"
+                role="tab"
+                data-toggle="tab">Billing</a>
+            </li>
+            <a data-i18n="[title]orderScreen.changeOrderType"
+              class="fa fa-exchange changeordertypeicon has-i18n"
+              aria-hidden="true"
+              id="changeordertypeid"
+              title="Change Order Type"></a>
+
+            <a data-i18n="[title]orderScreen.changeOrderType"
+              class="fa fa-exchange changeordertypeicon has-i18n"
+              aria-hidden="true"
+              id="changeordertypeAfterSaveKotid"
+              title="Change Order Type"></a>
+
+          </ul>
+          <div class="tab-content tabsContainer">
+            <div
+              role="tabpanel"
+              class="tab-pane fade in active kotTab"
+              id="tab1">
+              <div class="kotcontentDiv">
+                <div class="kotLables-div">
+                  <label
+                    data-i18n="[title]orderScreen.currentTable"
+                    title="Current table"
+                    class="currentTablename has-i18n"
+                    id="currentTablename"></label>
+                  <label
+                    data-i18n="orderScreen.KOT"
+                    data-i18n="common:order.KOT"
+                    for
+                    class="kottitleLabel has-i18n">KOT</label>
+                  <label
+                    data-i18n="[title]orderScreen.nextKot"
+                    title="Next KOT"
+                    class="has-i18n"
+                    id="nextkotnumberLabel"></label>
+
+                  <button
+                    data-i18n="controller:remoteKotController.RemoteKot"
+                    id="remoteKot"
+                    class="btn has-i18n">
+                    Remote KOT
+                  </button>
+                </div>
+                <div class="kottableDiv">
+                  <table
+                    class="table table-striped table-bordered table-sm"
+                    id="kotTable">
+                    <thead class="mdb-color darken-3 table-header">
+                      <tr>
+                        <th class="w-32px"></th>
+                        <th
+                          data-i18n="orderScreen.KOTSection.itemName"
+                          class="has-i18n">
+                          Item Name
+                        </th>
+                        <th
+                          data-i18n="orderScreen.KOTSection.QTY"
+                          class="has-i18n">
+                          Qty
+                        </th>
+                        <!-- <th data-i18n="orderScreen.KOTSection.Price" class="has-i18n">Price</th> -->
+                        <th
+                          data-i18n="orderScreen.KOTSection.Amount"
+                          class="has-i18n">
+                          Amount
+                        </th>
+                      </tr>
+                    </thead>
+                    <tbody></tbody>
+                  </table>
+                </div>
+                <div class="kotCustomer-div">
+                  <!-- <label id="dialCodeid" class="dialcodeclass"></label> -->
+                  <select
+                    type="text"
+                    class="dialkotcustomermobileField"
+                    id="dineinkotdialcodeFieldid"></select>
+                  <input
+                    data-i18n="[placeholder]orderScreen.KOTSection.customerMobile"
+                    type="text"
+                    id="kotcustomermobileField"
+                    class="kotcustomerMobile has-i18n"
+                    title="Customer Mobile"
+                    placeholder="Mobile" />
+                  <input
+                    data-i18n="[placeholder]orderScreen.KOTSection.customerName"
+                    type="text"
+                    id="kotcustomernameField"
+                    class="kotcustomerName has-i18n"
+                    placeholder="Name"
+                    title="Customer Name" />
+
+                  <i
+                    data-i18n="[title]orderScreen.KOTSection.customerHistory"
+                    title="Customer History"
+                    id="customerhistoryButton"
+                    class="fas fa-history tm-fa-sm customer-history-icon has-i18n"
+                    aria-hidden="true">
+                    <span
+                      title="Due Payment available"
+                      class="due-badge fas fa-star"></span>
+                  </i>
+                  <i
+                    data-i18n="[title]orderScreen.KOTSection.addWaiter"
+                    title="Add Waiter"
+                    id="selectdineinWaiterbutton"
+                    class="fas fa-concierge-bell tm-fa-sm has-i18n"
+                    aria-hidden="true"></i>
+                  <input id="showOnBillcheckid" type="checkbox" />
+                  <label
+                    data-i18n="[title]orderScreen.KOTSection.showOnBill"
+                    title="Show customer details on bill"
+                    class="has-i18n"
+                    id="showOnBilllabelcheckid"
+                    for="showOnBillcheckid">
+                  </label>
+                </div>
+                <div class="kot-noteDiv">
+                  <input
+                    data-i18n="[placeholder]orderScreen.KOTSection.customerAddress"
+                    class="has-i18n"
+                    type="text"
+                    name
+                    id="kotcustomeraddressField"
+                    placeholder="Address"
+                    title="Customer Address" />
+
+                  <i
+                    data-i18n
+                    title
+                    class="fas fa-plus-circle fa-lg has-i18n"
+                    id="showCustomeraddress"
+                    aria-hidden="true"></i>
+                  <input
+                    data-i18n="[placeholder]orderScreen.KOTSection.kotNote"
+                    id="kotnoteField"
+                    type="text"
+                    class="kotNote has-i18n"
+                    placeholder="KOT Note"
+                    title="KOT Note" />
+                  <input
+                    data-i18n="[placeholder]orderScreen.KOTSection.coversGuests"
+                    id="noofpersonsField"
+                    type="number"
+                    class="noofpersons has-i18n"
+                    placeholder="Guests"
+                    title="Guests" />
+                  <i
+                    data-i18n="[title]orderScreen.clearCurrentKOT"
+                    title="Clear current KOT"
+                    id="clearkotButton"
+                    class="fas fa-trash text-danger clear-kot-icon has-i18n"></i>
+                </div>
+                <div class="totalsDiv">
+                  <label
+                    data-i18n="orderScreen.KOTSection.Total"
+                    for="kotAmount_total"
+                    class="kottotaltitle_label has-i18n">Total:</label>
+                  <label
+                    for
+                    class="kotAmount_total"
+                    id="kottotalLabel"></label>
+                </div>
+                <div class="kot-actionsDiv" id="kot-actions-divid">
+                  <input
+                    data-i18n="[value]orderScreen.saveKOT"
+                    id="savekotButton"
+                    type="button"
+                    class="has-i18n"
+                    value="Save KOT" />
+                  <input
+                    data-i18n="[value]orderScreen.KOTSection.savePrintKOT"
+                    id="print_n_savekotButton"
+                    class="has-i18n"
+                    type="button"
+                    value="Print & Save KOT" />
+                  <input
+                    data-i18n="[value]orderScreen.KOTSection.printKotAndBill"
+                    id="PrintKotAndBillButton"
+                    class="has-i18n"
+                    type="button"
+                    value="Print KOT & Bill" />
+                </div>
+              </div>
+            </div>
+            <div role="tabpanel" class="tab-pane fade billTab" id="tab2">
+              <div class="billcontentDiv">
+                <div class="billLables-div">
+                  <div id="dineinbillNumbercontainer">
+                    <label
+                      data-i18n="orderScreen.BillingSection.Bill"
+                      for
+                      class="billtitleLabel has-i18n">Bill</label>
+                    <label
+                      data-i18n="[title]orderScreen.nextBill"
+                      title="Next Bill"
+                      id="currentbilllabelId"
+                      class="billnoLabel has-i18n"></label>
+                  </div>
+
+                  <!-- <label data-i18n="orderScreen.BillingSection.Bill" for=""
+                                        class="billtitleLabel has-i18n">Bill</label> -->
+                  <div>
+                    <label
+                      data-i18n="[title]orderScreen.orderNo"
+                      title="Order No"
+                      class="billtitleLabel has-i18n"
+                      id="orderNumberdineinlable">
+                    </label>
+
+                    <label
+                      data-i18n
+                      title="Next Bill"
+                      id="currentorderNumberlabelId"
+                      class="billnoLabel has-i18n"></label>
+                  </div>
+
+                  <input
+                    data-i18n="[value]orderScreen.BillingSection.oldKOT"
+                    class="oldkotButtonclass has-i18n"
+                    id="oldkotButton"
+                    type="button"
+                    value="Old KOT" />
+                  <input
+                    data-i18n="[value]orderScreen.BillingSection.oldKOT"
+                    class="oldkotButtonclass has-i18n"
+                    id="saveBilloldkotButton"
+                    type="button"
+                    value="Old KOT" />
+                  <input
+                    data-i18n="[value]orderScreen.BillingSection.splitBill"
+                    class="oldkotButtonclass has-i18n"
+                    id="splitbillButton"
+                    type="button"
+                    value="Split Bill" />
+                  <label
+                    data-i18n="[title]orderScreen.currentTable"
+                    title="Current table"
+                    class="currentTablename has-i18n"
+                    id="dineinbillcurrentTablename">
+                  </label>
+                </div>
+                <div class="billtableDiv">
+                  <table
+                    class="table table-striped table-bordered table-sm"
+                    id="billTable">
+                    <thead class="mdb-color darken-3 table-header">
+                      <tr>
+                        <th
+                          data-i18n="orderScreen.BillingSection.itemName"
+                          class="has-i18n">
+                          Item Name
+                        </th>
+                        <th
+                          data-i18n="orderScreen.BillingSection.QTY"
+                          class="has-i18n">
+                          Qty
+                        </th>
+                        <th
+                          data-i18n="orderScreen.BillingSection.Amount"
+                          class="has-i18n">
+                          Amount
+                        </th>
+                      </tr>
+                    </thead>
+                    <tbody></tbody>
+                  </table>
+                </div>
+                <div class="bill-misc-div d-flex align-items-center">
+                  <i
+                    data-i18n="[title]orderScreen.Add_order_note"
+                    class="fa-solid fa-file-pen fa-lg has-i18n"
+                    id="dineinOrdernoteButton"
+                    aria-hidden="true"
+                    title="Add order note"></i>
+
+                  <i
+                    data-i18n="[title]orderScreen.addCouponDiscount"
+                    title="Add Coupon Discount"
+                    class="fas fa-gift fa-lg has-i18n"
+                    id="coupondiscountButton"
+                    aria-hidden="true"></i>
+                  <i
+                    data-i18n="[title]orderScreen.Rewards"
+                    title="Rewards"
+                    id="dineinrewardsButton"
+                    class="fa-lg fas fa-award has-i18n"></i>
+                  <!-- <i data-i18n="[title]orderScreen.fastSettleWindow" title="Fast Settle Window"
+                                        id="opensettleWindowbutton" class="fas fa-bolt fa-lg has-i18n"
+                                        aria-hidden="true"></i> -->
+                  <i
+                    data-i18n="[title]orderScreen.send_payment_list"
+                    title="Send Payment link"
+                    id="sendpaylinkdineinButtonid"
+                    class="fa-lg fas fa-file-invoice-dollar has-i18n"></i>
+
+                  <i
+                    data-i18n="[title]orderScreen.BillingSection.editAddCustomer"
+                    title="Edit/Add Customer"
+                    id="editcustomerforDineinid"
+                    class="fa-lg fas fa-user-edit has-i18n"></i>
+                  <i
+                    data-i18n="[title]orderScreen.KOTSection.addWaiter"
+                    title="Add Waiter"
+                    id="selectdineinWaiterfromBillbutton"
+                    class="fas fa-concierge-bell tm-fa-sm has-i18n"
+                    aria-hidden="true"></i>
+                  <div></div>
+                  <input id="ebillBillcheckid" type="checkbox" />
+                  <label
+                    data-i18n="orderScreen.eBill"
+                    id="ebillBilllabelcheckid"
+                    class="has-i18n"
+                    for="ebillBillcheckid">eBill</label>
+                  <input id="transferordercheckid" type="checkbox" />
+                  <label
+                    data-i18n="orderScreen.TransferOrder"
+                    id="transferorderchecklabelid"
+                    class="has-i18n"
+                    for="transferordercheckid">
+                    Transfer Order
+                  </label>
+
+                </div>
+                <div id="paymentModesLabel"></div>
+                <div class="grandtotalsDiv">
+                  <label
+                    data-i18n="orderScreen.KOTSection.Total"
+                    class="has-i18n billGrandtotallabelclass"
+                    for="billGrandtotal">Total:</label>
+                  <label
+                    for
+                    id="billGrandtotal"
+                    class="billGrandtotallabel"></label>
+                  <div class="faIcon">
+                    <i
+                      data-i18n="[title]orderScreen.openPreview"
+                      title="Open Preview"
+                      id="previewButton"
+                      class="far fa-eye fa-lg has-i18n"
+                      aria-hidden="true"></i>
+
+                    <i
+                      data-i18n="[title]orderScreen.draftPrint"
+                      title="Draft Print"
+                      id="draftprintButton"
+                      class="fas fa-print fa-lg has-i18n"
+                      aria-hidden="true"></i>
+
+                    <i
+                      data-i18n="[title]orderScreen.addDiscount"
+                      title="Add Discount"
+                      class="fas fa-tag fa-lg has-i18n"
+                      id="discountButton"
+                      aria-hidden="true"></i>
+                    <!-- <i data-i18n="[title]orderScreen.addPayment" title="Add Payment"
+                                            class="fas fa-credit-card fa-lg has-i18n" id="paymentButton"
+                                            aria-hidden="true"></i> -->
+                    <i
+                      data-i18n="[title]orderScreen.addCharges"
+                      title="Add charges"
+                      class="fas fa-hand-holding-usd fa-lg has-i18n"
+                      id="chargesButton"
+                      aria-hidden="true"></i>
+                    <i
+                      data-i18n="[title]orderScreen.modifyBillStatus"
+                      title="Modify bill status"
+                      class="fas fa-plus-circle fa-lg has-i18n"
+                      id="billstatusButton"
+                      aria-hidden="true"></i>
+                  </div>
+                </div>
+                <div class="table-actionsDiv" id="table-actions-divid">
+                  <input
+                    data-i18n="[value]orderScreen.saveBill"
+                    class="has-i18n"
+                    id="saveBillbutton"
+                    type="button"
+                    value="Save Bill" />
+                  <input
+                    data-i18n="[value]orderScreen.savePrintBill"
+                    id="print_n_savebillButton"
+                    class="has-i18n"
+                    type="button"
+                    value="Print & Save Bill" />
+                  <input
+                    data-i18n="[value]orderScreen.savePrintBill"
+                    id="reprint_n_savebillButton"
+                    class="has-i18n"
+                    type="button"
+                    value="Reprint & Save Bill"
+                    style="width: 45% !important" />
+                  <input
+                    data-i18n="[value]orderScreen.Payment"
+                    id="paymentButton2"
+                    type="button"
+                    class="has-i18n"
+                    value="Payment" />
+                  <input
+                    data-i18n="[value]orderScreen.Paid"
+                    id="settlebillButton"
+                    type="button"
+                    class="has-i18n"
+                    value="Settle Bill" />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        role="tabpanel"
+        class="tab-pane fade takeawayTab"
+        id="takeawaytabdivID">
+        <div class="takeawayTabs">
+          <ul class="nav nav-tabs tasectionTabs" role="tablist">
+            <li class="nav-item">
+              <a
+                data-i18n="orderScreen.tabKOTlabel"
+                class="nav-link has-i18n"
+                id="takeawaykotTab"
+                href="#takeawaykotTabid"
+                role="tab"
+                data-toggle="tab">Order/KOT</a>
+            </li>
+            <li class="nav-item">
+              <a
+                data-i18n="orderScreen.Billing"
+                class="nav-link has-i18n"
+                id="takeawaybillTab"
+                href="#takeawaybillTabid"
+                role="tab"
+                data-toggle="tab">Billing</a>
+
+            </li>
+            <!-- <li id="pickup">
+              <div class="d-flex justify-content-center takeawaySwitchdiv">
+                <label class="switch">
+                  <input id="switchcheckId" type="checkbox" checked />
+                  <span class="slider round"></span>
+                </label>
+                <label
+                  data-i18n="orderScreen.TakeAway"
+                  class="currentswitchnameLabel has-i18n"
+                  id="currentSwitchname"
+                  >PickUp</label
+                >
+              </div>
+            </li> -->
+            <li class="newOrderwrapper">
+              <input
+                data-i18n="[value]orderScreen.newOrder"
+                id="takeawayneworderButtonid"
+                class="neworderButton has-i18n"
+                type="button"
+                value="New Order" />
+            </li>
+            <!-- FIRST ICON -->
+            <a data-i18n="[title]orderScreen.changeOrderType"
+              class="fa fa-exchange changeordertypeicon has-i18n"
+              aria-hidden="true"
+              id="takeawaychangeordertypeid"
+              title="Change Order Type"></a>
+
+            <!-- SECOND ICON -->
+            <a data-i18n="[title]orderScreen.changeOrderType"
+              class="fa fa-exchange changeordertypeicon has-i18n"
+              aria-hidden="true"
+              id="takeawaychangeordertypeAfterSaveKotid"
+              title="Change Order Type"></a>
+
+          </ul>
+          <div class="tab-content takeawaytabsContainer">
+            <div
+              role="tabpanel"
+              class="tab-pane fade in active takeawaykotTab"
+              id="takeawaykotTabid">
+              <div class="takeawaykotcontentDiv">
+                <div class="kotLables-div">
+                  <label
+                    class="currentTablename"
+                    id="takeawaycurrentTablename"></label>
+                  <label
+                    data-i18n="orderScreen.KOT"
+                    class="kottitleLabel has-i18n">KOT</label>
+                  <label id="nexttakeawaykotnumberLabel"></label>
+                </div>
+                <div class="takeawaykottableDiv">
+                  <table
+                    class="table table-striped table-bordered table-sm"
+                    id="takeawaykotTable">
+                    <thead class="mdb-color darken-3 table-header">
+                      <tr>
+                        <th class="w-32px"></th>
+                        <th
+                          data-i18n="orderScreen.KOTSection.itemName"
+                          class="has-i18n">
+                          Item Name
+                        </th>
+                        <th
+                          data-i18n="orderScreen.KOTSection.QTY"
+                          class="has-i18n">
+                          Qty
+                        </th>
+                        <!-- <th data-i18n="orderScreen.KOTSection.Price" class="has-i18n">Price</th> -->
+                        <th
+                          data-i18n="orderScreen.KOTSection.Amount"
+                          class="has-i18n">
+                          Amount
+                        </th>
+                      </tr>
+                    </thead>
+                    <tbody></tbody>
+                  </table>
+                </div>
+                <div class="takeway-kot-div-1 kotCustomer-div">
+                  <!-- <label  class="dialcodeclass"></label> -->
+                  <select
+                    type="text"
+                    class="dialkotcustomermobileField"
+                    id="takeawaykotdialcodeFieldid"></select>
+                  <input
+                    data-i18n="[placeholder]orderScreen.KOTSection.customerMobile"
+                    type="text"
+                    id="takeawaykotcustomermobileField"
+                    class="kotcustomerMobile has-i18n"
+                    title="Customer Mobile"
+                    placeholder="Mobile" />
+                  <input
+                    data-i18n="[placeholder]orderScreen.KOTSection.customerName"
+                    type="text"
+                    id="takeawaykotcustomernameField"
+                    class="kotcustomerName has-i18n"
+                    placeholder="Name"
+                    title="Name" />
+
+                  <i
+                    data-i18n="[title]orderScreen.KOTSection.customerHistory"
+                    title="Customer History"
+                    id="takeawaycustomerhistoryButton"
+                    class="fas fa-history tm-fa-sm customer-history-icon has-i18n"
+                    aria-hidden="true">
+                    <span
+                      title="Due Payment available"
+                      class="due-badge fas fa-star"></span>
+                  </i>
+                </div>
+                <div class="takeway-kot-div-2 kot-noteDiv">
+                  <input
+                    data-i18n="[placeholder]orderScreen.KOTSection.customerAddress"
+                    class="has-i18n"
+                    type="text"
+                    name
+                    id="takotcustomeraddressField"
+                    placeholder="Address"
+                    title="Customer Address" />
+                  <i
+                    data-i18n
+                    title
+                    class="fas fa-plus-circle fa-lg has-i18n"
+                    id="tashowCustomeraddress"
+                    aria-hidden="true"></i>
+                  <input
+                    data-i18n="[placeholder]orderScreen.KOTSection.kotNote"
+                    id="takeawaykotnoteField"
+                    type="text"
+                    class="kotNote has-i18n"
+                    title="KOT Note"
+                    placeholder="KOT Note" />
+
+                  <i
+                    data-i18n="[title]orderScreen.clearCurrentKOT"
+                    title="Clear current KOT"
+                    id="takeawayclearkotButton"
+                    class="fas fa-trash text-danger clear-kot-icon has-i18n"></i>
+                </div>
+                <div class="takeway-kot-div-3 kot-noteDiv">
+                  <input
+                    data-i18n="[placeholder]orderScreen.KOTSection.coversGuests"
+                    id="takeawaynoofpersonsField"
+                    type="number"
+                    class="noofpersons has-i18n"
+                    placeholder="Guests"
+                    title="Covers/Guests" />
+                  <input id="showOntakeawayBillcheckid" type="checkbox" />
+                  <label
+                    data-i18n="[title]orderScreen.KOTSection.showOnBill"
+                    title="Show customer details on bill"
+                    class="has-i18n"
+                    id="showOntakeawayBilllabelcheckid"
+                    for="showOntakeawayBillcheckid">
+                  </label>
+                  <input id="takeawayPreordercheckid" type="checkbox" />
+                  <label
+                    data-i18n="controller:orderController.preOrder"
+                    class="has-i18n"
+                    id="takeawayPreorderchecklabelid"
+                    for="takeawayPreordercheckid">Pre-Order</label>
+                  <i
+                    data-i18n="[title]orderScreen.KOTSection.addWaiter"
+                    title="Add Waiter"
+                    id="selecttakeawayWaiterbutton"
+                    class="fas fa-concierge-bell tm-fa-sm has-i18n"
+                    aria-hidden="true"></i>
+                </div>
+                <div class="totalsDiv">
+                  <label
+                    data-i18n="orderScreen.KOTSection.Total"
+                    class="kottotaltitle_label has-i18n">Total:</label>
+                  <label id="takeawaykottotalLabel"></label>
+                </div>
+                <div class="kot-actionsDiv" id="takot-actions-divid">
+                  <input
+                    data-i18n="[value]orderScreen.saveKOT"
+                    id="takeawaysavekotButton"
+                    class="has-i18n"
+                    type="button"
+                    value="Save KOT" />
+                  <input
+                    data-i18n="[value]orderScreen.KOTSection.savePrintKOT"
+                    class="has-i18n"
+                    id="takeawayprint_n_savekotButton"
+                    type="button"
+                    value="Print & Save KOT" />
+                  <input
+                    data-i18n="[value]orderScreen.KOTSection.printKotAndBill"
+                    class="has-i18n"
+                    id="saveTakeawayKOTAndBill"
+                    type="button"
+                    value="Print KOT & Bill" />
+                </div>
+              </div>
+            </div>
+            <div
+              role="tabpanel"
+              class="tab-pane fade takeawaybillTab"
+              id="takeawaybillTabid">
+              <div class="billcontentDiv takeawaybillcontentDiv">
+                <div class="billLables-div">
+                  <div id="takeawaybillcontainerid">
+                    <label
+                      data-i18n="orderScreen.Bill"
+                      for
+                      class="billtitleLabel has-i18n">Bill</label>
+                    <label
+                      id="takeawaycurrentbilllabelId"
+                      class="billnoLabel"></label>
+                  </div>
+
+                  <!-- <label data-i18n="orderScreen.Bill" for=""
+                                        class="billtitleLabel has-i18n">Bill</label> -->
+                  <div>
+                    <label
+                      data-i18n="orderScreen.Bill"
+                      for
+                      class="billtitleLabel has-i18n"
+                      id="ordernumbertakeawaylableid">Order</label>
+                    <label
+                      id="takeawaycurrentorderNumberlabelId"
+                      class="billnoLabel"></label>
+                  </div>
+                  <input
+                    data-i18n="[value]orderScreen.BillingSection.oldKOT"
+                    class="oldkotButtonclass has-i18n"
+                    id="takeawayoldkotButton"
+                    type="button"
+                    value="Old KOT" />
+                  <input
+                    data-i18n="[value]orderScreen.BillingSection.oldKOT"
+                    class="oldkotButtonclass has-i18n"
+                    id="saveBilltakeawayoldkotButton"
+                    type="button"
+                    value="Old KOT" />
+                  <input
+                    data-i18n="[value]orderScreen.BillingSection.splitBill"
+                    class="oldkotButtonclass has-i18n"
+                    id="tasplitbillButton"
+                    type="button"
+                    value="Split Bill" />
+                  <label
+                    data-i18n="[title]orderScreen.currentTable"
+                    title="Current table"
+                    class="currentTablename has-i18n"
+                    id="takeawaybillcurrentTablename" />
+                </div>
+                <div class="billtakeawayDiv">
+                  <table
+                    class="table table-striped table-bordered table-sm"
+                    id="takebillTable">
+                    <thead class="mdb-color darken-3 table-header">
+                      <tr>
+                        <th
+                          data-i18n="orderScreen.BillingSection.itemName"
+                          class="has-i18n">
+                          Item Name
+                        </th>
+                        <th
+                          data-i18n="orderScreen.BillingSection.QTY"
+                          class="has-i18n">
+                          Qty
+                        </th>
+                        <th
+                          data-i18n="orderScreen.BillingSection.Amount"
+                          class="has-i18n">
+                          Amount
+                        </th>
+                      </tr>
+                    </thead>
+                    <tbody></tbody>
+                  </table>
+                </div>
+                <div class="bill-misc-div d-flex align-items-center">
+                  <i
+                    data-i18n
+                    class="fa-solid fa-file-pen fa-lg has-i18n"
+                    id="taOrdernoteButton"
+                    aria-hidden="true"
+                    title="Add order note"></i>
+                  <i
+                    data-i18n="[title]orderScreen.addCouponDiscount"
+                    title="Add Coupon Discount"
+                    class="fas fa-gift fa-lg has-i18n"
+                    id="tacoupondiscountButton"
+                    aria-hidden="true"></i>
+                  <i
+                    data-i18n="[title]orderScreen.Rewards"
+                    title="Rewards"
+                    id="tdhdrewardsButton"
+                    class="fa-lg fas fa-award has-i18n"></i>
+                  <i
+                    title="Send Payment link"
+                    id="sendpaylinktaButtonid"
+                    class="fa-lg fas fa-file-invoice-dollar"></i>
+                  <i
+                    data-i18n="[title]orderScreen.BillingSection.editAddCustomer"
+                    title="Edit/Add Customer"
+                    id="editcustomerfortaid"
+                    class="fa-lg fas fa-user-edit has-i18n"></i>
+                  <i
+                    data-i18n="[title]orderScreen.KOTSection.addWaiter"
+                    title="Add Waiter"
+                    id="selecttakeawayafterkotWaiterbutton"
+                    class="fas fa-concierge-bell tm-fa-sm has-i18n"
+                    aria-hidden="true"></i>
+                  <input id="takeawayebillBillcheckid" type="checkbox" />
+                  <label
+                    data-i18n="orderScreen.ebill"
+                    id="takeawayebillBilllabelcheckid"
+                    for="takeawayebillBillcheckid"
+                    class="has-i18n">eBill</label>
+
+                  <input id="takeawaytransferordercheckid" type="checkbox" />
+                  <label
+                    data-i18n
+                    id="takeawaytransferorderlabelcheckid"
+                    class="has-i18n"
+                    for="takeawaytransferordercheckid">Transfer Order</label>
+                  <input
+                    id="sendcustomerdetailstodboyCheckid"
+                    type="checkbox" />
+                  <label
+                    data-i18n="orderScreen.sendDetailsToDBoy"
+                    class="has-i18n"
+                    id="sendcustomerdetailstodboylabelCheckid"
+                    for="sendcustomerdetailstodboyCheckid">Send DBoy</label>
+                  <select class="selectionBox" id="dboyselectionId">
+                    <option
+                      data-i18n="orderScreen.selectDBoy"
+                      class="has-i18n"
+                      disabled
+                      selected
+                      value>
+                      __Select DBoy__
+                    </option>
+                  </select>
+                </div>
+                <div id="takeawayPaymentModesLabel"></div>
+                <div class="grandtotalsDiv">
+                  <label
+                    data-i18n="orderScreen.KOTSection.Total"
+                    class="has-i18n billGrandtotallabelclass"
+                    for="billGrandtotal">Total:</label>
+                  <label
+                    for
+                    id="takeawaybillGrandtotal"
+                    class="billGrandtotallabel"></label>
+                  <div class="faIcon">
+                    <i
+                      data-i18n="[title]orderScreen.openPreview"
+                      title="Open Preview"
+                      id="takeawaypreviewButton"
+                      class="far fa-eye fa-lg has-i18n"
+                      aria-hidden="true"></i>
+                    <!-- <i data-i18n="[title]orderScreen.fastSettleWindow" title="Fast Settle Window"
+                                            id="opentasettleWindowbutton" class="fas fa-bolt fa-lg has-i18n"
+                                            aria-hidden="true"></i> -->
+                    <i
+                      data-i18n="[title]orderScreen.draftPrint"
+                      title="Draft Print"
+                      id="takeawaydraftprintButton"
+                      class="fas fa-print fa-lg has-i18n"
+                      aria-hidden="true"></i>
+                    <i
+                      title="Pre-Order Form"
+                      id="takeawaypreorderformButton"
+                      class="fas fa-file-invoice fa-lg"
+                      aria-hidden="true"></i>
+
+                    <i
+                      data-i18n="[title]orderScreen.addDiscount"
+                      title="Add Discount"
+                      class="fas fa-tag fa-lg has-i18n"
+                      id="takeawaydiscountButton"
+                      aria-hidden="true"></i>
+                    <!-- <i data-i18n="[title]orderScreen.addPayment" title="Add Payment"
+                                            class="fas fa-credit-card fa-lg has-i18n" id="takeawaypaymentButton"
+                                            aria-hidden="true"></i> -->
+                    <i
+                      data-i18n="[title]orderScreen.addCharges"
+                      title="Add charges"
+                      class="fas fa-hand-holding-usd fa-lg has-i18n"
+                      id="takeawaychargesButton"
+                      aria-hidden="true"></i>
+                    <i
+                      data-i18n="[title]orderScreen.modifyBillStatus"
+                      title="Modify bill status"
+                      class="fas fa-plus-circle fa-lg has-i18n"
+                      id="takeawaybillstatusButton"
+                      aria-hidden="true"></i>
+                  </div>
+                </div>
+                <div class="table-actionsDiv" id="tatable-actions-divid">
+                  <input
+                    data-i18n="[value]orderScreen.saveBill"
+                    id="savetakeawayBillbutton"
+                    class="has-i18n"
+                    type="button"
+                    value="Save Bill" />
+                  <input
+                    data-i18n="[value]orderScreen.savePrintBill"
+                    id="print_n_savetakeawayBillbutton"
+                    class="has-i18n"
+                    type="button"
+                    value="Print & Save Bill" />
+                  <input
+                    data-i18n="[value]orderScreen.savePrintBill"
+                    id="reprint_n_savetakeawayBillbutton"
+                    class="has-i18n"
+                    type="button"
+                    value="Reprint & Save Bill"
+                    style="width: 45% !important" />
+                  <input
+                    data-i18n="[value]orderScreen.Payment"
+                    id="takeawaypaymentButton2"
+                    class="has-i18n"
+                    type="button"
+                    value="Payment" />
+                  <input
+                    data-i18n="[value]orderScreen.Paid"
+                    id="takeawaysettlebillButton"
+                    class="has-i18n"
+                    type="button"
+                    value="Settle Bill" />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div
+        role="tabpanel"
+        class="tab-pane fade takeawayTab"
+        id="deliverytabdivID">
+        <div class="takeawayTabs">
+          <ul class="nav nav-tabs tasectionTabs" role="tablist">
+            <li class="nav-item">
+              <a
+                data-i18n="orderScreen.tabKOTlabel"
+                class="nav-link has-i18n"
+                id="deliverykotTab"
+                href="#deliverykotTabid"
+                role="tab"
+                data-toggle="tab">Order/KOT</a>
+            </li>
+            <li class="nav-item">
+              <a
+                data-i18n="orderScreen.Billing"
+                class="nav-link has-i18n"
+                id="deliverybillTab"
+                href="#deliverybillTabid"
+                role="tab"
+                data-toggle="tab">Billing</a>
+            </li>
+            <li class="newOrderwrapper">
+              <input
+                data-i18n="[value]orderScreen.newOrder"
+                id="deliveryneworderButtonid"
+                class="neworderButton has-i18n"
+                type="button"
+                value="New Order" />
+            </li>
+            <!-- DELIVERY FIRST ICON -->
+            <!-- DELIVERY FIRST ICON -->
+            <a data-i18n="[title]orderScreen.changeOrderType"
+              class="fa fa-exchange changeordertypeicon has-i18n"
+              aria-hidden="true"
+              id="deliverychangeordertypeid"
+              title="Change Order Type"></a>
+
+            <!-- DELIVERY SECOND ICON -->
+            <a data-i18n="[title]orderScreen.changeOrderType"
+              class="fa fa-exchange changeordertypeicon has-i18n"
+              aria-hidden="true"
+              id="deliverychangeordertypeAfterSaveKotid"
+              title="Change Order Type"></a>
+
+          </ul>
+          <div class="tab-content takeawaytabsContainer">
+            <div
+              role="tabpanel"
+              class="tab-pane fade in active deliverykotTab"
+              id="deliverykotTabid">
+              <div class="takeawaykotcontentDiv">
+                <div class="kotLables-div">
+                  <label
+                    class="currentTablename"
+                    id="deliverycurrentTablename"></label>
+                  <label
+                    data-i18n="orderScreen.KOT"
+                    class="kottitleLabel has-i18n">KOT</label>
+                  <label id="nextdeliverykotnumberLabel"></label>
+                </div>
+                <div class="takeawaykottableDiv">
+                  <table
+                    class="table table-striped table-bordered table-sm"
+                    id="deliverykotTable">
+                    <thead class="mdb-color darken-3 table-header">
+                      <tr>
+                        <th class="w-32px"></th>
+                        <th
+                          data-i18n="orderScreen.KOTSection.itemName"
+                          class="has-i18n">
+                          Item Name
+                        </th>
+                        <th
+                          data-i18n="orderScreen.KOTSection.QTY"
+                          class="has-i18n">
+                          Qty
+                        </th>
+                        <!-- <th data-i18n="orderScreen.KOTSection.Price" class="has-i18n">Price</th> -->
+                        <th
+                          data-i18n="orderScreen.KOTSection.Amount"
+                          class="has-i18n">
+                          Amount
+                        </th>
+                      </tr>
+                    </thead>
+                    <tbody></tbody>
+                  </table>
+                </div>
+                <div class="takeway-kot-div-1 kotCustomer-div">
+                  <!-- <label  class="dialcodeclass"></label> -->
+                  <select
+                    type="text"
+                    class="dialkotcustomermobileField"
+                    id="deliverykotdialcodeFieldid"></select>
+                  <input
+                    data-i18n="[placeholder]orderScreen.KOTSection.customerMobile"
+                    type="text"
+                    id="deliverykotcustomermobileField"
+                    class="kotcustomerMobile has-i18n"
+                    title="Customer Mobile"
+                    placeholder="Mobile" />
+                  <input
+                    data-i18n="[placeholder]orderScreen.KOTSection.customerName"
+                    type="text"
+                    id="deliverykotcustomernameField"
+                    class="kotcustomerName has-i18n"
+                    placeholder="Name"
+                    title="Name" />
+
+                  <i
+                    data-i18n="[title]orderScreen.KOTSection.customerHistory"
+                    title="Customer History"
+                    id="deliverycustomerhistoryButton"
+                    class="fas fa-history tm-fa-sm customer-history-icon has-i18n"
+                    aria-hidden="true">
+                    <span
+                      title="Due Payment available"
+                      class="due-badge fas fa-star"></span>
+                  </i>
+                </div>
+                <div class="takeway-kot-div-2 kot-noteDiv">
+                  <input
+                    data-i18n="[placeholder]orderScreen.KOTSection.customerAddress"
+                    class="has-i18n"
+                    type="text"
+                    name
+                    id="deliverykotcustomeraddressField"
+                    placeholder="Address"
+                    title="Customer Address" />
+                  <i
+                    data-i18n
+                    title
+                    class="fas fa-plus-circle fa-lg has-i18n"
+                    id="deliveryshowCustomeraddress"
+                    aria-hidden="true"></i>
+                  <input
+                    data-i18n="[placeholder]orderScreen.KOTSection.kotNote"
+                    id="deliverykotnoteField"
+                    type="text"
+                    class="kotNote has-i18n"
+                    title="KOT Note"
+                    placeholder="KOT Note" />
+
+                  <i
+                    data-i18n="[title]orderScreen.clearCurrentKOT"
+                    title="Clear current KOT"
+                    id="deliveryclearkotButton"
+                    class="fas fa-trash text-danger clear-kot-icon has-i18n"></i>
+                </div>
+                <div class="takeway-kot-div-3 kot-noteDiv">
+                  <input
+                    data-i18n="[placeholder]orderScreen.KOTSection.coversGuests"
+                    id="deliverynoofpersonsField"
+                    type="number"
+                    class="noofpersons has-i18n"
+                    placeholder="Guests"
+                    title="Covers/Guests" />
+                  <input id="showOndeliveryBillcheckid" type="checkbox" />
+                  <label
+                    data-i18n="[title]orderScreen.KOTSection.showOnBill"
+                    title="Show customer details on bill"
+                    class="has-i18n"
+                    id="showOndeliveryBilllabelcheckid"
+                    for="showOndeliveryBillcheckid">
+                  </label>
+                  <input id="deliveryPreordercheckid" type="checkbox" />
+                  <label
+                    data-i18n="controller:orderController.preOrder"
+                    class="has-i18n"
+                    id="deliveryPreorderchecklabelid"
+                    for="deliveryPreordercheckid">Pre-Order</label>
+                  <i
+                    data-i18n="[title]orderScreen.KOTSection.addWaiter"
+                    title="Add Waiter"
+                    id="selectdeliveryWaiterbutton"
+                    class="fas fa-concierge-bell tm-fa-sm has-i18n"
+                    aria-hidden="true"></i>
+                </div>
+                <div class="totalsDiv">
+                  <label
+                    data-i18n="orderScreen.KOTSection.Total"
+                    class="kottotaltitle_label has-i18n">Total:</label>
+                  <label id="deliverykottotalLabel"></label>
+                </div>
+                <div class="kot-actionsDiv" id="takot-actions-divid">
+                  <input
+                    data-i18n="[value]orderScreen.saveKOT"
+                    id="deliverysavekotButton"
+                    class="has-i18n"
+                    type="button"
+                    value="Save KOT" />
+                  <input
+                    data-i18n="[value]orderScreen.KOTSection.savePrintKOT"
+                    class="has-i18n"
+                    id="deliveryprint_n_savekotButton"
+                    type="button"
+                    value="Print & Save KOT" />
+                  <input
+                    data-i18n="[value]orderScreen.KOTSection.printKotAndBill"
+                    class="has-i18n"
+                    id="saveDeliveryKOTAndBill"
+                    type="button"
+                    value="Print KOT & Bill" />
+                </div>
+              </div>
+            </div>
+            <div
+              role="tabpanel"
+              class="tab-pane fade deliverybillTab"
+              id="deliverybillTabid">
+              <div class="billcontentDiv takeawaybillcontentDiv">
+                <div class="billLables-div">
+                  <div id="deliverybillcontainerid">
+                    <label
+                      data-i18n="orderScreen.Bill"
+                      for
+                      class="billtitleLabel has-i18n">Bill</label>
+                    <label
+                      id="deliverycurrentbilllabelId"
+                      class="billnoLabel"></label>
+                  </div>
+
+                  <!-- <label data-i18n="orderScreen.Bill" for=""
+                                        class="billtitleLabel has-i18n">Bill</label> -->
+                  <div>
+                    <label
+                      data-i18n="orderScreen.Bill"
+                      for
+                      class="billtitleLabel has-i18n"
+                      id="ordernumberdeliverylableid">Order</label>
+                    <label
+                      id="deliverycurrentorderNumberlabelId"
+                      class="billnoLabel"></label>
+                  </div>
+                  <input
+                    data-i18n="[value]orderScreen.BillingSection.oldKOT"
+                    class="oldkotButtonclass has-i18n"
+                    id="deliveryoldkotButton"
+                    type="button"
+                    value="Old KOT" />
+                  <input
+                    data-i18n="[value]orderScreen.BillingSection.oldKOT"
+                    class="oldkotButtonclass has-i18n"
+                    id="saveBilldeliveryoldkotButton"
+                    type="button"
+                    value="Old KOT" />
+                  <input
+                    data-i18n="[value]orderScreen.BillingSection.splitBill"
+                    class="oldkotButtonclass has-i18n"
+                    id="deliverysplitbillButton"
+                    type="button"
+                    value="Split Bill" />
+                  <label
+                    data-i18n="[title]orderScreen.currentTable"
+                    title="Current table"
+                    class="currentTablename has-i18n"
+                    id="deliverybillcurrentTablename"></label>
+                </div>
+                <div class="billdeliveryDiv">
+                  <table
+                    class="table table-striped table-bordered table-sm"
+                    id="deliverybillTable">
+                    <thead class="mdb-color darken-3 table-header">
+                      <tr>
+                        <th
+                          data-i18n="orderScreen.BillingSection.itemName"
+                          class="has-i18n">
+                          Item Name
+                        </th>
+                        <th
+                          data-i18n="orderScreen.BillingSection.QTY"
+                          class="has-i18n">
+                          Qty
+                        </th>
+                        <th
+                          data-i18n="orderScreen.BillingSection.Amount"
+                          class="has-i18n">
+                          Amount
+                        </th>
+                      </tr>
+                    </thead>
+                    <tbody></tbody>
+                  </table>
+                </div>
+                <div class="bill-misc-div d-flex align-items-center">
+                  <i
+                    data-i18n
+                    class="fa-solid fa-file-pen fa-lg has-i18n"
+                    id="deliveryOrdernoteButton"
+                    aria-hidden="true"
+                    title="Add order note"></i>
+                  <i
+                    data-i18n="[title]orderScreen.addCouponDiscount"
+                    title="Add Coupon Discount"
+                    class="fas fa-gift fa-lg has-i18n"
+                    id="deliverycoupondiscountButton"
+                    aria-hidden="true"></i>
+                  <i
+                    data-i18n="[title]orderScreen.Rewards"
+                    title="Rewards"
+                    id="deliveryrewardsButton"
+                    class="fa-lg fas fa-award has-i18n"></i>
+                  <i
+                    title="Send Payment link"
+                    id="sendpaylinkdeliveryButtonid"
+                    class="fa-lg fas fa-file-invoice-dollar"></i>
+                  <i
+                    data-i18n="[title]orderScreen.BillingSection.editAddCustomer"
+                    title="Edit/Add Customer"
+                    id="editcustomerfordeliveryid"
+                    class="fa-lg fas fa-user-edit has-i18n"></i>
+                  <i
+                    data-i18n="[title]orderScreen.KOTSection.addWaiter"
+                    title="Add Waiter"
+                    id="selectdeliveryafterkotWaiterbutton"
+                    class="fa-lg  fas fa-concierge-bell  has-i18n"
+                    aria-hidden="true"></i>
+                  <!-- <input id="deliveryebillBillcheckid" type="checkbox" />
+                  <label
+                    data-i18n="orderScreen.ebill"
+                    id="deliveryebillBilllabelcheckid"
+                    for="deliveryebillBillcheckid"
+                    class="has-i18n"
+                    >eBill</label
+                  > -->
+
+                  <input id="deliverytransferordercheckid" type="checkbox" />
+                  <label
+                    data-i18n
+                    id="deliverytransferorderlabelcheckid"
+                    class="has-i18n"
+                    for="deliverytransferordercheckid">Transfer Order</label>
+                  <!-- <select class="selectionBox" id="dboyselectionfordeliveryId">
+                    <option
+                      data-i18n="orderScreen.selectDBoy"
+                      class="has-i18n"
+                      disabled
+                      selected
+                      value
+                    >
+                      __Select DBoy__
+                    </option>
+                  </select> -->
+
+                  <label id="deliveryBoyNamelabelid"
+                    style="padding: 2px 5px;"></label>
+                  <i
+                    data-i18n="[title]orderScreen.KOTSection.addWaiter"
+                    title="Select Delivery boy"
+                    id="selectdeliveryboybutton"
+                    class=" has-i18n"
+                    aria-hidden="true"><img id="deliveryBoyImgId"
+                      src="../assets/images/fast-delivery.png" />
+                  </i>
+                  <!-- <i
+                    data-i18n="[title]orderScreen.KOTSection.addWaiter"
+                    title="Select Delivery boy"
+                    id="selectdeliveryboybutton"
+                    class="fas fa-concierge-bell tm-fa-sm has-i18n"
+                    aria-hidden="true"
+                  ></i> -->
+                </div>
+                <div id="deliveryPaymentModesLabel"></div>
+                <div class="grandtotalsDiv">
+                  <label
+                    data-i18n="orderScreen.KOTSection.Total"
+                    class="has-i18n billGrandtotallabelclass"
+                    for="billGrandtotal">Total:</label>
+                  <label
+                    for
+                    id="deliverybillGrandtotal"
+                    class="billGrandtotallabel"></label>
+                  <div class="faIcon">
+                    <i
+                      data-i18n="[title]orderScreen.openPreview"
+                      title="Open Preview"
+                      id="deliverypreviewButton"
+                      class="far fa-eye fa-lg has-i18n"
+                      aria-hidden="true"></i>
+                    <!-- <i data-i18n="[title]orderScreen.fastSettleWindow" title="Fast Settle Window"
+                                            id="opentasettleWindowbutton" class="fas fa-bolt fa-lg has-i18n"
+                                            aria-hidden="true"></i> -->
+                    <i
+                      data-i18n="[title]orderScreen.draftPrint"
+                      title="Draft Print"
+                      id="deliverydraftprintButton"
+                      class="fas fa-print fa-lg has-i18n"
+                      aria-hidden="true"></i>
+                    <i
+                      title="Pre-Order Form"
+                      id="deliverypreorderformButton"
+                      class="fas fa-file-invoice fa-lg"
+                      aria-hidden="true"></i>
+
+                    <i
+                      data-i18n="[title]orderScreen.addDiscount"
+                      title="Add Discount"
+                      class="fas fa-tag fa-lg has-i18n"
+                      id="deliverydiscountButton"
+                      aria-hidden="true"></i>
+                    <!-- <i data-i18n="[title]orderScreen.addPayment" title="Add Payment"
+                                            class="fas fa-credit-card fa-lg has-i18n" id="takeawaypaymentButton"
+                                            aria-hidden="true"></i> -->
+                    <i
+                      data-i18n="[title]orderScreen.addCharges"
+                      title="Add charges"
+                      class="fas fa-hand-holding-usd fa-lg has-i18n"
+                      id="deliverychargesButton"
+                      aria-hidden="true"></i>
+                    <i
+                      data-i18n="[title]orderScreen.modifyBillStatus"
+                      title="Modify bill status"
+                      class="fas fa-plus-circle fa-lg has-i18n"
+                      id="deliverybillstatusButton"
+                      aria-hidden="true"></i>
+                    <input id="deliveryebillBillcheckid" type="checkbox" />
+                    <label
+                      data-i18n="orderScreen.ebill"
+                      id="deliveryebillBilllabelcheckid"
+                      for="deliveryebillBillcheckid"
+                      class="has-i18n">eBill</label>
+                  </div>
+                </div>
+                <div class="table-actionsDiv" id="tatable-actions-divid">
+                  <input
+                    data-i18n="[value]orderScreen.saveBill"
+                    id="savedeliveryBillbutton"
+                    class="has-i18n"
+                    type="button"
+                    value="Save Bill" />
+                  <input
+                    data-i18n="[value]orderScreen.savePrintBill"
+                    id="print_n_savedeliveryBillbutton"
+                    class="has-i18n"
+                    type="button"
+                    value="Print & Save Bill" />
+                  <input
+                    data-i18n="[value]orderScreen.savePrintBill"
+                    id="reprint_n_savedeliveryBillbutton"
+                    class="has-i18n"
+                    type="button"
+                    value="Reprint & Save Bill"
+                    style="width: 45% !important" />
+                  <input
+                    data-i18n="[value]orderScreen.Payment"
+                    id="deliverypaymentButton2"
+                    class="has-i18n"
+                    type="button"
+                    value="Payment" />
+                  <input
+                    data-i18n="[value]orderScreen.Paid"
+                    id="deliverysettlebillButton"
+                    class="has-i18n"
+                    type="button"
+                    value="Settle Bill" />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div
+        role="tabpanel"
+        class="tab-pane fade deliveryTab"
+        id="quickbilltabdivID">
+        <div class="quickBillwrapperdiv">
+          <div class="d-flex quickbill-actions">
+            <input id="quickkotprintCheck" type="checkbox" />
+            <label
+              data-i18n="orderScreen.KOT"
+              class="has-i18n"
+              id="quickkotprintChecklabel"
+              for="quickkotprintCheck">
+              KOT
+            </label>
+            <input id="quickbillprintCheck" type="checkbox" />
+            <label
+              data-i18n="orderScreen.BillingSection.Bill"
+              class="has-i18n quickbillebillchecklabel"
+              id="quickbillprintChecklabel"
+              for="quickbillprintCheck">
+              Bill</label>
+            <!-- <input id="quickebillBillcheckid" type="checkbox" />
+            <label
+              data-i18n="orderScreen.eBill"
+              class="ml-2 has-i18n quickbillebillchecklabel"
+              for="quickebillBillcheckid"
+              id="quickebillBillcheckidlabel">eBill</label> -->
+
+            <!-- <input id="quickbilltransferordercheckid" type="checkbox">
+                            <label data-i18n="" id="quicktransferorderlabelcheckid" class="has-i18n"
+                                for="quickbilltransferordercheckid">Transfer Order</label> -->
+
+            <label
+              class="billnoLabel normal-label quickbillebillchecklabel"
+              id="nextbillnoforquickBillid">Order:</label>
+            <label
+              class="billnoLabel normal-label quickbillebillchecklabel"
+              id="nextordernoforquickBillid"></label>
+            <label
+              class="billnoLabel normal-label quickbillebillchecklabel has-i18n"
+              id="customQuickBillTypeid"
+              data-i18n="orderScreen.NewOrder">
+              New Order
+            </label>
+
+          </div>
+          <div class="quickBilltablewrapper">
+            <table
+              class="table table-striped table-bordered table-sm"
+              id="quickbillTable">
+              <thead class="mdb-color darken-3 table-header">
+                <tr>
+                  <th class="w-32px"></th>
+                  <th
+                    data-i18n="orderScreen.KOTSection.itemName"
+                    class="has-i18n">
+                    Item Name
+                  </th>
+                  <th data-i18n="orderScreen.KOTSection.QTY" class="has-i18n">
+                    Qty
+                  </th>
+                  <!-- <th data-i18n="orderScreen.KOTSection.Price" class="has-i18n">Price</th> -->
+                  <th
+                    data-i18n="orderScreen.KOTSection.Amount"
+                    class="has-i18n">
+                    Amount
+                  </th>
+                </tr>
+              </thead>
+              <tbody></tbody>
+            </table>
+          </div>
+          <div class="icon-container p-1">
+            <input id="quickebillBillcheckid" type="checkbox" />
+            <label
+              data-i18n="orderScreen.eBill"
+              class="ml-2 has-i18n quickbillebillchecklabel"
+              for="quickebillBillcheckid"
+              id="quickebillBillcheckidlabel">eBill</label>
+            <i
+              data-i18n
+              class="fa-solid fa-file-pen fa-lg has-i18n"
+              id="quickOrdernoteButton"
+              aria-hidden="true"
+              title="Add order note"></i>
+            <i
+              data-i18n="[title]orderScreen.addCouponDiscount"
+              title="Add Coupon Discount"
+              class="fas fa-gift fa-lg has-i18n"
+              id="quickcoupondiscountButton"
+              aria-hidden="true"></i>
+            <i
+              data-i18n="[title]orderScreen.Rewards"
+              title="Rewards"
+              id="quickbillrewardsButton"
+              class="fa-lg fas fa-award has-i18n"></i>
+            <!-- <i data-i18n="[title]orderScreen.fastSettleWindow" title="Fast Settle Window"
+                            id="openquicksettleWindowbutton" class="fas fa-bolt fa-lg has-i18n" aria-hidden="true"></i> -->
+            <i
+              class="fas fa-lg fa-file-invoice"
+              title="Show bill to customer display"
+              id="showQuickBillDataForCustomerDisplayid"></i>
+            <input id="quickbilltransferordercheckid" type="checkbox" />
+            <label
+              data-i18n="orderScreen.TransferOrder"
+              id="quicktransferorderlabelcheckid"
+              class="has-i18n"
+              for="quickbilltransferordercheckid">
+              Transfer Order
+            </label>
+
+          </div>
+          <div class="kotCustomer-div">
+            <!-- <label class="dialcodeclass"></label> -->
+            <select
+              type="text"
+              class="dialkotcustomermobileField"
+              id="quickbillkotdialcodeFieldid"></select>
+
+            <input
+              data-i18n="[placeholder]orderScreen.KOTSection.customerMobile"
+              type="text"
+              id="quickbillkotcustomermobileField"
+              class="kotcustomerMobile has-i18n"
+              title="Customer Mobile"
+              placeholder="Mobile" />
+            <input
+              data-i18n="[placeholder]orderScreen.KOTSection.customerName"
+              type="text"
+              id="quickbillkotcustomernameField"
+              class="kotcustomerName has-i18n"
+              placeholder="Name"
+              title="Customer Name" />
+
+            <i
+              data-i18n="[title]orderScreen.KOTSection.customerHistory"
+              title="Customer History"
+              id="quickcustomerhistoryButton"
+              class="fas fa-history tm-fa-sm customer-history-icon has-i18n"
+              aria-hidden="true">
+              <span
+                title="Due Payment available"
+                class="due-badge fas fa-star"></span>
+            </i>
+            <i
+              data-i18n="[title]orderScreen.KOTSection.addWaiter"
+              title="Add Waiter"
+              id="selectquickWaiterbutton"
+              class="fas fa-concierge-bell fa-lg has-i18n"
+              aria-hidden="true"></i>
+            <input id="showOnquickbillBillcheckid" type="checkbox" />
+            <label
+              data-i18n="orderScreen.KOTSection.showOnBill"
+              title="Show customer details on bill"
+              id="showOnquickbillBilllabelcheckid"
+              class="has-i18n"
+              for="showOnquickbillBillcheckid"></label>
+          </div>
+          <div class="kot-noteDiv">
+            <input
+              data-i18n="[placeholder]orderScreen.KOTSection.customerAddress"
+              type="text"
+              name
+              class="has-i18n"
+              id="quickkotcustomeraddressField"
+              placeholder="Address"
+              title="Customer Address" />
+            <i
+              data-i18n
+              title
+              class="fas fa-plus-circle fa-lg has-i18n"
+              id="quickshowCustomeraddress"
+              aria-hidden="true"></i>
+            <input
+              data-i18n="[placeholder]orderScreen.KOTSection.kotNote"
+              id="quickbillkotnoteField"
+              type="text"
+              class="kotNote has-i18n"
+              title="KOT Note"
+              placeholder="KOT Note" />
+            <input
+              data-i18n="[placeholder]orderScreen.KOTSection.coversGuests"
+              id="quickbillnoofpersonsField"
+              type="number"
+              class="noofpersons has-i18n"
+              placeholder="Guests"
+              title="Covers/Guests" />
+            <i
+              data-i18n="[title]orderScreen.clearCurrentKOT"
+              title="Clear current KOT"
+              id="quickbillclearkotButton"
+              class="fas fa-trash text-danger clear-kot-icon has-i18n"></i>
+          </div>
+          <div id="quickPaymentModesLabel"></div>
+          <div class="grandtotalsDiv">
+            <label
+              data-i18n="orderScreen.KOTSection.Total"
+              class="has-i18n billGrandtotallabelclass"
+              for="billGrandtotal">Total:</label>
+            <label
+              for
+              id="quickbillGrandtotal"
+              class="billGrandtotallabel"></label>
+            <div class="faIcon">
+              <i
+                data-i18n="[title]orderScreen.openPreview"
+                title="Open Preview"
+                id="quickpreviewButton"
+                class="far fa-eye fa-lg has-i18n"
+                aria-hidden="true"></i>
+
+              <i
+                data-i18n="[title]orderScreen.addDiscount"
+                title="Add Discount"
+                class="fas fa-tag fa-lg has-i18n"
+                id="quickdiscountButton"
+                aria-hidden="true"></i>
+              <!-- <i data-i18n="[title]orderScreen.addPayment" title="Add Payment"
+                                class="fas fa-credit-card fa-lg has-i18n" id="quickpaymentButton" aria-hidden="true"></i
+                                title="Add Payment"> -->
+              <i
+                data-i18n="[title]orderScreen.addCharges"
+                title="Add charges"
+                class="fas fa-hand-holding-usd fa-lg has-i18n"
+                id="quickchargesButton"
+                aria-hidden="true"></i>
+            </div>
+          </div>
+          <div class="kot-actionsDiv">
+            <input
+              data-i18n="[value]orderScreen.Payment"
+              id="quickpaymentButton2"
+              class="has-i18n"
+              type="button"
+              value="Payment" />
+            <input
+              data-i18n="[value]orderScreen.Paid"
+              id="quickbillsettleButton"
+              class="has-i18n"
+              type="button"
+              value="Settle Bill" />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- The Payment Modal -->
+  <div class="modal fade" id="paymentModalid" data-keyboard="true">
+    <div class="modal-dialog modal-sm modal-dialog-centered">
+      <div class="modal-content paymentModal">
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h4
+            data-i18n="orderScreen.choosePaymentMode"
+            class="modal-title has-i18n">
+            Choose Payment Mode
+          </h4>
+          <button type="button" class="close" data-dismiss="modal">
+            &times;
+          </button>
+        </div>
+
+        <!-- Modal body -->
+        <div class="modal-body paymentBody" id="paymentmodalBodyid">
+          <div class="payselectwrapper">
+            <select class="paySelection" id="payselectionCombo">
+              <option
+                data-i18n="orderScreen.selectPayment"
+                class="has-i18n"
+                disabled
+                selected
+                value>
+                __Select Payment__
+              </option>
+            </select>
+          </div>
+          <div class="splitaddpayWrapper">
+            <input
+              data-i18n="[placeholder]orderScreen.Amount"
+              type="text"
+              class="has-i18n"
+              name
+              id="splitpayAmount"
+              placeholder="Amount" />
+            <input
+              data-i18n="[value]orderScreen.Add"
+              id="addpayMethodbutton"
+              class="has-i18n"
+              type="button"
+              value="Add" />
+          </div>
+          <div class="splitDiv">
+            <input id="splitCheckid" type="checkbox" />
+            <label
+              data-i18n="orderScreen.splitPayment"
+              class="has-i18n"
+              for="splitCheckid">Split Payment</label>
+            <label data-i18n class="has-i18n"
+              for="paymentRefNumoldpaymentid">Payment Ref. No:</label>
+            <input id="paymentRefNumoldpaymentid" type="text" />
+            <div>
+              <label data-i18n class="has-i18n" for="tipAmountOldPaymentid">Tip
+                Amount:</label>
+              <input id="tipAmountOldPaymentid" type="number" />
+            </div>
+          </div>
+          <div class="paysplistselectwrapper" id="paysplistselectwrapperId">
+            <div class="remainingsplitWrapper">
+              <label
+                data-i18n="orderScreen.remainingAmount"
+                class="has-i18n"
+                for="remainingPayableamount">Remaining Amount:</label>
+              <label id="remainingPayableamount" for></label>
+            </div>
+            <ul class="splitpaylistContainer" id="splitpaylistId"></ul>
+          </div>
+          <div class="paymentGrandtotalclass">
+            <label
+              data-i18n="orderScreen.grandTotal"
+              class="has-i18n"
+              for="paymentTotalid">Grand Total:</label>
+            <label for id="paymentTotalid"></label>
+
+            <div
+              class="duepaycheck-wrapper"
+              id="duepaycheck-wrapperid"
+              style="display: none">
+              <input type="checkbox" name id="addduepaymentCheck" />
+              <label
+                data-i18n="orderScreen.addAsDuePayment"
+                class="has-i18n"
+                for="addduepaymentCheck">Add as due payment</label>
+              <!-- <i
+                data-i18n="[title]orderScreen.createWallet"
+                class="fas fa-plus has-i18n"
+                id="redirecttowalletButton"
+                title="Create Wallet"
+              ></i> -->
+            </div>
+            <div class="d-flex duepaycheck-wrapper">
+              <input
+                data-i18n="[placeholder]orderScreen.customerMobile"
+                type="text"
+                class="has-i18n"
+                placeholder="Customer Mobile"
+                id="duepaycustomermobileField" />
+            </div>
+          </div>
+        </div>
+
+        <!-- Modal footer -->
+        <div class="modal-footer">
+          <button
+            data-i18n="orderScreen.Close"
+            type="button"
+            class="normal-button has-i18n"
+            data-dismiss="modal">
+            Close
+          </button>
+          <button
+            data-i18n="orderScreen.Apply"
+            type="button"
+            class="normal-button has-i18n"
+            id="applypaymentButton">
+            Save & Settle Bill
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="neworderpaymentModalid" data-keyboard="true">
+    <div
+      class="modal-dialog newpaymentModal-dialog modal-sm modal-dialog-centered">
+      <div class="modal-content newpaymentModal">
+        <div class="modal-header">
+          <h5
+            data-i18n="orderScreen.choosePaymentMode"
+            class="modal-title has-i18n">
+            Choose Payment Mode <span id="choosePaymentforbillNumberid"></span>
+          </h5>
+          <button type="button" class="close" data-dismiss="modal">
+            &times;
+          </button>
+        </div>
+        <div class="modal-body paymentBody" id="neworderpaymentmodalBodyid">
+          <div
+            class="d-flex justify-content-start flex-wrap orderwindowPaymentlist"
+            id="orderwindowPaymentlist"></div>
+          <!-- <div class="splitDiv">
+                        <input id="newpaymentsplitCheckid" type="checkbox">
+                        <label data-i18n="orderScreen.splitPayment" class="has-i18n" for="newpaymentsplitCheckid">Split
+                            Payment</label>
+                    </div> -->
+          <div class style="margin-top: 10px">
+            <div class="row">
+              <div class="col-2">
+                <input id="newpaymentsplitCheckid" type="checkbox" />
+                <label
+                  data-i18n="orderScreen.splitPayment"
+                  class="has-i18n newpaymentsplitCheckClass"
+                  for="newpaymentsplitCheckid">Split Payment</label>
+              </div>
+              <div class="col-3 newwindowduepaymentcontainer">
+                <div
+                  class="newduepaycheckWrapperClass"
+                  id="newduepaycheckWrapperid"
+                  style="display: none">
+                  <input type="checkbox" name id="newaddduepaymentCheck" />
+                  <label
+                    data-i18n="orderScreen.addAsDuePayment"
+                    class="has-i18n"
+                    for="newaddduepaymentCheck">Add as due payment</label>
+                  <!-- <i
+                    data-i18n="[title]orderScreen.createWallet"
+                    class="fas fa-plus has-i18n"
+                    id="newredirecttowalletButton"
+                    title="Create Wallet"
+                  ></i> -->
+                </div>
+                <div class="d-flex newduepaymobileWrapper">
+                  <input
+                    data-i18n="[placeholder]orderScreen.customerMobile"
+                    type="text"
+                    class="has-i18n"
+                    placeholder="Customer Mobile"
+                    id="newduepaycustomermobileField" />
+                </div>
+              </div>
+              <div class="col-4">
+                <label
+                  data-i18n="orderScreen.PaymentReferenceNo"
+                  class="has-i18n"
+                  for="newpaymentreferenceid">Payment Reference No:</label>
+                <input
+                  class="paymentRefnumberinputclass"
+                  id="newpaymentreferenceid"
+                  type="text" />
+              </div>
+              <div class="col-3">
+                <label
+                  data-i18n="orderScreen.TipAmount"
+                  class="has-i18n"
+                  for="newpaymentTipAmountid">Tip Amount:</label>
+                <input
+                  class="tipamontinputclass"
+                  id="newpaymentTipAmountid"
+                  type="number" />
+              </div>
+            </div>
+            <!-- </div> -->
+
+            <!-- <div class="paymentGrandtotalclass"> -->
+            <div class="row" style="margin-top: 10px;">
+              <div class="col-2 newpaymentwindowgrandtotalcontainer">
+                <label
+                  data-i18n="orderScreen.grandTotal"
+                  class="has-i18n newpaymentTotalClass newpaymentGrandTotalClass"
+                  for="newpaymentTotalid">Grand Total:</label>
+                <label
+                  class="newpaymentGrandTotalClass"
+                  for
+                  id="newpaymentTotalid"></label>
+              </div>
+
+              <div class="col-3">
+                <div id="newpaymentcustomerpaidamtcontainer">
+                  <label
+                    data-i18n="orderScreen.Customerpaidamount"
+                    class="has-i18n"
+                    for="newpaymentCustomerPaidamtid">Paid Amount:</label>
+                  <input
+                    class="customerPaidamountinputclass"
+                    id="newpaymentCustomerPaidamtid"
+                    type="number" />
+                </div>
+              </div>
+              <div class="col-4">
+                <div id="newpaymentreturnamtcontainer">
+                  <label
+                    data-i18n="orderScreen.Returnamount"
+                    class="has-i18n"
+                    for="newpaymentReturnAmountid">Return Amount:</label>
+                  <input
+                    class="returnamountinputclass"
+                    id="newpaymentReturnAmountid"
+                    type="number"
+                    disabled />
+                </div>
+              </div>
+              <div class="col-3">
+                <label
+                  data-i18n="orderScreen.TIP_PAYMENT"
+                  class="has-i18n"
+                  for="newpaymentTipPaymentid">Tip Payment:</label>
+
+                <select class="expense-select" id="newpaymentTipPaymentid">
+                  <option
+                    data-i18n="orderScreen.SELECT_PAYMENT"
+                    class="has-i18n"
+                    disabled
+                    selected
+                    value>
+                    select payment
+                  </option>
+                </select>
+              </div>
+
+            </div>
+
+            <div
+              class="newpaysplistselectwrapper"
+              id="newpaysplistselectwrapperid">
+              <div class="newsplitaddpayWrapper w-100">
+                <input
+                  data-i18n="[placeholder]orderScreen.Amount"
+                  type="text"
+                  class="has-i18n"
+                  name
+                  id="newpaysplitpayAmount"
+                  placeholder="Amount" />
+                <input
+                  data-i18n="[value]orderScreen.Add"
+                  id="newpayaddpayMethodbutton"
+                  class="has-i18n"
+                  type="button"
+                  value="Add" />
+                <div class="newremainingsplitWrapper pl-2">
+                  <label
+                    data-i18n="orderScreen.remainingAmount"
+                    class="has-i18n"
+                    for="newremainingPayableamount">Remaining Amount:</label>
+                  <label id="newremainingPayableamount" for></label>
+                </div>
+              </div>
+              <div class="text-center">
+                <ul
+                  class="flex-wrap newsplitpaylistContainer"
+                  id="newordersplitpaylistId"></ul>
+              </div>
+            </div>
+
+            <div id="curreny-converter-container-body">
+              <span id="currency-coversion-title"
+                data-i18n="orderScreen.CURRENCY_CONVERSION"
+                class="has-i18n">Currency Conversion</span>
+              <div class="curreny-converter-container">
+                <input type="number" id="currenyamount" class="form-control"
+                  placeholder="Amount" value="1" min="0">
+
+                <select id="fromCurrency" class="form-select"></select>
+
+                <span>➝</span>
+
+                <select id="toCurrency" class="form-select"></select>
+
+                <button type="button" id="convert"
+                  class="normal-button has-i18n"
+                  data-i18n="orderScreen.CONVERT">Convert</button>
+
+                <span id="currencyresult">--</span>
+
+                <input id="payInForeingCurrencycheckid" type="checkbox" />
+                <label
+                  data-i18n="orderScreen.eBill"
+                  id="payInForeingCurrencychecboxid"
+                  class="has-i18n"
+                  for="payInForeingCurrencycheckid">Pay in</label>
+              </div>
+            </div>
+          </div>
+          <!-- </div> -->
+        </div>
+        <!-- Modal footer -->
+        <div class="modal-footer">
+          <button
+            data-i18n="orderScreen.Close"
+            type="button"
+            class="normal-button has-i18n"
+            data-dismiss="modal">
+            Close
+          </button>
+          <button
+            data-i18n="orderScreen.Printandsettlebiil"
+            type="button"
+            class="normal-button has-i18n"
+            id="savenewpaymentButton">
+            Print & Settle Bill
+          </button>
+          <button
+            data-i18n="orderScreen.saveandsettlebill"
+            type="button"
+            class="normal-button has-i18n"
+            id="applynewpaymentButton">
+            Save & Settle Bill
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- The Discount Modal -->
+  <div class="modal fade" class="discountModal" id="discountModalid">
+    <div class="modal-dialog modal-md modal-dialog-centered">
+      <div class="modal-content discountModal">
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h4
+            data-i18n="orderScreen.chooseDiscount"
+            class="modal-title has-i18n">
+            Choose Discount
+          </h4>
+          <button type="button" class="close" data-dismiss="modal">
+            &times;
+          </button>
+        </div>
+
+        <!-- Modal body -->
+        <div class="modal-body discountBody">
+          <!-- <select class="discSelection" id="discountsListCombo">
+                        <option data-i18n="orderScreen.selectAnOption" class="has-i18n" disabled selected value> --
+                            select an option -- </option>
+                    </select> -->
+          <input
+            data-i18n="[placeholder]orderScreen.searchDiscount"
+            class="form-control input-sm has-i18n"
+            type="text"
+            id="searchDiscountid"
+            placeholder="Search discount" />
+
+          <ul id="discountsListCombo"></ul>
+          <div
+            class="selectedDiscountinfocontainer"
+            id="selectedDiscountinfocontainerid"></div>
+          <input
+            data-i18n="[placeholder]orderScreen.reason"
+            class="discountInputs has-i18n"
+            id="discountreasonInputid"
+            type="text"
+            placeholder="Reason" />
+          <input
+            data-i18n="[placeholder]orderScreen.newDiscount"
+            class="discountInputs has-i18n"
+            id="discountInputid"
+            type="number"
+            style="display: none"
+            placeholder="New discount" />
+          <button
+            data-i18n="orderScreen.Edit"
+            class="has-i18n"
+            id="editDiscount"
+            style="display: none">
+            Edit
+          </button>
+        </div>
+
+        <!-- Modal footer -->
+        <div class="modal-footer">
+          <button
+            data-i18n="orderScreen.Apply"
+            type="button"
+            class="normal-button has-i18n"
+            id="applydiscountButton">
+            Apply
+          </button>
+          <button
+            data-i18n="orderScreen.Close"
+            type="button"
+            class="normal-button has-i18n"
+            data-dismiss="modal">
+            Close
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- The Pre-Order Modal -->
+  <div class="modal fade" class="preorderModal" id="takeawaypreorderModal">
+    <div
+      class="modal-dialog modal-sm modal-dialog-centered preorderModalcontainer">
+      <div class="modal-content preorderModal">
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h4
+            data-i18n="orderScreen.preOrderInformation"
+            class="modal-title has-i18n">
+            Pre-Order Information
+          </h4>
+          <button type="button" class="close" data-dismiss="modal">
+            &times;
+          </button>
+        </div>
+
+        <!-- Modal body -->
+        <div class="modal-body preorderModalbody">
+          <div class="preorder-container">
+            <div class="d-flex justify-content-end">
+              <div
+                class="preorderform-date"
+                id="preorderformPlaceddateid"></div>
+            </div>
+            <div class="row">
+              <div class="col">
+                <form>
+                  <div class="form-group">
+                    <label
+                      data-i18n="orderScreen.preOrder.customerName"
+                      class="has-i18n"
+                      for="preorderCustomernamefield">Customer Name :
+                    </label>
+                    <input
+                      type="name"
+                      class="form-control"
+                      id="preorderCustomernamefield"
+                      required />
+                  </div>
+                  <div class="form-group">
+                    <label
+                      data-i18n="orderScreen.preOrder.customerMobile"
+                      class="has-i18n"
+                      for="preorderCustomermobilefield">Customer Mobile :
+                    </label>
+                    <input
+                      type="name"
+                      class="form-control"
+                      id="preorderCustomermobilefield"
+                      required />
+                  </div>
+                </form>
+              </div>
+              <div class="col">
+                <form>
+                  <div class="form-group">
+                    <label
+                      data-i18n="orderScreen.preOrder.customerAddressOptional"
+                      class="has-i18n"
+                      for="preorderCustomeraddressfield">Customer address :
+                      (Optional)
+                    </label>
+                    <input
+                      type="name"
+                      class="form-control"
+                      id="preorderCustomeraddressfield" />
+                  </div>
+                </form>
+              </div>
+            </div>
+            <div>
+              <form>
+                <div class="form-group">
+                  <label
+                    data-i18n="orderScreen.preOrder.orderInstructionsOptional"
+                    class="has-i18n"
+                    for="preorderInstructionfield">Order Instructions :
+                    (Optional)
+                  </label>
+                  <textarea
+                    class="form-control"
+                    id="preorderInstructionfield"
+                    rows="2"></textarea>
+                </div>
+              </form>
+            </div>
+            <div>
+              <div class="form-group">
+                <label
+                  data-i18n="orderScreen.preOrder.mediaOptional"
+                  class="has-i18n">Media : (Optional)
+                </label>
+                <div class="custom-file d-flex">
+                  <input
+                    class="custom-file-input"
+                    id="preordermediaFile"
+                    aria-describedby="inputGroupFileAddon01" />
+                  <label
+                    data-i18n="orderScreen.preOrder.chooseFile"
+                    id="preordermediaFilelabel"
+                    class="custom-file-label overflow-hidden w-85 has-i18n"
+                    for="preordermediaFile">Choose file</label>
+                  <button
+                    data-i18n="orderScreen.preOrder.View"
+                    id="viewpreordermediaFile"
+                    type="button"
+                    class="normal-button m-0 w-15 has-i18n">
+                    View
+                  </button>
+                </div>
+              </div>
+              <div class="form-group">
+                <label
+                  data-i18n="orderScreen.preOrder.deliveryTime"
+                  class="has-i18n"
+                  for="preorderDeliverytimefield">Delivery time :
+                </label>
+                <input
+                  type="name"
+                  class="form-control"
+                  id="preorderDeliverytimefield" />
+              </div>
+              <div class="form-group">
+                <label
+                  data-i18n="orderScreen.preOrder.notificationTimeOptional"
+                  class="has-i18n"
+                  for="preorderNotificationtimefield">Notification time :
+                  (Optional)
+                </label>
+                <input
+                  type="name"
+                  class="form-control"
+                  id="preorderNotificationtimefield" />
+              </div>
+            </div>
+            <div>
+              <form>
+                <div class="form-group">
+                  <label
+                    data-i18n="orderScreen.preOrder.paymentInstructionsOptional"
+                    class="has-i18n"
+                    for="preorderPaymentinstructionsfield">Payment Instructions
+                    : (Optional)
+                  </label>
+                  <textarea
+                    class="form-control"
+                    id="preorderPaymentinstructionsfield"
+                    rows="2"></textarea>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+
+        <!-- Modal footer -->
+        <div class="modal-footer">
+          <button
+            data-i18n="orderScreen.Close"
+            type="button"
+            class="normal-button has-i18n"
+            data-dismiss="modal">
+            Close
+          </button>
+          <button
+            data-i18n="orderScreen.preOrder.savePreOrderForm"
+            type="button"
+            class="normal-button has-i18n"
+            data-dismiss="modal"
+            id="addpreorderinfoButton">
+            Save Pre-Order Form
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- The Old KOT Modal -->
+  <div class="modal fade" id="oldkotModal">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+      <div class="modal-content oldkotModalclass">
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h4 data-i18n="orderScreen.OldKOT" class="modal-title has-i18n">
+            Old KOT
+          </h4>
+          <button type="button" class="close" data-dismiss="modal">
+            &times;
+          </button>
+        </div>
+
+        <!-- Modal body -->
+        <div
+          class="modal-body oldkotpreviewBody"
+          id="oldkotpreviewBodyid"></div>
+
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="billstatusModal">
+    <div class="modal-dialog modal-sm modal-dialog-centered">
+      <div class="modal-content billstatusModalclass">
+        <!-- Modal body -->
+        <div
+          class="modal-body billstatusModalBody"
+          id="billstatusModalBodyid"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- The Charges Modal-->
+  <div class="modal fade" id="billchargesModal">
+    <div class="modal-dialog modal-sm modal-dialog-centered">
+      <div class="modal-content billchargesModalclass">
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h4
+            data-i18n="orderScreen.additionalCharges"
+            class="modal-title has-i18n">
+            Additional Charges
+          </h4>
+          <button type="button" class="close" data-dismiss="modal">
+            &times;
+          </button>
+        </div>
+
+        <!-- Modal body -->
+        <div class="modal-body billchargesBody" id="billchargesBodyid"></div>
+
+        <!-- Modal footer -->
+        <div class="modal-footer">
+          <button
+            data-i18n="orderScreen.Apply"
+            type="button"
+            class="normal-button has-i18n"
+            id="applychargesButton">
+            Apply
+          </button>
+          <button
+            data-i18n="orderScreen.Close"
+            type="button"
+            class="normal-button has-i18n"
+            data-dismiss="modal">
+            Close
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="loyaltyrewardsModalid">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content loyaltyrewardsModalclass">
+        <!-- Modal body -->
+        <div
+          class="modal-body loyaltyrewardsModalBody"
+          id="loyaltyrewardsModalBodyid">
+          <h4 data-i18n="orderScreen.selectReward" class="mb-4 has-i18n">
+            Select Reward
+          </h4>
+          <div class="alert alert-success" role="alert"></div>
+
+          <ul id="storerewardslistContainerid" class="list-group mb-4"></ul>
+          <div
+            class="input-group mb-3 rewards-otp-container"
+            id="rewards-otp-containerid">
+            <input
+              type="number"
+              class="form-control"
+              placeholder="OTP Verfication is required"
+              aria-label="OTP Verfication is required"
+              aria-describedby="basic-addon2" />
+            <div class="input-group-append mt-1 ml-n3">
+              <button
+                data-i18n="orderScreen.sendOTP"
+                id="loyaltyotpButton"
+                class="normal-button has-i18n"
+                type="button">
+                Send OTP
+              </button>
+            </div>
+          </div>
+        </div>
+        <!-- Modal footer -->
+        <div class="modal-footer">
+          <button
+            data-i18n="orderScreen.Close"
+            type="button"
+            class="normal-button has-i18n"
+            data-dismiss="modal">
+            Close
+          </button>
+          <button
+            data-i18n="orderScreen.Apply"
+            type="button"
+            class="normal-button has-i18n"
+            id="applyselectedRewardbuttonid">
+            Apply
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="reelorewardsModalid">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content loyaltyrewardsModalclass">
+        <!-- Modal body -->
+        <div
+          class="modal-body loyaltyrewardsModalBody"
+          id="reelorewardsModalBodyid">
+          <h4 data-i18n="orderScreen.selectReward" class="mb-4 has-i18n">
+            Select Reward
+          </h4>
+          <div class="alert alert-success" role="alert"></div>
+          <div class="alert alert-danger" role="alert"></div>
+
+          <ul
+            id="storeReelorewardslistContainerid"
+            class="list-group mb-4"></ul>
+          <div id="usepointsloyaltycontainerid">
+            <input
+              value="1"
+              name="usepointsloyalty"
+              id="usepointsloyaltyid"
+              type="radio" />
+            <label data-i18n class="has-i18n"
+              for="usepointsloyaltyid">Points</label>
+          </div>
+          <div id="redeemPointsContainerid">
+            <label style="font-weight: bold">Enter points to redeem:</label>
+            <input
+              type="number"
+              class="form-control"
+              placeholder="Enter points"
+              type="number"
+              aria-label="Enter points"
+              aria-describedby="basic-addon2"
+              id="reeloPointsRedeeminputid" />
+          </div>
+          <div
+            class="input-group mb-3 rewards-otp-container"
+            id="reelorewards-otp-containerid">
+            <input
+              type="number"
+              class="form-control"
+              placeholder="OTP Verfication is required"
+              aria-label="OTP Verfication is required"
+              aria-describedby="basic-addon2" />
+            <div class="input-group-append mt-1 ml-n3">
+              <button
+                data-i18n="orderScreen.sendOTP"
+                id="reeloOTPButton"
+                class="normal-button has-i18n"
+                type="button">
+                Send OTP
+              </button>
+            </div>
+          </div>
+        </div>
+        <!-- Modal footer -->
+        <div class="modal-footer">
+          <button
+            data-i18n="orderScreen.Close"
+            type="button"
+            class="normal-button has-i18n"
+            data-dismiss="modal">
+            Close
+          </button>
+          <button
+            data-i18n="orderScreen.Apply"
+            type="button"
+            class="normal-button has-i18n"
+            id="applyselectedReeloRewardbuttonid">
+            Apply
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="customerDivclass" id="customerDivid"></div>
+
+  <!-- Remote kot modal -->
+  <div class="modal fade" class="discountModal" id="remoteKotModal">
+    <div
+      class="modal-dialog modal-lg modal-dialog-centered remoteKotModaldialog">
+      <div class="modal-content remoteKot remoteKotModalcontent">
+        <!-- <link rel="stylesheet" href="../css/Onlineorders.css">
+                <link rel="stylesheet" href="../css/OrderButtons.css">
+                <link rel="stylesheet" href="../css/Order-item-template.css">
+                <link href="../css/Step-Progress.css" rel="stylesheet" /> -->
+
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h4
+            data-i18n="orderScreen.chooseDiscount"
+            class="modal-title has-i18n">
+            Remote KOT
+          </h4>
+          <button type="button" class="close" data-dismiss="modal">
+            &times;
+          </button>
+        </div>
+
+        <!-- Modal body -->
+        <div class="modal-body remotekotBody">
+          <div class="row main-order-wrapper">
+            <div class="col-sm-7 orderslistWrapeer remoteKotWrapper">
+              <div>
+                <ul
+                  class="nav nav-tabs mainsectionTabs"
+                  role="tablist"
+                  id>
+                  <li class="nav-item">
+                    <a
+                      data-i18n="orderScreen.dineIn"
+                      class="nav-link has-i18n"
+                      id="placedRemoteKot"
+                      href
+                      role="tab"
+                      data-toggle="tab">Placed</a>
+                  </li>
+                  <li class="nav-item">
+                    <a
+                      data-i18n="orderScreen.dineIn"
+                      class="nav-link has-i18n"
+                      id="acceptedRemoteKot"
+                      href
+                      role="tab"
+                      data-toggle="tab">Accepted</a>
+                  </li>
+                  <li class="nav-item">
+                    <a
+                      data-i18n="orderScreen.dineIn"
+                      class="nav-link has-i18n"
+                      id="rejectedRemoteKot"
+                      href
+                      role="tab"
+                      data-toggle="tab">Rejected</a>
+                  </li>
+                </ul>
+              </div>
+              <ul
+                class="list-group remoteKot-list-container touch-scroll"
+                id="remoteKotListID"></ul>
+              <label
+                data-i18n="controller:remoteKotController.kotsnotfound"
+                class="has-i18n"
+                id="kotNotFound">No KOTs found</label>
+            </div>
+
+            <div
+              id="remotekotdetail-wrapper-div"
+              class="col-sm-5 orderDetail-wrapper-div">
+              <div class="remotekotdetail-items-div">
+                <label
+                  data-i18n="digitalOrderScreen.ItemsHeading"
+                  class="orderdetail-itemsdetails-label has-i18n"
+                  for>Items</label>
+                <table class="table table-sm" id="remoteKotdetailsTable">
+                  <thead class>
+                    <tr>
+                      <th
+                        data-i18n="digitalOrderScreen.Items.name"
+                        class="has-i18n">
+                        Name
+                      </th>
+                      <th
+                        data-i18n="digitalOrderScreen.Items.QTY"
+                        class="has-i18n">
+                        Qty
+                      </th>
+                      <th
+                        data-i18n="digitalOrderScreen.Items.Price"
+                        class="has-i18n">
+                        Price
+                      </th>
+                      <th
+                        data-i18n="digitalOrderScreen.Items.Amount"
+                        class="has-i18n">
+                        Amount
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody></tbody>
+                </table>
+              </div>
+
+              <div class="orderdetails-actionsDiv">
+                <button
+                  data-i18n="controller:remoteKotController.AcceptPrintKot"
+                  id="pullRemotekotButton"
+                  class="normal-button has-i18n">
+                  Accept & Print KOT
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- waiter notification modal -->
+  <div class="modal fade" class="discountModal" id="waiterNotificationsModal">
+    <div
+      class="modal-dialog modal-lg modal-dialog-centered waiterNotificationsModaldialog">
+      <div
+        class="modal-content waiterNotifications waiterNotificationsModalcontent">
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h4
+            data-i18n="controller:orderController.Waiternotifications"
+            class="modal-title has-i18n">
+            Waiter notifications
+          </h4>
+          <button type="button" class="close" data-dismiss="modal">
+            &times;
+          </button>
+        </div>
+
+        <!-- Modal body -->
+        <div class="modal-body waiterNotificationsModalBody">
+          <div class="main-order-wrapper">
+            <div class="orderslistWrapeer waiterNotificationsModalWrapper">
+              <div>
+                <ul
+                  class="nav nav-tabs mainsectionTabs"
+                  role="tablist"
+                  id="notificationMainsectionTabsid">
+                  <li class="nav-item">
+                    <a
+                      data-i18n="controller:orderController.Open"
+                      class="nav-link has-i18n"
+                      id="openNotificationsbuttonid"
+                      href
+                      role="tab"
+                      data-toggle="tab">Open</a>
+                  </li>
+                  <li class="nav-item">
+                    <a
+                      data-i18n="controller:orderController.Close"
+                      class="nav-link has-i18n"
+                      id="closedNotificationsbuttonid"
+                      href
+                      role="tab"
+                      data-toggle="tab">Closed</a>
+                  </li>
+                  <li class="nav-item">
+                    <a
+                      data-i18n="controller:orderController.All"
+                      class="nav-link has-i18n"
+                      id="allnotificationsbuttonid"
+                      href
+                      role="tab"
+                      data-toggle="tab">All</a>
+                  </li>
+                </ul>
+              </div>
+              <ul
+                class="list-group remoteKot-list-container touch-scroll"
+                id="waiterNotificationstListID"></ul>
+              <ul id="paginateNotification"></ul>
+              <!-- <label data-i18n="" class="has-i18n" id="NotificationNotFound">Notifications not found</label> -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Payments list modal -->
+  <div class="modal fade" class="discountModal" id="paymentsListModal">
+    <div
+      class="modal-dialog modal-lg modal-dialog-centered paymentsListModaldialog">
+      <div class="modal-content remoteKot paymentsListModalcontent">
+        <link rel="stylesheet" href="../css/Payments.css" />
+        <link rel="stylesheet" href="../css/Table.css" />
+        <!-- <link rel="stylesheet" href="../css/OrderButtons.css">
+                <link rel="stylesheet" href="../css/Order-item-template.css">
+                <link href="../css/Step-Progress.css" rel="stylesheet" /> -->
+
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h4
+            data-i18n="orderScreen.chooseDiscount"
+            class="modal-title has-i18n">
+            Payment List
+          </h4>
+          <button type="button" class="close" data-dismiss="modal">
+            &times;
+          </button>
+        </div>
+
+        <!-- Modal body -->
+        <div class="modal-body paymentsListBody">
+          <div class="row main-order-wrapper">
+            <div class="col-sm-12 orderslistWrapeer psymentsListWrapper">
+              <ul
+                class="list-group payments-list-container touch-scroll"
+                id="paymentsListID"></ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Item modifiers -->
+  <div class="modal fade" id="itemModifiersModal">
+    <link rel="stylesheet" href="../css/ItemModifiers.css" />
+    <div
+      class="modal-dialog modal-xl modal-dialog-centered itemModifiersmodal-dialog">
+      <div class="modal-content itemModifiersModalwrapper">
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h6 data-i18n id="itemModifierBaseitemtitleid"
+            class="modal-title has-i18n">
+          </h6>
+          <button type="button" class="close" data-dismiss="modal">
+            &times;
+          </button>
+        </div>
+        <!-- Modal body -->
+        <div
+          class="modal-body itemModifiersModalbody"
+          id="itemModifiersModalbodyid"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modifier varient -->
+  <div class="modal fade" id="modifierVarientModal">
+    <link rel="stylesheet" href="../css/ItemModifiers.css" />
+    <div
+      class="modal-dialog modal-sm modal-dialog-centered modifierVarientmodal-dialog">
+      <div class="modal-content modifierVarientModalwrapper">
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h6 data-i18n="home.customerForm" class="modal-title has-i18n">
+            Select Variant
+          </h4>
+          <button type="button" class="close" data-dismiss="modal">
+            &times;
+          </button>
+        </div>
+        <!-- Modal body -->
+        <div
+          class="modal-body modifierVarientModalbody"
+          id="modifierVarientModalbodyid">
+          <div id="modifierVarientContainerId"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- delivery boy window -->
+  <div class="modal fade" id="deliveryBoyModal">
+    <div class="modal-dialog modal-sm modal-dialog-centered">
+      <div class="modal-content deliveryBoyModalclass">
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h4
+            data-i18n
+            class="modal-title has-i18n"
+            id="Deliveryboymodalheading">
+            Assign Delivery Boy/Rider
+          </h4>
+
+        </div>
+
+        <!-- Modal body -->
+        <div class="modal-body deliveryBoyBody" id="deliveryBoyBodyid">
+          <input
+            data-i18n
+            class="form-control input-sm has-i18n"
+            type="text"
+            id="searchDeliveryBoyid"
+            placeholder="Search Delivery Boy/Rider" />
+          <ul id="deliveryBoylistId" class="chargeslistClass"></ul>
+        </div>
+
+        <!-- Modal footer -->
+        <div class="modal-footer">
+          <button
+            data-i18n="orderScreen.Close"
+            type="button"
+            class="normal-button has-i18n"
+            data-dismiss="modal">
+            Close
+          </button>
+          <button
+            data-i18n="orderScreen.Apply"
+            type="button"
+            class="normal-button has-i18n"
+            id="applyDeliveryBoyButton">
+            Update Details
+          </button>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Zomato pay auth -->
+  <div class="modal fade" id="zomatoPayAuthModal">
+    <!-- <link rel="stylesheet" href="../css/ItemModifiers.css" /> -->
+    <div
+      class="modal-dialog modal-md modal-dialog-centered zomatoPayAuthmodal-dialog">
+      <div class="modal-content zomatoPayAuthModalwrapper">
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h5>Settle Bill with Zomato Pay</h5>
+
+          <button type="button" class="close" data-dismiss="modal">
+            &times;
+          </button>
+        </div>
+        <!-- Modal body -->
+        <div
+          class="modal-body zomatoPayAuthModalbody"
+          id="zomatoPayAuthModalbodyid">
+          <div id="zomatoPayAuthContainerId">
+            <div>
+              <input id="zomatoPayAuthenticationCodeInputid"
+                placeholder="Enter Authentication Code" />
+              <input type="button" id="VeifyZomatoPayAuthCodebuttonId"
+                value="Verify Code" />
+            </div>
+          </div>
+          <div id="verifyingAuthCodeContainerId">
+            <i class="fas fa-spinner fa-spin text-center"></i>
+            <span id="verifyingauthcodemessageId">Verifying Code with Zomato
+              Pay...</span>
+          </div>
+          <div class="alert alert-success" role="alert"
+            id="zomatoPayAuthSuccessMessageID">
+          </div>
+          <div class="alert alert-danger" role="alert"
+            id="zomatoPayAuthFailureMessageID">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!--Add or edit customer -->
+  <div class="modal fade" id="addOrEditCustomerModal">
+    <!-- <link rel="stylesheet" href="../css/ItemModifiers.css" /> -->
+    <div
+      class="modal-dialog modal-md modal-dialog-centered zomatoPayAuthmodal-dialog">
+      <div class="modal-content addOrEditCustomerModalwrapper">
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h5 class="has-i18n"
+            data-i18n="orderScreen.addUpdateCustomer">Add/Update Customer</h5>
+
+          <button type="button" class="close" data-dismiss="modal">
+            &times;
+          </button>
+        </div>
+        <!-- Modal body -->
+        <div
+          class="modal-body addOrEditCustomerModalbody"
+          id="addOrEditCustomerModalbodyid">
+          <div id="addOrEditCustomerContainerId">
+            <input type='number' autocomplete
+              class='w-100 wallet_customerPhone has-i18n'
+              id='modal_customerPhoneid'
+              data-i18n='[placeholder]controller:orderController.editOrAddCustomer.customerMobile'
+              placeholder="Customer Mobile">
+            <input type='text' name class='w-100 wallet_customerName has-i18n'
+              id='modal_customernameid'
+              data-i18n='[placeholder]controller:orderController.editOrAddCustomer.customerName'
+              placeholder="Customer Name">
+            <input type='text' name class='w-82 has-i18n'
+              id='modal_customeraddressid'
+              data-i18n='[placeholder]controller:orderController.editOrAddCustomer.customerAddress'
+              placeholder="Customer Address">
+            <i data-i18n title
+              class="fas fa-plus-circle fa-lg has-i18n"
+              id="showCustomeraddressswalid"
+              -hidden="true"></i>
+          </div>
+        </div>
+
+        <!-- Modal footer -->
+        <div class="modal-footer">
+          <button
+            data-i18n="orderScreen.Close"
+            type="button"
+            class="normal-button has-i18n"
+            data-dismiss="modal">
+            Close
+          </button>
+          <button
+            data-i18n="orderScreen.Apply"
+            type="button"
+            class="normal-button has-i18n"
+            id="updateAndSettleCustomerButton">
+            Update & Save
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- <div class="startCloseDayShiftwindowWrapper"
+        id="startCloseDayShiftwindowWrapperid"
+      ></div> -->
+
+  <!-- Open Item Modal -->
+  <div class="modal fade" id="openItemModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content rounded-3 shadow">
+        <div class="modal-header">
+          <h5 class="modal-title" id="openItemModalTitle"></h5>
+          <button type="button" class="close" data-dismiss="modal">
+            &times;
+          </button>
+        </div>
+        <div class="modal-body">
+          <!-- Item Name Input (hidden for price-only case) -->
+          <div class="mb-3" id="itemNameGroup">
+            <input
+              type="text"
+              class="form-control has-i18n"
+              id="modalItemName"
+              data-i18n="[placeholder]orderScreen.enterNewItemName"
+              placeholder="Enter new item name" />
+          </div>
+          <!-- Price Input -->
+          <div class="mb-3">
+            <input
+              type="number"
+              class="form-control has-i18n"
+              id="modalItemPrice"
+              data-i18n="[placeholder]orderScreen.enterNewPrice"
+              placeholder="Enter new price" />
+          </div>
+
+          <!-- Error message -->
+          <div id="modalError" class="text-danger small"></div>
+        </div>
+        <div class="modal-footer">
+          <button
+            data-i18n="orderScreen.Close"
+            type="button"
+            class="normal-button has-i18n"
+            data-dismiss="modal">
+            Close
+          </button>
+          <button type="button" id="modalSubmitBtn"
+            class="normal-button has-i18n"
+            data-i18n="orderScreen.AddItem">
+            Add Item
+          </button>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- search table Modal -->
+  <div class="modal fade" id="searchTableModal" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Search Order</h5>
+          <button type="button" class="close" data-dismiss="modal">
+            &times;
+          </button>
+        </div>
+
+        <div class="modal-body">
+          <input
+            id="kotSearch"
+            type="text"
+            class="form-control"
+            placeholder="KOT Number|Bill Number|Order Number|Customer Mobile|Customer Name"
+            autocomplete="off" />
+          <div
+            id="suggestions"
+            class="list-group mt-2"
+            style="max-height:250px; overflow:auto;"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+<script>
+  require('../js/OrderController.js');
+</script>
+<!-- Insert this line after script imports -->
+<script>
+  if (window.module) module = window.module;
+</script>

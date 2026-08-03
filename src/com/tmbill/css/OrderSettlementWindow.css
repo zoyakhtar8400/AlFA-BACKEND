@@ -1,0 +1,354 @@
+.searchOrderSettleDivclass {
+  display: flex;
+  height: 55px;
+  /* width: 100%; */
+  max-height: 10%;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--table-button-background);
+}
+
+.otherfiltersDivcalls {
+  height: 55px;
+  width: 100%;
+  max-height: 10%;
+}
+
+#searchOrderSettlementField {
+  margin: 0px !important;
+  width: 250px;
+}
+
+#ordersettlewindowheaderid {
+  color: white;
+  font-weight: bold;
+  padding-left: 10px;
+}
+
+#ordertypesinOrderSettlementWindowContainerId {
+  display: flex;
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+
+#ordertypesinOrderSettlementWindowContainerId button {
+  height: 40px;
+  margin: 5px;
+  background: white;
+  border: none;
+  border-radius: 5px;
+}
+
+#orderSettleWindowOrderStatusContainer span {
+  height: 32px;
+  padding: 10.5px;
+  margin: 8px 2px;
+  width: 99px;
+  font-size: 12px;
+}
+button#refreshOrderSettlementWindowButtonId {
+  margin-top: -3px;
+}
+span#orderSettlewindowAllorderCountId {
+  width: 68px;
+}
+
+#orderSettlewindowTable_filter {
+  display: none !important;
+}
+
+.settleOrderActionsDivclass {
+  background-color: var(--table-button-background);
+  display: flex;
+  align-items: center;
+  justify-content: end;
+  position: fixed;
+  bottom: 0;
+  width: 97%;
+  margin-left: 0px;
+}
+
+#orderSettlewindowSettleButtonId {
+  margin-right: 28px;
+}
+/* Order Settlement — keep status pills on one line (desktop 1024–1280) */
+@media (max-width: 1280px) and (min-width: 1024px) {
+  /* container: single row */
+  #orderSettleWindowOrderStatusContainer {
+    display: flex;
+    align-items: center;
+    gap: 6px; /* space between pills */
+    flex-wrap: nowrap; /* no wrapping */
+    white-space: nowrap; /* keep spans in one line */
+  }
+
+  /* status pills */
+  #orderSettleWindowOrderStatusContainer span {
+    height: 30px;
+    padding: 6px 8px;
+    margin: 6px 2px;
+    width: 79px; /* narrower than 88px */
+    font-size: 10.7px; /* a touch smaller */
+    line-height: 1;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* “All(1)” pill a bit tighter */
+  span#orderSettlewindowAllorderCountId {
+    width: 58px;
+  }
+
+  /* refresh button sits on same row */
+  button#refreshOrderSettlementWindowButtonId {
+    height: 30px;
+    padding: 6px 10px;
+    margin-top: 0;
+  }
+}
+
+.custom-check {
+  white-space: normal !important;
+}
+
+.custom-check::before {
+  font-size: 12px;
+  width: 15px !important;
+  height: 15px !important;
+}
+
+.custom-check:after {
+  font-size: 14px !important;
+  width: 20px !important;
+  height: 20px !important;
+  top: 1.6rem !important;
+  font-weight: 200;
+  text-shadow: none !important;
+}
+.orderSettlewindowTableclass tr.selectedbillRow th.select-checkbox:after {
+  text-shadow: none !important;
+}
+
+.orderSettlewindowTableclass tr.selectedbillRow .select-checkbox:after {
+  content: '\2714' !important;
+}
+
+.orderSettlewindowTableclass tbody tr.selectedbillRow td.select-checkbox:after,
+table.dataTable tbody tr.selectedbillRow th.select-checkbox:after {
+  background-color: #1fa67a;
+}
+
+.otherfiltersDivcalls span {
+  cursor: pointer;
+}
+
+.updateOrderStatusIcon {
+  margin-left: 10px;
+  color: green;
+}
+
+.row-payment-mode,
+.header-payment-mode,
+.header-delivery-boy,
+.row-delivery-boy,
+.header-waiter-name,
+.row-waiter-name {
+  width: 132px;
+}
+
+div.dataTables_scrollBody::-webkit-scrollbar {
+  width: 10px;
+  height: 5px;
+}
+/* Labels: no margin-bottom + reduced padding */
+#totalBillSelectedAmountid,
+#totalBillSelectedid {
+  margin-bottom: 0px;
+  padding: 2px 4px; /* reduced padding */
+  font-size: 0.9em; /* optional: slightly smaller text */
+}
+
+/* Buttons: make them a little smaller */
+#orderSettlewindowUpdateButtonId,
+#orderSettlewindowSettleButtonId {
+  font-size: 0.9em; /* slightly smaller text */
+  padding: 6px 12px; /* reduced padding for compact size */
+  height: 10%;
+}
+.row-checkbox::before {
+  margin-top: 6px !important;
+}
+
+.row-checkbox::after {
+  margin-top: -9px !important;
+}
+
+#totalBillSelectedAmountid,
+#totalBillSelectedid {
+  color: white;
+  /* width: 100px; */
+  border: 1px solid;
+  border-radius: 4px;
+  padding: 5px 16px;
+}
+
+#totalBillSelectedAmountid {
+  margin-left: 10px;
+}
+
+#totalBillSelectedid,
+#totalBillSelectedAmountid {
+  display: none;
+}
+
+.activeOrderCountStatusButton {
+  border: 2px solid;
+  border-image: linear-gradient(to right, #c0c0c0, #e0e0e0) 1;
+  box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.5);
+}
+
+#refreshOrderSettlementWindowButtonId {
+  background-color: var(--button-background);
+  color: white;
+  height: 32px;
+  text-align: center;
+  line-height: 1;
+  font-size: 75%;
+  font-weight: 700;
+}
+h6#ordersettlewindowheaderid {
+  padding-top: 9px;
+}
+.badge {
+  line-height: none;
+}
+
+.hide-delivery-boy-cell select {
+  display: none !important;
+}
+
+#orderSettlemetWindowParentDivID
+  table#orderSettlewindowTable
+  tbody
+  tr
+  td:first-child,
+#orderSettlemetWindowParentDivID
+  table#orderSettlewindowTable
+  thead
+  tr
+  th:first-child {
+  padding-left: 27px !important;
+}
+
+#orderSettlemetWindowParentDivID
+  table#orderSettlewindowTable
+  tbody
+  td:nth-child(2) {
+  padding-left: 5px !important;
+  padding-right: 0 !important;
+}
+
+#orderSettlemetWindowParentDivID
+  table#orderSettlewindowTable
+  tbody
+  td:nth-child(3) {
+  padding-left: 27px !important;
+}
+
+#orderSettlemetWindowParentDivID
+  table#orderSettlewindowTable
+  tbody
+  td.row-checkbox.select-checkbox.custom-check::before,
+#orderSettlemetWindowParentDivID
+  table#orderSettlewindowTable
+  tbody
+  td.row-checkbox.select-checkbox.custom-check::after {
+  left: 19px !important;
+}
+#orderSettlewindowTable .statusLabel {
+  padding: 4px 10px;
+  font-size: 12px;
+  white-space: nowrap;
+}
+
+#orderSettlemetWindowParentDivID
+  div.dataTables_scrollHead
+  table#orderSettlewindowTable
+  thead
+  th:nth-child(15),
+#orderSettlemetWindowParentDivID
+  div.dataTables_scrollBody
+  table#orderSettlewindowTable
+  tbody
+  td:nth-child(15) {
+  width: 50px !important;
+  min-width: 40px !important;
+  max-width: 50px !important;
+  padding-left: 22px;
+}
+
+#orderSettlemetWindowParentDivID
+  div.dataTables_scrollHead
+  table#orderSettlewindowTable
+  thead
+  th:nth-child(5),
+#orderSettlemetWindowParentDivID
+  div.dataTables_scrollBody
+  table#orderSettlewindowTable
+  tbody
+  td:nth-child(5) {
+  width: 56.5px !important;
+  min-width: 56.5px !important;
+}
+
+#orderSettlemetWindowParentDivID
+  div.dataTables_scrollBody
+  table#orderSettlewindowTable
+  tbody
+  td:nth-child(11),
+#orderSettlemetWindowParentDivID
+  div.dataTables_scrollBody
+  table#orderSettlewindowTable
+  tbody
+  td:nth-child(12) {
+  /* Status */
+  padding-left: 1px !important;
+  text-align: center;
+}
+
+#orderSettlemetWindowParentDivID
+  div.dataTables_scrollBody
+  table#orderSettlewindowTable
+  tbody
+  td:nth-child(13) {
+  padding-left: 26px !important;
+}
+
+#orderSettlemetWindowParentDivID
+  div.dataTables_scrollBody
+  table#orderSettlewindowTable
+  tbody
+  td:nth-child(5) {
+  padding-left: 5px !important;
+}
+#orderSettlemetWindowParentDivID #deliveryBoyReeportprintButton {
+  color: var(--button-background);
+  cursor: pointer;
+}
+
+#orderSettlemetWindowParentDivID #deliveryBoyReeportprintButton:hover {
+  opacity: 0.8;
+}
+#orderSettlemetWindowParentDivID #deliveryBoyReeportprintButton {
+  color: var(--button-background);
+  cursor: pointer;
+}
+
+#orderSettlemetWindowParentDivID #deliveryBoyReeportprintButton:hover {
+  opacity: 0.8;
+}
+#orderSettlemetWindowParentDivID #deliveryBoyReeportprintButton {
+  color: #fff;
+  cursor: pointer;
+}

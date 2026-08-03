@@ -1,0 +1,419 @@
+<div class="receiptsDiv" id="reciptsparentdivID">
+  <link rel="stylesheet" href="../css/Receipt.css" />
+  <div class="searchreceiptDivclass">
+    <input
+      data-i18n="[value]receipt.allBills"
+      class="has-i18n get-filter"
+      type="button"
+      id="allbillsButton"
+      value="All Bills" />
+    <input
+      data-i18n="[value]receipt.todaysBills"
+      class="has-i18n get-filter selected-filter"
+      type="button"
+      id="todaysbillsButton"
+      value="Todays Bills" />
+    <div class="receiptselectalldiv">
+      <input id="selectallreceiptBillcheck" type="checkbox" />
+      <label
+        data-i18n="receipt.selectAll"
+        class="selectall-receipt-check has-i18n"
+        for="selectallreceiptBillcheck">Select All</label>
+    </div>
+    <input
+      data-i18n="[placeholder]receipt.Search"
+      class="has-i18n"
+      type="text"
+      placeholder="Search"
+      id="searchreceiptField" />
+    <input
+      data-i18n="[placeholder]receipt.fromDate"
+      class="has-i18n"
+      placeholder="From Date"
+      id="receipt_fromdateButton" />
+    <div id="fetchReceiptDataasperclosedayCheckDiv">
+      <input
+        id="fetchReceiptDataasperclosedayCheckid"
+        title="As per Close Day"
+        type="checkbox" />
+      <label
+        data-i18n
+        class="has-i18n"
+        for="fetchReceiptDataasperclosedayCheckid"
+        title="As per Close Day"></label>
+    </div>
+    <!-- <input type="text" placeholder="To Date" id="receipt_todateButton"> -->
+    <input
+      data-i18n="[value]receipt.Fetch"
+      class="has-i18n"
+      type="button"
+      id="receipt_fetchbillsButton"
+      value="Fetch" />
+
+    <input
+      data-i18n="[value]receipt.syncBills"
+      class="has-i18n"
+      type="button"
+      id="syncBillbutton"
+      value="Sync Bills" />
+    <input
+      data-i18n="[value]receipt.reSyncBills"
+      title="Select date and click on resync"
+      class="resync-bills-button has-i18n"
+      type="button"
+      id="resyncBillbuttonid"
+      value="Re-Sync Bills" />
+  </div>
+
+  <div class="billtableWrapper">
+    <div class="table-responsive billsDivclass">
+      <table
+        class="table table-sm receiptTableclass display tablenowrap"
+        id="receiptTable">
+        <tfoot>
+          <tr>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+          </tr>
+        </tfoot>
+      </table>
+    </div>
+  </div>
+
+  <div class="receiptWrapper2">
+    <div class="table-responsive billsitemsDivclass">
+      <table
+        class="table table-sm receiptitemsTableclass"
+        id="receiptitemsTable"></table>
+    </div>
+    <div class="receiptbillactionsDiv">
+      <div class="receiptActiondiv1">
+        <div>
+          <input id="receiptshowoldbillfirstCheckid" type="checkbox" />
+          <label
+            data-i18n="receipt.showOldBillFirst"
+            class="selectall-receipt-check has-i18n"
+            for="receiptshowoldbillfirstCheckid">Show old bill first</label>
+        </div>
+        <input
+          data-i18n="[value]receipt.clearSection"
+          class="has-i18n"
+          type="button"
+          id="clearSelectionbutton"
+          value="Clear Selection" />
+        <input
+          data-i18n="[value]receipt.todaysReport"
+          class="has-i18n"
+          type="button"
+          id="todaysreportbutton"
+          value="Today's Report" />
+        <input
+          class="has-i18n"
+          type="button"
+          data-i18n="[value]orderScreen.ReduceInventory"
+          id="reduceinvreportbutton"
+          value="Reduce inventory" />
+        <!-- <input
+          class="has-i18n"
+          type="button"
+          data-i18n=""
+          id="exportTallyReportbutton"
+          value="Tally"
+        /> -->
+        <input
+          data-i18n="[value]receipt.generateIRN"
+          class="has-i18n"
+          type="button"
+          id="generateIRNButtonId"
+          value="Generate IRN" />
+      </div>
+      <div class="receiptActiondiv2">
+        <label
+          data-i18n="receipt.grandTotal"
+          for="receiptGrandtotalclass"
+          class="receiptGrandtotallabelclass has-i18n">Grand Total :</label>
+        <label id="receiptGrandlabelid" class="receiptGrandtotalclass"></label>
+        <div class="receiptIcons" aria-hidden="true">
+          <i
+            data-i18n="[title]receipt.previewBill"
+            id="previewreceiptbillButton"
+            class="far fa-eye has-i18n"
+            title="Preview Bill"
+            aria-hidden="true"></i>
+          <i
+            data-i18n="[title]receipt.printBill"
+            id="receiptprintButton"
+            class="fas fa-print has-i18n"
+            title="Print Bill"
+            aria-hidden="true"></i>
+          <i
+            data-i18n="[title]receipt.editBill"
+            id="editbillButton"
+            class="far fa-edit has-i18n"
+            title="Edit Bill"
+            aria-hidden="true"></i>
+          <i
+            data-i18n="[title]receipt.editBill"
+            id="modifybillButton"
+            class="fas fa-pencil-alt has-i18n"
+            title="Modify Bill"
+            aria-hidden="true"></i>
+          <!-- <i class="fa-regular fa-pen-field"></i> -->
+          <i
+            data-i18n="[title]receipt.reverseinventory"
+            id="reverseInventoryButton"
+            class="fas fa fa-undo has-i18n"
+            title="Reverse Inventory"
+            aria-hidden="true"></i>
+        </div>
+        <!-- <i class="fa-sharp fa-solid fa-file-pen"></i> -->
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="receiptPreviewModal">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+      <div class="modal-content oldkotModalclass">
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h4 data-i18n="receipt.oldBillPreview" class="modal-title has-i18n">
+            Old Bill Preview
+          </h4>
+          <button type="button" class="close" data-dismiss="modal">
+            &times;
+          </button>
+        </div>
+
+        <!-- Modal body -->
+        <div
+          class="modal-body receiptPreviewModalbody"
+          id="receiptPreviewModalbodyid"></div>
+
+        <!-- Modal footer -->
+        <div class="modal-footer">
+          <button
+            data-i18n="receipt.OK"
+            type="button"
+            class="btn btn-secondary has-i18n"
+            data-dismiss="modal">
+            OK
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="receiptactionsModal">
+    <div
+      class="modal-dialog neworderstatus-modal-dialog modal-lg modal-dialog-centered">
+      <div class="modal-content receiptactionsModalclass">
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h4 data-i18n="receipt.modifyBill" class="modal-title has-i18n">
+            Modify Bill
+          </h4>
+          <button type="button" class="close" data-dismiss="modal">
+            &times;
+          </button>
+        </div>
+
+        <!-- Modal body -->
+        <div
+          class="modal-body receiptactionsModalclassbody"
+          id="receiptactionsModalbodyid"></div>
+
+        <!-- Modal footer -->
+        <div class="modal-footer">
+          <input
+            data-i18n="receipt.Apply"
+            type="button"
+            class="has-i18n"
+            id="receiptapplypaymentButton"
+            value="Apply" />
+          <input
+            data-i18n="receipt.Close"
+            type="button"
+            class="has-i18n"
+            data-dismiss="modal"
+            value="Close" />
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- <div class="modal fade" id="receiptactionsModal" data-keyboard="true">
+    <div
+      class="modal-dialog newpaymentModal-dialog modal-sm modal-dialog-centered"
+    >
+      <div class="modal-content receiptactionsModalclass">
+        <div class="modal-header">
+          <h4
+            data-i18n="orderScreen.choosePaymentMode"
+            class="modal-title has-i18n"
+          >
+            Modify bill
+          </h4>
+          <button type="button" class="close" data-dismiss="modal">
+            &times;
+          </button>
+        </div>
+        <div class="modal-body paymentBody" id="receiptactionsModalbodyid">
+          <div
+            class="d-flex justify-content-start flex-wrap orderwindowPaymentlist"
+            id="orderwindowPaymentlist"
+          ></div>
+          <!-- <div class="splitDiv">
+                        <input id="newpaymentsplitCheckid" type="checkbox">
+                        <label data-i18n="orderScreen.splitPayment" class="has-i18n" for="newpaymentsplitCheckid">Split
+                            Payment</label>
+                    </div> -->
+  <!-- <div class="container">
+            <div class="row">
+              <div class="col-3">
+                <input id="newpaymentsplitCheckid" type="checkbox" />
+                <label
+                  data-i18n="orderScreen.splitPayment"
+                  class="has-i18n"
+                  for="newpaymentsplitCheckid"
+                  >Split Payment</label
+                >
+              </div>
+              <div class="col-5">
+                <label
+                  data-i18n="orderScreen.PaymentReferenceNo"
+                  class="has-i18n"
+                  for="newpaymentreferenceid"
+                  >Payment Reference No:</label
+                >
+                <input id="newpaymentreferenceid" type="text" />
+              </div>
+              <div class="col-4">
+                <label
+                  data-i18n="orderScreen.TipAmount"
+                  class="has-i18n"
+                  for="newpaymentTipAmountid"
+                  >Tip Amount:</label
+                >
+                <input id="newpaymentTipAmountid" type="number" />
+              </div>
+            </div>
+          </div>
+
+          <div
+            class="newpaysplistselectwrapper"
+            id="newpaysplistselectwrapperid"
+          >
+            <div class="newsplitaddpayWrapper w-100">
+              <input
+                data-i18n="[placeholder]orderScreen.Amount"
+                type="text"
+                class="has-i18n"
+                name=""
+                id="newpaysplitpayAmount"
+                placeholder="Amount"
+              />
+              <input
+                data-i18n="[value]orderScreen.Add"
+                id="newpayaddpayMethodbutton"
+                class="has-i18n"
+                type="button"
+                value="Add"
+              />
+              <div class="newremainingsplitWrapper pl-2">
+                <label
+                  data-i18n="orderScreen.remainingAmount"
+                  class="has-i18n"
+                  for="newremainingPayableamount"
+                  >Remaining Amount:</label
+                >
+                <label id="newremainingPayableamount" for=""></label>
+              </div>
+            </div>
+            <div class="text-center">
+              <ul
+                class="flex-wrap newsplitpaylistContainer"
+                id="newordersplitpaylistId"
+              ></ul>
+            </div>
+          </div>
+          <div class="paymentGrandtotalclass">
+            <label
+              data-i18n="orderScreen.grandTotal"
+              class="has-i18n"
+              for="newpaymentTotalid"
+              >Grand Total:</label
+            >
+            <label for="" id="newpaymentTotalid"></label>
+            <div
+              class="newduepaycheckWrapper"
+              id="newduepaycheckWrapperid"
+              style="display: none"
+            >
+              <input type="checkbox" name="" id="newaddduepaymentCheck" />
+              <label
+                data-i18n="orderScreen.addAsDuePayment"
+                class="has-i18n"
+                for="newaddduepaymentCheck"
+                >Add as due payment</label
+              >
+              <i
+                data-i18n="[title]orderScreen.createWallet"
+                class="fas fa-plus has-i18n"
+                id="newredirecttowalletButton"
+                title="Create Wallet"
+              ></i>
+            </div>
+            <div class="d-flex newduepaymobileWrapper">
+              <input
+                data-i18n="[placeholder]orderScreen.customerMobile"
+                type="text"
+                class="has-i18n"
+                placeholder="Customer Mobile"
+                id="newduepaycustomermobileField"
+              />
+            </div>
+          </div>
+        </div>
+         Modal footer
+        <div class="modal-footer">
+          <button
+            data-i18n="orderScreen.Close"
+            type="button"
+            class="normal-button has-i18n"
+            data-dismiss="modal"
+          >
+            Close
+          </button>
+          <button
+            data-i18n="orderScreen.Apply"
+            type="button"
+            class="normal-button has-i18n"
+            id="savenewpaymentButton"
+          >
+            Settle & print Bill
+          </button>
+          <button
+            data-i18n="orderScreen.Apply"
+            type="button"
+            class="normal-button has-i18n"
+            id="applynewpaymentButton"
+          >
+            Save & Settle Bill
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>  -->
+</div>
+
+<script>
+  require('../js/ReceiptsController.js');
+</script>
+<!-- Insert this line after script imports -->
+<script>
+  if (window.module) module = window.module;
+</script>

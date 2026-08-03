@@ -1,0 +1,49 @@
+.simple-keyboard-container {
+  position: absolute;
+  bottom: 5px;
+  width: 100%;
+  display: flex;
+  justify-content: left;
+  height: max-content;
+  z-index: 1000000;
+  pointer-events: none;
+  padding-left: 10px;
+}
+
+.simple-keyboard-container .simple-keyboard {
+  width: 65%;
+  pointer-events: all;
+}
+
+/* .simple-keyboard {
+  position: absolute;
+  bottom: 119px;
+  left: 200px;
+} */
+
+.login-simple-keyboard {
+  position: absolute;
+  top: 57%;
+  /* left: 33%; */
+  display: flex;
+  justify-content: end;
+}
+
+.numpad-theme .hg-button {
+  height: 60px !important;
+}
+
+.numpad-theme {
+  width: 40% !important;
+}
+
+.show-keyboard {
+  display: block;
+}
+
+.hide-keyboard {
+  display: none !important;
+}
+.asterisk {
+  color: red;
+}

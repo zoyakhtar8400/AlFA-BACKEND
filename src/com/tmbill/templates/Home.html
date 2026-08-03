@@ -1,0 +1,1366 @@
+<!doctype html>
+<html lang="en">
+  <title>TMBill</title>
+
+  <head>
+    <link rel="stylesheet" href="../css/fontawesome/6.5.1/css/all.css" />
+    <link rel="stylesheet" href="../css/fontawesome/6.5.1/css/v4-shims.css" />
+    <link rel="stylesheet" href="../css/theme/App.css" />
+    <link rel="stylesheet" href="../css/order.css" />
+    <link rel="stylesheet" href="../css/Optiongrpsandoptions.css" />
+    <link rel="stylesheet" href="../css/Switch.css" />
+    <link rel="stylesheet" href="../css/Quickbill.css" />
+    <link rel="stylesheet" href="../css/media.css" />
+    <link rel="stylesheet" href="../css/StatusLabels.css" />
+    <link rel="stylesheet" href="../css/tableview.css" />
+    <link rel="stylesheet" href="../css/bootstrap/4.3.1/css/bootstrap.css" />
+    <link rel="stylesheet" href="../css/jquery/jquery-ui.min.css" />
+    <link rel="stylesheet" href="../css/expense.css" />
+    <link
+      rel="stylesheet"
+      href="../css/jquery/context-menu/jquery.contextMenu.min.css" />
+    <link rel="stylesheet" href="../css/jquery/jquery.dataTables.min.css" />
+    <link rel="stylesheet" href="../css/jquery/select.dataTables.min.css" />
+    <link rel="stylesheet" href="../css/datepicker/daterangepicker.min.css" />
+    <link
+      rel="stylesheet"
+      href="../css/bootstrap/4.3.1/css/bootstrap-select.min.css" />
+    <link rel="stylesheet" href="../css/Appnotifications.css" />
+    <link rel="stylesheet" href="../css/Livestatus.css" />
+    <link rel="stylesheet" href="../thirdparty/select2/select2.min.css" />
+    <link rel="stylesheet" href="../css/PreorderModal.css" />
+    <link rel="stylesheet" href="../css/Passcode.css" />
+    <link rel="stylesheet" href="../css/keyboard.css" />
+    <link rel="stylesheet" href="../css/RemoteKOT.css" />
+    <link rel="stylesheet" href="../css/TableReservation.css" />
+    <link rel="stylesheet" href="../css/IRNStyle.css" />
+    <link rel="stylesheet" href="../css/Account.css" />
+
+    <link
+      rel="stylesheet"
+      href="../../../../node_modules/simple-keyboard/build/css/index.css" />
+    <link href="../css/toastNotification/bs4Toast.css" rel="stylesheet" />
+    <link href="../css/HandleCounter/handle-counter.min.css" rel="stylesheet" />
+    <link href="../css/Pagination/pagination.css" rel="stylesheet" />
+    <link rel="stylesheet" href="../thirdparty/flatpickr/css/index.css" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="UTF-8" />
+  </head>
+
+  <body>
+    <div class="pill-b" id="stagingTagId" style="display: none !important;">
+    <div class="pill-b-icon">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"
+        stroke-linejoin="round">
+        <path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z" />
+        <line x1="12" y1="9" x2="12" y2="13" />
+        <line x1="12" y1="17" x2="12.01" y2="17" />
+      </svg>
+    </div>
+    staging
+  </div>
+    <div class="se-pre-con"></div>
+    <div class="parentContainer">
+      <div class="menuWrapper">
+        <ul class="menu" id="menu-wapper-id">
+          <li
+            data-i18n="[title]home.Dashboard"
+            class="has-i18n"
+            id="dashboard-li-item"
+            title="Dashboard">
+            <a href="#" class="dashboard" id="dashboardIcon">Dashboard</a>
+          </li>
+          <li
+            data-i18n="[title]home.Order"
+            id="order-li-item"
+            class="has-i18n"
+            title="Order">
+            <a href="#" class="order" id="orderIcon">Order</a>
+          </li>
+          <li
+            data-i18n="[title]home.orderSettlementWindow"
+            id="order-settlement-li-item"
+            class="has-i18n"
+            title="Order Settlement Window">
+            <a href="#" class="order-settlement" id="orderSettlementIcon"
+              data-i18n="home.orderSettlementWindow">
+              Order Settlement Window
+            </a>
+          </li>
+
+          <li
+            data-i18n="[title]home.Digital"
+            class="has-i18n"
+            id="digital-li-item"
+            title="Online Orders">
+            <a href="#" class="digitalOrders" id="digitalOrdersIcon">Digital</a>
+          </li>
+          <li
+            data-i18n="[title]home.Receipt"
+            class="has-i18n"
+            id="receipt-li-item"
+            title="Receipt">
+            <a href="#" class="receipt" id="receiptIcon">Order</a>
+          </li>
+          <li
+            data-i18n="[title]home.store"
+            class="has-i18n"
+            title="Switch Outlet">
+            <a href="#" class="changeStore" id="changeStoreicon">Store</a>
+          </li>
+          <li
+            data-i18n="[title]home.Reports"
+            class="has-i18n"
+            id="allreports-li-item"
+            title="Reports">
+            <a href="#" class="allreports" id="allreportsIcon">Reports</a>
+          </li>
+
+          <!-- <li
+            data-i18n="[title]home.Online"
+            class="has-i18n"
+            id="online-li-item"
+            title="Online Orders (TMChannel)"
+          >
+            <a href="#" class="online" id="onlineorderIcon">Online</a>
+          </li> -->
+          <!-- <li
+            data-i18n="[title]home.Master"
+            class="has-i18n"
+            title="Master"
+            id="mastermenu-li-item">
+            <a href="#" class="masterMenu" id="mastermenuIcon">Master</a>
+          </li> -->
+          <li data-i18n="[title]home.operations" class="has-i18n"
+            title="Operations" id="menuManagement-li-item">
+            <a href="#" class="menuManagement"
+              id="menuManagementIcon">Operations</a>
+            <li
+              data-i18n="[title]home.operations"
+              id="mastermenu-li-item"
+              class="has-i18n"
+              title="Operations">
+
+              <a
+                href="#"
+                class="notificationIcon has-i18n"
+                id="notificationIconid"
+                data-i18n="[title]home.notifications"
+                title="Notifications">
+                Notification
+              </a>
+
+            </li>
+            <li
+              data-i18n="[title]home.notifications"
+              class="has-i18n"
+              title="[title]home.notification"
+              id="notification-li-item">
+              <span id="notification-badgeid"
+                class="badge notification-badge"></span>
+            </li>
+
+            <li class="has-i18n">
+              <a
+                href="#"
+                class="customLinksIcon has-i18n"
+                id="customLinksIconId"
+                data-i18n="[title]home.customLinks"
+                title="Custom links">
+                Custom links
+              </a>
+            </li>
+
+          </li>
+          <li data-i18n="[title]home.logOut" title="Logout" class="has-i18n">
+            <a href="#" class="logout" id="logoutIcon">Logout</a>
+          </li>
+          <li
+            data-i18n="[title]home.fullScreen"
+            class="has-i18n"
+            title="Full Screen">
+            <a href="#" class="fa fa-compress" id="fullScreenIcon"
+              aria-hidden="true"></a>
+          </li>
+          <li
+            data-i18n="[title]home.Settings"
+            class="last-menu-item has-i18n"
+            title="Settings">
+            <a href="#" class="settings" id="settingsButton">Settings</a>
+          </li>
+        </ul>
+      </div>
+
+      <div class="dashwindowWrapper" id="dashwindowWrapperid"></div>
+      <div class="orderwindowWrapper" id="orderwindowWrapperid"></div>
+      <div class="orderwindowWrapper"
+        id="orderSettlementwindowWrapperid"></div>
+      <div class="receiptwindowWrapper" id="receiptwindowWrapperid"></div>
+
+      <div
+        class="onlineorderswindowWrapper"
+        id="onlineorderswindowWrapperid"></div>
+      <div
+        class="digitalorderswindowWrapper"
+        id="digitalorderswindowWrapperid"></div>
+      <div class="mastermenuwindowWrapper"
+        id="mastermenuwindowWrapperid"></div>
+      <div
+        class="mastermenuwindowWrapper"
+        id="menuManagementwindowWrapperid"></div>
+      <div
+        class="itemmastermenuwindowWrapper"
+        id="itemsManagementwindowWrapperid"></div>z
+
+      <div
+        class="crmwindowWrapper"
+        id="crmwindowWrapperid"></div>
+
+      <div
+        class="userManagementwindowWrapper"
+        id="userManagementwindowWrapperid"></div>
+
+      <div
+        class="walletManagementwindowWrapper"
+        id="walletManagementwindowWrapperid"></div>
+
+      <!-- Expense Management Wrapper -->
+      <div
+        class="expenseManagementwindowWrapper"
+        id="expenseManagementwindowWrapperid"
+        style="display:none">
+      </div>
+      <div class="fcmTestwindowWrapper"
+        id="fcmTestwindowWrapperid"
+        style="display:none">
+      </div>
+
+      <div class="reportswindowWrapper" id="reportswindowWrapperid"></div>
+      <div class="simple-keyboard-container">
+        <div class="simple-keyboard" id="simplekeyboardId"></div>
+      </div>
+
+      <div
+        class="startCloseDayShiftwindowWrapper"
+        id="startCloseDayShiftwindowWrapperid"></div>
+      <!-- close Day And shift  -->
+      <div
+        class="CloseDayAndShiftwindowWrapper"
+        id="CloseDayAndShiftwindowWrapperid"></div>
+
+      <!-- close shift  -->
+      <div class="CloseShiftwindowWrapper"
+        id="CloseShiftwindowWrapperid"></div>
+
+      <!-- start shift  -->
+      <div class="StartShiftwindowWrapper"
+        id="StartShiftwindowWrapperid"></div>
+
+      <!-- close day shift export and print report  -->
+      <div class="modal fade" id="exportAndPrintDayShiftReportModal">
+        <div class="modal-dialog modal-md modal-dialog-centered">
+          <div class="modal-content exportAndPrintDayShiftReportModalclass">
+            <!-- Modal body -->
+            <div
+              class="modal-body exportAndPrintDayShiftReportBody"
+              id="exportAndPrintDayShiftReportBodyid">
+              <div>
+                <div class="row afteCloseDayExportAndPrintReportButtons">
+                  <input
+                    type="button"
+                    value="Export Close Day Report"
+                    data-i18n="[value]home.ExportCloseDayReport"
+                    class="has-i18n"
+                    id="exportCloseDayReportButtonId" />
+                  <input
+                    type="button"
+                    value="Print Close Day Report"
+                    data-i18n="[value]home.PrintCloseDayReport"
+                    class="has-i18n"
+                    id="printCloseDayReportButtonId" />
+                </div>
+                <div class="row afteCloseDayExportAndPrintReportButtons">
+                  <input
+                    type="button"
+                    value="Export Close Shift Report"
+                    data-i18n="[value]home.ExportCloseShiftReport"
+                    class="has-i18n"
+                    id="exportCloseShiftReportButtonId" />
+                  <input
+                    type="button"
+                    value="Print Close Shift Report"
+                    data-i18n="[value]home.PrintCloseShiftReport"
+                    class="has-i18n"
+                    id="printCloseShiftReportButtonId" />
+                </div>
+                <div class="row afteCloseDayExportAndPrintReportButtons">
+                  <input
+                    type="button"
+                    value="Log Out"
+                    class="has-i18n"
+                    data-i18n="[value]home.logOut"
+                    id="afterCloseDayShiftLogoutButtonId" />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- close day reminder popup  -->
+      <!-- Close Day Popup Modal -->
+      <div id="closeDayReminderModal">
+        <div id="closeDayReminderContainerId">
+          <h3 class="has-i18n" data-i18n="home.itsTimeToCloseTheDay">
+            🕒 It's Time to Close the Day
+          </h3>
+          <p id="closedaytitlefor24hour" class="has-i18n">
+
+  <span
+    class="has-i18n"
+    data-i18n="home.itsBenTwentyFourHoursSinceDayClosed">
+    It's been over 24 hours since the last day was closed.
+  </span>
+
+  Please<br />
+
+  <span
+    class="has-i18n"
+    data-i18n="home.reviewTodaysSaleAndCloseTheDay">
+    review today's sales and close the day.
+  </span>
+
+</p>
+
+          <p id="closedaytitleforsettime">
+            Daily close time reached.<br />Please review today's sales and
+            close
+            the day.
+          </p>
+          <input
+            type="button"
+            id="okCloseDayReminderButton"
+            style="margin-right: 10px"
+            value="Proceed to Close Day"
+            data-i18n="[value]home.proceedToCloseDay"
+            class="has-i18n" />
+          <input
+            type="button"
+            id="cancelCloseDayReminderButton"
+            value="Cancel"
+            data-i18n="[value]home.cancel"
+            class="has-i18n" />
+        </div>
+      </div>
+
+      <!-- The Preview Modal -->
+      <div class="modal fade" id="previewModal">
+        <div class="modal-dialog modal-sm modal-dialog-centered">
+          <div class="modal-content previewModalclass">
+            <!-- Modal Header -->
+            <div class="modal-header">
+              <h4 data-i18n="home.Preview" class="modal-title has-i18n">
+                Preview
+              </h4>
+              <button type="button" class="close" data-dismiss="modal">
+                &times;
+              </button>
+            </div>
+
+            <!-- Modal body -->
+            <div class="modal-body previewBody" id="previewBodyid"></div>
+
+            <!-- Modal footer -->
+            <div class="modal-footer preview-footer">
+              <div class="row">
+                <span
+                  value="2"
+                  id="showPrinterconfig"
+                  class="fas fa-arrow-down"></span>
+              </div>
+              <div class="preview-footer-actions"
+                id="preview-footer-actionsid">
+                <div class="preview-margin">
+                  <label
+                    data-i18n="home.leftMargin"
+                    class="preview-margin-title has-i18n"
+                    for>
+                    Left Margin:</label>
+                  <i
+                    id="minusleftMarginid"
+                    class="fas fa-minus counter-background"></i>
+                  <label class="count-label" id="currentleftMarginlabel"
+                    for>0</label>
+                  <i
+                    id="plusleftMarginid"
+                    class="fas fa-plus counter-background"></i>
+                </div>
+                <div class="preview-margin">
+                  <label
+                    data-i18n="home.rightMargin"
+                    class="preview-margin-title has-i18n"
+                    for>Right Margin:</label>
+                  <i
+                    id="minusrightMarginid"
+                    class="fas fa-minus counter-background"></i>
+                  <label class="count-label" id="currentrightMarginlabel"
+                    for>0</label>
+                  <i
+                    id="plusrightMarginid"
+                    class="fas fa-plus counter-background"></i>
+                </div>
+              </div>
+              <!-- <button type="button" class="btn btn-secondary" data-dismiss="modal">OK</button> -->
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal fade" id="resetdateinfoModalid">
+        <div class="modal-dialog modal-dialog-centered">
+          <div
+            class="modal-content billstatusModalclass loyaltyrewardsModalclass">
+            <div class="modal-header">
+              <h4 data-i18n="resetDate.title" class="modal-title has-i18n">Reset
+                date</h4>
+              <button type="button" class="close" data-dismiss="modal">
+                &times;
+              </button>
+            </div>
+            <!-- Modal body -->
+            <div class="modal-body loyaltyrewardsModalBody"
+              id="resetdateinfoModalBodyid">
+              <div id="billNumberresetdatemessageid" class="alert alert-success"
+                role="alert" data-i18n="resetDate.billNumberReset">
+                Bill number has been reset
+              </div>
+              <div id="kotnumberresetdatemessageid" class="alert alert-success"
+                role="alert" data-i18n="resetDate.kotNumberReset">
+                Kot number has been reset
+              </div>
+              <div id="ordernumberresetdatemessageid"
+                class="alert alert-success" role="alert"
+                data-i18n="resetDate.orderNumberReset">
+                Order number has been reset
+              </div>
+            </div>
+            <!-- Modal footer -->
+            <div class="modal-footer">
+              <button data-i18n="orderScreen.Close" type="button"
+                class="normal-button has-i18n" data-dismiss="modal">
+                Close
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- The Passcode Modal -->
+      <div class="modal fade" id="userpasscodeModalid">
+        <div
+          class="modal-dialog modal-sm modal-dialog-centered userpasscodeModal-dialog">
+          <div class="modal-content userpasscodeModalclass">
+            <div class="modal-header">
+              <button type="button" class="close">
+                <i class="fas fa-times"></i>
+              </button>
+            </div>
+
+            <!-- Modal body -->
+            <div
+              class="modal-body userpasscodeBody"
+              id="userpasscodeModalbodyid">
+              <div class="passcodeTitlecontainer p-2 mb-3 text-center">
+                <h5
+                  data-i18n="controller:passcodeController.title"
+                  class="has-i18n">
+                  Please enter passcode to use this feature
+                </h5>
+              </div>
+              <div
+                class="passcode-group text-center"
+                id="passcodeGroupcontainer">
+                <input
+                  type="password"
+                  maxlength="1"
+                  input-number="1"
+                  max="9"
+                  min="0"
+                  class="passcode-access-input-class" />
+                <input
+                  type="password"
+                  maxlength="1"
+                  input-number="2"
+                  max="9"
+                  min="0"
+                  class="passcode-access-input-class" />
+                <input
+                  type="password"
+                  maxlength="1"
+                  input-number="3"
+                  max="9"
+                  min="0"
+                  class="passcode-access-input-class" />
+                <input
+                  type="password"
+                  maxlength="1"
+                  input-number="4"
+                  max="9"
+                  min="0"
+                  class="passcode-access-input-class" />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- The Printer settings Modal -->
+      <div class="modal fade" id="printersModal">
+        <div
+          class="modal-dialog modal-lg modal-dialog-centered printer-modal">
+          <div class="modal-content printersModalclass">
+            <!-- Modal body -->
+            <div
+              class="modal-body printersModalBody"
+              id="printersModalBodyid"></div>
+            <!-- Modal footer -->
+            <div class="modal-footer">
+              <button
+                data-i18n="home.Close"
+                type="button"
+                class="btn btn-secondary has-i18n"
+                data-dismiss="modal">
+                Close
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal fade" id="settingsModal">
+        <div
+          class="modal-dialog modal settingsModalclass modal-dialog-centered">
+          <div class="modal-content settingsModalcontent">
+            <div
+              class="modal-body settingsModalBody"
+              id="settingsModalBodyid"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal fade" id="changelogModal">
+        <div
+          class="modal-dialog modal changelogModal-dialog modal-dialog-centered">
+          <div class="modal-content changelogModalcontent">
+            <div class="modal-body" id="changelogModalBodyid"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- The KOT Preview and Print Modal -->
+      <div class="modal fade" id="kotpreviewModal">
+        <div class="modal-dialog modal-sm modal-dialog-centered">
+          <div class="modal-content kotpreviewModalclass">
+            <!-- Modal Header -->
+            <div class="modal-header">
+              <h4 data-i18n="home.KOT" class="modal-title has-i18n">KOT</h4>
+              <button type="button" class="close" data-dismiss="modal">
+                &times;
+              </button>
+            </div>
+
+            <!-- Modal body -->
+            <div class="modal-body kotpreviewBody"
+              id="kotpreviewBodyid"></div>
+
+            <!-- Modal footer -->
+            <div class="modal-footer">
+              <button
+                data-i18n="home.OK"
+                type="button"
+                class="btn btn-secondary has-i18n"
+                data-dismiss="modal">
+                OK
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- The Report Modal -->
+      <div class="modal fade" id="reportprintModal">
+        <div class="modal-dialog modal-sm modal-dialog-centered">
+          <div class="modal-content reportprintModalclass">
+            <!-- Modal body -->
+            <div
+              class="modal-body reportprintBody"
+              id="reportprintBodyid"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Custmor history analysis window -->
+      <div class="modal fade" id="customerHistorymodal">
+        <div class="modal-dialog modal-dialog-centered customerHistorymodal">
+          <div class="modal-content customerHistorymodalWrapper">
+            <!-- Modal body -->
+            <div
+              class="modal-body customerHistorymodalbody"
+              id="customerHistoryBodyid"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal-body IRNmodalbody" id="IRNgeneratemodalBodyid"></div>
+
+      <div
+        class="modal-body IRNItemDeatilsmodalbody"
+        id="IRNItemDetailsmodalBodyid"></div>
+
+      <div
+        class="modal-body AddOrUpdateItemmodalbody"
+        id="AddOrUpdateItemManagementmodalBodyid"></div>
+
+      <!-- modify bill -->
+      <div class="modal fade" id="billModifyModal">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+          <div class="modal-content receiptactionsModalclass">
+            <!-- Modal Header -->
+            <div class="modal-header">
+              <h4 data-i18n="receipt.modifyBill" class="modal-title has-i18n">
+                Modify Bill
+              </h4>
+              <button type="button" class="close" data-dismiss="modal">
+                &times;
+              </button>
+            </div>
+
+            <!-- Modal body -->
+            <div
+              class="modal-body receiptactionsModalclassbody"
+              id="billModifyModalbodyid"></div>
+
+            <!-- Modal footer -->
+            <!-- <div class="modal-footer">
+                        <button data-i18n="receipt.Apply" type="button" class="btn btn-secondary has-i18n"
+                            id="receiptapplypaymentButton">Apply</button>
+                        <button data-i18n="receipt.Close" type="button" class="btn btn-secondary has-i18n"
+                            data-dismiss="modal">Close</button>
+                    </div> -->
+          </div>
+        </div>
+      </div>
+
+      <!-- Reverse Item Inventory -->
+      <div class="modal fade" id="reverseItemInventoryModal">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+          <div class="modal-content receiptactionsModalclass">
+            <!-- Modal Header -->
+            <div class="modal-header">
+              <h4 data-i18n="r" class="modal-title has-i18n">
+                Reverse Item Inventory
+              </h4>
+              <button type="button" class="close" data-dismiss="modal">
+                &times;
+              </button>
+            </div>
+
+            <!-- Modal body -->
+            <div
+              class="modal-body receiptactionsModalclassbody"
+              id="reverseItemInventoryModalbodyid"></div>
+          </div>
+        </div>
+      </div>
+      <!-- Partial accept order -->
+      <div class="modal fade" id="partialAcceptorderModal">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+          <div class="modal-content receiptactionsModalclass">
+            <!-- Modal Header -->
+            <div class="modal-header">
+              <h4 data-i18n class="modal-title has-i18n">Order details</h4>
+              <button type="button" class="close" data-dismiss="modal">
+                &times;
+              </button>
+            </div>
+
+            <!-- Modal body -->
+            <div
+              class="modal-body receiptactionsModalclassbody"
+              id="partialAcceptorderModalid"></div>
+
+            <!-- Modal footer -->
+            <div class="modal-footer">
+              <button
+                data-i18n
+                type="button"
+                class="btn btn-secondary has-i18n"
+                id="partialAcceptorderbutton">
+                Partial Accept
+              </button>
+              <button
+                data-i18n="receipt.Close"
+                type="button"
+                class="btn btn-secondary has-i18n"
+                data-dismiss="modal">
+                Close
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal fade" id="customerModal">
+        <link rel="stylesheet" href="../css/CustomerForm.css" />
+        <div
+          class="modal-dialog modal-lg modal-dialog-centered customermodal-dialog">
+          <div class="modal-content customerModalwrapper">
+            <!-- Modal Header -->
+            <div class="modal-header">
+              <h4 data-i18n="home.customerForm" class="modal-title has-i18n">
+                Customer Form
+              </h4>
+              <button type="button" class="close" data-dismiss="modal">
+                &times;
+              </button>
+            </div>
+            <!-- Modal body -->
+            <div
+              class="modal-body customerModalbody"
+              id="customerModalbodyid"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- customer address -->
+      <div class="modal fade" id="customerAddressModal">
+        <link rel="stylesheet" href="../css/CustomerForm.css" />
+        <div
+          class="modal-dialog modal-md modal-dialog-centered customeraddressmodal-dialog">
+          <div class="modal-content customerAddressModalwrapper">
+            <!-- Modal Header -->
+            <div class="modal-header">
+              <h4 data-i18n="home.customerForm" class="modal-title has-i18n">
+                Customer Address
+              </h4>
+              <button type="button" class="close" data-dismiss="modal">
+                &times;
+              </button>
+            </div>
+            <!-- Modal body -->
+            <div
+              class="modal-body customerAddressModalbody"
+              id="customerAddressModalbodyid"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- The KOT Preview and Print Modal -->
+      <div class="modal fade" id="billdetailspreviewModal">
+        <div
+          class="modal-dialog billdetailspreview-dialog modal-lg modal-dialog-centered">
+          <div class="modal-content billdetailspreviewModalclass">
+            <!-- Modal Header -->
+            <div class="modal-header">
+              <h4 data-i18n="home.billDetails" class="modal-title has-i18n">
+                Bill details
+              </h4>
+              <button type="button" class="close" data-dismiss="modal">
+                &times;
+              </button>
+            </div>
+
+            <!-- Modal body -->
+            <div
+              class="modal-body billdetailspreviewBody"
+              id="billdetailspreviewBodyid"></div>
+
+            <!-- Modal footer -->
+            <div class="modal-footer">
+              <button
+                data-i18n="home.OK"
+                type="button"
+                class="btn btn-secondary has-i18n"
+                data-dismiss="modal">
+                OK
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal fade" id="splitbillModal">
+        <div
+          class="modal-dialog splitbillModal-dialog modal-lg modal-dialog-centered">
+          <div class="modal-content splitbillModalclass">
+            <!-- Modal Header -->
+            <div class="modal-header">
+              <h4 data-i18n="home.splitBill" class="modal-title has-i18n">
+                Split Bill
+              </h4>
+              <button type="button" class="close" data-dismiss="modal">
+                &times;
+              </button>
+            </div>
+
+            <!-- Modal body -->
+            <div
+              class="modal-body splitbillModalBody"
+              id="splitbillModalBodyid"></div>
+
+            <!-- Modal footer -->
+            <div class="modal-footer">
+              <button
+                data-i18n="home.Close"
+                type="button"
+                class="btn btn-secondary has-i18n"
+                data-dismiss="modal">
+                Close
+              </button>
+              <button
+                data-i18n="home.split"
+                id="applysplitbillButton"
+                type="button"
+                class="btn btn-secondary has-i18n">
+                Split
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal fade" id="orderduepaytransModal">
+        <div
+          class="modal-dialog modal-lg modal-dialog-centered orderduepaytransmodal-dialog">
+          <div class="modal-content orderduepaytransModalclass">
+            <!-- Modal Header -->
+            <div class="modal-header transactions-header">
+              <h4 data-i18n="home.dueTransactions"
+                class="modal-title has-i18n">
+                Due Transactions
+              </h4>
+              <button type="button" class="close" data-dismiss="modal">
+                &times;
+              </button>
+            </div>
+
+            <!-- Modal body -->
+            <div
+              class="modal-body orderduepaytransmodalBody"
+              id="orderduepaytransmodalBodyid">
+              <table
+                class="table table-sm table-striped normal-table orderduepaytransactionstable"
+                id="orderduepaytransactionstableID"></table>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal fade" id="livestatusModal">
+        <div
+          class="modal-dialog modal-lg modal-dialog-centered livestatusmodal-dialog">
+          <div class="modal-content livestatusModalclass">
+            <!-- Modal Header -->
+            <div class="modal-header transactions-header">
+              <h4 data-i18n="home.liveStatus" class="modal-title has-i18n">
+                Live Status
+              </h4>
+              <button type="button" class="close" data-dismiss="modal">
+                &times;
+              </button>
+            </div>
+
+            <!-- Modal body -->
+            <div
+              class="modal-body livestatusmodalBody"
+              id="livestatusmodalBodyid">
+              <table
+                class="table table-sm table-striped normal-table livestatustable"
+                id="livestatustableID"></table>
+              <div class="livestatus-actions">
+                <input id="getrecentliveitemsCheck" type="checkbox" />
+                <label
+                  data-i18n="home.getRecentlyPlaced"
+                  class="has-i18n"
+                  for="getrecentliveitemsCheck">Get recently placed
+                </label>
+                <select name id="livestatusstateOptions">
+                  <option
+                    data-i18n="home.selectStatus"
+                    class="has-i18n"
+                    disabled
+                    selected
+                    value>
+                    __Select Status__
+                  </option>
+                </select>
+                <input
+                  data-i18n="[value]home.Update"
+                  class="has-i18n"
+                  type="button"
+                  value="Update"
+                  id="updateitemlivestatButton" />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal fade" id="storeactivationModalid">
+        <div
+          class="modal-dialog modal storeactivationModalclass modal-dialog-centered">
+          <div class="modal-content storeactivationModalcontent">
+            <!-- <div class="modal-header">
+                        <h4 class="modal-title has-i18n">Activation Details</h4>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div> -->
+            <div
+              class="modal-body storeactivationModalBody"
+              id="storeactivationModalBodyid">
+              <div class="row">
+                <div class="col-8 p-4 d-flex flex-column">
+                  <div
+                    class="alert alert-warning has-i18n"
+                    role="alert"
+                    data-i18n="home.activationExpiring">
+                    Your activation is about to expire.
+                  </div>
+
+                  <div
+                    class="alert alert-danger has-i18n"
+                    role="alert"
+                    data-i18n="home.activationExpiredMessage">
+                    You will be logged out automatically when the expiry period
+                    is reached. Please contact TMBill support team to continue
+                    using our POS.
+                  </div>
+
+                  <div class="d-flex flex-column align-items-end mt-auto">
+                    <div>Contact:</div>
+                    <div>+91 907 544 4888 , +91 777 403 5601</div>
+                    <div>contact@tmbill.com , support@tmbill.com</div>
+                  </div>
+                </div>
+                <div
+                  class="col-4 leftactivationinfoContainer p-4"
+                  id="leftactivationinfoContainerid">
+                  <div
+                    class="d-flex align-items-center activationStatuscontainer">
+                    <div class="notexpired">● Active</div>
+                  </div>
+                  <div class="remainingDayscontainer mt-2 p-2">
+                    <div class="titlelabel">Day's Left</div>
+                    <div class="valuelabel"></div>
+                  </div>
+                  <div class="storenamecontainer mt-1 p-2">
+                    <div class="titlelabel">Store Name</div>
+                    <div class="valuelabel"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- table reservation modal -->
+      <div class="modal fade" class="discountModal"
+        id="tableReservationModal">
+        <div
+          class="modal-dialog newpaymentModal-dialog modal-sm modal-dialog-centered">
+          <div
+            class="modal-content tableReservation tableReservationModalcontent">
+            <!-- Modal Header -->
+            <div class="modal-header">
+              <h4 data-i18n="tableReservation.modalTitle"
+                class="modal-title has-i18n">
+                Table Reservation
+              </h4>
+
+              <button type="button" class="close" data-dismiss="modal">
+                &times;
+              </button>
+            </div>
+
+            <!-- Modal body -->
+            <div class="modal-body tableReservationModalBody">
+              <div class="main-order-wrapper">
+                <div class="orderslistWrapeer tableReservationModalWrapper">
+                  <div>
+                    <div class="reservation-tabs-wrapper">
+
+                      <!-- LEFT SIDE -->
+                      <ul
+                        class="nav nav-tabs mainsectionTabs reservation-tabs-only"
+                        role="tablist"
+                        id="notificationMainsectionTabsid">
+
+                        <li class="nav-item">
+                          <a class="nav-link has-i18n"
+                            id="newRservationbuttonid"
+                            data-i18n="tableReservation.tabs.new"
+                            href role="tab" data-toggle="tab">
+                            New
+                          </a>
+                        </li>
+
+                        <li class="nav-item">
+                          <a class="nav-link has-i18n"
+                            id="AllocatedReservationsbuttonid"
+                            data-i18n="tableReservation.tabs.allocated"
+                            href role="tab" data-toggle="tab">
+                            Allocated
+                          </a>
+                        </li>
+
+                        <li class="nav-item">
+                          <a class="nav-link has-i18n"
+                            id="fulfilledReservationbuttonid"
+                            data-i18n="tableReservation.tabs.fulfilled"
+                            href role="tab" data-toggle="tab">
+                            Fulfilled
+                          </a>
+                        </li>
+
+                        <li class="nav-item">
+                          <a class="nav-link has-i18n"
+                            id="cancelledRservationbuttonid"
+                            data-i18n="tableReservation.tabs.cancelled"
+                            href role="tab" data-toggle="tab">
+                            Cancelled
+                          </a>
+                        </li>
+
+                      </ul>
+
+                      <!-- RIGHT SIDE BUTTON -->
+                      <button
+                        class="btn btn-success reservation-create-btn has-i18n"
+                        id="createRservationbuttonid"
+                        data-toggle="tab"
+                        data-bs-target="#createRsearvationFormId"
+                        data-i18n="tableReservation.tabs.createReservation">
+                        Create Reservation
+                      </button>
+
+                    </div>
+
+                  </div>
+
+                  <div class="row" id="createReservationFormid">
+                    <div class="col-md-12 irncard">
+                      <div class="card card-secondary">
+                        <div class="card-header card-custom-header">
+                          <h3 data-i18n="tableReservation.form.reserveTable"
+                            class="card-title has-i18n">
+                            Reserve Table
+                          </h3>
+                        </div>
+                        <div class="card-body card-custom-body">
+                          <div class="row">
+                            <div class="form-group col-md-6">
+                              <label
+                                data-i18n="tableReservation.form.customerName"
+                                class="has-i18n">Customer Name</label>
+                              <input
+                                type="text"
+                                id="custNameForReservationid"
+                                class="form-control irnInput has-i18n"
+                                placeholder="Enter customer name"
+                                data-i18n="[placeholder]tableReservation.placeholders.customerName" />
+                            </div>
+                            <div class="form-group col-md-6">
+                              <label
+                                data-i18n="tableReservation.form.customerPhone"
+                                class="has-i18n">Customer Phone</label>
+                              <input
+                                type="text"
+                                id="custPhoneForReservationid"
+                                class="form-control irnInput has-i18n"
+                                placeholder="Enter customer phone"
+                                data-i18n="[placeholder]tableReservation.placeholders.customerPhone" />
+                            </div>
+                          </div>
+                          <div class="row">
+                            <div class="form-group col-md-3">
+                              <label data-i18n="tableReservation.form.date"
+                                class="has-i18n"
+                                for="datePickerForReservationid">Date:</label>
+                              <input
+                                type="text"
+                                id="datePickerForReservationid"
+                                class="form-control irnInput has-i18n"
+                                placeholder="Select Date"
+                                data-i18n="[placeholder]tableReservation.placeholders.date" />
+                            </div>
+                            <div class="form-group col-md-3">
+                              <label data-i18n="tableReservation.form.time"
+                                class="has-i18n"
+                                for="timePickerForReservationid">Time:</label>
+                              <input
+                                type="text"
+                                id="timePickerForReservationid"
+                                class="form-control irnInput has-i18n"
+                                placeholder="Select Time"
+                                data-i18n="[placeholder]tableReservation.placeholders.time" />
+                            </div>
+                            <div class="form-group col-md-6">
+                              <label
+                                data-i18n="tableReservation.form.numberOfGuests"
+                                class="has-i18n">Number of Guests</label>
+                              <input
+                                type="text"
+                                id="personsForReservationid"
+                                class="form-control irnInput has-i18n"
+                                placeholder="Enter number of guests"
+                                data-i18n="[placeholder]tableReservation.placeholders.numberOfGuests" />
+                            </div>
+                          </div>
+                          <div class="row">
+                            <div class="form-group col-md-6">
+                              <label data-i18n="tableReservation.form.note"
+                                class="has-i18n">Note</label>
+                              <input
+                                type="text"
+                                id="noteForReservationid"
+                                class="form-control irnInput has-i18n"
+                                placeholder="Enter note"
+                                data-i18n="[placeholder]tableReservation.placeholders.note" />
+                            </div>
+                          </div>
+                          <div class="row">
+                            <div class="form-group col">
+                              <label data-i18n="tableReservation.form.occasion"
+                                class="has-i18n">Occasion</label>
+                              <div class="reservation-occasion-class">
+                                <input value="Birthday"
+                                  name="reservationOccations"
+                                  id="birthdayreservationOccations" type="radio"
+                                  class="irnInput" />
+                                <label
+                                  data-i18n="tableReservation.occasions.birthday"
+                                  class="has-i18n"
+                                  for="birthdayreservationOccations">Birthday</label>
+
+                                <input value="Anniversary"
+                                  name="reservationOccations"
+                                  id="anniversayreservationOccations"
+                                  type="radio" />
+                                <label
+                                  data-i18n="tableReservation.occasions.anniversary"
+                                  class="has-i18n"
+                                  for="anniversayreservationOccations">Anniversary</label>
+
+                                <input value="Family Gathering"
+                                  name="reservationOccations"
+                                  id="familyGatheringreservationOccations"
+                                  type="radio" />
+                                <label
+                                  data-i18n="tableReservation.occasions.familyGathering"
+                                  class="has-i18n"
+                                  for="familyGatheringreservationOccations">Family
+                                  Gathering</label>
+
+                                <input value="Office Party"
+                                  name="reservationOccations"
+                                  id="officepartyreservationOccations"
+                                  type="radio" />
+                                <label
+                                  data-i18n="tableReservation.occasions.officeParty"
+                                  class="has-i18n"
+                                  for="officepartyreservationOccations">Office
+                                  Party</label>
+
+                                <input value="Corporate Celebrations"
+                                  name="reservationOccations"
+                                  id="corporatecelebreservationOccations"
+                                  type="radio" />
+                                <label
+                                  data-i18n="tableReservation.occasions.corporateCelebration"
+                                  class="has-i18n"
+                                  for="corporatecelebreservationOccations">Corporate
+                                  Celebration</label>
+
+                                <input value="Other" name="reservationOccations"
+                                  id="otherreservationOccations" type="radio" />
+                                <label
+                                  data-i18n="tableReservation.occasions.other"
+                                  class="has-i18n"
+                                  for="otherreservationOccations">Other</label>
+                              </div>
+                            </div>
+                          </div>
+                          <button data-i18n="tableReservation.form.submit"
+                            class="btn btn-outline-success has-i18n"
+                            id="submitReservatioDataButtonid">Submit</button>
+                          <button data-i18n="tableReservation.form.update"
+                            class="btn btn-outline-success has-i18n"
+                            id="updateReservatioDataButtonid">Update</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="list-group remoteKot-list-container touch-scroll"
+                    id="tableReservationtListID"></div>
+
+                  <div data-i18n="tableReservation.noReservationsFound"
+                    id="noreservationfoundid" class="has-i18n">Reservations not
+                    found</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Modal footer -->
+            <div class="modal-footer tablereservation-modal-footer">
+              <ul id="paginateTableReservations"></ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- pos disconnected modal -->
+      <div
+        class="modal fade"
+        id="posDisconnectedModalid"
+        style="overflow: hidden !important">
+        <div
+          class="modal-dialog modal posDisconnectedModalclass modal-dialog-centered">
+          <div class="modal-content posDisconnectedModalcontent">
+            <!-- <div class="modal-header">
+                        <h4 class="modal-title has-i18n">Activation Details</h4>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div> -->
+            <div
+              class="modal-body posDisconnectedModalBody"
+              id="posDisconnectedModalBodyid">
+              <img src="../assets/images/conn.jpg" style="width: 470px" />
+              <div class="row">
+                <h5 style="margin: 0px 10px; text-align: center">
+                  Look's like you are not connected with Master POS or Master
+                  POS is closed
+                </h5>
+                <input
+                  type="button"
+                  id="checkSocketConnectionButtonid"
+                  value="Please try again" />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- new customer form  -->
+      <div class="modal fade" id="customerFormModal">
+        <div class="modal-dialog modal-xl modal-dialog-centered">
+          <div class="modal-content customerFormModalclass">
+            <!-- Modal Header -->
+            <div class="modal-header">
+              <div class="customer-header-info">
+                <span class="title-label"
+                  id="customerFormSalutationHeadingId">
+                </span>
+                <span class="separator">|</span>
+                <span
+                  class="contact-info"
+                  id="customerFormNameAndNumberHeadingId">Customer
+                  Profile</span>
+              </div>
+              <button type="button" class="close" data-dismiss="modal">
+                &times;
+              </button>
+            </div>
+
+            <!-- Modal body -->
+            <div
+              class="modal-body customerFormBody"
+              id="customerFormBodyid"></div>
+
+            <!-- Modal footer -->
+            <!-- <div class="modal-footer">
+              <button class="btn btn-outline-secondary">Reset</button>
+              <button class="btn" id="submitCustomerFormButtonId">
+                Submit
+              </button>
+            </div> -->
+          </div>
+        </div>
+      </div>
+
+      <div class="modal fade" id="customerOrderDetialsModal">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+          <div class="modal-content customerOrderDetialsModalclass">
+            <!-- Modal Header -->
+            <div class="modal-header">
+              <h6>
+                <span class="has-i18n"
+                  data-i18n="Customerform.BILL_DETAILS"></span>
+                <span class="subinfo"
+                  id="customerOrderDetailsHeadingId"></span>
+              </h6>
+
+              <button type="button" class="close" data-dismiss="modal">
+                &times;
+              </button>
+            </div>
+
+            <!-- Modal body -->
+            <div
+              class="modal-body customerOrderDetialsBody"
+              id="customerOrderDetailsBodyid"></div>
+            <div class="modal-footer">
+              <input
+                type="button"
+                id="cancelBill"
+                class="cancel has-i18n"
+                data-i18n="[value]Customerform.CANCEL"
+                value="Cancel" />
+
+              <input
+                type="button"
+                class="repeat has-i18n"
+                id="repeatCustomerOrderButtonId"
+                data-i18n="[value]Customerform.REPEAT_ORDER"
+                value="⟳ Repeat Order" />
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+  <script>
+    if (typeof module === 'object') {
+      window.module = module;
+      module = undefined;
+    }
+  </script>
+  <script src="../css/jquery/jquery-3.6.0.js"></script>
+  <script src="../css/jquery/jquery-ui.min.js"></script>
+  <script src="../css/jquery/context-menu/jquery.contextMenu.min.js"></script>
+  <script src="../css/jquery/context-menu/jquery.ui.position.js"></script>
+  <script src="../css/bootstrap/4.3.1/js/popper.min.js"></script>
+  <script src="../css/bootstrap/4.3.1/js/bootstrap.js"></script>
+  <script src="../css/bootstrap/4.3.1/js/bootstrap-treeview.min.js"></script>
+  <script src="../css/jquery/jquery.dataTables.min.js"></script>
+  <script src="../css/jquery/dataTables.select.min.js"></script>
+  <script
+    src="https://cdn.datatables.net/select/1.7.0/js/dataTables.select.min.js"></script>
+  <script src="../thirdparty/flatpickr/index.js"></script>
+  <script src="../js/renderer.js"></script>
+  <script src="../css/datepicker/daterangepicker.js"></script>
+  <script src="../css/bootstrap/4.3.1/js/bootstrap-select.min.js"></script>
+  <script src="../thirdparty/select2/select2.min.js"></script>
+  <script src="../thirdparty/clipboard/clipboard.min.js"></script>
+  <script src="../css/HandleCounter/handleCounter.js"></script>
+  <script src="../css/Pagination/pagination.js"></script>
+  <script src="../css/toastNotification/bs4-toast.js"></script>
+
+  <script>
+    require('../js/HomeController.js');
+  </script>
+  <!-- Insert this line after script imports -->
+  <script>
+    if (window.module) module = window.module;
+  </script>
+</html>

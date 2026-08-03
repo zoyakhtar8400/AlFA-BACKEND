@@ -1,0 +1,73 @@
+/**
+Pop Up
+**/
+
+.tmbill-swal-pop-up-custom {
+    width: 40% !important;
+    /* height: 60% !important;
+    min-width: 40% !important;
+    max-height: 60% !important; */
+}
+
+.tmbill-swal-content-class {
+    height: 80% !important;
+}
+
+.tmbill-swal-content-class>div#swal2-content {
+    height: 100%;
+    width: 100%;
+}
+
+.tmbill-swal-actions-class {
+    justify-content: flex-end !important;
+    margin: 0.5em auto 0 !important;
+}
+
+.items-options-div {
+    width: 100%;
+    max-width: 100%;
+    overflow-y: auto;
+    max-height: 70vh;
+    float: right;
+    display: grid;
+    align-items: flex-start;
+    padding-left: 2px;
+}
+
+.items-options-div input[type=checkbox]+label:before {
+    height: 24px;
+    width: 24px;
+    padding-left: 0;
+}
+
+.items-options-div input[type=radio]+label:before {
+    margin-right: 0.5em;
+}
+
+.individual-option-div {
+    width: 100%;
+    height: max-content;
+}
+
+.individual-option-div * {
+    float: left;
+}
+
+.individual-option-div h5 {
+    width: 90%;
+    text-align: left;
+    font-weight: 600;
+    font-size: medium;
+}
+
+/* .items-options-list-container{
+    display: grid;
+} */
+.items-options-list-container li{
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+
+.items-options-list-container li label{
+    margin-right: 10px;
+}

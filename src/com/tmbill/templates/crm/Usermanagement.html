@@ -1,0 +1,107 @@
+
+<div>
+  <link rel="stylesheet" href="../css/Usermanagement.css" />
+  <div class="captainmgmt-container">
+    <h5 class="MenuHeading has-i18n"
+      data-i18n="captainManagement.userManagement">User Management</h5>
+
+    <div id="goBackButtonContainer">
+      <button
+        class="btn btn-outline-secondary"
+        id="gobacktomenumangemtfromUserManagementview">
+        <i class="fa-solid fa-arrow-left"></i>
+      </button>
+    </div>
+  </div>
+  <div class="row captain-actions-div">
+    <input id="opencaptainButton" type="button" value="Add Captain" />
+  </div>
+
+  <div class="captains-container">
+    <table
+      class="table table-sm table-striped allexpensesTableclass"
+      id="captainsTable"></table>
+  </div>
+  <div class="modal fade" id="addcaptainModal">
+    <div class="modal-dialog modal-sm modal-dialog-centered">
+      <div class="modal-content addcaptainModalclass">
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h4
+            data-i18n="captainManagement.addEmployee"
+            class="modal-title has-i18n">
+            Add Employee
+          </h4>
+          <button type="button" class="close" data-dismiss="modal">
+            &times;
+          </button>
+        </div>
+
+        <!-- Modal body -->
+        <div class="modal-body addcaptainModalBody" id="addcaptainModalBodyid">
+          <div class="row addcaptain-inputs-div">
+            <input
+              data-i18n="[placeholder]captainManagement.Name"
+              class="has-i18n"
+              type="text"
+              name
+              id="captainNamefield"
+              placeholder="Name" />
+            <input
+              data-i18n="[placeholder]captainManagement.Phone"
+              class="has-i18n"
+              type="text"
+              name
+              id="captainPhonefield"
+              placeholder="Phone" />
+            <input
+              data-i18n="[placeholder]captainManagement.Username"
+              class="has-i18n"
+              type="text"
+              name
+              id="captainUsernamefield"
+              placeholder="Username" />
+            <input
+              data-i18n="[placeholder]captainManagement.passowrd"
+              class="has-i18n"
+              type="password"
+              name
+              id="captainPasswordfield"
+              placeholder="passowrd" />
+            <select class="expense-select" id="captaintypeList">
+              <option
+                data-i18n="captainManagement.selectType"
+                class="has-i18n"
+                disabled
+                selected
+                value>
+                -- select type --
+              </option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Modal footer -->
+        <div class="modal-footer">
+          <button
+            data-i18n="captainManagement.Add"
+            id="addnewcaptainButton"
+            type="button"
+            class="btn btn-secondary has-i18n">
+            Add
+          </button>
+          <button
+            data-i18n="captainManagement.Close"
+            type="button"
+            class="btn btn-secondary has-i18n"
+            data-dismiss="modal">
+            Close
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+  require('../js/CaptainManagement.js');
+</script>

@@ -1,0 +1,373 @@
+<div
+  class="modal fade"
+  data-bs-backdrop="static"
+  data-bs-keyboard="false"
+  id="closeDayAndShiftModal">
+  <link rel="stylesheet" href="../css/Account.css" />
+  <div class="modal-dialog modal-dialog-centered closeDayAndShiftmodal-dialog">
+    <div
+      class="modal-content startDayAndShiftModalwrapper closeDayAndShiftModalwrapper">
+      <!-- Modal Header -->
+      <div class="modal-header startDayAndShiftModalHeaderwrapper">
+        <h5 style="font-weight: bold" id="closeDayShiftModalHeader">
+          Closing Day And Shift
+        </h5>
+      </div>
+
+      <!-- Modal body -->
+      <div
+        class="modal-body startDayAndShiftModalbody"
+        id="closeDayAndShiftModalbodyid">
+        <div class="row closeDayAndShiftContainer">
+          <!-- ================= LEFT COLUMN : CURRENCY ================= -->
+          <div class="col-3 acc-layout-col">
+            <div class="acc-card acc-card-full">
+              <table id="closeDayAndShiftCashDenominationTableId"
+                class="denom-table">
+                <thead>
+                  <tr>
+                    <th
+                      colspan="3"
+                      class="currencyDenominationTableHeader has-i18n">
+                      <span class="currency-title has-i18n"
+                        data-i18n="controller:account.Currencydenomination">
+                        Currency Denomination
+                      </span>
+                      <i
+                        class="fas fa-cash-register fa-2x"
+                        id="openCashDrawerOnCloseDayAndShiftbuttonid"
+                        aria-hidden="true"></i>
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <!-- Rows will be generated dynamically with JS -->
+                </tbody>
+                <tfoot class="currencyDenominationTableFooter">
+                  <tr>
+                    <td
+                      colspan="2"
+                      class="has-i18n"
+                      data-i18n="controller:account.Totalcashindrawer">
+                      Cash In Drawer :
+                    </td>
+                    <td class="total-cell">
+                      <input
+                        type="number"
+                        step="any"
+                        id="closeDayAndShiftCashInDrawerId" />
+                    </td>
+                  </tr>
+                </tfoot>
+              </table>
+            </div>
+          </div>
+
+          <!-- ================= MIDDLE COLUMN : RECONCILIATION + INFO + NOTES ================= -->
+          <div class="col-6 acc-layout-col">
+            <!-- Payment Reconciliation -->
+            <div class="acc-card acc-card-main">
+              <div class="acc-card-header">
+                <span
+                  class="has-i18n"
+                  data-i18n="controller:account.Paymentreconciliation">
+                  Payment Reconciliation
+                </span>
+              </div>
+
+              <div class="closeShiftTransactionTableContainerClass acc-scroll">
+                <table id="closeDayAndShiftTransactionsTableForShiftid">
+                  <thead>
+                    <tr class="closeDayShiftTransactionTableHeader">
+                      <th
+                        class="has-i18n"
+                        data-i18n="controller:account.Paymentmode">
+                        Mode
+                      </th>
+                      <th
+                        class="closeDayTransactionCount has-i18n"
+                        data-i18n="controller:account.Transactioncount">
+                        Count
+                      </th>
+                      <th
+                        class="closeDaySettledAmount has-i18n"
+                        data-i18n="controller:account.Settled">
+                        Settled
+                      </th>
+                      <th
+                        class="closeDayActualAmouunt has-i18n"
+                        data-i18n="controller:account.Actual">
+                        Actual
+                      </th>
+                      <th
+                        class="closeDayVarianceAmount has-i18n"
+                        data-i18n="controller:account.Variance">
+                        Variance
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <!-- Rows will be generated dynamically with JS -->
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            <!-- Session Info + Account Balance -->
+            <div class="acc-row-two">
+              <!-- Session Info -->
+              <div class="acc-card acc-card-half">
+                <div class="acc-card-subtitle">
+                  <span
+                    class="has-i18n"
+                    data-i18n="controller:account.Sessioninfo">
+                    Session Info
+                  </span>
+                </div>
+                <div class="modal-info-row revenueDetails">
+                  <label class="info-field">
+                    <span class="info-key"
+                      id="closeDayShiftRevenueId_key"></span>
+                    <span class="info-value" id="closeDayShiftRevenueId"></span>
+                  </label>
+                  <label class="info-field">
+                    <span class="info-key"
+                      id="closeDayShiftUsername_key"></span>
+                    <span class="info-value" id="closeDayShiftUsername"></span>
+                  </label>
+                  <label class="info-field">
+                    <span
+                      class="info-key has-i18n"
+                      data-i18n="controller:account.Cashdrawerid">
+                      Cash Drawer ID:
+                    </span>
+
+                    <span
+                      class="info-value force-ltr"
+                      id="closeDayShiftCashdrawerId"></span>
+                  </label>
+
+                </div>
+              </div>
+
+              <!-- Account Balance (Shift) -->
+              <div class="acc-card acc-card-half">
+                <div class="acc-card-subtitle">
+                  <span
+                    id="accountStaticsheaderid"
+                    class="has-i18n"
+                    data-i18n="controller:account.Accountbalance">
+                    Account Balance
+                  </span>
+                </div>
+                <div class="modal-info-row">
+                  <!-- Opening Balance -->
+                  <label class="info-field">
+                    <span class="info-key"
+                      id="closeDayShiftOpeningBanlanceId_key"></span>
+                    <span class="info-value"
+                      id="closeDayShiftOpeningBanlanceId"></span>
+                  </label>
+
+                  <!-- Expenses -->
+                  <label class="info-field">
+                    <span class="info-key"
+                      id="closeDayShiftExpensesId_key">Expenses :</span>
+                    <span class="info-value"
+                      id="closeDayShiftExpensesId_value"></span>
+                  </label>
+                </div>
+
+              </div>
+            </div>
+
+            <!-- Shift Notes -->
+            <div class="acc-card acc-card-notes">
+              <div class="acc-card-subtitle">
+                <span
+                  class="has-i18n"
+                  data-i18n="controller:account.Shiftnotes">
+                  Closing Day Shift Notes
+                </span>
+              </div>
+              <input
+                placeholder="Comments Here"
+                id="closeDayAndShiftCommentInputId"
+                class="closeDayAndShitcomment has-i18n"
+                data-i18n="[placeholder]controller:account.Commentshere" />
+            </div>
+          </div>
+
+          <!-- ================= RIGHT COLUMN : ORDER STATS + DAY SUMMARY ================= -->
+          <div class="col-3 accountStatistics acc-layout-col">
+            <!-- Order Statistics (Shift) -->
+            <div class="acc-card acc-card-order">
+              <div class="acc-card-header">
+                <span
+                  id="previousDayHistorylabelid"
+                  class="has-i18n"
+                  data-i18n="controller:account.Orderstatisticsshift">
+                  Order Statistics (Day)
+                </span>
+              </div>
+              <div class="order-stats-list">
+                <div class="order-stat-line order-stat-success">
+                  <span
+                    class="has-i18n"
+                    data-i18n="controller:account.Fullfieldorders">
+                    Fulfilled
+                  </span>
+                  <span
+                    id="closeDayShiftFulfilledOrdersId"
+                    class="order-stat-value">
+                    0
+                  </span>
+                </div>
+                <div class="order-stat-line order-stat-danger">
+                  <span
+                    class="has-i18n"
+                    data-i18n="controller:account.Cancelledorders">
+                    Cancelled
+                  </span>
+                  <span
+                    id="closeDayShiftCancelledOrdersId"
+                    class="order-stat-value">
+                    0
+                  </span>
+                </div>
+                <div class="order-stat-line order-stat-muted">
+                  <span
+                    class="has-i18n"
+                    data-i18n="controller:account.Complementaryorders">
+                    Complementary
+                  </span>
+                  <span class="order-stat-value"
+                    id="closeDayShiftComplementaryOrdersId">0</span>
+                </div>
+                <div class="acc-card acc-card-summary">
+                  <div class="acc-card-header">
+                    <span
+                      id="closeDaySummarylabelid"
+                      class="has-i18n"
+                      data-i18n="controller:account.Closingdayssummary">
+                      Closing Day Summary
+                    </span>
+                  </div>
+
+                  <div
+                    class="closeDayTransactionsTableContaierClass acc-scroll">
+                    <table id="closeDayAndShiftTransactionsForDayTableId">
+                      <thead>
+                        <tr>
+                          <th>Mode</th>
+                          <th>Count</th>
+                          <th>Settled</th>
+                        </tr>
+                      </thead>
+                      <tbody></tbody>
+                    </table>
+                  </div>
+                </div>
+
+                <div class="acc-summary-actions">
+                  <button
+                    data-i18n="controller:account.Close"
+                    class="btn btn-danger closeDayAndShiftModalButton has-i18n"
+                    data-dismiss="modal">
+                    Close
+                  </button>
+
+                  <input
+                    type="button"
+                    value="CLOSE DAY AND SHIFT"
+                    id="CloseDayAndShiftButtonId"
+                    class="has-i18n"
+                    data-i18n="[value]controller:account.Closedayandshift" />
+                </div>
+              </div>
+            </div>
+
+            <!-- Closing Day Summary + Day stats + buttons -->
+            <!-- <div class="acc-card acc-card-summary">
+              <div class="acc-card-header">
+                <span
+                  id="closeDaySummarylabelid"
+                  class="has-i18n"
+                  data-i18n="controller:account.Closingdayssummary">
+                  Closing Day Summary
+                </span>
+              </div>
+
+              <div class="closeDayTransactionsTableContaierClass acc-scroll">
+                
+              </div>
+
+              <div class="modal-info-row prevDayCloseDayShiftSummary">
+                <label
+                  id="previousDayHistorylabelid"
+                  class="has-i18n"
+                  data-i18n="controller:account.Orderstatistics">
+                  Order Statistics (Day)
+                </label>
+                <label
+                  id="closeDayShiftFulfilledOrdersForDayId"
+                  class="has-i18n"
+                  data-i18n="controller:account.Fullfieldorders">
+                  Fulfilled Orders:
+                </label>
+                <label
+                  id="closeDayShiftCancelledOrdersForDayId"
+                  class="has-i18n"
+                  data-i18n="controller:account.Cancelledorders">
+                  Cancelled Orders:
+                </label>
+                <label
+                  id="closeDayShiftComplementaryOrdersForDayId"
+                  data-i18n="controller:account.Complementaryorders"
+                  class="has-i18n">
+                  Complementary Orders:
+                </label>
+              </div>
+
+              <div class="modal-info-row">
+                <label
+                  id="closeDayShiftOpeningBanlanceForDayId"
+                  class="has-i18n"
+                  data-i18n="controller:account.Openingbalance">
+                  Opening Balance
+                </label>
+                <label
+                  id="closeDayShiftExpensesForDayId"
+                  class="has-i18n"
+                  data-i18n="controller:account.Expenses">
+                  Expenses: 0
+                </label>
+              </div>
+
+              <div class="acc-summary-actions">
+                <button
+                  data-i18n="controller:account.Close"
+                  class="btn btn-danger closeDayAndShiftModalButton has-i18n"
+                  data-dismiss="modal">
+                  Close
+                </button>
+
+                <input
+                  type="button"
+                  value="CLOSE DAY AND SHIFT"
+                  id="CloseDayAndShiftButtonId"
+                  class="has-i18n"
+                  data-i18n="[value]controller:account.Closedayandshift" />
+              </div>
+
+            </div> -->
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+  require('../js/Account/CloseDayAndShift.js');
+</script>

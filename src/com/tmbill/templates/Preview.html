@@ -1,0 +1,263 @@
+<div class="previewContainer" id="previewContainerid">
+    <link rel="stylesheet" href="../css/preview.css">
+
+    <div class="hotellogoDiv" id="hotellogoDivid">
+        <img id="hotellogoImage" src="" alt="">
+    </div>
+    <div class="titleDiv" id="brandnameID"></div>
+    <div class="titleDiv" id="hotelnameID"></div>
+    <div class="titleDiv" id="previewlternatehotelnameID"></div>
+    <div class="titleDiv" id="previewChannelRestaurantNameID"></div>
+    <div class="addressDiv" id="addressdivID"></div>
+    <label class="dateLabel" id="storeContactlabelId"></label>
+    <label class="dateLabel" id="storeemailLabelid"></label>
+    <label class="dateLabel" id="storewebsiteLabelid"></label>
+    <label class="dateLabel" id="storeinfonoteField"></label>
+    <label class="dateLabel" id="storeinfoField1"></label>
+    <label class="dateLabel" id="storeinfoField2"></label>
+    <label class="dateLabel" id="storeinfoField3"></label>
+    <label class="dateLabel" id="storeinfoHeaderField4"></label>
+    <label class="dateLabel" id="storeinfoField5"></label>
+    <label class="dateLabel" id="storeinfoField6"></label>
+    <label class="dateLabel" id="storeinfoField7"></label>
+    <label class="dateLabel" for="" id="datelabelID"></label>
+    <label class="dateLabel" for="" id="mitiDatelabelID"></label>
+    <label id="draftBilllabelid"></label>
+    <label id="ordertypeLabel"></label>
+    <!-- <label data-i18n="previewScreen.billCopy" class="titleDiv has-i18n" id="oldbilllabelid">Reprinted Bill</label> -->
+    <label data-i18n="previewScreen.billCopy" class="titleDiv has-i18n" id="oldbilllabelid"></label>
+    <label class="titleDiv" id="billstatuslabelid"></label>
+    <label id="billnumberlabelid"></label>
+    <label id="ordernumberlabelid"></label>
+    <label id="kotnumberlabelid"></label>
+    <label id="orderidlabel"></label>
+    <label id="parentorderidlabel"></label>
+    <label id="externalorderidlabel"></label>
+    <label id="orderPickupedAtIdlabel"></label>
+    <!-- <label id="orderDeliveredAtIdlabel"></label> -->
+    <label id="onlineorderTagsContainerid"></label>
+    <label id="irnNumberidlabel" class="addressDiv"></label>
+    <label id="onlineOrderOTPidlabel" class="addressDiv"></label>
+
+    <!-- <div class="parentWrapper">
+        <div class="wrapper1">
+            <label class="tablenameLabel" for="" id="tablenameLabelid"></label>
+            <label for="" id="usernameLabelid"></label>
+        </div>
+        <div class="payWrapper" style="display: block;">
+            <label class="paymodeClass" for="" id="paymodeId"></label>
+            <label id="orderTimelabelid" class="orderTimelabelid"></label>
+        </div>
+        <div class="payWrapper">
+            <label class="paymodeClass" id="orderOtplabelid"></label>
+            <label id="deliverybylabelId" class="deliveryboynameLabel"></label>
+        </div>
+        <div class="payWrapper">
+            <label class="paymodeClass" id="billprintWaiterlabelid"></label>
+            <label class="paymodeClass" id="billprintCaptainlabelid"></label>
+        </div>
+        <div class="payWrapper">
+            <label class="paymodeClass" id="guestsonbilllabelid"></label>
+            <label id="deliveryboyLabelid" class="deliveryboynameLabel"></label>
+
+        </div>
+    </div> -->
+
+    <div class="parentWrapper billMiscDetailsWrapper">
+            <label class="tablenameLabel" for="" id="tablenameLabelid"></label>
+            <label for="" id="usernameLabelid"></label>
+            <label class="paymodeClass" for="" id="paymodeId"></label>
+            <label id="orderTimelabelid" class="orderTimelabelid"></label>
+            <label class="paymodeClass" id="orderOtplabelid"></label>
+            <label id="deliverybylabelId" class="deliveryboynameLabel"></label>
+            <label class="paymodeClass" id="billprintWaiterlabelid"></label>
+            <label class="paymodeClass" id="billprintCaptainlabelid"></label>
+            <label class="paymodeClass" id="guestsonbilllabelid"></label>
+            <label id="deliveryboyLabelid" class="deliveryboynameLabel"></label>
+
+    </div>
+    <div class="wrapper2 orderitemtable">
+        <table id="previewTable" style="width:100%">
+            <tr>
+                <th data-i18n="previewScreen.Item" id="previewItemName" class="has-i18n lefTextAlign">Item</th>
+                <th data-i18n="previewScreen.Qty" class="has-i18n previewItemQtyClass rightTextAlign" id="previewItemQtyid" >Qty</th>
+                <th data-i18n="previewScreen.Rate" class="has-i18n previewItemRateClass rightTextAlign" id="previewItemQtyid" >Rate</th>
+                <th data-i18n="previewScreen.Total" class="has-i18n previewItemTotalClass rightTextAlign" id="previewItemTotalid" >Total</th>
+            </tr>
+        </table>
+    </div>
+    <div class="itemtablewrapperclass">
+        <table id="previewTable" style="width:100%">
+            <tr>
+                    <th data-i18n="bothLanguage.Item" id="previewItemName" class="has-i18n lefTextAlign">Item <br> غرض</th>
+                    <th data-i18n="bothLanguage.Qty" class="has-i18n previewItemQtyClass rightTextAlign">Qty <br> الكمية</th>
+
+                    <th data-i18n="bothLanguage.Rate" class="has-i18n previewItemRateClass rightTextAlign">Rate <br> السعر</th>
+                    <th data-i18n="bothLanguage.Total" class="has-i18n previewItemTotalClass rightTextAlign">Total<br> الاجمالي</th>
+
+            </tr>
+        </table>
+    </div>
+    <!-- <div id="totalQtyDIvid" class="totalDiv">
+        <label data-i18n="" class="has-i18n" for="totalQtylabel">Total Qty : </label>
+        <label id="totalQtylabel" class="totalAmount"></label>
+    </div> -->
+    <!-- <div class="totalDiv">
+        <label data-i18n="previewScreen.totalAmount" class="has-i18n" for="totalAmount">Total Amount : </label>
+        <label id="totalAmountlabel" class="totalAmount"></label>
+    </div> -->
+    <!-- <div style="display: flex; justify-content: space-between;">
+        <span id="totalQtyDIvid" class="">
+            <label data-i18n="controller:previewController.TotalQty" id="totalqtylabelid" class="has-i18n" for="totalQtylabel">Total Qty :
+            </label>
+            <label data-i18n="bothLanguage.TotalQty" id="totalqtylableidforbothlang" class="has-i18n" for="totalQtylabel">Total Qty <br>  اجمالي الكمية:
+            </label>
+            <label id="totalQtylabel" class="totalAmount"></label>
+        </span>
+        <span id="totaldivid">
+            <label data-i18n="previewScreen.totalAmount" id="totalamountlabelid" class="has-i18n" for="totalAmount">Total Amount : </label>
+            <label data-i18n="bothLanguage.totalAmount" id="totalamountlableidforbothlang" class="has-i18n" for="totalAmount">Total Amount <br> المبلغ الاجمالي: </label>
+            <label id="totalAmountlabel" class="totalAmount"></label>
+        </span>
+    </div> -->
+
+    <div id="totalQtyAndAmountDivId">
+        <label data-i18n="controller:previewController.TotalQty" id="totalQtyAndAmountLabel" class="has-i18n" >Total :
+            </label>
+            <label data-i18n="controller:previewController.TotalQty" id="totalQtylabel">
+            </label>
+            <label data-i18n="controller:previewController.TotalQty" id="totalAmountlabel">
+            </label>
+    </div>
+    <div id="discountDivid" class="discountDiv ">
+        <div id="discountAmountlabel" class="discAmount"></div>
+        <div id="previewDiscountreasonlabelid" class="discAmount"></div>
+    </div>
+
+    <div id="coupondiscountDivid" class="discountDiv">
+        <div id="cpdiscountAmountlabel" class="discAmount"></div>
+    </div>
+
+    <div id="totalwithouttaxDivid" class="discountDiv billSummaryPrint" >
+        <label data-i18n="controller:previewController.Totalwithouttax" id="totalwithtaxid" class="has-i18n" for="totalWithouttaxid">Total
+            Without Tax : </label>
+        <label data-i18n="bothLanguage.Totalwithouttax" id="totalwithouttaxinbothlangid" class="has-i18n" for="totalWithouttaxid">Total
+            Without Tax <br> المجموع بدون ضريبة  </label>
+        <label id="totalWithouttaxid" class="discAmount"></label>
+    </div>
+    
+
+    
+    <div id="taxlistContainerid">
+
+    </div>
+    <div class="taxnamediv billSummaryPrint" id="taxnameDiv_id" style="display: none;">
+        <Label id="taxmethodName"></Label>
+        <Label id="taxPercent"></Label>
+    </div>
+    <div class="tax_divided_div1 billSummaryPrint" id="tax_divided_div1_id" style="display: none;">
+        <Label id="cgstLabel"></Label>
+        <Label id="cgstAmount"></Label>
+    </div>
+    <div class="tax_divided_div2 billSummaryPrint" id="tax_divided_div2_id" style="display: none;">
+        <Label id="sgstLabel"></Label>
+        <Label id="sgstAmount"></Label>
+    </div>
+
+    <div id="taxDivid" class="taxDiv billSummaryPrint">
+        <label data-i18n="previewScreen.totalTax" class="has-i18n" id="taxAmountlabeltitle" for="taxAmount">Total Tax :
+        </label>
+        <label id="taxAmountlabel" class="taxAmount"></label>
+    </div>
+    <div id="onlinetaxDivid" class="taxDiv billSummaryPrint">
+        <label data-i18n="previewScreen.totalTax" class="has-i18n" id="taxAmountlabeltitleforonline" for="taxAmount">Total Tax :
+        </label>
+        <label id="onlinetaxAmountlabel" class="taxAmount"></label>
+    </div>
+
+    <div class="previewchargesWrapper" id="previewchargesWrapperid">
+        <!-- <label>Additional Charges </label> -->
+        <ul id="previewchargesListid"></ul>
+    </div>
+
+    <div id="itemlevelChargestotaldivID" class="previewchargesWrapper">
+        <ul id="previewitemchargesListid"></ul>
+    </div>
+    <div id="grandtotaldivID" class="grandtotaldiv billSummaryPrint">
+        <label data-i18n="previewScreen.grandTotal" id="grandtotallabelid" class="has-i18n" for="grandtotallabe">Grand Total : </label>
+        <label data-i18n="bothLanguage.grandTotal" id="grandtotallabelidforbothlang" class="has-i18n" for="grandtotallabe">Grand Total <br> المجموع الإجمالي:     </label>
+        <label id="grandtotallabelID" class="grandtotallabe"></label>
+        <div id="grandtotalInForeignCurrencylabelID" class="grandtotalForignCurrencylabel"></div>
+    </div>
+    <div id="previewroundedTotallabelid" class="roundedTotalcontainer"></div>
+    <div id="grandtotalwordid" class="grandtotalwordclass"></div>
+    <div class="previewmiscContainer top-dashed botton-dashed p-2" id="previewmiscContainerid"></div>
+
+    <div class="customerInfodiv" id="customerInfodivid">
+        <label for="" id="duePaymentlabelid"></label>
+    </div>
+    <div class='' id="billpreviewcustomerpaidContainer">
+        <label for="" id="billpreviewcustomerpaidAmountlabelid"></label>
+        <label for="" id="billpreviewcustomerreturnAmountlabelid"></label>
+    </div>
+    <label for="" id="billpreviewtipAmountlabelid"></label>
+    <div class="deliveryboyInfodiv" id="deliveryboyInfodivid">
+        <label data-i18n="previewScreen.deliveryBoy" class="has-i18n" for="">Delivery Boy:</label>
+        <!-- <br> -->
+        <label for="" id="deliveryboyInfolabelid"></label>
+    </div>
+
+    <div class="" id="orderNoteDivId"></div>
+
+    <div class="footerDiv" id="footerDivid"></div>
+
+    <div class="qrcodeContainer paymentqrcontainer p-2 top-dashed" id="paymentQrcodeCanvascontainerid">
+        <div data-i18n="previewScreen.scanAndPayThroughAnyUPIApp" class="scanqrTitle has-i18n">Scan & pay through any
+            UPI app</div>
+        <img id="paymentQrcodeCanvasid"></img>
+    </div>
+
+    <div class="qrcodeContainer newqrcanvasContainer p-2" id="invoiceebillQrcodeCanvascontainer">
+        <div data-i18n="previewScreen.scanAndViewYourEBill" class="invoiceQrtitle has-i18n">Scan & view your E-Bill
+        </div>
+        <img id="invoiceebillQrcodeCanvasid"></img>
+    </div>
+
+    <div class="qrcodeContainer newqrcanvasContainer p-2" id="irnQrcodeCanvascontainer">
+        <div data-i18n="previewScreen.scanAndViewYourEBill" class="invoiceQrtitle has-i18n">Scan & view your IRN
+        </div>
+        <img id="irnQrcodeCanvasid"></img>
+    </div>
+
+    <div class="qrcodeContainer newqrcanvasContainer p-2" id="zatcaQrcodeCanvascontainer">
+        <div data-i18n="previewScreen.scanAndViewYourEBill" class="invoiceQrtitle has-i18n">Scan & view your Zatca Invoice
+        </div>
+        <img id="zatcaQrcodeCanvasid"></img>
+    </div>
+
+    <div class="custom-qrcode-container" id="customqrcodeContainerid">
+
+    </div>
+    <!-- <label class="dateLabel" id="storeinfoField4"></label> -->
+
+    <label class="dateLabel" id="billprintFooter1"></label>
+    <label class="dateLabel" id="billprintFooter2"></label>
+    <label class="dateLabel" id="billprintFooter3"></label>
+    <label class="dateLabel" id="billprintFooter4"></label>
+    <label class="dateLabel" id="billprintFooter5"></label>
+    <label class="dateLabel" id="billprintFooter6"></label>
+
+
+    <div class="qrcodeContainer newqrcanvasContainer p-2" id="orderIdBarcodeCanvascontainer">
+        <svg id="orderidBarcodeCanvasid"></svg>
+    </div>
+
+    <div id="appversionDivid" class="appversionDiv"></div>
+</div>
+
+
+<script>
+    require('../js/PreviewController.js');
+</script>
+<!-- Insert this line after script imports -->
+<script>if (window.module) module = window.module;</script>

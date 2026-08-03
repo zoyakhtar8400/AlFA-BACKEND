@@ -1,0 +1,72 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <title data-i18n="[value]customerDisplay.title" class="has-i18n">
+    Customer Display
+  </title>
+  <link rel="stylesheet" href="../../css/fontawesome/6.5.1/css/all.css" />
+  <link rel="stylesheet" href="../../css/bootstrap/4.3.1/css/bootstrap.css" />
+  <link rel="stylesheet" href="../../css/bootstrap/4.3.1/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="../../css/fontawesome/6.5.1/css/v4-shims.css" />
+  <link rel="stylesheet" href="../../css/datepicker/daterangepicker.min.css" />
+  <link rel="stylesheet" href="../../packages/swiper/css/index.css" />
+  <link rel="stylesheet" href="./index.css" />
+</head>
+
+<body>
+  <div class="customerDisplaywrapper" id="customerDisplaywrapperid">
+    <div class="content">
+      <div class="leftContainer" id="leftContainerid">
+        <div class="swiperContainer" id="swiperContainerid">
+          <div class="swiper-wrapper"></div>
+        </div>
+      </div>
+      <div class="rightContainer" id="rightContainerid">
+        <div class="orderSummarywrapper">
+          <div class="ordersummaryChild">
+            <div class="outletDetails">
+              <img class="storeLogo" id="outletLogoelementid" />
+              <div class="storeTitle" id="outletTitleelementid"></div>
+            </div>
+            <div class="orderheaderWrapper">
+              <div class="ordernoLabel" id="ordernoLabelid"></div>
+            </div>
+            <div class="orderitemsContainer" id="orderitemsContainerid">
+              <ul class="orderitemstitleList">
+                <li class="itemName" data-i18n="[value]orderScreen.KOTSection.itemName">Item Name</li>
+                <li class="itemQty" data-i18n="[value]orderScreen.KOTSection.QTY">Qty</li>
+                <li class="itemAmount" data-i18n="[value]orderScreen.KOTSection.Amount">Amount</li>
+              </ul>
+              <div class="orderitemsWrapper" id="orderitemsWrapperid"></div>
+              <div class="cdorderPrompt" id="cdorderPromptid"></div>
+              <div class="orderdetailsWrapper">
+                <div class="ordertotaltaxLabel" id="ordertotaltaxLabelid"></div>
+                <div class="ordertotalLabel" id="ordertotalLabelid"></div>
+              </div>
+              <div class="qrcodeContainer" id="qrcodeContainerid">
+                <img id="customerdisplayqrCanvasid" />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+<script>
+  if (typeof module === 'object') {
+    window.module = module;
+    module = undefined;
+  }
+</script>
+<script src="../../css/jquery/jquery-3.6.0.js"></script>
+<script src="../../css/bootstrap/4.3.1/js/bootstrap.js"></script>
+<script src="../../packages/swiper/index.js"></script>
+<script>
+  require('../../js/CustomerDisplay/index.js');
+</script>
+
+</html>

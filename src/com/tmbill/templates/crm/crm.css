@@ -1,0 +1,138 @@
+Main Table Styles
+#customermgmtDattable {
+    width: 100%;
+    border-collapse: collapse;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 13px;
+}
+
+/* Header Styles */
+#customermgmtDattable thead th {
+    background-color: #2c3e50;
+    color: white;
+    padding: 12px 10px;
+    text-align: left;
+    position: sticky;
+    top: 0;
+    font-weight: 500;
+}
+
+/* Body Styles */
+#customermgmtDattable tbody td {
+    padding: 12px 10px;
+    border-bottom: 1px solid #e0e0e0;
+    vertical-align: middle;
+}
+
+/* Column Widths */
+#customermgmtDattable td:nth-child(1) { width: 50px; text-align: center; }  /* S/No */
+#customermgmtDattable td:nth-child(2) { width: 180px; font-weight: 600; }   /* Name */
+#customermgmtDattable td:nth-child(3) { width: 80px; text-align: center; }  /* Country Code */
+#customermgmtDattable td:nth-child(4) { width: 100px; }                     /* Contact No */
+#customermgmtDattable td:nth-child(7) { width: 120px; }                     /* Address */
+#customermgmtDattable td:nth-child(11) { width: 40px; text-align: center; } /* Actions */
+
+/* Edit Icons */
+.edit-icon {
+    color: #3498db;
+    cursor: pointer;
+    font-size: 16px;
+    transition: all 0.2s;
+}
+
+.edit-icon:hover {
+    transform: scale(1.1);
+    opacity: 0.9;
+}
+
+.address-edit-icon {
+    color: #27ae60;
+    margin-left: 8px;
+}
+
+.empty-field {
+    color: #95a5a6;
+    font-style: italic;
+}
+
+.address-checkmark {
+    color: #27ae60;
+}
+
+.dataTables_info, .dataTables_paginate {
+    padding: 8px 0;
+    font-size: 12px;
+}
+
+@media (max-width: 768px) {
+    #customermgmtDattable {
+        font-size: 12px;
+    }
+}
+
+
+.crm-actions-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 8px 10px;
+  margin-bottom: 8px;
+}
+
+/* left: back + search */
+.crm-actions-left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex: 1;
+}
+
+/* right: buttons */
+.crm-actions-right {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* back button */
+.crm-back-button {
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* search input */
+.crm-search {
+  height: 36px;
+  max-width: 320px;
+  width: 100%;
+  padding: 6px 12px;
+  border-radius: 8px;
+  border: 1px solid #d9d9de;
+  background: #f6f6f8;
+  font-size: 14px;
+}
+
+/* action buttons */
+.crm-actions-right .normal-button {
+  height: 36px;
+  padding: 6px 14px;
+  border-radius: 8px;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+
+#customermgmtDattable_wrapper .edit-icon-on-left::before {
+  font-family: FontAwesome;
+  content: '\f304';
+  float: left;
+  padding-right: 3px !important;   
+}
+

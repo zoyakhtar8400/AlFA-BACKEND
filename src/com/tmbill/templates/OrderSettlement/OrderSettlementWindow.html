@@ -1,0 +1,134 @@
+<div class="orderSettlemetWindowDiv" id="orderSettlemetWindowParentDivID">
+  <link rel="stylesheet" href="../css/OrderSettlementWindow.css" />
+  <div class="row searchOrderSettleDivclass">
+    <div class="col-3">
+      <h6
+        id="ordersettlewindowheaderid"
+        class="has-i18n"
+        data-i18n="tables:OrderTable.OrderSettlementWindow">
+        Order Settlement Window
+      </h6>
+    </div>
+    <div class="col-4">
+      <input
+        data-i18n="[placeholder]receipt.Search"
+        class="has-i18n"
+        type="text"
+        placeholder="Search"
+        id="searchOrderSettlementField" />
+    </div>
+    <div class="col-4">
+      <div id="ordertypesinOrderSettlementWindowContainerId"></div>
+    </div>
+    <div class="col-1"></div>
+  </div>
+  <div class="row otherfiltersDivcalls">
+    <div class="col-7" id="orderSettleWindowOrderStatusContainer">
+      <span class="badge badge-dark" id="orderSettlewindowAllorderCountId">
+        <span class="has-i18n"
+          data-i18n="tables:reportTableHeadings.ALL"></span>
+        <span class="count"></span>
+      </span>
+
+      <span class="badge badge-secondary"
+        id="orderSettlewindowRunningOrderCountId">
+        <span class="has-i18n"
+          data-i18n="tables:reportTableHeadings.RUNNING"></span>
+        <span class="count"></span>
+      </span>
+
+      <span class="badge badge-primary"
+        id="orderSettlewindowFoodReadyOrderCountId">
+        <span class="has-i18n"
+          data-i18n="tables:reportTableHeadings.READY"></span>
+        <span class="count"></span>
+      </span>
+
+      <span class="badge badge-warning"
+        id="orderSettlewindowDispatchedOrderCountId">
+        <span class="has-i18n"
+          data-i18n="tables:reportTableHeadings.DISPATCHED"></span>
+        <span class="count"></span>
+      </span>
+
+      <span class="badge badge-success"
+        id="orderSettlewindowCompletedOrderCountId">
+        <span class="has-i18n"
+          data-i18n="tables:reportTableHeadings.COMPLETED"></span>
+        <span class="count"></span>
+      </span>
+
+      <span class="badge badge-danger"
+        id="orderSettlewindowCancelledOrderCountId">
+        <span class="has-i18n"
+          data-i18n="tables:reportTableHeadings.CANCELLED"></span>
+        <span class="count"></span>
+      </span>
+
+      <button class="btn" id="refreshOrderSettlementWindowButtonId">
+        <i class="fa fa-refresh"></i>
+      </button>
+    </div>
+    <div class="col-5" style="display: flex">
+      <div class="row-3">
+        <div class="col-3">
+          <input
+            data-i18n="[placeholder]OrderTable.AREA_FILTER"
+            class="has-i18n"
+            type="text"
+            placeholder="Area Filter"
+            id="orderSettleAreaFilterId" />
+        </div>
+      </div>
+      <div class="row-2">
+        <div class="col-3">
+          <input
+            data-i18n="[placeholder]OrderTable.DELIVERY_BOY_FILTER"
+            class="has-i18n"
+            type="text"
+            placeholder="Delivery Boy Filter"
+            id="orderSettlementDeliveryBoySearchId" />
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="billtableWrapper">
+    <div class="table-responsive billsDivclass">
+      <table
+        class="table table-sm orderSettlewindowTableclass display tablenowrap"
+        id="orderSettlewindowTable"></table>
+    </div>
+  </div>
+
+  <div class="row settleOrderActionsDivclass">
+    <i
+      data-i18n
+      title="Print Delivery Boy Report"
+      id="deliveryBoyReeportprintButton"
+      class="fas fa-print fa-lg has-i18n"
+      aria-hidden="true"></i>
+    <label id="totalBillSelectedid"></label>
+    <label id="totalBillSelectedAmountid"></label>
+    <input
+      type="button"
+      id="orderSettlewindowUpdateButtonId"
+      class="has-i18n"
+      data-i18n="[value]tables:reportTableHeadings.Update"
+      value="Update" />
+    <input
+      type="button"
+      class="has-i18n"
+      data-i18n="[value]tables:reportTableHeadings.Settle"
+      value="Settle"
+      id="orderSettlewindowSettleButtonId" />
+  </div>
+</div>
+
+<script>
+  require('../js/OrderSettlement/index.js');
+</script>
+<!-- Insert this line after script imports -->
+<script>
+  if (window.module) module = window.module;
+</script>

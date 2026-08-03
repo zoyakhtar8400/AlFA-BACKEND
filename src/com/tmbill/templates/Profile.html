@@ -1,0 +1,138 @@
+<div class="profileWrapper" id="profileWrapperid">
+  <link rel="stylesheet" href="../css/Profile.css" />
+  <div class="d-flex justify-content-center hotelLogodiv">
+    <img
+      id="hotelLogoid"
+      src="../assets/images/avataaars.png"
+      alt
+      id="hotellogoImageid" />
+  </div>
+
+  <div class="hotelinfoWrapper">
+    <div class="d-flex justify-content-center hoteltitleDiv">
+      <h4 title="Outlet Name" id="hoteltitleheadingId"></h4>
+    </div>
+    <div class="storestaticInfodiv">
+      <div class="info-card">
+        <h6 data-i18n="settingScreen.Profile.Username" class="has-i18n">
+          Username
+        </h6>
+        <h5 id="storeusernameId"></h5>
+      </div>
+      <div class="info-card">
+        <h6 data-i18n="settingScreen.Profile.City" class="has-i18n">City</h6>
+        <h5 id="storecityId">Pune</h5>
+      </div>
+      <div class="info-card">
+        <h6 data-i18n="settingScreen.Profile.outlatPhone" class="has-i18n">
+          Outlet Phone
+        </h6>
+        <h5 id="storephoneId">965987378846</h5>
+      </div>
+    </div>
+    <div class="storestaticInfodiv">
+      <div class="info-card">
+        <h6 data-i18n="settingScreen.Profile.tmposId" class="has-i18n">
+          TMPOS ID
+        </h6>
+        <h5 id="storetmposId"></h5>
+      </div>
+      <div class="info-card">
+        <h6 data-i18n="settingScreen.Profile.revenueId" class="has-i18n">
+          Revenue ID
+        </h6>
+        <h5 id="storeRevenueId">-</h5>
+      </div>
+      <div class="info-card">
+        <h6 data-i18n="settingScreen.Profile.ipAddress" class="has-i18n">
+          IP Address
+        </h6>
+        <h5 id="storeIPAddressId"></h5>
+      </div>
+    </div>
+
+    <div class="alert alert-primary profileExpiryinfo mb-1" role="alert"></div>
+
+    <div class="updatabledataDiv">
+      <div class="inlineContainer">
+        <input
+          data-i18n="[placeholder]settingScreen.Profile.updateForm.Username"
+          class="has-i18n"
+          type="text"
+          name
+          id="usernameInputid"
+          title="Username"
+          placeholder="Username" />
+        <input
+          data-i18n="[placeholder]settingScreen.Profile.updateForm.userMobile"
+          class="has-i18n"
+          type="text"
+          name
+          id="usermobileInputid"
+          placeholder="User Mobile"
+          title="User Mobile" />
+      </div>
+
+      <div class="inlineContainer">
+        <input
+          data-i18n="[placeholder]settingScreen.Profile.updateForm.userMail"
+          class="has-i18n"
+          type="text"
+          name
+          id="usermailInputid"
+          title="User Mail"
+          placeholder="User Mail" />
+        <input
+          data-i18n="[placeholder]settingScreen.Profile.updateForm.address1"
+          class="has-i18n"
+          type="text"
+          name
+          id="storeaddresId1"
+          title="Address 1"
+          placeholder="Address 1" />
+      </div>
+
+      <div class="inlineContainer">
+        <input
+          data-i18n="[placeholder]settingScreen.Profile.updateForm.address2"
+          class="has-i18n"
+          type="text"
+          name
+          id="storeaddresId2"
+          title="Address 2"
+          placeholder="Address 2" />
+        <input
+          data-i18n="[placeholder]settingScreen.Profile.updateForm.subLocality"
+          class="has-i18n"
+          type="text"
+          name
+          id="userlocalityId"
+          placeholder="Sub Locality"
+          title="Sub Locality" />
+      </div>
+      <div class="inlineContainer">
+        <input
+          data-i18n="[value]settingScreen.Profile.resetFCMToken"
+          class="has-i18n btn btn-danger"
+          type="button"
+          id="resetFCMTokenButton"
+          value="Reset FCM Token" />
+        <input
+          data-i18n="[value]settingScreen.Profile.fixDBIssues"
+          class="has-i18n btn btn-danger"
+          type="button"
+          id="fixdbissueButton"
+          value="Fix DB Issues" />
+        <input
+          data-i18n="[value]settingScreen.Profile.updateForm.Update"
+          class="has-i18n"
+          type="button"
+          id="updatestoreinfoButton"
+          value="Update" />
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+  require('../js/ProfileController.js');
+</script>

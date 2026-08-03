@@ -1,0 +1,50 @@
+POST http://www.techmainstay.in/tmpos/api/v8/cust_order_history HTTP/1.1
+content-type: application/json
+
+{
+    "cust_mobile": "98999223829",
+    "store_id": "5441948253456436"
+}
+
+###
+POST https://www.tmbill.net/tmpos/api/dv9/catalogues HTTP/1.1
+Content-Type: application/x-www-form-urlencoded
+
+ 
+store_id=5441948253456436
+# 5441948253456436 4481795922446688
+
+###
+POST https://www.tmbill.net/tmpos/api/v7/storelogin 
+Content-Type: application/x-www-form-urlencoded
+
+username=mumbrA&password=1234
+###
+POST https://www.tmbill.net/tmbill/channel/v3/desklogin
+content-type: application/json
+
+{
+    "username": "tmzafraan",
+    "password": "abdullah"
+}
+
+####
+POST https://www.tmbill.net/tmbill/channel/v3/get_store_items
+Content-Type: application/x-www-form-urlencoded
+
+store_id=4481795922446688
+
+###
+POST https://www.tmbill.net/tmbill/channel/v3/getstores
+Content-Type: application/x-www-form-urlencoded
+
+tracking_id=6820450
+
+
+###
+POST https://www.tmbill.online/tmbill/channel/v4/order
+Content-Type: application/json
+
+{"customer":{"address":{"city":"Bangalore","is_guest_mode":false,"landmark":null,"latitude":0,"line_1":"Bangalore","line_2":null,"longitude":0,"pin":"","sub_locality":"Bangalore","tag":null},"email":"","name":"Swiggy User","phone":"1234567890"},"order":{"details":{"biz_id":37494914,"channel":"swiggy","charges":[],"coupon":"","created":1581578540284,"delivery_datetime":1581578540283,"discount":0,"ext_platforms":[{"delivery_type":"partner","extras":{"order_type":"regular"},"id":"646537381","kind":"food_aggregator","name":"swiggy"}],"id":646537381,"instructions":"","item_level_total_charges":0,"item_level_total_taxes":0,"item_taxes":0,"merchant_ref_id":"646537381","order_level_total_charges":0,"order_level_total_taxes":0,"order_state":"Placed","order_subtotal":199,"order_total":199,"order_type":"delivery","state":"Placed","taxes":[],"total_charges":0,"total_external_discount":0,"total_taxes":0},"items":[{"charges":[],"discount":0,"food_type":"2","id":324232,"image_landscape_url":null,"image_url":null,"merchant_id":"48","options_to_add":[{"id":81010,"merchant_id":"12","price":199,"title":"Full","unit_weight":0}],"options_to_remove":[],"price":0,"quantity":1,"taxes":[],"title":"Chicken Dum Biryani.","total":199,"total_with_tax":199,"unit_weight":0}],"next_state":"Acknowledged","next_states":["Acknowledged","Food Ready","Dispatched","Completed","Cancelled"],"payment":[{"amount":199,"option":"aggregator","srvr_trx_id":null}],"store":{"address":"6-2-2, Bhagya Laxmi colony, Manikonda, 500089.","id":649736820450,"latitude":0,"longitude":0,"merchant_ref_id":"649736820450","name":"Kammana Kitchens"}}}
+
+

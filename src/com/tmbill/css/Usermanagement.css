@@ -1,0 +1,89 @@
+/* =====================================
+   USER MANAGEMENT – Back Button (FINAL)
+   ===================================== */
+
+/* container alignment */
+#goBackButtonContainer {
+  display: flex;
+  align-items: center;
+  height: 36px;
+  margin-top: 4px;
+  margin-bottom: 10px;
+}
+
+/* back button – same as Wallet / CRM */
+#gobacktomenumangemtfromUserManagementview {
+  width: 62px !important;
+  min-width: 62px !important;
+  max-width: 62px !important;
+
+  height: 36px !important;
+  padding: 0 !important;
+
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+
+  border-radius: 5px !important;
+  border: 1px solid #6c757d !important;
+
+  /* background-color: #ffffff !important; */
+  color: #6c757d !important;
+
+  box-sizing: border-box;
+  line-height: 1 !important;
+
+  transition:
+    background-color 0.15s ease,
+    border-color 0.15s ease,
+    color 0.15s ease;
+}
+
+#gobacktomenumangemtfromUserManagementview i {
+  font-size: 16px;
+  line-height: 1;
+}
+
+#gobacktomenumangemtfromUserManagementview:hover {
+  color: #fff !important;
+  background-color: #6c757d !important;
+  border-color: #6c757d !important;
+}
+
+#captainsTable.dataTable thead th,
+#captainsTable.dataTable thead td {
+  text-align: left !important;
+}
+
+#captainsTable.dataTable tbody td {
+  text-align: left !important;
+}
+
+#captainsTable.dataTable thead th,
+#captainsTable.dataTable thead td {
+  text-align: left !important;
+}
+
+#captainsTable.dataTable tbody td {
+  text-align: left !important;
+}
+
+#captainsTable_wrapper .dataTables_scrollHead table.dataTable thead th,
+#captainsTable_wrapper .dataTables_scrollHead table.dataTable thead td {
+  text-align: left !important;
+}
+
+#captainsTable_wrapper #captainsTable.dataTable tbody td {
+  text-align: left !important;
+}
+
+#captainsTable_wrapper #captainsTable.dataTable tbody td {
+  padding-left: 16px !important;
+}
+
+#captainsTable_wrapper #captainsTable.dataTable tbody td:nth-child(5) {
+  padding-left: 2px !important;
+}
+#captainsTable_wrapper .dataTables_scrollBody {
+  overflow-x: hidden !important;
+}

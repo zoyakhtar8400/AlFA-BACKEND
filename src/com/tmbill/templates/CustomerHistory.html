@@ -1,0 +1,105 @@
+<div class="custmerhistoryWrapper">
+  <link rel="stylesheet" href="../css/CustomerHistory.css" />
+  <div class="settingstitleDiv">
+    <h4
+      data-i18n="customerHistory.customerName"
+      id="customerAnalysistitle"
+      class="settingsHeading has-i18n"
+    >
+      Customer Name
+    </h4>
+    <input
+      data-i18n="[value]customerHistory.Refresh"
+      id="fetchHistorybutton"
+      class="has-i18n"
+      type="button"
+      value="Refresh"
+    />
+    <i
+      data-dismiss="modal"
+      class="fas fa-times fa-lg closeSettings"
+      aria-hidden="true"
+    ></i>
+  </div>
+
+  <div class="row stat-container customerhistorycontainer">
+    <div class="col-md-2 orders-count-card stat-card">
+      <h6 data-i18n="customerHistory.totalOrders" class="has-i18n">
+        Total Orders
+      </h6>
+      <div>
+        <h5 id="customerOrderstotalid">---</h5>
+        <h6 id="customerOrdersrevenuetotalid">---</h6>
+      </div>
+    </div>
+    <div class="col-md-3 fav-item-card stat-card">
+      <h6 data-i18n="customerHistory.loyaltyPoints" class="has-i18n">
+        Loyalty Points
+      </h6>
+      <h5 id="customerhistoryLoyaltypointslabelid">----</h5>
+    </div>
+    <div class="col-md-4 lastorder-date-card stat-card">
+      <h6 data-i18n="customerHistory.lastVisitedOn" class="has-i18n">
+        Last Visited On
+      </h6>
+      <h5 id="lastvisitId">----</h5>
+    </div>
+    <div class="col-md-3 duepay-card stat-card">
+      <h6 data-i18n="customerHistory.duePayment" class="has-i18n">
+        Due Payment
+      </h6>
+      <h5 id="customerHistoryduepaymentamountid">----</h5>
+    </div>
+    <div class="col-md-3 fav-item-card stat-card">
+      <h6 data-i18n="customerHistory.mostOrderedItem" class="has-i18n">
+        Most Ordered Item
+      </h6>
+      <h5 id="favouriteItemname">----</h5>
+    </div>
+  </div>
+
+  <div class="row stat-container2">
+    <div class="col-md-6 customer-orders-container">
+      <h6
+        data-i18n="customerHistory.previousOrders"
+        class="customHeading has-i18n"
+      >
+        Previous Orders:
+      </h6>
+      <table class="table table-sm" id="customerordersTable">
+        <thead class="">
+          <tr>
+            <th data-i18n="customerHistory.orderID" class="has-i18n">
+              Order ID
+            </th>
+            <th data-i18n="customerHistory.Date" class="has-i18n">Date</th>
+            <th data-i18n="customerHistory.Amount" class="has-i18n">Amount</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
+    <div class="col-md-6">
+      <h6
+        data-i18n="customerHistory.orderedItems"
+        class="customHeading has-i18n"
+      >
+        Ordered Items:
+      </h6>
+      <div
+        id="js-legend-4"
+        class="chart-legend customerordereditemsclass"
+        style="height: 60px"
+      ></div>
+      <canvas
+        class="pieChart"
+        id="pieChartid"
+        width="300"
+        height="300"
+      ></canvas>
+    </div>
+  </div>
+</div>
+<script>
+  require('../js/CustomerhistoryController.js');
+</script>

@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+  <title>TMBill</title>
+  <head>
+    <link rel="stylesheet" href="../css/fontawesome/6.5.1/css/all.css" />
+    <link rel="stylesheet" href="../css/bootstrap/4.3.1/css/bootstrap.css" />
+    <link rel="stylesheet" href="../css/ApplicationType.css" />
+  </head>
+
+  <body>
+    <div class="applicationtypeContainer magicpattern">
+      <div class="applicationtypeWrapper">
+        <div class="title">
+          This app can be used in two modes: Master POS and Terminal POS. Which
+          mode would you like to use?
+        </div>
+        <div id="masterposSelection" class="type">
+          <div class="typeTitle">
+            <i class="fa-solid fa-computer"></i>
+            <div>Master POS</div>
+          </div>
+          <div class="subtitle">
+            Configure this computer to serve as the Master POS
+          </div>
+        </div>
+        <div id="terminalSelection" class="type">
+          <div class="typeTitle">
+            <i class="fa-solid fa-network-wired"></i>
+            <div>Terminal POS</div>
+          </div>
+          <div class="subtitle">
+            This computer will serve as an additional billing station at your
+            restaurant, processing orders and payments. It will connect to your
+            existing Master POS for central management.
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+  <script>
+    if (typeof module === 'object') {
+      window.module = module;
+      module = undefined;
+    }
+    require('../renderer/controller/ApplicationType.controller.js');
+  </script>
+</html>

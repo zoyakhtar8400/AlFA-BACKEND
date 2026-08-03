@@ -1,0 +1,2080 @@
+body {
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+  /* background-color: #f8f9fa; */
+}
+
+.customer-modal {
+  /* background-color: #fff; */
+  border-radius: 10px;
+  box-shadow: white;
+  margin-top: -19px;
+}
+.modal-header-bar {
+  padding-bottom: 4px;
+  margin-bottom: 10px;
+  margin-top: 4px;
+}
+
+.customer-header-info {
+  font-size: 16px;
+  font-weight: 500;
+  color: #333;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-left: 3px;
+}
+
+.customer-header-info .title-label {
+  font-size: 18px;
+  font-weight: 600;
+  /* color: #1d1d1d; */
+}
+
+.customer-header-info .separator {
+  font-size: 16px;
+  /* color: #888; */
+}
+/* .submit-btn1:hover {
+  background-color: #245d30;
+  color: #fff;
+} */
+
+.customer-header-info .contact-info {
+  font-size: 15.5px;
+  /* color: #555; */
+}
+/* Hide unwanted floating ❌ injected dynamically */
+#dynamicModalClose {
+  display: none !important;
+}
+
+/* On smaller screens, wrap nicely */
+@media (max-width: 480px) {
+  .customer-header-info {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 2px;
+  }
+
+  .customer-header-info .separator {
+    display: none;
+  }
+}
+
+/* Header */
+h4 {
+  margin: 0;
+  font-weight: 600;
+}
+
+/* Tabs */
+/* Default styles */
+.tab-group {
+  display: flex !important;
+  flex-direction: row !important;
+  overflow-x: auto;
+  white-space: nowrap;
+  -webkit-overflow-scrolling: touch;
+  margin-top: -17px;
+  border: 1px solid #1e4936;
+  gap: 4px;
+  overflow-y: hidden !important;
+  overflow-x: hidden !important;
+  max-height: none !important;
+  overflow: hidden;
+}
+
+.tab-group .tab-btn:focus,
+.tab-group .tab-btn:focus-visible {
+  box-shadow: none !important;
+  outline: none !important;
+}
+
+.tab-btn {
+  flex-shrink: 0;
+  min-width: 120px;
+  height: 34px;
+}
+
+.tab-btn.active {
+  background-color: #1e4936;
+  color: #fff;
+}
+
+.tab-btn:hover {
+  background-color: #1e4936;
+  color: #fff;
+  border-color: #1e4936;
+}
+
+/* Tab Content */
+.customer-tab-content {
+  display: none;
+}
+
+.customer-tab-content.active {
+  display: block;
+}
+
+/* Medium screen adjustments */
+@media (max-width: 768px) {
+  .tab-group {
+    flex-wrap: nowrap !important;
+    margin-top: 0 !important;
+    font-size: 13px;
+  }
+
+  .tab-btn {
+    border-radius: 4px 4px 0 0 !important;
+    margin-right: 2px !important;
+    height: 31px;
+  }
+}
+
+/* Small screens (up to 678px) - fix spacing issue */
+@media (max-width: 678px) {
+  .tab-group {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 3px;
+  }
+
+  .tab-btn {
+    flex: 1 1 22%;
+    min-width: 64px;
+    padding: 10px 4px;
+    justify-content: center;
+    text-align: center;
+  }
+
+  .tab-btn .tab-label {
+    display: none;
+  }
+
+  .tab-btn svg {
+    display: block;
+    margin: 0 auto !important;
+  }
+}
+
+/* Smaller screens - reduce size more */
+@media (max-width: 576px) {
+  .tab-btn {
+    min-width: 90px;
+    font-size: 13px;
+    padding: 8px 4px;
+  }
+}
+
+@media (max-width: 400px) {
+  .tab-btn {
+    min-width: 80px;
+    font-size: 12px;
+    height: 28px;
+  }
+}
+@media (min-width: 627px) and (max-width: 768px) {
+  .tab-group {
+    flex-wrap: nowrap !important;
+    justify-content: space-between !important;
+  }
+  .tab-btn {
+    flex: 1 1 auto !important;
+    min-width: auto !important;
+    text-align: center;
+    font-size: 14px;
+  }
+}
+@media (max-width: 663px) {
+  .tab-group {
+    flex-wrap: wrap;
+    gap: 2px;
+  }
+
+  .tab-btn {
+    flex: 1 1 48%; /* Two buttons per row */
+    font-size: 14px;
+    padding: 10px 0 !important;
+  }
+}
+@media (min-width: 400px) and (max-width: 480px) {
+  .tab-btn {
+    height: 29px;
+  }
+}
+/* For very small screens (387px and below) */
+@media (max-width: 387px) {
+  .tab-group {
+    flex-direction: column;
+  }
+
+  .tab-btn {
+    width: 100%; /* One button per row */
+    font-size: 14px;
+    padding: 10px 0 !important;
+  }
+}
+@media (max-width: 626px) {
+  .tab-group .tab-btn {
+    min-width: 56px;
+    padding: 10px;
+    font-size: 0; /* Hide text space */
+    gap: 0;
+  }
+
+  .tab-group .tab-btn svg {
+    font-size: 18px;
+    margin: 0 auto;
+    display: block;
+  }
+}
+/* Slightly move tab icons upward */
+.tab-btn svg {
+  margin-bottom: 2px;
+}
+
+/* Ensure tab container doesn't wrap */
+.btn-group.w-lb {
+  flex-wrap: nowrap !important;
+  overflow: visible !important;
+  border-radius: 2px;
+}
+.btn-group {
+  border-radius: 4px;
+}
+
+.tab-group {
+  border-radius: 0.5rem; /* Adjust as needed: 0.25rem for subtle, 1rem for pill shape */
+}
+.tab-btn {
+  border-top-left-radius: 4px;
+  border-bottom-left-radius: 4px;
+  border-top-right-radius: 4px;
+  border-bottom-right-radius: 4px;
+}
+/* Remove any existing vertical tab styles */
+.tab-group.vertical-tabs {
+  flex-direction: row !important;
+}
+
+.tab-group.vertical-tabs .tab-btn {
+  width: auto !important;
+  display: inline-block !important;
+}
+/* Scrollable Sections */
+.scroll-section {
+  position: relative;
+  max-height: 440px;
+  overflow-y: auto;
+  padding: 0 16px 16px 16px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  /* background-color: #fefefe; */
+  box-sizing: border-box;
+}
+
+/* Reset global scrollbar (optional) */
+::-webkit-scrollbar {
+  width: 3px;
+}
+::-webkit-scrollbar-thumb {
+  background-color: #1e4936;
+  border-radius: 10px;
+}
+
+/* Custom scroll for your modal/tab scrollable sections only */
+.custom-scrollbar::-webkit-scrollbar {
+  width: 5px;
+}
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  /* background-color: #ccc; */
+  border-radius: 10px;
+}
+
+/* Shift label text slightly right when it includes an icon */
+.input-with-icon label {
+  padding-left: 4px; /* or margin-left: 4px */
+  display: inline-block;
+}
+
+/* Form Grid */
+.form-grid input,
+.form-grid textarea,
+.form-grid select {
+  width: 98%;
+  padding: -10px;
+  margin-top: -1px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 14px;
+  height: 38px;
+}
+.scroll-section.form-grid {
+  /* margin-top: 6px;
+  padding-top: 18.5px; */
+  padding-top: 39px;
+}
+
+.form-grid label {
+  font-weight: 500;
+  display: block;
+  margin-bottom: 4px;
+  font-size: 14px;
+}
+.leftrightcontent {
+  margin-top: 13px;
+  padding-top: 6px;
+}
+
+/* Right Column Layout */
+.col-md-6.d-flex {
+  display: flex;
+  flex-direction: column;
+  margin-top: -9px;
+}
+
+.flex-grow-1 {
+  flex-grow: 1;
+  margin-top: 10px;
+}
+
+/* Buttons */
+.reset-btn,
+.submit-btn {
+  min-width: 100px;
+  padding: 8px 16px;
+  font-size: 14px;
+}
+
+.reset-btn {
+  background-color: #d5d3d3;
+  border: 1px solid #ccc;
+}
+.reset-btn {
+  background-color: #d5d3d3;
+  border: 1px solid #ccc;
+  color: #000; /* Optional: sets text color */
+}
+
+/* .reset-btn:hover {
+  background-color: #000;
+  color: #fff; 
+} */
+
+.submit-btn {
+  background-color: #0d6efd;
+  /* color: white; */
+  border: none;
+}
+
+.submit-btn:hover {
+  background-color: #d70b41;
+}
+/* Sticky Header Inside Scrollable Section */
+.headisection {
+  position: sticky;
+  top: -40px;
+  z-index: 10;
+  background-color: #fefefe;
+  padding: 12px 0;
+  border-bottom: 1px solid #ddd;
+  margin-top: -40px;
+  width: 125%;
+}
+.cf {
+  font-size: 20px;
+  font-weight: 600;
+  /* color: #333; */
+}
+
+.section-desc {
+  font-size: 14px;
+  /* color: #666; */
+  margin-top: 4px;
+}
+/* Optional: Improve visual separation */
+.headisection .headi {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 600;
+  /* color: #333; */
+}
+#toggleIcon svg {
+  vertical-align: middle;
+  transform: translateY(-1.5px); /* adjusts vertical alignment */
+  /* color: #999; */
+}
+
+.section-desci {
+  margin: 4px 0 0;
+  font-size: 13px;
+  /* color: #666; */
+}
+.mb33 {
+  height: 20px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .scroll-section {
+    max-height: 400px;
+  }
+
+  .btn-group {
+    flex-direction: column;
+  }
+}
+/* Phone input style with icon */
+.phone-input {
+  position: relative;
+}
+
+.phone-input input {
+  padding-left: 35px;
+}
+.phone-input-box {
+  display: flex;
+  gap: 8px;
+}
+
+.phone-input-box .country-code-box {
+  width: 60px;
+  min-width: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #fff;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
+}
+.phone-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.country-code-box {
+  height: 38px;
+  min-width: 60px;
+  padding: 4px 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  /* background-color: #fff; */
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.flag-icon {
+  position: absolute;
+  top: 50%;
+  left: 10px;
+  transform: translateY(-50%);
+  font-size: 16px;
+}
+/* Unified Button Base */
+.reset-btn,
+.submit-btn1 {
+  padding: 6px 16px;
+  font-size: 14px;
+  min-width: 100px;
+  height: 36px;
+  border-radius: 4px;
+}
+
+/* Submit Button Styling */
+.submit-btn1 {
+  background-color: #2b713a;
+  /* color: white; */
+  border: 1px solid #2b713a;
+}
+
+.submit-btn1:hover {
+  background-color: #285c34;
+  border: 1px solid #2b713a;
+}
+
+/* Reset Button Styling */
+.reset-btn {
+  /* background-color: #7f7e7e;
+  color: white; */
+  border: 1px solid #ccc;
+}
+/* .reset-btn:hover {
+  background: #696969;
+  color: #fff;
+  border: 1px solid #ccc;
+  cursor: default;
+} */
+.submit-btn1,
+.reset-btn {
+  outline: none;
+  box-shadow: none;
+}
+
+.submit-btn1:focus,
+.submit-btn1:active,
+.reset-btn:focus,
+.reset-btn:active {
+  outline: none;
+  box-shadow: none;
+}
+
+.btn-outline-primary2 {
+  border: 1px solid #ccc;
+  /* background-color: #fff; */
+  /* color: #333; */
+  padding: 4px 12px;
+  font-size: 14px;
+  border-radius: 4px;
+}
+
+/* .btn-outline-primary2:hover {
+  background-color: #f0f0f0;
+  border-color: #aaa;
+} */
+.add-more-label {
+  cursor: pointer;
+}
+
+#addMoreToggle:hover .add-more-label {
+  text-decoration: underline;
+}
+/* For input icons inside date fields */
+.icon-input {
+  position: relative;
+}
+
+.icon-input .input-icon {
+  position: absolute;
+  top: 68%;
+  left: 12px;
+  transform: translateY(-50%);
+  /* color: #888; */
+  font-size: 14px;
+  pointer-events: none;
+}
+
+.icon-input input.with-icon {
+  padding-left: 32px;
+}
+.leftrightcontent {
+  margin-top: 1px;
+}
+.right-section-row {
+  margin-top: 10px;
+}
+.mtt-3 {
+  margin-top: 7px;
+}
+/* Scroll container improvements */
+#tab-addresses .scroll-section {
+  min-height: 300px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+#tab-addresses .row.gx-3 {
+  display: flex;
+  flex-wrap: wrap;
+}
+#tab-addresses .headisection {
+  margin-left: -0px;
+  margin-right: -2px;
+  padding-left: 30px;
+  padding-right: 10px;
+}
+
+#tab-addresses .col-md-6 {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Match height even if one side is empty */
+#tab-addresses .scroll-section {
+  min-height: 300px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+/* Sticky Header Fix */
+#tab-addresses .headisection {
+  position: sticky;
+  top: 40%;
+  z-index: 10;
+  /* background-color: #fefefe; */
+  padding: 12px 0;
+  border-bottom: 1px solid #ddd;
+  width: 100%;
+}
+
+/* Text spacing */
+#tab-addresses .headi {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 600;
+  /* color: #333; */
+}
+
+#tab-addresses .section-desci {
+  font-size: 13px;
+  /* color: #666; */
+  margin: 4px 0 0;
+}
+
+/* Form spacing */
+#tab-addresses .form-control {
+  width: 98%;
+  padding-right: 4px;
+}
+
+#tab-addresses .leftrightcontent {
+  padding-top: 12px;
+  padding-bottom: 20px;
+}
+/* Adjust "Set as default" checkbox and label in Addresses tab */
+#tab-addresses #setAsDefault {
+  transform: translateY(-2px);
+}
+
+#tab-addresses .form-check-label1 {
+  margin-top: -25px;
+  font-size: 13px; /* optional: improves visual alignment */
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  #tab-addresses .row > .col {
+    flex: 100%;
+    max-width: 100%;
+    height: 40px;
+  }
+}
+@media (max-width: 768px) {
+  #tab-addresses .row.gx-3 {
+    flex-direction: column;
+  }
+
+  #tab-addresses .col-md-6 {
+    width: 100%;
+    max-width: 100%;
+    display: flex;
+  }
+
+  #tab-addresses .scroll-section {
+    min-height: 260px; /* keep decent height even if empty */
+  }
+}
+/* Fix: Ensure right side doesn't collapse when empty in responsive view */
+@media (max-width: 768px) {
+  #tab-addresses .col-md-6:last-child .scroll-section {
+    min-height: 300px; /* adjust as per left side's visual height */
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    /* background-color: #fefefe; */
+  }
+
+  /* Optional: Add some placeholder spacing so it's not visually empty */
+  #tab-addresses .col-md-6:last-child .scroll-section:empty::before {
+    content: 'No saved addresses';
+    display: block;
+    text-align: center;
+    /* color: #aaa; */
+    padding-top: 80px;
+    font-size: 14px;
+    font-style: italic;
+  }
+}
+
+/* Location Label Buttons */
+/* --- LOCATION LABELS --- */
+.location-labels {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-left: 5px;
+}
+
+.location-labels .location-label {
+  padding: 4px 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  cursor: pointer;
+  user-select: none;
+  font-size: 13px;
+  /* color: #333; */
+  /* background-color: #fff; */
+  transition: all 0.2s ease;
+}
+
+.location-labels .location-label:hover {
+  background: #f0f0f0;
+}
+
+.location-label.active {
+  background: #f0f0f0;
+  /* color: black; */
+  border-color: #ccc;
+}
+
+/* Hover look like button (but not active yet) */
+/* Custom Set as Default - No conflict with Bootstrap or order.css */
+.set-default-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.checkbox-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  width: 20px;
+}
+.set-default-label {
+  font-size: 14px;
+  /* color: #333; */
+  margin: 0;
+  cursor: pointer;
+}
+
+.set-default-checkbox {
+  width: 16px;
+  height: 16px;
+  cursor: pointer;
+  accent-color: #2b713a;
+  appearance: auto;
+}
+
+/* Container alignment fix */
+.set-default-container {
+  padding: 0 4px;
+  min-height: 32px;
+}
+
+/* Custom label */
+.set-default-label {
+  font-size: 14px;
+  /* color: #333; */
+  margin: 0;
+  cursor: pointer;
+}
+
+/* Visible, small checkbox with no Bootstrap conflict */
+.set-default-checkbox {
+  width: 16px;
+  height: 16px;
+  cursor: pointer;
+  accent-color: #2b713a;
+  appearance: auto;
+}
+
+.set-default-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 4px 8px;
+}
+
+.set-default-text {
+  font-size: 14px;
+  color: #333;
+  margin: 0;
+}
+.complete-address-input {
+  flex: 1 1 91%;
+  margin-right: 6px;
+}
+
+#tab-addresses .map-btn {
+  margin-left: 6px;
+}
+.pp3 {
+  margin-top: 20px;
+}
+/* Add these styles to your existing Customers.css file */
+
+/* Base responsive adjustments */
+@media (max-width: 992px) {
+  .customer-modal {
+    margin-top: -20px;
+    width: calc(100% - 20px);
+  }
+
+  .scroll-section {
+    max-height: 300px;
+  }
+}
+
+/* For medium screens (tablets) */
+@media (max-width: 768px) {
+  .row.gx-3 {
+    flex-direction: column;
+  }
+
+  .col-md-6 {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .scroll-section {
+    max-height: 290px;
+    margin-bottom: 15px;
+  }
+
+  .headisection {
+    top: 0;
+  }
+}
+@media (min-width: 763px) and (max-width: 997px) {
+  .scroll-section {
+    max-height: 500px;
+    overflow-y: auto;
+  }
+}
+
+/* For small screens (mobile) and height adjustments */
+@media (max-height: 700px), (max-width: 576px) {
+  .scroll-section {
+    max-height: 200px;
+  }
+
+  .form-grid input,
+  .form-grid textarea,
+  .form-grid select {
+    padding: 8px;
+    font-size: 13px;
+    height: 36px;
+  }
+
+  .headisection {
+    padding: 8px 0;
+  }
+
+  .headi {
+    font-size: 15px !important;
+  }
+
+  .section-desci,
+  .section-desc {
+    font-size: 12px !important;
+  }
+
+  .customer-tab-content {
+    padding-top: 10px;
+  }
+
+  .leftrightcontent {
+    margin-top: 8px;
+    padding-top: 4px;
+  }
+}
+
+/* Extra small height adjustment */
+@media (max-height: 600px) {
+  .scroll-section {
+    max-height: 270px;
+  }
+
+  .form-grid input,
+  .form-grid textarea,
+  .form-grid select {
+    padding: 6px;
+    height: 32px;
+  }
+
+  .btn,
+  .reset-btn,
+  .submit-btn1 {
+    padding: 4px 12px;
+    height: 29.5px;
+    font-size: 13px;
+  }
+
+  .mb-3 {
+    margin-bottom: 0.75rem !important;
+  }
+
+  .headisection {
+    top: -30px;
+    margin-top: -30px;
+  }
+}
+
+/* Address tab specific adjustments */
+#tab-addresses .scroll-section {
+  min-height: auto;
+}
+
+@media (max-height: 600px) {
+  #tab-addresses .scroll-section {
+    max-height: 120px;
+  }
+
+  #tab-addresses .location-labels {
+    gap: 6px;
+  }
+
+  #tab-addresses .location-label {
+    padding: 2px 6px;
+    font-size: 12px;
+  }
+}
+
+/* Ensure form elements don't overflow */
+.form-control {
+  max-width: 100%;
+}
+
+/* Fix for sticky headers in scroll sections */
+.scroll-section {
+  position: relative;
+}
+
+.headisection {
+  position: sticky;
+  top: -40px;
+  /* background-color: #fefefe; */
+  z-index: 10;
+  padding-top: 12px;
+  margin-top: -40px;
+  width: 100%;
+}
+
+/* Adjustments for very small screens */
+@media (max-width: 400px) {
+  .phone-row {
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .country-code-box {
+    width: 100%;
+    justify-content: flex-start;
+  }
+
+  .d-flex.gap-2.align-items-center {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
+  }
+
+  .map-btn {
+    align-self: flex-start;
+    margin-left: 0 !important;
+    margin-top: 6px;
+  }
+}
+.modal-scroll-wrapper {
+  max-height: calc(100vh - 140px); /* Adjust for header + buttons */
+  overflow-y: auto;
+  padding-right: 10px;
+}
+
+/* Sticky bottom bar */
+.modal-actions {
+  position: sticky;
+  bottom: 0;
+  /* background-color: #fff; */
+  border-top: 1px solid #ddd;
+  z-index: 100;
+  padding: 5px 36px;
+  gap: 3px;
+  margin-left: 20px;
+}
+@media (max-width: 576px) {
+  .modal-actions {
+    gap: 3px;
+    align-items: stretch;
+  }
+
+  .modal-scroll-wrapper {
+    max-height: calc(100vh - 160px);
+  }
+}
+/* Wallet Input Field with suffix */
+.wallet-balance-group {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: nowrap; /* prevents button & icon from wrapping */
+  min-width: 100%;
+}
+
+.wallet-input-container {
+  position: relative;
+  flex-grow: 1;
+  min-width: 0;
+  max-width: 100%;
+}
+
+.wallet-input-container input.with-suffix {
+  text-align: left;
+  padding-right: 55px;
+  height: 36px;
+  font-size: 14px;
+  width: 100%;
+}
+
+.wallet-input-container .input-suffix {
+  position: absolute;
+  top: 50%;
+  right: 6px;
+  transform: translateY(-50%);
+  font-size: 13px;
+  /* color: #666; */
+  pointer-events: none;
+}
+
+.suffix-aed {
+  right: 6px;
+}
+
+/* Topup button */
+.wallet-action-btn {
+  height: 36px;
+  padding: 8px 12px;
+  font-size: 14px;
+  /* background-color: #eee;
+  color: #333; */
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  flex-shrink: 0; /* prevents shrinking */
+  margin-left: 5px;
+}
+
+/* Clock icon */
+.wallet-history-icon {
+  height: 36px;
+  width: 36px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid #ccc;
+  /* background-color: #eee; */
+  border-radius: 4px;
+  cursor: pointer;
+  opacity: 0.7;
+  font-size: 14px;
+  flex-shrink: 0; /* prevents wrapping */
+}
+
+.wallet-history-icon:hover {
+  opacity: 1;
+}
+/* Permanently remove light blue background from ALL input fields */
+input.form-control,
+select.form-control,
+textarea.form-control {
+  /* background-color: #fff !important; */
+  background-image: none !important;
+  box-shadow: none !important;
+  -webkit-box-shadow: none !important;
+}
+
+/* For readonly fields */
+input.form-control[readonly] {
+  /* background-color: #f8f9fa !important; */
+  cursor: not-allowed;
+}
+
+/* Completely disable Chrome autofill styling */
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active,
+select:-webkit-autofill,
+select:-webkit-autofill:hover,
+select:-webkit-autofill:focus,
+select:-webkit-autofill:active {
+  -webkit-box-shadow: 0 0 0 1000px white inset !important;
+  -webkit-text-fill-color: #333 !important;
+  box-shadow: 0 0 0 1000px white inset !important;
+  /* background-color: white !important; */
+  background-image: none !important;
+  transition: background-color 5000s ease-in-out 0s !important;
+}
+
+/* For readonly fields with autofill */
+input[readonly]:-webkit-autofill,
+input[readonly]:-webkit-autofill:hover,
+input[readonly]:-webkit-autofill:focus,
+input[readonly]:-webkit-autofill:active {
+  -webkit-box-shadow: 0 0 0 1000px #f8f9fa inset !important;
+  -webkit-text-fill-color: #333 !important;
+  box-shadow: 0 0 0 1000px #f8f9fa inset !important;
+  /* background-color: #f8f9fa !important; */
+  background-image: none !important;
+  transition: background-color 5000s ease-in-out 0s !important;
+}
+
+/* Specific fields that need special attention */
+#loyalty,
+#due,
+#wallet {
+  /* background-color: #f8f9fa !important; */
+  -webkit-box-shadow: 0 0 0 1000px #f8f9fa inset !important;
+  box-shadow: 0 0 0 1000px #f8f9fa inset !important;
+}
+
+/* Force background color on focus */
+/* input:focus,
+select:focus,
+textarea:focus {
+  background-color: #fff !important;
+} */
+
+input[readonly]:focus,
+select[readonly]:focus,
+textarea[readonly]:focus {
+  /* background-color: #f8f9fa !important; */
+}
+
+/* Remove any blue borders or outlines */
+/* input,
+select,
+textarea {
+  outline: none !important;
+  border: 1px solid #ccc !important;
+} */
+
+input:focus,
+select:focus,
+textarea:focus {
+  border-color: #4ce29a !important;
+  box-shadow:
+    inset 0 1px 1px rgba(0, 0, 0, 0.075),
+    0 0 8px rgba(92, 234, 165, 0.6) !important;
+}
+
+/* Additional insurance against Chrome's autofill */
+@keyframes onAutoFillStart {
+  /* from {
+    background-color: white;
+  }
+  to {
+    background-color: white;
+  } */
+}
+
+@keyframes onAutoFillStartReadonly {
+  /* from {
+    background-color: #f8f9fa;
+  }
+  to {
+    background-color: #f8f9fa;
+  } */
+}
+
+input:-webkit-autofill {
+  animation-name: onAutoFillStart !important;
+  animation-fill-mode: both !important;
+}
+
+input[readonly]:-webkit-autofill {
+  animation-name: onAutoFillStartReadonly !important;
+  animation-fill-mode: both !important;
+}
+/* Responsive tweak */
+@media (max-width: 600px) {
+  .wallet-balance-group {
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .wallet-input-container,
+  .wallet-action-btn,
+  .wallet-history-icon {
+    width: 100%;
+  }
+}
+/* Mandatory asterisk styling */
+.mandatory {
+  color: red;
+  font-size: 13px;
+  margin-left: 1px;
+}
+/* ======= ADDRESS TAB UPDATES ======= */
+
+#tab-addresses .row.gx-3 {
+  display: flex;
+  flex-wrap: wrap;
+}
+/* Override receipt.css for customers.html */
+.customers-page input[type='date']::after,
+.customers-page select::after {
+  content: none !important; /* remove unwanted icon */
+}
+
+/* Ensure both left and right sides are scrollable and aligned */
+#tab-addresses .col-md-6 {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Main scroll container shared by both sides */
+#tab-addresses .scroll-section {
+  position: relative;
+  overflow-y: auto;
+  /* background-color: #fefefe;s */
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 0 16px 16px 16px;
+  flex-grow: 1;
+  box-sizing: border-box;
+  min-height: 300px;
+}
+
+/* Fix right side collapsing when content is empty */
+@media (max-width: 768px) {
+  #tab-addresses .col-md-6:last-child .scroll-section {
+    min-height: 300px;
+  }
+
+  /* Optional placeholder if content is empty */
+  #tab-addresses .col-md-6:last-child .scroll-section:empty::before {
+    content: 'No saved addresses';
+    display: block;
+    text-align: center;
+    color: #aaa;
+    padding-top: 80px;
+    font-size: 14px;
+    font-style: italic;
+  }
+}
+
+/* Sticky Header inside scroll section */
+#tab-addresses .scroll-section .headisection {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  /* background-color: #fefefe; */
+  padding: 12px 0;
+  border-bottom: 1px solid #ddd;
+  margin-top: 0 !important;
+}
+
+/* Ensure both sides match alignment */
+#tab-addresses .scroll-section.form-grid {
+  padding-top: 0;
+}
+
+/* Header title style */
+#tab-addresses .headi {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 600;
+  /* color: #333; */
+}
+
+#tab-addresses .section-desci {
+  font-size: 13px;
+  color: #666;
+  margin: 4px 0 0;
+}
+
+/* Content spacing inside form grid */
+#tab-addresses .leftrightcontent {
+  padding-top: 12px;
+  padding-bottom: 20px;
+}
+.headisection {
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.06);
+}
+
+/* Label alignment fix */
+#tab-addresses label {
+  font-size: 14px;
+  font-weight: 500;
+  margin-bottom: 4px;
+  margin-left: 12px;
+}
+
+/* Input fix */
+#tab-addresses .form-control {
+  width: 98%;
+  padding-right: 4px;
+  height: 38px;
+  font-size: 14px;
+}
+
+/* Complete address field fix */
+.complete-address-input {
+  flex: 1 1 91%;
+  margin-right: 6px;
+}
+/* rotate chevron when expanded */
+
+/* Map button */
+
+.modal-sticky-top {
+  position: sticky;
+  top: 0;
+  z-index: 200;
+  /* background-color: #fff; */
+  padding-top: 10px;
+  margin-top: -20px;
+}
+.custom-close-btn {
+  font-size: 28px;
+  font-weight: bold;
+  cursor: pointer;
+  color: #000;
+  line-height: 1;
+  padding: 0 10px;
+  margin-top: -6px;
+  transition: color 0.2s;
+}
+
+.custom-close-btn:hover {
+  color: #dc3545;
+}
+
+body > span#dynamicModalClose {
+  display: none !important;
+}
+
+/* Make backend-bound input fields read-only styled */
+input[readonly] {
+  cursor: not-allowed;
+  /* background-color: #f8f9fa; */
+}
+/* Styling only for Customer Details > Personal Information section */
+#tab-details .personal-info-container label {
+  font-size: 14px;
+  font-weight: 500;
+  margin-bottom: 4px;
+  display: inline-block;
+  /* color: #333; */
+  margin-left: 11.5px;
+}
+
+#tab-details .personal-info-container .form-control {
+  font-size: 14px;
+  line-height: 1.5;
+  height: 38px;
+  box-sizing: border-box;
+}
+
+#tab-details .personal-info-container .form-control::placeholder {
+  /* color: #999; */
+  font-size: 14px;
+  opacity: 1;
+  line-height: 1.5;
+}
+.tab-btn svg,
+.tab-btn i {
+  margin-right: 5px;
+  vertical-align: middle;
+  margin-top: -1px;
+}
+
+/* Fix tab buttons between 627px - 768px */
+/* Make tab buttons fill the entire height of the tab container */
+@media (max-width: 768px) {
+  .tab-group {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 3px;
+    padding: 0;
+  }
+
+  .tab-btn {
+    flex: 1 1 22%;
+    min-width: auto;
+    padding: 10px 4px;
+    justify-content: center;
+    text-align: center;
+    white-space: nowrap;
+  }
+
+  .tab-btn .tab-label {
+    display: none;
+  }
+
+  .tab-btn svg {
+    display: block;
+    margin: 0 auto;
+  }
+}
+/* Target the standalone Pincode field */
+#tab-addresses
+  .leftrightcontent
+  .mb-3
+  .col
+  input[placeholder='Pincode/Zipcode'] {
+  width: 94%; /* matches other inputs visually */
+  box-sizing: border-box;
+  margin-left: 12px; /* same left margin as labels */
+}
+
+/* Keep label aligned with others */
+#tab-addresses .leftrightcontent .mb-3 .col label {
+  display: block;
+  margin-left: 3px;
+}
+
+/* Target input under label Pincode/Zipcode */
+#pincodeInput {
+  width: 179px !important; /* fixed smaller width */
+  margin-left: -8px;
+}
+
+/* Responsive adjustment */
+@media (max-width: 992px) {
+  #pincodeInput {
+    width: 180px !important;
+    margin-left: 0;
+  }
+}
+
+@media (max-width: 576px) {
+  #pincodeInput {
+    width: 100% !important; /* full width for mobile */
+  }
+}
+/* ===== Responsive Pincode sizing & alignment =====
+   Place this at the end of your CSS file so it overrides bootstrap rules.
+   Targets the id you added: #pincodeInput
+*/
+
+/* Base / Desktop: match ~one column width (same visual width as the left .col inputs) */
+.leftrightcontent #pincodeInput,
+#tab-addresses #pincodeInput {
+  box-sizing: border-box !important;
+  display: inline-block !important;
+  width: calc(
+    51.7% - 16px
+  ) !important; /* visually similar to one .col inside the row */
+  max-width: 360px !important; /* prevent it from becoming too wide on very large screens */
+  margin-left: -8px !important; /* align with other inputs' label left offset */
+  vertical-align: middle !important;
+}
+
+/* Keep width consistent on focus / active so inspector shows same size */
+.leftrightcontent #pincodeInput:focus,
+#tab-addresses #pincodeInput:focus {
+  width: calc(50% - 16px) !important;
+  outline: none;
+  box-shadow: none;
+}
+
+/* Large screens — slightly tighter cap */
+@media (min-width: 1400px) {
+  .leftrightcontent #pincodeInput {
+    max-width: 420px !important;
+    width: calc(44% - 16px) !important;
+  }
+}
+
+/* Medium screens (desktop / small desktops) */
+@media (max-width: 1399px) and (min-width: 992px) {
+  .leftrightcontent #pincodeInput {
+    width: calc(50% - 16px) !important;
+    max-width: 320px !important;
+    margin-left: 12px !important;
+  }
+}
+
+/* Tablet: make it a bit narrower so it still looks balanced */
+@media (max-width: 991px) and (min-width: 768px) {
+  .leftrightcontent #pincodeInput {
+    width: 45% !important;
+    max-width: 260px !important;
+    margin-left: 8px !important;
+  }
+}
+
+/* Mobile: full width for usability and alignment */
+@media (max-width: 767px) {
+  .leftrightcontent #pincodeInput {
+    width: 100% !important;
+    max-width: none !important;
+    margin-left: 0 !important;
+    display: block !important;
+    margin-bottom: 8px !important;
+  }
+}
+
+/* Keep the label aligned (in case other label rules are different) */
+.leftrightcontent label[for='pincodeInput'],
+#tab-addresses label[for='pincodeInput'] {
+  display: block;
+  margin-left: -10px;
+}
+#customerFormSalutationId {
+  width: 100%;
+}
+#customeFormnameid {
+  margin-left: 12px;
+  width: 97%;
+}
+.full-name-input {
+  flex: 1 1 auto;
+  max-width: calc(100% - 110px);
+  padding: 6px 10px;
+  font-size: 14px;
+  border-radius: 4px;
+}
+/* .modal-sticky-top {
+  position: sticky;
+  top: 0;
+  z-index: 1050;
+  background-color: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  margin-top: 0;
+} */
+/* Fix for sticky header positioning */
+.modal-sticky-top {
+  position: sticky;
+  top: 0;
+  z-index: 1050;
+  /* background-color: #fff; */
+
+  margin-top: 0;
+}
+
+/* Ensure the modal container has proper scrolling */
+.customer-modal {
+  max-height: 80vh;
+  overflow-y: auto;
+  position: relative;
+}
+
+/* Remove any conflicting transforms or margins */
+.modal-header-bar {
+  transform: none !important;
+  margin-top: 0 !important;
+}
+
+/* Prevent any parent elements from interfering with sticky positioning */
+.container-fluid {
+  overflow: visible !important;
+}
+.phone-row {
+  display: flex;
+  align-items: center;
+  gap: 8px; /* consistent spacing between dropdown and input */
+  margin-bottom: 8px;
+}
+
+.country-code-dropdown {
+  width: 110px;
+  min-width: 110px;
+  padding: 6px 8px;
+  font-size: 14px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  background-color: #fff;
+}
+
+.phone-row .form-control {
+  flex: 1;
+  padding: 6px 10px;
+  font-size: 14px;
+  border-radius: 4px;
+}
+/* Fix for any potential offset issues */
+
+/* Fix for any potential offset issues */
+/* ===========================
+   Customer Address Section
+   Scoped with custaddr-
+.saved-addresses {
+  display: flex;
+  flex-direction: column;
+  background: #fff;
+  height: 100%;
+  overflow: hidden;
+}
+/* Sticky Header inside scroll container */
+.saved-addresses .headisection {
+  position: sticky;
+  top: 0;
+  background: #fff;
+  z-index: 10;
+  padding: 12px 16px;
+  border-bottom: 1px solid #e0e0e0;
+}
+/* Address list takes remaining space */
+.saved-addresses .custaddr-list {
+  flex-grow: 1;
+  /* overflow-y: auto; */
+  padding: 12px 16px;
+  margin: 0;
+}
+/* Address Card */
+.custaddr-card {
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  padding: 12px;
+  margin-bottom: 12px;
+  transition:
+    border-color 0.2s,
+    box-shadow 0.2s;
+  /* background: #fff; */
+  margin-left: -14px;
+}
+.custaddr-card:last-child {
+  margin-bottom: 0;
+}
+.custaddr-card.is-selected {
+  border-color: #1e4936;
+  box-shadow: 0 2px 6px rgba(0, 123, 255, 0.15);
+}
+/* Card Main Layout */
+.custaddr-main {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+/* Left section */
+.custaddr-left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.custaddr-icon {
+  font-size: 12px;
+  /* color: #4d4e4e; */
+  margin-top: -16px;
+}
+.custaddr-text {
+  display: flex;
+  flex-direction: column;
+}
+.custaddr-name {
+  font-weight: 600;
+  font-size: 15px;
+}
+.custaddr-desc {
+  font-size: 13px;
+  color: #666;
+}
+/* Right Section (buttons) */
+.custaddr-right {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+/* Icon buttons (Edit / Delete) */
+.custaddr-btn-icon {
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  cursor: pointer;
+  color: #666;
+  font-size: 14px;
+  padding: 6px;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+}
+/* Deliver button */
+.custaddr-btn-deliver {
+  background: #1e4936;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  padding: 6px 12px;
+  font-size: 12.5px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+button.custaddr-btn-deliver {
+  width: 88px;
+}
+.custaddr-btn-deliver:hover {
+  background: #1e4936;
+}
+.custaddr-card.active {
+  border-color: #1e4936;
+  box-shadow: 0 2px 6px rgba(0, 123, 255, 0.15);
+}
+
+#addNewCustomerAddress {
+  float: right;
+}
+
+#ordersContainer {
+  /* min-height: 500px; */
+}
+
+.order-cards-scroll-container {
+  min-height: 400px;
+}
+.country-code-dropdown {
+  width: 109px !important;
+}
+
+.phone-row {
+  display: flex;
+  gap: 8px; /* consistent spacing between dropdown and input */
+  align-items: center;
+}
+
+.country-code-dropdown {
+  width: 100px; /* fixed width for dropdown */
+}
+
+#locationLabelContinerId,
+#completeAddressContinerId,
+#buildingContinerId,
+#flatContainerId,
+#floorContinerId,
+#blockContinerId,
+#laneContinerId,
+#streetContinerId,
+#areaContinerId,
+#landmarkContinerId,
+#locationContainerId,
+#pincodeContinerId,
+#locationLabelMadnatoryFieldId,
+#completeAddressMadnatoryFieldId,
+#buildingMadnatoryFieldId,
+#flatMadnatoryFieldId,
+#floorMadnatoryFieldId,
+#blockMadnatoryFieldId,
+#laneMadnatoryFieldId,
+#streetMadnatoryFieldId,
+#areaMadnatoryFieldId,
+#landmarkMadnatoryFieldId,
+#locationMadnatoryFieldId,
+#pincodeMadnatoryFieldId {
+  display: none;
+}
+
+.tags-input {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 5px;
+  cursor: text;
+}
+
+.tags-input input {
+  border: none;
+  outline: none;
+  flex: 1;
+  min-width: 120px;
+}
+.tag {
+  /* background: #007bff;
+  color: white; */
+  padding: 4px 8px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+.tag .remove-tag {
+  cursor: pointer;
+  font-weight: bold;
+}
+
+/* new way  */
+.tag-container {
+  border: 1px solid #a7a4a4;
+  /* color: black; */
+  padding: 0px;
+  border-radius: 4px;
+  position: relative;
+}
+
+.tag {
+  display: inline-block;
+  /* background: #fbf6f6; */
+  /* color: black; */
+  padding: 2px 8px;
+  margin: 2px;
+  border-radius: 4px;
+}
+.tag .remove {
+  cursor: pointer;
+  margin-left: 5px;
+  color: red;
+}
+
+.order-card {
+  max-width: 230px;
+}
+
+.map-btn {
+  cursor: default !important;
+}
+
+#customerAddressSectionId {
+  display: block !important;
+}
+.modal-header {
+  border-bottom: none !important;
+}
+#customTagsInputId {
+  border: none;
+  outline: none;
+
+  margin: 0;
+  width: 100%;
+  background: transparent;
+}
+#addNewCustomerButtonId {
+  float: right;
+  margin-bottom: -11px;
+}
+#toggleIcon {
+  transition: transform 0.25s ease;
+  display: flex;
+  align-items: center;
+}
+
+/* Bootstrap toggler sets aria-expanded (or removes .collapsed). We use attribute selector: */
+#addMoreToggle[aria-expanded='true'] #toggleIcon {
+  transform: rotate(180deg);
+}
+#createNewCustomerAddress,
+#editCustomerAddress {
+  width: 98.5%;
+  /* margin-top: 3px; */
+}
+#createNewCustomerAddress {
+  margin-bottom: -17px;
+  margin-top: 9px;
+}
+/* ===== FIX FOR ADDITIONAL DETAILS SECTION ===== */
+
+/* Fix the row container - remove default bootstrap margins */
+.leftrightcontent .row.align-items-center {
+  margin: 0 !important;
+  display: flex;
+  align-items: center;
+  margin-bottom: 0.75rem !important;
+}
+
+/* Label column - keep compact */
+.leftrightcontent .row.align-items-center > .col-4.col-form-label {
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+  flex: 0 0 auto !important;
+  max-width: none !important;
+  width: auto !important;
+  margin-right: 12px;
+}
+
+/* Input column - take remaining space */
+.leftrightcontent .row.align-items-center > .col-8 {
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+  flex: 1 1 auto !important;
+  max-width: none !important;
+}
+
+/* Ensure all form controls in right section have consistent sizing */
+.leftrightcontent .form-control {
+  width: 100% !important;
+  height: 36px !important;
+  padding: 6px 10px !important;
+  box-sizing: border-box !important;
+  font-size: 14px;
+}
+
+/* Override Bootstrap's form-grid padding on inputs */
+.scroll-section.form-grid .leftrightcontent .form-control {
+  width: 100% !important;
+}
+
+/* Fix the mb-4 spacing - make it mb-3 like old UI */
+.scroll-section.form-grid .leftrightcontent .mb-4 {
+  margin-bottom: 0.75rem !important;
+}
+
+/* Wallet group fix */
+.leftrightcontent .wallet-balance-group {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  width: 100%;
+  flex-wrap: nowrap;
+}
+
+.leftrightcontent .wallet-input-container {
+  flex: 1;
+  min-width: 0;
+}
+
+.leftrightcontent .wallet-action-btn,
+.leftrightcontent .wallet-history-icon {
+  flex-shrink: 0;
+}
+/* ===== MATCH BUSINESS NAME LAYOUT FOR ALL ADDITIONAL DETAILS ===== */
+
+/* Use CSS Grid for tight layout like old UI */
+#tab-details .leftrightcontent .row.align-items-center {
+  display: grid !important;
+  grid-template-columns: 120px 1fr !important;
+  column-gap: 12px;
+  row-gap: 0;
+  align-items: center;
+  margin: 0 !important;
+  margin-bottom: 10px !important;
+}
+
+/* Label column - fixed width, left aligned */
+#tab-details .leftrightcontent .row.align-items-center > .col-4.col-form-label {
+  grid-column: 1;
+  padding: 0 !important;
+  width: auto !important;
+  flex: initial !important;
+  max-width: none !important;
+  white-space: nowrap;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+/* Input column - takes remaining space */
+#tab-details .leftrightcontent .row.align-items-center > .col-8 {
+  grid-column: 2;
+  padding: 0 !important;
+  width: auto !important;
+  flex: initial !important;
+  max-width: none !important;
+}
+
+/* All form inputs in Additional Details */
+#tab-details .leftrightcontent .form-control {
+  width: 100% !important;
+  height: 36px !important;
+  padding: 6px 10px !important;
+  box-sizing: border-box !important;
+  font-size: 14px;
+}
+
+/* Wallet balance group - keep tight */
+#tab-details .leftrightcontent .wallet-balance-group {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  width: 100%;
+  flex-wrap: nowrap;
+}
+
+#tab-details .leftrightcontent .wallet-input-container {
+  flex: 1;
+  min-width: 0;
+}
+
+#tab-details .leftrightcontent .wallet-action-btn {
+  height: 36px !important;
+  flex-shrink: 0;
+}
+
+#tab-details .leftrightcontent .wallet-history-icon {
+  height: 36px;
+  width: 36px;
+  flex-shrink: 0;
+}
+
+/* Business fields (hidden by default) */
+#businessFields .row.align-items-center {
+  display: grid !important;
+  grid-template-columns: 120px 1fr !important;
+  column-gap: 12px;
+  row-gap: 16px;
+  margin: 0 !important;
+}
+
+#businessFields .col-4,
+#businessFields .col-8 {
+  padding: 0 !important;
+  flex: initial !important;
+  max-width: none !important;
+}
+
+#businessFields .form-control {
+  width: 100% !important;
+  height: 36px !important;
+  box-sizing: border-box !important;
+}
+/* ==== Vertical spacing for Additional Details (right panel) ==== */
+#tab-details .leftrightcontent {
+  --addl-gap: 23px; /* tweak to 10/14 if you want tighter/looser */
+}
+
+/* every row gets the same bottom space */
+#tab-details .leftrightcontent > .row.align-items-center {
+  margin-top: 0 !important;
+  margin-bottom: var(--addl-gap) !important;
+}
+
+/* no extra gap after the last row in the block */
+#tab-details .leftrightcontent > .row.align-items-center:last-child {
+  margin-bottom: 0 !important;
+}
+
+/* keep Description/Comment textareas same height as inputs (optional) */
+#tab-details .leftrightcontent textarea.form-control {
+  height: 38px !important;
+  resize: none;
+}
+
+/* Email + Tags placeholders — push further right */
+/* Email + Tags placeholders — slightly less right */
+#customeFormmaild::placeholder,
+#customTagsInputId::placeholder {
+  text-indent: 4px;
+}
+
+/* Cross-browser */
+#customeFormmaild::-webkit-input-placeholder,
+#customTagsInputId::-webkit-input-placeholder {
+  text-indent: 9px;
+}
+#customeFormmaild::-moz-placeholder,
+#customTagsInputId::-moz-placeholder {
+  text-indent: 9px;
+  opacity: 1;
+}
+#customeFormmaild:-ms-input-placeholder,
+#customTagsInputId:-ms-input-placeholder {
+  text-indent: 6px;
+}
+#customeFormmaild::-ms-input-placeholder,
+#customTagsInputId::-ms-input-placeholder {
+  text-indent: 6px;
+}
+
+/* Date inputs — move “dd-mm-yyyy” further right */
+#customeFormbirthld::-webkit-datetime-edit,
+#customeFormannivid::-webkit-datetime-edit {
+  padding-left: 22px;
+}
+/* Base styles */
+.leftrightcontent .form-control {
+  width: 100%;
+}
+
+@media (min-width: 1024px) and (max-width: 1280px) {
+  .scroll-section.form-grid .leftrightcontent {
+    width: 95% !important;
+  }
+}
+
+@media (min-width: 1024px) and (max-width: 1280px) {
+  #tab-details .leftrightcontent {
+    width: 94% !important;
+  }
+}
+/* 🔥 OVERRIDE external focus ONLY for customer phone inputs */
+.kot-customer-locked {
+  background-color: #ededed !important;
+  cursor: not-allowed !important;
+}

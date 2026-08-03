@@ -1,0 +1,1313 @@
+<!-- customers.html -->
+<div>
+  <div>
+    <div class="container-fluid p-1 border1 rounded customer-modal">
+      <!-- Header -->
+      <div class="modal-sticky-top">
+        <!-- <div
+          class="d-flex justify-content-between align-items-center mb-3 modal-header-bar"
+        >
+          <div class="customer-header-info">
+            <span class="title-label"> VIP </span>
+            <span class="separator">|</span>
+            <span class="contact-info">Rahil: +971 5852226696</span>
+          </div>
+        </div> -->
+
+        <!-- Tabs -->
+        <div class="btn-group w-100 mb-3 d-flex tab-group">
+          <!-- Customer Details Tab -->
+          <button
+            class="tab-btn btn btn-outline-primary5 active"
+            data-tab="tab-details"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="lucide lucide-user me-1"
+            >
+              <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"></path>
+              <circle cx="12" cy="7" r="4"></circle>
+            </svg>
+            <span data-i18n="Customerform.CUSTOMER_DETAILS" class="has-i18n"
+              >Customer Details</span
+            >
+          </button>
+
+          <!-- Addresses Tab -->
+          <button
+            class="tab-btn btn btn-outline-primary5 has-i18n"
+            data-i18n="Customerform.ADDRESSES"
+            data-tab="tab-addresses"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="lucide lucide-map-pin me-1"
+            >
+              <path
+                d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"
+              ></path>
+              <circle cx="12" cy="10" r="3"></circle>
+            </svg>
+            Addresses
+          </button>
+
+          <!-- Order History Tab -->
+          <button
+            class="tab-btn btn btn-outline-primary5 has-i18n"
+            data-i18n="Customerform.ORDER_HISTORY"
+            data-tab="tab-history"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="lucide lucide-package me-1"
+              aria-hidden="true"
+            >
+              <path
+                d="M11 21.73a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73z"
+              ></path>
+              <path d="M12 22V12"></path>
+              <polyline points="3.29 7 12 12 20.71 7"></polyline>
+              <path d="m7.5 4.27 9 5.15"></path>
+            </svg>
+            Order History
+          </button>
+
+          <!-- Analytics Tab -->
+          <button
+            class="tab-btn btn btn-outline-primary5 has-i18n"
+            data-i18n="Customerform.ANALYTICS"
+            data-tab="tab-analytics"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="lucide lucide-chart-column me-1"
+            >
+              <path d="M3 3v16a2 2 0 0 0 2 2h16"></path>
+              <path d="M18 17V9"></path>
+              <path d="M13 17V5"></path>
+              <path d="M8 17v-3"></path>
+            </svg>
+            Analytics
+          </button>
+        </div>
+      </div>
+      <!-- Customer Details Section Only -->
+      <div class="customer-tab-content active" id="tab-details">
+        <div class="row gx-3">
+          <!-- LEFT -->
+          <!-- LEFT -->
+          <div class="col-md-6 d-flex flex-column">
+            <div
+              class="scroll-section form-grid flex-grow-1 custom-scrollbar"
+              id="AddCustomerFormContainerId"
+            >
+              <div class="headisection">
+                <h5
+                  class="headi has-i18n"
+                  data-i18n="Customerform.PERSONAL_INFORMATION"
+                >
+                  Personal Information
+                </h5>
+
+                <p
+                  class="section-desci has-i18n"
+                  data-i18n="Customerform.BASIC_CUSTOMER_DETAILS_AND_PLATFORM"
+                >
+                  Basic customer detail & platform
+                </p>
+              </div>
+
+              <!-- ✅ WRAP everything below inside this new div -->
+              <div class="personal-info-container">
+                <!-- Salutation + Name -->
+                <div class="leftrightcontent">
+                  <div class="mb-3">
+                    <label>
+                      <span class="has-i18n" data-i18n="Customerform.NAME"
+                        >Name</span
+                      >
+                      <span class="mandatory">*</span></label
+                    >
+                    <div class="d-flex align-items-end gap-2">
+                      <div style="flex: 0 0 80px; min-width: 110px">
+                        <!-- Dropdown with correctly localized label and options -->
+                        <select
+                          type="text"
+                          aria-label="Salutation"
+                          id="customerFormSalutationId"
+                        >
+                          <option
+                            disabled
+                            selected
+                            hidden
+                            class="has-i18n"
+                            data-i18n="Customerform.SALUTATION"
+                          >
+                            Salutation
+                          </option>
+                          <option class="has-i18n" data-i18n="Customerform.MR">
+                            Mr.
+                          </option>
+                          <option class="has-i18n" data-i18n="Customerform.MRS">
+                            Mrs.
+                          </option>
+                          <option class="has-i18n" data-i18n="Customerform.MS">
+                            Ms.
+                          </option>
+                          <option class="has-i18n" data-i18n="Customerform.DR">
+                            Dr.
+                          </option>
+                          <option
+                            class="has-i18n"
+                            data-i18n="Customerform.KING"
+                          >
+                            King
+                          </option>
+                          <option
+                            class="has-i18n"
+                            data-i18n="Customerform.QUEEN"
+                          >
+                            Queen
+                          </option>
+                          <option class="has-i18n" data-i18n="Customerform.SIR">
+                            Sir
+                          </option>
+                          <option
+                            class="has-i18n"
+                            data-i18n="Customerform.MADAM"
+                          >
+                            Madam
+                          </option>
+                          <option class="has-i18n" data-i18n="Customerform.VIP">
+                            VIP
+                          </option>
+                        </select>
+                      </div>
+                      <div style="flex: 1">
+                        <input
+                          type="text"
+                          class="form-control has-i18n"
+                          id="customeFormnameid"
+                          data-i18n="[placeholder]Customerform.ENTER_FULL_NAME"
+                          placeholder="Enter full name"
+                        />
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="mb-3">
+                    <label
+                      ><span class="has-i18n" data-i18n="Customerform.PHONE">
+                        Phone</span
+                      >
+                      <span class="mandatory">*</span></label
+                    >
+                    <div class="phone-row">
+                      <select
+                        type="text"
+                        class="primary-phone-country-code-dropdown country-code-dropdown"
+                        id="customerFormDialCodeId"
+                      ></select>
+                      <input
+                        type="text"
+                        class="form-control has-i18n"
+                        id="customeFormmobileid"
+                        data-i18n="[placeholder]Customerform.ENTER_PHONE"
+                        placeholder="Enter Phone Number"
+                      />
+                    </div>
+                  </div>
+
+                  <div class="mb-3">
+                    <label
+                      class="has-i18n"
+                      data-i18n="Customerform.ALTERNATE_PHONE"
+                    >
+                      Alternate Phone
+                    </label>
+
+                    <div class="phone-row">
+                      <select
+                        type="text"
+                        class="primary-phone-country-code-dropdown country-code-dropdown"
+                        id="customerFormalternateDialCodeId"
+                      ></select>
+                      <!-- <input
+                        type="text"
+                        class="form-control has-i18n"
+                        id="customerFormalternateMobileId"
+                        data-i18n="Customerform.ENTER_PHONE"
+                        data-i18n="[placeholder]Customerform.ENTER_PHONE"
+                        placeholder="Enter Phone Number"
+                      /> -->
+                      <input
+                        type="text"
+                        class="form-control has-i18n"
+                        id="customerFormalternateMobileId"
+                        data-i18n="[placeholder]Customerform.ENTER_PHONE"
+                        placeholder="Enter Phone Number"
+                      />
+                    </div>
+                  </div>
+
+                  <div id="altPhonesContainer"></div>
+
+                  <div class="mb-3" id="addPhoneBtnWrapper">
+                    <button
+                      type="button"
+                      class="btn btn-sm btn-outline-primary2 has-i18n"
+                      id="addAltPhone"
+                      data-i18n="Customerform.ADD_NEW"
+                    >
+                      Add New
+                    </button>
+                  </div>
+
+                  <div class="mb-3">
+                    <label class="has-i18n" data-i18n="Customerform.SELECT_TYPE"
+                      >Select Type</label
+                    >
+                    <select class="form-control" id="customerFormCustTypeId">
+                      <option
+                        disabled
+                        selected
+                        hidden
+                        class="has-i18n"
+                        data-i18n="Customerform.SELECT_CUSTOMER_TYPE"
+                      >
+                        Select Customer Type
+                      </option>
+                      <option
+                        class="has-i18n"
+                        data-i18n="Customerform.INDIVIDUAL"
+                      >
+                        Individual
+                      </option>
+                      <option
+                        class="has-i18n"
+                        data-i18n="Customerform.CORPORATE"
+                      >
+                        Corporate
+                      </option>
+                      <option
+                        class="has-i18n"
+                        data-i18n="Customerform.VIP_TYPE"
+                      >
+                        VIP
+                      </option>
+                      <option class="has-i18n" data-i18n="Customerform.FAMILY">
+                        Family
+                      </option>
+                      <option
+                        class="has-i18n"
+                        data-i18n="Customerform.DEFAULTER"
+                      >
+                        Defaulter
+                      </option>
+                    </select>
+                  </div>
+
+                  <div class="mb-3">
+                    <label class="has-i18n" data-i18n="Customerform.EMAIL"
+                      >Email</label
+                    >
+                    <input
+                      type="email"
+                      class="form-control has-i18n"
+                      id="customeFormmaild"
+                      data-i18n="[placeholder]Customerform.EMAIL"
+                      placeholder="Email"
+                    />
+                  </div>
+
+                  <div class="mb-3 icon-input">
+                    <label class="has-i18n" data-i18n="Customerform.BIRTH_DATE"
+                      >Birth Date</label
+                    >
+                    <input
+                      type="date"
+                      class="form-control with-icon"
+                      id="customeFormbirthld"
+                    />
+                    <i class="fa fa-cake-candles input-icon"></i>
+                  </div>
+
+                  <div class="mb-3 icon-input">
+                    <label
+                      class="has-i18n"
+                      data-i18n="Customerform.ANNIVERSARY_DATE"
+                      >Anniversary Date</label
+                    >
+                    <input
+                      type="date"
+                      class="form-control with-icon"
+                      id="customeFormannivid"
+                    />
+                    <i class="fa fa-heart input-icon"></i>
+                  </div>
+
+                  <!-- <div class="mb-3">
+                    <label>Custom Tags</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      placeholder="Enter tags"
+                      id="customTagsInputId"
+                    />
+                  </div> -->
+                  <div class="mb-3" id="tagsInputWrapper">
+                    <label class="has-i18n" data-i18n="Customerform.CUSTOM_TAGS"
+                      >Custom Tags</label
+                    >
+                    <div class="tag-container" id="customerCustomTagContianer">
+                      <input
+                        type="text"
+                        id="customTagsInputId"
+                        class="has-i18n"
+                        data-i18n="[placeholder]Customerform.ENTER_TAGS"
+                        placeholder="Enter tags"
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- RIGHT -->
+          <div class="col-md-6 d-flex flex-column">
+            <div class="scroll-section form-grid flex-grow-1 custom-scrollbar">
+              <div class="headisection">
+                <h4
+                  class="headi has-i18n"
+                  data-i18n="Customerform.ADDITIONAL_DETAILS"
+                >
+                  Additional Details
+                </h4>
+                <p
+                  class="section-desci has-i18n"
+                  data-i18n="Customerform.BUSINESS_AND_IDENTIFICATION_INFORMATION"
+                >
+                  Business and identification information
+                </p>
+              </div>
+              <div class="leftrightcontent">
+                <!-- Loyalty points -->
+                <div style="height: 10px"></div>
+
+                <div class="mb-4 row align-items-center">
+                  <label
+                    class="col-4 col-form-label has-i18n"
+                    data-i18n="Customerform.LOYALTY_POINT"
+                    >Loyalty points:</label
+                  >
+                  <div class="col-8">
+                    <input
+                      type="text"
+                      id="customerLoyaltyPointsId"
+                      class="form-control"
+                      value="0"
+                      readonly
+                    />
+                  </div>
+                </div>
+                <!-- Due Payments -->
+                <div class="mb-4 row align-items-center">
+                  <label
+                    class="col-4 col-form-label has-i18n"
+                    data-i18n="Customerform.DUE_PAYMENT"
+                    >Due Payments:</label
+                  >
+                  <div class="col-8">
+                    <input
+                      type="text"
+                      id="customerDuePaymentsId"
+                      class="form-control"
+                      value="0"
+                      readonly
+                    />
+                  </div>
+                </div>
+
+                <!-- Wallet Balance -->
+                <!-- Wallet Balance -->
+                <div class="mb-4 row align-items-center">
+                  <label
+                    class="col-4 col-form-label has-i18n"
+                    data-i18n="Customerform.WALLET_BALANCE"
+                    >Wallet Balance:</label
+                  >
+                  <div class="col-8">
+                    <div class="d-flex align-items-center wallet-balance-group">
+                      <!-- Input with suffix -->
+                      <div class="wallet-input-container">
+                        <input
+                          type="text"
+                          id="customerWalletId"
+                          class="form-control"
+                          value="0"
+                          readonly
+                        />
+                      </div>
+
+                      <!-- Topup button -->
+                      <button
+                        type="button"
+                        class="wallet-action-btn has-i18n"
+                        data-i18n="Customerform.TOP_UP"
+                      >
+                        Topup
+                      </button>
+
+                      <!-- History icon -->
+                      <div class="wallet-history-icon" title="History">
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          width="18"
+                          height="18"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          stroke="currentColor"
+                          stroke-width="2"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          class="lucide lucide-history"
+                        >
+                          <path
+                            d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"
+                          ></path>
+                          <path d="M3 3v5h5"></path>
+                          <path d="M12 7v5l4 2"></path>
+                        </svg>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Description -->
+                <div class="mb-4 row align-items-center">
+                  <label
+                    class="col-4 col-form-label has-i18n"
+                    data-i18n="Customerform.DESCRIPTION"
+                    >Description :</label
+                  >
+                  <div class="col-8">
+                    <input
+                      type="text"
+                      class="form-control has-i18n"
+                      data-i18n="[placeholder]Customerform.DESCRIPTION"
+                      placeholder="Description"
+                      id="customeFormdescid"
+                    />
+                  </div>
+                </div>
+
+                <!-- Comment -->
+                <div class="mb-4 row align-items-center">
+                  <label
+                    class="col-4 col-form-label has-i18n"
+                    data-i18n="Customerform.COMMENT"
+                    >Comment :</label
+                  >
+                  <div class="col-8">
+                    <textarea
+                      class="form-control has-i18n"
+                      data-i18n="[placeholder]Customerform.COMMENT"
+                      placeholder="Comment"
+                      id="customeFormCommentid"
+                    ></textarea>
+                  </div>
+                </div>
+
+                <!-- Add More Toggle -->
+                <div
+                  id="addMoreToggle"
+                  class="mb-3 d-flex justify-content-start align-items-center gap-1 collapsed"
+                  role="button"
+                  data-bs-toggle="collapse"
+                  data-bs-target="#businessFields"
+                  aria-controls="businessFields"
+                  aria-expanded="false"
+                  style="cursor: pointer"
+                >
+                  <label
+                    class="mb-0 add-more-label has-i18n"
+                    data-i18n="Customerform.ADD_MORE"
+                    >Add more</label
+                  >
+                  <span
+                    id="toggleIcon"
+                    style="margin-left: 4px; display: flex; align-items: center"
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="18"
+                      height="18"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    >
+                      <path d="m6 9 6 6 6-6" />
+                    </svg>
+                  </span>
+                </div>
+
+                <!-- Hidden Business Fields -->
+                <div id="businessFields" class="d-none">
+                  <div class="mb-3 row align-items-center">
+                    <label
+                      class="col-4 col-form-label has-i18n"
+                      data-i18n="Customerform.BUSINESS_NAME"
+                      >Business Name</label
+                    >
+                    <div class="col-8">
+                      <input
+                        type="text"
+                        class="form-control has-i18n"
+                        data-i18n="[placeholder]Customerform.BUSINESS_NAME"
+                        placeholder="Business Name"
+                        id="customeFormbusinessid"
+                      />
+                    </div>
+                  </div>
+                  <div class="mb-3 row align-items-center">
+                    <label
+                      class="col-4 col-form-label has-i18n"
+                      data-i18n="Customerform.TAX_NO"
+                      >GST No</label
+                    >
+                    <div class="col-8">
+                      <input
+                        type="text"
+                        class="form-control has-i18n"
+                        data-i18n="[placeholder]Customerform.TAX_NO"
+                        placeholder="GST No"
+                        id="customeFormgstid"
+                      />
+                    </div>
+                  </div>
+                  <div
+                    class="mb-3 row align-items-center"
+                    id="customerFormPanContainerId"
+                  >
+                    <label
+                      class="col-4 col-form-label has-i18n"
+                      data-i18n="Customerform.PAN_NUMBER"
+                      >PAN No</label
+                    >
+                    <div class="col-8">
+                      <input
+                        type="text"
+                        class="form-control has-i18n"
+                        data-i18n="[placeholder]Customerform.PAN_NUMBER"
+                        placeholder="PAN No"
+                        id="customeFormpanid"
+                      />
+                    </div>
+                  </div>
+                  <div
+                    class="mb-3 row align-items-center"
+                    id="customerFormAadharContainerId"
+                  >
+                    <label
+                      class="col-4 col-form-label has-i18n"
+                      data-i18n="Customerform.AADHAR_NUMBER"
+                      >Aadhaar No</label
+                    >
+                    <div class="col-8">
+                      <input
+                        type="text"
+                        class="form-control has-i18n"
+                        data-i18n="[placeholder]Customerform.AADHAR_NUMBER"
+                        placeholder="Aadhaar No"
+                        id="customeFormadharid"
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- Buttons -->
+          </div>
+        </div>
+        <div>
+          <input
+            type="button"
+            value="Submit"
+            id="addNewCustomerButtonId"
+            data-i18n="Customerform.ADD_CUSTOMER"
+            class="has-i18n"
+          />
+        </div>
+      </div>
+
+      <!-- Other Tabs (non-functional but visible) -->
+      <div class="customer-tab-content" id="tab-addresses">
+        <div class="row gx-3 h-100">
+          <!-- LEFT FORM -->
+          <div class="col-md-6 d-flex flex-column">
+            <div class="scroll-section form-grid flex-grow-1 custom-scrollbar">
+              <!-- Sticky Header -->
+              <div class="headisection">
+                <h4
+                  class="headi has-i18n"
+                  data-i18n="Customerform.CUSTOMER_ADDRESS"
+                >
+                  Customer Address
+                </h4>
+
+                <p
+                  class="section-desci has-i18n"
+                  data-i18n="Customerform.ENTER_CUSTOMERS_FULL_ADDRESS"
+                >
+                  Enter the customer’s full address.
+                </p>
+              </div>
+
+              <!-- Form Content -->
+              <div class="leftrightcontent">
+                <!-- Location Label -->
+                <div class="mb-3" id="locationLabelContinerId">
+                  <label>
+                    <span
+                      class="has-i18n"
+                      data-i18n="Customerform.ADDRESS_TYPE"
+                    >
+                      Address Type</span
+                    >
+                    <span class="mandatory" id="locationLabelMadnatoryFieldId"
+                      >*</span
+                    >
+                  </label>
+
+                  <div class="location-labels d-flex gap-3 flex-wrap mt-1">
+                    <div
+                      class="location-label has-i18n"
+                      data-i18n="Customerform.HOME"
+                      data-label="Home"
+                      id="homelocatiobuttonid"
+                    >
+                      <i class="fa fa-home me-1"></i> Home
+                    </div>
+
+                    <div
+                      class="location-label has-i18n"
+                      data-i18n="Customerform.OFFICE"
+                      data-label="Office"
+                      id="officelocationbuttonid"
+                    >
+                      <i class="fa fa-building me-1"></i> Office
+                    </div>
+                    <div
+                      class="location-label has-i18n"
+                      data-i18n="Customerform.OTHERS"
+                      data-label="Other"
+                      id="otherlocationbuttionid"
+                    >
+                      <i class="fa fa-ellipsis-h me-1"></i> Other
+                    </div>
+                  </div>
+                </div>
+                <!-- Complete Address -->
+                <div class="mb-3" id="completeAddressContinerId">
+                  <label
+                    ><span
+                      class="has-i18n"
+                      data-i18n="Customerform.CUSTOMER_ADDRESS"
+                      >Complete Address</span
+                    >
+                    <span class="mandatory" id="completeAddressMadnatoryFieldId"
+                      >*</span
+                    >
+                  </label>
+
+                  <div class="d-flex gap-2 align-items-center">
+                    <input
+                      type="text"
+                      class="form-control has-i18n"
+                      data-i18n="[placeholder]Customerform.CUSTOMER_ADDRESS"
+                      placeholder="Complete Address"
+                      id="customerCompleteAddressid"
+                    />
+                    <button
+                      type="button"
+                      class="btn btn-sm btn-dark map-btn"
+                      title="Locate on Map"
+                    >
+                      <i class="fa fa-map-marker-alt"></i>
+                    </button>
+                  </div>
+                </div>
+
+                <!-- Building/Tower -->
+                <div class="mb-3" id="buildingContinerId">
+                  <label
+                    class="has-i18n"
+                    data-i18n="Customerform.BUILDING_TOWER"
+                    >Building/Tower
+                    <span class="mandatory" id="buildingMadnatoryFieldId"
+                      >*</span
+                    >
+                  </label>
+
+                  <input
+                    type="text"
+                    class="form-control has-i18n"
+                    data-i18n="[placeholder]Customerform.BUILDING_TOWER"
+                    placeholder="Building/Tower"
+                    id="customerLocationid"
+                  />
+                </div>
+
+                <!-- Flat / Floor -->
+                <div class="mb-3 row">
+                  <div class="col" id="flatContainerId">
+                    <label
+                      ><span
+                        class="has-i18n"
+                        data-i18n="Customerform.FLAT_APARTMENT_NO"
+                      >
+                        Flat/Apartment No.</span
+                      >
+                      <span class="mandatory" id="flatMadnatoryFieldId">*</span>
+                    </label>
+
+                    <input
+                      type="text"
+                      class="form-control has-i18n"
+                      data-i18n="[placeholder]Customerform.FLAT_APARTMENT_NO"
+                      placeholder="Flat/Appartment No."
+                      id="customerFlatid"
+                    />
+                  </div>
+                  <div class="col" id="floorContinerId">
+                    <label
+                      ><span class="has-i18n" data-i18n="Customerform.FLOOR"
+                        >Floor</span
+                      >
+                      <span class="mandatory" id="floorMadnatoryFieldId"
+                        >*</span
+                      >
+                    </label>
+
+                    <input
+                      type="text"
+                      class="form-control has-i18n"
+                      data-i18n="[placeholder]Customerform.FLOOR"
+                      placeholder="Floor"
+                      id="customerFloorid"
+                    />
+                  </div>
+                </div>
+
+                <!-- Landmark / Area -->
+                <div class="mb-3 row">
+                  <div class="col" id="blockContinerId">
+                    <label
+                      ><span class="has-i18n" data-i18n="Customerform.BLOCK"
+                        >Block</span
+                      >
+                      <span class="mandatory" id="blockMadnatoryFieldId"
+                        >*</span
+                      >
+                    </label>
+
+                    <input
+                      type="text"
+                      class="form-control has-i18n"
+                      data-i18n="[placeholder]Customerform.BLOCK"
+                      placeholder="Block"
+                      id="customerblockid"
+                    />
+                  </div>
+                  <div class="col" id="laneContinerId">
+                    <label
+                      ><span class="has-i18n" data-i18n="Customerform.LANE"
+                        >Lane</span
+                      >
+                      <span class="mandatory" id="laneMadnatoryFieldId">*</span>
+                    </label>
+
+                    <input
+                      type="text"
+                      class="form-control has-i18n"
+                      data-i18n="[placeholder]Customerform.LANE"
+                      placeholder="Lane"
+                      id="customerLaneid"
+                    />
+                  </div>
+                </div>
+
+                <!-- Street / Block -->
+                <div class="mb-3 row">
+                  <div class="col" id="streetContinerId">
+                    <label
+                      ><span class="has-i18n" data-i18n="Customerform.STREET"
+                        >Street</span
+                      >
+                      <span class="mandatory" id="streetMadnatoryFieldId"
+                        >*</span
+                      >
+                    </label>
+
+                    <input
+                      type="text"
+                      class="form-control has-i18n"
+                      data-i18n="[placeholder]Customerform.STREET"
+                      placeholder="Street"
+                      id="customerStreetid"
+                    />
+                  </div>
+                  <div class="col" id="areaContinerId">
+                    <label
+                      ><span class="has-i18n" data-i18n="Customerform.AREA"
+                        >Area</span
+                      >
+                      <span class="mandatory" id="areaMadnatoryFieldId">*</span>
+                    </label>
+
+                    <input
+                      type="text"
+                      class="form-control has-i18n"
+                      data-i18n="[placeholder]Customerform.AREA"
+                      placeholder="Area"
+                      id="customerareaid"
+                    />
+                  </div>
+                </div>
+
+                <!-- Lane / Pincode -->
+                <div class="mb-3 row">
+                  <div class="col" id="landmarkContinerId">
+                    <label
+                      ><span class="has-i18n" data-i18n="Customerform.LANDMARK"
+                        >Landmark</span
+                      >
+                      <span class="mandatory" id="landmarkMadnatoryFieldId"
+                        >*</span
+                      >
+                    </label>
+
+                    <input
+                      type="text"
+                      class="form-control has-i18n"
+                      data-i18n="[placeholder]Customerform.LANDMARK"
+                      placeholder="Landmark"
+                      id="customerLandmarkid"
+                    />
+                  </div>
+                  <div class="col" id="locationContainerId">
+                    <label
+                      ><span class="has-i18n" data-i18n="Customerform.LOCATION"
+                        >Location</span
+                      >
+                      <span class="mandatory" id="locationMadnatoryFieldId"
+                        >*</span
+                      >
+                    </label>
+
+                    <input
+                      type="text"
+                      class="form-control has-i18n"
+                      data-i18n="[placeholder]Customerform.LOCATION"
+                      placeholder="Location"
+                      id="customerlocationid"
+                    />
+                  </div>
+                </div>
+                <div class="col" id="pincodeContinerId">
+                  <label for="pincodeInput"
+                    ><span
+                      class="has-i18n"
+                      data-i18n="Customerform.PIN_ZIP_CODE"
+                      >PIN / Zipcode</span
+                    >
+                    <span class="mandatory" id="pincodeMadnatoryFieldId"
+                      >*</span
+                    >
+                  </label>
+
+                  <input
+                    type="text"
+                    class="form-control has-i18n"
+                    data-i18n="[placeholder]Customerform.PIN_ZIP_CODE"
+                    placeholder="Pincode/Zipcode"
+                    id="customerAddresspincodeInputId"
+                  />
+                </div>
+
+                <!-- Set Default -->
+                <!-- <div class="d-flex justify-content-end mb-3">
+                  <div class="form-check">
+                    <input
+                      class="form-check-input"
+                      type="checkbox"
+                      value=""
+                      id="setAsDefault"
+                    />
+                    <label class="form-check-label1" for="setAsDefault">
+                      Set as default
+                    </label>
+                  </div>
+                </div> -->
+              </div>
+            </div>
+          </div>
+
+          <!-- RIGHT PANEL -->
+          <div class="col-md-6 d-flex flex-column">
+            <div
+              class="scroll-section form-grid flex-grow-1 custom-scrollbar"
+              id="customerAddressSectionId"
+            >
+              <!-- Sticky Header -->
+              <div class="headisection">
+                <h4
+                  class="headi has-i18n"
+                  data-i18n="Customerform.ADD_NEW_ADDRESS"
+                >
+                  Add New Address
+                </h4>
+
+                <p
+                  class="section-desci has-i18n"
+                  data-i18n="Customerform.SAVED_ADDRESS"
+                >
+                  Saved Addresses
+                </p>
+              </div>
+
+              <!-- Address list will go here -->
+              <div class="custaddr-list" id="addressContainer">
+                <!-- Card 1 -->
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- <div> -->
+        <input
+          type="button"
+          value="Saved Address"
+          id="createNewCustomerAddress"
+          data-i18n="[value]Customerform.SAVED_ADDRESS"
+          class="has-i18n"
+        />
+        <input
+          type="button"
+          value="Update Address"
+          id="editCustomerAddress"
+          data-i18n="[value]Customerform.UPDATE_ADDRESS"
+          class="has-i18n"
+        />
+
+        <!-- </div> -->
+      </div>
+
+      <div class="customer-tab-content" id="tab-history">
+        <div class="order-history-container">
+          <!-- Scrollable Order Cards Container -->
+          <div class="order-cards-scroll-container">
+            <!-- Order Cards Grid -->
+            <div class="order-cards-grid" id="ordersContainer"></div>
+          </div>
+
+          <!-- Pagination Section -->
+          <!-- <div class="order-history-pagination">
+            <div class="pagination-controls">
+              <button class="pagination-btn prev-btn">
+                <i class="fas fa-angle-left"></i> Previous
+              </button>
+              <div class="page-numbers">
+                <span class="page-number active">1</span>
+                <span class="page-number">2</span>
+              </div>
+              <button class="pagination-btn next-btn">
+                Next <i class="fas fa-angle-right"></i>
+              </button>
+            </div>
+            <div class="pagination-info">Showing 1 to 10 of 16 orders</div>
+          </div> -->
+        </div>
+      </div>
+
+      <!-- Include the Analytics tab after this -->
+      <div class="customer-tab-content" id="tab-analytics">
+        <div class="analytics-container custom-scrollbar">
+          <div class="analytics-heading">
+            <h3
+              class="has-i18n"
+              data-i18n="Customerform.CUSTOMER_ANALYTICS_INSIGHTS"
+            >
+              Customer Analytics &amp; Insights
+            </h3>
+            <p
+              class="has-i18n"
+              data-i18n="Customerform.CUSTOMER_BEHAVIOUR_INSIGHTS"
+            >
+              Insights based on customer behavior
+            </p>
+          </div>
+
+          <div class="analytics-cards">
+            <!-- First row -->
+            <div class="analytic-card blue">
+              <div class="analytic-content">
+                <span
+                  class="analytic-label has-i18n"
+                  data-i18n="Customerform.TOTAL_ORDERS"
+                  >Total Orders</span
+                >
+
+                <span
+                  class="analytic-value"
+                  id="customerTotalOrdersCountId"
+                ></span>
+                <span
+                  class="analytic-subtext"
+                  id="customerTotalOrdersTitleId"
+                ></span>
+              </div>
+              <div class="analytic-icon">
+                <i class="fas fa-bag-shopping"></i>
+              </div>
+            </div>
+
+            <div class="analytic-card green">
+              <div class="analytic-content">
+                <span
+                  class="analytic-label has-i18n"
+                  data-i18n="Customerform.TOTAL_REVENUE"
+                  >Total Revenue</span
+                >
+                <span
+                  class="analytic-value"
+                  id="customersTotalRevenueId"
+                ></span>
+                <span
+                  class="analytic-subtext"
+                  id="customersTotalRevenueTitleId"
+                ></span>
+              </div>
+              <div class="analytic-icon">
+                <i class="fas fa-dollar-sign"></i>
+              </div>
+            </div>
+            <div class="analytic-card loyalty-card">
+              <div class="analytic-content">
+                <span
+                  class="analytic-label has-i18n"
+                  data-i18n="Customerform.SPEND_EARN"
+                  >Spend & Earn</span
+                >
+                <span
+                  class="analytic-value has-i18n"
+                  data-i18n="Customerform.LOYALTY"
+                  >Loyalty</span
+                >
+                <span
+                  class="analytic-subtext"
+                  id="customersLoyaltyPointsId"
+                ></span>
+              </div>
+              <div class="analytic-icon">
+                <i class="fas fa-user-astronaut"></i>
+                <!-- or use a custom SVG if needed -->
+              </div>
+            </div>
+            <div class="analytic-card purple">
+              <div class="analytic-content">
+                <span
+                  class="analytic-label has-i18n"
+                  data-i18n="Customerform.LAST_VISITED_DATE"
+                  >Last Visited Date</span
+                >
+                <span
+                  class="analytic-value"
+                  id="customerLastVistedDateId"
+                ></span>
+                <span
+                  class="analytic-subtext"
+                  id="customerLastVistedDaysAgoId"
+                ></span>
+              </div>
+              <div class="analytic-icon">
+                <i class="fas fa-calendar-days"></i>
+              </div>
+            </div>
+
+            <div class="analytic-card yellow">
+              <div class="analytic-content">
+                <span
+                  class="analytic-label has-i18n"
+                  id="favoriteItemLabel"
+                  data-i18n="Customerform.MOST_FAVOURITE_ITEM"
+                >
+                  Most Favourite Item
+                </span>
+
+                <span class="analytic-value" id="customerFavoriteItemId"></span>
+                <span
+                  class="analytic-subtext"
+                  id="customerFavoriteItemTitleId"
+                ></span>
+              </div>
+              <div class="analytic-icon" id="favoriteItemIcon">
+                <i class="fas fa-heart"></i>
+              </div>
+            </div>
+
+            <div class="analytic-card blue-light">
+              <div class="analytic-content">
+                <span
+                  class="analytic-label has-i18n"
+                  data-i18n="Customerform.PREFERRED_PAY_MODE"
+                  >Preferred Pay Mode</span
+                >
+                <span
+                  class="analytic-value"
+                  id="customerPreferredPaymentModeId"
+                ></span>
+                <span
+                  class="analytic-subtext"
+                  id="customerPreferredPaymentModeTitleId"
+                ></span>
+              </div>
+              <div class="analytic-icon">
+                <i class="fas fa-credit-card"></i>
+              </div>
+            </div>
+
+            <!-- Full width row -->
+          </div>
+          <div class="order-distribution-section">
+            <div class="distribution-container">
+              <!-- Left side - Order Type Distribution -->
+              <div class="distribution-left">
+                <div class="distribution-header">
+                  <h3
+                    class="has-i18n"
+                    data-i18n="Customerform.ORDER_TYPE_DISTRIBUTION"
+                  >
+                    Order Type Distribution
+                  </h3>
+                  <p
+                    class="has-i18n"
+                    data-i18n="Customerform.PREFERRED_ORDER_METHODS"
+                  >
+                    Preferred order methods
+                  </p>
+                </div>
+                <!-- <div class="distribution-stats">
+                  <div class="distribution-bar">
+                    <div class="bar-info">
+                      <span class="bar-label">Delivery</span>
+                      <div class="bar-track">
+                        <div class="bar-fill" style="width: 80%">13</div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="distribution-bar">
+                    <div class="bar-info">
+                      <span class="bar-label">Dine In</span>
+                      <div class="bar-track">
+                        <div class="bar-fill" style="width: 45%">4</div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="distribution-bar">
+                    <div class="bar-info">
+                      <span class="bar-label">Pickup</span>
+                      <div class="bar-track">
+                        <div class="bar-fill" style="width: 25%">2</div>
+                      </div>
+                    </div>
+                  </div>
+                </div> -->
+                <div
+                  class="distribution-stats"
+                  id="customerAnalyticsOrderDistributionBarChartId"
+                ></div>
+              </div>
+
+              <!-- Right side - Empty for now -->
+              <div class="distribution-right">
+                <div class="distribution-header">
+                  <h3
+                    class="has-i18n"
+                    data-i18n="Customerform.ORDERED_ITEMS_DISTRIBUTION"
+                  >
+                    Ordered Items Distribution
+                  </h3>
+                  <p
+                    class="has-i18n"
+                    data-i18n="Customerform.MOST_COMMONLY_ORDERED_ITEMS"
+                  >
+                    Most commonly ordered items
+                  </p>
+                </div>
+
+                <div
+                  style="width: 100%; margin: 20px auto"
+                  id="customerAnalyticsPreferredItemsChartId"
+                >
+                  <canvas id="preferredItemsChart"></canvas>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> -->
+
+  <!-- <script src="../js/UIutils/modalLoader.js"></script> -->
+
+  <!-- <script src="../js/UIutils/openBillmodal.js"></script> -->
+
+  <!-- <script src="../js/Customer/index.js"></script> -->
+
+  <!-- <script src="../js/OrderController.js"></script> -->
+  <link rel="stylesheet" href="./Customers/customers.css" />
+  <link rel="stylesheet" href="./Customers/orderHistory.css" />
+  <link rel="stylesheet" href="./Customers/analytics.css" />
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+  />
+</div>

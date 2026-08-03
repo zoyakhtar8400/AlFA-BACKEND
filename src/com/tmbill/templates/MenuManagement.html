@@ -1,0 +1,243 @@
+<!-- Menumanagement.html -->
+<link rel="stylesheet" href="../css/MenuManagement.css" />
+<div class="menuManagementmainWrappper operation-page"
+  id="menuManagementmainWrappperid">
+
+  <!-- <link rel="stylesheet" href="../css/ItemManagement.css" /> -->
+
+  <h5
+    class="MenuHeading has-i18n"
+    data-i18n="controller:account.Operation">
+    Operations
+  </h5>
+
+  <!-- AFTER (Translatable): -->
+  <p class="operationSubText has-i18n"
+    data-i18n="masterScreen.operationSubText">
+    Manage your configuration and daily activities
+  </p>
+
+  <div id="menuManagementIpContainer" class="menu-management-ip-container"
+    aria-hidden="false">
+    <button id="generateFcmBtn"
+      class="btn btn-sm btn-success fcm-test-btn">
+      Notification Test
+    </button>
+    <div id="ipaddressFieldMenuManagement" class="menuManagementIpBox">
+      <i class="fas fa-server"></i>
+    </div>
+  </div>
+  <h6
+    class="MenuHeading menuConfigurationHeading has-i18n"
+    data-i18n="controller:account.Menuconfiguration">
+    Menu Configuration
+  </h6>
+  <div class="row menuManagement-1">
+    <div
+      class="col menuManagementtypeContainer"
+      id="menuManagementtypeContainerid">
+      <div class="card menuOptionsCard" id="itemsManagementCardid">
+        <div
+          menu-option-action="1"
+          class="card-body menuOptionsCardData"
+          id="itemsManagementbuttonid">
+
+          <i class="fas fa-book-open"></i>
+
+          <span class="has-i18n"
+            data-i18n="itemManagement.Itemmanagement"
+            style="font-size: 14px">
+            Items Management
+          </span>
+
+          <label id="itemsManagementLabelid"
+            class="has-i18n"
+            data-i18n="masterScreen.itemsManagementLabel">
+            Manage Categories & Items Pricing
+          </label>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- <div class="col-sm-9">
+      <div class="menuManagementInfodiv">
+        <ul id="menuManagementListid" class="menuManagementList">
+          <li menu-option-action="1">
+            <div class="menuItemsdiv">
+              <table
+                class="table table-sm table-striped report-table"
+                id="menuItemsTableid"
+              ></table>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div> -->
+  </div>
+
+  <h6
+    class="MenuHeading has-i18n"
+    data-i18n="controller:account.Account">
+    Account
+  </h6>
+  <div
+    class="alert alert-danger alert-dismissible fade show"
+    id="checkAllShiftCloseValidationMessageContianerId"
+    role="alert"
+    style="display: none">
+    <label id="checkAllShiftCloseValidationMessageId"></label>
+    <!-- <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button> -->
+  </div>
+  <div class="row menuManagement-2">
+    <div class="col menuManagementtypeContainer" id="accountContainerid">
+      <div class="card menuOptionsCard" id="closeDayCardid">
+        <div
+          menu-option-action="1"
+          class="card-body menuOptionsCardData"
+          id="closeDaybuttonid">
+          <i class="fas fa-door-closed"></i>
+          <span
+            style="font-size: 14px"
+            class="has-i18n"
+            data-i18n="itemManagement.closeDay">Close Day</span>
+          <label
+            id="currnetstartdayendLabelid"
+            class="has-i18n"></label>
+        </div>
+      </div>
+
+      <!-- <div class="card menuOptionsCard" id="closeShiftCardid">
+        <div
+          data-i18n=""
+          menu-option-action="1"
+          class="card-body has-i18n menuOptionsCardData"
+          id="startShiftbuttonid"
+        >
+          <i class="fas fa-hourglass-start"></i>
+          <span style="font-size: 14px">Start Shift</span>
+        </div>
+      </div> -->
+
+      <div class="card menuOptionsCard" id="closeShiftCardid">
+        <div
+          menu-option-action="1"
+          class="card-body menuOptionsCardData"
+          id="closeShiftbuttonid">
+          <i class="fas fa-hourglass-end"></i>
+          <span
+            style="font-size: 14px"
+            class="has-i18n"
+            data-i18n="itemManagement.closeShift">Close Shift</span>
+          <label
+            id="currnetstartShiftendLabelid"
+            class="has-i18n"></label>
+        </div>
+      </div>
+      <div class="card menuOptionsCard" id="expenseManagementCardid">
+        <div
+          menu-option-action="1"
+          class="card-body menuOptionsCardData"
+          id="expenseManagementButtonid">
+          <i class="fas fa-file-invoice-dollar"></i>
+
+          <span
+            style="font-size: 14px"
+            class="has-i18n"
+            data-i18n="itemManagement.expenseManagement">
+            Expense Management
+          </span>
+          <label id="expenseManagementLabelid" class="has-i18n"
+            data-i18n="masterScreen.expenseManagementLabel">
+            Track and manage business expenses
+          </label>
+
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+  <h6 class="MenuHeading has-i18n" data-i18n="itemManagement.crm">CRM</h6>
+
+  <!-- Validation Message -->
+  <div
+    class="alert alert-danger alert-dismissible fade show"
+    id="checkAllShiftCloseValidationMessageContianerId"
+    role="alert"
+    style="display: none">
+    <label id="checkAllShiftCloseValidationMessageId"></label>
+  </div>
+
+  <!-- CRM Cards Row -->
+  <div class="row menuManagement-2">
+    <div class="col menuManagementtypeContainer" id="accountContainerid">
+
+      <!-- Customer Relation Management Card -->
+      <div class="card menuOptionsCard crmCardCustomWidth" id="crmCardid">
+        <div
+          menu-option-action="1"
+          class="card-body menuOptionsCardData"
+          id="crmButtonid">
+          <i class="fas fa-users"></i>
+          <span
+            style="font-size: 14px"
+            class="has-i18n"
+            data-i18n="itemManagement.closeDay">Customer Management</span>
+          <label id="crmDayLabelid" class="has-i18n"
+            data-i18n="masterScreen.crmLabel">
+            Manage customer information records
+          </label>
+
+        </div>
+
+      </div>
+
+      <!-- Wallet Management Card -->
+      <div class="card menuOptionsCard crmCardCustomWidth" id="walletCardid">
+        <div
+          menu-option-action="1"
+          class="card-body menuOptionsCardData"
+          id="walletButtonid">
+          <i class="fas fa-wallet"></i>
+          <span
+            style="font-size: 14px"
+            class="has-i18n"
+            data-i18n="itemManagement.closeShift">
+            Wallet Management
+          </span>
+
+          <label id="walletShiftLabelid" class="has-i18n"
+            data-i18n="masterScreen.walletManagementLabel">
+            Manage customer wallets & balances
+          </label>
+        </div>
+      </div>
+
+      <div class="card menuOptionsCard crmCardCustomWidth"
+        id="UserManagementid">
+        <div
+          menu-option-action="1"
+          class="card-body menuOptionsCardData"
+          id="UserManagement">
+          <i class="fas fa-user"></i>
+          <span
+            class="has-i18n"
+            data-i18n="itemManagement.closeShift">User Management</span>
+          <label id="UserManagementLabelid" style="font-size: 11px"
+            class="has-i18n"
+            data-i18n="masterScreen.userManagementLabel">
+            Create and manage system users
+          </label>
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <script>
+  require('../js/MenuManagement/MenuManagement.js');
+</script>

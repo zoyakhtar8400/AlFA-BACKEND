@@ -1,0 +1,2261 @@
+:root {
+  --main-bg-color: #0d1117;
+  --light-border-color: #30363d;
+  --label-color: #c9d1d9;
+  --light-dark-border-color: #333;
+  --tabs-link-color: #fefefe;
+  --light-button-color: aliceblue;
+  --transparent-background: #3535356e;
+  --autocomplete-text-color: #c9d1d9;
+  --button-label-color: #c9d1d9;
+  --tabs-border-color: #636161;
+  --date-background: #999;
+  --table-header-border: #4a4a4a;
+  --switch-background: #827d7d;
+  --kot-action-div: #21262d;
+  --icon-fill-color: #8b949e;
+  --button-border-color: rgb(240 246 252 / 10%);
+  --placeholder-text-color: rgba(211, 207, 207, 0.856);
+}
+
+body,
+.container-after-titlebar {
+  background-color: var(--main-bg-color) !important;
+}
+
+/**
+Windows title bar controls
+**/
+
+.cet-titlebar {
+  background: var(--main-bg-color) !important;
+}
+
+.cet-window-controls .cet-control-icon svg {
+  fill: white !important;
+}
+
+input[type='button'],
+button {
+  /* background-color: var(--kot-action-div); */
+  border-color: rgb(240 246 252 / 10%) !important;
+}
+
+.running-filers-div button {
+  background-color: var(--kot-action-div) !important;
+  border-color: rgb(240 246 252 / 10%) !important;
+  color: var(--label-color) !important;
+}
+
+.parentContainer,
+.userMenuwrapper {
+  background-color: var(--main-bg-color);
+}
+
+.wrapperDiv,
+.orderwindowWrapper,
+.onlineorderswindowWrapper,
+.digitalorderswindowWrapper,
+.receiptwindowWrapper,
+.tablesParentdivclass,
+.receiptsDiv,
+.dashwindowWrapper,
+.reportswindowWrapper,
+.mastermenuwindowWrapper,
+.itemmastermenuwindowWrapper,
+.crmwindowWrapper,
+.userManagementwindowWrapper,
+.walletManagementwindowWrapper {
+  background: var(--main-bg-color);
+}
+
+.mainWindow,
+.modal-content,
+.tableDiv,
+.popover {
+  background-color: var(--main-bg-color);
+}
+
+.tableDiv {
+  border: transparent;
+}
+
+.billstatusModalclass {
+  background-color: transparent;
+}
+
+.card {
+  background-color: var(--main-bg-color);
+  color: var(--label-color);
+  /* border: 1px solid var(--light-border-color); */
+  border: 1px solid #7c78783b;
+}
+
+.notification-item-data {
+  color: var(--label-color);
+}
+
+#changelog-container {
+  color: var(--label-color);
+}
+
+.dataTables_wrapper.no-footer .dataTables_scrollBody {
+  border-bottom: 1px solid var(--light-border-color) !important;
+}
+
+.modal-content {
+  background-color: var(--main-bg-color);
+  color: var(--label-color);
+}
+
+.table_container {
+  background-color: var(--main-bg-color);
+  border: 1px solid var(--light-border-color);
+}
+
+.reporttypeContainer {
+  border-right: 2px solid var(--light-dark-border-color) !important;
+}
+
+.quickBilltablewrapper {
+  background-color: var(--main-bg-color);
+  border: 1px solid var(--light-border-color);
+}
+
+.table_container > button {
+  border: none;
+  margin: 1px;
+}
+
+.actionDiv {
+  background-color: var(--main-bg-color);
+  border: 1px solid var(--light-border-color);
+}
+
+.searchDiv {
+  background-color: var(--main-bg-color);
+  border: 1px solid var(--light-border-color);
+}
+
+.itemsDiv {
+  background-color: var(--main-bg-color);
+  border: 1px solid var(--light-border-color);
+}
+
+.treeviewDiv {
+  background-color: var(--main-bg-color);
+  border: 1px solid var(--light-border-color);
+}
+
+.itemviewDiv {
+  background-color: var(--main-bg-color);
+  border: 1px solid var(--light-border-color);
+}
+
+.itemviewDiv button {
+  border: 1px solid var(--light-border-color);
+  box-sizing: border-box;
+  background-color: var(--main-bg-color);
+  color: var(--label-color);
+}
+
+.list-group {
+  background-color: var(--main-bg-color);
+  color: var(--label-color);
+}
+
+.virtual-keyboard-theme {
+  background-color: var(--main-bg-color);
+  color: var(--label-color);
+  border: 5px solid var(--button-border-color);
+}
+
+.virtual-keyboard-theme .hg-button,
+.virtual-keyboard-theme .hg-standardBtn {
+  background-color: var(--main-bg-color);
+  color: var(--label-color);
+  border: 3px solid var(--button-border-color);
+}
+
+.virtual-keyboard-theme .hg-button:active,
+.virtual-keyboard-theme .hg-standardBtn:active {
+  background-color: var(--main-bg-color);
+  color: #7460ee !important;
+  border: 2px solid #7460ee !important;
+}
+
+.list-group .list-group-item {
+  background-color: var(--main-bg-color);
+  color: var(--label-color);
+  overflow: hidden;
+  border-color: var(--button-border-color);
+  border: 1px solid var(--button-border-color);
+  /* text-overflow: ellipsis;
+    white-space: nowrap; */
+}
+
+.customlinks-title {
+  color: white;
+}
+
+.orders-list-container,
+.digitalorders-list-container {
+  border-right: 0.5px solid var(--light-border-color);
+  border-left: 0.5px solid var(--light-border-color);
+}
+
+.ui-autocomplete,
+.choices__list,
+.choices__inner {
+  max-height: 200px;
+  background-color: var(--main-bg-color) !important;
+  color: var(--autocomplete-text-color);
+  overflow-y: auto;
+  /* prevent horizontal scrollbar */
+  overflow-x: hidden;
+  /* add padding to account for vertical scrollbar */
+  z-index: 1000000 !important;
+}
+
+label,
+.orderdetails-dboyinfo-div i,
+h5,
+h6,
+h3 {
+  color: var(--label-color);
+}
+
+/**
+input Field
+  **/
+
+input[type='text'],
+input[type='number'],
+input[type='password'],
+input[type='search'],
+input[type='date'],
+select {
+  border: 1px solid var(--light-border-color) !important;
+  background-color: var(--main-bg-color) !important;
+  color: var(--light-border-color);
+}
+
+input[type='text'],
+input[type='number'],
+input[type='password'],
+input[type='search'],
+input[type='date'],
+select {
+  color: var(--label-color);
+}
+
+#searchByname_item {
+  color: var(--label-color);
+}
+
+input::placeholder {
+  color: var(--placeholder-text-color);
+}
+
+#searchByname_item::placeholder {
+  color: var(--placeholder-text-color);
+}
+
+/* input[type=text]:focus, input[type=password]:focus {
+    background-color: var(--main-bg-color);
+    color: var(--light-border-color);
+    border: 1px solid var(--light-border-color);
+    outline: none;
+} */
+
+input[type='checkbox'] + label {
+  background-color: var(--main-bg-color);
+  color: var(--label-color);
+}
+
+.table {
+  color: var(--label-color);
+}
+
+.table > thead {
+  color: var(--label-color);
+  border: 1px solid var(--light-border-color);
+}
+
+table > thead > tr > th {
+  border: none !important;
+  /* border: 1px solid var(--light-border-color); */
+}
+
+.nav-tabs .nav-link.active {
+  background-color: var(--main-bg-color);
+  color: var(--label-color);
+}
+
+.sectionTabs > li > a .active {
+  background-color: var(--main-bg-color);
+}
+
+.kotLables-div .kotnoLabel {
+  color: inherit;
+  text-align: center;
+  background-color: transparent;
+  border-radius: 20px;
+}
+
+.kot-noteDiv input[type='button'] {
+  background-color: var(--main-bg-color);
+  border-color: var(--button-border-color);
+}
+
+.normal-button {
+  /* background-color: var(--kot-action-div); */
+  color: var(--label-color);
+  border-color: var(--button-border-color);
+}
+
+.kottableDiv,
+.sectionTabs,
+.tabs,
+.billtableDiv,
+.buttonload,
+.takeawaykottableDiv,
+.billtakeawayDiv,
+.billdeliveryDiv {
+  background-color: var(--main-bg-color);
+  color: var(--label-color);
+  border: 1px solid var(--light-border-color);
+}
+
+.inneritembuttonDiv label {
+  color: rgb(241, 235, 235) !important;
+}
+
+.inneritembuttonDiv .statusLabel {
+  background-color: white !important;
+  color: #000 !important;
+}
+
+.switchview {
+  color: var(--label-color);
+}
+
+#deliveryBoyImgId,
+#switchviewButtonid {
+  filter: invert(1) !important;
+}
+
+.parentTabs {
+  background-color: var(--main-bg-color);
+  color: var(--label-color);
+  border: none;
+}
+
+.kot-actionsDiv > input[type='button'],
+.table-actionsDiv > input[type='button'],
+.searchreceiptDivclass > input[type='button'] {
+  background-color: var(--button-background);
+  color: var(--button-label-color);
+  border-color: var(--button-border-color);
+}
+
+img {
+  filter: grayscale(20%);
+}
+
+/**
+Tree view
+**/
+
+.node-tree:not(.node-disabled):hover {
+  background-color: transparent !important;
+}
+
+.node-itemManagementCategorytree:not(.node-disabled):hover {
+  background-color: transparent !important;
+}
+
+.nav-tabs {
+  border-bottom: transparent !important;
+}
+
+.nav-tabs .nav-link.active {
+  border: 1px solid var(--button-label-color) !important;
+}
+
+/**
+Scroll Bar CSS
+**/
+
+::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  background-color: var(--main-bg-color);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar {
+  width: 7px;
+  background-color: var(--main-bg-color);
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  background-color: rgba(179, 180, 179, 0.808);
+}
+
+.paymentModal,
+.discountModal,
+.preorderModal,
+.newpaymentModal {
+  background-color: var(--main-bg-color);
+  color: var(--autocomplete-text-color);
+}
+
+.payselectwrapper::before,
+.discountBody::before {
+  background-color: transparent;
+}
+
+.payselectwrapper:hover::before,
+.discountBody:hover::before {
+  background-color: transparent;
+}
+
+/**
+Date Picker
+**/
+
+input[type='date'] .ui-widget-content {
+  background: var(--date-background) none;
+}
+
+.dataTable .even {
+  background-color: var(--main-bg-color);
+}
+
+.menuItemButton div img {
+  border-radius: 5px;
+}
+
+/**
+  Context menu
+  **/
+
+.context-menu-list {
+  background-color: var(--main-bg-color);
+}
+
+.context-menu-list li {
+  background-color: var(--main-bg-color);
+  color: var(--autocomplete-text-color);
+}
+
+.context-menu-item span {
+  color: var(--autocomplete-text-color);
+}
+
+/**
+Swal
+**/
+
+.tmbill-swal-pop-up {
+  background-color: var(--main-bg-color) !important;
+  border: 1px solid var(--button-border-color);
+}
+
+.tmbill-swal-title-class {
+  color: var(--label-color) !important;
+}
+
+.swal2-confirm {
+  border: 1px solid var(--button-border);
+  background-color: var(--kot-action-div) !important;
+  color: var(--white-color);
+}
+
+/**
+Online orders window:Start
+**/
+
+.order-state-wrapper {
+  border-right: 1px solid var(--light-border-color);
+  color: var(--button-label-color);
+}
+
+.order-states li,
+.digital-order-states li {
+  border: 1px solid var(--light-border-color);
+}
+
+.order-reject {
+  background-color: var(--kot-action-div) !important;
+}
+
+/**
+Receipt Window
+**/
+
+.receiptTableclass thead tr th,
+.overviewexpensesTableclass thead tr th,
+.allexpensesTableclass thead tr th,
+.nceexpensesTableclass thead tr th {
+  border: none !important;
+}
+
+#receiptitemsTable tbody td {
+  border: 1px solid var(--table-header-border);
+}
+
+#receiptTable tbody td,
+#overviewexpensesTable tbody td,
+#allexpensesTable tbody td,
+#nceexpensesTable tbody td,
+#captainsTable tbody td {
+  border: 1px solid var(--table-header-border);
+}
+
+.billsDivclass,
+.billsitemsDivclass,
+.receiptbillactionsDiv,
+.billsitemsDivclass,
+.expense-overviewtable-container {
+  border: 1px solid var(--table-header-border) !important;
+}
+
+.table-bordered {
+  border: transparent !important;
+}
+
+.table-bordered th,
+.table-bordered td {
+  border: 1px solid var(--table-header-border) !important;
+}
+
+/**
+Login Window
+**/
+
+.loginWindowwrapper,
+.loginWindowwrapper div {
+  background-color: var(--main-bg-color) !important;
+}
+
+.loginWindowwrapper div {
+  border: 1px solid var(--light-border-color);
+}
+
+/**
+Data tables
+**/
+
+.dataTables_wrapper .dataTables_paginate .paginate_button {
+  background: none !important;
+  color: var(--label-color) !important;
+  -webkit-text-fill-color: var(--label-color) !important;
+}
+
+.slider {
+  background-color: var(--switch-background);
+}
+
+.selectedReport {
+  border-right: 4px solid var(--autocomplete-text-color) !important;
+}
+
+.popover {
+  color: var(--label-color) !important;
+  border: 1px solid var(--autocomplete-text-color) !important;
+}
+
+.table-filters-list {
+  background-color: var(--main-bg-color) !important;
+  color: var(--label-color) !important;
+}
+
+.bs4ToastWrapper {
+  background-color: var(--main-bg-color) !important;
+  color: var(--label-color) !important;
+  border: 1px solid var(--light-border-color);
+}
+
+.bs4ToastWrapper .toast-header {
+  background-color: var(--main-bg-color) !important;
+  border-bottom: 1px solid var(--light-border-color);
+}
+
+.bs4ToastWrapper .toast-actions button {
+  background-color: var(--kot-action-div);
+  color: var(--label-color);
+  border-color: var(--button-border-color);
+}
+
+/**
+Date Picker
+**/
+
+/* .daterangepicker {
+    background-color: var(--main-bg-color) !important;
+    color: var(--label-color);
+}
+
+.daterangepicker .cancelBtn {
+    background: var(--light-button-color) !important;
+} */
+
+/**
+Report window
+**/
+
+.reportitem {
+  background: var(--transparent-background) !important;
+  color: var(--label-color);
+}
+
+.normal-table thead tr,
+.orderwindowWrapper table thead tr,
+.receiptwindowWrapper table thead tr,
+.expense-container table thead tr,
+.captains-container table thead tr,
+.customermgmtDattableclass thead tr {
+  background: var(--transparent-background) !important;
+}
+
+.reporttypeContainer,
+.horizontal-scroll,
+.menu-types-container,
+.dashboardparentDiv {
+  background: var(--transparent-background) !important;
+}
+
+.stat-card-wrapper {
+  background-color: var(--transparent-background) !important;
+}
+
+.statcard,
+.dashboard-chart-container-1,
+.dashboard-chart-container-3,
+.dashboard-chart-container-2,
+.overall-stat-container {
+  background-color: var(--main-bg-color) !important;
+}
+
+.menu-types-list-item {
+  color: var(--label-color);
+}
+
+.select-checkbox:before {
+  border: 1px solid #6f6767 !important;
+}
+
+.selected-filter {
+  /* color: #7460ee !important; */
+  border: 2px solid #7460ee !important;
+}
+
+#paymentsList,
+#openCashDrawerbuttonid {
+  color: white;
+}
+
+.remoteKotCard.selected-order {
+  background-color: var(--main-bg-color) !important;
+}
+
+.remotkotid {
+  background-color: var(--switch-background) !important;
+}
+
+.bill-misc-div,
+.actionDiv i,
+.sectionTabs a,
+.icon-container,
+.kotCustomer-div,
+#showCustomeraddress,
+#selecttakeawayWaiterbutton,
+#tashowCustomeraddress,
+#deliveryshowCustomeraddress,
+#selectdeliveryWaiterbutton {
+  color: var(--icon-fill-color);
+}
+
+.treeview ul li {
+  color: var(--label-color) !important;
+}
+
+.close {
+  color: var(--icon-fill-color);
+}
+
+.analytics-container,
+.order-cards-scroll-container,
+.customer-tab-content,
+.customer-tab-content {
+  background: var(--main-bg-color);
+}
+
+.headisection {
+  background: var(--main-bg-color) !important;
+}
+
+/* .tab-btn, */
+#customerFormNameAndNumberHeadingId {
+  color: white;
+}
+
+.customer-view-order,
+.customer-repeat-order {
+  color: white;
+}
+
+.tab-btn,
+#addAltPhone {
+  color: white;
+}
+/* ============================================================
+   CLOSE DAY & SHIFT MODAL – DARK THEME OVERRIDE
+   (uses existing dark.css variables)
+   ============================================================ */
+
+/* 1) Give this modal its own dark variables */
+#closeDayAndShiftModal {
+  --bg: var(--main-bg-color);
+  --panel: #161b22;
+  --muted: #9aa8ba;
+  --text: var(--label-color);
+  --accent: #16a34a;
+  --danger: #fb7185;
+  --border: var(--light-border-color);
+  --border-soft: var(--light-border-color);
+  --shadow-soft: 0 10px 30px rgba(0, 0, 0, 0.7);
+  --shadow-subtle: 0 6px 18px rgba(0, 0, 0, 0.5);
+}
+
+/* 2) Modal shell */
+#closeDayAndShiftModal .modal-dialog,
+#closeDayAndShiftModal .closeDayAndShiftmodal-dialog,
+#closeDayAndShiftModal .startDayAndShiftmodal-dialog {
+  background-color: transparent !important;
+}
+
+#closeDayAndShiftModal .modal-content,
+#closeDayAndShiftModal .startDayAndShiftModalwrapper,
+#closeDayAndShiftModal .closeDayAndShiftModalwrapper {
+  background: var(--main-bg-color) !important;
+  color: var(--label-color) !important;
+  border: 1px solid var(--light-border-color) !important;
+  box-shadow: var(--shadow-soft) !important;
+}
+
+#closeDayAndShiftModal .startDayAndShiftModalHeaderwrapper {
+  background: var(--main-bg-color) !important;
+  border-bottom: 1px solid var(--light-border-color) !important;
+}
+
+#closeDayAndShiftModal .startDayAndShiftModalHeaderwrapper h5 {
+  color: var(--label-color) !important;
+}
+
+#closeDayAndShiftModal .startDayAndShiftModalbody {
+  background-color: var(--main-bg-color) !important;
+}
+
+/* 3) Cards */
+#closeDayAndShiftModal .acc-card {
+  background-color: #161b22 !important;
+  border: 1px solid var(--light-border-color) !important;
+  box-shadow: none !important;
+  color: var(--label-color) !important;
+}
+
+#closeDayAndShiftModal .acc-card-header,
+#closeDayAndShiftModal .acc-card-subtitle {
+  color: var(--label-color) !important;
+}
+
+/* 4) Tables inside this modal */
+#closeDayAndShiftModal table {
+  color: var(--label-color) !important;
+}
+
+#closeDayAndShiftModal th {
+  background-color: #161b22 !important;
+  color: var(--label-color) !important;
+  border-bottom: 1px solid var(--light-border-color) !important;
+}
+
+#closeDayAndShiftModal td {
+  border-bottom: 1px solid #1f2933 !important;
+  color: var(--label-color) !important;
+}
+
+/* Payment reconciliation scroll box */
+#closeDayAndShiftModal .closeShiftTransactionTableContainerClass {
+  background-color: #161b22 !important;
+  border: 1px solid var(--light-border-color) !important;
+}
+
+/* 5) Currency denomination (left column) */
+#closeDayAndShiftModal #closeDayAndShiftCashDenominationTableId tbody td {
+  background-color: #151b23 !important;
+  border-color: var(--light-border-color) !important;
+  color: var(--label-color) !important;
+}
+
+#closeDayAndShiftModal .currencyDenominationTableHeader {
+  /* background: transparent !important; */
+  color: var(--label-color) !important;
+}
+
+#closeDayAndShiftModal .currencyDenominationTableFooter td {
+  background-color: #151b23 !important;
+  border-color: var(--light-border-color) !important;
+}
+
+/* Total cash value text */
+#closeDayAndShiftModal #closeDayAndShiftCashInDrawerId {
+  color: #16a34a !important;
+  caret-color: #16a34a !important;
+  background: transparent !important;
+  border: none !important;
+}
+
+/* 6) Inputs in this modal */
+#closeDayAndShiftModal input[type='text'],
+#closeDayAndShiftModal input[type='number'],
+#closeDayAndShiftModal input[type='password'],
+#closeDayAndShiftModal input[type='search'],
+#closeDayAndShiftModal input[type='date'],
+#closeDayAndShiftModal select {
+  background-color: var(--main-bg-color) !important;
+  border: 1px solid var(--light-border-color) !important;
+  color: var(--label-color) !important;
+}
+
+/* "Actual" column inputs look like plain text */
+#closeDayAndShiftModal
+  #closeDayAndShiftTransactionsTableForShiftid
+  tbody
+  td:nth-child(4)
+  input {
+  background: transparent !important;
+  border: none !important;
+  color: var(--label-color) !important;
+}
+
+/* 7) Session info / Account balance / Day stats pills */
+#closeDayAndShiftModal .modal-info-row label,
+#closeDayAndShiftModal .prevDayCloseDayShiftSummary label {
+  background-color: #151b23 !important;
+  color: var(--label-color) !important;
+  border-radius: 20px !important;
+}
+
+/* 8) Order statistics (shift) */
+#closeDayAndShiftModal .order-stat-line span:first-child {
+  color: var(--label-color) !important;
+}
+
+#closeDayAndShiftModal .order-stat-value {
+  color: var(--label-color) !important;
+}
+
+#closeDayAndShiftModal .order-stat-line::before {
+  border-color: #4b5563 !important;
+}
+
+#closeDayAndShiftModal .order-stat-success::before {
+  border-color: #22c55e !important;
+}
+
+#closeDayAndShiftModal .order-stat-danger::before {
+  border-color: #ef4444 !important;
+}
+
+#closeDayAndShiftModal .order-stat-muted::before {
+  border-color: #6b7280 !important;
+}
+
+/* 9) Shift notes input */
+#closeDayAndShiftModal #closeDayAndShiftCommentInputId {
+  background-color: #151b23 !important;
+  border: 1px solid var(--light-border-color) !important;
+  color: var(--label-color) !important;
+}
+
+/* 10) Buttons – green and red like light mode but on dark bg */
+#closeDayAndShiftModal #CloseDayAndShiftButtonId {
+  background-color: #16a34a !important;
+  border-color: #22c55e !important;
+  color: #ffffff !important;
+  font-weight: 600 !important;
+}
+
+#closeDayAndShiftModal .closeDayAndShiftModalButton {
+  background-color: #ef4444 !important;
+  border-color: #fca5a5 !important;
+  color: #ffffff !important;
+  font-weight: 600 !important;
+}
+
+/* Small hover effect */
+#closeDayAndShiftModal #CloseDayAndShiftButtonId:hover,
+#closeDayAndShiftModal .closeDayAndShiftModalButton:hover {
+  filter: brightness(1.08) !important;
+}
+
+/* 11) Sticky header shadow in dark */
+#closeDayAndShiftModal
+  #closeDayAndShiftTransactionsTableForShiftid
+  thead
+  th::after {
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.7) !important;
+}
+/* ============================================================
+   CLOSE DAY & SHIFT – FINAL DARK TWEAKS
+   (pills + headers + order stats text)
+   ============================================================ */
+
+/* Revenue ID / Username / Cash Drawer pills */
+#closeDayAndShiftModal .revenueDetails label {
+  background-color: #151b23 !important;
+  color: var(--label-color) !important;
+}
+
+/* Closing Day Summary title (text was black) */
+#closeDayAndShiftModal #closeDaySummarylabelid {
+  color: var(--label-color) !important;
+}
+/* ============================================================
+   CLOSE DAY & SHIFT – PILL BACKGROUNDS (final fix)
+   Makes Revenue ID / Username / Cash Drawer / Opening Balance /
+   Expenses / Closing Day Summary rows match dark mode.
+   ============================================================ */
+
+/* Session Info pills: Revenue ID / Username / Cash Drawer */
+body #closeDayAndShiftModal .revenueDetails label {
+  background-color: transparent !important;
+  border: 1px solid var(--light-border-color) !important;
+  color: var(--label-color) !important;
+}
+
+/* Generic pills inside cards (Session Info, Account Balance, etc.) */
+body #closeDayAndShiftModal .acc-card .modal-info-row label {
+  background-color: transparent !important; /* remove white fill */
+  border: 1px solid var(--light-border-color) !important;
+  color: var(--label-color) !important;
+}
+
+/* Closing Day Summary rows (Order Statistics (Day), Fulfilled Orders, etc.) */
+body
+  #closeDayAndShiftModal
+  .acc-card-summary
+  .prevDayCloseDayShiftSummary
+  label {
+  background-color: transparent !important;
+  border: 1px solid var(--light-border-color) !important;
+  color: var(--label-color) !important;
+}
+
+/* Just to be safe: any pill that was forced full-width in Account.css */
+body #closeDayAndShiftModal .acc-card .modal-info-row label,
+body
+  #closeDayAndShiftModal
+  .acc-card-summary
+  .prevDayCloseDayShiftSummary
+  label {
+  border-radius: 999px !important; /* keep pill shape */
+  width: 100% !important;
+  box-sizing: border-box;
+}
+#closeDayAndShiftModal #closeDayAndShiftTransactionsTableForShiftid {
+  border: none !important;
+}
+
+#closeDayAndShiftModal #closeDayAndShiftTransactionsTableForShiftid td,
+#closeDayAndShiftModal #closeDayAndShiftTransactionsTableForShiftid th {
+  border-bottom: 1px solid var(--light-border-color) !important;
+}
+
+#closeDayAndShiftModal .closeShiftTransactionTableContainerClass {
+  border: 1px solid var(--light-border-color) !important;
+}
+
+/* Remove the inner white outline (your screenshot shows this) */
+#closeDayAndShiftModal #closeDayAndShiftTransactionsTableForShiftid {
+  box-shadow: none !important;
+}
+
+#closeDayAndShiftModal .closeShiftTransactionTableContainerClass {
+  box-shadow: none !important;
+}
+/* Inputs inside denomination table: no box, just text */
+#closeDayAndShiftModal
+  #closeDayAndShiftCashDenominationTableId
+  tbody
+  td
+  input[type='number'],
+#closeDayAndShiftModal
+  #closeDayAndShiftCashDenominationTableId
+  tbody
+  td
+  input[type='text'] {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  outline: none !important;
+  color: var(--label-color) !important;
+  text-align: center !important;
+}
+
+/* Total Cash input – also text only */
+#closeDayAndShiftModal #closeDayAndShiftCashInDrawerId {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  outline: none !important;
+  color: #16a34a !important;
+  text-align: right !important;
+}
+/* ============================================================
+   CLOSE SHIFT MODAL – DARK MODE OVERRIDE  
+   (matches Close Day & Shift and uses global dark variables)
+   ============================================================ */
+
+#closeShiftModal {
+  --bg: var(--main-bg-color);
+  --panel: #161b22;
+  --muted: #9aa8ba;
+  --text: var(--label-color);
+  --accent: #16a34a;
+  --danger: #ef4444;
+  --border: var(--light-border-color);
+  --border-soft: var(--light-border-color);
+  --shadow-soft: 0 10px 30px rgba(0, 0, 0, 0.55);
+  --shadow-subtle: 0 6px 18px rgba(0, 0, 0, 0.45);
+}
+
+/* Modal shell */
+#closeShiftModal .closeShiftModalwrapper,
+#closeShiftModal .startDayAndShiftModalwrapper {
+  background-color: var(--main-bg-color) !important;
+  color: var(--label-color) !important;
+  border: 1px solid var(--light-border-color) !important;
+  box-shadow: var(--shadow-soft) !important;
+}
+
+#closeShiftModal .startDayAndShiftModalHeaderwrapper {
+  background-color: var(--main-bg-color) !important;
+  border-bottom: 1px solid var(--light-border-color) !important;
+}
+
+#closeShiftModal .startDayAndShiftModalHeaderwrapper h5 {
+  color: var(--label-color) !important;
+}
+
+#closeShiftModal .startDayAndShiftModalbody {
+  background-color: var(--main-bg-color) !important;
+}
+
+/* Cards */
+#closeShiftModal .acc-card {
+  background-color: #161b22 !important;
+  border: 1px solid var(--light-border-color) !important;
+  color: var(--label-color) !important;
+  box-shadow: none !important;
+}
+
+#closeShiftModal .acc-card-header,
+#closeShiftModal .acc-card-subtitle {
+  color: var(--label-color) !important;
+}
+
+/* Tables */
+#closeShiftModal table {
+  color: var(--label-color) !important;
+}
+
+#closeShiftModal th {
+  background-color: #161b22 !important;
+  color: var(--label-color) !important;
+  border-bottom: 1px solid var(--light-border-color) !important;
+}
+
+#closeShiftModal td {
+  border-bottom: 1px solid #1f2933 !important;
+  color: var(--label-color) !important;
+}
+
+/* Payment reconciliation box */
+#closeShiftModal .closeShiftTransactionTableContainerClass {
+  background-color: #161b22 !important;
+  border: 1px solid var(--light-border-color) !important;
+  box-shadow: none !important;
+}
+
+/* Currency Denomination */
+#closeShiftModal #closeShiftCashDenominationTableId tbody td {
+  background-color: #151b23 !important;
+  border: 1px solid var(--light-border-color) !important;
+  color: var(--label-color) !important;
+}
+
+#closeShiftModal .currencyDenominationTableHeader {
+  /* background: transparent !important; */
+  color: var(--label-color) !important;
+}
+
+#closeShiftModal .currencyDenominationTableFooter td {
+  background-color: #151b23 !important;
+  border-color: var(--light-border-color) !important;
+}
+
+/* Total Cash value – green text */
+#closeShiftModal #closeShiftCashInDrawerId {
+  color: #16a34a !important;
+  caret-color: #16a34a !important;
+  background: transparent !important;
+  border: none !important;
+}
+
+/* Inputs inside denomination table = plain text */
+#closeShiftModal
+  #closeShiftCashDenominationTableId
+  tbody
+  td
+  input[type='number'],
+#closeShiftModal
+  #closeShiftCashDenominationTableId
+  tbody
+  td
+  input[type='text'] {
+  background: transparent !important;
+  border: none !important;
+  color: var(--label-color) !important;
+  box-shadow: none !important;
+  outline: none !important;
+  text-align: center !important;
+}
+
+/* Actual column inputs look like plain text */
+#closeShiftModal #closeShiftTransactionsTableId tbody td:nth-child(4) input {
+  background: transparent !important;
+  border: none !important;
+  color: var(--label-color) !important;
+  box-shadow: none !important;
+}
+
+/* Pill labels (Session Info / Account Stats / Orders) */
+#closeShiftModal .modal-info-row label,
+#closeShiftModal .prevDayCloseDayShiftSummary label {
+  background-color: transparent !important;
+  border: 1px solid var(--light-border-color) !important;
+  color: var(--label-color) !important;
+  border-radius: 999px !important;
+  width: 100% !important;
+}
+
+/* Shift notes */
+#closeShiftModal #closeShiftCommentInputId {
+  background-color: #151b23 !important;
+  border: 1px solid var(--light-border-color) !important;
+  color: var(--label-color) !important;
+}
+
+/* Buttons */
+#closeShiftModal .closeDayAndShiftModalButton {
+  background-color: #ef4444 !important;
+  /* border-color: #fca5a5 !important; */
+  color: #fff !important;
+  font-weight: 600 !important;
+}
+
+#closeShiftModal #CloseShiftButtonId {
+  background-color: #16a34a !important;
+  /* border-color: #22c55e !important; */
+  color: #fff !important;
+  font-weight: 600 !important;
+}
+
+/* Hover effect */
+#closeShiftModal .closeDayAndShiftModalButton:hover,
+#closeShiftModal #CloseShiftButtonId:hover {
+  filter: brightness(1.1) !important;
+}
+
+/* Scroll area cleanup */
+#closeShiftModal #closeShiftTransactionsTableId {
+  border: none !important;
+  box-shadow: none !important;
+}
+/* ============================================================
+   CLOSE SHIFT – REMOVE REMAINING WHITE BACKGROUNDS
+   (pills + header strip)
+   ============================================================ */
+
+/* Header strip behind "Closing Shift - date/time" */
+#closeShiftModal .startDayAndShiftModalHeaderwrapper {
+  background: var(--main-bg-color) !important;
+  border-bottom: 1px solid var(--light-border-color) !important;
+}
+
+/* All pill-style labels inside cards (Session Info, Account Statistics) */
+body #closeShiftModal .acc-card .modal-info-row label {
+  background: transparent !important; /* no white fill */
+  border: 1px solid var(--light-border-color) !important; /* subtle outline */
+  color: var(--label-color) !important;
+  border-radius: 999px !important;
+  width: 100% !important;
+  box-sizing: border-box;
+}
+
+/* Order Statistics pills on the right side */
+body #closeShiftModal .acc-card .prevDayCloseDayShiftSummary label {
+  background: transparent !important;
+  border: 1px solid var(--light-border-color) !important;
+  color: var(--label-color) !important;
+  border-radius: 999px !important;
+  width: 100% !important;
+  box-sizing: border-box;
+  padding: 8px 14px !important; /* keep same padding */
+}
+
+/* Shift Notes input background (so it's not lighter than the card) */
+#closeShiftModal #closeShiftCommentInputId {
+  background-color: #151b23 !important;
+  border: 1px solid var(--light-border-color) !important;
+  color: var(--label-color) !important;
+}
+
+#closeShiftModal #closeShiftCashDenominationTableId tbody tr td:first-child {
+  border-right: none !important;
+}
+
+/* middle COUNT cell: no left/right border */
+#closeShiftModal #closeShiftCashDenominationTableId tbody tr td:nth-child(2) {
+  border-left: none !important;
+  border-right: none !important;
+}
+
+/* AMOUNT cell: no left border */
+#closeShiftModal #closeShiftCashDenominationTableId tbody tr td:nth-child(3) {
+  border-left: none !important;
+}
+#closeShiftModal .startDayAndShiftModalHeaderwrapper {
+  background-color: #151b23;
+}
+/* ============================================================
+   CLOSE SHIFT – FIX WHITE BG BEHIND TITLE TEXT
+   ============================================================ */
+
+/* Make the whole header bar dark */
+#closeShiftModal .modal-header.startDayAndShiftModalHeaderwrapper {
+  background-color: var(--main-bg-color) !important;
+  border-bottom: 1px solid var(--light-border-color) !important;
+}
+
+/* Force the title and any inner elements to have NO background */
+#closeShiftModal #closeShiftModalHeaderId,
+#closeShiftModal .startDayAndShiftModalHeaderwrapper h5,
+#closeShiftModal .startDayAndShiftModalHeaderwrapper * {
+  background-color: transparent !important;
+  color: var(--label-color) !important;
+}
+
+/* Just in case Bootstrap adds .modal-title somewhere */
+#closeShiftModal .modal-title {
+  background-color: transparent !important;
+  color: var(--label-color) !important;
+}
+/* ============================================================
+   START DAY & SHIFT MODAL – DARK MODE OVERRIDE
+   Matches Close Day & Shift / Close Shift styling
+   ============================================================ */
+
+#startDayAndShiftModal {
+  --bg: var(--main-bg-color);
+  --panel: #161b22;
+  --muted: #9aa8ba;
+  --text: var(--label-color);
+  --accent: #16a34a;
+  --danger: #ef4444;
+  --border: var(--light-border-color);
+  --border-soft: var(--light-border-color);
+  --shadow-soft: 0 10px 30px rgba(0, 0, 0, 0.55);
+  --shadow-subtle: 0 6px 18px rgba(0, 0, 0, 0.45);
+}
+
+/* Modal shell */
+#startDayAndShiftModal .startDayAndShiftmodal-dialog {
+  background-color: transparent !important;
+}
+
+#startDayAndShiftModal .startDayAndShiftModalwrapper,
+#startDayAndShiftModal .startDayModalwrapper {
+  background-color: var(--main-bg-color) !important;
+  color: var(--label-color) !important;
+  border: 1px solid var(--light-border-color) !important;
+  box-shadow: var(--shadow-soft) !important;
+}
+
+/* Header strip */
+#startDayAndShiftModal .modal-header.startDayAndShiftModalHeaderwrapper {
+  background-color: var(--main-bg-color) !important;
+  border-bottom: 1px solid var(--light-border-color) !important;
+}
+
+#startDayAndShiftModal .startDayAndShiftModalHeaderwrapper h5,
+#startDayAndShiftModal #startDayAndShiftModalHeaderId,
+#startDayAndShiftModal .startDayAndShiftModalHeaderwrapper * {
+  background-color: transparent !important;
+  color: var(--label-color) !important;
+}
+
+#startDayAndShiftModal .modal-title {
+  background-color: transparent !important;
+  color: var(--label-color) !important;
+}
+
+#startDayAndShiftModal .header-date {
+  color: #9ca3af !important;
+}
+
+/* Body */
+#startDayAndShiftModal .startDayAndShiftModalbody {
+  background-color: var(--main-bg-color) !important;
+  color: var(--label-color) !important;
+}
+
+/* Cards */
+#startDayAndShiftModal .acc-card {
+  background-color: #161b22 !important;
+  border: 1px solid var(--light-border-color) !important;
+  color: var(--label-color) !important;
+  box-shadow: none !important;
+}
+
+#startDayAndShiftModal .acc-card-subtitle {
+  color: var(--label-color) !important;
+}
+
+/* Tables */
+#startDayAndShiftModal table {
+  color: var(--label-color) !important;
+}
+
+#startDayAndShiftModal th {
+  background-color: #161b22 !important;
+  color: var(--label-color) !important;
+  border-bottom: 1px solid var(--light-border-color) !important;
+}
+
+#startDayAndShiftModal td {
+  border-bottom: 1px solid #1f2933 !important;
+  color: var(--label-color) !important;
+}
+
+/* ================= Currency Denomination (LEFT) ================= */
+
+#startDayAndShiftModal #startDayAndShitCashDenominationTableId tbody td {
+  background-color: #151b23 !important;
+  border: 1px solid var(--light-border-color) !important;
+  color: var(--label-color) !important;
+}
+
+/* Header row */
+#startDayAndShiftModal .currencyDenominationTableHeader {
+  background: transparent !important;
+  color: var(--label-color) !important;
+}
+
+/* Footer row */
+#startDayAndShiftModal .currencyDenominationTableFooter td {
+  background-color: #151b23 !important;
+  border-color: var(--light-border-color) !important;
+}
+
+/* Inner column borders cleanup (same as Close Shift) */
+#startDayAndShiftModal
+  #startDayAndShitCashDenominationTableId
+  tbody
+  tr
+  td:first-child {
+  border-right: none !important;
+}
+
+#startDayAndShiftModal
+  #startDayAndShitCashDenominationTableId
+  tbody
+  tr
+  td:nth-child(2) {
+  border-left: none !important;
+  border-right: none !important;
+}
+
+#startDayAndShiftModal
+  #startDayAndShitCashDenominationTableId
+  tbody
+  tr
+  td:nth-child(3) {
+  border-left: none !important;
+}
+
+/* Inputs inside denomination table: plain text */
+#startDayAndShiftModal
+  #startDayAndShitCashDenominationTableId
+  tbody
+  td
+  input[type='number'],
+#startDayAndShiftModal
+  #startDayAndShitCashDenominationTableId
+  tbody
+  td
+  input[type='text'] {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  outline: none !important;
+  color: var(--label-color) !important;
+  text-align: center !important;
+}
+
+/* Total Cash input – green text, no box */
+#startDayAndShiftModal #startDayAndShiftCashInDrawerId {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  outline: none !important;
+  color: #16a34a !important;
+  text-align: right !important;
+  caret-color: #16a34a !important;
+}
+
+/* ================= Middle column: Session / Account / Previous ================= */
+
+/* All pill-style labels inside cards (Session Info, Account Statistics, Previous history) */
+body #startDayAndShiftModal .acc-card .modal-info-row label,
+body #startDayAndShiftModal .acc-card .prevDayCloseDayShiftSummary label {
+  background: transparent !important;
+  border: 1px solid var(--light-border-color) !important;
+  color: var(--label-color) !important;
+  border-radius: 999px !important;
+  width: 100% !important;
+  box-sizing: border-box;
+  padding: 8px 14px !important;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Revenue details row specifically */
+body #startDayAndShiftModal .revenueDetails label {
+  background: transparent !important;
+  border: 1px solid var(--light-border-color) !important;
+  color: var(--label-color) !important;
+  border-radius: 999px !important;
+  width: 100% !important;
+  box-sizing: border-box;
+}
+
+/* Generic “value-strong” helper span */
+#startDayAndShiftModal .value-strong {
+  font-weight: 600;
+}
+
+/* Shift Notes input */
+#startDayAndShiftModal #startDayShiftCommentInputId {
+  background-color: #151b23 !important;
+  border: 1px solid var(--light-border-color) !important;
+  color: var(--label-color) !important;
+}
+
+/* ================= Right column: Summary + Start button ================= */
+
+#startDayAndShiftModal .startDayActionsContainer input[type='button'],
+#startDayAndShiftModal #startCloseDayAndShiftButtonId {
+  background-color: #16a34a !important;
+  color: #ffffff !important;
+  font-weight: 600 !important;
+  border-radius: 10px !important;
+  border: 1px solid #22c55e !important;
+}
+
+/* Hover effect */
+#startDayAndShiftModal .startDayActionsContainer input[type='button']:hover,
+#startDayAndShiftModal #startCloseDayAndShiftButtonId:hover {
+  filter: brightness(1.08) !important;
+}
+
+/* Make sure Summary card pills use dark style too */
+body
+  #startDayAndShiftModal
+  .accountStatistics
+  .acc-card
+  .prevDayCloseDayShiftSummary
+  label {
+  background: transparent !important;
+  border: 1px solid var(--light-border-color) !important;
+  color: var(--label-color) !important;
+}
+
+/* Safety: make sure currency header stays dark */
+#startDayAndShiftModal .currencyDenominationTableHeader .currency-title {
+  color: var(--label-color) !important;
+}
+/* ============================================================
+   START SHIFT MODAL – DARK MODE OVERRIDE
+   Matches Close Day & Shift / Close Shift styling
+   Place at the end of dark.css
+   ============================================================ */
+
+#startShiftModal {
+  --bg: var(--main-bg-color);
+  --panel: #161b22;
+  --muted: #9aa8ba;
+  --text: var(--label-color);
+  --accent: #16a34a;
+  --danger: #ef4444;
+  --border: var(--light-border-color);
+  --border-soft: var(--light-border-color);
+  --shadow-soft: 0 10px 30px rgba(0, 0, 0, 0.55);
+  --shadow-subtle: 0 6px 18px rgba(0, 0, 0, 0.45);
+}
+
+/* modal shell */
+#startShiftModal .startDayAndShiftmodal-dialog,
+#startShiftModal .startShiftModal-dialog {
+  background-color: transparent !important;
+}
+
+#startShiftModal .startDayAndShiftModalwrapper,
+#startShiftModal .startShiftModalwrapper {
+  background-color: var(--main-bg-color) !important;
+  color: var(--label-color) !important;
+  border: 1px solid var(--light-border-color) !important;
+  box-shadow: var(--shadow-soft) !important;
+}
+
+/* header */
+#startShiftModal .modal-header.startDayAndShiftModalHeaderwrapper {
+  background-color: var(--main-bg-color) !important;
+  border-bottom: 1px solid var(--light-border-color) !important;
+}
+
+#startShiftModal .startDayAndShiftModalHeaderwrapper h5,
+#startShiftModal #startShiftModalHeaderId,
+#startShiftModal .startDayAndShiftModalHeaderwrapper * {
+  background: transparent !important;
+  color: var(--label-color) !important;
+}
+
+#startShiftModal .header-date {
+  color: #9ca3af !important;
+}
+
+/* body */
+#startShiftModal .startDayAndShiftModalbody {
+  background-color: var(--main-bg-color) !important;
+  color: var(--label-color) !important;
+}
+
+/* cards */
+#startShiftModal .acc-card {
+  background-color: #161b22 !important;
+  border: 1px solid var(--light-border-color) !important;
+  color: var(--label-color) !important;
+  box-shadow: none !important;
+}
+
+#startShiftModal .acc-card-subtitle {
+  color: var(--label-color) !important;
+}
+
+/* tables */
+#startShiftModal table {
+  color: var(--label-color) !important;
+}
+
+#startShiftModal th {
+  background-color: #161b22 !important;
+  color: var(--label-color) !important;
+  border-bottom: 1px solid var(--light-border-color) !important;
+}
+
+#startShiftModal td {
+  border-bottom: 1px solid #1f2933 !important;
+  color: var(--label-color) !important;
+}
+
+/* ================= Currency Denomination (LEFT) ================= */
+
+#startShiftModal #startShiftCashDenominationTableId tbody td {
+  background-color: #151b23 !important;
+  border: 1px solid var(--light-border-color) !important;
+  color: var(--label-color) !important;
+}
+
+/* header */
+#startShiftModal .currencyDenominationTableHeader {
+  background: transparent !important;
+  color: var(--label-color) !important;
+}
+
+/* footer */
+#startShiftModal .currencyDenominationTableFooter td {
+  background-color: #151b23 !important;
+  border-color: var(--light-border-color) !important;
+}
+
+/* inner column borders cleanup (match CloseShift) */
+#startShiftModal #startShiftCashDenominationTableId tbody tr td:first-child {
+  border-right: none !important;
+}
+
+#startShiftModal #startShiftCashDenominationTableId tbody tr td:nth-child(2) {
+  border-left: none !important;
+  border-right: none !important;
+}
+
+#startShiftModal #startShiftCashDenominationTableId tbody tr td:nth-child(3) {
+  border-left: none !important;
+}
+
+/* inputs inside denomination table -> plain text */
+#startShiftModal
+  #startShiftCashDenominationTableId
+  tbody
+  td
+  input[type='number'],
+#startShiftModal
+  #startShiftCashDenominationTableId
+  tbody
+  td
+  input[type='text'] {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  outline: none !important;
+  color: var(--label-color) !important;
+  text-align: center !important;
+}
+
+#startShiftModal #startShiftCashInDrawerId {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  outline: none !important;
+  color: #16a34a !important;
+  text-align: right !important;
+  caret-color: #16a34a !important;
+}
+
+body #startShiftModal .acc-card .modal-info-row label,
+body #startShiftModal .acc-card .prevDayCloseDayShiftSummary label {
+  background: transparent !important;
+  border: 1px solid var(--light-border-color) !important;
+  color: var(--label-color) !important;
+  border-radius: 999px !important;
+  width: 100% !important;
+  box-sizing: border-box;
+  padding: 8px 14px !important;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* revenueDetails row */
+body #startShiftModal .revenueDetails label {
+  background: transparent !important;
+  border: 1px solid var(--light-border-color) !important;
+  color: var(--label-color) !important;
+  border-radius: 999px !important;
+  width: 100% !important;
+  box-sizing: border-box;
+}
+
+/* helper for bold values */
+#startShiftModal .value-strong {
+  font-weight: 600;
+}
+
+/* Shift Notes input */
+#startShiftModal #startShiftCommentInputId {
+  background-color: #151b23 !important;
+  border: 1px solid var(--light-border-color) !important;
+  color: var(--label-color) !important;
+}
+
+/* ================= Right column: Summary + Start button ================= */
+
+#startShiftModal .startDayActionsContainer input[type='button'],
+#startShiftModal #startShiftButtonId {
+  background-color: #16a34a !important;
+  color: #ffffff !important;
+  font-weight: 600 !important;
+  border-radius: 10px !important;
+  border: 1px solid #22c55e !important;
+}
+
+/* Hover */
+#startShiftModal .startDayActionsContainer input[type='button']:hover,
+#startShiftModal #startShiftButtonId:hover {
+  filter: brightness(1.08) !important;
+}
+
+/* Ensure summary pills are dark */
+body
+  #startShiftModal
+  .accountStatistics
+  .acc-card
+  .prevDayCloseDayShiftSummary
+  label {
+  background: transparent !important;
+  border: 1px solid var(--light-border-color) !important;
+  color: var(--label-color) !important;
+}
+
+/* Safety: currency title color */
+#startShiftModal .currencyDenominationTableHeader .currency-title {
+  color: var(--label-color) !important;
+}
+/* ============================================================
+   CLOSE DAY & SHIFT – FIX WHITE INPUTS (DARK MODE)
+   Applies ONLY to dark modal
+   ============================================================ */
+
+/* ---------- COMMON INPUT LOOK (dark) ---------- */
+#closeDayAndShiftModal input[type='number'],
+#closeDayAndShiftModal input[type='text'] {
+  background-color: #151b23 !important;
+  color: var(--label-color) !important;
+  border: 1px solid rgba(255, 255, 255, 0.25) !important;
+  box-shadow: none !important;
+  outline: none !important;
+}
+
+/* focus */
+#closeDayAndShiftModal input[type='number']:focus,
+#closeDayAndShiftModal input[type='text']:focus {
+  border-color: rgba(255, 255, 255, 0.45) !important;
+  background-color: #151b23 !important;
+}
+
+/* ---------- ACTUAL COLUMN (Payment Reconciliation) ---------- */
+/* 4th column = Actual */
+#closeDayAndShiftModal
+  #closeDayAndShiftTransactionsTableForShiftid
+  tbody
+  td:nth-child(4)
+  input {
+  background-color: #151b23 !important;
+  border: 1px solid rgba(255, 255, 255, 0.25) !important;
+  color: var(--label-color) !important;
+  text-align: right !important;
+  padding: 4px 6px !important;
+}
+
+/* ---------- CURRENCY DENOMINATION TABLE ---------- */
+#closeDayAndShiftModal #closeDayAndShiftCashDenominationTableId tbody td input {
+  background-color: #151b23 !important;
+  border: 1px solid rgba(255, 255, 255, 0.25) !important;
+  color: var(--label-color) !important;
+  text-align: center !important;
+}
+
+/* ---------- TOTAL CASH INPUT ---------- */
+#closeDayAndShiftModal #closeDayAndShiftCashInDrawerId {
+  background-color: #151b23 !important;
+  border: 1px solid rgba(34, 197, 94, 0.6) !important; /* green hint */
+  color: #16a34a !important;
+  text-align: right !important;
+}
+
+/* ---------- REMOVE BOOTSTRAP WHITE GLOW ---------- */
+#closeDayAndShiftModal input {
+  -webkit-appearance: none !important;
+  appearance: none !important;
+}
+.onlinestoreSettingsdiv,
+.onlinesettingsModalclass,
+.onlinesettingsModalcontent,
+.onlinesettingstabsContainer {
+  background-color: var(--main-bg-color) !important;
+  color: var(--label-color) !important;
+} /* Header */
+.onlinesettingsTitle {
+  background-color: var(--kot-action-div) !important;
+  border-bottom: 1px solid var(--light-border-color) !important;
+}
+.onlinesettingsTitle h5,
+.onlinesettingsTitle i {
+  color: var(--label-color) !important;
+} /* Store select bar */
+.container-div-1 {
+  background-color: var(--main-bg-color) !important;
+  border-bottom: 1px solid var(--light-border-color) !important;
+}
+.storeOptionscontainer label {
+  color: var(--label-color) !important;
+} /* Tabs */
+.digistoresettingsTabs {
+  background-color: var(--main-bg-color) !important;
+  border-bottom: 1px solid var(--light-border-color) !important;
+}
+.digistoresettingsTabs .nav-link {
+  color: var(--label-color) !important;
+}
+.digistoresettingsTabs .nav-link.active {
+  background-color: var(--main-bg-color) !important;
+  border-bottom: 2px solid var(--tabs-border-color) !important;
+  font-weight: 600;
+} /* Tab panes */
+.onlinesettingstabsContainer,
+.tab-pane {
+  background-color: var(--main-bg-color) !important;
+  color: var(--label-color) !important;
+} /* Inputs / selects / search */
+.onlinestoreSettingsdiv input[type='text'],
+.onlinestoreSettingsdiv input[type='search'],
+.onlinestoreSettingsdiv select {
+  background-color: var(--main-bg-color) !important;
+  border: 1px solid var(--light-border-color) !important;
+  color: var(--label-color) !important;
+}
+.onlinestoreSettingsdiv input::placeholder {
+  color: var(--placeholder-text-color) !important;
+} /* Buttons */
+.onlinestoreSettingsdiv .normal-button,
+.onlinestoreSettingsdiv .btn {
+  background-color: var(--kot-action-div) !important;
+  color: var(--label-color) !important;
+  border: 1px solid var(--button-border-color) !important;
+} /* Tables */
+.onlinestoreSettingsdiv table {
+  background-color: var(--main-bg-color) !important;
+  color: var(--label-color) !important;
+}
+.onlinestoreSettingsdiv table thead {
+  background-color: var(--transparent-background) !important;
+}
+.onlinestoreSettingsdiv table tbody tr:hover {
+  background-color: var(--transparent-background) !important;
+}
+.onlinestoreSettingsdiv table td,
+.onlinestoreSettingsdiv table th {
+  border-bottom: 1px solid var(--light-border-color) !important;
+} /* Platform cards */
+.platform-status-container {
+  background-color: var(--main-bg-color) !important;
+  border: 1px solid var(--light-border-color) !important;
+}
+.platform-status-container:hover {
+  background-color: var(--transparent-background) !important;
+} /* Toggle switch */
+.onlinestoreSettingsdiv .slider {
+  background-color: var(--switch-background) !important;
+}
+.onlinestoreSettingsdiv input:checked + .slider {
+  background-color: var(--tabs-border-color) !important;
+} /* Warning text */
+.onlinestoreSettingsdiv .text-danger {
+  color: #f59e0b !important;
+} /* Scrollbars (local override) */
+.onlinestoreSettingsdiv ::-webkit-scrollbar {
+  width: 7px;
+}
+.onlinestoreSettingsdiv ::-webkit-scrollbar-track {
+  background: var(--main-bg-color);
+}
+.onlinestoreSettingsdiv ::-webkit-scrollbar-thumb {
+  background: rgba(179, 180, 179, 0.6);
+  border-radius: 10px;
+}
+
+/* =====================================================
+   MenuManagement Dark Mode - Perfect Match
+   Applies when dark mode is active
+   ==================================================== */
+
+#menuManagementmainWrappperid.operation-page {
+  background: #1a1a1e !important; /* Dark charcoal */
+}
+
+#menuManagementmainWrappperid.operation-page h5.MenuHeading {
+  color: #e5e7eb !important; /* Light gray */
+}
+
+#menuManagementmainWrappperid.operation-page h6.MenuHeading {
+  color: #d1d5db !important;
+  border-bottom-color: #374151 !important; /* Gray-700 */
+}
+
+#menuManagementmainWrappperid.operation-page .operationSubText {
+  color: #9ca3af !important; /* Gray-400 */
+}
+
+/* ---------------- DARK CARDS ---------------- */
+#menuManagementmainWrappperid.operation-page .menuOptionsCard {
+  background: #2d2e36 !important; /* Darker card bg */
+  border-color: #4b5563 !important; /* Gray-600 */
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.3) !important;
+}
+
+#menuManagementmainWrappperid.operation-page .menuOptionsCard:hover {
+  background: #3a3b44 !important;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4) !important;
+  transform: translateY(-3px);
+}
+
+/* ---------------- DARK ICONS ---------------- */
+#menuManagementmainWrappperid.operation-page .menuOptionsCardData i {
+  background: rgba(16, 185, 129, 0.15) !important;
+  color: #10b981 !important; /* Keep green accent */
+}
+
+/* ---------------- DARK TEXT ---------------- */
+#menuManagementmainWrappperid.operation-page .menuOptionsCardData span {
+  color: #f9fafb !important; /* Gray-50 */
+  font-weight: 600;
+}
+
+#menuManagementmainWrappperid.operation-page .menuOptionsCardData label {
+  color: #d1d5db !important; /* Gray-300 */
+}
+
+/* ---------------- DARK IP BOX ---------------- */
+#ipaddressFieldMenuManagement.menuManagementIpBox {
+  background: linear-gradient(135deg, #1f5f3a, #2d8b5e) !important;
+  border-color: #047857 !important;
+  color: #ecfdf5 !important; /* Emerald-50 */
+}
+
+#ipaddressFieldMenuManagement.menuManagementIpBox i {
+  background: #059669 !important;
+  color: #ffffff !important;
+}
+
+/* ---------------- ALERTS ---------------- */
+#menuManagementmainWrappperid.operation-page .alert-danger {
+  background: #451a1f !important;
+  border-color: #dc2626 !important;
+  color: #f87171 !important;
+}
+
+/* ---------------- RESPONSIVE DARK MODE ---------------- */
+@media (max-width: 1400px) and (min-width: 1022px) {
+  #menuManagementmainWrappperid.operation-page .menuOptionsCard {
+    background: #2d2e36 !important;
+  }
+}
+
+@media (max-width: 800px) {
+  #menuManagementmainWrappperid.operation-page {
+    background: #1a1a1e !important;
+  }
+}
+
+/* ---------------- MASTER WRAPPER (if needed) ---------------- */
+.mastermenuwindowWrapper {
+  background: #1a1a1e !important;
+}
+
+/* ---------------- MenuHeading helper text ---------------- */
+#menuManagementmainWrappperid .menuOptionsCardData label {
+  color: #d1d5db !important;
+}
+/* =========================================================
+   ADD / UPDATE ITEM MODAL – DARK MODE FIX
+   Uses existing dark.css variables
+   ========================================================= */
+
+#AddOrUpdateItemmodal {
+  background: transparent !important;
+}
+
+/* Modal shell */
+#AddOrUpdateItemmodal .AddOrUpdateItemmodalWrapper {
+  background-color: var(--main-bg-color) !important;
+  border: 1px solid var(--light-border-color) !important;
+  color: var(--label-color) !important;
+}
+
+/* Header & Footer */
+#AddOrUpdateItemmodal .modal-header,
+#AddOrUpdateItemmodal .modal-footer {
+  background-color: var(--main-bg-color) !important;
+  border-color: var(--light-border-color) !important;
+}
+
+#AddOrUpdateItemmodal .modal-title {
+  color: var(--label-color) !important;
+}
+
+#AddOrUpdateItemmodal .close {
+  color: var(--icon-fill-color) !important;
+}
+
+/* Body */
+#AddOrUpdateItemmodal .modal-body {
+  background-color: var(--main-bg-color) !important;
+}
+
+/* Labels */
+#AddOrUpdateItemmodal .menu-item-label-class {
+  color: var(--label-color) !important;
+}
+
+#AddOrUpdateItemmodal .asterisk {
+  color: #ef4444 !important;
+}
+
+#AddOrUpdateItemmodal input[type='text'],
+#AddOrUpdateItemmodal input[type='number'],
+#AddOrUpdateItemmodal select,
+#AddOrUpdateItemmodal .itemUpdateinputbox,
+#AddOrUpdateItemmodal .expense-select {
+  background-color: #151b23 !important;
+  border: 1px solid var(--light-border-color) !important;
+  color: var(--label-color) !important;
+}
+
+#AddOrUpdateItemmodal input::placeholder {
+  color: var(--placeholder-text-color) !important;
+}
+
+/* Focus */
+#AddOrUpdateItemmodal input:focus,
+#AddOrUpdateItemmodal select:focus {
+  border-color: rgba(255, 255, 255, 0.4) !important;
+  box-shadow: none !important;
+}
+
+#AddOrUpdateItemmodal select {
+  background-image:
+    linear-gradient(45deg, transparent 50%, #9ca3af 50%),
+    linear-gradient(135deg, #9ca3af 50%, transparent 50%) !important;
+}
+
+#AddOrUpdateItemmodal .input-group-text {
+  background-color: var(--kot-action-div) !important;
+  border: 1px solid var(--button-border-color) !important;
+  color: var(--label-color) !important;
+}
+
+#AddOrUpdateItemmodal .slider {
+  background-color: var(--switch-background) !important;
+}
+
+#AddOrUpdateItemmodal input:checked + .slider {
+  background-color: var(--tabs-border-color) !important;
+}
+
+#AddOrUpdateItemmodal #reduceItemInventoryButtonId {
+  background-color: var(--kot-action-div) !important;
+  border: 1px solid var(--button-border-color) !important;
+  color: var(--label-color) !important;
+}
+
+#AddOrUpdateItemmodal .normal-button {
+  background-color: var(--kot-action-div) !important;
+  border: 1px solid var(--button-border-color) !important;
+  color: var(--label-color) !important;
+}
+
+#AddOrUpdateItemmodal #menuItemAddbuttonid {
+  background-color: #16a34a !important;
+  border-color: #22c55e !important;
+  color: #ffffff !important;
+  font-weight: 600;
+}
+
+#AddOrUpdateItemmodal .modal-body::-webkit-scrollbar-thumb {
+  background: rgba(179, 180, 179, 0.6);
+}
+
+#AddOrUpdateItemmodal select {
+  appearance: auto !important;
+  -webkit-appearance: menulist !important;
+  -moz-appearance: menulist !important;
+
+  background-image: none !important;
+  padding-right: 12px !important;
+}
+#tab-addresses .section-desci {
+  color: var(--label-color) !important;
+}
+.analytic-card {
+  background-color: transparent !important;
+}
+
+h6,
+#baseItemPrice {
+  color: var(--label-color) !important;
+}
+
+.swal2-popup.digital-payment-swal {
+  background-color: var(--main-bg-color) !important;
+  border: 1px solid var(--light-border-color) !important;
+  color: var(--label-color) !important;
+}
+
+.swal2-popup.digital-payment-swal .swal2-title {
+  color: var(--label-color) !important;
+}
+
+.swal2-popup.digital-payment-swal .digital-payment-container {
+  background-color: transparent !important;
+}
+
+.swal2-popup.digital-payment-swal .digital-payment-card {
+  background-color: #161b22 !important;
+  border: 1px solid var(--light-border-color) !important;
+  color: var(--label-color) !important;
+  transition:
+    background-color 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.swal2-popup.digital-payment-swal .digital-payment-card:hover {
+  background-color: #1f2933 !important;
+  border-color: var(--tabs-border-color) !important;
+}
+
+.swal2-popup.digital-payment-swal .digital-payment-card.selected {
+  border: 2px solid #16a34a !important;
+  background-color: rgba(22, 163, 74, 0.12) !important;
+}
+
+.swal2-popup.digital-payment-swal .digital-payment-card div {
+  color: var(--label-color) !important;
+}
+
+.swal2-popup.digital-payment-swal
+  .digital-payment-container::-webkit-scrollbar-track {
+  background-color: var(--main-bg-color) !important;
+}
+
+.swal2-popup.digital-payment-swal
+  .digital-payment-container::-webkit-scrollbar-thumb {
+  background-color: rgba(179, 180, 179, 0.6) !important;
+  border-radius: 10px;
+}
+
+.swal2-popup.digital-payment-swal .swal2-confirm {
+  /* background-color: #16a34a !important; */
+  /* border: 1px solid #22c55e !important; */
+  color: #ffffff !important;
+  font-weight: 600 !important;
+}
+
+.swal2-popup.digital-payment-swal .swal2-cancel {
+  background-color: #ef4444 !important;
+  border: 1px solid #f87171 !important;
+  color: #ffffff !important;
+  font-weight: 600 !important;
+}
+
+.swal2-popup.digital-payment-swal .swal2-confirm:hover,
+.swal2-popup.digital-payment-swal .swal2-cancel:hover {
+  filter: brightness(1.08);
+}
+.swal2-popup.digital-payment-swal .swal2-title {
+  color: #f0f6fc !important;
+  font-weight: 600 !important;
+  opacity: 1 !important;
+}
+
+.swal2-popup.digital-payment-swal .swal2-html-container {
+  color: var(--label-color) !important;
+  opacity: 1 !important;
+}
+
+.swal2-popup.digital-payment-swal {
+  background-color: var(--main-bg-color) !important;
+  border: 1px solid var(--light-border-color) !important;
+  color: var(--label-color) !important;
+}
+
+.swal2-popup.digital-payment-swal .swal2-title {
+  color: var(--label-color) !important;
+}
+
+.swal2-popup.digital-payment-swal .digital-payment-container {
+  background-color: transparent !important;
+}
+
+.swal2-popup.digital-payment-swal .digital-payment-card {
+  background-color: #161b22 !important;
+  border: 1px solid var(--light-border-color) !important;
+  color: var(--label-color) !important;
+  transition:
+    background-color 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.swal2-popup.digital-payment-swal .digital-payment-card:hover {
+  background-color: #1f2933 !important;
+  border-color: var(--tabs-border-color) !important;
+}
+
+.swal2-popup.digital-payment-swal .digital-payment-card div {
+  color: var(--label-color) !important;
+}
+
+.swal2-popup.digital-payment-swal
+  .digital-payment-container::-webkit-scrollbar-track {
+  background-color: var(--main-bg-color) !important;
+}
+
+.swal2-popup.digital-payment-swal
+  .digital-payment-container::-webkit-scrollbar-thumb {
+  background-color: rgba(179, 180, 179, 0.6) !important;
+  border-radius: 10px;
+}
+
+.swal2-popup.digital-payment-swal .swal2-confirm {
+  background-color: #16a34a !important;
+  border: 1px solid #22c55e !important;
+  color: #ffffff !important;
+  font-weight: 600 !important;
+}
+
+.swal2-popup.digital-payment-swal .swal2-cancel {
+  background-color: #ef4444 !important;
+  border: 1px solid #f87171 !important;
+  color: #ffffff !important;
+  font-weight: 600 !important;
+}
+
+.swal2-popup.digital-payment-swal .swal2-confirm:hover,
+.swal2-popup.digital-payment-swal .swal2-cancel:hover {
+  filter: brightness(1.08);
+}
+#salesdaterangeId,
+#itemsdaterangeId,
+#dashboarddateFilterid,
+#receipt_fromdateButton,
+#reportfromdateButton {
+  background-color: #11151b !important;
+  color: #ffffff !important;
+  border: 1px solid #2a2a3a !important;
+}
+.expense-back-btn,
+#gobacktomenumangemtfromUserManagementview,
+.wallet-mgmt-container .wallet-back-btn {
+  background-color: var(--main-bg-color) !important;
+  color: #ffffff !important;
+  border: 1px solid #2a2a3a !important; /* optional clean dark border */
+}
+
+/* Optional: keep same bg on hover/focus */
+.expense-back-btn:hover,
+#gobacktomenumangemtfromUserManagementview:hover,
+.wallet-mgmt-container .wallet-back-btn:hover,
+.expense-back-btn:focus,
+#gobacktomenumangemtfromUserManagementview:focus,
+.wallet-mgmt-container .wallet-back-btn:focus {
+  background-color: var(--main-bg-color) !important;
+  opacity: 0.9;
+}
+#digitalordersearchButtonid {
+  background-color: var(--main-bg-color) !important;
+}

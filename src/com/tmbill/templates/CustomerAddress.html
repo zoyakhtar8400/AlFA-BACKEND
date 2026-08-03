@@ -1,0 +1,270 @@
+<div class="customermgmtContainer">
+  <div class="row">
+    <input type="checkbox" name="" id="showaddcustoerAddressForm" />
+    <label
+      data-i18n="customerAddress.AddAddress"
+      class="has-i18n showaddcustoerAddressForm"
+      for="showaddcustoerAddressForm"
+      >Add address</label
+    >
+  </div>
+
+  <div class="inputWrapperdiv" id="customerAddressinputWrapperdivid">
+    <div>
+      <label
+        class="customerAddresslabel has-i18n"
+        for="customerCompleteAddressid"
+        data-i18n="customerAddress.completeaddress"
+        >Complete Address </label
+      ><span class="asterisk">*</span>
+
+      <input
+        type="text"
+        placeholder="Complete address"
+        id="customerCompleteAddressid"
+        class="customerAddressInput has-i18n"
+        data-i18n="[placeholder]customerAddress.completeaddress"
+      />
+    </div>
+
+    <!-- location -->
+    <div>
+      <label
+        class="customerAddresslabel has-i18n"
+        for="customerlocationid"
+        data-i18n=""
+        >Location
+      </label>
+      <span class="asterisk">*</span>
+
+      <input
+        type="text"
+        placeholder="Location"
+        id="customerlocationid"
+        class="customerAddressInput has-i18n"
+        data-i18n=""
+      />
+    </div>
+
+    <!-- area -->
+    <div>
+      <label
+        class="customerAddresslabel has-i18n"
+        for="customerareaid"
+        data-i18n=""
+        >Area</label
+      >
+      <input
+        type="text"
+        placeholder="Area"
+        id="customerareaid"
+        class="customerAddressInput has-i18n"
+        data-i18n=""
+      />
+    </div>
+
+    <!-- block -->
+    <div>
+      <label
+        class="customerAddresslabel has-i18n"
+        for="customerblockid"
+        data-i18n=""
+        >Block</label
+      >
+      <input
+        type="text"
+        placeholder="Block"
+        id="customerblockid"
+        class="customerAddressInput has-i18n"
+        data-i18n=""
+      />
+    </div>
+
+    <!-- street -->
+    <div>
+      <label
+        class="customerAddresslabel has-i18n"
+        for="customerStreetid"
+        data-i18n=""
+        >Street</label
+      >
+      <input
+        type="text"
+        placeholder="Street"
+        id="customerStreetid"
+        class="customerAddressInput has-i18n"
+        data-i18n=""
+      />
+    </div>
+
+    <!-- lane -->
+    <div>
+      <label
+        class="customerAddresslabel has-i18n"
+        for="customerLaneid"
+        data-i18n=""
+        >Lane</label
+      >
+      <input
+        type="text"
+        placeholder="Lane"
+        id="customerLaneid"
+        class="customerAddressInput has-i18n"
+        data-i18n=""
+      />
+    </div>
+
+    <div>
+      <label
+        class="customerAddresslabel has-i18n"
+        for="customerLocationid"
+        data-i18n="customerAddress.BuildingTower"
+        >Building/Tower
+      </label>
+      <span class="asterisk">*</span>
+
+      <input
+        type="text"
+        placeholder="Building/Tower"
+        id="customerLocationid"
+        class="customerAddressInput has-i18n"
+        data-i18n="[placeholder]customerAddress.BuildingTower"
+      />
+    </div>
+
+    <!-- flat -->
+    <div>
+      <label
+        class="customerAddresslabel has-i18n"
+        for="customerFlatid"
+        data-i18n=""
+        >Flat</label
+      >
+      <input
+        type="text"
+        placeholder="Flat"
+        id="customerFlatid"
+        class="customerAddressInput has-i18n"
+        data-i18n=""
+      />
+    </div>
+
+    <!-- floor -->
+    <div>
+      <label
+        class="customerAddresslabel has-i18n"
+        for="customerFloorid"
+        data-i18n=""
+        >Floor No</label
+      >
+      <input
+        type="text"
+        placeholder="Floor"
+        id="customerFloorid"
+        class="customerAddressInput has-i18n"
+        data-i18n=""
+      />
+    </div>
+    <div>
+      <label
+        class="customerAddresslabel has-i18n"
+        for="customerLandmarkid"
+        data-i18n="customerAddress.Landmark"
+        >Landmark </label
+      ><span class="asterisk">*</span>
+
+      <input
+        type="text"
+        placeholder="Landmark"
+        id="customerLandmarkid"
+        class="customerAddressInput has-i18n"
+        data-i18n="[placeholder]customerAddress.Landmark"
+      />
+    </div>
+
+    <div
+      class="has-i18n"
+      data-i18n="customerAddress.locationlabel"
+      style="display: inline"
+    >
+      Location label:
+    </div>
+    <span class="asterisk">*</span>
+    <div
+      class="btn-toolbar mb-3"
+      role="toolbar"
+      aria-label="Toolbar with button groups"
+    >
+      <div class="btn-group me-2" role="group" aria-label="First group">
+        <button
+          type="button"
+          id="homelocatiobuttonid"
+          class="btn btn-outline-secondary has-i18n"
+          data-i18n="customerAddress.Home"
+        >
+          Home
+        </button>
+        <button
+          type="button"
+          id="officelocationbuttonid"
+          class="btn btn-outline-secondary has-i18n"
+          data-i18n="customerAddress.Office"
+        >
+          Office
+        </button>
+        <button
+          type="button"
+          id="otherlocationbuttionid"
+          class="btn btn-outline-secondary has-i18n"
+          data-i18n="customerAddress.Other"
+        >
+          Other
+        </button>
+      </div>
+    </div>
+    <div>
+      <button
+        class="btn btn-outline-secondary has-i18n"
+        id="createNewCustomerAddress"
+        data-i18n="customerAddress.AddAddress"
+      >
+        Add address
+      </button>
+
+      <button
+        class="btn btn-outline-secondary has-i18n"
+        id="editCustomerAddress"
+        data-i18n="customerAddress.Editaddress"
+      >
+        Edit address
+      </button>
+    </div>
+  </div>
+  <div id="customeradderesscontainerid">
+    <div
+      id="maxaddresswarningid"
+      class="alert alert-danger has-i18n"
+      role="alert"
+      data-i18n="customerAddress.Youcanaddmaximumfiveaddress"
+    >
+      You can add maximum 5 address
+    </div>
+    <h5
+      id="selectedaddresslabel"
+      class="has-i18n"
+      data-i18n="customerAddress.Selectanaddress"
+    >
+      Select an address
+    </h5>
+    <div class="customerDatadiv" id="customerAddressDatadivid">
+      <!-- <table class="table table-sm customersTable" id="customersTableid"></table> -->
+    </div>
+  </div>
+</div>
+<script>
+  require('../js/CustomerAddressController.js');
+</script>
+<!-- Insert this line after script imports -->
+<script>
+  if (window.module) module = window.module;
+</script>

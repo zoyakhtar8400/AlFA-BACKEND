@@ -1,0 +1,145 @@
+.deliveryTab {
+  height: 100%;
+  font-size: 12px;
+  width: 100%;
+}
+/* Default (small & medium screens) */
+/* Default (small & medium screens) */
+/* .billtitleLabel,
+.billnoLabel {
+  font-size: 11px;
+} */
+
+/* Larger than 1500px */
+
+#quickkotprintChecklabel,
+#quickbillprintChecklabel {
+  /* max-width: 15%; */
+  max-height: 30px;
+  /* white-space: nowrap; */
+  /* overflow: hidden; */
+  text-overflow: ellipsis;
+}
+
+.quickBillwrapperdiv {
+  height: 100%;
+}
+
+.quickBillwrapperdiv .billLables-div {
+  justify-content: center;
+  height: 7%;
+  min-height: 7%;
+  max-height: 7%;
+}
+
+.quickbill-actions {
+  height: 40px;
+}
+
+.quickBilltablewrapper {
+  height: 51%;
+  position: relative;
+  width: 100%;
+  border: 1px solid #ccc;
+  overflow: auto;
+}
+
+@media (max-width: 1024px) {
+  #nextbillnoforquickBillid {
+    font-size: 12.5px;
+    /* display: inline-block; */
+    /* width: 75px; */
+    /* text-align: center;
+    line-height: 1.1;
+
+    white-space: normal;
+    word-break: keep-all;
+    overflow-wrap: normal; */
+  }
+}
+@media (max-width: 1024px) {
+  #nextbillnoforquickBillid {
+    /* display: inline-block;
+    text-align: center;
+    line-height: 1.1;
+
+    white-space: normal;
+    word-break: keep-all;
+    overflow-wrap: normal;
+    padding-top: 9px; */
+  }
+}
+@media (width: 1024px) {
+  .billtitleLabel,
+  .billnoLabel {
+    font-size: 12px;
+  }
+}
+/* Reduce gap between GST Invoice and eBill */
+#quickkotprintChecklabel,
+#quickbillprintChecklabel,
+#quickebillBillcheckidlabel {
+  margin-right: 5px !important; /* reduce space */
+}
+@media (max-width: 1024px) {
+  #customQuickBillTypeid {
+    /* display: inline-block;
+    text-align: center;
+    line-height: 1.1; */
+
+    white-space: normal;
+    word-break: keep-all;
+    overflow-wrap: normal;
+  }
+}
+/* Also reduce checkbox spacing */
+.quickbillebillchecklabel {
+  /* margin-left: 2px !important; */
+  /* margin-right: 4px !important; */
+}
+
+/* If still extra gap, tighten container */
+.quickBillwrapperdiv .billLables-div {
+  gap: 6px !important;
+}
+/* Default for Quick Bill (above 1300px) */
+.quickBillwrapperdiv .billtitleLabel,
+.quickBillwrapperdiv .billnoLabel {
+  font-size: 13px;
+}
+
+/* Below 1300px */
+@media (max-width: 1300px) {
+  .quickBillwrapperdiv .billtitleLabel,
+  .quickBillwrapperdiv .billnoLabel {
+    font-size: 13px;
+  }
+}
+
+/* Specific 1024×768 (and similar 1024 widths) */
+/* ONLY Quick Bill tab */
+@media (max-width: 1024px) {
+  .quickBillwrapperdiv .billtitleLabel,
+  .quickBillwrapperdiv .billnoLabel {
+    font-size: 12px;
+  }
+}
+/* Only 1400×1050 + only Quick Bill UI */
+@media (width: 1400px) and (height: 1050px) {
+  .quickBillwrapperdiv .billtitleLabel,
+  .quickBillwrapperdiv .billnoLabel {
+    font-size: 13px;
+  }
+}
+@media (width: 1400px) and (height: 1050px) {
+  .quickBillwrapperdiv .billtitleLabel,
+  .quickBillwrapperdiv .billnoLabel {
+    font-size: 13px;
+  }
+}
+@media (max-width: 1299px) {
+  #quickkotprintChecklabel,
+  #quickbillprintChecklabel {
+    max-width: 15%;
+  }
+}

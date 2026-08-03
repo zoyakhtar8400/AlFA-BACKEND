@@ -1,0 +1,793 @@
+.dashboardparentDiv {
+  display: grid;
+  /* background-color: #cecece6e; */
+  background-color: #f5f6fa;
+  height: 100%;
+  width: 100%;
+  padding: 1rem;
+  grid-template-rows: 13vh 27vh 62vh;
+}
+
+.dashboard-stat-container-1 {
+  height: 13vh;
+  display: flex;
+  overflow: hidden;
+  width: 100%;
+  padding: 0.2rem;
+  /* background-color: blueviolet; */
+}
+
+.sales-bar-title,
+.sales-bar-subtitle {
+  margin: 0;
+  font-size: smaller;
+  font-weight: 600;
+  color: white !important;
+  width: 50%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  text-align: center;
+}
+
+.sales-bar-subtitle {
+  text-align: end;
+  color: rgba(252, 252, 255, 0.644) !important;
+}
+
+.overall-sales-bar-chart {
+  background-color: #ff8b61;
+  height: 100%;
+  border-radius: 5px;
+  width: 25%;
+  /* margin-left: 2px; */
+  padding: 5px;
+  overflow: hidden;
+}
+
+.overall-sales-bar-chart:hover,
+.overall-sales-bar-chart:focus,
+.overall-sales-bar-chart:active {
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+div#allsales-stat-container-id::-webkit-scrollbar {
+  width: 5px;
+  height: 10px;
+}
+
+ul.dashboardPaymentList::-webkit-scrollbar {
+  width: 4px;
+  height: 7px;
+}
+
+#saleschartOptionsid {
+  width: 90px;
+}
+
+.overall-sales-info {
+  /* background-color: #FFFFFF; */
+  border-radius: 5px;
+  width: 75%;
+  justify-content: space-evenly;
+}
+
+.dashboard-date-filter {
+  width: 60%;
+}
+
+.dashboard-stat-container-2 {
+  padding: 0.2rem;
+  height: 27vh;
+  display: flex;
+  width: 100%;
+}
+
+.overall-stat-container:hover,
+.overall-stat-container:focus,
+.overall-stat-container:active {
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.overall-stat-container {
+  background-color: #ffffff;
+  border-radius: 5px;
+  width: 75%;
+  /* border: 1px solid #6f6a6a36; */
+  height: 100%;
+  padding: 10px;
+  flex-direction: row !important;
+  overflow: hidden;
+}
+
+.dashboard-pay-stats {
+  background-color: #5447c8;
+  border-radius: 5px;
+  height: 100%;
+  width: 25%;
+  margin-left: 5px;
+  overflow: hidden;
+}
+
+.dashboardPaymentList {
+  height: 100%;
+  width: 99%;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+.dashboardPaymentList li {
+  background-color: #6559cd;
+  padding: 0.7rem 0.5rem;
+  margin-top: 2px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.pay-list-item-title,
+.pay-list-item-value {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: small;
+  margin: 0;
+  color: white;
+  flex-shrink: 0;
+}
+
+.pay-list-item-title {
+  width: 23%;
+  min-width: 70px;
+}
+
+.pay-list-item-value {
+  width: 32%;
+  min-width: 85px;
+  text-align: center;
+  text-align: left;
+  margin-left: 10px;
+}
+
+.dashboardPaymentList .progress-bar-wrapper {
+  flex: 1;
+  min-width: 40px;
+  margin: 0 4px;
+}
+
+.dashboardPaymentList:hover,
+.dashboardPaymentList:focus,
+.dashboardPaymentList:active {
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.total-sales-card,
+.todays-sales-card {
+  min-width: 15%;
+  max-width: 25%;
+  width: 24%;
+  height: 98%;
+  background-color: #ffffff;
+  border-radius: 10px;
+}
+
+.blank-card {
+  min-width: 23.3%;
+}
+
+.statcard,
+.statcard2 {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.statcard {
+  text-align: center;
+}
+
+.stat-card-wrapper {
+  display: inline-flex;
+  align-items: center;
+  margin-right: 5px;
+  padding: 0.5rem;
+  border-radius: 5px;
+}
+
+.statcard-title {
+  margin: 0;
+  font-size: smaller;
+  font-weight: 600;
+}
+
+.statcard2-title {
+  margin: 0;
+  font-size: smaller;
+  font-weight: 600;
+  color: rgb(128, 128, 128);
+}
+
+.statcard-value,
+.statcard2-value {
+  margin: 0;
+  font-size: 15px;
+  font-weight: 600;
+  color: mediumseagreen;
+  overflow: hidden;
+}
+
+.stat-card-wrapper {
+  min-width: 24%;
+  max-width: 24%;
+  /* max-width: fit-content; */
+  height: 80px;
+  background-color: #d0d1d445;
+  margin-bottom: 2px;
+}
+
+.statcard-img {
+  height: 38px;
+  width: 38px;
+  margin-right: 5px;
+  filter: saturate(3);
+}
+
+.avatar-initials {
+  border-radius: 20px;
+  width: 25px;
+  background: whitesmoke;
+  text-align: center;
+}
+
+.progress-bar-wrapper {
+  border: 1px solid #f9f9f9;
+  width: 100%;
+  height: 10px;
+  border-radius: 10px;
+}
+
+.progress-bar {
+  width: 50.34%;
+  background-color: white;
+  height: 100%;
+  border-radius: 10px;
+}
+
+.vprogress-bar-wrapper {
+  height: 70%;
+  width: 20px;
+  background-color: white;
+  border-radius: 3px;
+}
+
+.blank-space-forvbar {
+  height: 20%;
+}
+
+.sales-data {
+  height: 75%;
+  justify-content: space-evenly;
+}
+
+.vprogress-bar-title {
+  margin: 0;
+  width: 100%;
+  padding: 0;
+  color: wheat;
+  text-align: left;
+  font-size: smaller;
+}
+
+.progress-item {
+  height: 100%;
+  width: 20px;
+  margin-left: 10px;
+}
+
+.progress-bar-veticle {
+  background-color: #ffcc8c;
+  height: 80%;
+  padding-top: 20%;
+  border-radius: 3px;
+  width: 100%;
+}
+
+.dashboard-stat-container-3 {
+  height: 53vh;
+  margin: 0;
+  padding: 0;
+  border-radius: 5px;
+  flex-direction: row !important;
+}
+
+.dashboard-chart-container-1 {
+  background-color: transparent;
+}
+
+.dashboard-chart-container-2 {
+  background-color: transparent;
+}
+
+.allsalesLinechart,
+.allsalesBarchart {
+  max-height: 45vh;
+}
+
+.dashboard-chart-container-2 {
+  display: flex;
+  flex-direction: column;
+  align-self: flex-end;
+}
+
+.dashboard-chart-container-1,
+.dashboard-chart-container-3,
+.dashboard-chart-container-2 {
+  /* background-color: #ffffff; */
+  text-align: center;
+  border-radius: 8px;
+}
+
+.dashboard-chart-container-3 {
+  height: 100%;
+}
+
+.chart-date {
+  width: 42%;
+}
+
+.dashboard-actions {
+  align-items: baseline;
+  justify-content: flex-end;
+}
+
+.chart-actions {
+  align-items: baseline;
+}
+
+.sales-option {
+  height: 35px;
+}
+
+.topitemspieChart {
+  /* max-height: calc(70% - 45px); */
+  padding-bottom: 20px !important;
+}
+
+#itemslimitfieldId {
+  width: 53px;
+}
+
+@media only screen and (max-width: 950px) {
+  .vprogress-bar-wrapper {
+    width: 10px;
+  }
+
+  .statcard-value,
+  .statcard2-value {
+    font-size: 16px;
+  }
+}
+
+#salesdaterangeId,
+#itemsdaterangeId,
+#dashboarddateFilterid {
+  height: 35px;
+  padding-left: 10px;
+  border-radius: 15px;
+  box-sizing: border-box;
+  font-size: 13px;
+  border: 1px solid var(--input-border-color);
+  background-color: var(--input-background);
+}
+/* Improved Responsive Design for 1024x768 */
+
+@media only screen and (max-width: 1366px) {
+  .stat-card-wrapper {
+    min-width: 24%;
+    max-width: 24%;
+    height: 68px;
+    padding: 0.35rem 0.4rem;
+    margin-bottom: 2px;
+    margin-right: 3px;
+  }
+
+  .statcard-img {
+    height: 35px;
+    width: 35px;
+    margin-right: 5px;
+    flex-shrink: 0;
+  }
+
+  .statcard2 {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 4.5px; /* Added gap between title and value */
+  }
+
+  .statcard2-title {
+    font-size: 13px;
+    font-weight: 600;
+    line-height: 1.2;
+    margin-bottom: 0; /* Remove margin-bottom since gap handles it */
+  }
+
+  .statcard2-value {
+    font-size: 12px;
+    font-weight: 600;
+    line-height: 1.1;
+    margin-top: 0; /* Ensure no extra margin */
+  }
+
+  .overall-stat-container {
+    padding: 7px;
+  }
+}
+label.pay-list-item-title {
+  text-align: left;
+  margin-left: 19px;
+}
+/* Optimized for 1024x768 resolution */
+@media only screen and (max-width: 1024px) {
+  .stat-card-wrapper {
+    min-width: 24%;
+    max-width: 24%;
+    height: 64px;
+    padding: 0.3rem 0.35rem;
+    margin-bottom: 2px;
+    margin-right: 2px;
+    display: inline-flex;
+    align-items: center;
+  }
+
+  .statcard-img {
+    height: 28px;
+    width: 28px;
+    margin-right: 4px;
+    flex-shrink: 0;
+  }
+
+  .statcard2 {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 3px; /* Increased gap for better spacing */
+    min-width: 0;
+    flex: 1;
+  }
+
+  .statcard2-title {
+    font-size: 9.5px;
+    font-weight: 600;
+    line-height: 1.15;
+    margin: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .statcard2-value {
+    font-size: 13px;
+    font-weight: 600;
+    line-height: 1.1;
+    margin: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .overall-stat-container {
+    padding: 6px;
+  }
+
+  .dashboard-pay-stats {
+    margin-left: 3px;
+  }
+
+  .dashboardPaymentList li {
+    padding: 0.55rem;
+  }
+
+  .pay-list-item-title,
+  .pay-list-item-value {
+    font-size: 13.5px;
+  }
+}
+
+/* Extra refinement for exactly 1024x768 */
+@media only screen and (max-width: 1024px) and (max-height: 768px) {
+  .stat-card-wrapper {
+    min-width: 24.3%;
+    max-width: 24.3%;
+    height: 60px;
+    padding: 0.25rem 0.3rem;
+    margin-right: 2px;
+    margin-bottom: 2px;
+  }
+
+  .statcard-img {
+    height: 35px;
+    width: 35px;
+    margin-right: 4px;
+  }
+
+  .statcard2 {
+    gap: 6px; /* Proper gap between title and value */
+  }
+
+  .statcard2-title {
+    font-size: 12.3px;
+    font-weight: 600;
+    line-height: 1.1;
+    margin: 0; /* Remove all margins */
+  }
+
+  .statcard2-value {
+    font-size: 12px;
+    font-weight: 600;
+    line-height: 1;
+    margin: 0; /* Remove all margins */
+  }
+
+  .overall-stat-container {
+    padding: 5px;
+  }
+
+  .dashboard-stat-container-2 {
+    height: 26vh;
+    padding: 0.15rem;
+  }
+
+  .dashboardPaymentList li {
+    padding: 0.5rem;
+    margin-top: 1px;
+  }
+}
+
+/* For very compact displays */
+@media only screen and (max-width: 1024px) and (max-height: 768px) {
+  /* Ensure cards don't wrap awkwardly */
+  .stat-card-wrapper {
+    box-sizing: border-box;
+  }
+
+  /* Better text overflow handling */
+  .statcard2-value {
+    display: block;
+    max-width: 100%;
+  }
+}
+/* FIX FOR 1024px to 1227px SCREENS - PAYMENT STATS SECTION */
+@media only screen and (min-width: 1024px) and (max-width: 1227px) {
+  .dashboardPaymentList li {
+    padding: 0.55rem 0.4rem;
+    gap: 5px;
+  }
+
+  .pay-list-item-title {
+    width: 28%;
+    min-width: 58px;
+    font-size: 12px;
+  }
+
+  .pay-list-item-value {
+    width: 30%;
+    min-width: 78px;
+    font-size: 11px;
+  }
+
+  .dashboardPaymentList .progress-bar-wrapper {
+    margin: 0 3px;
+    min-width: 38px;
+  }
+}
+/* FIX FOR PAGINATION ON 1024x768 SCREENS */
+@media only screen and (max-width: 1024px) and (max-height: 768px) {
+  .pagination-container,
+  .table-pagination,
+  .order-settlement-pagination {
+    display: flex !important;
+    justify-content: flex-end !important;
+    align-items: center !important;
+    gap: 8px !important;
+    padding: 12px 15px !important;
+    margin-top: 10px !important;
+  }
+
+  .pagination-container button,
+  .table-pagination button,
+  .order-settlement-pagination button {
+    min-width: 38px !important;
+    height: 38px !important;
+    padding: 6px 12px !important;
+    font-size: 12px !important;
+    white-space: nowrap !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+  }
+}
+/* For large screens (1280+ width) */
+@media (min-width: 1280px) {
+  body {
+    /* font-size: 14px;  */
+  }
+  .pay-list-item-title,
+  .pay-list-item-value {
+    font-size: 12px;
+  }
+}
+
+/* For medium screens (e.g., 1280x600, 1280x720, 1289x768) */
+@media (max-width: 1280px) and (min-width: 800px) {
+  body {
+    font-size: 14px;
+  }
+  /* Adjust labels if needed */
+}
+
+/* For small screens (max-width: 800px) */
+@media (max-width: 800px) {
+  body {
+    font-size: 12px; /* small but still readable */
+  }
+  .pay-list-item-title,
+  .pay-list-item-value {
+    font-size: 10px;
+  }
+  /* For very small elements, consider 8px if necessary */
+}
+@media (max-width: 800px) and (max-height: 600px) {
+  body {
+    font-size: 12px; /* minimum readable size for main content */
+  }
+  .pay-list-item-title,
+  .pay-list-item-value {
+    font-size: 10px; /* for item titles and values */
+  }
+  .very-small-text {
+    font-size: 8px; /* for less important fine print or labels */
+  }
+}
+.d-flex.chart-actions {
+  gap: 4px;
+}
+div#linesaleschart-container-id {
+  margin: 7px;
+}
+select#saleschartOptionsid {
+  border-radius: 14px;
+}
+@media (max-width: 1366px) and (min-width: 1024px) {
+  .chart-date {
+    width: 171px;
+  }
+}
+select#saleschartOptionsid {
+  font-size: 14px;
+}
+input[type='button'],
+.normal-button {
+  /* margin: 5px 0 0px 3px; */
+}
+#fetchsalesdataButton,
+#fetchtopitemsButton {
+  border-radius: 15px;
+}
+/* ===== ULTRA-MINI (FINAL) for 1024×768 & 1152×864 — paste AT THE VERY END ===== */
+@media (min-width: 1000px) and (max-width: 1200px) {
+  /* grid: 3 tiny columns, equal tiny rows */
+  .analytics-cards {
+    display: grid !important;
+    grid-template-columns: repeat(3, 1fr) !important;
+    gap: 6px !important;
+    grid-auto-rows: minmax(40px, 1fr) !important; /* tiny rows, equal height */
+    align-items: stretch !important;
+    min-width: 0 !important;
+  }
+
+  /* ultra-mini card container */
+  .analytic-card {
+    padding: 4px 6px !important; /* very small padding */
+    /* min-height: 40px !important;       */
+    height: 100% !important;
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    gap: 6px !important;
+    border-radius: 6px !important;
+    box-sizing: border-box !important;
+    overflow: hidden !important;
+  }
+
+  /* content: single-line, tight spacing */
+  .analytic-card .analytic-content {
+    min-width: 0 !important;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 2px !important;
+    justify-content: center !important;
+    align-items: flex-start !important;
+    padding-right: 4px !important;
+  }
+
+  /* typography — very small */
+  .analytic-label {
+    font-size: 9px !important;
+    font-weight: 500 !important;
+    line-height: 1 !important;
+  }
+  .analytic-value {
+    font-size: 11px !important;
+    font-weight: 700 !important;
+    line-height: 1 !important;
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+  }
+  .analytic-subtext {
+    font-size: 8.5px !important;
+    opacity: 0.75 !important;
+    line-height: 1 !important;
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+  }
+
+  /* very small icon circle */
+  .analytic-card .analytic-icon {
+    flex: 0 0 24px !important;
+    width: 24px !important;
+    height: 24px !important;
+    padding: 3px !important;
+    font-size: 12px !important;
+    border-radius: 50% !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    margin-left: 6px !important;
+  }
+
+  /* force favorite (yellow) card to be identical size and single-line name */
+  .analytic-card.yellow,
+  .analytic-card.yellow.wide {
+    grid-column: auto !important;
+    padding: 4px 6px !important;
+    min-height: 40px !important;
+  }
+
+  /* clamp favorite name to 1 line (ultra-compact) */
+  .analytic-card.yellow .analytic-value {
+    display: block !important;
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    font-size: 11px !important;
+    line-height: 1 !important;
+    max-height: 1.1em !important;
+  }
+  .analytic-card.yellow .analytic-subtext {
+    display: block !important;
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    font-size: 8.5px !important;
+    line-height: 1 !important;
+    max-height: 1.1em !important;
+  }
+
+  /* safety: prevent overflow */
+  .analytics-container,
+  .analytics-cards,
+  .distribution-container {
+    min-width: 0 !important;
+    box-sizing: border-box !important;
+  }
+}
+#refreshDashboard {
+  font-size: 1rem;
+}

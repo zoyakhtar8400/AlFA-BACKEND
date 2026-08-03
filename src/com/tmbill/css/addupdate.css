@@ -1,0 +1,608 @@
+#AddOrUpdateItemmodal {
+  --accent: #1f7a4c;
+  --accent-dark: #155b3b;
+  --border: #e5e9ec;
+  --text: #1f2933;
+  --muted: #6b7280;
+
+  font-family: 'Inter', 'Segoe UI', Roboto, Arial, sans-serif;
+  color: var(--text);
+}
+
+#AddOrUpdateItemmodal .modal-dialog.AddOrUpdateItemmodal {
+  max-width: 960px;
+  width: calc(100% - 40px);
+  margin: 0 auto;
+}
+
+#AddOrUpdateItemmodal .AddOrUpdateItemmodalWrapper {
+  display: flex;
+  flex-direction: column;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  background: #fff;
+  overflow: hidden;
+  max-height: calc(100vh - 80px);
+  margin-top: 45px;
+}
+
+#AddOrUpdateItemmodal .modal-header {
+  padding: 10px 16px;
+  border-bottom: 1px solid var(--border);
+  background: #fff;
+}
+
+#AddOrUpdateItemmodal .modal-title {
+  font-size: 18px;
+  font-weight: 700;
+  margin: 0;
+}
+
+#AddOrUpdateItemmodal .modal-header .close {
+  font-size: 20px;
+  /* padding: 2px 6px; */
+  line-height: 1;
+  /* color: #555; */
+}
+
+#AddOrUpdateItemmodal .modal-body.AddOrUpdateItemmodalbody {
+  flex: 1 1 auto;
+  overflow-y: auto;
+  padding: 10px 16px;
+}
+
+#AddOrUpdateItemmodal .modal-footer {
+  padding: 8px 16px;
+  border-top: 1px solid var(--border);
+  background: #fff;
+}
+
+#AddOrUpdateItemmodal .row {
+  margin-left: -6px;
+  margin-right: -6px;
+  margin-bottom: 4px;
+}
+
+#AddOrUpdateItemmodal .form-group {
+  margin: 0;
+}
+
+#AddOrUpdateItemmodal .menu-item-label-class {
+  display: inline;
+  font-size: 13px;
+  font-weight: 600;
+  color: #344050;
+  line-height: 1.2;
+}
+
+#AddOrUpdateItemmodal .asterisk {
+  display: inline;
+  margin-left: 4px;
+  font-size: 12px;
+  font-weight: 700;
+  color: #d9534f;
+}
+
+#AddOrUpdateItemmodal input[type='text'],
+#AddOrUpdateItemmodal input[type='number'],
+#AddOrUpdateItemmodal select,
+#AddOrUpdateItemmodal .itemUpdateinputbox,
+#AddOrUpdateItemmodal .expense-select {
+  width: 100%;
+  height: 38px;
+  padding: 6px 12px;
+  margin-top: 4px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  background: #fbfcfd;
+  font-size: 14px;
+  box-sizing: border-box;
+}
+
+#AddOrUpdateItemmodal input:focus,
+#AddOrUpdateItemmodal select:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(31, 122, 76, 0.08);
+  outline: none;
+}
+
+#AddOrUpdateItemmodal select {
+  appearance: none;
+  padding-right: 36px;
+  background-image:
+    linear-gradient(45deg, transparent 50%, #cfd6d9 50%),
+    linear-gradient(135deg, #cfd6d9 50%, transparent 50%);
+  background-position:
+    calc(100% - 18px) center,
+    calc(100% - 12px) center;
+  background-size: 6px 6px;
+  background-repeat: no-repeat;
+}
+
+#AddOrUpdateItemmodal .input-group-append .input-group-text {
+  margin-top: 6px;
+  padding: 2px 12px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  background: #f6f8f8;
+  font-weight: 600;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+#AddOrUpdateItemmodal .item-status-menu-mgmt {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 6px;
+}
+
+#AddOrUpdateItemmodal .item-status-menu-mgmt .col-3 {
+  width: auto;
+  padding: 0;
+}
+
+#AddOrUpdateItemmodal .item-status-menu-mgmt .col-9 {
+  flex: 1;
+  padding-left: 8px;
+}
+
+#AddOrUpdateItemmodal .switch {
+  width: 40px;
+  height: 22px;
+}
+
+#AddOrUpdateItemmodal .slider:before {
+  width: 16px;
+  height: 16px;
+}
+
+#AddOrUpdateItemmodal #reduceItemInventoryButtonId {
+  padding: 6px 12px;
+  border-radius: 8px;
+  background: #e9ecef;
+  /* color: #fff; */
+  border: none;
+  font-weight: 500;
+  border: 1px solid #ced4da;
+}
+
+#AddOrUpdateItemmodal .normal-button {
+  min-width: 96px;
+  padding: 8px 14px;
+  border-radius: 8px;
+  font-weight: 500;
+}
+
+#AddOrUpdateItemmodal #menuItemAddbuttonid {
+  background: var(--button-background);
+  color: #fff;
+  box-shadow: 0 6px 18px rgba(31, 122, 76, 0.14);
+}
+
+#AddOrUpdateItemmodal #menuItemUpdatebuttonid {
+  background: var(--button-background);
+  color: #fff;
+  border: 1px solid var(--border);
+}
+
+#AddOrUpdateItemmodal .modal-body::-webkit-scrollbar {
+  width: 8px;
+}
+
+#AddOrUpdateItemmodal .modal-body::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.12);
+  border-radius: 8px;
+}
+
+@media (max-width: 768px) {
+  #AddOrUpdateItemmodal .AddOrUpdateItemmodalWrapper {
+    max-height: none;
+  }
+
+  #AddOrUpdateItemmodal .modal-body {
+    overflow: visible;
+  }
+
+  #AddOrUpdateItemmodal .col-6 {
+    width: 100%;
+  }
+}
+
+#AddOrUpdateItemmodal {
+  --accent: #1f7a4c;
+  --accent-dark: #155b3b;
+  --border: #e5e9ec;
+  --text: #1f2933;
+  font-family: 'Inter', 'Segoe UI', Roboto, Arial, sans-serif;
+}
+
+/* ---------- GLOBAL NORMALIZATION ---------- */
+
+#AddOrUpdateItemmodal .form-group {
+  margin-bottom: 0 !important;
+}
+
+/* ---------- INPUTS ---------- */
+
+#AddOrUpdateItemmodal input,
+#AddOrUpdateItemmodal select {
+  height: 38px;
+  margin-top: 4px;
+}
+
+#AddOrUpdateItemmodal .item-status-menu-mgmt {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  margin-bottom: 4px;
+}
+
+/* Remove Bootstrap row side-effects inside it */
+#AddOrUpdateItemmodal .item-status-menu-mgmt > .row {
+  margin: 0;
+  width: 100%;
+  display: flex;
+  align-items: flex-start;
+}
+
+/* Active column */
+#AddOrUpdateItemmodal .item-status-menu-mgmt .col-3 {
+  width: auto;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* Alternative Name column */
+#AddOrUpdateItemmodal .item-status-menu-mgmt .col-9 {
+  flex: 1;
+  padding: 0;
+}
+
+/* Prevent label spacing mismatch */
+#AddOrUpdateItemmodal .item-status-menu-mgmt .menu-item-label-class {
+  margin-bottom: 4px;
+  display: block;
+}
+
+#AddOrUpdateItemmodal .col-6:not(.item-status-menu-mgmt) + .col-6 {
+  margin-top: 0;
+}
+
+/* Specifically tighten Stock Status */
+#AddOrUpdateItemmodal label[data-i18n='itemManagement.stockStatus'] {
+  margin-top: 0;
+}
+
+#AddOrUpdateItemmodal .switch {
+  width: 40px;
+  height: 22px;
+}
+
+#AddOrUpdateItemmodal .switch .slider:before {
+  width: 15px;
+  height: 15px;
+}
+
+#AddOrUpdateItemmodal .modal-body {
+  padding-bottom: 10px;
+}
+
+#AddOrUpdateItemmodal .modal-footer {
+  padding-top: 8px;
+}
+/* SAFE FIX – layout only */
+#AddOrUpdateItemmodal .item-status-menu-mgmt {
+  display: flex;
+  align-items: center;
+}
+
+#AddOrUpdateItemmodal .item-status-menu-mgmt .col-3 {
+  margin-top: 0 !important;
+  display: flex;
+  align-items: center;
+  top: 15px;
+}
+#AddOrUpdateItemmodal #reduceItemInventoryContainer .input-group {
+  align-items: center;
+}
+
+#AddOrUpdateItemmodal #reduceItemInventoryButtonId {
+  height: 38px;
+}
+#AddOrUpdateItemmodal .d-flex.align-items-end {
+  padding-bottom: 2px;
+}
+
+#AddOrUpdateItemmodal #reduceItemInventoryButtonId {
+  height: 38px;
+}
+
+#AddOrUpdateItemmodal .input-group {
+  display: flex;
+  align-items: center;
+}
+
+/* Reduce select width and let it grow naturally */
+#AddOrUpdateItemmodal .input-group select {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+/* Tight, compact Add buttons */
+#AddOrUpdateItemmodal .input-group-append {
+  margin-left: 6px;
+}
+
+#AddOrUpdateItemmodal .input-group-text {
+  height: 38px;
+  white-space: nowrap;
+  padding: 6px 14px;
+  font-size: 13.5px;
+  font-weight: 500;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+#AddOrUpdateItemmodal .input-group-append .input-group-text {
+  flex: 0 0 auto;
+}
+
+#addCategoryModalId .modal-dialog,
+#addSubCategoryModalId .modal-dialog,
+#addKitchenDeptModalId .modal-dialog {
+  min-height: calc(100% - 1rem);
+  display: flex;
+  align-items: center;
+  margin: auto;
+}
+
+#addCategoryModalId,
+#addSubCategoryModalId,
+#addKitchenDeptModalId {
+  z-index: 1060;
+}
+
+#addCategoryModalId .modal-content,
+#addSubCategoryModalId .modal-content,
+#addKitchenDeptModalId .modal-content {
+  transform: none !important;
+}
+
+.swal2-container {
+  z-index: 2000 !important;
+}
+
+body:has(#addCategoryModalId.show) #AddOrUpdateItemmodal::after,
+body:has(#addSubCategoryModalId.show) #AddOrUpdateItemmodal::after,
+body:has(#addKitchenDeptModalId.show) #AddOrUpdateItemmodal::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.35);
+  z-index: 1055;
+  pointer-events: none;
+  border-radius: 8px;
+}
+
+#addCategoryModalId,
+#addSubCategoryModalId,
+#addKitchenDeptModalId {
+  z-index: 1060;
+}
+
+body:has(.swal2-container.swal2-shown) #AddOrUpdateItemmodal::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.35);
+  z-index: 1055;
+  pointer-events: none;
+}
+
+#addCategoryModalId .modal-dialog,
+#addSubCategoryModalId .modal-dialog,
+#addKitchenDeptModalId .modal-dialog {
+  max-width: 620px;
+  width: calc(100% - 40px);
+}
+
+#addCategoryModalId .modal-body,
+#addSubCategoryModalId .modal-body,
+#addKitchenDeptModalId .modal-body {
+  padding: 22px 24px;
+}
+
+#addCategoryModalId .addCatgoryInputgroup,
+#addSubCategoryModalId .addCatgoryInputgroup,
+#addKitchenDeptModalId .addCatgoryInputgroup {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  width: 100%;
+  margin: 18px auto 8px;
+}
+
+#addCategoryModalId .addCatgoryInputgroup input,
+#addKitchenDeptModalId .addCatgoryInputgroup input {
+  width: 70%;
+  min-width: 260px;
+  height: 44px;
+  padding: 10px 14px;
+  border-radius: 8px;
+  border: 1px solid #e3e6e8;
+  font-size: 14px;
+  background: #fff;
+}
+
+#addSubCategoryModalId .addCatgoryInputgroup select {
+  width: 45%;
+  min-width: 240px;
+  height: 44px;
+  padding: 10px 14px;
+  border-radius: 8px;
+  border: 1px solid #e3e6e8;
+  font-size: 14px;
+  background: #fff;
+}
+
+#addCategoryModalId .addCatgoryInputgroup button,
+#addSubCategoryModalId .addCatgoryInputgroup button,
+#addKitchenDeptModalId .addCatgoryInputgroup button {
+  height: 44px;
+  padding: 10px 16px;
+  border-radius: 8px;
+  font-weight: 600;
+  background: #f2f3f4;
+  border: 1px solid #e0e3e6;
+  white-space: nowrap;
+}
+
+#addCategoryModalId input:focus,
+#addSubCategoryModalId input:focus,
+#addSubCategoryModalId select:focus,
+#addKitchenDeptModalId input:focus {
+  outline: none;
+  border-color: #1f7a4c;
+  box-shadow: 0 4px 10px rgba(31, 122, 76, 0.08);
+}
+
+#addCategoryModalId .modal-footer,
+#addSubCategoryModalId .modal-footer,
+#addKitchenDeptModalId .modal-footer {
+  display: flex;
+  justify-content: center;
+  gap: 14px;
+  padding: 16px 20px;
+}
+
+#addCategoryModalId .modal-footer button,
+#addSubCategoryModalId .modal-footer button,
+#addKitchenDeptModalId .modal-footer button {
+  min-width: 120px;
+  height: 40px;
+  border-radius: 8px;
+  font-weight: 500;
+}
+
+@media (max-width: 520px) {
+  #addCategoryModalId .addCatgoryInputgroup,
+  #addSubCategoryModalId .addCatgoryInputgroup,
+  #addKitchenDeptModalId .addCatgoryInputgroup {
+    flex-direction: column;
+  }
+
+  #addCategoryModalId .addCatgoryInputgroup input,
+  #addSubCategoryModalId .addCatgoryInputgroup select,
+  #addKitchenDeptModalId .addCatgoryInputgroup input,
+  #addCategoryModalId .addCatgoryInputgroup button,
+  #addSubCategoryModalId .addCatgoryInputgroup button,
+  #addKitchenDeptModalId .addCatgoryInputgroup button {
+    width: 100%;
+  }
+}
+
+#addSubCategoryModalId .addCatgoryInputgroup {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+#addSubCategoryModalId .addCatgoryInputgroup select {
+  height: 44px;
+  min-height: 44px;
+  padding: 10px 14px;
+  border-radius: 8px;
+  border: 1px solid #e3e6e8;
+  font-size: 14px;
+  background-color: #fff;
+  box-sizing: border-box;
+  margin-top: 0;
+  vertical-align: middle;
+}
+
+#addSubCategoryModalId .addCatgoryInputgroup input,
+#addSubCategoryModalId .addCatgoryInputgroup .itemUpdateinputbox {
+  height: 44px;
+  min-height: 44px;
+  padding: 10px 14px;
+  border-radius: 8px;
+  border: 1px solid #e3e6e8;
+  font-size: 14px;
+  background-color: #fff;
+  box-sizing: border-box;
+  margin-top: 0 !important;
+  top: 0 !important;
+  transform: none !important;
+  vertical-align: middle;
+}
+
+#addSubCategoryModalId
+  .addCatgoryInputgroup
+  .input-group-append
+  .input-group-text,
+#addSubCategoryModalId .addCatgoryInputgroup button {
+  height: 44px;
+  min-height: 44px;
+  padding: 10px 16px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  white-space: nowrap;
+}
+
+#addSubCategoryModalId .addCatgoryInputgroup > * {
+  flex-shrink: 0;
+}
+
+#AddOrUpdateItemmodal:has(#menuItemUpdatebuttonid:not([style*='display: none']))
+  #menuitemshortcodeid {
+  cursor: not-allowed;
+}
+
+#AddOrUpdateItemmodal #addCategoryOpenModal,
+#AddOrUpdateItemmodal #addSubCategoryOpenModal,
+#AddOrUpdateItemmodal [data-target='#addKitchenDeptModalId'],
+#AddOrUpdateItemmodal #reduceItemInventoryButtonId {
+  background-color: var(--button-background);
+  color: #fff;
+  border: 1px solid var(--button-background);
+}
+
+/* Hover effect */
+#AddOrUpdateItemmodal #addCategoryOpenModal:hover,
+#AddOrUpdateItemmodal #addSubCategoryOpenModal:hover,
+#AddOrUpdateItemmodal [data-target='#addKitchenDeptModalId']:hover,
+#AddOrUpdateItemmodal #reduceItemInventoryButtonId:hover {
+  background-color: var(--button-background);
+  border-color: var(--button-background);
+}
+#AddOrUpdateItemmodal .switch .slider.round {
+  width: 44px;
+  height: 22px;
+}
+
+#AddOrUpdateItemmodal select {
+  appearance: auto;
+  background-image: none;
+}
+#AddOrUpdateItemmodal .input-group-text,
+#AddOrUpdateItemmodal button.input-group-text {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  line-height: 1;
+}
+
+#AddOrUpdateItemmodal #menuItemAddbuttonid,
+#AddOrUpdateItemmodal #menuItemUpdatebuttonid {
+  font-size: 13.5px;
+  font-weight: 500;
+}

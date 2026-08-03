@@ -1,0 +1,871 @@
+.analytics-container {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 3px 2px;
+  /* max-height: 80%; */
+  height: 58vh;
+  overflow-y: auto;
+  /* max-height: calc(100vh - 160px); */
+  
+    margin-top: -4px;
+}
+
+
+/* Heading block */
+.analytics-heading {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-bottom: -2px;
+}
+.analytics-heading h3 {
+  font-size: 16px;
+  font-weight: 600;
+  /* color: #111; */
+  margin: 0;
+}
+.analytics-heading p {
+  font-size: 13px;
+  /* color: #666; */
+  margin: 0;
+  margin-top: -3px;
+}
+
+.analytics-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 12px;
+  margin-top: -5px;
+}
+
+/* Cards */
+.analytic-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-radius: 10px;
+  padding: 12px 14px; /* ✅ Slightly reduced */
+  /* background-color: #f9f9f9; */
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+  font-size: 13px;
+  min-height: 100px; /* ✅ Reduced height */
+}
+
+.analytic-card.full-width {
+  grid-column: 1 / -1;
+}
+
+.analytic-content {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.analytic-label {
+  font-size: 13px;
+  font-weight: 500;
+  /* color: #777; */
+}
+
+.analytic-value {
+  font-size: 16px;
+  font-weight: 700;
+  /* color: #111; */
+}
+
+.analytic-subtext {
+  font-size: 12px;
+  /* color: #666; */
+  margin-top: 2px;
+}
+
+/* Icon */
+.analytic-icon {
+  font-size: 20px;
+  /* background-color: rgba(0, 0, 0, 0.05); */
+  padding: 10px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Color Themes */
+.analytic-card.blue {
+  background-color: #f1f6fe;
+  border: 1px solid #d8e9fc;
+}
+
+.analytic-card.green {
+  background-color: #e9f7f1;
+  border: 1px solid #cbeede;
+}
+
+.analytic-card.purple {
+  background-color: #f4efff;
+  border: 1px solid #e0d6ff;
+}
+
+.analytic-card.yellow {
+  background-color: #fff9ec;
+  border: 1px solid #ffe9b7;
+}
+
+.analytic-card.blue-light {
+  background-color: #edf5ff;
+  border: 1px solid #d7eaff;
+}
+
+
+.loyalty-card {
+ 
+  background: none;
+  background-color: #e8e7f1; 
+  border: 1px solid #cbeede; 
+  /* color: #000; */
+  border-radius: 10px;
+  padding: 12px 14px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex: 1 1 100%;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+}
+
+
+.loyalty-card .analytic-icon {
+  background-color: rgba(
+    0,
+    0,
+    0,
+    0.05
+  ); 
+}
+
+.analytic-card.light {
+  background-color: #f9f9f9;
+  border: 1px solid #d8e9fc;
+}
+
+/* Icon color */
+.analytic-icon i {
+  color: #666;
+  font-size: 16px;
+}
+
+/* Responsive Tweaks */
+@media (max-width: 600px) {
+  .analytic-value {
+    font-size: 15px;
+  }
+
+  .analytic-card {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .analytic-icon {
+    align-self: flex-end;
+  }
+}
+
+/* */
+/* Statistics Section */
+/* Order Distribution Section */
+.order-distribution-section {
+  margin-top: 20px;
+}
+
+.distribution-container {
+  display: flex;
+  gap: 16px;
+  width: 100%;
+  margin-top: -16px;
+}
+
+.distribution-left,
+.distribution-right {
+  flex: 1;
+  /* background-color: #fff; */
+  border: 1px solid #e5e5e5;
+  border-radius: 10px;
+  padding: 16px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+}
+
+/* Section Header */
+.distribution-header {
+  margin-bottom: 16px;
+}
+
+.distribution-header h3 {
+  font-size: 16px;
+  font-weight: 600;
+  /* color: #111; */
+  margin: 0 0 4px 0;
+}
+
+.distribution-header p {
+  font-size: 13px;
+  /* color: #666; */
+  margin: 0;
+}
+
+/* Bar Style Order Stats */
+.distribution-stats {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.distribution-bar {
+  margin-bottom: 4px;
+}
+
+.bar-info {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.bar-label {
+  font-size: 13px;
+  /* color: #333; */
+}
+
+.bar-track {
+  /* background-color: #eee; */
+  height: 42px; /* ✅ Increased bar height */
+  border-radius: 999px;
+  overflow: hidden;
+  position: relative;
+}
+
+.bar-fill {
+  background-color: #e26b4c;
+  height: 100%;
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: 600;
+  color: white;
+  padding-left: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+/* Legacy (Not used anymore — but retained for fallback) */
+.distribution-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 0;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.distribution-item:last-child {
+  border-bottom: none;
+}
+
+.distribution-label {
+  font-size: 14px;
+  /* color: #444; */
+}
+
+.distribution-value {
+  font-size: 14px;
+  font-weight: 600;
+  /* color: #111; */
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .distribution-container {
+    flex-direction: column;
+  }
+
+  .distribution-left,
+  .distribution-right {
+    width: 100%;
+  }
+}
+.distribution-container {
+  display: flex;
+  gap: 16px;
+  width: 100%; /* Use full width of modal */
+  margin-top: -16px;
+}
+
+.distribution-container > div {
+  flex: 1; /* Make both left and right containers equal width */
+  min-width: 0; /* Prevent flex items from overflowing */
+}
+
+/* right */
+/* Right Panel: Donut Chart and Legend */
+/* Right Panel Header */
+.distribution-header {
+  margin-bottom: 16px;
+}
+.distribution-header h3 {
+  font-size: 16px;
+  font-weight: 600;
+  /* color: #111; */
+  margin: 0 0 4px 0;
+}
+.distribution-header p {
+  font-size: 13px;
+  /* color: #666; */
+  margin: 0;
+}
+
+/* Chart Section Wrapper */
+.distribution-chart {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* Flex container to align legend and chart */
+.legend-and-chart {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 24px;
+}
+.donut-chart {
+  order: 1; /* ✅ show first (left) */
+  flex: 0 0 230px; /* fixed size */
+}
+/* Legend list */
+.item-legend-list {
+  order: 2; /* ✅ show second (right) */
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-left: 0px;
+  width: 220px; /* keep a neat column; adjust if needed */
+}
+.item-legend-list li {
+  display: flex;
+  grid-template-columns: 14px 1fr auto;
+  align-items: center;
+  column-gap: 7px;
+  justify-content: space-between;
+  white-space: nowrap; /* keep single line */
+}
+.item-legend-list li .color-dot {
+  width: 13px;
+  height: 13px;
+  border-radius: 37%;
+  margin-right: 8px;
+  flex-shrink: 0;
+}
+.item-legend-list li .label {
+  flex: 1; /* ✅ allows text to expand */
+  overflow: hidden;
+  text-overflow: ellipsis; /* ✅ trims long text neatly */
+}
+.item-legend-list li .percent1 {
+  background: rgba(0, 123, 255, 0.1); /* light badge bg */
+  color: #004085;
+  font-weight: 600;
+  padding: 2px 8px;
+  border-radius: 12px;
+  font-size: 10.5px;
+  flex-shrink: 0;
+  /* ✅ never squishes percentage */
+}
+.item-legend-list li {
+  align-items: center;
+  justify-content: space-between; /* ✅ pushes percentage to right */
+  font-size: 12.5px;
+  /* color: #1a1a1a; */
+  white-space: nowrap; /* ✅ keeps text in one line */
+}
+
+/* Colored square */
+.color-box {
+  width: 12px;
+  height: 12px;
+  border-radius: 2px;
+  flex-shrink: 0;
+}
+
+/* Chart colors */
+.color-box.blue {
+  background-color: #0457a0;
+}
+.color-box.yellow {
+  background-color: #ffeb3b;
+}
+.color-box.teal {
+  background-color: #00796b;
+}
+.color-box.gray {
+  background-color: #9e9e9e;
+}
+.color-box.lightgray {
+  background-color: #eceff1;
+}
+
+/* Donut chart */
+.donut-chart {
+  flex-shrink: 0; /* prevent shrinking */
+  width: 230px;
+  height: 230px;
+  border-radius: 50%;
+  background: conic-gradient(
+    #0457a0 0% 35%,
+    #eceff1 35% 55%,
+    #ffeb3b 55% 65%,
+    #9e9e9e 65% 75%,
+    #00796b 75% 100%
+  );
+  mask: radial-gradient(circle at center, transparent 52%, black 53%);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .distribution-container {
+    flex-direction: column;
+  }
+
+  .distribution-left,
+  .distribution-right {
+    width: 100%;
+  }
+
+  .legend-and-chart {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .donut-chart {
+    margin: 12px auto;
+  }
+}
+/* Right container (chart + legend wrapper) */
+.distribution-container .right-side {
+  flex: 1;
+  display: flex;
+  flex-direction: row; /* chart + legend side by side */
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  min-width: 0;
+  flex-wrap: wrap; /* allows wrapping if needed */
+}
+
+/* Chart responsive */
+.right-side .chart {
+  flex: 1;
+  max-width: 60%;
+  min-width: 200px;
+  height: auto;
+}
+
+/* Legend responsive */
+.order-items-legend {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-width: 150px;
+}
+
+/* Legend item */
+.order-items-legend .legend-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 6px;
+  width: 100%;
+  font-size: clamp(10px, 1vw, 14px); /* 🔹 auto shrink */
+  word-break: break-word;
+}
+
+/* Percentage badge */
+.legend-item .percent {
+  background: #f1f5f9;
+  border-radius: 12px;
+  padding: 2px 6px;
+  font-size: clamp(9px, 0.9vw, 12px); /* 🔹 scales down */
+  white-space: nowrap;
+}
+
+/* 🔹 On small screens → stack legend above chart */
+@media (max-width: 768px) {
+  .distribution-container .right-side {
+    flex-direction: column; /* stack */
+    align-items: stretch;
+  }
+
+  .right-side .chart {
+    max-width: 100%;
+    order: 2; /* chart goes down */
+  }
+
+  .order-items-legend {
+    order: 1; /* legend goes up */
+    font-size: clamp(9px, 2.5vw, 12px); /* smaller font */
+  }
+}
+/* 🔹 Between 1235px and 767px → stack legend above chart + shrink chart */
+@media (max-width: 1235px) and (min-width: 768px) {
+  .distribution-container .right-side {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .order-items-legend {
+    order: 1; /* legend on top */
+    width: 100%;
+  }
+
+  .right-side .chart {
+    order: 2; /* chart below */
+    max-width: 300px; /* shrink chart */
+    width: 80%;
+    margin: 0 auto;
+  }
+}
+
+/* 🔹 Below 767px → even smaller */
+@media (max-width: 767px) {
+  .right-side .chart {
+    max-width: 250px;
+    width: 100%;
+  }
+
+  .order-items-legend .legend-item {
+    font-size: clamp(9px, 2.5vw, 12px);
+  }
+
+  .legend-item .percent {
+    font-size: clamp(8px, 2vw, 11px);
+  }
+}
+/* ==== Keep Chart Left + Legend Right (mid widths) ==== */
+@media (max-width: 1116px) and (min-width: 963px) {
+  .legend-and-chart {
+    flex-direction: row; /* stay side by side */
+    align-items: flex-start;
+    gap: 16px;
+  }
+
+  .donut-chart {
+    flex: 0 0 200px; /* shrink chart */
+    height: 200px;
+  }
+
+  .item-legend-list {
+    flex: 1;
+    max-width: 260px; /* constrain legend width */
+  }
+
+  .item-legend-list li {
+    display: grid;
+    grid-template-columns: 14px 1fr auto; /* dot | label | % */
+    align-items: center;
+    column-gap: 8px;
+    font-size: 12px; /* shrink font */
+  }
+
+  .item-legend-list li .percent1 {
+    font-size: 10.5px;
+    padding: 2px 6px;
+    margin-left: 4px; /* tighter spacing */
+  }
+}
+
+/* 🔹 Below 963px → then stack (legend top, chart bottom) */
+@media (max-width: 962px) {
+  .legend-and-chart {
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+  }
+  .item-legend-list {
+    width: 100%;
+    max-width: 100%;
+  }
+  .donut-chart {
+    width: 180px;
+    height: 180px;
+  }
+}
+/* 🖥 Fix order for 760–950px */
+@media (max-width: 950px) and (min-width: 760px) {
+  .legend-and-chart {
+    display: flex;
+    flex-direction: column-reverse; /* 🔄 put legend above chart */
+    align-items: center;
+    gap: 12px;
+  }
+
+  .item-legend-list {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(120px, 1fr));
+    gap: 6px 14px;
+    width: 100%;
+    max-width: 420px;
+    margin-bottom: 8px; /* spacing from chart */
+  }
+
+  .item-legend-list li {
+    display: grid;
+    grid-template-columns: 14px auto auto;
+    align-items: center;
+    gap: 6px;
+    font-size: 12px;
+  }
+
+  .item-legend-list li .percent1 {
+    font-size: 11px;
+    padding: 2px 6px;
+    margin-left: 0;
+    justify-self: end;
+  }
+
+  .donut-chart {
+    width: 220px;
+    height: 220px;
+  }
+}
+/* updatable */
+.analytic-card.yellow {
+  background-color: #fff9ec;
+  border: 1px solid #ffe9b7;
+ 
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;  
+  padding: 12px;
+  box-sizing: border-box;
+  
+}
+
+.analytic-card.yellow .analytic-content {
+  flex: 1;
+  max-height: 100%; 
+  overflow: hidden; /* prevents content from pushing card */
+}
+
+.analytic-card.yellow #customerFavoriteItemId {
+  display: block;
+  max-height: 42.5px;        /* restrict text area */
+  
+}
+
+.analytic-card.yellow #customerFavoriteItemTitleId {
+  display: block;
+  max-height: 30px;
+ 
+}
+/* Apply only inside yellow card */
+.analytic-card.yellow #customerFavoriteItemId,
+.analytic-card.yellow #customerFavoriteItemTitleId {
+  scrollbar-width: thin;           /* Firefox */
+  scrollbar-color: #bbb transparent; /* Firefox: thumb + track */
+}
+
+.analytic-card.yellow #customerFavoriteItemId::-webkit-scrollbar,
+.analytic-card.yellow #customerFavoriteItemTitleId::-webkit-scrollbar {
+  width: 7px;  /* thin scrollbar */
+}
+
+.analytic-card.yellow #customerFavoriteItemId::-webkit-scrollbar-thumb,
+.analytic-card.yellow #customerFavoriteItemTitleId::-webkit-scrollbar-thumb {
+ 
+  border-radius: 4px;
+}
+
+#favoriteItemIcon {
+  padding-top: 40px; /* Adjust this value to control how far down it shifts */
+}
+/* .analytic-card.yellow {
+  padding-top: 30px;
+  padding-bottom: 0px;
+} */
+
+.analytic-card.yellow{
+  padding-top: 10px;
+}
+#customerFavoriteItemId {
+  display: inline-block;
+  margin-top: 8px; /* Adjust this value as needed */
+}
+#favoriteItemLabel {
+  display: inline-block;
+  margin-top: 13px; /* Adjust as needed */
+}
+#customerFavoriteItemTitleId {
+  display: inline-block;
+  margin-top: 5px; /* Adjust this value as needed */
+}/* ===== FLEX layout + 96% width for 1000–1200px (1024×768 & 1152×864) ===== */
+@media (min-width: 1000px) and (max-width: 1200px) {
+
+  /* Use flex instead of grid, center container and set width to 96% */
+  .analytics-cards {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    gap: 12px !important;
+    width: 96% !important;          /* requested width */
+    margin: 0 auto !important;      /* center in modal */
+    justify-content: flex-start !important;
+    align-items: stretch !important;
+    box-sizing: border-box !important;
+    min-width: 0 !important;
+  }
+
+  /* Each card: take ~1/3 width minus gaps (3 per row), with shrink/grow */
+  .analytic-card {
+    flex: 0 1 calc(33.333% - 12px) !important; /* three cards per row */
+    max-width: calc(33.333% - 12px) !important;
+    box-sizing: border-box !important;
+    height: auto !important;
+  
+    padding: 8px 10px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    overflow: hidden !important;
+    margin: 0 !important;
+  }
+
+  /* ensure card content truncates instead of expanding the card */
+  .analytic-card .analytic-content {
+    min-width: 0 !important;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: center !important;
+    /* gap: 6px !important; */
+    align-items: flex-start !important;
+  }
+
+  /* icons smaller and fixed so they don't push layout */
+  .analytic-card .analytic-icon {
+    flex: 0 0 36px !important;
+    width: 36px !important;
+    height: 36px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    padding: 6px !important;
+    margin-left: 8px !important;
+    box-sizing: border-box !important;
+  }
+
+  /* favourite card: do NOT span; clamp text */
+  .analytic-card.yellow,
+  .analytic-card.yellow.wide {
+    flex: 0 1 calc(33.333% - 12px) !important;
+    max-width: calc(33.333% - 12px) !important;
+  }
+
+  .analytic-card.yellow .analytic-value {
+    display: -webkit-box !important;
+    -webkit-box-orient: vertical !important;
+    -webkit-line-clamp: 2 !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    font-size: 13px !important;
+    line-height: 1.1 !important;
+    max-height: calc(2 * 1.1em) !important;
+  }
+
+  .analytic-card.yellow .analytic-subtext {
+    display: -webkit-box !important;
+    -webkit-box-orient: vertical !important;
+    -webkit-line-clamp: 1 !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    font-size: 11.5px !important;
+  }
+
+  /* typography tuning for compact feel */
+  .analytic-label { font-size: 12px !important; }
+  .analytic-value { font-size: 14px !important; }
+  .analytic-subtext { font-size: 12px !important; }
+
+  /* safety: prevent horizontal overflow on container */
+  .analytics-container, .analytics-cards {
+    min-width: 0 !important;
+    box-sizing: border-box !important;
+  }
+}
+/* ==== Fine-tune yellow card alignment (slightly lower than before) ==== */
+
+/* Move the whole text block slightly DOWN (very small nudge) */
+.analytic-card.yellow .analytic-content {
+  justify-content: flex-start !important;  /* instead of center */
+  padding-top: 4px !important;             /* 🔥 slight down shift */
+}
+
+/* Icon also slightly lowered to match the text visually */
+.analytic-card.yellow .analytic-icon {
+  margin-top: 4px !important;              /* keeps icon + text in same baseline */
+}
+
+/* +1px font size increase for yellow card text */
+.analytic-card.yellow .analytic-label {
+  font-size: 13px !important;        /* was 12 */
+}
+
+.analytic-card.yellow .analytic-value {
+  font-size: 15px !important;        /* was ~14 */
+}
+
+.analytic-card.yellow .analytic-subtext {
+  font-size: 12px !important;        /* was 11 */
+}
+/* ===== Yellow card font tweaks ONLY for 1000–1200px screens ===== */
+@media (min-width: 1000px) and (max-width: 1200px) {
+
+  .analytic-card.yellow .analytic-value {
+    font-size: 13.5px !important;
+  }
+
+  .analytic-card.yellow .analytic-subtext {
+    font-size: 11.5px !important;
+  }
+  .analytic-card.yellow .analytic-label {
+    font-size: 12px !important;
+}
+}
+
+/* Remove earlier forced margin resets to avoid pushing text too high */
+#favoriteItemLabel,
+#customerFavoriteItemId,
+#customerFavoriteItemTitleId {
+  margin-top: 2px !important;        /* small, natural spacing */
+}
+/* ===== Nudge analytics cards slightly left for 1000–1200px band =====
+   Paste at the VERY END of your stylesheet so it overrides earlier rules. */
+
+@media (min-width: 1000px) and (max-width: 1200px) {
+  /* subtle left shift: recommended */
+  .analytics-cards {
+    transform: translateX(-1.8%) !important;
+    /* keep transform smooth and prevent clip */
+    will-change: transform;
+  }
+
+  /* small safety: ensure no accidental horizontal scrollbar from transform */
+  .analytics-container {
+    overflow-x: hidden !important;
+  }
+}
+/* ===== Slight upward nudge for analytics cards (1000–1200px) ===== */
+@media (min-width: 1000px) and (max-width: 1200px) {
+  .analytics-cards {
+    transform: translateX(-1.8%) translateY(-6px) !important;
+    /* -6px = small upward lift; adjust if needed */
+  }
+}

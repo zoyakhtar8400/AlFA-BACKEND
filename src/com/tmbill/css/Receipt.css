@@ -1,0 +1,459 @@
+/* Reciepts.css */
+
+.receiptsDiv {
+  width: 100%;
+  margin-left: 2px;
+  height: 100%;
+}
+
+.receiptWrapper {
+  height: 90%;
+}
+
+.searchreceiptDivclass {
+  display: flex;
+  height: 55px;
+  width: 100%;
+  max-height: 10%;
+  align-items: center;
+  justify-content: center;
+  margin-left: -17px;
+}
+
+.searchreceiptDivclass > input {
+  width: 8%;
+  margin: 0 5px;
+}
+
+#searchreceiptField {
+  width: 18%;
+}
+
+#receiptTable_filter {
+  display: none !important;
+}
+
+input[type='date']:after,
+select {
+  content: '\f073';
+  /* color: #555; */
+  padding: 0 5px;
+}
+
+input[type='date'],
+select {
+  border: 1px solid #f9f9f9;
+  border-radius: 5px;
+  padding: 3px 5px;
+  box-shadow: inset 0 3px 6px rgba(0, 0, 0, 0.1);
+  width: 15%;
+}
+
+/**
+Receipt table
+**/
+
+.billtableWrapper {
+  height: 60%;
+  overflow: auto;
+  margin-top: 3px;
+}
+
+.receiptWrapper2 {
+  margin-top: 4px;
+  height: 30%;
+  width: 100%;
+  overflow: auto;
+}
+
+.dataTables_scrollBody {
+  border-bottom: none !important;
+}
+
+.billsDivclass {
+  height: 100%;
+  /* width: 96%; */
+  border: 1px solid #f9f9f9;
+}
+
+.billsitemsDivclass {
+  height: 100%;
+  width: 50%;
+  max-width: 50%;
+  border: 1px solid #f9f9f9;
+  float: left;
+}
+
+.receiptbillactionsDiv {
+  margin-left: 11px;
+  width: 48%;
+  float: left;
+  border: 1px solid #f9f9f9;
+  height: 100%;
+  position: relative;
+  margin-top: -20px;
+}
+
+.receiptActiondiv1,
+.receiptActiondiv2 {
+  position: absolute;
+  bottom: -7.5px;
+}
+
+.receiptGrandtotalclass {
+  min-width: 20%;
+}
+
+.receiptActiondiv1 {
+  margin-bottom: 49px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
+
+#receipt_fromdateButton {
+  width: 23%;
+}
+
+.receiptActiondiv2 {
+  color: white;
+}
+
+.receiptActiondiv2 * {
+  margin-left: 8px;
+}
+
+.receiptActiondiv2 i {
+  font-size: 1.3em;
+}
+
+.receiptActiondiv1 > input {
+  width: 22%;
+}
+
+.receiptGrandtotalclass {
+  margin-left: 3px;
+}
+
+.receiptTableclass {
+  width: 100%;
+  table-layout: fixed !important;
+}
+
+.receiptitemsTableclass {
+  width: 100%;
+}
+
+.receipt_date {
+  max-width: 50px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.receiptTableclass tbody tr td,
+.receiptitemsTableclass tbody tr td {
+  text-align: center;
+
+  font-size: 14.5px;
+}
+
+#receiptitemsTable tbody > tr {
+  background-color: transparent;
+}
+
+.dataTables_wrapper.no-footer .dataTables_scrollBody {
+  border-bottom: 1px solid #f9f9f9;
+}
+
+.selectall-receipt-check {
+  font-size: 14px;
+}
+
+.custom-check {
+  white-space: normal !important;
+}
+
+.custom-check::before {
+  font-size: 12px;
+  width: 15px !important;
+  height: 15px !important;
+}
+
+.custom-check:after {
+  font-size: 14px !important;
+  width: 20px !important;
+  height: 20px !important;
+  top: 1.6rem !important;
+  font-weight: 200;
+  text-shadow: none !important;
+}
+
+.receiptTableclass tr.selectedbillRow th.select-checkbox:after {
+  text-shadow: none !important;
+}
+
+.receiptTableclass tr.selectedbillRow .select-checkbox:after {
+  content: '\2714' !important;
+}
+
+.receiptTableclass tbody tr.selectedbillRow td.select-checkbox:after,
+table.dataTable tbody tr.selectedbillRow th.select-checkbox:after {
+  background-color: #1fa67a;
+}
+
+table.dataTable tbody tr.selected {
+  color: rgba(253, 254, 255, 0.6);
+  background-color: var(--selected-color) !important;
+}
+
+.resync-bills-button {
+  background-color: #e41e4b !important;
+  color: white !important;
+}
+
+/**
+BIll Status
+**/
+
+@media only screen and (max-width: 800px) {
+  .receiptTableclass tbody tr td,
+  .receiptitemsTableclass tbody tr td {
+    padding: 2px !important;
+    font-size: 13px;
+  }
+}
+
+.selected-filter {
+  background-color: #f9f9f9;
+  color: #7460ee;
+  border: 2px solid #7460ee;
+}
+
+#receipt_fromdateButton {
+  height: 35px;
+  padding-left: 10px;
+  border-radius: 15px;
+  box-sizing: border-box;
+  font-size: 13px;
+  border: 1px solid var(--input-border-color);
+  background-color: var(--input-background);
+}
+
+div.dataTables_scrollBody::-webkit-scrollbar {
+  width: 10px;
+  height: 5px;
+}
+
+div.paymentWrapper::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+.billsitemsDivclass {
+  overflow: hidden;
+}
+
+div.dataTables_scrollBody::-webkit-scrollbar-track-piece {
+  background: rgb(250, 244, 244);
+}
+
+div.dataTables_scrollBody::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  /* background-color: #53975a; */
+  background-color: #1e4936;
+}
+
+.irnhistory-label {
+  color: #18ba60 !important;
+  background: #18ba6024 !important;
+}
+
+#reverseInventoryAactionwrapperid {
+  float: right;
+}
+@media only screen and (max-width: 1024px) {
+  .searchreceiptDivclass {
+    display: flex;
+    flex-wrap: wrap;
+    height: auto;
+    min-height: 70px;
+    width: 100%;
+    max-height: none;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    padding: 8px 4px;
+  }
+
+  .searchreceiptDivclass > input {
+    width: auto !important;
+    margin: 3px !important;
+    font-size: 11px;
+    padding: 5px 6px;
+  }
+
+  #allbillsButton,
+  #todaysbillsButton {
+    width: 75px !important;
+    font-size: 11px;
+    padding: 5px 8px;
+  }
+
+  .receiptselectalldiv {
+    display: flex;
+    align-items: center;
+    gap: 3px;
+    white-space: nowrap;
+    margin: 3px;
+  }
+
+  .receiptselectalldiv input[type='checkbox'] {
+    white-space: nowrap !important;
+    width: 14px;
+    height: 14px;
+    margin: 0;
+  }
+
+  .selectall-receipt-check {
+    font-size: 12px;
+    margin: 0;
+  }
+
+  #searchreceiptField {
+    width: 140px !important;
+    font-size: 11px;
+  }
+  .searchreceiptDivclass {
+    margin-left: -49px;
+  }
+  #receipt_fromdateButton {
+    width: 140px !important;
+    height: 32px;
+    padding-left: 8px;
+    font-size: 11px;
+    border-radius: 4px;
+  }
+
+  #fetchReceiptDataasperclosedayCheckDiv {
+    display: flex;
+    align-items: center;
+    gap: 3px;
+    margin: 3px;
+  }
+
+  #fetchReceiptDataasperclosedayCheckDiv input[type='checkbox'] {
+    width: 10px;
+    height: 10px;
+    margin: 0;
+  }
+
+  #receipt_fetchbillsButton,
+  #syncBillbutton {
+    width: 70px !important;
+    font-size: 11px;
+    padding: 5px 6px;
+  }
+
+  .resync-bills-button {
+    width: 85px !important;
+    font-size: 11px;
+    padding: 5px 6px;
+    background-color: #e41e4b !important;
+    color: white !important;
+  }
+
+  .receiptTableclass tbody tr td,
+  .receiptitemsTableclass tbody tr td {
+    font-size: 13.5px;
+    padding: 11px 2px;
+  }
+
+  .receiptActiondiv1 > input {
+    width: 120px !important;
+    font-size: 11px;
+    padding: 5px 6px;
+  }
+
+  .receiptActiondiv2 i {
+    font-size: 1.1em;
+  }
+
+  .receiptGrandtotalclass {
+    font-size: 12px;
+  }
+
+  .receiptGrandtotallabelclass {
+    font-size: 12px;
+  }
+}
+.badge {
+  line-height: none;
+}
+/* ---------- layout for bottom bar: left label, right icons ---------- */
+.receiptActiondiv2 {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: space-between; /* keep grand total left, icons right */
+  padding: 10px 16px; /* spacing inside the bar */
+  box-sizing: border-box;
+  gap: 12px;
+  z-index: 2;
+}
+
+/* ensure the left labels behave correctly */
+.receiptActiondiv2 .receiptGrandtotallabelclass,
+.receiptActiondiv2 .receiptGrandtotalclass {
+  margin: 0;
+  white-space: nowrap;
+  font-weight: 600;
+  font-size: 1.05em;
+}
+
+/* group icons and align them to the right */
+.receiptIcons {
+  display: flex;
+  align-items: right;
+  justify-content: flex-end;
+  gap: 0px;
+  margin-left: auto; /* keep a clean separation from the left group */
+}
+
+/* icon sizing / clickable area */
+.receiptActiondiv2 i {
+  font-size: 1.25rem;
+  cursor: pointer;
+  padding: 6px;
+  border-radius: 6px;
+  transition:
+    background-color 0.12s,
+    transform 0.08s;
+}
+
+/* small hover affordance */
+.receiptActiondiv2 i:hover {
+  background: rgba(255, 255, 255, 0.06);
+  transform: translateY(-1px);
+}
+
+/* smaller screens adjustments */
+@media only screen and (max-width: 1024px) {
+  .receiptActiondiv2 {
+    padding: 8px 10px;
+    gap: 8px;
+  }
+
+  .receiptActiondiv2 i {
+    font-size: 1.05rem;
+    padding: 5px;
+  }
+
+  .receiptIcons {
+    gap: 2px;
+  }
+}

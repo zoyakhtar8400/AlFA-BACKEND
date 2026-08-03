@@ -1,0 +1,285 @@
+<!-- start day and shift -->
+<div
+  class="modal fade"
+  data-bs-backdrop="static"
+  data-bs-keyboard="false"
+  id="startDayAndShiftModal">
+  <link rel="stylesheet" href="../css/Account.css" />
+  <link rel="stylesheet" href="../css/Startdayandshift.css" />
+
+  <div class="modal-dialog modal-dialog-centered startDayAndShiftmodal-dialog">
+    <div
+      class="modal-content startDayAndShiftModalwrapper startDayModalwrapper">
+      <!-- Modal Header -->
+      <div class="modal-header startDayAndShiftModalHeaderwrapper">
+        <h5
+          style="font-weight: bold"
+          id="startDayAndShiftModalHeaderId"
+          class="has-i18n"
+          data-i18n="controller:account.Startdayandshift">
+          Starting Day & Shift
+          <span
+            class="header-date"
+            id="startDayAndShiftHeaderDateId"></span>
+        </h5>
+      </div>
+
+      <!-- Modal body -->
+      <div
+        class="modal-body startDayAndShiftModalbody"
+        id="startDayAndShiftModalbodyid">
+        <div class="row startDayAndShiftContainer">
+
+          <!-- LEFT: Currency Denomination (same ID) -->
+          <div class="col-3 acc-layout-col">
+            <div class="acc-card acc-card-full">
+              <table id="startDayAndShitCashDenominationTableId">
+                <thead>
+                  <tr>
+                    <th
+                      colspan="3"
+                      class="currencyDenominationTableHeader has-i18n">
+                      <span
+                        class="currency-title has-i18n"
+                        data-i18n="controller:account.Currencydenomination">
+                        Currency Denomination
+                      </span>
+                       <i
+                        class="fas fa-cash-register fa-2x"
+                        id="openCashDrawerOnStartDayAndShiftbuttonid"
+                        aria-hidden="true">
+                      </i>
+
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <!-- JS will generate rows -->
+                </tbody>
+                <tfoot class="currencyDenominationTableFooter">
+                  <tr>
+                    <td
+                      colspan="2"
+                      class="has-i18n"
+                      data-i18n="controller:account.Totalcashindrawer">
+                    Total Cash In Drawer
+                    </td>
+                    <td>
+                      <input
+                        type="number"
+                        step="any"
+                        id="startDayAndShiftCashInDrawerId" />
+                    </td>
+                  </tr>
+                </tfoot>
+              </table>
+            </div>
+          </div>
+
+          <!-- MIDDLE: Session Info + Account Stats on same row, then Previous Shift, then Notes -->
+          <div class="col-6 acc-layout-col">
+
+            <!-- Row: Session Info (left) + Account Statistics (right) -->
+            <div class="acc-row-two acc-row-top">
+              <!-- Session Info -->
+              <div class="acc-card acc-card-half">
+                <div
+                  class="acc-card-subtitle has-i18n"
+                  data-i18n="controller:account.Sessioninfo">
+                  Session Info
+                </div>
+                <div class="modal-info-row revenueDetails">
+                  <!-- Revenue ID -->
+                  <label class="info-field">
+                    <span class="info-key"
+                      id="startDayAndShiftRevenueId_key"></span>
+                    <span class="info-value"
+                      id="startDayAndShiftRevenueId_value"></span>
+                  </label>
+
+                  <!-- Username -->
+                  <label class="info-field">
+                    <span class="info-key"
+                      id="startDayAndShiftUsername_key"></span>
+                    <span class="info-value"
+                      id="startDayAndShiftUsername_value"></span>
+                  </label>
+
+                  <!-- Cash Drawer ID (editable input on the right) -->
+                 <label class="info-field" id="startDayAndShiftCashDrawerField">
+  <span class="info-key" id="startDayAndShiftCashDrawerId_key"></span>
+
+  <!-- small, standalone input; NOT using .info-value to avoid inherited rules -->
+  <input
+    id="startDayAndShiftCashDrawerInputId"
+    class="cashdrawer-input"
+    type="text"
+    placeholder=""
+    maxlength="30"
+    autocomplete="off"
+  />
+</label>
+
+                </div>
+
+              </div>
+
+              <!-- Account Statistics -->
+              <div class="acc-card acc-card-half">
+                <div
+                  class="acc-card-subtitle has-i18n"
+                  data-i18n="controller:account.Accountstatistics">
+                  Account Statistics
+                </div>
+                <div class="modal-info-row">
+                  <label class="info-field">
+                    <span class="info-key"
+                      id="startDayAndShiftOpeningBalanceId_key"></span>
+                    <span class="info-value"
+                      id="startDayAndShiftOpeningBalanceId_value"></span>
+                  </label>
+
+                 <label class="info-field">
+  <span
+    class="info-key has-i18n"
+    data-i18n="controller:account.Collection">
+    Collections Account
+  </span>
+  
+  <span
+    class="info-value force-ltr"
+    id="startDayAndShiftCollectionsAccountId_value"></span>
+</label>
+
+
+<label class="info-field">
+  <span
+    class="info-key has-i18n"
+    data-i18n="controller:account.Pettycashbalance">
+    Petty Cash Balance
+  </span>
+  
+  <span
+    class="info-value force-ltr"
+    id="startDayAndShiftPettyCashBalanceId_value"></span>
+</label>
+
+                </div>
+
+              </div>
+            </div>
+
+            <!-- Previous Shift History (full width) -->
+           <div class="acc-card acc-card-prev">
+  <div
+    class="acc-card-subtitle has-i18n"
+    data-i18n="controller:account.Previousshifthistory">
+    Previous Day/Shift History
+  </div>
+  <div class="modal-info-row prevDayCloseDayShiftSummary">
+
+    <!-- Closing amount -->
+    <label class="info-field">
+      <span class="info-key"
+        id="startDayAndShiftPreviousShiftClosingAmountId_key"></span>
+      <span class="info-value"
+        id="startDayAndShiftPreviousShiftClosingAmountId_value"></span>
+    </label>
+
+    <!-- Last username -->
+    <label class="info-field">
+      <span class="info-key"
+        id="startDayAndShiftPreviousShiftUsernameId_key"></span>
+      <span class="info-value"
+        id="startDayAndShiftPreviousShiftUsernameId_value"></span>
+    </label>
+
+    <!-- Closing time -->
+    <label class="info-field">
+      <span class="info-key"
+        id="startDayAndShiftPreviousShiftClosingTimeId_key"></span>
+      <span class="info-value"
+        id="startDayAndShiftPreviousShiftClosingTimeId_value"></span>
+    </label>
+
+    <!-- Previous closing balance -->
+    <!-- <label class="info-field">
+      <span class="info-key"
+        id="startDayAndShiftPreviousDayClosingbalance_key"></span>
+      <span class="info-value"
+        id="startDayAndShiftPreviousDayClosingbalance_value"></span>
+    </label> -->
+  </div>
+</div>
+
+
+          </div>
+
+          <!-- RIGHT: Summary + Start button -->
+          <div class="col-3 acc-layout-col accountStatistics">
+            <div class="acc-card acc-card-full">
+              <!-- <div
+                class="acc-card-subtitle has-i18n"
+                data-i18n="controller:account.Orderstatistics">
+                Summary
+              </div>
+              <div class="modal-info-row prevDayCloseDayShiftSummary">
+                <label id="startDaySummaryLabel1" class="has-i18n">
+                  Order Statistics (Day)
+                </label>
+                <label id="startDaySummaryLabel2" class="has-i18n">
+                  Opening Balance: Rs 0
+                </label>
+                <label id="startDaySummaryLabel3" class="has-i18n">
+                  Expenses: 0
+                </label>
+              </div> -->
+              <div
+                class="acc-card-subtitle startDayShiftNotesTitle has-i18n"
+                data-i18n="controller:account.Shiftnotes">
+                Starting day Notes
+              </div>
+              <input
+                placeholder="Comments Here"
+                id="startDayShiftCommentInputId"
+                class="has-i18n"
+                data-i18n="[placeholder]controller:account.Commentshere" />
+
+              <div class="acc-summary-actions startDayActionsContainer">
+                <input
+                  type="button"
+                  value="START DAY AND SHIFT"
+                  id="startCloseDayAndShiftButtonId"
+                  class="has-i18n"
+                  data-i18n="[value]controller:account.startDayAndShift" />
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Optional: header date (like Close Shift) -->
+<script>
+  (function setStartHeaderDate() {
+    const el = document.getElementById('startDayAndShiftHeaderDateId');
+    if (!el) return;
+    const now = new Date();
+    const pad = (n) => (n < 10 ? '0' + n : n);
+    const dd = pad(now.getDate());
+    const mm = pad(now.getMonth() + 1);
+    const yyyy = now.getFullYear();
+    let h = now.getHours();
+    const m = pad(now.getMinutes());
+    const ampm = h >= 12 ? 'PM' : 'AM';
+    h = h % 12 || 12;
+    el.textContent = `- ${dd}/${mm}/${yyyy} ${h}:${m} ${ampm}`;
+  })();
+</script>
+
+<script>
+  require('../js/Account/StartDayAndShift.js');
+</script>

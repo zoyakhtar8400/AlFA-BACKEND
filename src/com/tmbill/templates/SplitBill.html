@@ -1,0 +1,154 @@
+<div class="split-bill-container" id="split-bill-container-id">
+  <link rel="stylesheet" href="../css/SplitBill.css" />
+
+  <ul class="nav nav-tabs" id="splitbillTab" role="tablist">
+    <li class="nav-item">
+      <a
+        data-i18n="splitBill.itemWise"
+        class="nav-link active has-i18n"
+        id="split-itemwise-tab"
+        data-toggle="tab"
+        href="#split-itemwise-container-id"
+        role="tab"
+        aria-controls="split-itemwise-container-id"
+        aria-selected="true"
+        >Item Wise</a
+      >
+    </li>
+    <li class="nav-item">
+      <a
+        data-i18n="splitBill.portionWise"
+        class="nav-link has-i18n"
+        id="split-portionwise-tab"
+        data-toggle="tab"
+        href="#split-portionwise-container-id"
+        role="tab"
+        aria-controls="split-portionwise-container-id"
+        aria-selected="false"
+        >Portion Wise</a
+      >
+    </li>
+    <li class="nav-item">
+      <a
+        data-i18n="splitBill.percentageWise"
+        class="nav-link has-i18n"
+        id="split-percentwise-tab"
+        data-toggle="tab"
+        href="#split-percentwise-container-id"
+        role="tab"
+        aria-controls="split-percentwise-container-id"
+        aria-selected="false"
+        >Percentage Wise</a
+      >
+    </li>
+  </ul>
+  <div class="tab-content" id="splitTabContent">
+    <div
+      class="tab-pane fade show active split-itemwise-container"
+      id="split-itemwise-container-id"
+      role="tabpanel"
+      aria-labelledby="split-itemwise-tab"
+    >
+      <div class="row split-itemwise-items-container">
+        <div class="col-sm-4 split-itemwise-allitems">
+          <label data-i18n="splitBill.selectItems" class="has-i18n" for=""
+            >Select Items:</label
+          >
+          <ul class="split-items-list" id="split-items-list-id"></ul>
+          <input
+            data-i18n="[value]splitBill.createAPart"
+            id="createItemspartbutton"
+            class="create-part-button has-i18n"
+            type="button"
+            value="Create a part"
+          />
+        </div>
+        <div
+          class="col-sm-8 split-itemwise-splitedparts"
+          id="split-itemwise-splitedparts-id"
+        ></div>
+      </div>
+    </div>
+    <div
+      class="tab-pane fade"
+      id="split-portionwise-container-id"
+      role="tabpanel"
+      aria-labelledby="split-portionwise-tab"
+    >
+      <div class="split-portionwise-content">
+        <label
+          data-i18n="splitBill.pleaseEnterTheNumberOfPortion"
+          for=""
+          class="titleLabel portion-wise-title-label has-i18n"
+          >Please enter the number of portion:</label
+        >
+        <label
+          data-i18n="splitBill.exIfYouEnterBillWillBeDividedIntoParts"
+          for=""
+          class="faded-label portion-wise-title-label has-i18n"
+          >Ex. If you enter 2 bill will be divided into 2 parts (1/2)</label
+        >
+        <input
+          min="2"
+          max="15"
+          type="number"
+          id="splitbill-portions-field-id"
+        />
+      </div>
+    </div>
+    <div
+      class="tab-pane fade"
+      id="split-percentwise-container-id"
+      role="tabpanel"
+      aria-labelledby="split-percentwise-tab"
+    >
+      <div class="split-percentageswise-content">
+        <label
+          data-i18n="splitBill.pleaseEnterPercentage"
+          for=""
+          class="titleLabel portion-wise-title-label has-i18n"
+          >Please enter percentage:</label
+        >
+        <label
+          data-i18n="splitBill.onlyNumberIsRequired"
+          for=""
+          class="faded-label portion-wise-title-label has-i18n"
+          >( Only number is required)</label
+        >
+        <div
+          class="split-percentage-content-inputs"
+          id="split-percentage-content-inputs-id"
+        >
+          <input
+            data-i18n="[placeholder]controller:splitBillController.Enterpercentage"
+            class="split-percent-input has-i18n"
+            min="1"
+            max="99"
+            type="number"
+            id="split-percent-input-1"
+            placeholder="Enter percentage"
+          />
+        </div>
+        <div class="d-flex split-percentageswise-actions">
+          <input
+            data-i18n="[value]splitBill.addMore"
+            type="button"
+            class="has-i18n"
+            value="Add More"
+            id="add-newsplitpercent-input-id"
+          />
+          <input
+            data-i18n="[value]splitBill.Restart"
+            type="button"
+            class="has-i18n"
+            value="Restart"
+            id="restart-newsplitpercent-input-id"
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+  require('../js/SplitbillController.js');
+</script>

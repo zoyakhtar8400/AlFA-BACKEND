@@ -1,0 +1,867 @@
+.expenseManagementwindowWrapper {
+  position: absolute;
+  top: 0px; /* same as others */
+  left: 60px; /* sidebar width */
+  width: calc(100% - 60px);
+  height: calc(100% - 30px);
+  overflow: auto;
+  /* background: #f5f5f5;      */
+}
+.mastermenuWrapper {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 2px;
+}
+
+.expensesModalBody {
+  display: grid;
+}
+
+.expensemodal-container,
+.expensemodal-cat-container,
+.expensemodal-subcat-container {
+  width: 350px;
+}
+
+.allexpensesTableclass {
+  width: 100% !important;
+}
+
+.nceexpensesTableclass {
+  width: 100% !important;
+}
+
+.main-container {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+}
+
+#currnetstartdayendLabelid {
+  font-size: small;
+  margin: 0;
+}
+
+.menu-types-container {
+  font-size: 1.3rem;
+  background: #cecece6e;
+  padding-top: 10px;
+  overflow: hidden;
+  height: 99%;
+  -webkit-overflow-scrolling: touch;
+}
+
+.list-sub-menu li i {
+  margin-right: 3px;
+}
+
+.menu-types-container:hover,
+.menu-types-container:focus,
+.menu-types-container:active {
+  overflow-y: auto;
+}
+
+.menu-types-list-item {
+  width: 100%;
+  display: inline-block;
+  margin: 3px;
+  border-radius: 0;
+  border: none;
+  padding: 1rem;
+  font-weight: 600;
+}
+
+.menu-types-list-item i {
+  color: mediumseagreen;
+}
+
+.selectedMenu {
+  /* border-left: 2px solid #1A9A62; */
+  border-left: #1e4936;
+}
+
+.menu-types-list-item i {
+  background: #1a9a62;
+  font-size: 1.3rem;
+  padding: 0.5rem;
+  border-radius: 27px;
+  color: white;
+}
+
+.menu-types-list {
+  margin: 0;
+  padding: 0;
+}
+
+.menu-data-container {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+.menu-data-container-item {
+  height: 100%;
+  margin-left: 3px;
+  display: flex;
+  justify-content: start;
+  align-items: start;
+}
+
+.expense-container {
+  height: 100%;
+  width: 100%;
+}
+
+.expense-tab-content > div {
+  height: 96%;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+#overviewexpensesTable tbody td,
+#allexpensesTable tbody td,
+#nceexpensesTable tbody td,
+#captainsTable tbody td {
+  text-align: center;
+}
+@media (max-width: 1280px) and (min-width: 1024px) {
+  #overviewexpensesTable tbody td,
+  #allexpensesTable tbody td,
+  #nceexpensesTable tbody td,
+  #captainsTable tbody td {
+    text-align: center;
+    padding: 6px 4px;
+  }
+}
+
+.overview-data-container {
+  margin: 0;
+  height: 80%;
+}
+
+.expense-tabs {
+  border-bottom: none;
+}
+
+.expense-tabs li a {
+  color: var(--tabs-link-color);
+}
+
+.expense-tabs .nav-link.active {
+  border: none;
+  border-bottom: 2px solid #00653a;
+}
+
+.overviewDiv {
+  height: 90%;
+}
+
+.expenses-stats-container {
+  display: inline-flex;
+  padding: 10px;
+  width: 100%;
+}
+
+.expenses-stats-card {
+  width: 30%;
+  padding: 1rem;
+  height: 90px;
+  max-height: 90px;
+  margin-right: 5px;
+  border-radius: 5px;
+  border: none;
+  box-shadow:
+    0 3px 6px rgba(0, 0, 0, 0.16),
+    0 3px 6px rgba(0, 0, 0, 0.23);
+  color: white !important;
+}
+
+.card-1 {
+  background-image: radial-gradient(
+    circle farthest-corner at 10% 20%,
+    rgba(239, 87, 87, 0.74) 0%,
+    rgba(245, 123, 13, 0.74) 90.2%
+  );
+}
+
+.card-2 {
+  background-image: linear-gradient(
+    181deg,
+    rgba(2, 0, 97, 1) 15%,
+    rgba(97, 149, 219, 1) 158.5%
+  );
+}
+
+.card-3 {
+  background-image: linear-gradient(
+    109.6deg,
+    rgba(31, 179, 237, 1) 11.2%,
+    rgba(17, 106, 197, 1) 91.1%
+  );
+}
+
+.expense-actions-container {
+  width: 100%;
+  height: 50px;
+  display: inline-flex;
+  justify-content: flex-end;
+  margin-left: -10px;
+}
+
+/* .expense-actions-container button {
+  width: 23%;
+} */
+
+.expense-actions-container button i {
+  padding-right: 10px;
+}
+
+.expense-tab-content {
+  height: 86vh;
+}
+
+/*
+Expense Categories
+*/
+
+.textField {
+  width: 100%;
+}
+
+.expensecat-actions {
+  display: inline-flex;
+  justify-content: flex-end;
+  width: 100%;
+}
+
+.expense-category-list-container,
+.expense-subcategory-list-container {
+  max-height: 200px;
+  overflow-y: auto;
+  margin: 0;
+  padding: 9px;
+}
+
+.expense-overviewtable-container {
+  padding: 0;
+  border: 1px solid #ccc;
+  height: 100%;
+}
+
+.expense-overviewtable-graphcontainer {
+  /* overflow-y: auto; */
+  height: 100%;
+}
+
+.lineChart {
+  max-height: 450px !important;
+  margin: 0 auto;
+}
+
+.nceexpenseLinechart,
+.nceexpensepieChart,
+.expenseLinechart,
+.expensepieChart {
+  max-height: 280px;
+}
+
+.selectedExpensecat {
+  background: blueviolet;
+  color: white;
+}
+
+.expense-select {
+  height: 35px;
+  width: 100% !important;
+  margin-top: 5px;
+}
+
+.expense-category-list-item {
+  padding: 0.5rem;
+  border: 2px solid blueviolet;
+  /* width: 50%; */
+  margin: 2px;
+  border-radius: 5px;
+  justify-content: space-between;
+}
+
+.graph-container {
+  display: grid;
+  height: 90%;
+}
+
+.expenses-graph-container,
+.nceexpenses-graph-container {
+  width: 100%;
+  margin: 0;
+}
+
+div.expenses-graph-container .chart-legend {
+  max-height: 100px;
+  overflow: hidden;
+}
+
+div.expenses-graph-container .chart-legend:focus,
+div.expenses-graph-container .chart-legend:hover,
+div.expenses-graph-container .chart-legend:active {
+  max-height: 100px;
+  overflow-y: auto;
+}
+
+#allexpensefromdateField,
+#allnceexpensefromdateField,
+#graphdateField {
+  width: 25%;
+}
+
+.editableExpense:before,
+.deleteExpense:before {
+  font-family: FontAwesome;
+  content: '\f304';
+  float: right;
+}
+
+.deleteExpense:before {
+  content: '\f1f8';
+}
+
+/**
+Captain Window
+**/
+
+.captainmgmt-container {
+  width: 100%;
+  height: 100%;
+}
+
+.addcaptain-inputs-div {
+  padding: 1rem;
+}
+
+.addcaptain-inputs-div > input {
+  width: 100%;
+}
+
+/**
+Customer window
+**/
+
+.customer-mgmt-container {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.actions-div {
+  height: 8%;
+  max-height: 8%;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.customer-data-div {
+  height: 92%;
+  max-height: 92%;
+}
+
+.customermgmtDattableclass {
+  height: 99%;
+  width: 100%;
+}
+
+.actions-div button i {
+  padding-right: 11px;
+}
+
+.addCusomermodal-dialog {
+  justify-content: center;
+}
+
+.addCusomermodalbody input {
+  width: 60%;
+}
+
+.addCusomermodalbody .titleLabel {
+  width: 30%;
+}
+
+.input-container {
+  display: flex;
+  justify-content: start;
+}
+
+.addCusomermodalWrapper {
+  width: 400px;
+  height: 400px;
+}
+
+.addCusomermodalbody {
+  overflow-y: auto;
+}
+
+.rotate {
+  -moz-transition: all 0.5s linear;
+  -webkit-transition: all 0.5s linear;
+  transition: all 0.5s linear;
+}
+
+.rotate.down {
+  -moz-transform: rotate(90deg);
+  -webkit-transform: rotate(90deg);
+  transform: rotate(90deg);
+}
+
+.editableExpense {
+  width: 62px;
+}
+
+#printButton,
+#exportButton {
+  margin: 5px;
+  width: 101px;
+  height: 44px;
+  border: 0;
+  border-radius: 0.25em;
+  background: initial;
+  background-color: #1a1a23;
+  color: #fff;
+  font-size: 1em;
+}
+
+ul#expense-category-list-containerid::-webkit-scrollbar {
+  width: 10px !important;
+}
+
+ul#expense-subcategory-list-containerid::-webkit-scrollbar {
+  width: 10px !important;
+}
+
+div.menu-types-container::-webkit-scrollbar {
+  width: 10px !important;
+}
+/* --- final small-desktop tuning: (1024-1280) only --- */
+@media (max-width: 1280px) and (min-width: 1024px) {
+  /* reduce icon pill size */
+  .menu-types-list-item i {
+    font-size: 14px; /* was ~1.0+  => smaller */
+    padding: 0.4rem; /* reduces circle size */
+  }
+  .menu-types-container {
+    font-size: 16.3px; /* as you said */
+  }
+  /* reduce label font just slightly */
+  .menu-types-list-item span {
+    font-size: 15px; /* very safe */
+  }
+
+  /* overall item height slightly tighter */
+  .menu-types-list-item {
+    padding: 1rem 0.8rem; /* reduces vertical height */
+    line-height: 1.05;
+  }
+}
+@media only screen and (max-height: 650px) {
+  #menu-types-list-id .card {
+    font-size: inherit !important;
+    line-height: inherit !important;
+  }
+}
+/* desktop 1024 → 1280 override for date fields */
+@media (max-width: 1280px) and (min-width: 1024px) {
+  #allexpensefromdateField,
+  #allnceexpensefromdateField,
+  #graphdateField {
+    width: 38%;
+  }
+}
+
+.expense-back-btn {
+  align-self: center;
+
+  width: 62px !important;
+  min-width: 62px !important;
+  max-width: 62px !important;
+  height: 36px;
+
+  padding: 0;
+  flex: 0 0 60px !important;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 5px;
+  border: 1px solid #6c757d;
+
+  background-color: #ffffff;
+  color: #6c757d;
+
+  position: relative;
+  z-index: 1000; /* ensures click */
+  pointer-events: auto; /* ensures click */
+}
+
+.expense-back-btn i {
+  font-size: 14px;
+  line-height: 1;
+}
+
+/* hover */
+.expense-back-btn:hover {
+  color: #ffffff;
+  background-color: #6c757d;
+  border-color: #6c757d;
+}
+
+/* -------------------------------
+   Action Buttons Alignment Fix
+-------------------------------- */
+.expense-actions-container {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 12px;
+
+  margin-top: -42px;
+  padding-right: 10px;
+
+  position: relative;
+  z-index: 10;
+}
+
+/* uniform button size */
+.expense-actions-container .normal-button {
+  height: 36px;
+  padding: 6px 14px;
+  white-space: nowrap;
+}
+
+/* -------------------------------
+   Prevent Content Overlap
+-------------------------------- */
+.expense-tab-content {
+  position: relative;
+  z-index: 1;
+}
+.expense-screen {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+/* header: back left, actions right */
+.expense-header {
+  padding-top: 8px;
+  padding-bottom: 2px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  /* padding: 6px 10px; */
+}
+
+/* reuse your existing visual treatment, but no giant z-index */
+.expense-back-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 62px;
+  min-width: 62px;
+  height: 36px;
+
+  border-radius: 5px;
+  border: 1px solid #6c757d;
+  background-color: #ffffff;
+  color: #6c757d;
+
+  position: relative;
+  z-index: 1;
+}
+
+.expense-header-actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 12px;
+}
+
+.expense-header-actions .normal-button {
+  height: 36px;
+  padding: 6px 14px;
+  white-space: nowrap;
+}
+
+/* tabs + content fill the rest of the screen */
+.expense-tabs {
+  border-bottom: none;
+}
+
+.expense-tab-content {
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow: hidden;
+}
+
+.expense-tab-content > .tab-pane {
+  height: 100%;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+/* in Mastermenu.css or MenuManagement.css */
+#expenseManagementwindowWrapperid {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+/* prevent jQuery .show() from switching it to wrong display */
+#expenseManagementwindowWrapperid[style*='display: block'] {
+  display: flex !important;
+}
+/* =========================
+   FINAL: Expense area uses full available width
+   Scoped-only changes (no html/body modifications)
+   Paste at end of expense.css
+   ========================= */
+
+/* Ensure main expense wrapper uses full workspace (sidebar left:60px) */
+/* =====================================================
+   EXPENSE MANAGEMENT – FINAL DESKTOP WIDTH (PERFECT)
+   Replace previous overrides with this
+   ===================================================== */
+
+/* Main expense workspace */
+#expenseManagementwindowWrapperid,
+.expenseManagementwindowWrapper {
+  left: 55px;
+  width: calc(100% - 60px);
+  padding: 11px 11px;
+  box-sizing: border-box;
+  overflow-x: hidden;
+}
+
+.expense-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+}
+
+.expense-back-btn {
+  flex: 0 0 62px;
+}
+
+.expense-header-actions {
+  display: flex;
+  flex: 1 1 auto;
+  justify-content: center;
+  gap: 24px;
+  margin: 0 8px;
+}
+
+.expense-header-actions .normal-button {
+  min-width: 230px;
+  height: 40px;
+  padding: 8px 20px;
+  white-space: nowrap;
+}
+
+.expenses-stats-container {
+  display: flex;
+  width: 100%;
+  gap: 16px;
+  /* margin: 14px 0 18px; */
+}
+
+.expenses-stats-card {
+  flex: 1 1 0;
+  min-width: 0;
+  height: 90px;
+}
+
+.expense-tab-content {
+  width: 100%;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.expense-tab-content > .tab-pane {
+  max-height: calc(100vh - 190px);
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.overview-data-container {
+  display: flex;
+  width: 100%;
+  gap: 24px;
+  margin-top: 14px;
+}
+
+.expense-overviewtable-container {
+  flex: 1 1 50%;
+  min-width: 0;
+  border: 1px solid #e3e3e3;
+}
+
+.expense-overviewtable-graphcontainer {
+  flex: 1 1 50%;
+  min-width: 0;
+  padding: 12px 18px;
+}
+
+.allexpensesTableclass,
+.nceexpensesTableclass,
+.overviewexpensesTableclass,
+#allexpensesTable,
+#nceexpensesTable,
+#overviewexpensesTable {
+  width: 100% !important;
+  table-layout: fixed;
+}
+
+canvas,
+.expensepieChart,
+.expenseLinechart,
+.nceexpensepieChart,
+.nceexpenseLinechart,
+.lineChart {
+  width: 100% !important;
+  max-width: 100%;
+  height: auto !important;
+}
+
+#allexpensefromdateField,
+#allnceexpensefromdateField,
+#graphdateField {
+  max-width: 480px;
+  width: 100%;
+}
+/* =====================================================
+   FINAL FIX: HEADER BUTTONS ON SAME TOP ROW
+   SAFE + SCOPED (EXPENSE SCREEN ONLY)
+   ===================================================== */
+
+/* Make header a 2-column layout */
+.expense-header {
+  display: grid !important;
+  grid-template-columns: auto 1fr;
+  align-items: center;
+}
+
+/* Left side (back + title stays same) */
+.expense-back-btn {
+  grid-column: 1;
+}
+
+/* Right side buttons move UP */
+.expense-header-actions {
+  grid-column: 2;
+  justify-self: end;
+
+  display: flex !important;
+  align-items: center;
+  gap: 1px;
+
+  /* THIS is the key: pull buttons UP */
+  margin-top: -10px; /* pulls them to title row */
+}
+
+/* Reduce button width slightly */
+.expense-header-actions .normal-button {
+  min-width: 144px; /* smaller than before */
+  height: 36px;
+  padding: 6px 14px;
+  font-size: 14px;
+  white-space: nowrap;
+}
+/* ===============================
+   FIX: Remove MenuHeading margin
+   ONLY inside Expense Management
+   =============================== */
+
+#expenseManagementwindowWrapperid .MenuHeading,
+.expenseManagementwindowWrapper .MenuHeading {
+  margin: 1px !important;
+}
+
+#overviewexpensesTable tbody td.editableExpense {
+  text-align: right !important;
+
+  padding-left: 0px !important; /* 🔑 remove left restriction */
+  padding-right: 12px !important; /* 🔑 tight to right */
+
+  position: relative;
+}
+
+.captainmgmt-container {
+  padding-left: 5px;
+}
+.expense-container .expense-screen .MenuHeading.has-i18n {
+  padding: 0 !important; /* All sides zero */
+  margin-top: 0 !important; /* Extra safety vs external margins */
+}
+
+/* ===== Expense Buttons (Add / Update) ===== */
+#addExpensebutton,
+#addnewExpensecatbutton,
+#updateExpensecatbutton,
+#addnewExpensesubcatbutton,
+#updateExpensesubcatbutton {
+  background-color: var(--button-background);
+  border-color: var(--button-background);
+  color: #ffffff;
+}
+
+/* Cancel hover effects coming from outer CSS */
+#addExpensebutton:hover,
+#addExpensebutton:focus,
+#addExpensebutton:active,
+#addnewExpensecatbutton:hover,
+#addnewExpensecatbutton:focus,
+#addnewExpensecatbutton:active,
+#updateExpensecatbutton:hover,
+#updateExpensecatbutton:focus,
+#updateExpensecatbutton:active,
+#addnewExpensesubcatbutton:hover,
+#addnewExpensesubcatbutton:focus,
+#addnewExpensesubcatbutton:active,
+#updateExpensesubcatbutton:hover,
+#updateExpensesubcatbutton:focus,
+#updateExpensesubcatbutton:active {
+  background-color: var(--button-background) !important;
+  border-color: var(--button-background) !important;
+  color: #ffffff !important;
+  box-shadow: none !important;
+}
+
+/* ===== Close Buttons ===== */
+#addExpensebutton + button,
+#updateExpensecatbutton + button,
+#updateExpensesubcatbutton + button {
+  background-color: #dc3545;
+  border-color: #dc3545;
+  color: #ffffff;
+}
+
+#addExpensebutton + button:hover,
+#addExpensebutton + button:focus,
+#addExpensebutton + button:active,
+#updateExpensecatbutton + button:hover,
+#updateExpensecatbutton + button:focus,
+#updateExpensecatbutton + button:active,
+#updateExpensesubcatbutton + button:hover,
+#updateExpensesubcatbutton + button:focus,
+#updateExpensesubcatbutton + button:active {
+  background-color: #dc3545 !important;
+  border-color: #dc3545 !important;
+  color: #ffffff !important;
+  box-shadow: none !important;
+}

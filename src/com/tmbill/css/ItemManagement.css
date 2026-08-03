@@ -1,0 +1,395 @@
+/* ItemManagement.css */
+#menuManagementmainWrappperid.operation-page .menuOptionsCard,
+#menuManagementmainWrappperid.operation-page .menuOptionsCardData,
+#menuManagementmainWrappperid.operation-page .crmCardCustomWidth {
+}
+
+#menuManagementmainWrappperid.operation-page #closeShiftCardid,
+#menuManagementmainWrappperid.operation-page #closeDayCardid {
+  width: auto !important;
+}
+
+#menuManagementmainWrappperid {
+  height: 99%;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+#menuManagementmainWrappperid .menuManagement-1 {
+  margin: 0;
+  min-height: 16%;
+}
+
+#menuManagementmainWrappperid .reportselect_container {
+  outline: none;
+  width: 16%;
+  height: 35px;
+  border-radius: 7px;
+  margin-left: 5px;
+  font-size: 0.88rem;
+}
+
+#menuManagementmainWrappperid .menuManagementtypeContainer {
+  border-right: 2px solid #d6d2d2;
+  font-size: 1.3rem;
+  background: #cecece6e;
+  min-height: 16%;
+  max-height: 18%;
+  overflow: hidden;
+  overflow-x: hidden;
+  -webkit-overflow-scrolling: touch;
+  box-sizing: border-box;
+}
+
+#menuManagementmainWrappperid .menuOptionsCard {
+  width: 150px;
+  margin: 10px;
+  box-sizing: border-box;
+}
+
+#menuManagementmainWrappperid #accountContainerid {
+  display: flex;
+}
+
+#menuManagementmainWrappperid .menuOptionsCardData {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+#menuManagementmainWrappperid .selectedMenuOption {
+  border-right: 4px solid #131212;
+}
+
+#menuManagementmainWrappperid .MenuHeading {
+  font-weight: bold;
+  margin: 10px;
+}
+
+#menuManagementmainWrappperid .menuManagementItemsDiv {
+  height: 100%;
+}
+
+#menuManagementmainWrappperid #menuManagementItemsDivid {
+  width: 100%;
+  display: flex;
+  height: 100%;
+}
+
+/* item card sizes etc */
+#menuManagementmainWrappperid .item-management-item-card-body {
+  height: 155px;
+}
+
+#menuManagementmainWrappperid #itemManagementItemviewContainer {
+  grid-column-gap: 7px;
+  /* grid-row-gap: 16px; */
+  grid-auto-rows: 130px;
+}
+
+#menuManagementmainWrappperid .menu-management-item-row {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+
+#menuManagementmainWrappperid .itemImage-for-menu-management {
+  width: 50px;
+  height: 44px;
+  border-radius: 50%;
+  background: transparent;
+}
+
+#menuManagementmainWrappperid .img-container-for-menu-management {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#menuManagementmainWrappperid .edit-item-button {
+  height: 27px;
+  background-color: '#1d1d35';
+  color: white;
+}
+
+#menuManagementmainWrappperid .item-status-switch {
+  /* placeholder */
+}
+
+/* inputs / buttons spacing */
+#menuManagementmainWrappperid #addItemInMenuManagement {
+  margin: 10px;
+}
+
+#menuManagementmainWrappperid #syncButton {
+  margin: 10px 10px 10px 0px;
+}
+
+#menuManagementmainWrappperid .searchDivForMenu {
+  display: flex;
+}
+
+#menuManagementmainWrappperid #goBackButtonContainer {
+  width: 20%;
+  margin: 10px 0px;
+  display: flex;
+  padding-left: 5px;
+  align-items: center;
+}
+
+#menuManagementmainWrappperid #gobacktomenumangemtfromitemview {
+  width: 25%;
+}
+
+#menuManagementmainWrappperid .category-status-switch {
+  float: right;
+}
+
+#menuManagementmainWrappperid .item-short-code,
+#menuManagementmainWrappperid .item-sale-price,
+#menuManagementmainWrappperid .item-stock-status {
+  font-weight: bold;
+  color: gray;
+  font-size: 14px !important;
+}
+
+#menuManagementmainWrappperid .item-title {
+  font-weight: bold;
+  padding-top: -10px;
+  font-size: 14px !important;
+}
+
+#menuManagementmainWrappperid .searchWrapper-for-item-management {
+  width: 20% !important;
+  margin-right: 10px;
+}
+
+#menuManagementmainWrappperid .searchWrapper-for-item-management i {
+  top: 0px !important;
+}
+
+#menuManagementmainWrappperid #searchByname_item_in_item_management {
+  width: 100%;
+  margin-left: 5px;
+  margin-top: 0px;
+}
+
+#menuManagementmainWrappperid #searchitembyCode-for-item-management {
+  margin-top: 0px;
+  width: 20%;
+}
+
+#menuManagementmainWrappperid .searchWrapperContainer {
+  width: 79%;
+  display: flex;
+  align-items: center;
+  justify-content: end;
+}
+
+#menuManagementmainWrappperid .item-management-edit-button {
+  margin: 10px;
+}
+
+#menuManagementmainWrappperid .edit-item-container {
+  height: 66%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+}
+
+#menuManagementmainWrappperid .item-edit-icon {
+  font-size: 18px;
+}
+
+#menuManagementmainWrappperid .itemUpdateinputbox {
+  width: 100%;
+  margin-top: 5px !important;
+  margin-left: 0px !important;
+}
+
+#menuManagementmainWrappperid .itemUpdateSelectinputbox {
+  width: 100%;
+  margin-top: 5px !important;
+  margin-left: 0px !important;
+  border-radius: 6px;
+}
+
+#menuManagementmainWrappperid .menu-item-switch-container {
+  margin-top: 5px;
+}
+
+#menuManagementmainWrappperid .menu-item-label-class {
+  font-weight: bold;
+}
+
+#menuManagementmainWrappperid .multipricing-saleprice-field {
+  display: inline !important;
+  width: 85% !important;
+}
+
+#menuManagementmainWrappperid .multipricingContainer {
+  display: none;
+}
+
+#menuManagementmainWrappperid .AddOrUpdateItemmodalbody {
+  height: 495px;
+  max-height: 600px;
+  overflow: auto;
+}
+
+#menuManagementmainWrappperid .category-select-class {
+  width: 68%;
+}
+
+#menuManagementmainWrappperid .add-sub-catgory-class {
+  width: 59%;
+}
+
+#menuManagementmainWrappperid .add-kitchen-dept-class {
+  width: 48%;
+}
+
+#menuManagementmainWrappperid .addCategory-modal {
+  margin-top: 20%;
+}
+
+#menuManagementmainWrappperid #addSubCatCategorieslist {
+  border-radius: 15px;
+  height: 35px;
+}
+
+#menuManagementmainWrappperid #categoryInputField,
+#menuManagementmainWrappperid #addSubCatCategorieslist,
+#menuManagementmainWrappperid #subCategoryInputField,
+#menuManagementmainWrappperid #addKitchenDepartmentInput {
+  /* width: 80%; */
+}
+
+#menuManagementmainWrappperid .addCatgoryInputgroup {
+  justify-content: center;
+}
+
+#menuManagementmainWrappperid .item-status-menu-mgmt {
+  padding-top: 9px;
+}
+
+#menuManagementmainWrappperid .menuOptionsCard .menuOptionsCardData {
+  justify-content: center;
+}
+
+#menuManagementmainWrappperid .menuOptionsCardData {
+  min-height: 112px;
+  height: 112px;
+}
+
+#menuManagementmainWrappperid #closeShiftCardid,
+#menuManagementmainWrappperid #closeDayCardid {
+  width: 200px !important;
+}
+
+#menuManagementmainWrappperid #checkAllShiftCloseValidationMessageContianerId {
+  display: none;
+}
+
+#menuManagementmainWrappperid #showOnBilllabelcheckid {
+  margin-left: 10px;
+}
+
+#menuManagementmainWrappperid #addUpdateMultipricingtitleid {
+  font-size: 14px;
+  color: green;
+}
+
+#menuManagementmainWrappperid
+  #addUpdateMultipricingUpdatefrombackofficetitleid {
+  font-size: 14px;
+  color: red;
+  margin-left: 45px;
+}
+
+#menuManagementmainWrappperid .crmCardCustomWidth {
+  width: 160px !important;
+  height: 120px !important;
+  margin: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+#menuManagementmainWrappperid #moduleViewWrapper {
+  width: 100%;
+  height: 100%;
+  min-height: 100vh;
+  overflow: auto;
+}
+
+#menuManagementmainWrappperid #itemManagementItemviewContainer {
+  overflow-y: auto;
+  padding-bottom: 70px;
+}
+#menuManagementmainWrappperid .treeviewDiv {
+  max-height: 100%;
+  overflow-y: auto !important;
+}
+
+@media (min-height: 900px) {
+  #menuManagementmainWrappperid .treeviewDiv {
+    max-height: calc(100vh - 160px);
+    overflow-y: auto !important;
+  }
+}
+
+#menuManagementmainWrappperid #moduleViewWrapper {
+  min-height: auto !important;
+  height: 100% !important;
+}
+
+#menuManagementmainWrappperid .treeviewDiv {
+  height: 100%;
+  overflow-y: auto !important;
+}
+
+#menuManagementmainWrappperid .treeviewDiv {
+  height: calc(100vh - 130px) !important;
+  overflow-y: auto !important;
+}
+
+#menuManagementmainWrappperid .treeviewDiv {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+#menuManagementmainWrappperid .treeviewDiv::-webkit-scrollbar {
+  display: none;
+}
+#menuManagementmainWrappperid .outofstocktag {
+  font-size: 13px !important;
+}
+
+#menuManagementmainWrappperid #itemManagementItemviewContainer {
+  grid-auto-rows: 162px;
+}
+
+#menuManagementmainWrappperid .item-edit-icon {
+  position: relative;
+  top: 18px;
+}
+#menuManagementmainWrappperid .treeviewDiv li,
+#menuManagementmainWrappperid .treeviewDiv span,
+#menuManagementmainWrappperid .treeviewDiv a {
+  font-size: 12.7px;
+}
+
+@media (max-width: 1500px) {
+  #menuManagementmainWrappperid #itemManagementItemviewContainer {
+    grid-template-columns: repeat(3, calc(33.333% - 21px)) !important;
+  }
+}
+#menuManagementmainWrappperid .item-management-item-card-body:hover {
+  background-color: #f7fdfa;
+  border: 1px solid #1f7a4c;
+  box-shadow: 0 0 0 3px rgba(31, 122, 76, 0.08);
+}

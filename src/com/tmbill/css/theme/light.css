@@ -1,0 +1,41 @@
+/**
+Theme: light
+**/
+
+/**
+Windows title bar controls
+**/
+.cet-window-controls .cet-control-icon svg {
+    fill: black !important;
+}
+
+.parentContainer {
+    background-color: white;
+}
+
+.menu {
+    background-color: white;
+    border-right: 1px solid #bdbdbd;
+}
+
+.settingsDiv {
+    background-color: white;
+    border-right: 1px solid #bdbdbd;
+}
+
+.menu li a,
+.settingsDiv a {
+    color: var(--button-background);
+    opacity: 0.85;
+}
+
+.treeview .list-group {
+    background-color: white;
+    color: black;
+}
+
+.swal2-confirm {
+    border: 1px solid var(--button-border);
+    background-color: var(--button-background) !important;
+    color: var(--white-color);
+}

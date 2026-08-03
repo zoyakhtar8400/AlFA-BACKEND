@@ -1,0 +1,26 @@
+<head>
+  <link rel="stylesheet" href="../css/Worker.css" />
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+</head>
+
+<body>
+  <div class="hotellogoDiv" id="workerhotellogoDivid">
+    <img id="hotellogoImage" src="" alt="" />
+  </div>
+  <div class="printableDiv" id="printableDivid"></div>
+
+  <script>
+    if (typeof module === 'object') {
+      window.module = module;
+      module = undefined;
+    }
+  </script>
+  <script src="../css/jquery/jquery-3.6.0.js"></script>
+  <script src="../js/renderer.js"></script>
+  <script>
+    require('../js/Worker.js');
+  </script>
+  <script>
+    if (window.module) module = window.module;
+  </script>
+</body>
