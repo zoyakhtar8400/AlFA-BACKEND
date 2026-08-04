@@ -71,34 +71,36 @@ router.get('/pending', async (req, res) => {
 // POST /api/payments or POST /
 const paymentHandler = async (req, res) => {
   const response = new ResponseMessage(200, '');
+  const transaction = await global.serverdbConnection.sequelize.transaction();
   try {
     const { orderId, order_id, amount, paymentMethod, paymentMode } = req.body;
     const targetOrderId = orderId || order_id;
 
     if (!targetOrderId) {
+      await transaction.rollback();
       response.setStatus(400);
       response.setMessage('Order ID is required');
       return res.json(response);
     }
 
-    const bill = await global.serverdbConnection.Bill.findByPk(targetOrderId);
+    const bill = await global.serverdbConnection.Bill.findByPk(targetOrderId, { transaction });
     if (bill) {
       const mode = paymentMethod || paymentMode || 'Cash';
       await bill.update({
         order_state: 'completed',
         payment_mode: mode
-      });
+      }, { transaction });
 
       await global.serverdbConnection.BillPayment.create({
         order_id: bill.order_id || bill.id,
         amount: amount || bill.order_total || bill.total_amount,
         payment_mode: mode,
         store_id: 'STORE_1'
-      });
+      }, { transaction });
 
       // Set Table status in PostgreSQL to 'PAYMENT_COMPLETED' with payment_completed_at timestamp
       if (bill.table_id) {
-        let table = await global.serverdbConnection.Table.findByPk(bill.table_id);
+        let table = await global.serverdbConnection.Table.findByPk(bill.table_id, { transaction });
         if (!table) {
           table = await global.serverdbConnection.Table.findOne({
             where: {
@@ -106,7 +108,8 @@ const paymentHandler = async (req, res) => {
                 { table_no: String(bill.table_id) },
                 { table_name: `Table ${bill.table_id}` }
               ]
-            }
+            },
+            transaction
           });
         }
         if (table) {
@@ -123,20 +126,22 @@ const paymentHandler = async (req, res) => {
               customer: 'Walk-in',
               waiter: null
             }
-          });
+          }, { transaction });
         }
       }
 
       // Close KOT in PostgreSQL
       await global.serverdbConnection.KOT.update(
         { status: 6 },
-        { where: { table_id: bill.table_id, is_active: 1 } }
+        { where: { table_id: bill.table_id, is_active: 1 }, transaction }
       );
     }
 
+    await transaction.commit();
     response.setStatus(200);
     response.setMessage('Payment processed successfully');
   } catch (err) {
+    await transaction.rollback();
     console.error('Error processing payment:', err);
     response.setStatus(400);
     response.setMessage(err.message || 'Failed to process payment');

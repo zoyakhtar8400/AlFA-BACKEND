@@ -56,14 +56,11 @@ async function getCustomer(params) {
 }
 router.get('/', async (req, res) => {
   let response = new ResponseMessage(200, '');
-  if (req.query.store_id) {
-    let customers = await getCustomer(req.query);
-    response.customers = customers;
-    response.setStatus(200);
-  } else {
-    response.setStatus(400);
-    response.setMessage('Please provide store id.');
-  }
+  const queryParams = { ...req.query, store_id: req.query.store_id || 'STORE_1' };
+  let customers = await getCustomer(queryParams);
+  response.customers = customers;
+  response.data = customers;
+  response.setStatus(200);
   res.json(response);
 });
 

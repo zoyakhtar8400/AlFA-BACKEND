@@ -158,6 +158,9 @@ expressApp.use(ROUTES.SOCKETEVENTS, auth, socketEvents);
 
 expressApp.use(ROUTES.API, localAuth, apiRouter);
 
+const { setupSwagger } = require('../docs');
+setupSwagger(expressApp);
+
 // eslint-disable-next-line no-unused-vars
 expressApp.get('*', (req, res, next) => {
   res.json(new ResponseMessage(404, 'No Mapping Found'));

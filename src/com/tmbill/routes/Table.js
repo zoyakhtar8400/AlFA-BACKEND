@@ -225,8 +225,8 @@ router.put('/:id', async (req, res) => {
   res.json(response);
 });
 
-// PATCH /:id/status update table status directly
-router.patch('/:id/status', async (req, res) => {
+// PATCH status handler for both /:id and /:id/status routes
+const patchStatusHandler = async (req, res) => {
   const response = new ResponseMessage(200, '');
   try {
     let table = await global.serverdbConnection.Table.findByPk(req.params.id);
@@ -249,9 +249,10 @@ router.patch('/:id/status', async (req, res) => {
 
     const rawStatus = req.body.status || req.body.order_state || 'AVAILABLE';
     let status = 'AVAILABLE';
-    if (['KOT_CUT', 'Running', 'running', 'occupied', 'ORDERED'].includes(rawStatus)) {
-      status = rawStatus === 'ORDERED' ? 'ORDERED' : 'KOT_CUT';
-    } else if (['PAYMENT_COMPLETED', 'CLEANUP_RUNNING', 'Paid', 'paid', 'Cleaning', 'cleaning'].includes(rawStatus)) {
+    const rawUpper = String(rawStatus).toUpperCase();
+    if (['KOT_CUT', 'RUNNING', 'OCCUPIED', 'ORDERED', 'KOT GENERATED', 'KOT_GENERATED'].includes(rawUpper)) {
+      status = rawUpper === 'ORDERED' ? 'ORDERED' : 'KOT_CUT';
+    } else if (['PAYMENT_COMPLETED', 'CLEANUP_RUNNING', 'PAID', 'CLEANING', 'BILL GENERATED'].includes(rawUpper)) {
       status = 'PAYMENT_COMPLETED';
     }
 
@@ -291,7 +292,10 @@ router.patch('/:id/status', async (req, res) => {
     response.setMessage(err.message || 'Failed to update table status');
   }
   res.json(response);
-});
+};
+
+router.patch('/:id/status', patchStatusHandler);
+router.patch('/:id', patchStatusHandler);
 
 // DELETE /:id or DELETE /
 router.delete('/:id', async (req, res) => {

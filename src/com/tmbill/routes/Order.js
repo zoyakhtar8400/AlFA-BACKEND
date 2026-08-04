@@ -656,43 +656,46 @@ router.patch('/:id/status', async (req, res) => {
 // PATCH /:id/payment or POST /:id/settle — settle bill
 const settleOrderHandler = async (req, res) => {
   const response = new ResponseMessage(200, '');
+  const transaction = await global.serverdbConnection.sequelize.transaction();
   try {
     const orderId = req.params.id;
-    const bill = await global.serverdbConnection.Bill.findByPk(orderId);
+    const bill = await global.serverdbConnection.Bill.findByPk(orderId, { transaction });
     
     if (bill) {
       await bill.update({
         order_state: 'completed',
         payment_status: 'Paid',
         payment_mode: req.body.paymentMethod || req.body.paymentMode || 'Cash'
-      });
+      }, { transaction });
 
       // Also record payment entry
       await global.serverdbConnection.BillPayment.create({
-        order_id: bill.order_id,
-        amount: req.body.amount || bill.total_amount,
+        order_id: bill.order_id || bill.id,
+        amount: req.body.amount || bill.total_amount || bill.order_total,
         payment_mode: req.body.paymentMethod || 'Cash',
         store_id: 'STORE_1'
-      });
+      }, { transaction });
 
       // Update associated table to Available / Blank in PostgreSQL
       if (bill.table_id) {
         await global.serverdbConnection.Table.update(
           { order_state: 'Blank' },
-          { where: { id: bill.table_id } }
+          { where: { id: bill.table_id }, transaction }
         );
       }
 
       // Close KOTs associated with table
       await global.serverdbConnection.KOT.update(
         { status: 6 }, // 6 = Closed
-        { where: { table_id: bill.table_id, is_active: 1 } }
+        { where: { table_id: bill.table_id, is_active: 1 }, transaction }
       );
     }
 
+    await transaction.commit();
     response.setStatus(200);
     response.setMessage('Payment settled successfully');
   } catch (err) {
+    await transaction.rollback();
     console.error('Error settling order:', err);
     response.setStatus(400);
     response.setMessage(err.message || 'Failed to settle order');

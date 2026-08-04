@@ -232,14 +232,22 @@ const createKotHandler = async (req, res) => {
     }
 
     // Update table status to KOT_CUT in PostgreSQL
-    if (payload.tableId || payload.table_id) {
-      const targetTableId = payload.tableId || payload.table_id;
-      let table = await global.serverdbConnection.Table.findByPk(targetTableId);
+    if (payload.tableId || payload.table_id || payload.tableNo) {
+      const cleanNum = String(payload.tableNo || payload.tableId || payload.table_id || '').replace(/[^0-9]/g, '');
+      const numId = Number(cleanNum) || 1;
+      const paddedNo = String(numId).padStart(2, '0');
+
+      let table = await global.serverdbConnection.Table.findByPk(numId);
       if (!table) {
         table = await global.serverdbConnection.Table.findOne({
           where: {
-            // mpos_table has NO table_no column — only table_name
-            table_name: `Table ${targetTableId}`
+            [global.serverdbConnection.Sequelize.Op.or]: [
+              { id: numId },
+              { table_name: `Table ${numId}` },
+              { table_name: `Table ${paddedNo}` },
+              { table_name: `T${numId}` },
+              { table_name: `T${paddedNo}` }
+            ]
           }
         });
       }
@@ -256,6 +264,7 @@ const createKotHandler = async (req, res) => {
             customer: payload.customerName || extra.customer || 'Walk-in'
           }
         });
+        console.log(`✅ Backend KOT.js automatically updated Table ${table.table_name || table.id} to KOT_CUT in PostgreSQL DB`);
       }
     }
 
@@ -282,6 +291,42 @@ const createKotHandler = async (req, res) => {
 
 router.post('/', createKotHandler);
 router.post('/save', createKotHandler);
+
+// POST /close-table/:tableId — Mark ALL active KOTs for a table as closed (is_active=0)
+// Called after payment to prevent old KOT items from appearing in future billing sessions
+router.post('/close-table/:tableId', async (req, res) => {
+  const response = new ResponseMessage(200, '');
+  try {
+    const tableIdParam = req.params.tableId;
+    const cleanId = String(tableIdParam).replace(/[^0-9]/g, '') || String(tableIdParam);
+
+    const [updatedCount] = await global.serverdbConnection.KOT.update(
+      { is_active: 0, status: 6 }, // 6 = Served/Closed
+      {
+        where: {
+          is_active: 1,
+          [global.serverdbConnection.Sequelize.Op.or]: [
+            { table_id: Number(cleanId) || 0 },
+            { table_name: `Table ${cleanId}` },
+            { table_name: `T${cleanId}` },
+            { table_name: `T0${cleanId}` }
+          ]
+        }
+      }
+    );
+
+    response.setStatus(200);
+    response.setMessage(`Closed ${updatedCount} KOT(s) for table ${tableIdParam}`);
+    response.data = { tableId: tableIdParam, closedCount: updatedCount };
+    console.log(`✅ Closed ${updatedCount} KOT(s) for table ${tableIdParam} after payment`);
+  } catch (err) {
+    console.error('Error closing KOTs for table:', err);
+    response.setStatus(400);
+    response.setMessage(err.message || 'Failed to close KOTs for table');
+  }
+  res.json(response);
+});
+
 
 // POST /:id/move — Move KOT to another table, updating both tables in PostgreSQL
 router.post('/:id/move', async (req, res) => {
