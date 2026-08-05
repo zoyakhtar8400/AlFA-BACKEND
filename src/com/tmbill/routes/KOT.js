@@ -197,12 +197,60 @@ const createKotHandler = async (req, res) => {
       totalAmount += (Number(it.qty || it.quantity || 1) * Number(it.unitPrice || it.price || it.rate || 0));
     });
 
+    const targetTableId = Number(payload.tableId || payload.table_id || 1);
+    const cleanTableNum = String(payload.tableNo || payload.tableId || payload.table_id || '').replace(/[^0-9]/g, '') || String(targetTableId);
+
+    // Deactivate previous active KOTs if payload indicates new session or if table was AVAILABLE / Blank
+    let isBlankOrNew = payload.isNewSession || payload.is_new_session || false;
+    if (!isBlankOrNew && targetTableId) {
+      try {
+        let existingTable = await global.serverdbConnection.Table.findByPk(targetTableId);
+        if (!existingTable) {
+          existingTable = await global.serverdbConnection.Table.findOne({
+            where: {
+              [global.serverdbConnection.Sequelize.Op.or]: [
+                { table_name: `Table ${cleanTableNum}` },
+                { table_name: `T${cleanTableNum}` },
+                { table_name: `T0${cleanTableNum}` }
+              ]
+            }
+          });
+        }
+        if (existingTable) {
+          const tState = String(existingTable.order_state || '').toUpperCase();
+          if (['AVAILABLE', 'BLANK', 'PAYMENT_COMPLETED', 'PAID', 'CLEANING'].includes(tState)) {
+            isBlankOrNew = true;
+          }
+        }
+      } catch (e) {
+        console.warn('Error checking table state before KOT create:', e.message);
+      }
+    }
+
+    if (isBlankOrNew) {
+      console.log(`🧹 Deactivating old KOTs for table ${targetTableId} (Table ${cleanTableNum}) for new session...`);
+      await global.serverdbConnection.KOT.update(
+        { is_active: 0, status: 6 },
+        {
+          where: {
+            is_active: 1,
+            [global.serverdbConnection.Sequelize.Op.or]: [
+              { table_id: targetTableId },
+              { table_name: `Table ${cleanTableNum}` },
+              { table_name: `T${cleanTableNum}` },
+              { table_name: `T0${cleanTableNum}` }
+            ]
+          }
+        }
+      );
+    }
+
     const kotData = {
       // mpos_kot model columns: kot_id, table_id, table_name, custom_bill_number, in_time, waiter, amount, is_active, store_id, status, kot_date, customer_name
       // NO kot_no or table_no columns exist in mpos_kot
       custom_bill_number: customBillNo,
-      table_id: Number(payload.tableId || payload.table_id || 1),
-      table_name: payload.tableNo ? `Table ${payload.tableNo}` : (payload.table_name || `Table ${payload.tableId || 1}`),
+      table_id: targetTableId,
+      table_name: payload.tableNo ? `Table ${payload.tableNo}` : (payload.table_name || `Table ${targetTableId}`),
       customer_name: payload.customerName || payload.customer_name || 'Walk-in',
       store_id: payload.store_id || 'STORE_1',
       status: mapStatusStringToInt(payload.status || 'Sent to Kitchen'),

@@ -49,6 +49,24 @@ function mapTable(t) {
           },
           { where: { id: t.id } }
         ).catch(err => console.warn('Error resetting table status in DB:', err.message));
+
+        const cleanId = String(t.table_no || t.id).replace(/[^0-9]/g, '') || String(t.id);
+        if (global.serverdbConnection.KOT) {
+          global.serverdbConnection.KOT.update(
+            { is_active: 0, status: 6 },
+            {
+              where: {
+                is_active: 1,
+                [global.serverdbConnection.Sequelize.Op.or]: [
+                  { table_id: t.id },
+                  { table_name: `Table ${cleanId}` },
+                  { table_name: `T${cleanId}` },
+                  { table_name: `T0${cleanId}` }
+                ]
+              }
+            }
+          ).catch(err => console.warn('Error deactivating KOTs on table reset:', err.message));
+        }
       }
     } else {
       status = 'PAYMENT_COMPLETED';
@@ -278,6 +296,24 @@ const patchStatusHandler = async (req, res) => {
       updatedExtra.amount = 0;
       updatedExtra.waiter = null;
       updatedExtra.customer = 'Walk-in';
+
+      const cleanId = String(table.table_no || table.id).replace(/[^0-9]/g, '') || String(table.id);
+      if (global.serverdbConnection && global.serverdbConnection.KOT) {
+        global.serverdbConnection.KOT.update(
+          { is_active: 0, status: 6 },
+          {
+            where: {
+              is_active: 1,
+              [global.serverdbConnection.Sequelize.Op.or]: [
+                { table_id: table.id },
+                { table_name: `Table ${cleanId}` },
+                { table_name: `T${cleanId}` },
+                { table_name: `T0${cleanId}` }
+              ]
+            }
+          }
+        ).catch(err => console.warn('Error deactivating KOTs on table status patch:', err.message));
+      }
     }
 
     await table.update({ order_state: status, extra_details: updatedExtra });

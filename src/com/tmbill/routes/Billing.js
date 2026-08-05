@@ -130,11 +130,25 @@ const paymentHandler = async (req, res) => {
         }
       }
 
-      // Close KOT in PostgreSQL
-      await global.serverdbConnection.KOT.update(
-        { status: 6 },
-        { where: { table_id: bill.table_id, is_active: 1 }, transaction }
-      );
+      // Close KOT in PostgreSQL (set is_active: 0 so old KOT items don't accumulate in future sessions)
+      if (bill.table_id) {
+        const cleanId = String(bill.table_id).replace(/[^0-9]/g, '') || String(bill.table_id);
+        await global.serverdbConnection.KOT.update(
+          { is_active: 0, status: 6 },
+          {
+            where: {
+              is_active: 1,
+              [global.serverdbConnection.Sequelize.Op.or]: [
+                { table_id: Number(cleanId) || 0 },
+                { table_name: `Table ${cleanId}` },
+                { table_name: `T${cleanId}` },
+                { table_name: `T0${cleanId}` }
+              ]
+            },
+            transaction
+          }
+        );
+      }
     }
 
     await transaction.commit();
