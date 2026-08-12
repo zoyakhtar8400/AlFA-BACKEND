@@ -179,8 +179,7 @@ function getModel(sequelize, type) {
     if (user_id) {
       query =
         'SELECT mpos_order_child.*,SUM(mpos_order_child.quantity) as qty,  ' +
-        // ` printf("%.${global.ROUNDOFF_UPTO}f", (SUM(mpos_order_child.quantity)*price)) as total` +
-        ` printf("%.${global.ROUNDOFF_UPTO}f", SUM(mpos_order_child.quantity * mpos_order_child.price)) as total,` +
+        ' SUM(mpos_order_child.quantity * mpos_order_child.price) as total,' +
         ' FROM mpos_order_child' +
         ' LEFT JOIN' +
         ' mpos_order' +
@@ -189,8 +188,7 @@ function getModel(sequelize, type) {
         ' mpos_order.my_order_date BETWEEN' +
         ' :fromDate AND  :toDate ' +
         ' AND store_id=:store_id' +
-        // ' AND mpos_order.user_id=:user_id ' +
-        ' AND order_state in ("fulfilled") ' +
+        ' AND order_state in (\'fulfilled\') ' +
         ` ${user_id ? `${' AND mpos_order.user_id=:user_id '}` : ''} ` +
         ' GROUP BY title ';
       try {
@@ -211,7 +209,7 @@ function getModel(sequelize, type) {
     } else {
       query =
         'SELECT mpos_order_child.*,SUM(mpos_order_child.quantity) as qty,  ' +
-        ` printf("%.${global.ROUNDOFF_UPTO}f", (SUM(mpos_order_child.quantity)*price)) as total` +
+        ' SUM(mpos_order_child.quantity * mpos_order_child.price) as total,' +
         ' FROM mpos_order_child' +
         ' LEFT JOIN' +
         ' mpos_order' +
@@ -220,9 +218,7 @@ function getModel(sequelize, type) {
         ' mpos_order.my_order_date BETWEEN' +
         ' :fromDate AND  :toDate ' +
         ' AND store_id=:store_id' +
-        ' AND order_state in ("fulfilled") ' +
-        ` ${user_id ? `${' AND mpos_order.user_id=:user_id '}` : ''} ` +
-        // + ' AND user_id=:user_id '
+        ' AND order_state in (\'fulfilled\') ' +
         ' GROUP BY title ';
       try {
         solditemsList = await sequelize.query(query, {
@@ -230,7 +226,6 @@ function getModel(sequelize, type) {
             fromDate: fromDate,
             toDate: toDate,
             store_id: store_id,
-            user_id: user_id,
           },
           type: sequelize.QueryTypes.SELECT,
         });
@@ -258,16 +253,12 @@ function getModel(sequelize, type) {
       grouByStatement = ' GROUP BY mpos_order_child.item_id  ';
       // grouByStatement += ' ,item_id  ';
     }
-    // let query = `SELECT mpos_order_child.*,printf("%.${global.ROUNDOFF_UPTO}f", SUM(mpos_order_child.quantity)) as qty,  `
     let query =
-      `SELECT mpos_order_child.*,  printf("%.${global.ROUNDOFF_UPTO}f", SUM(mpos_order_child.quantity)) as qty,  ` +
-      // ' (CASE mpos_order_child.total =0  WHEN TRUE ' +
-      // ' THEN 0 ELSE mpos_order_child.price END) as finalPrice,' +
-      ` printf("%.${global.ROUNDOFF_UPTO}f",` +
-      ` ${groupByBaseItem ? 'AVG(CASE mpos_order_child.total = 0 WHEN TRUE THEN 0   ELSE mpos_order_child.price END)' : '(CASE mpos_order_child.total = 0 WHEN TRUE THEN 0   ELSE mpos_order_child.price END)'} ) as finalPrice, ` +
-      ` printf("%.${global.ROUNDOFF_UPTO}f", (SUM(mpos_order_child.quantity)*AVG(price))) as finalamount, ` +
+      `SELECT mpos_order_child.*,  SUM(mpos_order_child.quantity) as qty,  ` +
+      ` ${groupByBaseItem ? 'AVG(CASE mpos_order_child.total = 0 WHEN TRUE THEN 0   ELSE mpos_order_child.price END)' : '(CASE mpos_order_child.total = 0 WHEN TRUE THEN 0   ELSE mpos_order_child.price END)'} as finalPrice, ` +
+      ` (SUM(mpos_order_child.quantity)*AVG(price)) as finalamount, ` +
       ` (CASE mpos_order_child.tax_method=1 WHEN TRUE THEN SUM(mpos_order_child.total_with_tax - (mpos_order_child.tax_value * mpos_order_child.quantity)) ELSE (SUM(mpos_order_child.quantity) * mpos_order_child.price) END) as total_withouttax, ` +
-      ` printf("%.${global.ROUNDOFF_UPTO}f", SUM(mpos_order_child.total_with_tax)) as total_with_tax ` +
+      ` SUM(mpos_order_child.total_with_tax) as total_with_tax ` +
       ' FROM mpos_order_child' +
       ' LEFT JOIN' +
       ' mpos_order' +
@@ -276,9 +267,8 @@ function getModel(sequelize, type) {
       ' mpos_order.created_time BETWEEN' +
       ' :fromDate AND  :toDate ' +
       ' AND store_id=:store_id' +
-      ' AND order_state in ("fulfilled") ' +
+      ' AND order_state in (\'fulfilled\') ' +
       ` ${user_id ? `${' AND mpos_order.user_id=:user_id '}` : ''} ` +
-      // + ' AND user_id=:user_id '
       `${grouByStatement}` +
       ' ORDER BY qty DESC limit :limit  ';
 
@@ -290,15 +280,15 @@ function getModel(sequelize, type) {
         '      THEN SUM(mpos_order_child.total_with_tax - (mpos_order_child.tax_value * mpos_order_child.quantity)) ' +
         '      ELSE (SUM(mpos_order_child.quantity) * mpos_order_child.price) ' +
         ' END as total_withouttax, ' +
-        ` printf("%.${global.ROUNDOFF_UPTO}f", CASE WHEN mpos_order_child.total = 0 THEN 0 ELSE mpos_order_child.price END) as finalPrice, ` +
-        ` printf("%.${global.ROUNDOFF_UPTO}f", (SUM(mpos_order_child.quantity) * price)) as finalamount ` + // removed extra comma
+        ` CASE WHEN mpos_order_child.total = 0 THEN 0 ELSE mpos_order_child.price END as finalPrice, ` +
+        ` (SUM(mpos_order_child.quantity) * price) as finalamount ` +
         ' FROM mpos_order_child ' +
         ' LEFT JOIN mpos_order ' +
         ' ON mpos_order_child.orderMasterId = mpos_order.order_id ' +
         ' WHERE ' +
         ' mpos_order.created_time BETWEEN :fromDate AND :toDate ' +
         ' AND store_id = :store_id ' +
-        ' AND order_state IN ("fulfilled") ' +
+        ' AND order_state IN (\'fulfilled\') ' +
         (user_id ? ' AND mpos_order.user_id = :user_id ' : '') +
         `${grouByStatement} ` +
         ' ORDER BY finalamount DESC ' +
@@ -374,36 +364,35 @@ function getModel(sequelize, type) {
     //   // +' AND mpos_order.createdBy=:user_id ' +
     //   ' GROUP BY mpos_item.category_ref_ids,mpos_categories.category_name';
 
+    const startDateOnly = String(fromDate).slice(0, 10);
+    const endDateOnly = String(toDate).slice(0, 10);
+
     let query = `SELECT
-  mi.category_ref_ids                      AS category_ref_ids,
+  mi.category_ref_ids AS category_ref_ids,
   mc.category_name,
   mc.alternative_title,
 
-  SUM(moc.quantity)                       AS count,
-  SUM(moc.total_with_tax - moc.discount)  AS priceTotal,
-  SUM(moc.quantity * moc.price)           AS total,
-  SUM(moc.quantity) * AVG(moc.price)      AS newtotal
+  SUM(CAST(COALESCE(moc.quantity, 0) AS numeric)) AS count,
+  SUM(CAST(COALESCE(moc.total_with_tax, 0) - COALESCE(moc.discount, 0) AS numeric)) AS priceTotal,
+  SUM(CAST(COALESCE(moc.quantity, 0) * COALESCE(moc.price, 0) AS numeric)) AS total,
+  SUM(CAST(COALESCE(moc.quantity, 0) AS numeric)) * AVG(CAST(COALESCE(moc.price, 0) AS numeric)) AS newtotal
 
 FROM
 (
   SELECT order_id
   FROM mpos_order
-  WHERE created_time BETWEEN :fromDate AND :toDate
-    AND store_id = :store_id
-    AND order_state IN ('fulfilled', 'free')
-    ${user_id ? ' AND user_id = :user_id' : ''}
+  WHERE (my_order_date BETWEEN :startDateOnly AND :endDateOnly OR my_order_date IS NULL)
+    AND order_state IN ('fulfilled', 'free', 'completed')
 ) AS fo   -- filtered_orders
 
 INNER JOIN mpos_order_child AS moc
-  ON moc.orderMasterId = fo.order_id
+  ON CAST(moc."orderMasterId" AS text) = CAST(fo.order_id AS text)
 
-INNER JOIN mpos_item AS mi
-  ON mi.item_refid = moc.item_id
- AND mi.store_id = :store_id
+LEFT JOIN mpos_item AS mi
+  ON CAST(mi.item_refid AS text) = CAST(moc.item_id AS text)
 
-INNER JOIN mpos_categories AS mc
-  ON mc.category_refid = mi.category_ref_ids
- AND mc.store_id = mi.store_id
+LEFT JOIN mpos_categories AS mc
+  ON CAST(mc.category_refid AS text) = CAST(mi.category_ref_ids AS text)
 
 GROUP BY
   mi.category_ref_ids,
@@ -417,7 +406,9 @@ ORDER BY total DESC;
         replacements: {
           fromDate: fromDate,
           toDate: toDate,
-          store_id: store_id,
+          startDateOnly: startDateOnly,
+          endDateOnly: endDateOnly,
+          store_id: String(store_id),
           user_id: user_id,
         },
         type: sequelize.QueryTypes.SELECT,

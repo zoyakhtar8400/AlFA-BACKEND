@@ -68,6 +68,16 @@ router.post('/', async (req, res) => {
     const tableNoStr = String(b.tableNo || b.table_no || b.tableId || '').replace(/[^0-9]/g, '') || String(b.tableId || '');
     const resId = b.reservationId || `RES-${Date.now()}`;
 
+    const formatTime = (v) => {
+      if (!v) return new Date().toTimeString().split(' ')[0];
+      const str = String(v).trim();
+      if (str.length === 8 && str.includes(':')) return str;
+      if (str.length === 5 && str.includes(':')) return `${str}:00`;
+      const parsed = new Date(str);
+      if (!isNaN(parsed.getTime())) return parsed.toTimeString().split(' ')[0];
+      return new Date().toTimeString().split(' ')[0];
+    };
+
     const created = await global.serverdbConnection.TableReservation.create({
       reservation_id: resId,
       store_id: b.store_id || 'STORE_1',
@@ -77,11 +87,11 @@ router.post('/', async (req, res) => {
       phone: b.phone || '',
       persons: Number(b.persons || b.guestsCount || 1),
       occasion: b.occasion || '',
-      check_in: b.checkIn || b.check_in || null,
-      check_out: b.checkOut || b.check_out || null,
+      check_in: formatTime(b.checkIn || b.check_in),
+      check_out: formatTime(b.checkOut || b.check_out),
       status: b.status || 'Reserved',
-      created_at: new Date(),
-      created_time: new Date()
+      created_at: formatTime(new Date()),
+      created_time: formatTime(new Date())
     });
 
     // Mark table as Reserved in PostgreSQL

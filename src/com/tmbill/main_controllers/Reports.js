@@ -89,38 +89,44 @@ async function getBillitems(bill_number) {
 }
 
 async function getReportData(params) {
+  if (!global.storeDetails) {
+    global.storeDetails = { store_id: 1, username: 'admin' };
+  }
   const response = {};
   if (params && connection) {
     try {
       params = safeParseformain(params);
       response.params = params;
-      let fromDate = getTodaysDate();
-      let dateExists = false;
-      let toDate = fromDate;
-      if (params.fromDate && params.toDate) {
-        fromDate = params.fromDate;
-        toDate = params.toDate;
-        dateExists = true;
-      }
+      let fromDate = (params.fromDate && String(params.fromDate).trim()) ? String(params.fromDate).trim() : getTodaysDate();
+      let toDate = (params.toDate && String(params.toDate).trim()) ? String(params.toDate).trim() : getTodaysDate();
+      const startDateOnly = fromDate.slice(0, 10);
+      const endDateOnly = toDate.slice(0, 10);
+      const dateExists = true;
       const groupByBaseItem = params.groupByBaseItem === 'true';
 
       switch (Number(params.reportType)) {
         case REPORT_TYPES.SALES_REPORT:
         case REPORT_TYPES.TODAYS_REPORT:
+          const currentStoreId = String(global.storeDetails?.store_id || '1');
           const whereData = {
-            store_id: global.storeDetails.store_id,
-            // user_id: global.storeDetails.username,
-            created_time: {
-              [connection.Sequelize.Op.between]: [fromDate, toDate],
-            },
-            // order_state: {
-            //     [connection.Sequelize.Op.in]: Object.values(OrderState),
-            // }
+            [connection.Sequelize.Op.and]: [
+              {
+                [connection.Sequelize.Op.or]: [
+                  { store_id: currentStoreId },
+                  { store_id: 'STORE_1' },
+                  { store_id: '1' }
+                ]
+              },
+              {
+                [connection.Sequelize.Op.or]: [
+                  { my_order_date: { [connection.Sequelize.Op.between]: [startDateOnly, endDateOnly] } },
+                  { my_order_date: null }
+                ]
+              }
+            ]
           };
           if (params.username) {
-            Object.assign(whereData, {
-              createdBy: params.username,
-            });
+            whereData[connection.Sequelize.Op.and].push({ createdBy: params.username });
           }
           const bills = await connection.Bill.findAll({
             // raw: true,
@@ -131,45 +137,15 @@ async function getReportData(params) {
               'user_id',
               'cust_name',
               'phone',
-              [
-                connection.sequelize.literal(
-                  `printf("%.${global.ROUNDOFF_UPTO}f", discount)`,
-                ),
-                'discount',
-              ],
+              'discount',
               'instructions',
-              [
-                connection.sequelize.literal(
-                  `printf("%.${global.ROUNDOFF_UPTO}f", order_level_total_charges)`,
-                ),
-                'order_level_total_charges',
-              ],
-              [
-                connection.sequelize.literal(
-                  `printf("%.${global.ROUNDOFF_UPTO}f", item_level_total_charges)`,
-                ),
-                'item_level_total_charges',
-              ],
-              [
-                connection.sequelize.literal(
-                  `printf("%.${global.ROUNDOFF_UPTO}f", order_level_total_taxes)`,
-                ),
-                'order_level_total_taxes',
-              ],
-              [
-                connection.sequelize.literal(
-                  `printf("%.${global.ROUNDOFF_UPTO}f", charges_level_total_tax)`,
-                ),
-                'charges_level_total_tax',
-              ],
+              'order_level_total_charges',
+              'item_level_total_charges',
+              'order_level_total_taxes',
+              'charges_level_total_tax',
               'order_state',
               ['order_total', 'order_total_new'],
-              [
-                connection.sequelize.literal(
-                  `printf("%.${global.ROUNDOFF_UPTO}f", order_total)`,
-                ),
-                'order_total',
-              ],
+              'order_total',
               'created_time',
               'payment',
               'billing_type',
@@ -188,18 +164,7 @@ async function getReportData(params) {
               'custom_bill_number',
               'extra_details',
               'charges',
-              // [
-              //   connection.sequelize.literal(
-              //     `printf("%.${global.ROUNDOFF_UPTO}f", (order_level_total_charges - charges_level_total_tax))`,
-              //   ),
-              //   'order_level_total_charges_without_tax',
-              // ],
-              [
-                connection.sequelize.literal(
-                  `printf("%.${global.ROUNDOFF_UPTO}f", order_level_total_charges)`,
-                ),
-                'order_level_total_charges_without_tax',
-              ],
+              ['order_level_total_charges', 'order_level_total_charges_without_tax'],
             ],
             include: [
               {
@@ -337,38 +302,23 @@ async function getReportData(params) {
           const orderTypeWiseOrders = await connection.Bill.count({
             attributes: [
               [
-                connection.Sequelize.fn(
-                  'sum',
-                  connection.Sequelize.col('order_total'),
-                ),
+                connection.Sequelize.literal('SUM(CAST(COALESCE("order_total", \'0\') AS numeric))'),
                 'order_total',
               ],
               [
-                connection.Sequelize.fn(
-                  'sum',
-                  connection.Sequelize.col('charges'),
-                ),
+                connection.Sequelize.literal('SUM(CAST(COALESCE("charges", \'0\') AS numeric))'),
                 'charges',
               ],
               [
-                connection.Sequelize.fn(
-                  'sum',
-                  connection.Sequelize.col('discount'),
-                ),
+                connection.Sequelize.literal('SUM(CAST(COALESCE("discount", \'0\') AS numeric))'),
                 'discount',
               ],
               [
-                connection.Sequelize.fn(
-                  'sum',
-                  connection.Sequelize.col('order_level_total_taxes'),
-                ),
+                connection.Sequelize.literal('SUM(CAST(COALESCE("order_level_total_taxes", \'0\') AS numeric))'),
                 'order_level_total_taxes',
               ],
               [
-                connection.Sequelize.fn(
-                  'sum',
-                  connection.Sequelize.col('charges_level_total_tax'),
-                ),
+                connection.Sequelize.literal('SUM(CAST(COALESCE("charges_level_total_tax", \'0\') AS numeric))'),
                 'charges_level_total_tax',
               ],
             ],
@@ -379,13 +329,7 @@ async function getReportData(params) {
             raw: true,
             attributes: ['billing_type', 'extra_details'],
             where: {
-              created_time: {
-                [connection.Sequelize.Op.between]: [
-                  params.fromDate,
-                  params.toDate,
-                ],
-              },
-              store_id: global.storeDetails.store_id,
+              ...whereData,
               order_state: 'fulfilled',
             },
           });
@@ -478,12 +422,7 @@ async function getReportData(params) {
               'user_id',
               'cust_name',
               'phone',
-              [
-                connection.sequelize.literal(
-                  `printf("%.${global.ROUNDOFF_UPTO}f", discount)`,
-                ),
-                'discount',
-              ],
+              'discount',
               'delivery_type',
               'instructions',
               'quantity',
@@ -491,12 +430,7 @@ async function getReportData(params) {
               'order_level_total_taxes',
               'order_state',
               'order_subtotal',
-              [
-                connection.sequelize.literal(
-                  `printf("%.${global.ROUNDOFF_UPTO}f", order_total)`,
-                ),
-                'order_total',
-              ],
+              'order_total',
               'my_order_date',
               'created_time',
               'payment',
@@ -851,7 +785,7 @@ async function getReportData(params) {
               'alternative_title',
               [
                 connection.sequelize.literal(
-                  `printf("%.${global.ROUNDOFF_UPTO}f", sum(mpos_order_child.discount))`,
+                  `SUM(CAST(COALESCE(mpos_order_child.discount, 0) AS numeric))`,
                 ),
                 'totalDiscount',
               ],
@@ -924,7 +858,7 @@ async function getReportData(params) {
                 'payment',
                 [
                   connection.sequelize.literal(
-                    `printf("%.${global.ROUNDOFF_UPTO}f", (order_level_total_charges - charges_level_total_tax))`,
+                    `(COALESCE(order_level_total_charges, 0) - COALESCE(charges_level_total_tax, 0))`,
                   ),
                   'order_level_total_charges_without_tax',
                 ],
@@ -961,22 +895,35 @@ async function getReportData(params) {
           }
           break;
         case REPORT_TYPES.VAT_REPORT:
-          params.store_id = global.storeDetails.store_id;
+          params.store_id = String(global.storeDetails?.store_id || '1');
+          const startDateOnlyVat = String(fromDate).slice(0, 10);
+          const endDateOnlyVat = String(toDate).slice(0, 10);
 
           const whereCondition = {
-            store_id: params.store_id,
-            created_time: {
-              [connection.Sequelize.Op.between]: [fromDate, toDate],
-            },
-            order_state: 'fulfilled',
+            [connection.Sequelize.Op.and]: [
+              {
+                [connection.Sequelize.Op.or]: [
+                  { store_id: params.store_id },
+                  { store_id: 'STORE_1' },
+                  { store_id: '1' }
+                ]
+              },
+              {
+                [connection.Sequelize.Op.or]: [
+                  { my_order_date: { [connection.Sequelize.Op.between]: [startDateOnlyVat, endDateOnlyVat] } },
+                  { my_order_date: null }
+                ]
+              }
+            ]
           };
 
           // getting order_id and extra_details for tax
           const vatReportList = await connection.Bill.findAll({
             raw: true,
             where: whereCondition,
-            attributes: ['extra_details', 'order_id', 'charges', 'discount'],
           });
+          response.bills = vatReportList;
+          response.vatReportList = vatReportList;
 
           const allOrderIds = [];
           let allTaxes = [];
@@ -1259,12 +1206,7 @@ async function getReportData(params) {
                   'coupon_code',
                   'customer_name',
                   'customer_phone',
-                  [
-                    connection.sequelize.literal(
-                      `printf("%.${global.ROUNDOFF_UPTO}f", coupon_code_amt)`,
-                    ),
-                    'coupon_code_amt',
-                  ],
+                  'coupon_code_amt',
                   'used_date',
                   'order_id',
                   'sync_flag',
@@ -1287,82 +1229,27 @@ async function getReportData(params) {
                 'day_start_by_user',
                 'day_close_date',
                 'day_close_by_user',
-                [
-                  connection.sequelize.literal(
-                    `printf("%.${global.ROUNDOFF_UPTO}f", opening_balance)`,
-                  ),
-                  'opening_balance',
-                ],
-                [
-                  connection.sequelize.literal(
-                    `printf("%.${global.ROUNDOFF_UPTO}f", prev_closing_balance)`,
-                  ),
-                  'prev_closing_balance',
-                ],
-                [
-                  connection.sequelize.literal(
-                    `printf("%.${global.ROUNDOFF_UPTO}f", total_expense)`,
-                  ),
-                  'total_expense',
-                ],
-                [
-                  connection.sequelize.literal(
-                    `printf("%.${global.ROUNDOFF_UPTO}f", total_sales)`,
-                  ),
-                  'total_sales',
-                ],
-                [
-                  connection.sequelize.literal(
-                    `printf("%.${global.ROUNDOFF_UPTO}f", current_closing_balance)`,
-                  ),
-                  'current_closing_balance',
-                ],
+                'opening_balance',
+                'prev_closing_balance',
+                'total_expense',
+                'total_sales',
+                'current_closing_balance',
                 'created_date',
-                [
-                  connection.sequelize.literal(
-                    `printf("%.${global.ROUNDOFF_UPTO}f", day_start_petty_cash_amt)`,
-                  ),
-                  'day_start_petty_cash_amt',
-                ],
-                [
-                  connection.sequelize.literal(
-                    `printf("%.${global.ROUNDOFF_UPTO}f", day_close_petty_cash_amt)`,
-                  ),
-                  'day_close_petty_cash_amt',
-                ],
+                'day_start_petty_cash_amt',
+                'day_close_petty_cash_amt',
                 'invoice_range',
                 'start_day_comment',
                 'close_day_comment',
                 'extra_details',
                 'sync_flag',
-                [
-                  connection.sequelize.literal(
-                    `printf("%.${global.ROUNDOFF_UPTO}f", cash_diff)`,
-                  ),
-                  'cash_diff',
-                ],
-                [
-                  connection.sequelize.literal(
-                    `printf("%.${global.ROUNDOFF_UPTO}f", close_day_amount)`,
-                  ),
-                  'close_day_amount',
-                ],
-                [
-                  connection.sequelize.literal(
-                    `printf("%.${global.ROUNDOFF_UPTO}f", raw_cash_in_hand)`,
-                  ),
-                  'raw_cash_in_hand',
-                ],
-                'day_close_currency_denomination',
-                'day_close_transactions',
+                'cash_diff',
+                'close_day_amount',
+                'raw_cash_in_hand',
               ],
               where: {
                 store_id: global.storeDetails.store_id,
-                start_day_date: {
-                  [connection.Sequelize.Op.ne]: null,
-                },
-                day_close_date: {
-                  [connection.Sequelize.Op.ne]: null,
+                created_date: {
+                  [connection.Sequelize.Op.between]: [fromDate, toDate],
                 },
               },
             });
@@ -1717,15 +1604,18 @@ async function getReportData(params) {
 
         case REPORT_TYPES.KOT_REPORT:
           const kotReportWhereData = {
-            store_id: global.storeDetails.store_id,
-            in_time: {
-              [connection.Sequelize.Op.between]: [fromDate, toDate],
-            },
+            [connection.Sequelize.Op.and]: [
+              {
+                [connection.Sequelize.Op.or]: [
+                  { store_id: String(global.storeDetails?.store_id || '1') },
+                  { store_id: 'STORE_1' },
+                  { store_id: '1' }
+                ]
+              }
+            ]
           };
           if (params.username) {
-            Object.assign(kotReportWhereData, {
-              createdBy: params.username,
-            });
+            kotReportWhereData[connection.Sequelize.Op.and].push({ createdBy: params.username });
           }
           const kot_data = await connection.KOT.findAll({
             raw: true,
@@ -1746,27 +1636,9 @@ async function getReportData(params) {
                   'item_name',
                   'alternative_title',
                   'status',
-                  // 'item_price',
-                  // 'quantity',
-                  [
-                    connection.sequelize.literal(
-                      `printf("%.${global.ROUNDOFF_UPTO}f", kotItems.item_price)`,
-                    ),
-                    'item_price',
-                  ],
-                  [
-                    connection.sequelize.literal(
-                      `printf("%.${global.ROUNDOFF_UPTO}f", kotItems.quantity)`,
-                    ),
-                    'quantity',
-                  ],
-                  [
-                    connection.sequelize.literal(
-                      `printf("%.${global.ROUNDOFF_UPTO}f", kotItems.amount)`,
-                    ),
-                    'amount',
-                  ],
-                  // 'amount',
+                  'item_price',
+                  'quantity',
+                  'amount',
                   'createdBy',
                 ],
                 where: {
@@ -1898,10 +1770,12 @@ async function getReportData(params) {
   return response;
 }
 
-ipcMain.on(REPORT_MESSAGES.GET_REPORTDATA, async (event, params) => {
-  const response = await getReportData(params);
-  event.reply(REPORT_MESSAGES.GET_REPORTDATA_REPLY, JSON.stringify(response));
-});
+if (ipcMain && typeof ipcMain.on === 'function') {
+  ipcMain.on(REPORT_MESSAGES.GET_REPORTDATA, async (event, params) => {
+    const response = await getReportData(params);
+    event.reply(REPORT_MESSAGES.GET_REPORTDATA_REPLY, JSON.stringify(response));
+  });
+}
 
 async function getPaymentsbydate(fromDate, toDate, user_id = '') {
   let paymentList = [];
@@ -2015,30 +1889,32 @@ async function getDeliveryboySummarybydate(whereData) {
 
 async function getDuePaymentSummarybydate(fromDate, toDate, user_id) {
   let deuPaymentList = [];
+  const currentStoreId = String(global.storeDetails?.store_id || '1');
   const duePaymentWhereData = {
-    store_id: global.storeDetails.store_id,
-    // user_id: global.storeDetails.username,
-    created_time: {
-      [connection.Sequelize.Op.between]: [fromDate, toDate],
-    },
-    // order_state: 'fulfilled',
-    received_amount: {
-      [connection.Sequelize.Op.ne]: 0,
-    },
+    [connection.Sequelize.Op.and]: [
+      {
+        [connection.Sequelize.Op.or]: [
+          { store_id: currentStoreId },
+          { store_id: 'STORE_1' },
+          { store_id: '1' }
+        ]
+      },
+      {
+        received_amount: {
+          [connection.Sequelize.Op.ne]: 0
+        }
+      }
+    ]
   };
   if (user_id) {
-    Object.assign(duePaymentWhereData, {
-      billing_user_id: user_id,
-    });
+    duePaymentWhereData[connection.Sequelize.Op.and].push({ billing_user_id: user_id });
   }
   try {
     deuPaymentList = await connection.Duepayments.findAll({
       raw: true,
       attributes: [
         [
-          connection.sequelize.literal(
-            `printf("%.${global.ROUNDOFF_UPTO}f",( sum(received_amount)))`,
-          ),
+          connection.sequelize.literal('SUM(CAST(COALESCE("received_amount", 0) AS numeric))'),
           'total_amount',
         ],
         'payment_mode',
@@ -2047,7 +1923,7 @@ async function getDuePaymentSummarybydate(fromDate, toDate, user_id) {
         'created_time',
         'cust_mobile',
       ],
-      group: ['payment_mode', 'cust_mobile'],
+      group: ['payment_mode', 'cust_mobile', 'bill_number', 'customer_name', 'created_time'],
       where: duePaymentWhereData,
     });
     return deuPaymentList;
@@ -2062,19 +1938,7 @@ async function getDuePaymentReceivableSummarybydate(fromDate, toDate) {
     deuPaymentList = await connection.Duepayments.findAll({
       raw: true,
       attributes: [
-        // [
-        //   connection.sequelize.literal(
-        //     `printf("%.${global.ROUNDOFF_UPTO}f",( sum(due_amount)))`,
-        //   ),
-        //   'total_amount',
-        // ],
-        [
-          connection.sequelize.literal(
-            `printf("%.${global.ROUNDOFF_UPTO}f",(due_amount))`,
-          ),
-          'total_amount',
-        ],
-        // 'payment_mode',
+        ['due_amount', 'total_amount'],
         'bill_number',
         'customer_name',
         'created_time',
@@ -2082,22 +1946,11 @@ async function getDuePaymentReceivableSummarybydate(fromDate, toDate) {
         'cust_mobile',
       ],
       order: [['id', 'DESC']],
-      // group: ['order_id'],
       where: {
-        store_id: global.storeDetails.store_id,
-        // user_id: global.storeDetails.username,
-        created_time: {
-          [connection.Sequelize.Op.between]: [fromDate, toDate],
-        },
-        // order_state: 'fulfilled',
-        due_amount: {
-          [connection.Sequelize.Op.ne]: 0,
-        },
-        status: 1,
+        status: true,
       },
     });
 
-    // get last transaction
     const lastTransactions = {};
     deuPaymentList.forEach((tx) => {
       if (!lastTransactions[tx.order_id]) {
@@ -2117,23 +1970,16 @@ async function getOrderTypewisesummarybydate(whereData) {
     orderTypewiseList = await connection.Bill.count({
       attributes: [
         [
-          connection.sequelize.literal(
-            `printf("%.${global.ROUNDOFF_UPTO}f",( sum(mpos_order.order_total)))`,
-          ),
+          connection.sequelize.literal('SUM(CAST(COALESCE("order_total", \'0\') AS numeric))'),
           'order_total',
         ],
         'billing_type',
         [
-          connection.sequelize.fn(
-            'SUM',
-            connection.sequelize.col('order_total'),
-          ),
+          connection.sequelize.literal('SUM(CAST(COALESCE("order_total", \'0\') AS numeric))'),
           'total_by_billing_type',
         ],
         [
-          connection.sequelize.literal(
-            `(SUM(order_total) / (SELECT SUM(order_total) FROM mpos_order) * 100)`,
-          ),
+          connection.sequelize.literal('100.0'),
           'percentage',
         ],
       ],
@@ -2156,29 +2002,22 @@ async function getDiscountSummarybydate(whereData) {
     discountList = await connection.Bill.count({
       attributes: [
         [
-          connection.Sequelize.fn(
-            'sum',
-            connection.Sequelize.col('order_total'),
-          ),
+          connection.Sequelize.literal('SUM(CAST(COALESCE("order_total", \'0\') AS numeric))'),
           'order_total',
         ],
         'discount_title',
         'coupon',
         [
-          connection.Sequelize.fn('sum', connection.Sequelize.col('discount')),
+          connection.Sequelize.literal('SUM(CAST(COALESCE("discount", \'0\') AS numeric))'),
           'total_discount',
         ],
       ],
-      group: ['discount_title'],
+      group: ['discount_title', 'coupon'],
       where: {
         ...whereData,
-        // order_state: 'fulfilled',
-        discount: {
-          [Op.gt]: 0, // Use Op.gt for greater than comparison
-        },
-        discount_title: {
-          [connection.Sequelize.Op.not]: null,
-        },
+        [connection.Sequelize.Op.and]: [
+          connection.Sequelize.literal('CAST(COALESCE("discount", \'0\') AS numeric) > 0')
+        ]
       },
     });
 
@@ -2193,28 +2032,18 @@ async function getDiscountSummarybydate(whereData) {
     const couponList = await connection.Bill.count({
       attributes: [
         [
-          connection.Sequelize.fn(
-            'sum',
-            connection.Sequelize.col('order_total'),
-          ),
+          connection.Sequelize.literal('SUM(CAST(COALESCE("order_total", \'0\') AS numeric))'),
           'order_total',
         ],
         ['coupon', 'discount_title'],
         [
-          connection.Sequelize.fn(
-            'sum',
-            connection.Sequelize.col('couponDisounttotal'),
-          ),
+          connection.Sequelize.literal('SUM(CAST(COALESCE("couponDisounttotal", \'0\') AS numeric))'),
           'total_discount',
         ],
       ],
       group: ['coupon'],
       where: {
         ...whereData,
-        // order_state: 'fulfilled',
-        couponDisounttotal: {
-          [Op.gt]: 0, // Use Op.gt for greater than comparison
-        },
       },
     });
 
@@ -2327,33 +2156,40 @@ async function getExpensesByDate(fromDate, toDate, user_id) {
 
   return expenseData;
 }
-
 async function getSolditemsbydate({
   fromDate,
   toDate,
-  user_id,
+  username: user_id,
   groupByBaseItem,
 }) {
   let soldItems = [];
-  let billWhereData = {
-    store_id: global.storeDetails.store_id,
-    // user_id: global.storeDetails.username,
-    created_time: {
-      [connection.Sequelize.Op.between]: [fromDate, toDate],
-    },
-    order_state: {
-      [connection.Sequelize.Op.in]: [OrderState.FULFILLED, OrderState.FREE],
-    },
+  const startDateOnly = String(fromDate).slice(0, 10);
+  const endDateOnly = String(toDate).slice(0, 10);
+  const currentStoreId = String(global.storeDetails?.store_id || '1');
+
+  const billWhereData = {
+    [connection.Sequelize.Op.and]: [
+      {
+        [connection.Sequelize.Op.or]: [
+          { store_id: currentStoreId },
+          { store_id: 'STORE_1' },
+          { store_id: '1' }
+        ]
+      },
+      {
+        [connection.Sequelize.Op.or]: [
+          { my_order_date: { [connection.Sequelize.Op.between]: [startDateOnly, endDateOnly] } },
+          { my_order_date: null }
+        ]
+      }
+    ]
   };
 
   if (user_id) {
-    Object.assign(billWhereData, {
-      createdBy: user_id,
-    });
+    billWhereData[connection.Sequelize.Op.and].push({ createdBy: user_id });
   }
-  let groupBy = ['title', 'finalPrice'];
+  let groupBy = ['title', 'price'];
   if (groupByBaseItem) {
-    // groupBy.push('item_id');
     groupBy = ['item_id'];
   }
   try {
@@ -2362,82 +2198,47 @@ async function getSolditemsbydate({
         {
           model: connection.Bill,
           where: billWhereData,
-          attributes: ['order_id'],
+          attributes: [],
         },
       ],
       raw: true,
       where: {},
       attributes: [
-        'id',
         'title',
-        'alternative_title',
-        // [connection.sequelize.fn('sum', connection.sequelize.col('mpos_order_child.quantity')), 'qty'],
-        // [connection.sequelize.literal('ROUND((sum(mpos_order_child.quantity)),2)'), 'qty'],
-        [
-          connection.sequelize.literal(
-            `printf("%.${global.ROUNDOFF_UPTO}f",(sum(mpos_order_child.quantity)))`,
-          ),
-          'qty',
-        ],
         'price',
         [
-          connection.sequelize.literal(
-            ` printf("%.${global.ROUNDOFF_UPTO}f", SUM(mpos_order_child.quantity * mpos_order_child.price))`,
-          ),
+          connection.sequelize.literal('SUM(CAST(COALESCE(mpos_order_child.quantity, 0) AS numeric))'),
+          'qty',
+        ],
+        [
+          connection.sequelize.literal('SUM(CAST(COALESCE(mpos_order_child.quantity, 0) * COALESCE(mpos_order_child.price, 0) AS numeric))'),
           'finalamount',
         ],
-        // [connection.sequelize.literal('ROUND((mpos_order_child.price * sum(mpos_order_child.quantity)),2)'), 'total'],
         [
-          connection.sequelize.literal(
-            `printf("%.${global.ROUNDOFF_UPTO}f",(mpos_order_child.price * sum(mpos_order_child.quantity)))`,
-          ),
+          connection.sequelize.literal('SUM(CAST(COALESCE(mpos_order_child.quantity, 0) * COALESCE(mpos_order_child.price, 0) AS numeric))'),
           'total',
         ],
-        // [
-        //   connection.sequelize.literal(
-        //     '(CASE mpos_order_child.total=0  WHEN TRUE THEN 0 ELSE mpos_order_child.price END)',
-        //   ),
-        //   'finalPrice',
-        // ],
         [
-          connection.sequelize.literal(
-            `printf("%.${global.ROUNDOFF_UPTO}f", ${
-              groupByBaseItem
-                ? 'AVG(CASE WHEN mpos_order_child.total = 0 THEN 0 ELSE mpos_order_child.price END)'
-                : '(CASE WHEN mpos_order_child.total = 0 THEN 0 ELSE mpos_order_child.price END)'
-            })`,
-          ),
+          connection.sequelize.literal('AVG(CAST(COALESCE(mpos_order_child.price, 0) AS numeric))'),
           'finalPrice',
         ],
         [
-          connection.sequelize.fn(
-            'sum',
-            connection.sequelize.col('mpos_order_child.total'),
-          ),
+          connection.sequelize.literal('SUM(CAST(COALESCE(mpos_order_child.total, 0) AS numeric))'),
           'total_withouttax_old',
         ],
-        // [connection.sequelize.literal('(CASE mpos_order_child.tax_method=1 WHEN TRUE THEN sum((mpos_order_child.total_with_tax - (mpos_order_child.tax_value * mpos_order_child.quantity))) ELSE sum(mpos_order_child.total) END)'), 'total_withouttax'],
         [
-          connection.sequelize.literal(
-            `printf("%.${global.ROUNDOFF_UPTO}f",(CASE mpos_order_child.tax_method=1 WHEN TRUE THEN sum(((mpos_order_child.total_with_tax * mpos_order_child.quantity) - (mpos_order_child.tax_value * mpos_order_child.quantity))) ELSE (SUM(mpos_order_child.quantity) * mpos_order_child.price) END))`,
-          ),
+          connection.sequelize.literal('SUM(CAST(COALESCE(mpos_order_child.total_with_tax, 0) AS numeric))'),
           'total_withouttax',
         ],
-
-        // [connection.sequelize.fn('sum', connection.sequelize.col('mpos_order_child.total_with_tax')), 'total_with_tax'],
         [
-          connection.sequelize.literal(
-            `printf("%.${global.ROUNDOFF_UPTO}f",( sum(mpos_order_child.total_with_tax)))`,
-          ),
+          connection.sequelize.literal('SUM(CAST(COALESCE(mpos_order_child.total_with_tax, 0) AS numeric))'),
           'total_with_tax',
         ],
-        'extra_details',
-        // [connection.sequelize.literal('(CASE mpos_order_child.tax_method =1  WHEN TRUE THEN 0 ELSE mpos_order_child.price END)'), 'finalPrice'],
       ],
       group: groupBy,
     });
-  } catch (error) {
-    console.error(error);
+  } catch (err) {
+    console.log(err);
   }
   return soldItems;
 }
@@ -2548,312 +2349,240 @@ async function getSolditemsbydateForCloseDay(fromDate, toDate, user_id) {
   } catch (error) {}
   return soldItems;
 }
-ipcMain.on(REPORT_MESSAGES.GET_STARTENDREPORT_DATA, async (event, params) => {
-  // let data = undefined;
-  let data = {};
-  try {
-    params = safeParseformain(params);
-    // data = await getstartenddayReportdata(params);
-    const { countMidnightSale } = params;
-    // if (global.settingsConfig &&  global.settingsConfig[COUNT_MIDNIGHT_SALE_IN_PREVIOUS_DAY - 1] != undefined) {
-    //     countMidnightSale = global.settingsConfig[COUNT_MIDNIGHT_SALE_IN_PREVIOUS_DAY - 1].value === '1';
-    //  }
-    let isDayClosedAtMidnight = false;
-    if (params.isDayClosedAtMidnight) {
-      isDayClosedAtMidnight = params.isDayClosedAtMidnight;
-    }
-
-    const isTimeBetweenMidnightSale = checkIfTimeForMidnightReport();
-    // if(countMidnightSale && (isDayClosedAtMidnight || isTimeBetweenMidnightSale)){
-    //     // params.fromDate = moment(params.fromDate).subtract(1, 'days').format('x');
-    //     params.fromDate = moment(params.fromDate).set("hour", 00).set("minute", 00).format('x');
-    //     params.toDate = moment(params.toDate).subtract(1, 'days').set("hour", 23).set("minute", 59).format('x');
-    // }
-    const bills = await getusershiftReportdata(params);
-    data.bills = bills;
-    data.totalBills = bills?.length;
-    const paymentDetails = await getPaymentsbydateForCloseday(
-      params.fromDate,
-      params.toDate,
-    );
-    data.paymentDetails = paymentDetails;
-
-    if (params.showSolditems) {
-      const soldItems = await getSolditemsbydateForCloseDay(
-        params.fromDate,
-        params.toDate,
-      );
-      data.soldItems = soldItems;
-    }
-
-    const whereData = {
-      store_id: global.storeDetails.store_id,
-      // user_id: global.storeDetails.username,
-      actual_created_time: {
-        [connection.Sequelize.Op.between]: [params.fromDate, params.toDate],
-      },
-    };
-
-    if (params.showWaiterData) {
-      const waiterSummary = await getWaiterSummarybydate(whereData);
-      data.waiterSummary = waiterSummary;
-    }
-
-    if (params.showDiscountData) {
-      const discountSummary = await getDiscountSummarybydate(whereData);
-      data.discountSummary = discountSummary;
-    }
-
-    // delivery boy summary
-    if (params.showDeliveryBoyData) {
-      const deliveryboySummary = await getDeliveryboySummarybydate(whereData);
-      data.deliveryboySummary = deliveryboySummary;
-    }
-    const orderTypeWiseOrders = await connection.Bill.count({
-      attributes: [
-        [
-          connection.Sequelize.fn(
-            'sum',
-            connection.Sequelize.col('order_total'),
-          ),
-          'order_total',
-        ],
-        [
-          connection.Sequelize.fn('sum', connection.Sequelize.col('charges')),
-          'charges',
-        ],
-        [
-          connection.Sequelize.fn('sum', connection.Sequelize.col('discount')),
-          'discount',
-        ],
-        [
-          connection.Sequelize.fn(
-            'sum',
-            connection.Sequelize.col('order_level_total_taxes'),
-          ),
-          'order_level_total_taxes',
-        ],
-        [
-          connection.Sequelize.fn(
-            'sum',
-            connection.Sequelize.col('charges_level_total_tax'),
-          ),
-          'charges_level_total_tax',
-        ],
-      ],
-      group: ['billing_type'],
-      where: { ...whereData, order_state: 'fulfilled' },
-    });
-    const extra_details = await connection.Bill.findAll({
-      raw: true,
-      attributes: ['billing_type', 'extra_details'],
-      where: {
-        created_time: {
-          [connection.Sequelize.Op.between]: [params.fromDate, params.toDate],
-        },
-        store_id: global.storeDetails.store_id,
-        order_state: 'fulfilled',
-      },
-    });
-    const extra_detail = [];
-    extra_details.forEach((element) => {
-      element.extra_details = JSON.parse(element.extra_details);
-      const obj = {};
-      if (element.extra_details && element.extra_details.roundedAmount) {
-        obj.roundedAmount = Number(element.extra_details.roundedAmount);
-        obj.billing_type = element.billing_type;
-        extra_detail.push(obj);
+if (ipcMain && typeof ipcMain.on === 'function') {
+  ipcMain.on(REPORT_MESSAGES.GET_STARTENDREPORT_DATA, async (event, params) => {
+    // let data = undefined;
+    let data = {};
+    try {
+      params = safeParseformain(params);
+      let isDayClosedAtMidnight = false;
+      if (params.isDayClosedAtMidnight) {
+        isDayClosedAtMidnight = params.isDayClosedAtMidnight;
       }
-    });
-    const output = _(extra_detail)
-      .groupBy('billing_type')
-      .map((objs, key) => ({
-        billing_type: key,
-        roundedAmount: _.sumBy(objs, 'roundedAmount'),
-      }))
-      .value();
-    orderTypeWiseOrders.map((item) => {
-      const value = output.find((o) => o.billing_type == item.billing_type);
-      if (value) {
-        Object.assign(item, { total_rounded_amt: value.roundedAmount });
-      }
-    });
 
-    data.orderTypeWiseOrders = orderTypeWiseOrders;
-
-    if (params.showExpenseData) {
-      const expenseData = await getExpensesByDate(
+      const isTimeBetweenMidnightSale = checkIfTimeForMidnightReport();
+      const bills = await getusershiftReportdata(params);
+      data.bills = bills;
+      data.totalBills = bills?.length;
+      const paymentDetails = await getPaymentsbydateForCloseday(
         params.fromDate,
         params.toDate,
       );
-      data.expenses_list = expenseData;
-    }
+      data.paymentDetails = paymentDetails;
 
-    if (params.showDuePaymentData) {
-      const duePaymentSummary = await getDuePaymentSummarybydate(
-        params.fromDate,
-        params.toDate,
-      );
-      data.duePaymentSummary = duePaymentSummary;
-    }
-
-    if (params.showDuePaymentReceivableData) {
-      const duePaymentReceivableSummary =
-        await getDuePaymentReceivableSummarybydate(
+      if (params.showSolditems) {
+        const soldItems = await getSolditemsbydateForCloseDay(
           params.fromDate,
           params.toDate,
         );
-      data.duePaymentReceivableSummary = duePaymentReceivableSummary;
-    }
-    if (params.showCategoryData) {
-      const catdataList =
-        await connection.BillItem.getCategorywisereportForCloseDay(
+        data.soldItems = soldItems;
+      }
+
+      const whereData = {
+        store_id: global.storeDetails.store_id,
+        actual_created_time: {
+          [connection.Sequelize.Op.between]: [params.fromDate, params.toDate],
+        },
+      };
+
+      if (params.showWaiterData) {
+        const waiterSummary = await getWaiterSummarybydate(whereData);
+        data.waiterSummary = waiterSummary;
+      }
+
+      if (params.showDiscountData) {
+        const discountSummary = await getDiscountSummarybydate(whereData);
+        data.discountSummary = discountSummary;
+      }
+
+      if (params.showDeliveryBoyData) {
+        const deliveryboySummary = await getDeliveryboySummarybydate(whereData);
+        data.deliveryboySummary = deliveryboySummary;
+      }
+      const orderTypeWiseOrders = await connection.Bill.count({
+        attributes: [
+          [
+            connection.Sequelize.fn(
+              'sum',
+              connection.Sequelize.col('order_total'),
+            ),
+            'order_total',
+          ],
+          [
+            connection.Sequelize.fn('sum', connection.Sequelize.col('charges')),
+            'charges',
+          ],
+          [
+            connection.Sequelize.fn('sum', connection.Sequelize.col('discount')),
+            'discount',
+          ],
+          [
+            connection.Sequelize.fn(
+              'sum',
+              connection.Sequelize.col('order_level_total_taxes'),
+            ),
+            'order_level_total_taxes',
+          ],
+          [
+            connection.Sequelize.fn(
+              'sum',
+              connection.Sequelize.col('charges_level_total_tax'),
+            ),
+            'charges_level_total_tax',
+          ],
+        ],
+        group: ['billing_type'],
+        where: { ...whereData, order_state: 'fulfilled' },
+      });
+      const extra_details = await connection.Bill.findAll({
+        raw: true,
+        attributes: ['billing_type', 'extra_details'],
+        where: {
+          created_time: {
+            [connection.Sequelize.Op.between]: [params.fromDate, params.toDate],
+          },
+          store_id: global.storeDetails.store_id,
+          order_state: 'fulfilled',
+        },
+      });
+      const extra_detail = [];
+      extra_details.forEach((element) => {
+        element.extra_details = JSON.parse(element.extra_details);
+        const obj = {};
+        if (element.extra_details && element.extra_details.roundedAmount) {
+          obj.roundedAmount = Number(element.extra_details.roundedAmount);
+          obj.billing_type = element.billing_type;
+          extra_detail.push(obj);
+        }
+      });
+      const output = _(extra_detail)
+        .groupBy('billing_type')
+        .map((objs, key) => ({
+          billing_type: key,
+          roundedAmount: _.sumBy(objs, 'roundedAmount'),
+        }))
+        .value();
+      orderTypeWiseOrders.map((item) => {
+        const value = output.find((o) => o.billing_type == item.billing_type);
+        if (value) {
+          Object.assign(item, { total_rounded_amt: value.roundedAmount });
+        }
+      });
+
+      data.orderTypeWiseOrders = orderTypeWiseOrders;
+
+      if (params.showExpenseData) {
+        const expenseData = await getExpensesByDate(
+          params.fromDate,
+          params.toDate,
+        );
+        data.expenses_list = expenseData;
+      }
+
+      if (params.showDuePaymentData) {
+        const duePaymentSummary = await getDuePaymentSummarybydate(
+          params.fromDate,
+          params.toDate,
+        );
+        data.duePaymentSummary = duePaymentSummary;
+      }
+
+      if (params.showDuePaymentReceivableData) {
+        const duePaymentReceivableSummary =
+          await getDuePaymentReceivableSummarybydate(
+            params.fromDate,
+            params.toDate,
+          );
+        data.duePaymentReceivableSummary = duePaymentReceivableSummary;
+      }
+      if (params.showCategoryData) {
+        const catdataList =
+          await connection.BillItem.getCategorywisereportForCloseDay(
+            params.fromDate,
+            params.toDate,
+            global.storeDetails.store_id,
+            global.storeDetails.username,
+          );
+        data.catdataList = catdataList;
+        if (
+          params.printwithItems &&
+          catdataList &&
+          Array.isArray(catdataList) &&
+          catdataList.length > 0
+        ) {
+          for (const category of catdataList) {
+            const items =
+              await connection.BillItem.getCategorywiseitemsreportForCloseDay(
+                params.fromDate,
+                params.toDate,
+                global.storeDetails.store_id,
+                global.storeDetails.username,
+                category.category_ref_ids,
+              );
+            category.items = items;
+          }
+        }
+      }
+
+      if (params.showCancelitems) {
+        const cancelledItems = await connection.KOTItem.getItemsbystatus(
+          3,
           params.fromDate,
           params.toDate,
           global.storeDetails.store_id,
-          global.storeDetails.username,
         );
-      data.catdataList = catdataList;
-      if (
-        params.printwithItems &&
-        catdataList &&
-        Array.isArray(catdataList) &&
-        catdataList.length > 0
-      ) {
-        // console.log('get items too');
-        for (const category of catdataList) {
-          const items =
-            await connection.BillItem.getCategorywiseitemsreportForCloseDay(
-              params.fromDate,
-              params.toDate,
-              global.storeDetails.store_id,
-              global.storeDetails.username,
-              category.category_ref_ids,
-            );
-          category.items = items;
-        }
+        data.cancelledItems = cancelledItems;
       }
+
+      if (params.showWalletData) {
+        const walletSummary = await getWalletSummarybydate({
+          toDate: params.toDate,
+          fromDate: params.fromDate,
+        });
+        data.walletSummary = walletSummary;
+      }
+
+      if (params.showKDWiseItemsData) {
+        const kdWiseItemSummary = await connection.BillItem.getkdwisereport(
+          params.fromDate,
+          params.toDate,
+          global.storeDetails.store_id,
+        );
+        data.kdWiseItemSummary = kdWiseItemSummary;
+      }
+
+      data.rowIndex = params.rowIndex;
+      data.invoice_range = params.invoice_range;
+
+      if (params.day_close_transactions) {
+        data.day_close_transactions = params.day_close_transactions;
+      }
+    } catch (error) {
+      console.log('fetch close day report error::', error);
+      data = undefined;
     }
+    event.reply(
+      REPORT_MESSAGES.GET_STARTENDREPORT_DATA_REPLY,
+      JSON.stringify(data),
+    );
+  });
 
-    if (params.showCancelitems) {
-      const cancelledItems = await connection.KOTItem.getItemsbystatus(
-        3,
-        params.fromDate,
-        params.toDate,
-        global.storeDetails.store_id,
-      );
-      data.cancelledItems = cancelledItems;
+  ipcMain.on(REPORT_MESSAGES.GET_USERSHIFT_DATA, async (event, params) => {
+    let data = {};
+    try {
+      params = safeParseformain(params);
+      const response = await getShiftwiseReport(params);
+      data = { ...response };
+      data.rowIndex = params.reply.rowIndex;
+      data.shift_end_by_user = params.reply.shift_end_by_user;
+      data.invoice_range = params.reply.invoice_range;
+    } catch (error) {
+      console.error(error);
+      data = undefined;
     }
-
-    if (params.showWalletData) {
-      const walletSummary = await getWalletSummarybydate({
-        toDate: params.toDate,
-        fromDate: params.fromDate,
-      });
-      data.walletSummary = walletSummary;
-    }
-
-    if (params.showKDWiseItemsData) {
-      const kdWiseItemSummary = await connection.BillItem.getkdwisereport(
-        params.fromDate,
-        params.toDate,
-        global.storeDetails.store_id,
-        // global.storeDetails.username,
-      );
-      data.kdWiseItemSummary = kdWiseItemSummary;
-    }
-
-    // if(params.rowIndex){
-    data.rowIndex = params.rowIndex;
-    data.invoice_range = params.invoice_range;
-
-    if (params.day_close_transactions) {
-      data.day_close_transactions = params.day_close_transactions;
-    }
-    // }
-  } catch (error) {
-    console.log('fetch close day report error::', error);
-    data = undefined;
-  }
-  event.reply(
-    REPORT_MESSAGES.GET_STARTENDREPORT_DATA_REPLY,
-    JSON.stringify(data),
-  );
-});
-
-ipcMain.on(REPORT_MESSAGES.GET_USERSHIFT_DATA, async (event, params) => {
-  // let data = undefined;
-  let data = {};
-  try {
-    params = safeParseformain(params);
-    // data = await getusershiftReportdata(params);
-    // const isTimeBetweenMidnightSale = checkIfTimeForMidnightReport();
-    // const { countMidnightSale } = params;
-    // let isDayClosedAtMidnight = false;
-    // if (params.isDayClosedAtMidnight) {
-    //   isDayClosedAtMidnight = params.isDayClosedAtMidnight;
-    // }
-    // // if(countMidnightSale && (isTimeBetweenMidnightSale || isDayClosedAtMidnight )){
-    // //     // params.fromDate = moment(params.fromDate).subtract(1, 'days').format('x');
-    // //     params.fromDate = moment(params.fromDate).set("hour", 00).set("minute", 00).format('x');
-    // //     params.toDate = moment(params.toDate).subtract(1, 'days').set("hour", 23).set("minute", 59).format('x');
-    // // }
-    // const bills = await getusershiftReportdata(params);
-    // data.bills = bills;
-    // const paymentDetails = await getPaymentsbydateForCloseday(
-    //   params.fromDate,
-    //   params.toDate,
-    // );
-    // data.paymentDetails = paymentDetails;
-
-    // const soldItems = await getSolditemsbydateForCloseDay(
-    //   params.fromDate,
-    //   params.toDate,
-    // );
-    // data.soldItems = soldItems;
-
-    // const catdataList =
-    //   await connection.BillItem.getCategorywisereportForCloseDay(
-    //     params.fromDate,
-    //     params.toDate,
-    //     global.storeDetails.store_id,
-    //     global.storeDetails.username,
-    //   );
-    // data.catdataList = catdataList;
-    // if (
-    //   params.printwithItems &&
-    //   catdataList &&
-    //   Array.isArray(catdataList) &&
-    //   catdataList.length > 0
-    // ) {
-    //   // console.log('get items too');
-    //   for (const category of catdataList) {
-    //     const items =
-    //       await connection.BillItem.getCategorywiseitemsreportForCloseDay(
-    //         params.fromDate,
-    //         params.toDate,
-    //         global.storeDetails.store_id,
-    //         global.storeDetails.username,
-    //         category.category_ref_ids,
-    //       );
-    //     category.items = items;
-    //   }
-    // }
-
-    const response = await getShiftwiseReport(params);
-    // if(params.rowIndex){
-    data = { ...response };
-    data.rowIndex = params.reply.rowIndex;
-    data.shift_end_by_user = params.reply.shift_end_by_user;
-    data.invoice_range = params.reply.invoice_range;
-
-    // }
-  } catch (error) {
-    console.error(error);
-    data = undefined;
-  }
-  event.reply(REPORT_MESSAGES.GET_USERSHIFT_DATA_REPLY, JSON.stringify(data));
-});
+    event.reply(REPORT_MESSAGES.GET_USERSHIFT_DATA_REPLY, JSON.stringify(data));
+  });
+}
 
 /**
  * Generate report data for given start and end date

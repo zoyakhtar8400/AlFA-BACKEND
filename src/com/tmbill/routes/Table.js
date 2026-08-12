@@ -118,7 +118,12 @@ function mapTable(t) {
   };
 }
 
-// GET all tables
+// Helper: extract floor and section from extra_details JSONB
+function getExtra(t, key, fallback) {
+  if (t[key]) return t[key];
+  if (t.extra_details && t.extra_details[key]) return t.extra_details[key];
+  return fallback;
+}
 router.get('/', async (req, res) => {
   const response = new ResponseMessage(200, '');
   try {
@@ -129,6 +134,86 @@ router.get('/', async (req, res) => {
       raw: true
     });
     const mapped = dbTables.map(mapTable);
+
+    // Fetch active KOTs and KOT items to populate table.kots for UI
+    try {
+      const activeKots = await global.serverdbConnection.KOT.findAll({
+        where: { is_active: 1 },
+        raw: true
+      });
+
+      if (activeKots && activeKots.length > 0) {
+        const activeKotIds = activeKots.map(k => k.kot_id);
+        const allKotItems = await global.serverdbConnection.KOTItem.findAll({
+          where: { kot_id: activeKotIds },
+          raw: true
+        });
+
+        mapped.forEach(tbl => {
+          const tblKots = activeKots.filter(k => Number(k.table_id) === Number(tbl.id));
+
+          if (tblKots.length === 0 && (tbl.status === 'KOT_CUT' || tbl.order_state === 'KOT_CUT')) {
+            tbl.status = 'AVAILABLE';
+            tbl.color = 'white';
+            tbl.amount = 0;
+            tbl.kotCount = 0;
+            tbl.available_actions = [];
+          }
+
+          tbl.kots = tblKots.map(k => {
+            const items = (allKotItems || [])
+              .filter(i => Number(i.kot_id) === Number(k.kot_id))
+              .map(i => ({
+                itemId: i.item_id,
+                name: i.item_name || 'Item',
+                itemName: i.item_name || 'Item',
+                qty: Number(i.quantity || 1),
+                quantity: Number(i.quantity || 1),
+                unitPrice: Number(i.item_price || 0),
+                price: Number(i.item_price || 0),
+                total: Number(i.amount || (i.quantity * i.item_price) || 0)
+              }));
+            return {
+              id: k.custom_bill_number || `KOT-${k.kot_id}`,
+              kot_id: k.kot_id,
+              status: k.status === 1 ? 'Sent to Kitchen' : 'Cut',
+              numericKotId: k.kot_id,
+              table_id: k.table_id,
+              time: k.in_time || 'Now',
+              waiter: k.waiter || 'Staff',
+              amount: Number(k.amount || 0),
+              items: items
+            };
+          });
+
+          tbl.kotCount = tbl.kots.length;
+          const kotsSum = tbl.kots.reduce((sum, k) => {
+            const itemsSum = (k.items || []).reduce((is, it) => is + Number(it.total || 0), 0);
+            return sum + (Number(k.amount || 0) || itemsSum);
+          }, 0);
+
+          if (tbl.kotCount > 0) {
+            tbl.amount = kotsSum > 0 ? kotsSum : tbl.amount;
+            if (tbl.status === 'AVAILABLE' || tbl.status === 'BLANK') {
+              tbl.status = 'KOT_CUT';
+              tbl.color = 'orange';
+              tbl.kot_status = 'CUT';
+              tbl.available_actions = ['print_kot', 'view_kot'];
+            }
+          }
+        });
+      }
+    } catch (kotErr) {
+      console.warn('Warning populating active KOTs for tables:', kotErr.message);
+    }
+
+    // Sort by numeric part of table_name so T1 < T2 < T10 < T11 (natural order)
+    mapped.sort((a, b) => {
+      const numA = parseInt(String(a.table_name || a.name || '').replace(/\D/g, '')) || 0;
+      const numB = parseInt(String(b.table_name || b.name || '').replace(/\D/g, '')) || 0;
+      if (numA !== numB) return numA - numB;
+      return String(a.table_name || '').localeCompare(String(b.table_name || ''));
+    });
     response.tables = mapped;
     response.data = mapped;
     response.setStatus(200);
@@ -165,11 +250,20 @@ router.get('/:id', async (req, res) => {
 router.post('/', async (req, res) => {
   const response = new ResponseMessage(200, '');
   try {
-    const tableNum = req.body.no || req.body.table_no || req.body.table_number;
+    const tableNum  = req.body.no || req.body.table_no || req.body.table_number;
     const tableName = req.body.table_name || req.body.name || `Table ${tableNum || ''}`;
+    // 'department' DB column is INTEGER (FK). Store the readable name in extra_details.section
+    const sectionName = req.body.section || req.body.department || 'Restaurant';
+    const existing = await global.serverdbConnection.Table.findOne({ where: { table_name: tableName } });
+    if (existing) {
+      response.setStatus(409);
+      response.setMessage(`Table '${tableName}' already exists`);
+      return res.status(409).json(response);
+    }
+
     const extraDetails = {
-      floor: req.body.floor || 'Ground',
-      section: req.body.section || 'Main Area',
+      floor: req.body.floor || 'Ground Floor',
+      section: sectionName,
       amount: req.body.amount || 0,
       waiter: req.body.waiter || null,
       customer: req.body.customer || 'Walk-in',
@@ -180,7 +274,7 @@ router.post('/', async (req, res) => {
     const created = await global.serverdbConnection.Table.create({
       table_name: tableName,
       max_person: String(req.body.max_person || req.body.seats || 4),
-      department: req.body.department || 1,
+      department: 1,           // Always integer — section name stored in extra_details
       store_id: req.body.store_id || 'STORE_1',
       isactive: 1,
       order_state: 'AVAILABLE',
@@ -216,6 +310,7 @@ router.put('/:id', async (req, res) => {
       ...currentExtra,
       ...(req.body.floor && { floor: req.body.floor }),
       ...(req.body.section && { section: req.body.section }),
+      ...(req.body.department && { section: req.body.department }),
       ...(req.body.amount !== undefined && { amount: req.body.amount }),
       ...(req.body.waiter !== undefined && { waiter: req.body.waiter }),
       ...(req.body.customer !== undefined && { customer: req.body.customer })
@@ -223,9 +318,11 @@ router.put('/:id', async (req, res) => {
 
     const updateFields = {
       ...(req.body.table_name && { table_name: req.body.table_name }),
+      ...(req.body.name && { table_name: req.body.name }),
       ...(req.body.seats && { max_person: String(req.body.seats) }),
       ...(req.body.max_person && { max_person: String(req.body.max_person) }),
       ...(req.body.status && { order_state: req.body.status }),
+      // department stays as integer 1 — section name goes in extra_details
       extra_details: updatedExtra
     };
 

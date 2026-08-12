@@ -309,64 +309,62 @@ function getModel(sequelize, type) {
     groupByBaseItem,
   ) {
     if (user_id) {
-      let query =
-        'SELECT mpos_kot.store_id as store_id, ' +
-        ' mpos_kot.user_id as user_id, ' +
-        ' mpos_kot_item.modifiedDate as created_time,' +
-        // ' mpos_kot_item.quantity as qty,' +
-        ` printf("%.${global.ROUNDOFF_UPTO}f", SUM(mpos_kot_item.quantity)) as qty,` +
-        ` printf("%.${global.ROUNDOFF_UPTO}f", AVG(mpos_kot_item.item_price)) as price, printf("%.${global.ROUNDOFF_UPTO}f",mpos_kot_item.amount) as total,  ` +
-        ' mpos_kot_item.item_name as title, ' +
-        ' mpos_kot_item.alternative_title, ' +
-        ' mpos_kot_item.extra_details, ' +
-        ' mpos_kot_item.reason as reason, ' +
-        ' mpos_kot_item.createdBy as createdBy, ' +
-        ' mpos_kot.billing_type as billing_type, ' +
-        ' mpos_kot.table_name as table_name' +
-        ' FROM mpos_kot_item JOIN mpos_kot  ' +
-        ' ON mpos_kot.kot_id=mpos_kot_item.kot_id' +
-        ' WHERE mpos_kot_item.status=:status AND ' +
-        ' mpos_kot.in_time BETWEEN' +
-        ' :fromDate AND  :toDate ' +
-        ' AND mpos_kot.store_id=:store_id ' +
-        `AND mpos_kot_item.createdBy=:user_id 
-        ${groupByBaseItem ? ' GROUP BY item_id, reason, billing_type ' : 'GROUP BY title, billing_type'} `;
+      let query = `
+        SELECT
+          mpos_kot.store_id as store_id,
+          mpos_kot.user_id as user_id,
+          mpos_kot.in_time as created_time,
+          SUM(CAST(COALESCE(mpos_kot_item.quantity, 0) AS numeric)) as qty,
+          AVG(CAST(COALESCE(mpos_kot_item.item_price, 0) AS numeric)) as price,
+          SUM(CAST(COALESCE(mpos_kot_item.amount, 0) AS numeric)) as total,
+          mpos_kot_item.item_name as title,
+          mpos_kot_item.alternative_title,
+          CAST(mpos_kot_item.extra_details AS text) as extra_details,
+          mpos_kot_item.reason as reason,
+          mpos_kot_item."createdBy" as "createdBy",
+          mpos_kot.billing_type as billing_type,
+          mpos_kot.table_name as table_name
+        FROM mpos_kot_item
+        JOIN mpos_kot ON mpos_kot.kot_id = mpos_kot_item.kot_id
+        WHERE mpos_kot_item.status = :status
+          AND CAST(mpos_kot.store_id AS text) IN ('1', 'STORE_1')
+          ${user_id ? 'AND mpos_kot_item."createdBy" = :user_id' : ''}
+        ${groupByBaseItem ? 'GROUP BY mpos_kot.store_id, mpos_kot.user_id, mpos_kot.in_time, mpos_kot_item.item_id, mpos_kot_item.reason, mpos_kot.billing_type, mpos_kot.table_name, mpos_kot_item.item_name, mpos_kot_item.alternative_title, CAST(mpos_kot_item.extra_details AS text), mpos_kot_item."createdBy"' : 'GROUP BY mpos_kot.store_id, mpos_kot.user_id, mpos_kot.in_time, mpos_kot_item.item_name, mpos_kot.billing_type, mpos_kot.table_name, mpos_kot_item.alternative_title, CAST(mpos_kot_item.extra_details AS text), mpos_kot_item.reason, mpos_kot_item."createdBy"'}
+      `;
 
-      // + ' AND mpos_kot.user_id=:user_id ';
       let complementaryItems = [];
       try {
         complementaryItems = await sequelize.query(query, {
-          replacements: { fromDate, toDate, store_id, status, user_id },
+          replacements: { fromDate, toDate, store_id: String(store_id), status, user_id },
           type: sequelize.QueryTypes.SELECT,
         });
       } catch (error) {
         console.log(error);
-
         complementaryItems = [];
       }
       return complementaryItems;
     } else {
-      let query =
-        'SELECT mpos_kot.store_id as store_id, ' +
-        ' mpos_kot.user_id as user_id, ' +
-        ' mpos_kot_item.modifiedDate as created_time,' +
-        // ' mpos_kot_item.quantity as qty,' +
-        ` printf("%.${global.ROUNDOFF_UPTO}f", SUM(mpos_kot_item.quantity)) as qty,` +
-        ` printf("%.${global.ROUNDOFF_UPTO}f", AVG(mpos_kot_item.item_price)) as price, printf("%.${global.ROUNDOFF_UPTO}f",mpos_kot_item.amount) as total,  ` +
-        ' mpos_kot_item.item_name as title, ' +
-        ' mpos_kot_item.alternative_title, ' +
-        ' mpos_kot_item.extra_details, ' +
-        ' mpos_kot_item.reason as reason, ' +
-        ' mpos_kot_item.createdBy as createdBy, ' +
-        ' mpos_kot.billing_type as billing_type, ' +
-        ' mpos_kot.table_name as table_name' +
-        ' FROM mpos_kot_item JOIN mpos_kot  ' +
-        ' ON mpos_kot.kot_id=mpos_kot_item.kot_id' +
-        ' WHERE mpos_kot_item.status=:status AND ' +
-        ' mpos_kot.in_time BETWEEN' +
-        ' :fromDate AND  :toDate ' +
-        ` AND mpos_kot.store_id=:store_id 
-        ${groupByBaseItem ? ' GROUP BY item_id, reason, billing_type ' : 'GROUP BY title, billing_type'} `;
+      let query = `
+        SELECT
+          mpos_kot.store_id as store_id,
+          mpos_kot.user_id as user_id,
+          mpos_kot.in_time as created_time,
+          SUM(CAST(COALESCE(mpos_kot_item.quantity, 0) AS numeric)) as qty,
+          AVG(CAST(COALESCE(mpos_kot_item.item_price, 0) AS numeric)) as price,
+          SUM(CAST(COALESCE(mpos_kot_item.amount, 0) AS numeric)) as total,
+          mpos_kot_item.item_name as title,
+          mpos_kot_item.alternative_title,
+          CAST(mpos_kot_item.extra_details AS text) as extra_details,
+          mpos_kot_item.reason as reason,
+          mpos_kot_item."createdBy" as "createdBy",
+          mpos_kot.billing_type as billing_type,
+          mpos_kot.table_name as table_name
+        FROM mpos_kot_item
+        JOIN mpos_kot ON mpos_kot.kot_id = mpos_kot_item.kot_id
+        WHERE mpos_kot_item.status = :status
+          AND CAST(mpos_kot.store_id AS text) IN ('1', 'STORE_1')
+        ${groupByBaseItem ? 'GROUP BY mpos_kot.store_id, mpos_kot.user_id, mpos_kot.in_time, mpos_kot_item.item_id, mpos_kot_item.reason, mpos_kot.billing_type, mpos_kot.table_name, mpos_kot_item.item_name, mpos_kot_item.alternative_title, CAST(mpos_kot_item.extra_details AS text), mpos_kot_item."createdBy"' : 'GROUP BY mpos_kot.store_id, mpos_kot.user_id, mpos_kot.in_time, mpos_kot_item.item_name, mpos_kot.billing_type, mpos_kot.table_name, mpos_kot_item.alternative_title, CAST(mpos_kot_item.extra_details AS text), mpos_kot_item.reason, mpos_kot_item."createdBy"'}
+      `;
 
       // + ' AND mpos_kot.user_id=:user_id ';
       let complementaryItems = [];

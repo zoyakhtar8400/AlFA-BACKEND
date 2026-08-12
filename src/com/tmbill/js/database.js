@@ -37,6 +37,7 @@ const CoupondiscountHistoryModal = require('../model/CoupondiscountHistory');
 const StartcloseDayModal = require('../model/StartdayCloseday');
 const UserShiftModal = require('../model/UserShift');
 const ProductGroupModal = require('../model/ProductGroup');
+const NCTypeModel = require('../model/NCType');
 const UserModal = require('../model/User');
 const SectionwiseDiscounthistoryModal = require('../model/SectionwisediscountHistory');
 const WalletModal = require('../model/Wallet');
@@ -64,6 +65,23 @@ const UserLoginStatusModel = require('../model/UserLoginStatus');
 const ZatcaStatusModel = require('../model/ZatcaStatus');
 const OrderTypesModel = require('../model/OrderTypes');
 const ItemStockOutboxModel = require('../model/ItemStockOutBox');
+const InventoryItemModel = require('../model/InventoryItem');
+const RecipeMasterModel = require('../model/RecipeMaster');
+const RecipeItemsModel = require('../model/RecipeItems');
+const StockLedgerModel = require('../model/StockLedger');
+const SupplierModel = require('../model/Supplier');
+const ItemGroupModel = require('../model/ItemGroup');
+const UnitModel = require('../model/Unit');
+const PurchaseOrderModel = require('../model/PurchaseOrder');
+const PurchaseOrderItemModel = require('../model/PurchaseOrderItem');
+const PurchaseGRNModel = require('../model/PurchaseGRN');
+const PurchaseGRNItemModel = require('../model/PurchaseGRNItem');
+const PurchaseBillModel = require('../model/PurchaseBill');
+const PurchaseIndentModel = require('../model/PurchaseIndent');
+const PurchaseIndentItemModel = require('../model/PurchaseIndentItem');
+const PurchaseQuotationModel = require('../model/PurchaseQuotation');
+const PurchaseReturnModel = require('../model/PurchaseReturn');
+const DepartmentIssueModel = require('../model/DepartmentIssue');
 
 const { Config } = require('../config/config');
 
@@ -173,6 +191,7 @@ const WaiterNotification = WaiterNotificationModel.getModel(
 
 const TableReservation = TableReservationModel.getModel(sequelize, Sequelize);
 const Tax = TaxModel.getModel(sequelize, Sequelize);
+const NCType = NCTypeModel.getModel(sequelize, Sequelize);
 const ModifierGroupItemsMapping = ModifierGroupItemsMappingModel.getModel(
   sequelize,
   Sequelize,
@@ -190,6 +209,62 @@ const UserLoginStatus = UserLoginStatusModel.getModel(sequelize, Sequelize);
 const ZatcaStatus = ZatcaStatusModel.getModel(sequelize, Sequelize);
 const OrderTypes = OrderTypesModel.getModel(sequelize, Sequelize);
 const ItemStockOutbox = ItemStockOutboxModel.getModel(sequelize, Sequelize);
+const InventoryItem = InventoryItemModel.getModel(sequelize, Sequelize);
+const RecipeMaster = RecipeMasterModel.getModel(sequelize, Sequelize);
+const RecipeItems = RecipeItemsModel.getModel(sequelize, Sequelize);
+const StockLedger = StockLedgerModel.getModel(sequelize, Sequelize);
+const Supplier = SupplierModel.getModel(sequelize, Sequelize);
+const ItemGroup = ItemGroupModel.getModel(sequelize, Sequelize);
+const Unit = UnitModel.getModel(sequelize, Sequelize);
+const PurchaseOrder = PurchaseOrderModel.getModel(sequelize, Sequelize);
+const PurchaseOrderItem = PurchaseOrderItemModel.getModel(sequelize, Sequelize);
+const PurchaseGRN = PurchaseGRNModel.getModel(sequelize, Sequelize);
+const PurchaseGRNItem = PurchaseGRNItemModel.getModel(sequelize, Sequelize);
+const PurchaseBill = PurchaseBillModel.getModel(sequelize, Sequelize);
+const PurchaseIndent = PurchaseIndentModel.getModel(sequelize, Sequelize);
+const PurchaseIndentItem = PurchaseIndentItemModel.getModel(sequelize, Sequelize);
+const PurchaseQuotation = PurchaseQuotationModel.getModel(sequelize, Sequelize);
+const PurchaseReturn = PurchaseReturnModel.getModel(sequelize, Sequelize);
+const DepartmentIssue = DepartmentIssueModel.getModel(sequelize, Sequelize);
+
+// Purchase & Supplier Associations
+PurchaseOrder.belongsTo(Supplier, { foreignKey: 'supplier_id' });
+PurchaseOrder.hasMany(PurchaseOrderItem, { foreignKey: 'po_id', as: 'poItems' });
+PurchaseOrderItem.belongsTo(PurchaseOrder, { foreignKey: 'po_id' });
+
+PurchaseGRN.belongsTo(Supplier, { foreignKey: 'supplier_id' });
+PurchaseGRN.hasMany(PurchaseGRNItem, { foreignKey: 'grn_id', as: 'grnItems' });
+PurchaseGRNItem.belongsTo(PurchaseGRN, { foreignKey: 'grn_id' });
+
+PurchaseBill.belongsTo(Supplier, { foreignKey: 'supplier_id' });
+PurchaseIndent.hasMany(PurchaseIndentItem, { foreignKey: 'indent_id', as: 'indentItems' });
+
+// Automatically ensure tables exist in PostgreSQL
+(async () => {
+  try {
+    await InventoryItem.sync({ alter: true });
+    await RecipeMaster.sync({ alter: true });
+    await RecipeItems.sync({ alter: true });
+    await StockLedger.sync({ alter: true });
+    await Item.sync({ alter: true });
+    await Supplier.sync({ alter: true });
+    await ItemGroup.sync({ alter: true });
+    await Unit.sync({ alter: true });
+    await PurchaseOrder.sync({ alter: true });
+    await PurchaseOrderItem.sync({ alter: true });
+    await PurchaseGRN.sync({ alter: true });
+    await PurchaseGRNItem.sync({ alter: true });
+    await PurchaseBill.sync({ alter: true });
+    await PurchaseIndent.sync({ alter: true });
+    await PurchaseIndentItem.sync({ alter: true });
+    await PurchaseQuotation.sync({ alter: true });
+    await PurchaseReturn.sync({ alter: true });
+    await DepartmentIssue.sync({ alter: true });
+    console.log('✅ Inventory, Recipe, Purchase, and Stock Ledger PostgreSQL tables synchronized successfully.');
+  } catch (syncErr) {
+    console.warn('⚠️ Table sync warning:', syncErr.message);
+  }
+})();
 
 /**
  * Associations
@@ -214,6 +289,13 @@ Item.belongsTo(ProductGroup, {
 
 KOT.hasMany(KOTItem, { as: 'kotItems', foreignKey: 'kot_id' });
 KOTItem.belongsTo(KOT, { foreignKey: 'kot_id', onDelete: 'CASCADE' });
+
+// Recipe & Inventory Associations
+RecipeMaster.hasMany(RecipeItems, { as: 'recipeItems', foreignKey: 'recipe_id' });
+RecipeItems.belongsTo(RecipeMaster, { foreignKey: 'recipe_id', onDelete: 'CASCADE' });
+RecipeItems.belongsTo(InventoryItem, { foreignKey: 'inventory_item_id' });
+InventoryItem.hasMany(StockLedger, { as: 'ledgerEntries', foreignKey: 'inventory_item_id' });
+StockLedger.belongsTo(InventoryItem, { foreignKey: 'inventory_item_id' });
 
 KOTItem.hasMany(KotItemOption, {
   targetKey: 'kot_items_id',
@@ -474,6 +556,7 @@ module.exports = {
   WaiterNotification,
   TableReservation,
   Tax,
+  NCType,
   ModifierGroupItemsMapping,
   ModifierGroups,
   Modifiers,
@@ -485,4 +568,21 @@ module.exports = {
   ZatcaStatus,
   OrderTypes,
   ItemStockOutbox,
+  InventoryItem,
+  RecipeMaster,
+  RecipeItems,
+  StockLedger,
+  Supplier,
+  ItemGroup,
+  Unit,
+  PurchaseOrder,
+  PurchaseOrderItem,
+  PurchaseGRN,
+  PurchaseGRNItem,
+  PurchaseBill,
+  PurchaseIndent,
+  PurchaseIndentItem,
+  PurchaseQuotation,
+  PurchaseReturn,
+  DepartmentIssue,
 };

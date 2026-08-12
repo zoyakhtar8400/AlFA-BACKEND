@@ -66,54 +66,54 @@ function getModel(sequelize, type) {
   }) {
     let subquery =
       `SELECT ` +
-      // ` DISTINCT ` +
       ` payment_option,` +
-      ` sum(p.amount) as amount, mpos_order.order_state as order_state,` +
-      ` count(payment_option) as transactions,  count(payment_option) as count ` +
-      ` FROM (SELECT  order_id ,payment_option,amount from mpos_order_payment) as p ` +
-      ` left join mpos_order on p.order_id=mpos_order.order_id where  ` +
+      ` SUM(CAST(COALESCE(p.amount, 0) AS numeric)) as amount, mpos_order.order_state as order_state,` +
+      ` count(payment_option) as transactions, count(payment_option) as count ` +
+      ` FROM (SELECT order_id, payment_option, amount from mpos_order_payment) as p ` +
+      ` left join mpos_order on CAST(p.order_id AS text) = CAST(mpos_order.order_id AS text) where ` +
       ` $date ` +
       ` $order_state ` +
       ` $userId ` +
-      // + ` due_payment = "0" AND`
-      ` store_id=:store_id GROUP BY $groupBy`;
+      ` CAST(mpos_order.store_id AS text) = :store_id GROUP BY $groupBy`;
 
     if (fromDate && toDate) {
+      const fDate = String(fromDate).replace(/'/g, '').slice(0, 10);
+      const tDate = String(toDate).replace(/'/g, '').slice(0, 10);
       subquery = subquery.replace(
         '$date',
-        ` created_time BETWEEN ${fromDate} and ${toDate} AND `,
+        ` (mpos_order.my_order_date BETWEEN '${fDate}' and '${tDate}' OR mpos_order.my_order_date IS NULL) AND `,
       );
     } else {
       subquery = subquery.replace('$date', '');
     }
     if (user_id) {
-      subquery = subquery.replace('$userId', ` user_id="${user_id}" AND `);
+      subquery = subquery.replace('$userId', ` mpos_order.user_id='${user_id}' AND `);
     } else {
       subquery = subquery.replace('$userId', '');
     }
     if (order_state) {
       subquery = subquery.replace(
         '$order_state',
-        ` order_state in (${order_state}) AND `,
+        ` mpos_order.order_state in (${order_state}) AND `,
       );
     } else {
       subquery = subquery.replace(
         '$order_state',
-        'order_state = "fulfilled" AND',
+        ` mpos_order.order_state IN ('fulfilled', 'completed', 'free') AND `,
       );
     }
 
     if (groupBy) {
       subquery = subquery.replace('$groupBy', `${groupBy}`);
     } else {
-      subquery = subquery.replace('$groupBy', 'payment_option');
+      subquery = subquery.replace('$groupBy', 'payment_option, mpos_order.order_state');
     }
-    // console.log(subquery);
+
     let payments = await sequelize.query(subquery, {
       model: this,
       mapToModel: true,
       raw: true,
-      replacements: { store_id: store_id },
+      replacements: { store_id: String(store_id) },
       type: sequelize.QueryTypes.SELECT,
     });
     return payments;
@@ -128,54 +128,54 @@ function getModel(sequelize, type) {
   }) {
     let subquery =
       `SELECT ` +
-      // ` DISTINCT ` +
       ` payment_option,` +
-      ` sum(p.amount) as amount, mpos_order.order_state as order_state,` +
-      ` count(payment_option) as transactions,  count(payment_option) as count ` +
-      ` FROM (SELECT  order_id ,payment_option,amount from mpos_order_payment) as p ` +
-      ` left join mpos_order on p.order_id=mpos_order.order_id where  ` +
+      ` SUM(CAST(COALESCE(p.amount, 0) AS numeric)) as amount, mpos_order.order_state as order_state,` +
+      ` count(payment_option) as transactions, count(payment_option) as count ` +
+      ` FROM (SELECT order_id, payment_option, amount from mpos_order_payment) as p ` +
+      ` left join mpos_order on CAST(p.order_id AS text) = CAST(mpos_order.order_id AS text) where ` +
       ` $date ` +
       ` $order_state ` +
       ` $userId ` +
-      // + ` due_payment = "0" AND`
-      ` store_id=:store_id GROUP BY $groupBy`;
+      ` CAST(mpos_order.store_id AS text) = :store_id GROUP BY $groupBy`;
 
     if (fromDate && toDate) {
+      const fDate = String(fromDate).replace(/'/g, '').slice(0, 10);
+      const tDate = String(toDate).replace(/'/g, '').slice(0, 10);
       subquery = subquery.replace(
         '$date',
-        ` actual_created_time BETWEEN ${fromDate} and ${toDate} AND `,
+        ` (mpos_order.my_order_date BETWEEN '${fDate}' and '${tDate}' OR mpos_order.my_order_date IS NULL) AND `,
       );
     } else {
       subquery = subquery.replace('$date', '');
     }
     if (user_id) {
-      subquery = subquery.replace('$userId', ` user_id="${user_id}" AND `);
+      subquery = subquery.replace('$userId', ` mpos_order.user_id='${user_id}' AND `);
     } else {
       subquery = subquery.replace('$userId', '');
     }
     if (order_state) {
       subquery = subquery.replace(
         '$order_state',
-        ` order_state in (${order_state}) AND `,
+        ` mpos_order.order_state in (${order_state}) AND `,
       );
     } else {
       subquery = subquery.replace(
         '$order_state',
-        'order_state in ("fulfilled", "pending") AND',
+        ` mpos_order.order_state IN ('fulfilled', 'completed', 'free') AND `,
       );
     }
 
     if (groupBy) {
       subquery = subquery.replace('$groupBy', `${groupBy}`);
     } else {
-      subquery = subquery.replace('$groupBy', 'payment_option');
+      subquery = subquery.replace('$groupBy', 'payment_option, mpos_order.order_state');
     }
-    // console.log(subquery);
+
     let payments = await sequelize.query(subquery, {
       model: this,
       mapToModel: true,
       raw: true,
-      replacements: { store_id: store_id },
+      replacements: { store_id: String(store_id) },
       type: sequelize.QueryTypes.SELECT,
     });
     return payments;

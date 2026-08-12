@@ -471,14 +471,20 @@ function getModel(sequelize, type) {
   Order.getBillrange = async function (params) {
     let range = {};
     try {
+      const currentStoreId = String(params.store_id || global.storeDetails?.store_id || '1');
       let where = {
-        store_id: params.store_id,
-        created_time: {
-          [type.Op.between]: [params.fromDate, params.toDate],
-        },
+        [type.Op.and]: [
+          {
+            [type.Op.or]: [
+              { store_id: currentStoreId },
+              { store_id: 'STORE_1' },
+              { store_id: '1' }
+            ]
+          }
+        ]
       };
       if (params.username) {
-        where.user_id = params.username;
+        where[type.Op.and].push({ createdBy: params.username });
       }
       range = await Order.findAll({
         raw: true,
@@ -644,1388 +650,1388 @@ function getModel(sequelize, type) {
         ' FROM mpos_order ' +
         ' WHERE created_time BETWEEN' +
         ' :fromDate AND :toDate AND ' +
-        ' order_state="fulfilled" AND ' +
+        " order_state='fulfilled' AND " +
         ' store_id=:store_id) as todaysTotal,' +
         // + ' (SELECT SUM(order_total - due_payment) '
         ' (SELECT SUM(order_total) ' +
         ' FROM mpos_order ' +
         ' WHERE created_time BETWEEN' +
         ' :fromDate AND :toDate AND ' +
-        ' order_state="fulfilled" AND ' +
+        " order_state='fulfilled' AND " +
         ' store_id=:store_id) as paymentsTotal,' +
         ' (SELECT count(order_total) ' +
         ' FROM mpos_order ' +
         ' WHERE created_time BETWEEN' +
         ' :fromDate AND :toDate AND ' +
-        ' order_state="fulfilled" AND ' +
+        " order_state='fulfilled' AND " +
         ' store_id=:store_id) as todaysOrders,' +
         // + ' (SELECT SUM(order_total- due_payment) '
         ' (SELECT SUM(order_total) ' +
         ' FROM mpos_order ' +
         ' WHERE created_time BETWEEN' +
         ' :weekStart AND :weekEnd AND ' +
-        ' order_state="fulfilled" AND ' +
+        " order_state='fulfilled' AND " +
         ' store_id=:store_id) as weeksTotal,' +
         ' (SELECT count(order_id) ' +
         ' FROM mpos_order WHERE ' +
-        ' order_state="fulfilled" AND ' +
+        " order_state='fulfilled' AND " +
         ' store_id=:store_id) as totalOrders,' +
         // + ' (SELECT SUM(order_total - due_payment) '
         ' (SELECT SUM(order_total) ' +
         ' FROM mpos_order ' +
         ' WHERE ' +
-        ' order_state="fulfilled" AND ' +
+        " order_state='fulfilled' AND " +
         ' store_id=:store_id) as totalSale,' +
         ' (SELECT count(order_total) ' +
         ' FROM mpos_order ' +
         ' WHERE ' +
-        ' order_state="fulfilled" AND ' +
+        " order_state='fulfilled' AND " +
         ' store_id=:store_id) as alltimeordersCount,' +
         // + ' (SELECT SUM(order_total - due_payment) '
         ' (SELECT SUM(order_total) ' +
         ' FROM mpos_order ' +
         ' WHERE created_time BETWEEN' +
         ' :monthStart AND :monthEnd AND ' +
-        ' order_state="fulfilled" AND ' +
+        " order_state='fulfilled' AND " +
         ' store_id=:store_id) as monthsTotal,' +
         ' (SELECT count(order_total) ' +
         ' FROM mpos_order ' +
         ' WHERE created_time BETWEEN' +
         ' :monthStart AND :monthEnd AND ' +
-        ' order_state="fulfilled" AND ' +
+        " order_state='fulfilled' AND " +
         ' store_id=:store_id) as monthOrders,' +
         ' (SELECT SUM(order_level_total_taxes) ' +
         ' FROM mpos_order ' +
         ' WHERE ' +
-        ' order_state="fulfilled" AND ' +
+        " order_state='fulfilled' AND " +
         ' store_id=:store_id) as totalTax,' +
         ' (SELECT SUM(discount) ' +
         ' FROM mpos_order ' +
         ' WHERE ' +
-        ' order_state="fulfilled" AND ' +
+        " order_state='fulfilled' AND " +
         ' store_id=:store_id) as totalDiscount,' +
         // + ' (SELECT SUM(order_total - due_payment) '
         ' (SELECT SUM(order_total) ' +
         ' FROM mpos_order ' +
         ' WHERE billing_type=0 AND ' +
-        ' order_state="fulfilled" AND ' +
+        " order_state='fulfilled' AND " +
         ' store_id=:store_id) as quickbillTotal,' +
         ' (SELECT count(order_total) ' +
         ' FROM mpos_order ' +
         ' WHERE billing_type=0 AND ' +
-        ' order_state="fulfilled" AND ' +
+        " order_state='fulfilled' AND " +
         ' store_id=:store_id) as quickbillOrders,' +
         // + ' (SELECT SUM(order_total - due_payment) '
         ' (SELECT SUM(order_total) ' +
         ' FROM mpos_order ' +
         ' WHERE billing_type=1 AND ' +
-        ' order_state="fulfilled" AND ' +
+        " order_state='fulfilled' AND " +
         ' store_id=:store_id) as dineinTotal,' +
         ' (SELECT count(order_total) ' +
         ' FROM mpos_order ' +
         ' WHERE billing_type=1 AND ' +
-        ' order_state="fulfilled" AND ' +
+        " order_state='fulfilled' AND " +
         ' store_id=:store_id) as dineinOrders,' +
         // + ' (SELECT SUM(order_total - due_payment) '
         ' (SELECT SUM(order_total) ' +
         ' FROM mpos_order ' +
         ' WHERE billing_type=2 AND ' +
-        ' order_state="fulfilled" AND ' +
+        " order_state='fulfilled' AND " +
         ' store_id=:store_id) as takeawayTotal,' +
         ' (SELECT count(order_total) ' +
         ' FROM mpos_order ' +
         ' WHERE billing_type=2 AND ' +
-        ' order_state="fulfilled" AND ' +
+        " order_state='fulfilled' AND " +
         ' store_id=:store_id) as takeawayOrders,' +
         // + ' (SELECT SUM(order_total - due_payment) '
         ' (SELECT SUM(order_total) ' +
         ' FROM mpos_order ' +
         ' WHERE billing_type=3 AND ' +
-        ' order_state="fulfilled" AND ' +
+        " order_state='fulfilled' AND " +
         ' store_id=:store_id) as homdedelTotal,' +
         ' (SELECT count(order_total) ' +
         ' FROM mpos_order ' +
         ' WHERE billing_type=3 AND ' +
-        ' order_state="fulfilled" AND ' +
+        " order_state='fulfilled' AND " +
         ' store_id=:store_id) as homdedelOrders,' +
         // + ' (SELECT SUM(order_total - due_payment) '
         ' (SELECT SUM(order_total) ' +
         ' FROM mpos_order ' +
         ' WHERE billing_type=4 AND ' +
-        ' order_state="fulfilled" AND ' +
+        " order_state='fulfilled' AND " +
         ' store_id=:store_id) as zomatoTotal,' +
         ' (SELECT count(order_total) ' +
         ' FROM mpos_order ' +
         ' WHERE billing_type=4 AND ' +
-        ' order_state="fulfilled" AND ' +
+        " order_state='fulfilled' AND " +
         ' store_id=:store_id) as zomatoOrders,' +
         // + ' (SELECT SUM(order_total - due_payment) '
         ' (SELECT SUM(order_total) ' +
         ' FROM mpos_order ' +
         ' WHERE billing_type=5 AND ' +
-        ' order_state="fulfilled" AND ' +
+        " order_state='fulfilled' AND " +
         ' store_id=:store_id) as swiggyTotal,' +
         ' (SELECT count(order_total) ' +
         ' FROM mpos_order ' +
         ' WHERE billing_type=5 AND ' +
-        ' order_state="fulfilled" AND ' +
+        " order_state='fulfilled' AND " +
         ' store_id=:store_id) as swiggyOrders,' +
         // + ' (SELECT SUM(order_total - due_payment) '
         ' (SELECT SUM(order_total) ' +
         ' FROM mpos_order ' +
         ' WHERE billing_type=6 AND ' +
-        ' order_state="fulfilled" AND ' +
+        " order_state='fulfilled' AND " +
         ' store_id=:store_id) as ubereatsTotal,' +
         ' (SELECT count(order_total) ' +
         ' FROM mpos_order ' +
         ' WHERE billing_type=6 AND ' +
-        ' order_state="fulfilled" AND ' +
+        " order_state='fulfilled' AND " +
         ' store_id=:store_id) as ubereatsOrders,' +
         // + ' (SELECT SUM(order_total - due_payment) '
         ' (SELECT SUM(order_total) ' +
         ' FROM mpos_order ' +
         ' WHERE billing_type=7 AND ' +
-        ' order_state="fulfilled" AND ' +
+        " order_state='fulfilled' AND " +
         ' store_id=:store_id) as dunzoTotal,' +
         ' (SELECT count(order_total) ' +
         ' FROM mpos_order ' +
         ' WHERE billing_type=7 AND ' +
-        ' order_state="fulfilled" AND ' +
+        " order_state='fulfilled' AND " +
         ' store_id=:store_id) as dunzoOrders,' +
         ' (SELECT SUM(order_total) ' +
         ' FROM mpos_order ' +
         ' WHERE billing_type=104 AND ' +
-        ' order_state="fulfilled" AND ' +
+        " order_state='fulfilled' AND " +
         ' store_id=:store_id) as ondcTotal,' +
         ' (SELECT count(order_total) ' +
         ' FROM mpos_order ' +
         ' WHERE billing_type=104 AND ' +
-        ' order_state="fulfilled" AND ' +
+        " order_state='fulfilled' AND " +
         ' store_id=:store_id) as ondcOrders,' +
         // 9 dineout
         ' (SELECT SUM(order_total) ' +
         ' FROM mpos_order ' +
         ' WHERE billing_type=9 AND ' +
-        ' order_state="fulfilled" AND ' +
+        " order_state='fulfilled' AND " +
         ' store_id=:store_id) as dineoutTotal,' +
         ' (SELECT count(order_total) ' +
         ' FROM mpos_order ' +
         ' WHERE billing_type=9 AND ' +
-        ' order_state="fulfilled" AND ' +
+        " order_state='fulfilled' AND " +
         ' store_id=:store_id) as dineoutOrders,' +
         // 10 google pay
         ' (SELECT SUM(order_total) ' +
         ' FROM mpos_order ' +
         ' WHERE billing_type=10 AND ' +
-        ' order_state="fulfilled" AND ' +
+        " order_state='fulfilled' AND " +
         ' store_id=:store_id) as googlepayTotal,' +
         ' (SELECT count(order_total) ' +
         ' FROM mpos_order ' +
         ' WHERE billing_type=10 AND ' +
-        ' order_state="fulfilled" AND ' +
+        " order_state='fulfilled' AND " +
         ' store_id=:store_id) as googlepayOrders,' +
         // 11 gupshup
         ' (SELECT SUM(order_total) ' +
         ' FROM mpos_order ' +
         ' WHERE billing_type=11 AND ' +
-        ' order_state="fulfilled" AND ' +
+        " order_state='fulfilled' AND " +
         ' store_id=:store_id) as gupshupTotal,' +
         ' (SELECT count(order_total) ' +
         ' FROM mpos_order ' +
         ' WHERE billing_type=11 AND ' +
-        ' order_state="fulfilled" AND ' +
+        " order_state='fulfilled' AND " +
         ' store_id=:store_id) as gupshupOrders,' +
         // 12 peppo
         ' (SELECT SUM(order_total) ' +
         ' FROM mpos_order ' +
         ' WHERE billing_type=12 AND ' +
-        ' order_state="fulfilled" AND ' +
+        " order_state='fulfilled' AND " +
         ' store_id=:store_id) as peppoTotal,' +
         ' (SELECT count(order_total) ' +
         ' FROM mpos_order ' +
         ' WHERE billing_type=12 AND ' +
-        ' order_state="fulfilled" AND ' +
+        " order_state='fulfilled' AND " +
         ' store_id=:store_id) as peppoOrders,' +
         // 13 amazon food
         ' (SELECT SUM(order_total) ' +
         ' FROM mpos_order ' +
         ' WHERE billing_type=13 AND ' +
-        ' order_state="fulfilled" AND ' +
+        " order_state='fulfilled' AND " +
         ' store_id=:store_id) as amazonfoodTotal,' +
         ' (SELECT count(order_total) ' +
         ' FROM mpos_order ' +
         ' WHERE billing_type=13 AND ' +
-        ' order_state="fulfilled" AND ' +
+        " order_state='fulfilled' AND " +
         ' store_id=:store_id) as amazonfoodOrders,' +
         // 14 dotpe
         ' (SELECT SUM(order_total) ' +
         ' FROM mpos_order ' +
         ' WHERE billing_type=14 AND ' +
-        ' order_state="fulfilled" AND ' +
+        " order_state='fulfilled' AND " +
         ' store_id=:store_id) as dotpeTotal,' +
         ' (SELECT count(order_total) ' +
         ' FROM mpos_order ' +
         ' WHERE billing_type=14 AND ' +
-        ' order_state="fulfilled" AND ' +
+        " order_state='fulfilled' AND " +
         ' store_id=:store_id) as dotpeOrders,' +
         // 15 eazydiner
         ' (SELECT SUM(order_total) ' +
         ' FROM mpos_order ' +
         ' WHERE billing_type=15 AND ' +
-        ' order_state="fulfilled" AND ' +
+        " order_state='fulfilled' AND " +
         ' store_id=:store_id) as eazydinerTotal,' +
         ' (SELECT count(order_total) ' +
         ' FROM mpos_order ' +
         ' WHERE billing_type=15 AND ' +
-        ' order_state="fulfilled" AND ' +
+        " order_state='fulfilled' AND " +
         ' store_id=:store_id) as eazydinerOrders,' +
         // 16 dukaan
         ' (SELECT SUM(order_total) ' +
         ' FROM mpos_order ' +
         ' WHERE billing_type=16 AND ' +
-        ' order_state="fulfilled" AND ' +
+        " order_state='fulfilled' AND " +
         ' store_id=:store_id) as dukaanTotal,' +
         ' (SELECT count(order_total) ' +
         ' FROM mpos_order ' +
         ' WHERE billing_type=16 AND ' +
-        ' order_state="fulfilled" AND ' +
+        " order_state='fulfilled' AND " +
         ' store_id=:store_id) as dukaanOrders,' +
         // 17 jungleworks
         ' (SELECT SUM(order_total) ' +
         ' FROM mpos_order ' +
         ' WHERE billing_type=17 AND ' +
-        ' order_state="fulfilled" AND ' +
+        " order_state='fulfilled' AND " +
         ' store_id=:store_id) as jungleworksTotal,' +
         ' (SELECT count(order_total) ' +
         ' FROM mpos_order ' +
         ' WHERE billing_type=17 AND ' +
-        ' order_state="fulfilled" AND ' +
+        " order_state='fulfilled' AND " +
         ' store_id=:store_id) as jungleworksOrders,' +
         // 18 yumzy
         ' (SELECT SUM(order_total) ' +
         ' FROM mpos_order ' +
         ' WHERE billing_type=18 AND ' +
-        ' order_state="fulfilled" AND ' +
+        " order_state='fulfilled' AND " +
         ' store_id=:store_id) as yumzyTotal,' +
         ' (SELECT count(order_total) ' +
         ' FROM mpos_order ' +
         ' WHERE billing_type=18 AND ' +
-        ' order_state="fulfilled" AND ' +
+        " order_state='fulfilled' AND " +
         ' store_id=:store_id) as yumzyOrders,' +
         // 19 magicpin
         ' (SELECT SUM(order_total) ' +
         ' FROM mpos_order ' +
         ' WHERE billing_type=19 AND ' +
-        ' order_state="fulfilled" AND ' +
+        " order_state='fulfilled' AND " +
         ' store_id=:store_id) as magicpinTotal,' +
         ' (SELECT count(order_total) ' +
         ' FROM mpos_order ' +
         ' WHERE billing_type=19 AND ' +
-        ' order_state="fulfilled" AND ' +
+        " order_state='fulfilled' AND " +
         ' store_id=:store_id) as magicpinOrders,' +
         // 20 thrive
         ' (SELECT SUM(order_total) ' +
         ' FROM mpos_order ' +
         ' WHERE billing_type=20 AND ' +
-        ' order_state="fulfilled" AND ' +
+        " order_state='fulfilled' AND " +
         ' store_id=:store_id) as thriveTotal,' +
         ' (SELECT count(order_total) ' +
         ' FROM mpos_order ' +
         ' WHERE billing_type=20 AND ' +
-        ' order_state="fulfilled" AND ' +
+        " order_state='fulfilled' AND " +
         ' store_id=:store_id) as thriveOrders,' +
         // 21 talabat
         ' (SELECT SUM(order_total) ' +
         ' FROM mpos_order ' +
         ' WHERE billing_type=21 AND ' +
-        ' order_state="fulfilled" AND ' +
+        " order_state='fulfilled' AND " +
         ' store_id=:store_id) as talabatTotal,' +
         ' (SELECT count(order_total) ' +
         ' FROM mpos_order ' +
         ' WHERE billing_type=21 AND ' +
-        ' order_state="fulfilled" AND ' +
+        " order_state='fulfilled' AND " +
         ' store_id=:store_id) as talabatOrders,' +
         // 22 radyes
         ' (SELECT SUM(order_total) ' +
         ' FROM mpos_order ' +
         ' WHERE billing_type=22 AND ' +
-        ' order_state="fulfilled" AND ' +
+        " order_state='fulfilled' AND " +
         ' store_id=:store_id) as radyesTotal,' +
         ' (SELECT count(order_total) ' +
         ' FROM mpos_order ' +
         ' WHERE billing_type=22 AND ' +
-        ' order_state="fulfilled" AND ' +
+        " order_state='fulfilled' AND " +
         ' store_id=:store_id) as radyesOrders,' +
         // 23 mymenu
         ' (SELECT SUM(order_total) ' +
         ' FROM mpos_order ' +
         ' WHERE billing_type=23 AND ' +
-        ' order_state="fulfilled" AND ' +
+        " order_state='fulfilled' AND " +
         ' store_id=:store_id) as mymenuTotal,' +
         ' (SELECT count(order_total) ' +
         ' FROM mpos_order ' +
         ' WHERE billing_type=23 AND ' +
-        ' order_state="fulfilled" AND ' +
+        " order_state='fulfilled' AND " +
         ' store_id=:store_id) as mymenuOrders,' +
         // 24 deliverect
         ' (SELECT SUM(order_total) ' +
         ' FROM mpos_order ' +
         ' WHERE billing_type=24 AND ' +
-        ' order_state="fulfilled" AND ' +
+        " order_state='fulfilled' AND " +
         ' store_id=:store_id) as deliverectTotal,' +
         ' (SELECT count(order_total) ' +
         ' FROM mpos_order ' +
         ' WHERE billing_type=24 AND ' +
-        ' order_state="fulfilled" AND ' +
+        " order_state='fulfilled' AND " +
         ' store_id=:store_id) as deliverectOrders,' +
         // 25 foodpanda
         ' (SELECT SUM(order_total) ' +
         ' FROM mpos_order ' +
         ' WHERE billing_type=25 AND ' +
-        ' order_state="fulfilled" AND ' +
+        " order_state='fulfilled' AND " +
         ' store_id=:store_id) as foodpandaTotal,' +
         ' (SELECT count(order_total) ' +
         ' FROM mpos_order ' +
         ' WHERE billing_type=25 AND ' +
-        ' order_state="fulfilled" AND ' +
+        " order_state='fulfilled' AND " +
         ' store_id=:store_id) as foodpandaOrders,' +
         // 26 hungerstation
         ' (SELECT SUM(order_total) ' +
         ' FROM mpos_order ' +
         ' WHERE billing_type=26 AND ' +
-        ' order_state="fulfilled" AND ' +
+        " order_state='fulfilled' AND " +
         ' store_id=:store_id) as hungerstationTotal,' +
         ' (SELECT count(order_total) ' +
         ' FROM mpos_order ' +
         ' WHERE billing_type=26 AND ' +
-        ' order_state="fulfilled" AND ' +
+        " order_state='fulfilled' AND " +
         ' store_id=:store_id) as hungerstationOrders,' +
         // 27 jahez
         ' (SELECT SUM(order_total) ' +
         ' FROM mpos_order ' +
         ' WHERE billing_type=27 AND ' +
-        ' order_state="fulfilled" AND ' +
+        " order_state='fulfilled' AND " +
         ' store_id=:store_id) as jahezTotal,' +
         ' (SELECT count(order_total) ' +
         ' FROM mpos_order ' +
         ' WHERE billing_type=27 AND ' +
-        ' order_state="fulfilled" AND ' +
+        " order_state='fulfilled' AND " +
         ' store_id=:store_id) as jahezOrders,' +
         // 28 toyou
         ' (SELECT SUM(order_total) ' +
         ' FROM mpos_order ' +
         ' WHERE billing_type=28 AND ' +
-        ' order_state="fulfilled" AND ' +
+        " order_state='fulfilled' AND " +
         ' store_id=:store_id) as toyouTotal,' +
         ' (SELECT count(order_total) ' +
         ' FROM mpos_order ' +
         ' WHERE billing_type=28 AND ' +
-        ' order_state="fulfilled" AND ' +
+        " order_state='fulfilled' AND " +
         ' store_id=:store_id) as toyouOrders,' +
         // 29 chefz
         ' (SELECT SUM(order_total) ' +
         ' FROM mpos_order ' +
         ' WHERE billing_type=29 AND ' +
-        ' order_state="fulfilled" AND ' +
+        " order_state='fulfilled' AND " +
         ' store_id=:store_id) as chefzTotal,' +
         ' (SELECT count(order_total) ' +
         ' FROM mpos_order ' +
         ' WHERE billing_type=29 AND ' +
-        ' order_state="fulfilled" AND ' +
+        " order_state='fulfilled' AND " +
         ' store_id=:store_id) as chefzOrders,' +
         // 30 mrsool
         ' (SELECT SUM(order_total) ' +
         ' FROM mpos_order ' +
         ' WHERE billing_type=30 AND ' +
-        ' order_state="fulfilled" AND ' +
+        " order_state='fulfilled' AND " +
         ' store_id=:store_id) as mrsoolTotal,' +
         ' (SELECT count(order_total) ' +
         ' FROM mpos_order ' +
         ' WHERE billing_type=30 AND ' +
-        ' order_state="fulfilled" AND ' +
+        " order_state='fulfilled' AND " +
         ' store_id=:store_id) as mrsoolOrders,' +
         // 31 wassel
         ' (SELECT SUM(order_total) ' +
         ' FROM mpos_order ' +
         ' WHERE billing_type=31 AND ' +
-        ' order_state="fulfilled" AND ' +
+        " order_state='fulfilled' AND " +
         ' store_id=:store_id) as wasselTotal,' +
         ' (SELECT count(order_total) ' +
         ' FROM mpos_order ' +
         ' WHERE billing_type=31 AND ' +
-        ' order_state="fulfilled" AND ' +
+        " order_state='fulfilled' AND " +
         ' store_id=:store_id) as wasselOrders,' +
         // 32 walem
         ' (SELECT SUM(order_total) ' +
         ' FROM mpos_order ' +
         ' WHERE billing_type=32 AND ' +
-        ' order_state="fulfilled" AND ' +
+        " order_state='fulfilled' AND " +
         ' store_id=:store_id) as walemTotal,' +
         ' (SELECT count(order_total) ' +
         ' FROM mpos_order ' +
         ' WHERE billing_type=32 AND ' +
-        ' order_state="fulfilled" AND ' +
+        " order_state='fulfilled' AND " +
         ' store_id=:store_id) as walemOrders,' +
         // 33 careem
         ' (SELECT SUM(order_total) ' +
         ' FROM mpos_order ' +
         ' WHERE billing_type=33 AND ' +
-        ' order_state="fulfilled" AND ' +
+        " order_state='fulfilled' AND " +
         ' store_id=:store_id) as careemTotal,' +
         ' (SELECT count(order_total) ' +
         ' FROM mpos_order ' +
         ' WHERE billing_type=33 AND ' +
-        ' order_state="fulfilled" AND ' +
+        " order_state='fulfilled' AND " +
         ' store_id=:store_id) as careemOrders,' +
         // 34 TMT
         ' (SELECT SUM(order_total) ' +
         ' FROM mpos_order ' +
         ' WHERE billing_type=34 AND ' +
-        ' order_state="fulfilled" AND ' +
+        " order_state='fulfilled' AND " +
         ' store_id=:store_id) as tmtTotal,' +
         ' (SELECT count(order_total) ' +
         ' FROM mpos_order ' +
         ' WHERE billing_type=34 AND ' +
-        ' order_state="fulfilled" AND ' +
+        " order_state='fulfilled' AND " +
         ' store_id=:store_id) as tmtOrders,' +
         // 35 Mathaqi
         ' (SELECT SUM(order_total) ' +
         ' FROM mpos_order ' +
         ' WHERE billing_type=35 AND ' +
-        ' order_state="fulfilled" AND ' +
+        " order_state='fulfilled' AND " +
         ' store_id=:store_id) as mathaqiTotal,' +
         ' (SELECT count(order_total) ' +
         ' FROM mpos_order ' +
         ' WHERE billing_type=35 AND ' +
-        ' order_state="fulfilled" AND ' +
+        " order_state='fulfilled' AND " +
         ' store_id=:store_id) as mathaqiOrders,' +
         // 36 Ezhalha
         ' (SELECT SUM(order_total) ' +
         ' FROM mpos_order ' +
         ' WHERE billing_type=36 AND ' +
-        ' order_state="fulfilled" AND ' +
+        " order_state='fulfilled' AND " +
         ' store_id=:store_id) as ezhalhaTotal,' +
         ' (SELECT count(order_total) ' +
         ' FROM mpos_order ' +
         ' WHERE billing_type=36 AND ' +
-        ' order_state="fulfilled" AND ' +
+        " order_state='fulfilled' AND " +
         ' store_id=:store_id) as ezhalhaOrders,' +
         // 37 Lugmety
         ' (SELECT SUM(order_total) ' +
         ' FROM mpos_order ' +
         ' WHERE billing_type=37 AND ' +
-        ' order_state="fulfilled" AND ' +
+        " order_state='fulfilled' AND " +
         ' store_id=:store_id) as lugmetyTotal,' +
         ' (SELECT count(order_total) ' +
         ' FROM mpos_order ' +
         ' WHERE billing_type=37 AND ' +
-        ' order_state="fulfilled" AND ' +
+        " order_state='fulfilled' AND " +
         ' store_id=:store_id) as lugmetyOrders,' +
         // 38 Foodboy
         ' (SELECT SUM(order_total) ' +
         ' FROM mpos_order ' +
         ' WHERE billing_type=38 AND ' +
-        ' order_state="fulfilled" AND ' +
+        " order_state='fulfilled' AND " +
         ' store_id=:store_id) as foodboyTotal,' +
         ' (SELECT count(order_total) ' +
         ' FROM mpos_order ' +
         ' WHERE billing_type=38 AND ' +
-        ' order_state="fulfilled" AND ' +
+        " order_state='fulfilled' AND " +
         ' store_id=:store_id) as foodboyOrders,' +
         // 39 Yummy
         ' (SELECT SUM(order_total) ' +
         ' FROM mpos_order ' +
         ' WHERE billing_type=39 AND ' +
-        ' order_state="fulfilled" AND ' +
+        " order_state='fulfilled' AND " +
         ' store_id=:store_id) as yummyTotal,' +
         ' (SELECT count(order_total) ' +
         ' FROM mpos_order ' +
         ' WHERE billing_type=39 AND ' +
-        ' order_state="fulfilled" AND ' +
+        " order_state='fulfilled' AND " +
         ' store_id=:store_id) as yummyOrders,' +
         // 40 Upsale
         ' (SELECT SUM(order_total) ' +
         ' FROM mpos_order ' +
         ' WHERE billing_type=40 AND ' +
-        ' order_state="fulfilled" AND ' +
+        " order_state='fulfilled' AND " +
         ' store_id=:store_id) as upsaleTotal,' +
         ' (SELECT count(order_total) ' +
         ' FROM mpos_order ' +
         ' WHERE billing_type=40 AND ' +
-        ' order_state="fulfilled" AND ' +
+        " order_state='fulfilled' AND " +
         ' store_id=:store_id) as upsaleOrders,' +
         // 41 Wizzy
         ' (SELECT SUM(order_total) ' +
         ' FROM mpos_order ' +
         ' WHERE billing_type=41 AND ' +
-        ' order_state="fulfilled" AND ' +
+        " order_state='fulfilled' AND " +
         ' store_id=:store_id) as wizzyTotal,' +
         ' (SELECT count(order_total) ' +
         ' FROM mpos_order ' +
         ' WHERE billing_type=41 AND ' +
-        ' order_state="fulfilled" AND ' +
+        " order_state='fulfilled' AND " +
         ' store_id=:store_id) as wizzyOrders,' +
         // 42 Snoonu
         ' (SELECT SUM(order_total) ' +
         ' FROM mpos_order ' +
         ' WHERE billing_type=42 AND ' +
-        ' order_state="fulfilled" AND ' +
+        " order_state='fulfilled' AND " +
         ' store_id=:store_id) as snoonuTotal,' +
         ' (SELECT count(order_total) ' +
         ' FROM mpos_order ' +
         ' WHERE billing_type=42 AND ' +
-        ' order_state="fulfilled" AND ' +
+        " order_state='fulfilled' AND " +
         ' store_id=:store_id) as snoonuOrders,' +
         // 43 raffeq
         ' (SELECT SUM(order_total) ' +
         ' FROM mpos_order ' +
         ' WHERE billing_type=43 AND ' +
-        ' order_state="fulfilled" AND ' +
+        " order_state='fulfilled' AND " +
         ' store_id=:store_id) as raffeqTotal,' +
         ' (SELECT count(order_total) ' +
         ' FROM mpos_order ' +
         ' WHERE billing_type=43 AND ' +
-        ' order_state="fulfilled" AND ' +
+        " order_state='fulfilled' AND " +
         ' store_id=:store_id) as raffeqOrders,' +
         // 44 Mrd
         ' (SELECT SUM(order_total) ' +
         ' FROM mpos_order ' +
         ' WHERE billing_type=44 AND ' +
-        ' order_state="fulfilled" AND ' +
+        " order_state='fulfilled' AND " +
         ' store_id=:store_id) as mrdTotal,' +
         ' (SELECT count(order_total) ' +
         ' FROM mpos_order ' +
         ' WHERE billing_type=44 AND ' +
-        ' order_state="fulfilled" AND ' +
+        " order_state='fulfilled' AND " +
         ' store_id=:store_id) as mrdOrders,' +
         // 45 Accounts
         ' (SELECT SUM(order_total) ' +
         ' FROM mpos_order ' +
         ' WHERE billing_type=45 AND ' +
-        ' order_state="fulfilled" AND ' +
+        " order_state='fulfilled' AND " +
         ' store_id=:store_id) as accountsTotal,' +
         ' (SELECT count(order_total) ' +
         ' FROM mpos_order ' +
         ' WHERE billing_type=45 AND ' +
-        ' order_state="fulfilled" AND ' +
+        " order_state='fulfilled' AND " +
         ' store_id=:store_id) as accountsOrders,' +
         // 46 Whakaaro
         ' (SELECT SUM(order_total) ' +
         ' FROM mpos_order ' +
         ' WHERE billing_type=46 AND ' +
-        ' order_state="fulfilled" AND ' +
+        " order_state='fulfilled' AND " +
         ' store_id=:store_id) as whakaaroTotal,' +
         ' (SELECT count(order_total) ' +
         ' FROM mpos_order ' +
         ' WHERE billing_type=46 AND ' +
-        ' order_state="fulfilled" AND ' +
+        " order_state='fulfilled' AND " +
         ' store_id=:store_id) as whakaaroOrders,' +
         // 47 gatoes
         ' (SELECT SUM(order_total) ' +
         ' FROM mpos_order ' +
         ' WHERE billing_type=17 AND ' +
-        ' order_state="fulfilled" AND ' +
+        " order_state='fulfilled' AND " +
         ' store_id=:store_id) as gatoesTotal,' +
         ' (SELECT count(order_total) ' +
         ' FROM mpos_order ' +
         ' WHERE billing_type=47 AND ' +
-        ' order_state="fulfilled" AND ' +
+        " order_state='fulfilled' AND " +
         ' store_id=:store_id) as gatoesOrders,' +
         // 48 Wal Aan
         ' (SELECT SUM(order_total) ' +
         ' FROM mpos_order ' +
         ' WHERE billing_type=48 AND ' +
-        ' order_state="fulfilled" AND ' +
+        " order_state='fulfilled' AND " +
         ' store_id=:store_id) as walaanTotal,' +
         ' (SELECT count(order_total) ' +
         ' FROM mpos_order ' +
         ' WHERE billing_type=48 AND ' +
-        ' order_state="fulfilled" AND ' +
+        " order_state='fulfilled' AND " +
         ' store_id=:store_id) as walaanOrders,' +
         // 49 Delivery partner
         ' (SELECT SUM(order_total) ' +
         ' FROM mpos_order ' +
         ' WHERE billing_type=49 AND ' +
-        ' order_state="fulfilled" AND ' +
+        " order_state='fulfilled' AND " +
         ' store_id=:store_id) as deliverypartnerTotal,' +
         ' (SELECT count(order_total) ' +
         ' FROM mpos_order ' +
         ' WHERE billing_type=49 AND ' +
-        ' order_state="fulfilled" AND ' +
+        " order_state='fulfilled' AND " +
         ' store_id=:store_id) as deliverypartnerOrders,' +
         // 50 Mychharo
         ' (SELECT SUM(order_total) ' +
         ' FROM mpos_order ' +
         ' WHERE billing_type=50 AND ' +
-        ' order_state="fulfilled" AND ' +
+        " order_state='fulfilled' AND " +
         ' store_id=:store_id) as mychharoTotal,' +
         ' (SELECT count(order_total) ' +
         ' FROM mpos_order ' +
         ' WHERE billing_type=50 AND ' +
-        ' order_state="fulfilled" AND ' +
+        " order_state='fulfilled' AND " +
         ' store_id=:store_id) as mychharoOrders,' +
         // 51 quick bill
         // ' (SELECT SUM(order_total) ' +
         // ' FROM mpos_order ' +
         // ' WHERE billing_type=51 AND ' +
-        // ' order_state="fulfilled" AND ' +
+        // " order_state='fulfilled' AND " +
         // ' store_id=:store_id) as quickbillTotal,' +
         // ' (SELECT count(order_total) ' +
         // ' FROM mpos_order ' +
         // ' WHERE billing_type=51 AND ' +
-        // ' order_state="fulfilled" AND ' +
+        // " order_state='fulfilled' AND " +
         // ' store_id=:store_id) as quickbillOrders,' +
         // 52 local
         ' (SELECT SUM(order_total) ' +
         ' FROM mpos_order ' +
         ' WHERE billing_type=52 AND ' +
-        ' order_state="fulfilled" AND ' +
+        " order_state='fulfilled' AND " +
         ' store_id=:store_id) as localTotal,' +
         ' (SELECT count(order_total) ' +
         ' FROM mpos_order ' +
         ' WHERE billing_type=52 AND ' +
-        ' order_state="fulfilled" AND ' +
+        " order_state='fulfilled' AND " +
         ' store_id=:store_id) as localOrders,' +
         // 53 Travel
         ' (SELECT SUM(order_total) ' +
         ' FROM mpos_order ' +
         ' WHERE billing_type=53 AND ' +
-        ' order_state="fulfilled" AND ' +
+        " order_state='fulfilled' AND " +
         ' store_id=:store_id) as travelTotal,' +
         ' (SELECT count(order_total) ' +
         ' FROM mpos_order ' +
         ' WHERE billing_type=53 AND ' +
-        ' order_state="fulfilled" AND ' +
+        " order_state='fulfilled' AND " +
         ' store_id=:store_id) as travelOrders,' +
         // // 54 Delivery
         // ' WHERE billing_type=54 AND ' +
-        // ' order_state="fulfilled" AND ' +
+        // " order_state='fulfilled' AND " +
         // ' store_id=:store_id) as deliveryTotal,' +
         // ' (SELECT count(order_total) ' +
         // ' FROM mpos_order ' +
         // ' WHERE billing_type=54 AND ' +
-        // ' order_state="fulfilled" AND ' +
+        // " order_state='fulfilled' AND " +
         // ' store_id=:store_id) as deliveryOrders,' +
         // 55 Zomato
         // ' WHERE billing_type=1 AND ' +
-        // ' order_state="fulfilled" AND ' +
+        // " order_state='fulfilled' AND " +
         // ' store_id=:store_id) as dineinTotal,' +
         // ' (SELECT count(order_total) ' +
         // ' FROM mpos_order ' +
         // ' WHERE billing_type=1 AND ' +
-        // ' order_state="fulfilled" AND ' +
+        // " order_state='fulfilled' AND " +
         // ' store_id=:store_id) as dineinOrders,' +
 
         // 56 Zoeqi
         ' (SELECT SUM(order_total) ' +
         ' FROM mpos_order ' +
         ' WHERE billing_type=56 AND ' +
-        ' order_state="fulfilled" AND ' +
+        " order_state='fulfilled' AND " +
         ' store_id=:store_id) as zoeqiTotal,' +
         ' (SELECT count(order_total) ' +
         ' FROM mpos_order ' +
         ' WHERE billing_type=56 AND ' +
-        ' order_state="fulfilled" AND ' +
+        " order_state='fulfilled' AND " +
         ' store_id=:store_id) as zoeqiOrders,' +
         // 57 Uber eat
         ' (SELECT SUM(order_total) ' +
         ' FROM mpos_order ' +
         ' WHERE billing_type=57 AND ' +
-        ' order_state="fulfilled" AND ' +
+        " order_state='fulfilled' AND " +
         ' store_id=:store_id) as ubereatTotal,' +
         ' (SELECT count(order_total) ' +
         ' FROM mpos_order ' +
         ' WHERE billing_type=57 AND ' +
-        ' order_state="fulfilled" AND ' +
+        " order_state='fulfilled' AND " +
         ' store_id=:store_id) as ubereatOrders,' +
         // 58 Danzo
         ' (SELECT SUM(order_total) ' +
         ' FROM mpos_order ' +
         ' WHERE billing_type=58 AND ' +
-        ' order_state="fulfilled" AND ' +
+        " order_state='fulfilled' AND " +
         ' store_id=:store_id) as danzoTotal,' +
         ' (SELECT count(order_total) ' +
         ' FROM mpos_order ' +
         ' WHERE billing_type=58 AND ' +
-        ' order_state="fulfilled" AND ' +
+        " order_state='fulfilled' AND " +
         ' store_id=:store_id) as danzoOrders,' +
         // 59 digital orders
         ' (SELECT SUM(order_total) ' +
         ' FROM mpos_order ' +
         ' WHERE billing_type=59 AND ' +
-        ' order_state="fulfilled" AND ' +
+        " order_state='fulfilled' AND " +
         ' store_id=:store_id) as digitalordersTotal,' +
         ' (SELECT count(order_total) ' +
         ' FROM mpos_order ' +
         ' WHERE billing_type=59 AND ' +
-        ' order_state="fulfilled" AND ' +
+        " order_state='fulfilled' AND " +
         ' store_id=:store_id) as digitalordersOrders,' +
         // 60 Take-out
         ' (SELECT SUM(order_total) ' +
         ' FROM mpos_order ' +
         ' WHERE billing_type=60 AND ' +
-        ' order_state="fulfilled" AND ' +
+        " order_state='fulfilled' AND " +
         ' store_id=:store_id) as takeoutTotal,' +
         ' (SELECT count(order_total) ' +
         ' FROM mpos_order ' +
         ' WHERE billing_type=60 AND ' +
-        ' order_state="fulfilled" AND ' +
+        " order_state='fulfilled' AND " +
         ' store_id=:store_id) as takeoutOrders,' +
         // 61 Google pay
         ' (SELECT SUM(order_total) ' +
         ' FROM mpos_order ' +
         ' WHERE billing_type=61 AND ' +
-        ' order_state="fulfilled" AND ' +
+        " order_state='fulfilled' AND " +
         ' store_id=:store_id) as googlepayTotal,' +
         ' (SELECT count(order_total) ' +
         ' FROM mpos_order ' +
         ' WHERE billing_type=61 AND ' +
-        ' order_state="fulfilled" AND ' +
+        " order_state='fulfilled' AND " +
         ' store_id=:store_id) as googlepayOrders,' +
         // 62 Jabs HUb
         ' (SELECT SUM(order_total) ' +
         ' FROM mpos_order ' +
         ' WHERE billing_type=62 AND ' +
-        ' order_state="fulfilled" AND ' +
+        " order_state='fulfilled' AND " +
         ' store_id=:store_id) as jabshubTotal,' +
         ' (SELECT count(order_total) ' +
         ' FROM mpos_order ' +
         ' WHERE billing_type=62 AND ' +
-        ' order_state="fulfilled" AND ' +
+        " order_state='fulfilled' AND " +
         ' store_id=:store_id) as jabshubOrders,' +
         // 63 Bebo
         ' (SELECT SUM(order_total) ' +
         ' FROM mpos_order ' +
         ' WHERE billing_type=63 AND ' +
-        ' order_state="fulfilled" AND ' +
+        " order_state='fulfilled' AND " +
         ' store_id=:store_id) as beboTotal,' +
         ' (SELECT count(order_total) ' +
         ' FROM mpos_order ' +
         ' WHERE billing_type=63 AND ' +
-        ' order_state="fulfilled" AND ' +
+        " order_state='fulfilled' AND " +
         ' store_id=:store_id) as beboOrders,' +
         // 64 Amazon Food
         ' (SELECT SUM(order_total) ' +
         ' FROM mpos_order ' +
         ' WHERE billing_type=64 AND ' +
-        ' order_state="fulfilled" AND ' +
+        " order_state='fulfilled' AND " +
         ' store_id=:store_id) as amazonfoodTotal,' +
         ' (SELECT count(order_total) ' +
         ' FROM mpos_order ' +
         ' WHERE billing_type=64 AND ' +
-        ' order_state="fulfilled" AND ' +
+        " order_state='fulfilled' AND " +
         ' store_id=:store_id) as amazonfoodOrders,' +
         // 65 dotpe
         ' (SELECT SUM(order_total) ' +
         ' FROM mpos_order ' +
         ' WHERE billing_type=65 AND ' +
-        ' order_state="fulfilled" AND ' +
+        " order_state='fulfilled' AND " +
         ' store_id=:store_id) as dotpeTotal,' +
         ' (SELECT count(order_total) ' +
         ' FROM mpos_order ' +
         ' WHERE billing_type=65 AND ' +
-        ' order_state="fulfilled" AND ' +
+        " order_state='fulfilled' AND " +
         ' store_id=:store_id) as dotpeOrders,' +
         // 66 easydiner
         ' (SELECT SUM(order_total) ' +
         ' FROM mpos_order ' +
         ' WHERE billing_type=66 AND ' +
-        ' order_state="fulfilled" AND ' +
+        " order_state='fulfilled' AND " +
         ' store_id=:store_id) as easydinerTotal,' +
         ' (SELECT count(order_total) ' +
         ' FROM mpos_order ' +
         ' WHERE billing_type=66 AND ' +
-        ' order_state="fulfilled" AND ' +
+        " order_state='fulfilled' AND " +
         ' store_id=:store_id) as easydinerOrders,' +
         // 67 Dukan
         ' (SELECT SUM(order_total) ' +
         ' FROM mpos_order ' +
         ' WHERE billing_type=67 AND ' +
-        ' order_state="fulfilled" AND ' +
+        " order_state='fulfilled' AND " +
         ' store_id=:store_id) as dukanTotal,' +
         ' (SELECT count(order_total) ' +
         ' FROM mpos_order ' +
         ' WHERE billing_type=67 AND ' +
-        ' order_state="fulfilled" AND ' +
+        " order_state='fulfilled' AND " +
         ' store_id=:store_id) as dukanOrders,' +
         // 68 Jungle works
         ' (SELECT SUM(order_total) ' +
         ' FROM mpos_order ' +
         ' WHERE billing_type=68 AND ' +
-        ' order_state="fulfilled" AND ' +
+        " order_state='fulfilled' AND " +
         ' store_id=:store_id) as jungleworksTotal,' +
         ' (SELECT count(order_total) ' +
         ' FROM mpos_order ' +
         ' WHERE billing_type=68 AND ' +
-        ' order_state="fulfilled" AND ' +
+        " order_state='fulfilled' AND " +
         ' store_id=:store_id) as jungleworksOrders,' +
         // 69 Yumzy
         ' (SELECT SUM(order_total) ' +
         ' FROM mpos_order ' +
         ' WHERE billing_type=69 AND ' +
-        ' order_state="fulfilled" AND ' +
+        " order_state='fulfilled' AND " +
         ' store_id=:store_id) as yumzyTotal,' +
         ' (SELECT count(order_total) ' +
         ' FROM mpos_order ' +
         ' WHERE billing_type=69 AND ' +
-        ' order_state="fulfilled" AND ' +
+        " order_state='fulfilled' AND " +
         ' store_id=:store_id) as yumzyOrders,' +
         // 70 magic pin
         ' (SELECT SUM(order_total) ' +
         ' FROM mpos_order ' +
         ' WHERE billing_type=70 AND ' +
-        ' order_state="fulfilled" AND ' +
+        " order_state='fulfilled' AND " +
         ' store_id=:store_id) as magicpinTotal,' +
         ' (SELECT count(order_total) ' +
         ' FROM mpos_order ' +
         ' WHERE billing_type=70 AND ' +
-        ' order_state="fulfilled" AND ' +
+        " order_state='fulfilled' AND " +
         ' store_id=:store_id) as magicpinOrders,' +
         // 71 Thrive
         ' (SELECT SUM(order_total) ' +
         ' FROM mpos_order ' +
         ' WHERE billing_type=71 AND ' +
-        ' order_state="fulfilled" AND ' +
+        " order_state='fulfilled' AND " +
         ' store_id=:store_id) as thriveTotal,' +
         ' (SELECT count(order_total) ' +
         ' FROM mpos_order ' +
         ' WHERE billing_type=71 AND ' +
-        ' order_state="fulfilled" AND ' +
+        " order_state='fulfilled' AND " +
         ' store_id=:store_id) as thriveOrders,' +
         // 72 requests
         ' (SELECT SUM(order_total) ' +
         ' FROM mpos_order ' +
         ' WHERE billing_type=72 AND ' +
-        ' order_state="fulfilled" AND ' +
+        " order_state='fulfilled' AND " +
         ' store_id=:store_id) as requestsTotal,' +
         ' (SELECT count(order_total) ' +
         ' FROM mpos_order ' +
         ' WHERE billing_type=72 AND ' +
-        ' order_state="fulfilled" AND ' +
+        " order_state='fulfilled' AND " +
         ' store_id=:store_id) as requestsOrders,' +
         // 73 radian
         ' (SELECT SUM(order_total) ' +
         ' FROM mpos_order ' +
         ' WHERE billing_type=73 AND ' +
-        ' order_state="fulfilled" AND ' +
+        " order_state='fulfilled' AND " +
         ' store_id=:store_id) as radianTotal,' +
         ' (SELECT count(order_total) ' +
         ' FROM mpos_order ' +
         ' WHERE billing_type=73 AND ' +
-        ' order_state="fulfilled" AND ' +
+        " order_state='fulfilled' AND " +
         ' store_id=:store_id) as radinaOrders,' +
         // 74 my list
         ' (SELECT SUM(order_total) ' +
         ' FROM mpos_order ' +
         ' WHERE billing_type=74 AND ' +
-        ' order_state="fulfilled" AND ' +
+        " order_state='fulfilled' AND " +
         ' store_id=:store_id) as mylistTotal,' +
         ' (SELECT count(order_total) ' +
         ' FROM mpos_order ' +
         ' WHERE billing_type=74 AND ' +
-        ' order_state="fulfilled" AND ' +
+        " order_state='fulfilled' AND " +
         ' store_id=:store_id) as mylistOrders,' +
         // 75 deliverytech
         ' (SELECT SUM(order_total) ' +
         ' FROM mpos_order ' +
         ' WHERE billing_type=75 AND ' +
-        ' order_state="fulfilled" AND ' +
+        " order_state='fulfilled' AND " +
         ' store_id=:store_id) as deliverytechTotal,' +
         ' (SELECT count(order_total) ' +
         ' FROM mpos_order ' +
         ' WHERE billing_type=75 AND ' +
-        ' order_state="fulfilled" AND ' +
+        " order_state='fulfilled' AND " +
         ' store_id=:store_id) as deliverytechOrders,' +
         // 76 Food panda
         ' (SELECT SUM(order_total) ' +
         ' FROM mpos_order ' +
         ' WHERE billing_type=76 AND ' +
-        ' order_state="fulfilled" AND ' +
+        " order_state='fulfilled' AND " +
         ' store_id=:store_id) as foodpandaTotal,' +
         ' (SELECT count(order_total) ' +
         ' FROM mpos_order ' +
         ' WHERE billing_type=76 AND ' +
-        ' order_state="fulfilled" AND ' +
+        " order_state='fulfilled' AND " +
         ' store_id=:store_id) as foodpandaOrders,' +
         // 77 hungerstation
         ' (SELECT SUM(order_total) ' +
         ' FROM mpos_order ' +
         ' WHERE billing_type=77 AND ' +
-        ' order_state="fulfilled" AND ' +
+        " order_state='fulfilled' AND " +
         ' store_id=:store_id) as hungerstationTotal,' +
         ' (SELECT count(order_total) ' +
         ' FROM mpos_order ' +
         ' WHERE billing_type=77 AND ' +
-        ' order_state="fulfilled" AND ' +
+        " order_state='fulfilled' AND " +
         ' store_id=:store_id) as hungerstationOrders,' +
         // 78 ready
         ' (SELECT SUM(order_total) ' +
         ' FROM mpos_order ' +
         ' WHERE billing_type=78 AND ' +
-        ' order_state="fulfilled" AND ' +
+        " order_state='fulfilled' AND " +
         ' store_id=:store_id) as readyTotal,' +
         ' (SELECT count(order_total) ' +
         ' FROM mpos_order ' +
         ' WHERE billing_type=78 AND ' +
-        ' order_state="fulfilled" AND ' +
+        " order_state='fulfilled' AND " +
         ' store_id=:store_id) as readyOrders,' +
         // 79 tu yo
         ' (SELECT SUM(order_total) ' +
         ' FROM mpos_order ' +
         ' WHERE billing_type=79 AND ' +
-        ' order_state="fulfilled" AND ' +
+        " order_state='fulfilled' AND " +
         ' store_id=:store_id) as tuyoTotal,' +
         ' (SELECT count(order_total) ' +
         ' FROM mpos_order ' +
         ' WHERE billing_type=79 AND ' +
-        ' order_state="fulfilled" AND ' +
+        " order_state='fulfilled' AND " +
         ' store_id=:store_id) as tuyoOrders,' +
         // 80 chiefs
         ' (SELECT SUM(order_total) ' +
         ' FROM mpos_order ' +
         ' WHERE billing_type=80 AND ' +
-        ' order_state="fulfilled" AND ' +
+        " order_state='fulfilled' AND " +
         ' store_id=:store_id) as chiefsTotal,' +
         ' (SELECT count(order_total) ' +
         ' FROM mpos_order ' +
         ' WHERE billing_type=80 AND ' +
-        ' order_state="fulfilled" AND ' +
+        " order_state='fulfilled' AND " +
         ' store_id=:store_id) as chiefsOrders,' +
         // 81 messengers
         ' (SELECT SUM(order_total) ' +
         ' FROM mpos_order ' +
         ' WHERE billing_type=81 AND ' +
-        ' order_state="fulfilled" AND ' +
+        " order_state='fulfilled' AND " +
         ' store_id=:store_id) as messengersTotal,' +
         ' (SELECT count(order_total) ' +
         ' FROM mpos_order ' +
         ' WHERE billing_type=81 AND ' +
-        ' order_state="fulfilled" AND ' +
+        " order_state='fulfilled' AND " +
         ' store_id=:store_id) as messengersOrders,' +
         // 82 receipts
         ' (SELECT SUM(order_total) ' +
         ' FROM mpos_order ' +
         ' WHERE billing_type=82 AND ' +
-        ' order_state="fulfilled" AND ' +
+        " order_state='fulfilled' AND " +
         ' store_id=:store_id) as receiptsTotal,' +
         ' (SELECT count(order_total) ' +
         ' FROM mpos_order ' +
         ' WHERE billing_type=82 AND ' +
-        ' order_state="fulfilled" AND ' +
+        " order_state='fulfilled' AND " +
         ' store_id=:store_id) as receiptsOrders,' +
         // 83 william
         ' (SELECT SUM(order_total) ' +
         ' FROM mpos_order ' +
         ' WHERE billing_type=83 AND ' +
-        ' order_state="fulfilled" AND ' +
+        " order_state='fulfilled' AND " +
         ' store_id=:store_id) as williamTotal,' +
         ' (SELECT count(order_total) ' +
         ' FROM mpos_order ' +
         ' WHERE billing_type=83 AND ' +
-        ' order_state="fulfilled" AND ' +
+        " order_state='fulfilled' AND " +
         ' store_id=:store_id) as williamOrders,' +
         // 84 generous
         ' (SELECT SUM(order_total) ' +
         ' FROM mpos_order ' +
         ' WHERE billing_type=84 AND ' +
-        ' order_state="fulfilled" AND ' +
+        " order_state='fulfilled' AND " +
         ' store_id=:store_id) as generousTotal,' +
         ' (SELECT count(order_total) ' +
         ' FROM mpos_order ' +
         ' WHERE billing_type=84 AND ' +
-        ' order_state="fulfilled" AND ' +
+        " order_state='fulfilled' AND " +
         ' store_id=:store_id) as generousOrders,' +
         // 85 TMT
         ' (SELECT SUM(order_total) ' +
         ' FROM mpos_order ' +
         ' WHERE billing_type=85 AND ' +
-        ' order_state="fulfilled" AND ' +
+        " order_state='fulfilled' AND " +
         ' store_id=:store_id) as tmtTotal,' +
         ' (SELECT count(order_total) ' +
         ' FROM mpos_order ' +
         ' WHERE billing_type=85 AND ' +
-        ' order_state="fulfilled" AND ' +
+        " order_state='fulfilled' AND " +
         ' store_id=:store_id) as tmtOrders,' +
         // 86 my taste
         ' (SELECT SUM(order_total) ' +
         ' FROM mpos_order ' +
         ' WHERE billing_type=86 AND ' +
-        ' order_state="fulfilled" AND ' +
+        " order_state='fulfilled' AND " +
         ' store_id=:store_id) as mytasteTotal,' +
         ' (SELECT count(order_total) ' +
         ' FROM mpos_order ' +
         ' WHERE billing_type=86 AND ' +
-        ' order_state="fulfilled" AND ' +
+        " order_state='fulfilled' AND " +
         ' store_id=:store_id) as mytasteOrders,' +
         // 87 make it easy
         ' (SELECT SUM(order_total) ' +
         ' FROM mpos_order ' +
         ' WHERE billing_type=87 AND ' +
-        ' order_state="fulfilled" AND ' +
+        " order_state='fulfilled' AND " +
         ' store_id=:store_id) as makeiteasyTotal,' +
         ' (SELECT count(order_total) ' +
         ' FROM mpos_order ' +
         ' WHERE billing_type=87 AND ' +
-        ' order_state="fulfilled" AND ' +
+        " order_state='fulfilled' AND " +
         ' store_id=:store_id) as makeiteasyOrders,' +
         // 88 my bite
         ' (SELECT SUM(order_total) ' +
         ' FROM mpos_order ' +
         ' WHERE billing_type=88 AND ' +
-        ' order_state="fulfilled" AND ' +
+        " order_state='fulfilled' AND " +
         ' store_id=:store_id) as mybiteTotal,' +
         ' (SELECT count(order_total) ' +
         ' FROM mpos_order ' +
         ' WHERE billing_type=88 AND ' +
-        ' order_state="fulfilled" AND ' +
+        " order_state='fulfilled' AND " +
         ' store_id=:store_id) as mybiteOrders,' +
         // 89 food boy
         ' (SELECT SUM(order_total) ' +
         ' FROM mpos_order ' +
         ' WHERE billing_type=89 AND ' +
-        ' order_state="fulfilled" AND ' +
+        " order_state='fulfilled' AND " +
         ' store_id=:store_id) as foodboyTotal,' +
         ' (SELECT count(order_total) ' +
         ' FROM mpos_order ' +
         ' WHERE billing_type=89 AND ' +
-        ' order_state="fulfilled" AND ' +
+        " order_state='fulfilled' AND " +
         ' store_id=:store_id) as foodboyOrders,' +
         // 90 yummy
         ' (SELECT SUM(order_total) ' +
         ' FROM mpos_order ' +
         ' WHERE billing_type=90 AND ' +
-        ' order_state="fulfilled" AND ' +
+        " order_state='fulfilled' AND " +
         ' store_id=:store_id) as yummyTotal,' +
         ' (SELECT count(order_total) ' +
         ' FROM mpos_order ' +
         ' WHERE billing_type=90 AND ' +
-        ' order_state="fulfilled" AND ' +
+        " order_state='fulfilled' AND " +
         ' store_id=:store_id) as yummyOrders,' +
         // // 91 'اب سال'
         // ' WHERE billing_type=91 AND ' +
-        // ' order_state="fulfilled" AND ' +
+        // " order_state='fulfilled' AND " +
         // ' store_id=:store_id) as Total,' +
         // ' (SELECT count(order_total) ' +
         // ' FROM mpos_order ' +
         // ' WHERE billing_type=91 AND ' +
-        // ' order_state="fulfilled" AND ' +
+        // " order_state='fulfilled' AND " +
         // ' store_id=:store_id) as dineinOrders,' +
         // 92 Wizzy
         ' (SELECT SUM(order_total) ' +
         ' FROM mpos_order ' +
         ' WHERE billing_type=92 AND ' +
-        ' order_state="fulfilled" AND ' +
+        " order_state='fulfilled' AND " +
         ' store_id=:store_id) as wizzyTotal,' +
         ' (SELECT count(order_total) ' +
         ' FROM mpos_order ' +
         ' WHERE billing_type=92 AND ' +
-        ' order_state="fulfilled" AND ' +
+        " order_state='fulfilled' AND " +
         ' store_id=:store_id) as wizzyOrders,' +
         // 93 swallow
         ' (SELECT SUM(order_total) ' +
         ' FROM mpos_order ' +
         ' WHERE billing_type=93 AND ' +
-        ' order_state="fulfilled" AND ' +
+        " order_state='fulfilled' AND " +
         ' store_id=:store_id) as swallowTotal,' +
         ' (SELECT count(order_total) ' +
         ' FROM mpos_order ' +
         ' WHERE billing_type=1 AND ' +
-        ' order_state="fulfilled" AND ' +
+        " order_state='fulfilled' AND " +
         ' store_id=:store_id) as swallowOrders,' +
         // 94 companion
         ' (SELECT SUM(order_total) ' +
         ' FROM mpos_order ' +
         ' WHERE billing_type=94 AND ' +
-        ' order_state="fulfilled" AND ' +
+        " order_state='fulfilled' AND " +
         ' store_id=:store_id) as companionTotal,' +
         ' (SELECT count(order_total) ' +
         ' FROM mpos_order ' +
         ' WHERE billing_type=94 AND ' +
-        ' order_state="fulfilled" AND ' +
+        " order_state='fulfilled' AND " +
         ' store_id=:store_id) as companionOrders,' +
         // 95 Mr. d
         ' (SELECT SUM(order_total) ' +
         ' FROM mpos_order ' +
         ' WHERE billing_type=95 AND ' +
-        ' order_state="fulfilled" AND ' +
+        " order_state='fulfilled' AND " +
         ' store_id=:store_id) as mrdTotal,' +
         ' (SELECT count(order_total) ' +
         ' FROM mpos_order ' +
         ' WHERE billing_type=95 AND ' +
-        ' order_state="fulfilled" AND ' +
+        " order_state='fulfilled' AND " +
         ' store_id=:store_id) as mrdOrders,' +
         // 96 accounts
         ' (SELECT SUM(order_total) ' +
         ' FROM mpos_order ' +
         ' WHERE billing_type=96 AND ' +
-        ' order_state="fulfilled" AND ' +
+        " order_state='fulfilled' AND " +
         ' store_id=:store_id) as accountsTotal,' +
         ' (SELECT count(order_total) ' +
         ' FROM mpos_order ' +
         ' WHERE billing_type=96 AND ' +
-        ' order_state="fulfilled" AND ' +
+        " order_state='fulfilled' AND " +
         ' store_id=:store_id) as accountsOrders,' +
         // 97 wakroo
         ' (SELECT SUM(order_total) ' +
         ' FROM mpos_order ' +
         ' WHERE billing_type=97 AND ' +
-        ' order_state="fulfilled" AND ' +
+        " order_state='fulfilled' AND " +
         ' store_id=:store_id) as wakrooTotal,' +
         ' (SELECT count(order_total) ' +
         ' FROM mpos_order ' +
         ' WHERE billing_type=97 AND ' +
-        ' order_state="fulfilled" AND ' +
+        " order_state='fulfilled' AND " +
         ' store_id=:store_id) as wakrooOrders,' +
         // 98 gato
         ' (SELECT SUM(order_total) ' +
         ' FROM mpos_order ' +
         ' WHERE billing_type=98 AND ' +
-        ' order_state="fulfilled" AND ' +
+        " order_state='fulfilled' AND " +
         ' store_id=:store_id) as gatoTotal,' +
         ' (SELECT count(order_total) ' +
         ' FROM mpos_order ' +
         ' WHERE billing_type=98 AND ' +
-        ' order_state="fulfilled" AND ' +
+        " order_state='fulfilled' AND " +
         ' store_id=:store_id) as gatoOrders,' +
         // 99 and now
         ' (SELECT SUM(order_total) ' +
         ' FROM mpos_order ' +
         ' WHERE billing_type=99 AND ' +
-        ' order_state="fulfilled" AND ' +
+        " order_state='fulfilled' AND " +
         ' store_id=:store_id) as andnowTotal,' +
         ' (SELECT count(order_total) ' +
         ' FROM mpos_order ' +
         ' WHERE billing_type=99 AND ' +
-        ' order_state="fulfilled" AND ' +
+        " order_state='fulfilled' AND " +
         ' store_id=:store_id) as andnowOrders,' +
         // 100 up
         ' (SELECT SUM(order_total) ' +
         ' FROM mpos_order ' +
         ' WHERE billing_type=100 AND ' +
-        ' order_state="fulfilled" AND ' +
+        " order_state='fulfilled' AND " +
         ' store_id=:store_id) as upTotal,' +
         ' (SELECT count(order_total) ' +
         ' FROM mpos_order ' +
         ' WHERE billing_type=100 AND ' +
-        ' order_state="fulfilled" AND ' +
+        " order_state='fulfilled' AND " +
         ' store_id=:store_id) as upOrders,' +
         // 101 salon
         ' (SELECT SUM(order_total) ' +
         ' FROM mpos_order ' +
         ' WHERE billing_type=101 AND ' +
-        ' order_state="fulfilled" AND ' +
+        " order_state='fulfilled' AND " +
         ' store_id=:store_id) as salonTotal,' +
         ' (SELECT count(order_total) ' +
         ' FROM mpos_order ' +
         ' WHERE billing_type=101 AND ' +
-        ' order_state="fulfilled" AND ' +
+        " order_state='fulfilled' AND " +
         ' store_id=:store_id) as salonOrders,' +
         // 102 vuba vuba
         ' (SELECT SUM(order_total) ' +
         ' FROM mpos_order ' +
         ' WHERE billing_type=102 AND ' +
-        ' order_state="fulfilled" AND ' +
+        " order_state='fulfilled' AND " +
         ' store_id=:store_id) as vubavubaTotal,' +
         ' (SELECT count(order_total) ' +
         ' FROM mpos_order ' +
         ' WHERE billing_type=102 AND ' +
-        ' order_state="fulfilled" AND ' +
+        " order_state='fulfilled' AND " +
         ' store_id=:store_id) as vubavubaOrders,' +
         // 103 Rush Food
         ' (SELECT SUM(order_total) ' +
         ' FROM mpos_order ' +
         ' WHERE billing_type=103 AND ' +
-        ' order_state="fulfilled" AND ' +
+        " order_state='fulfilled' AND " +
         ' store_id=:store_id) as rushfoodTotal,' +
         ' (SELECT count(order_total) ' +
         ' FROM mpos_order ' +
         ' WHERE billing_type=103 AND ' +
-        ' order_state="fulfilled" AND ' +
+        " order_state='fulfilled' AND " +
         ' store_id=:store_id) as rushfoodOrders,' +
         // // 104 ONDC
         // ' WHERE billing_type=104 AND ' +
-        // ' order_state="fulfilled" AND ' +
+        // " order_state='fulfilled' AND " +
         // ' store_id=:store_id) as dineinTotal,' +
         // ' (SELECT count(order_total) ' +
         // ' FROM mpos_order ' +
         // ' WHERE billing_type=104 AND ' +
-        // ' order_state="fulfilled" AND ' +
+        // " order_state='fulfilled' AND " +
         // ' store_id=:store_id) as dineinOrders,' +
         // 105 Ahlan
         ' (SELECT SUM(order_total) ' +
         ' FROM mpos_order ' +
         ' WHERE billing_type=105 AND ' +
-        ' order_state="fulfilled" AND ' +
+        " order_state='fulfilled' AND " +
         ' store_id=:store_id) as ahlanTotal,' +
         ' (SELECT count(order_total) ' +
         ' FROM mpos_order ' +
         ' WHERE billing_type=105 AND ' +
-        ' order_state="fulfilled" AND ' +
+        " order_state='fulfilled' AND " +
         ' store_id=:store_id) as ahlanOrders,' +
         // 106 Smiles
         ' (SELECT SUM(order_total) ' +
         ' FROM mpos_order ' +
         ' WHERE billing_type=106 AND ' +
-        ' order_state="fulfilled" AND ' +
+        " order_state='fulfilled' AND " +
         ' store_id=:store_id) as smilesTotal,' +
         ' (SELECT count(order_total) ' +
         ' FROM mpos_order ' +
         ' WHERE billing_type=106 AND ' +
-        ' order_state="fulfilled" AND ' +
+        " order_state='fulfilled' AND " +
         ' store_id=:store_id) as smilesOrders,' +
         // 107 Noon food
         ' (SELECT SUM(order_total) ' +
         ' FROM mpos_order ' +
         ' WHERE billing_type=107 AND ' +
-        ' order_state="fulfilled" AND ' +
+        " order_state='fulfilled' AND " +
         ' store_id=:store_id) as noonfoodTotal,' +
         ' (SELECT count(order_total) ' +
         ' FROM mpos_order ' +
         ' WHERE billing_type=107 AND ' +
-        ' order_state="fulfilled" AND ' +
+        " order_state='fulfilled' AND " +
         ' store_id=:store_id) as noonfoodOrders,' +
         // 108 Deliverro
         ' (SELECT SUM(order_total) ' +
         ' FROM mpos_order ' +
         ' WHERE billing_type=108 AND ' +
-        ' order_state="fulfilled" AND ' +
+        " order_state='fulfilled' AND " +
         ' store_id=:store_id) as deliverroTotal,' +
         ' (SELECT count(order_total) ' +
         ' FROM mpos_order ' +
         ' WHERE billing_type=108 AND ' +
-        ' order_state="fulfilled" AND ' +
+        " order_state='fulfilled' AND " +
         ' store_id=:store_id) as deliverroOrders,' +
         // 109 Get cari
         ' (SELECT SUM(order_total) ' +
         ' FROM mpos_order ' +
         ' WHERE billing_type=109 AND ' +
-        ' order_state="fulfilled" AND ' +
+        " order_state='fulfilled' AND " +
         ' store_id=:store_id) as getCariTotal,' +
         ' (SELECT count(order_total) ' +
         ' FROM mpos_order ' +
         ' WHERE billing_type=109 AND ' +
-        ' order_state="fulfilled" AND ' +
+        " order_state='fulfilled' AND " +
         ' store_id=:store_id) as getCariOrders,' +
         // 110 IRCTC
         ' (SELECT SUM(order_total) ' +
         ' FROM mpos_order ' +
         ' WHERE billing_type=110 AND ' +
-        ' order_state="fulfilled" AND ' +
+        " order_state='fulfilled' AND " +
         ' store_id=:store_id) as irctcTotal,' +
         ' (SELECT count(order_total) ' +
         ' FROM mpos_order ' +
         ' WHERE billing_type=110 AND ' +
-        ' order_state="fulfilled" AND ' +
+        " order_state='fulfilled' AND " +
         ' store_id=:store_id) as irctcOrders,' +
         // 111 baladi express
         ' (SELECT SUM(order_total) ' +
         ' FROM mpos_order ' +
         ' WHERE billing_type=111 AND ' +
-        ' order_state="fulfilled" AND ' +
+        " order_state='fulfilled' AND " +
         ' store_id=:store_id) as baladiexpressTotal,' +
         ' (SELECT count(order_total) ' +
         ' FROM mpos_order ' +
         ' WHERE billing_type=111 AND ' +
-        ' order_state="fulfilled" AND ' +
+        " order_state='fulfilled' AND " +
         ' store_id=:store_id) as baladiexpressOrders,' +
         // 112 feedygo
         ' (SELECT SUM(order_total) ' +
         ' FROM mpos_order ' +
         ' WHERE billing_type=112 AND ' +
-        ' order_state="fulfilled" AND ' +
+        " order_state='fulfilled' AND " +
         ' store_id=:store_id) as feedygoTotal,' +
         ' (SELECT count(order_total) ' +
         ' FROM mpos_order ' +
         ' WHERE billing_type=112 AND ' +
-        ' order_state="fulfilled" AND ' +
+        " order_state='fulfilled' AND " +
         ' store_id=:store_id) as feedygoOrders,' +
         // 113 doordash
         ' (SELECT SUM(order_total) ' +
         ' FROM mpos_order ' +
         ' WHERE billing_type=113 AND ' +
-        ' order_state="fulfilled" AND ' +
+        " order_state='fulfilled' AND " +
         ' store_id=:store_id) as doordashTotal,' +
         ' (SELECT count(order_total) ' +
         ' FROM mpos_order ' +
         ' WHERE billing_type=113 AND ' +
-        ' order_state="fulfilled" AND ' +
+        " order_state='fulfilled' AND " +
         ' store_id=:store_id) as doordashOrders,' +
         // 114 skipthedishesh
         ' (SELECT SUM(order_total) ' +
         ' FROM mpos_order ' +
         ' WHERE billing_type=114 AND ' +
-        ' order_state="fulfilled" AND ' +
+        " order_state='fulfilled' AND " +
         ' store_id=:store_id) as skipthedisheshTotal,' +
         ' (SELECT count(order_total) ' +
         ' FROM mpos_order ' +
         ' WHERE billing_type=114 AND ' +
-        ' order_state="fulfilled" AND ' +
+        " order_state='fulfilled' AND " +
         ' store_id=:store_id) as skipthedisheshOrders,' +
         // 115 97 eats
         ' (SELECT SUM(order_total) ' +
         ' FROM mpos_order ' +
         ' WHERE billing_type=115 AND ' +
-        ' order_state="fulfilled" AND ' +
+        " order_state='fulfilled' AND " +
         ' store_id=:store_id) as nintyseveneatTotal,' +
         ' (SELECT count(order_total) ' +
         ' FROM mpos_order ' +
         ' WHERE billing_type=115 AND ' +
-        ' order_state="fulfilled" AND ' +
+        " order_state='fulfilled' AND " +
         ' store_id=:store_id) as nintyseveneatOrders,' +
         // 116 glovo
         ' (SELECT SUM(order_total) ' +
         ' FROM mpos_order ' +
         ' WHERE billing_type=116 AND ' +
-        ' order_state="fulfilled" AND ' +
+        " order_state='fulfilled' AND " +
         ' store_id=:store_id) as glovoTotal,' +
         ' (SELECT count(order_total) ' +
         ' FROM mpos_order ' +
         ' WHERE billing_type=116 AND ' +
-        ' order_state="fulfilled" AND ' +
+        " order_state='fulfilled' AND " +
         ' store_id=:store_id) as glovoOrders,' +
         // 117 TM done
         ' (SELECT SUM(order_total) ' +
         ' FROM mpos_order ' +
         ' WHERE billing_type=117 AND ' +
-        ' order_state="fulfilled" AND ' +
+        " order_state='fulfilled' AND " +
         ' store_id=:store_id) as tmdoneTotal,' +
         ' (SELECT count(order_total) ' +
         ' FROM mpos_order ' +
         ' WHERE billing_type=117 AND ' +
-        ' order_state="fulfilled" AND ' +
+        " order_state='fulfilled' AND " +
         ' store_id=:store_id) as tmdoneOrders,' +
         // 118 entertainer
         ' (SELECT SUM(order_total) ' +
         ' FROM mpos_order ' +
         ' WHERE billing_type=118 AND ' +
-        ' order_state="fulfilled" AND ' +
+        " order_state='fulfilled' AND " +
         ' store_id=:store_id) as entertainerTotal,' +
         ' (SELECT count(order_total) ' +
         ' FROM mpos_order ' +
         ' WHERE billing_type=118 AND ' +
-        ' order_state="fulfilled" AND ' +
+        " order_state='fulfilled' AND " +
         ' store_id=:store_id) as entertainerOrders,' +
         // 119 scootsy
         ' (SELECT SUM(order_total) ' +
         ' FROM mpos_order ' +
         ' WHERE billing_type=119 AND ' +
-        ' order_state="fulfilled" AND ' +
+        " order_state='fulfilled' AND " +
         ' store_id=:store_id) as scootsyTotal,' +
         ' (SELECT count(order_total) ' +
         ' FROM mpos_order ' +
         ' WHERE billing_type=119 AND ' +
-        ' order_state="fulfilled" AND ' +
+        " order_state='fulfilled' AND " +
         ' store_id=:store_id) as scootsyOrders,' +
         // 120 chatfood
         ' (SELECT SUM(order_total) ' +
         ' FROM mpos_order ' +
         ' WHERE billing_type=120 AND ' +
-        ' order_state="fulfilled" AND ' +
+        " order_state='fulfilled' AND " +
         ' store_id=:store_id) as chatfoodTotal,' +
         ' (SELECT count(order_total) ' +
         ' FROM mpos_order ' +
         ' WHERE billing_type=120 AND ' +
-        ' order_state="fulfilled" AND ' +
+        " order_state='fulfilled' AND " +
         ' store_id=:store_id) as chatfoodOrders,' +
         // + ' (SELECT SUM(order_total - due_payment) '
         ' (SELECT SUM(order_total) ' +
@@ -2093,7 +2099,7 @@ function getModel(sequelize, type) {
         ' FROM mpos_order ' +
         ' WHERE ' +
         ' billing_type BETWEEN 4 AND 248 AND  ' +
-        ' order_state="fulfilled" AND ' +
+        " order_state='fulfilled' AND " +
         ' store_id=:store_id) as oltotalTax,' +
         ' (SELECT SUM(order_level_total_taxes) ' +
         ' FROM mpos_order ' +
@@ -2101,13 +2107,13 @@ function getModel(sequelize, type) {
         // + ' billing_type=8 AND  '
         ' billing_type=8 OR  ' +
         ' billing_type=40 AND  ' +
-        ' order_state="fulfilled" AND ' +
+        " order_state='fulfilled' AND " +
         ' store_id=:store_id) as digitotalTax,' +
         ' (SELECT SUM(discount) ' +
         ' FROM mpos_order ' +
         ' WHERE ' +
         ' billing_type BETWEEN 4 AND 248 AND  ' +
-        ' order_state="fulfilled" AND ' +
+        " order_state='fulfilled' AND " +
         ' store_id=:store_id) as oltotalDiscount,' +
         ' (SELECT SUM(discount) ' +
         ' FROM mpos_order ' +
@@ -2115,59 +2121,59 @@ function getModel(sequelize, type) {
         // + ' billing_type=8 AND  '
         ' billing_type=8 OR  ' +
         ' billing_type=40 AND  ' +
-        ' order_state="fulfilled" AND ' +
+        " order_state='fulfilled' AND " +
         ' store_id=:store_id) as digitotalDiscount,' +
         ' (SELECT count(discount) ' +
         ' FROM mpos_order ' +
         ' WHERE ' +
         ' billing_type BETWEEN 0 AND 3 AND  ' +
-        ' order_state="fulfilled" AND ' +
+        " order_state='fulfilled' AND " +
         ' store_id=:store_id) as offlineSalescount,' +
         // + ' (SELECT sum(order_total - due_payment) '
         ' (SELECT sum(order_total) ' +
         ' FROM mpos_order ' +
         ' WHERE ' +
         ' billing_type BETWEEN 0 AND 3 AND  ' +
-        ' order_state="fulfilled" AND ' +
+        " order_state='fulfilled' AND " +
         ' store_id=:store_id) as offlineSales,' +
         ' (SELECT count(discount) ' +
         ' FROM mpos_order ' +
         ' WHERE ' +
         ' billing_type BETWEEN 4 AND 248 AND  ' +
-        ' order_state="fulfilled" AND ' +
+        " order_state='fulfilled' AND " +
         ' store_id=:store_id) as onlineSalescount,' +
         ' (SELECT sum(order_total) ' +
         ' FROM mpos_order ' +
         ' WHERE ' +
-        ' order_state="fulfilled" AND ' +
+        " order_state='fulfilled' AND " +
         ' billing_type in (8,40) AND  ' +
         ' store_id=:store_id) as digiSales,' +
         ' (SELECT count(id) ' +
         ' FROM mpos_order ' +
         ' WHERE ' +
         ' billing_type in (8,40)  AND ' +
-        ' order_state="fulfilled" AND ' +
+        " order_state='fulfilled' AND " +
         ' store_id=:store_id) as digiSalescount,' +
         ' (SELECT sum(order_total) ' +
         ' FROM mpos_order ' +
         ' WHERE ' +
         ' billing_type BETWEEN 4 AND 248 AND  ' +
-        ' order_state="fulfilled" AND ' +
+        " order_state='fulfilled' AND " +
         ' store_id=:store_id) as onlineSales,' +
         ' (SELECT SUM(due_payment) ' +
         ' FROM mpos_order ' +
         ' WHERE hasDuepayment=1 AND ' +
-        ' order_state="fulfilled" AND ' +
+        " order_state='fulfilled' AND " +
         ' store_id=:store_id) as due_payment,' +
         ' (SELECT count(hasDuepayment) ' +
         ' FROM mpos_order ' +
         ' WHERE hasDuepayment=1 AND ' +
-        ' order_state="fulfilled" AND ' +
+        " order_state='fulfilled' AND " +
         ' store_id=:store_id) as due_paymentCount,' +
         ' (SELECT sum(order_total)/sum(persons) ' +
         ' FROM mpos_order ' +
         ' WHERE  ' +
-        ' order_state="fulfilled" AND ' +
+        " order_state='fulfilled' AND " +
         ' store_id=:store_id) as avgsalesPerperson;';
 
       dashboardDetails = await sequelize.query(query, {
@@ -2230,13 +2236,13 @@ function getModel(sequelize, type) {
         ' FROM mpos_order ' +
         ' WHERE created_time BETWEEN' +
         ' :fromDate AND :endDate AND ' +
-        ' order_state="fulfilled" AND ' +
+        " order_state='fulfilled' AND " +
         ' store_id=:store_id) as paymentsTotal,' +
         ' (SELECT count(order_id) ' +
         ' FROM mpos_order WHERE ' +
         ' created_time BETWEEN' +
         ' :fromDate AND :endDate AND ' +
-        ' order_state="fulfilled" AND ' +
+        " order_state='fulfilled' AND " +
         ' store_id=:store_id) as totalOrders,' +
         // + ' (SELECT SUM(order_total - due_payment) '
         ' (SELECT SUM(order_total) ' +
@@ -2244,21 +2250,21 @@ function getModel(sequelize, type) {
         ' WHERE ' +
         ' created_time BETWEEN' +
         ' :fromDate AND :endDate AND ' +
-        ' order_state="fulfilled" AND ' +
+        " order_state='fulfilled' AND " +
         ' store_id=:store_id) as totalSale,' +
         ' (SELECT SUM(order_level_total_taxes) ' +
         ' FROM mpos_order ' +
         ' WHERE ' +
         ' created_time BETWEEN' +
         ' :fromDate AND :endDate AND ' +
-        ' order_state="fulfilled" AND ' +
+        " order_state='fulfilled' AND " +
         ' store_id=:store_id) as totalTax,' +
         ' (SELECT SUM(discount) ' +
         ' FROM mpos_order ' +
         ' WHERE ' +
         ' created_time BETWEEN' +
         ' :fromDate AND :endDate AND ' +
-        ' order_state="fulfilled" AND ' +
+        " order_state='fulfilled' AND " +
         ' store_id=:store_id) as totalDiscount,' +
         // + ' (SELECT SUM(order_total - due_payment) '
         ' (SELECT SUM(order_total) ' +
@@ -2266,14 +2272,14 @@ function getModel(sequelize, type) {
         ' WHERE billing_type=0 AND ' +
         ' created_time BETWEEN' +
         ' :fromDate AND :endDate AND ' +
-        ' order_state="fulfilled" AND ' +
+        " order_state='fulfilled' AND " +
         ' store_id=:store_id) as quickbillTotal,' +
         ' (SELECT count(order_total) ' +
         ' FROM mpos_order ' +
         ' WHERE billing_type=0 AND ' +
         ' created_time BETWEEN' +
         ' :fromDate AND :endDate AND ' +
-        ' order_state="fulfilled" AND ' +
+        " order_state='fulfilled' AND " +
         ' store_id=:store_id) as quickbillOrders,' +
         // + ' (SELECT SUM(order_total - due_payment) '
         ' (SELECT SUM(order_total) ' +
@@ -2281,14 +2287,14 @@ function getModel(sequelize, type) {
         ' WHERE billing_type=1 AND ' +
         ' created_time BETWEEN' +
         ' :fromDate AND :endDate AND ' +
-        ' order_state="fulfilled" AND ' +
+        " order_state='fulfilled' AND " +
         ' store_id=:store_id) as dineinTotal,' +
         ' (SELECT count(order_total) ' +
         ' FROM mpos_order ' +
         ' WHERE billing_type=1 AND ' +
         ' created_time BETWEEN' +
         ' :fromDate AND :endDate AND ' +
-        ' order_state="fulfilled" AND ' +
+        " order_state='fulfilled' AND " +
         ' store_id=:store_id) as dineinOrders,' +
         // + ' (SELECT SUM(order_total - due_payment) '
         ' (SELECT SUM(order_total) ' +
@@ -2296,14 +2302,14 @@ function getModel(sequelize, type) {
         ' WHERE billing_type=2 AND ' +
         ' created_time BETWEEN' +
         ' :fromDate AND :endDate AND ' +
-        ' order_state="fulfilled" AND ' +
+        " order_state='fulfilled' AND " +
         ' store_id=:store_id) as takeawayTotal,' +
         ' (SELECT count(order_total) ' +
         ' FROM mpos_order ' +
         ' WHERE billing_type=2 AND ' +
         ' created_time BETWEEN' +
         ' :fromDate AND :endDate AND ' +
-        ' order_state="fulfilled" AND ' +
+        " order_state='fulfilled' AND " +
         ' store_id=:store_id) as takeawayOrders,' +
         // + ' (SELECT SUM(order_total - due_payment) '
         ' (SELECT SUM(order_total) ' +
@@ -2311,80 +2317,80 @@ function getModel(sequelize, type) {
         ' WHERE billing_type=3 AND ' +
         ' created_time BETWEEN' +
         ' :fromDate AND :endDate AND ' +
-        ' order_state="fulfilled" AND ' +
+        " order_state='fulfilled' AND " +
         ' store_id=:store_id) as homdedelTotal,' +
         ' (SELECT count(order_total) ' +
         ' FROM mpos_order ' +
         ' WHERE billing_type=3 AND ' +
         ' created_time BETWEEN' +
         ' :fromDate AND :endDate AND ' +
-        ' order_state="fulfilled" AND ' +
+        " order_state='fulfilled' AND " +
         ' store_id=:store_id) as homdedelOrders,' +
         ' (SELECT SUM(order_total ) ' +
         ' FROM mpos_order ' +
         ' WHERE billing_type=4 AND ' +
         ' created_time BETWEEN' +
         ' :fromDate AND :endDate AND ' +
-        ' order_state="fulfilled" AND ' +
+        " order_state='fulfilled' AND " +
         ' store_id=:store_id) as zomatoTotal,' +
         ' (SELECT count(order_total) ' +
         ' FROM mpos_order ' +
         ' WHERE billing_type=4 AND ' +
         ' created_time BETWEEN' +
         ' :fromDate AND :endDate AND ' +
-        ' order_state="fulfilled" AND ' +
+        " order_state='fulfilled' AND " +
         ' store_id=:store_id) as zomatoOrders,' +
         ' (SELECT SUM(order_total) ' +
         ' FROM mpos_order ' +
         ' WHERE billing_type=5 AND ' +
         ' created_time BETWEEN' +
         ' :fromDate AND :endDate AND ' +
-        ' order_state="fulfilled" AND ' +
+        " order_state='fulfilled' AND " +
         ' store_id=:store_id) as swiggyTotal,' +
         ' (SELECT count(order_total) ' +
         ' FROM mpos_order ' +
         ' WHERE billing_type=5 AND ' +
         ' created_time BETWEEN' +
         ' :fromDate AND :endDate AND ' +
-        ' order_state="fulfilled" AND ' +
+        " order_state='fulfilled' AND " +
         ' store_id=:store_id) as swiggyOrders,' +
         ' (SELECT SUM(order_total) ' +
         ' FROM mpos_order ' +
         ' WHERE billing_type=6 AND ' +
         ' created_time BETWEEN' +
         ' :fromDate AND :endDate AND ' +
-        ' order_state="fulfilled" AND ' +
+        " order_state='fulfilled' AND " +
         ' store_id=:store_id) as ubereatsTotal,' +
         ' (SELECT count(order_total) ' +
         ' FROM mpos_order ' +
         ' WHERE billing_type=6 AND ' +
         ' created_time BETWEEN' +
         ' :fromDate AND :endDate AND ' +
-        ' order_state="fulfilled" AND ' +
+        " order_state='fulfilled' AND " +
         ' store_id=:store_id) as ubereatsOrders,' +
         ' (SELECT SUM(order_total) ' +
         ' FROM mpos_order ' +
         ' WHERE billing_type=7 AND ' +
         ' created_time BETWEEN' +
         ' :fromDate AND :endDate AND ' +
-        ' order_state="fulfilled" AND ' +
+        " order_state='fulfilled' AND " +
         ' store_id=:store_id) as dunzoTotal,' +
         ' (SELECT count(order_total) ' +
         ' FROM mpos_order ' +
         ' WHERE billing_type=7 AND ' +
         ' created_time BETWEEN' +
         ' :fromDate AND :endDate AND ' +
-        ' order_state="fulfilled" AND ' +
+        " order_state='fulfilled' AND " +
         ' store_id=:store_id) as dunzoOrders,' +
         ' (SELECT SUM(order_total) ' +
         ' FROM mpos_order ' +
         ' WHERE billing_type=104 AND ' +
-        ' order_state="fulfilled" AND ' +
+        " order_state='fulfilled' AND " +
         ' store_id=:store_id) as ondcTotal,' +
         ' (SELECT count(order_total) ' +
         ' FROM mpos_order ' +
         ' WHERE billing_type=104 AND ' +
-        ' order_state="fulfilled" AND ' +
+        " order_state='fulfilled' AND " +
         ' store_id=:store_id) as ondcOrders,' +
         ' (SELECT SUM(order_total - due_payment) ' +
         ' FROM mpos_order ' +
@@ -2477,7 +2483,7 @@ function getModel(sequelize, type) {
         ' billing_type BETWEEN 4 AND 248 AND  ' +
         ' created_time BETWEEN' +
         ' :fromDate AND :endDate AND ' +
-        ' order_state="fulfilled" AND ' +
+        " order_state='fulfilled' AND " +
         ' store_id=:store_id) as oltotalTax,' +
         ' (SELECT SUM(order_level_total_taxes) ' +
         ' FROM mpos_order ' +
@@ -2487,7 +2493,7 @@ function getModel(sequelize, type) {
         ' billing_type=40 AND  ' +
         ' created_time BETWEEN' +
         ' :fromDate AND :endDate AND ' +
-        ' order_state="fulfilled" AND ' +
+        " order_state='fulfilled' AND " +
         ' store_id=:store_id) as digitotalTax,' +
         ' (SELECT SUM(discount) ' +
         ' FROM mpos_order ' +
@@ -2495,7 +2501,7 @@ function getModel(sequelize, type) {
         ' billing_type BETWEEN 4 AND 248 AND  ' +
         ' created_time BETWEEN' +
         ' :fromDate AND :endDate AND ' +
-        ' order_state="fulfilled" AND ' +
+        " order_state='fulfilled' AND " +
         ' store_id=:store_id) as oltotalDiscount,' +
         ' (SELECT SUM(discount) ' +
         ' FROM mpos_order ' +
@@ -2505,7 +2511,7 @@ function getModel(sequelize, type) {
         ' billing_type=40 AND  ' +
         ' created_time BETWEEN' +
         ' :fromDate AND :endDate AND ' +
-        ' order_state="fulfilled" AND ' +
+        " order_state='fulfilled' AND " +
         ' store_id=:store_id) as digitotalDiscount,' +
         ' (SELECT count(discount) ' +
         ' FROM mpos_order ' +
@@ -2513,7 +2519,7 @@ function getModel(sequelize, type) {
         ' billing_type BETWEEN 0 AND 3 AND  ' +
         ' created_time BETWEEN' +
         ' :fromDate AND :endDate AND ' +
-        ' order_state="fulfilled" AND ' +
+        " order_state='fulfilled' AND " +
         ' store_id=:store_id) as offlineSalescount,' +
         ' (SELECT sum(order_total) ' +
         ' FROM mpos_order ' +
@@ -2521,7 +2527,7 @@ function getModel(sequelize, type) {
         ' billing_type BETWEEN 0 AND 3 AND  ' +
         ' created_time BETWEEN' +
         ' :fromDate AND :endDate AND ' +
-        ' order_state="fulfilled" AND ' +
+        " order_state='fulfilled' AND " +
         ' store_id=:store_id) as offlineSales,' +
         ' (SELECT count(discount) ' +
         ' FROM mpos_order ' +
@@ -2529,7 +2535,7 @@ function getModel(sequelize, type) {
         ' billing_type BETWEEN 4 AND 248 AND  ' +
         ' created_time BETWEEN' +
         ' :fromDate AND :endDate AND ' +
-        ' order_state="fulfilled" AND ' +
+        " order_state='fulfilled' AND " +
         ' store_id=:store_id) as onlineSalescount,' +
         ' (SELECT sum(order_total) ' +
         ' FROM mpos_order ' +
@@ -2537,13 +2543,13 @@ function getModel(sequelize, type) {
         ' billing_type BETWEEN 4 AND 248 AND  ' +
         ' created_time BETWEEN' +
         ' :fromDate AND :endDate AND ' +
-        ' order_state="fulfilled" AND ' +
+        " order_state='fulfilled' AND " +
         ' store_id=:store_id) as onlineSales,' +
         // + ' (SELECT sum(order_total - due_payment) '
         ' (SELECT sum(order_total) ' +
         ' FROM mpos_order ' +
         ' WHERE ' +
-        ' order_state="fulfilled" AND ' +
+        " order_state='fulfilled' AND " +
         ' billing_type in (8,40) AND  ' +
         ' created_time BETWEEN' +
         ' :fromDate AND :endDate AND ' +
@@ -2551,7 +2557,7 @@ function getModel(sequelize, type) {
         ' (SELECT count(id) ' +
         ' FROM mpos_order ' +
         ' WHERE ' +
-        ' order_state="fulfilled" AND ' +
+        " order_state='fulfilled' AND " +
         ' billing_type in (8,40) AND  ' +
         ' created_time BETWEEN' +
         ' :fromDate AND :endDate AND ' +
@@ -2561,19 +2567,19 @@ function getModel(sequelize, type) {
         ' WHERE hasDuepayment=1 AND ' +
         ' created_time BETWEEN' +
         ' :fromDate AND :endDate AND ' +
-        ' order_state="fulfilled" AND ' +
+        " order_state='fulfilled' AND " +
         ' store_id=:store_id) as due_payment,' +
         ' (SELECT count(hasDuepayment) ' +
         ' FROM mpos_order ' +
         ' WHERE hasDuepayment=1 AND ' +
         ' created_time BETWEEN' +
         ' :fromDate AND :endDate AND ' +
-        ' order_state="fulfilled" AND ' +
+        " order_state='fulfilled' AND " +
         ' store_id=:store_id) as due_paymentCount,' +
         ' (SELECT sum(order_total)/sum(persons) ' +
         ' FROM mpos_order ' +
         ' WHERE  ' +
-        ' order_state="fulfilled" AND ' +
+        " order_state='fulfilled' AND " +
         ' created_time BETWEEN' +
         ' :fromDate AND :endDate AND ' +
         ' store_id=:store_id) as avgsalesPerperson;';
@@ -2612,7 +2618,7 @@ function getModel(sequelize, type) {
         ' FROM mpos_order WHERE ' +
         ' actual_created_time BETWEEN' +
         ' :fromDate AND :endDate AND ' +
-        ' order_state="fulfilled" AND ' +
+        " order_state='fulfilled' AND " +
         ' store_id=:store_id) as totalFulfilledOrders,' +
         ' (SELECT count(order_id) ' +
         ' FROM mpos_order WHERE ' +
@@ -2683,7 +2689,7 @@ function getModel(sequelize, type) {
           ' created_time BETWEEN' +
           ' :fromDate AND :endDate AND ' +
           ' user_id=:user_id AND ' +
-          ' order_state="fulfilled" AND ' +
+          " order_state='fulfilled' AND " +
           ' store_id=:store_id) as totalFulfilledOrders,' +
           ' (SELECT count(order_id) ' +
           ' FROM mpos_order WHERE ' +
@@ -2730,7 +2736,7 @@ function getModel(sequelize, type) {
           ' FROM mpos_order WHERE ' +
           ' created_time BETWEEN' +
           ' :fromDate AND :endDate AND ' +
-          ' order_state="fulfilled" AND ' +
+          " order_state='fulfilled' AND " +
           ' store_id=:store_id) as totalFulfilledOrders,' +
           ' (SELECT count(order_id) ' +
           ' FROM mpos_order WHERE ' +
@@ -2793,7 +2799,7 @@ function getModel(sequelize, type) {
         ' FROM mpos_order' +
         ' WHERE created_time BETWEEN' +
         ' :weekStart AND :weekEnd AND ' +
-        ' order_state="fulfilled" AND ' +
+        " order_state='fulfilled' AND " +
         ' store_id=:store_id ' +
         ' GROUP BY day;';
       weekdays = await sequelize.query(query, {
@@ -2823,7 +2829,7 @@ function getModel(sequelize, type) {
             ' FROM mpos_order' +
             ' WHERE created_time BETWEEN' +
             ' :fromDate AND :toDate AND ' +
-            ' order_state="fulfilled" AND ' +
+            " order_state='fulfilled' AND " +
             ' store_id=:store_id ' +
             ' GROUP BY valDay;';
           break;
@@ -2835,7 +2841,7 @@ function getModel(sequelize, type) {
             ' FROM mpos_order' +
             ' WHERE created_time BETWEEN' +
             ' :fromDate AND :toDate AND ' +
-            ' order_state="fulfilled" AND ' +
+            " order_state='fulfilled' AND " +
             ' store_id=:store_id ' +
             ' GROUP BY valDay;';
           break;
@@ -2847,7 +2853,7 @@ function getModel(sequelize, type) {
             ' FROM mpos_order' +
             ' WHERE created_time BETWEEN' +
             ' :fromDate AND :toDate AND ' +
-            ' order_state="fulfilled" AND ' +
+            " order_state='fulfilled' AND " +
             ' store_id=:store_id ' +
             ' GROUP BY valDay;';
           break;

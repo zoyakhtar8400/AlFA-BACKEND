@@ -7,10 +7,18 @@ function getModel(sequelize, type) {
       tax_id: {
         type: type.INTEGER,
         primaryKey: true,
-        // autoIncrement: true
+        autoIncrement: true
       },
       tax_name: {
         type: type.STRING,
+      },
+      tax_percentage: {
+        type: type.DECIMAL(10, 2),
+        defaultValue: 5.0,
+      },
+      is_active: {
+        type: type.INTEGER,
+        defaultValue: 1,
       },
       tax_perct: {
         type: type.INTEGER, //1-percentage 0-fix

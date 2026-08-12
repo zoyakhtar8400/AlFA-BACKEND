@@ -145,7 +145,13 @@ expressApp.use(ROUTES.CUSTOMER, auth, customerRouter);
 expressApp.use(ROUTES.OLD_KOT, auth, oldkotRouter);
 expressApp.use(ROUTES.MENU, auth, menuRouter);
 
-// Specific /api/* routes must be registered BEFORE the generic /api catch-all handlers
+const recipeRouter = require('../routes/Recipe');
+const purchaseModuleRouter = require('../routes/Purchase');
+const posMastersRouter = require('../routes/PosMasters');
+
+expressApp.use('/api', recipeRouter);
+expressApp.use('/api', purchaseModuleRouter);
+expressApp.use('/api', posMastersRouter);
 expressApp.use('/api/reservations', auth, reservationRouter);
 
 expressApp.use('/api', auth, menuCatalogRouter);
@@ -172,6 +178,26 @@ if (!global.Config) {
 }
 
 const PORT = (global.Config && global.Config.server_port) || process.env.PORT || 3000;
+
+server.on('error', (err) => {
+  if (err.code === 'EADDRINUSE') {
+    console.warn(`⚠️ Port ${PORT} is occupied. Exiting for clean nodemon restart...`);
+    process.exit(1);
+  } else {
+    console.error('Server error:', err);
+  }
+});
+
+process.once('SIGUSR2', () => {
+  server.close(() => {
+    process.kill(process.pid, 'SIGUSR2');
+  });
+});
+
+process.on('unhandledRejection', (reason) => {
+  console.error('⚠️ Unhandled Rejection:', reason);
+});
+
 server.listen(PORT, () => {
   console.log(`✅ Express Server is running on port ${PORT}`);
 });

@@ -134,6 +134,15 @@ function getModel(sequelize, type) {
         type: type.JSON,
         allowNull: true,
       },
+      inventory_type: {
+        // 'RECIPE' or 'DIRECT'
+        type: type.STRING,
+        defaultValue: 'RECIPE',
+      },
+      direct_inventory_item_id: {
+        type: type.INTEGER,
+        allowNull: true,
+      },
       sale_price_1: {
         type: type.DECIMAL(10, 2),
       },
