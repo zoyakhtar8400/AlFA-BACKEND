@@ -155,8 +155,8 @@ const APP_CONFIG = {
   sourcePath: '',
   senderId: '992602538917', // 697935885051 992602538917
   server_port: 3000,
-  cipherKey: 'ep6nEwGhdNKSJZLXR5Q',
-  JWT_SECRET: '7FGnB8A2WrgmfJaMJYTfM7tDS7mYUNDa',
+  cipherKey: process.env.CIPHER_KEY || 'ep6nEwGhdNKSJZLXR5Q',
+  JWT_SECRET: process.env.JWT_SECRET,
   baseUrl,
 };
 

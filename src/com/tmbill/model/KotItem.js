@@ -261,12 +261,12 @@ function getModel(sequelize, type) {
       ' mpos_kot.user_id as user_id, ' +
       ' mpos_kot.in_time as created_time,' +
       ' mpos_kot_item.quantity as qty,' +
-      ' mpos_kot_item.item_price as price,SUM(mpos_kot_item.pricebeforeDiscount) as total,  ' +
+      ' mpos_kot_item.item_price as price,mpos_kot_item."pricebeforeDiscount" as total,  ' +
       ' mpos_kot_item.item_name as title, ' +
       ' mpos_kot_item.alternative_title, ' +
       ' mpos_kot_item.extra_details, ' +
-      ' mpos_kot_item.createdBy as createdBy,' +
-      ' mpos_kot_item.pricebeforeDiscount as price,' +
+      ' mpos_kot_item."createdBy" as "createdBy",' +
+      ' mpos_kot_item."pricebeforeDiscount" as price,' +
       ' mpos_kot_item.reason as reason,' +
       ' mpos_kot.billing_type as billing_type,' +
       ' mpos_kot.table_name as table_name,' +

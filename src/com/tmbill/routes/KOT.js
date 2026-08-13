@@ -32,11 +32,15 @@ function mapStatusStringToInt(statusStr) {
 router.get('/', async (req, res) => {
   const response = new ResponseMessage(200, '');
   try {
-    const { active, table_id, tableId, table_no, tableNo } = req.query || {};
+    const { active, table_id, tableId, table_no, tableNo, store_id } = req.query || {};
     const tableIdParam = table_id || tableId || table_no || tableNo;
+    const targetStoreId = store_id || req.user?.store_id || (req.user?.assigned_outlets && req.user.assigned_outlets[0]);
 
     // Build where condition based on ?active param
     const whereCondition = {};
+    if (targetStoreId) {
+      whereCondition.store_id = targetStoreId;
+    }
     if (active === '1' || active === 'true') {
       whereCondition.is_active = 1;
     } else if (active === '0' || active === 'false') {
@@ -259,13 +263,16 @@ const createKotHandler = async (req, res) => {
       }
     }
 
+    const targetStoreId = payload.store_id || req.body?.store_id || req.query?.store_id || req.user?.store_id || (req.user?.assigned_outlets && req.user.assigned_outlets[0]) || 'STORE_1';
+
     if (isBlankOrNew) {
-      console.log(`🧹 Deactivating old KOTs for table ${targetTableId} (Table ${cleanTableNum}) for new session...`);
+      console.log(`🧹 Deactivating old KOTs for table ${targetTableId} (Table ${cleanTableNum}) in outlet ${targetStoreId} for new session...`);
       await global.serverdbConnection.KOT.update(
         { is_active: 0, status: 6 },
         {
           where: {
             is_active: 1,
+            store_id: targetStoreId,
             [global.serverdbConnection.Sequelize.Op.or]: [
               { table_id: targetTableId },
               { table_name: `Table ${cleanTableNum}` },
@@ -285,7 +292,7 @@ const createKotHandler = async (req, res) => {
       table_name: payload.tableNo ? `Table ${payload.tableNo}` : (payload.table_name || `Table ${targetTableId}`),
       customer_name: payload.customerName || payload.customer_name || 'Walk-in',
       customer_mobile: payload.mobileNo || payload.customer_phone || payload.mobile || '',
-      store_id: payload.store_id || 'STORE_1',
+      store_id: targetStoreId,
       status: mapStatusStringToInt(payload.status || 'Sent to Kitchen'),
       in_time: payload.time || new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
       kot_date: new Date(),
@@ -317,7 +324,7 @@ const createKotHandler = async (req, res) => {
             if (invItem) {
               const currentStock = Number(invItem.current_stock || 0);
               if (currentStock < qty) {
-                throw new Error(`Insufficient stock for ${invItem.item_name}. Available: ${currentStock} ${invItem.unit}, Required: ${qty} ${invItem.unit}`);
+                console.warn(`⚠️ [Low Stock Notice] ${invItem.item_name}. Available: ${currentStock} ${invItem.unit}, Required: ${qty} ${invItem.unit}`);
               }
             }
           } else {
@@ -341,7 +348,7 @@ const createKotHandler = async (req, res) => {
                   const reqQtyInInvUnit = convertQuantity(rawReqQty, recipeItem.unit || 'g', invItem.unit || 'kg');
                   const currentStock = Number(invItem.current_stock || 0);
                   if (currentStock < reqQtyInInvUnit) {
-                    throw new Error(`Insufficient stock for ${invItem.item_name}. Available: ${currentStock} ${invItem.unit || 'kg'}, Required: ${reqQtyInInvUnit} ${invItem.unit || 'kg'}`);
+                    console.warn(`⚠️ [Low Stock Notice] Recipe ${invItem.item_name}. Available: ${currentStock} ${invItem.unit || 'kg'}, Required: ${reqQtyInInvUnit} ${invItem.unit || 'kg'}`);
                   }
                 }
               }

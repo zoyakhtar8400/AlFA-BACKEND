@@ -190,8 +190,8 @@ function getModel(sequelize, type) {
       'SELECT item_id,title,alternative_title,sale_price as price, ' +
       ' 1 as qty,sale_price as finalamount ' +
       'FROM mpos_item ' +
-      'WHERE item_refid NOT IN(' +
-      'SELECT  DISTINCT(item_id) ' +
+      'WHERE CAST(item_refid AS VARCHAR) NOT IN(' +
+      'SELECT DISTINCT CAST(item_id AS VARCHAR) ' +
       'FROM   mpos_order_child ' +
       'LEFT JOIN ' +
       'mpos_order ' +

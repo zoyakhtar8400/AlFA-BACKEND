@@ -78,7 +78,7 @@ const connection = require('../js/database');
 const { ROUTES } = require('../util/ServerUtils');
 const { ResponseMessage } = require('../error/ResponseMessage');
 const errorHandler = require('../error/error-handler');
-const { auth, socketAuth, localAuth } = require('../middleware/auth');
+const { auth, socketAuth, localAuth, internalAuth } = require('../middleware/auth');
 const loginRouter = require('../routes/Login');
 const tableRouter = require('../routes/Table');
 const depRouter = require('../routes/Department');
@@ -139,7 +139,8 @@ expressApp.use(ROUTES.DEPARTMENT, auth, depRouter);
 expressApp.use(ROUTES.ORDER, auth, orderRouter);
 expressApp.use('/api/orders', auth, orderRouter);
 
-expressApp.use(ROUTES.KOT, kotRouter);
+expressApp.use(ROUTES.KOT, auth, kotRouter);
+expressApp.use('/api/kots', auth, kotRouter);
 
 expressApp.use(ROUTES.CUSTOMER, auth, customerRouter);
 expressApp.use(ROUTES.OLD_KOT, auth, oldkotRouter);
@@ -148,10 +149,12 @@ expressApp.use(ROUTES.MENU, auth, menuRouter);
 const recipeRouter = require('../routes/Recipe');
 const purchaseModuleRouter = require('../routes/Purchase');
 const posMastersRouter = require('../routes/PosMasters');
+const userCrudRouter = require('../routes/UserCrud');
 
-expressApp.use('/api', recipeRouter);
-expressApp.use('/api', purchaseModuleRouter);
-expressApp.use('/api', posMastersRouter);
+expressApp.use('/api', auth, recipeRouter);
+expressApp.use('/api', auth, purchaseModuleRouter);
+expressApp.use('/api', auth, posMastersRouter);
+expressApp.use('/api/users', userCrudRouter);
 expressApp.use('/api/reservations', auth, reservationRouter);
 
 expressApp.use('/api', auth, menuCatalogRouter);
@@ -162,7 +165,7 @@ expressApp.use(ROUTES.KDS, auth, kdsRouter);
 expressApp.use(ROUTES.TERMINAL, auth, terminalRouter);
 expressApp.use(ROUTES.SOCKETEVENTS, auth, socketEvents);
 
-expressApp.use(ROUTES.API, localAuth, apiRouter);
+expressApp.use(ROUTES.API, internalAuth, apiRouter);
 
 const { setupSwagger } = require('../docs');
 setupSwagger(expressApp);

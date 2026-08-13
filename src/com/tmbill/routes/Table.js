@@ -1,9 +1,13 @@
 const express = require('express');
 const { KOT, Bill } = require('../js/database');
 const { changeTableforkot } = require('../main_controllers/Order');
-const ResponseMessage = require('../error/ResponseMessage').ResponseMessage;
+const { ResponseMessage } = require('../error/ResponseMessage');
+const { auth, authorizeOutlet } = require('../middleware/auth');
 
 const router = express.Router();
+
+router.use(auth);
+router.use(authorizeOutlet);
 
 // Helper to map DB record to frontend friendly format
 function mapTable(t) {
@@ -127,7 +131,9 @@ function getExtra(t, key, fallback) {
 router.get('/', async (req, res) => {
   const response = new ResponseMessage(200, '');
   try {
-    const whereData = req.query.store_id ? { store_id: req.query.store_id } : {};
+    const targetStoreId = req.query.store_id || req.user?.store_id || (req.user?.assigned_outlets && req.user.assigned_outlets[0]);
+    const whereData = targetStoreId ? { store_id: targetStoreId } : {};
+
     const dbTables = await global.serverdbConnection.Table.findAll({
       where: whereData,
       order: [['id', 'ASC']],
@@ -137,8 +143,12 @@ router.get('/', async (req, res) => {
 
     // Fetch active KOTs and KOT items to populate table.kots for UI
     try {
+      const kotWhere = { is_active: 1 };
+      if (targetStoreId) {
+        kotWhere.store_id = targetStoreId;
+      }
       const activeKots = await global.serverdbConnection.KOT.findAll({
-        where: { is_active: 1 },
+        where: kotWhere,
         raw: true
       });
 
@@ -252,12 +262,19 @@ router.post('/', async (req, res) => {
   try {
     const tableNum  = req.body.no || req.body.table_no || req.body.table_number;
     const tableName = req.body.table_name || req.body.name || `Table ${tableNum || ''}`;
+    const targetStoreId = req.body.store_id || req.query.store_id || req.user?.store_id || (req.user?.assigned_outlets && req.user.assigned_outlets[0]) || 'STORE_1';
+
     // 'department' DB column is INTEGER (FK). Store the readable name in extra_details.section
     const sectionName = req.body.section || req.body.department || 'Restaurant';
-    const existing = await global.serverdbConnection.Table.findOne({ where: { table_name: tableName } });
+    const existing = await global.serverdbConnection.Table.findOne({
+      where: {
+        table_name: tableName,
+        store_id: targetStoreId
+      }
+    });
     if (existing) {
       response.setStatus(409);
-      response.setMessage(`Table '${tableName}' already exists`);
+      response.setMessage(`Table '${tableName}' already exists in outlet '${targetStoreId}'`);
       return res.status(409).json(response);
     }
 
@@ -275,7 +292,7 @@ router.post('/', async (req, res) => {
       table_name: tableName,
       max_person: String(req.body.max_person || req.body.seats || 4),
       department: 1,           // Always integer — section name stored in extra_details
-      store_id: req.body.store_id || 'STORE_1',
+      store_id: targetStoreId,
       isactive: 1,
       order_state: 'AVAILABLE',
       extra_details: extraDetails

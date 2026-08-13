@@ -82,6 +82,7 @@ const PurchaseIndentItemModel = require('../model/PurchaseIndentItem');
 const PurchaseQuotationModel = require('../model/PurchaseQuotation');
 const PurchaseReturnModel = require('../model/PurchaseReturn');
 const DepartmentIssueModel = require('../model/DepartmentIssue');
+const UserOutletModel = require('../model/UserOutlet');
 
 const { Config } = require('../config/config');
 
@@ -226,10 +227,11 @@ const PurchaseIndentItem = PurchaseIndentItemModel.getModel(sequelize, Sequelize
 const PurchaseQuotation = PurchaseQuotationModel.getModel(sequelize, Sequelize);
 const PurchaseReturn = PurchaseReturnModel.getModel(sequelize, Sequelize);
 const DepartmentIssue = DepartmentIssueModel.getModel(sequelize, Sequelize);
+const UserOutlet = UserOutletModel.getModel(sequelize, Sequelize);
 
-// Purchase & Supplier Associations
+// Associations for Purchase & Inventory
 PurchaseOrder.belongsTo(Supplier, { foreignKey: 'supplier_id' });
-PurchaseOrder.hasMany(PurchaseOrderItem, { foreignKey: 'po_id', as: 'poItems' });
+PurchaseOrder.hasMany(PurchaseOrderItem, { foreignKey: 'po_id', as: 'purchaseOrderItems' });
 PurchaseOrderItem.belongsTo(PurchaseOrder, { foreignKey: 'po_id' });
 
 PurchaseGRN.belongsTo(Supplier, { foreignKey: 'supplier_id' });
@@ -239,9 +241,14 @@ PurchaseGRNItem.belongsTo(PurchaseGRN, { foreignKey: 'grn_id' });
 PurchaseBill.belongsTo(Supplier, { foreignKey: 'supplier_id' });
 PurchaseIndent.hasMany(PurchaseIndentItem, { foreignKey: 'indent_id', as: 'indentItems' });
 
+// Associations for User & Outlet
+User.hasMany(UserOutlet, { foreignKey: 'user_id', constraints: false });
+UserOutlet.belongsTo(User, { foreignKey: 'user_id', constraints: false });
+
 // Automatically ensure tables exist in PostgreSQL
 (async () => {
   try {
+    await UserOutlet.sync({ alter: true });
     await InventoryItem.sync({ alter: true });
     await RecipeMaster.sync({ alter: true });
     await RecipeItems.sync({ alter: true });
@@ -585,4 +592,5 @@ module.exports = {
   PurchaseQuotation,
   PurchaseReturn,
   DepartmentIssue,
+  UserOutlet,
 };

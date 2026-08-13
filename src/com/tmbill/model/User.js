@@ -22,6 +22,10 @@ function getModel(sequelize, type) {
         allowNull: false,
         unique: true,
       },
+      email: {
+        type: type.STRING,
+        allowNull: true,
+      },
       password: {
         type: type.STRING,
         allowNull: false,

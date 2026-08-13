@@ -35,15 +35,16 @@ const router = express.Router();
 
 router.get('/getorderdata', async (req, res) => {
   const response = new ResponseMessage(200, '');
-  if (req.query && req.query.store_id) {
+  const targetStoreId = req.query?.store_id || req.query?.outletId || 'STORE_1';
+  if (req.query && targetStoreId) {
     try {
       const orderdata = await getOrderwindowdetails(
-        req.query.store_id,
+        targetStoreId,
         req.query,
       );
       if (req.query.getOptions) {
         const { optionGroups, options } = await getOptiongroupandoptions({
-          store_id: req.query.store_id,
+          store_id: targetStoreId,
         });
         Object.assign(orderdata, {
           optionGroups,
@@ -51,13 +52,13 @@ router.get('/getorderdata', async (req, res) => {
         });
       }
       if (req.query.getPayments) {
-        const payments = await getPaymentmodes(req.query.store_id);
+        const payments = await getPaymentmodes(targetStoreId);
         Object.assign(orderdata, {
           payments,
         });
       }
       if (req.query.getDiscounts) {
-        const discounts = await getDiscounts({ store_id: req.query.store_id });
+        const discounts = await getDiscounts({ store_id: targetStoreId });
         Object.assign(orderdata, {
           ...discounts,
         });
@@ -108,21 +109,26 @@ router.get('/generateId', async (req, res) => {
 router.get('/', async (req, res) => {
   const response = new ResponseMessage(200, '');
   try {
+    const targetStoreId = req.query?.store_id || req.query?.outletId || req.user?.store_id || (req.user?.assigned_outlets && req.user.assigned_outlets[0]) || 'STORE_1';
     const tableId = req.query && (req.query.table_id || req.query.tableId || req.query.table_no || req.query.tableNo);
     if (tableId) {
       const cleanId = String(tableId).replace(/[^0-9]/g, '') || String(tableId);
+      const billWhere = {
+        [global.serverdbConnection.Sequelize.Op.or]: [
+          { table_id: cleanId },
+          { table_id: Number(cleanId) || 0 },
+          { table_name: `Table ${cleanId}` },
+          { table_name: `T${cleanId}` },
+          { table_name: `T0${cleanId}` }
+        ],
+        order_state: { [global.serverdbConnection.Sequelize.Op.ne]: 'completed' }
+      };
+      if (targetStoreId) {
+        billWhere.store_id = targetStoreId;
+      }
       // Find active bill/order for this table in PostgreSQL
       const activeBill = await global.serverdbConnection.Bill.findOne({
-        where: {
-          [global.serverdbConnection.Sequelize.Op.or]: [
-            { table_id: cleanId },
-            { table_id: Number(cleanId) || 0 },
-            { table_name: `Table ${cleanId}` },
-            { table_name: `T${cleanId}` },
-            { table_name: `T0${cleanId}` }
-          ],
-          order_state: { [global.serverdbConnection.Sequelize.Op.ne]: 'completed' }
-        },
+        where: billWhere,
         order: [['id', 'DESC']],
         raw: true
       });
@@ -240,9 +246,13 @@ router.get('/', async (req, res) => {
         }
       }
     } else {
+      const targetStoreId = req.query?.store_id || req.query?.outletId || req.user?.store_id || (req.user?.assigned_outlets && req.user.assigned_outlets[0]) || 'STORE_1';
       const whereCondition = {};
       if (req.query && req.query.status) {
         whereCondition.order_state = req.query.status;
+      }
+      if (targetStoreId) {
+        whereCondition.store_id = targetStoreId;
       }
 
       const bills = await global.serverdbConnection.Bill.findAll({
@@ -379,8 +389,72 @@ router.get('/', async (req, res) => {
         };
       });
 
-      response.data = formatted;
-      response.orders = formatted;
+      const billTableIds = bills.map(b => b.table_id).filter(Boolean);
+      const standaloneKots = await global.serverdbConnection.KOT.findAll({
+        where: { is_active: 1, ...(targetStoreId && { store_id: targetStoreId }) },
+        order: [['kot_id', 'DESC']],
+        raw: true
+      });
+
+      const unbilledKots = standaloneKots.filter(k => !(k.table_id && billTableIds.includes(k.table_id)));
+      const unbilledKotIds = unbilledKots.map(k => k.kot_id);
+      let kotItemsForUnbilled = [];
+      if (unbilledKotIds.length > 0) {
+        kotItemsForUnbilled = await global.serverdbConnection.KOTItem.findAll({
+          where: { kot_id: { [global.serverdbConnection.Sequelize.Op.in]: unbilledKotIds } },
+          raw: true
+        });
+      }
+
+      const formattedKots = unbilledKots.map((k, idx) => {
+        const items = kotItemsForUnbilled.filter(ki => String(ki.kot_id) === String(k.kot_id));
+        const cleanTableName = k.table_name || `Table ${k.table_id || ''}`;
+        return {
+          id: k.kot_id,
+          order_id: k.kot_id,
+          billNo: k.custom_bill_number || `KOT-${k.kot_id}`,
+          table_id: k.table_id,
+          table_name: cleanTableName,
+          tableNo: cleanTableName,
+          order_type: k.billing_type === 1 ? 'DINE_IN' : 'TAKE_AWAY',
+          billType: k.billing_type === 1 ? 'DINE_IN' : 'TAKE_AWAY',
+          billDate: new Date(k.kot_date || Date.now()).toLocaleDateString(),
+          createdAt: k.kot_date || Date.now(),
+          orderNo: String(k.kot_number || k.kot_id),
+          order_number: k.kot_number || k.kot_id,
+          amount: Number(k.amount || 0),
+          total_amount: Number(k.amount || 0),
+          subtotal: Number(k.amount || 0),
+          tax_amount: 0,
+          discount_amount: 0,
+          customer_name: k.customer_name || 'Walk-in',
+          customerName: k.customer_name || 'Walk-in',
+          customer_phone: k.customer_mobile || '—',
+          mobileNo: k.customer_mobile || '—',
+          waiter_name: k.waiter || 'Staff',
+          waiter: k.waiter || 'Staff',
+          order_status: 'pending',
+          status: 'pending',
+          payment_status: 'Unpaid',
+          payment_method: 'Cash',
+          items: items.map(i => ({
+            itemId: i.item_id,
+            itemName: i.item_name || 'Item',
+            name: i.item_name || 'Item',
+            variantName: i.alternative_title || '',
+            qty: Number(i.quantity || 1),
+            unitPrice: Number(i.item_price || 0),
+            rate: Number(i.item_price || 0),
+            price: Number(i.item_price || 0),
+            total: Number(i.amount || (i.quantity * i.item_price) || 0),
+            remark: ''
+          }))
+        };
+      });
+
+      const finalFormatted = [...formatted, ...formattedKots];
+      response.data = finalFormatted;
+      response.orders = finalFormatted;
     }
   } catch (error) {
     console.error('Error fetching orders:', error);
@@ -625,12 +699,14 @@ router.post('/', async (req, res) => {
     const totalAmount = subtotal + taxAmount;
 
     const targetTableId = Number(payload.tableId || payload.table_id || 0);
+    const targetStoreId = payload.store_id || payload.outletId || req.body?.store_id || req.body?.outletId || req.query?.store_id || req.query?.outletId || req.user?.store_id || (req.user?.assigned_outlets && req.user.assigned_outlets[0]) || 'STORE_1';
 
     let existingBill = null;
     if (targetTableId > 0) {
       existingBill = await global.serverdbConnection.Bill.findOne({
         where: {
           table_id: targetTableId,
+          store_id: targetStoreId,
           order_state: 'pending'
         },
         order: [['id', 'DESC']]
@@ -644,6 +720,7 @@ router.post('/', async (req, res) => {
     let createdBill;
     if (existingBill) {
       const updateFields = {
+        store_id: targetStoreId,
         subtotal: subtotal || existingBill.subtotal,
         total_tax: taxAmount || existingBill.total_tax,
         total_amount: totalAmount || existingBill.total_amount,
@@ -677,7 +754,7 @@ router.post('/', async (req, res) => {
       createdBill = await global.serverdbConnection.Bill.create({
         table_id: targetTableId || 1,
         table_name: payload.tableNo || payload.table_name || `Table ${targetTableId || 1}`,
-        store_id: payload.store_id || 'STORE_1',
+        store_id: targetStoreId,
         subtotal: subtotal,
         total_tax: taxAmount,
         total_amount: totalAmount,

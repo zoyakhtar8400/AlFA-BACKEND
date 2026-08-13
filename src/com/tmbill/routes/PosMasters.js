@@ -397,11 +397,16 @@ router.delete('/nc-types/:id', async (req, res) => {
 router.get('/stores', async (req, res) => {
   const response = new ResponseMessage(200, '');
   try {
-    const stores = await global.serverdbConnection.Store.findAll({ raw: true });
+    const stores = await global.serverdbConnection.Store.findAll({
+      order: [['id', 'ASC']],
+      raw: true
+    });
     const mapped = (stores || []).map(s => ({
       ...s,
-      store_id: s.store_id || String(s.id),
-      store_name: s.store_name || 'Restaurant'
+      id: s.id,
+      store_id: s.store_id || `STORE_${s.id}`,
+      store_name: s.store_name || `Outlet ${s.id}`,
+      name: s.store_name || `Outlet ${s.id}`
     }));
     response.data = mapped;
     response.setStatus(200);
@@ -415,27 +420,89 @@ router.get('/stores', async (req, res) => {
 router.post('/stores', async (req, res) => {
   const response = new ResponseMessage(200, '');
   try {
-    const { store_id, store_name, address, phone, gst_number } = req.body;
-    let store;
-    if (store_id) {
-      store = await global.serverdbConnection.Store.findByPk(store_id);
-      if (store) {
-        await store.update({
-          store_name: store_name || store.store_name,
-          address: address || store.address,
-          phone: phone || store.phone,
-          gst_number: gst_number || store.gst_number
-        });
-      }
-    } else {
-      store = await global.serverdbConnection.Store.create({
-        store_name: store_name || 'Main Outlet',
-        address: address || '',
-        phone: phone || '',
-        gst_number: gst_number || ''
+    const {
+      id, store_id, store_name, name, address, phone,
+      shortName, companyTitle, outletTitle, customerInfo, autoSettlement,
+      focusOn, kot, kotPrint, roomService, noOfKOT, noOfBills, hsnSac,
+      general, billHeader1, billHeader2, billHeader3, billSlogan1, billSlogan2, billSlogan3, status
+    } = req.body || {};
+
+    const newStoreName = store_name || name || 'New Outlet';
+    const targetId = id || store_id;
+    const isInactive = status === 'Inactive';
+
+    const settingsObj = {
+      shortName: shortName || '',
+      companyTitle: companyTitle || '',
+      outletTitle: outletTitle || '',
+      customerInfo: customerInfo || 'Optional',
+      autoSettlement: autoSettlement || 'No',
+      focusOn: focusOn || 'Item Search',
+      kot: kot || 'Print & Save',
+      kotPrint: kotPrint || 'Immediate',
+      roomService: roomService || 'Disabled',
+      noOfKOT: String(noOfKOT || '1'),
+      noOfBills: String(noOfBills || '1'),
+      hsnSac: hsnSac || '',
+      general: general || '',
+      billHeader1: billHeader1 || address || '',
+      billHeader2: billHeader2 || '',
+      billHeader3: billHeader3 || '',
+      billSlogan1: billSlogan1 || '',
+      billSlogan2: billSlogan2 || '',
+      billSlogan3: billSlogan3 || ''
+    };
+
+    let store = null;
+    if (targetId) {
+      store = await global.serverdbConnection.Store.findOne({
+        where: {
+          [global.serverdbConnection.Sequelize.Op.or]: [
+            { id: Number(targetId) || 0 },
+            { store_id: String(targetId) }
+          ]
+        }
       });
     }
-    response.data = store;
+
+    if (store) {
+      await store.update({
+        store_name: newStoreName,
+        store_phone: phone || store.store_phone,
+        user_phone: phone || store.user_phone,
+        user_line_1: billHeader1 || address || store.user_line_1,
+        user_line_2: billHeader2 || store.user_line_2,
+        user_sub_locality: billHeader3 || store.user_sub_locality,
+        footer_note: billSlogan1 || store.footer_note,
+        disable_ordering: isInactive ? 1 : 0,
+        settings: settingsObj
+      });
+    } else {
+      store = await global.serverdbConnection.Store.create({
+        store_name: newStoreName,
+        store_phone: phone || '',
+        user_phone: phone || '',
+        user_line_1: billHeader1 || address || '',
+        user_line_2: billHeader2 || '',
+        user_sub_locality: billHeader3 || '',
+        footer_note: billSlogan1 || '',
+        disable_ordering: isInactive ? 1 : 0,
+        settings: settingsObj
+      });
+      const generatedStoreId = `STORE_${store.id}`;
+      await store.update({ store_id: generatedStoreId });
+    }
+
+    const plainStore = store.get({ plain: true });
+    response.data = {
+      ...plainStore,
+      id: store.id,
+      store_id: store.store_id || `STORE_${store.id}`,
+      store_name: store.store_name,
+      name: store.store_name,
+      phone: store.store_phone || store.user_phone || '',
+      settings: settingsObj
+    };
     response.setMessage('Outlet saved successfully in PostgreSQL');
     response.setStatus(200);
   } catch (err) {

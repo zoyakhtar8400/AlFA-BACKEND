@@ -6,14 +6,20 @@ const router = express.Router();
 router.get('/pending', async (req, res) => {
   const response = new ResponseMessage(200, '');
   try {
+    const targetStoreId = req.query?.store_id || req.query?.outletId || req.user?.store_id || (req.user?.assigned_outlets && req.user.assigned_outlets[0]) || 'STORE_1';
+    const whereClause = {
+      [global.serverdbConnection.Sequelize.Op.or]: [
+        { order_state: 'pending' },
+        { order_state: 'Running' },
+        { order_state: 'placed' }
+      ]
+    };
+    if (targetStoreId) {
+      whereClause.store_id = targetStoreId;
+    }
+
     const bills = await global.serverdbConnection.Bill.findAll({
-      where: {
-        [global.serverdbConnection.Sequelize.Op.or]: [
-          { order_state: 'pending' },
-          { order_state: 'Running' },
-          { order_state: 'placed' }
-        ]
-      },
+      where: whereClause,
       order: [['id', 'DESC']],
       raw: true
     });
@@ -56,6 +62,54 @@ router.get('/pending', async (req, res) => {
       };
     });
 
+    const billTableIds = bills.map(b => b.table_id).filter(Boolean);
+    const standaloneKots = await global.serverdbConnection.KOT.findAll({
+      where: { is_active: 1, ...(targetStoreId && { store_id: targetStoreId }) },
+      order: [['kot_id', 'DESC']],
+      raw: true
+    });
+
+    const unbilledKots = standaloneKots.filter(k => !(k.table_id && billTableIds.includes(k.table_id)));
+    const unbilledKotIds = unbilledKots.map(k => k.kot_id);
+    let kotItemsForUnbilled = [];
+    if (unbilledKotIds.length > 0) {
+      kotItemsForUnbilled = await global.serverdbConnection.KOTItem.findAll({
+        where: { kot_id: { [global.serverdbConnection.Sequelize.Op.in]: unbilledKotIds } },
+        raw: true
+      });
+    }
+
+    const formattedKots = unbilledKots.map(k => {
+      const items = kotItemsForUnbilled.filter(ki => String(ki.kot_id) === String(k.kot_id));
+      return {
+        id: k.kot_id,
+        order_id: k.kot_id,
+        billNo: k.custom_bill_number || `KOT-${k.kot_id}`,
+        tableNo: k.table_name || `T${k.table_id || k.kot_id}`,
+        table_id: k.table_id,
+        billType: k.billing_type === 1 ? 'DINE_IN' : 'TAKE_AWAY',
+        billDate: new Date(k.kot_date || Date.now()).toLocaleDateString(),
+        orderNo: String(k.kot_number || k.kot_id),
+        amount: Number(k.amount || 0),
+        customerName: k.customer_name || 'Walk-in',
+        mobileNo: k.customer_mobile || '—',
+        waiter: k.waiter || 'Staff',
+        status: 'pending',
+        payment_status: 'Unpaid',
+        items: items.map(i => ({
+          itemId: i.item_id,
+          itemName: i.item_name || 'Item',
+          name: i.item_name || 'Item',
+          variantName: i.alternative_title || '',
+          qty: Number(i.quantity || 1),
+          unitPrice: Number(i.item_price || 0),
+          total: Number(i.amount || (i.quantity * i.item_price) || 0)
+        }))
+      };
+    });
+
+    const finalFormatted = [...formatted, ...formattedKots];
+
     response.data = formatted;
     response.pendingBills = formatted;
     response.orders = formatted;
@@ -95,7 +149,7 @@ const paymentHandler = async (req, res) => {
         order_id: bill.order_id || bill.id,
         amount: amount || bill.order_total || bill.total_amount,
         payment_mode: mode,
-        store_id: 'STORE_1'
+        store_id: bill.store_id || req.body.store_id || 'STORE_1'
       }, { transaction });
 
       // Set Table status in PostgreSQL to 'PAYMENT_COMPLETED' with payment_completed_at timestamp

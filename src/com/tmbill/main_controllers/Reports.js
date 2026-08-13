@@ -1210,7 +1210,6 @@ async function getReportData(params) {
                   'used_date',
                   'order_id',
                   'sync_flag',
-                  'is_loyalty_coupon',
                 ],
                 where: couponWhereData,
               });
@@ -1618,29 +1617,10 @@ async function getReportData(params) {
             kotReportWhereData[connection.Sequelize.Op.and].push({ createdBy: params.username });
           }
           const kot_data = await connection.KOT.findAll({
-            raw: true,
-            attributes: [
-              'bill_number',
-              'billing_type',
-              'kot_number',
-              'in_time',
-              'table_name',
-              'createdBy',
-              'waiter',
-            ],
             include: [
               {
                 as: 'kotItems',
                 model: connection.KOTItem,
-                attributes: [
-                  'item_name',
-                  'alternative_title',
-                  'status',
-                  'item_price',
-                  'quantity',
-                  'amount',
-                  'createdBy',
-                ],
                 where: {
                   [connection.Sequelize.Op.or]: [
                     {
@@ -1659,7 +1639,7 @@ async function getReportData(params) {
             ],
             where: kotReportWhereData,
           });
-          response.kotReportData = kot_data;
+          response.kotReportData = kot_data.map(k => k.get({ plain: true }));
           break;
 
         case REPORT_TYPES.RESERVATION_REPORT:
