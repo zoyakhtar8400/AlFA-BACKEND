@@ -17,7 +17,19 @@ function getModel(sequelize, type) {
         type: type.STRING,
         allowNull: true,
       },
+      name: {
+        type: type.STRING,
+        allowNull: true,
+      },
+      printer_id: {
+        type: type.INTEGER,
+        allowNull: true,
+      },
       isactive: {
+        type: type.INTEGER,
+        defaultValue: 1,
+      },
+      is_active: {
         type: type.INTEGER,
         defaultValue: 1,
       },

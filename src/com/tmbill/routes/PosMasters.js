@@ -519,10 +519,30 @@ router.get('/printers', async (req, res) => {
   const response = new ResponseMessage(200, '');
   try {
     const printers = await global.serverdbConnection.Printer.findAll({
-      where: { is_active: 1 },
+      where: {
+        [global.serverdbConnection.Sequelize.Op.or]: [
+          { is_active: 1 },
+          { is_active: null }
+        ]
+      },
       raw: true
     });
-    response.data = printers;
+    const mapped = printers.map(p => ({
+      id: p.id,
+      printer_id: p.id,
+      name: p.title || p.device_name || `Printer ${p.id}`,
+      printer_name: p.title || p.device_name || `Printer ${p.id}`,
+      title: p.title || p.device_name || `Printer ${p.id}`,
+      device_name: p.device_name || p.title || `Printer ${p.id}`,
+      ip_address: p.device_address || '192.168.1.100',
+      printer_ip: p.device_address || '192.168.1.100',
+      device_address: p.device_address || '192.168.1.100',
+      printer_type: p.printer_type || 1,
+      type: p.printer_type || 1,
+      store_id: p.store_id || 1,
+      is_active: p.is_active !== 0 ? 1 : 0
+    }));
+    response.data = mapped;
     response.setStatus(200);
   } catch (err) {
     response.setStatus(400);
@@ -534,28 +554,46 @@ router.get('/printers', async (req, res) => {
 router.post('/printers', async (req, res) => {
   const response = new ResponseMessage(200, '');
   try {
-    const { printer_id, printer_name, name, ip_address, printer_ip, type, printer_type } = req.body;
+    const { id, printer_id, printer_name, name, title, ip_address, printer_ip, device_address, type, printer_type, store_id } = req.body;
+    const targetId = id || printer_id;
+    const pName = printer_name || name || title || 'KOT Printer';
+    const pIp = ip_address || printer_ip || device_address || '192.168.1.100';
     const pTypeVal = typeof printer_type === 'number' ? printer_type : (typeof type === 'number' ? type : 1);
+    
     let printer;
-    if (printer_id) {
-      printer = await global.serverdbConnection.Printer.findByPk(printer_id);
+    if (targetId) {
+      printer = await global.serverdbConnection.Printer.findByPk(targetId);
       if (printer) {
         await printer.update({
-          printer_name: printer_name || name || printer.printer_name,
-          printer_ip: printer_ip || ip_address || printer.printer_ip,
-          printer_type: pTypeVal
+          title: pName,
+          device_name: pName,
+          device_address: pIp,
+          printer_type: pTypeVal,
+          is_active: 1
         });
       }
     } else {
       printer = await global.serverdbConnection.Printer.create({
-        printer_name: printer_name || name || 'KOT Printer',
-        printer_ip: printer_ip || ip_address || '192.168.1.100',
+        title: pName,
+        device_name: pName,
+        device_address: pIp,
         printer_type: pTypeVal,
         is_active: 1,
-        store_id: 1
+        activate: 1,
+        store_id: store_id ? String(store_id) : '1'
       });
     }
-    response.data = printer;
+    response.data = {
+      id: printer.id,
+      printer_id: printer.id,
+      name: printer.title || printer.device_name,
+      printer_name: printer.title || printer.device_name,
+      ip_address: printer.device_address,
+      printer_ip: printer.device_address,
+      printer_type: printer.printer_type,
+      store_id: printer.store_id,
+      is_active: 1
+    };
     response.setMessage('Printer saved successfully in PostgreSQL');
     response.setStatus(200);
   } catch (err) {
@@ -587,15 +625,35 @@ router.delete('/printers/:id', async (req, res) => {
 router.get('/production-categories', async (req, res) => {
   const response = new ResponseMessage(200, '');
   try {
-    const deps = await global.serverdbConnection.KitchenDepartment.findAll({
-      where: { is_active: 1 },
-      raw: true
+    const [deps, printers] = await Promise.all([
+      global.serverdbConnection.KitchenDepartment.findAll({
+        where: { is_active: 1 },
+        raw: true
+      }),
+      global.serverdbConnection.Printer.findAll({
+        where: { is_active: 1 },
+        raw: true
+      })
+    ]);
+
+    const printerMap = new Map();
+    printers.forEach(p => printerMap.set(Number(p.id), p));
+
+    const mapped = deps.map(d => {
+      const assignedPrinter = d.printer_id ? printerMap.get(Number(d.printer_id)) : null;
+      return {
+        id: d.id,
+        name: d.name || d.kitchen_dept_name || `Category ${d.id}`,
+        department_name: d.name || d.kitchen_dept_name || `Category ${d.id}`,
+        printer_id: d.printer_id || null,
+        printerId: d.printer_id || null,
+        printer_name: assignedPrinter ? assignedPrinter.printer_name : null,
+        printerName: assignedPrinter ? assignedPrinter.printer_name : null,
+        printer: assignedPrinter || null,
+        status: d.is_active === 1 ? 'Active' : 'Inactive',
+        store_id: d.store_id || 1
+      };
     });
-    const mapped = deps.map(d => ({
-      id: d.id,
-      name: d.name || d.department_name,
-      status: d.is_active === 1 ? 'Active' : 'Inactive'
-    }));
     response.data = mapped;
     response.setStatus(200);
   } catch (err) {
@@ -608,24 +666,51 @@ router.get('/production-categories', async (req, res) => {
 router.post('/production-categories', async (req, res) => {
   const response = new ResponseMessage(200, '');
   try {
-    const { id, name, department_name } = req.body;
+    const { id, name, department_name, printer_id, printerId, store_id } = req.body;
     const deptName = name || department_name || 'Kitchen Section';
+    const assignedPrinterId = printer_id !== undefined ? (printer_id ? Number(printer_id) : null) : (printerId ? Number(printerId) : null);
+    
     let dep;
     if (id) {
       dep = await global.serverdbConnection.KitchenDepartment.findByPk(id);
       if (dep) {
-        await dep.update({ name: deptName, kitchen_dept_name: deptName });
+        await dep.update({
+          name: deptName,
+          kitchen_dept_name: deptName,
+          printer_id: assignedPrinterId,
+          is_active: 1,
+          isactive: 1
+        });
       }
     } else {
       dep = await global.serverdbConnection.KitchenDepartment.create({
         name: deptName,
         kitchen_dept_name: deptName,
+        printer_id: assignedPrinterId,
         is_active: 1,
         isactive: 1,
-        store_id: 1
+        store_id: store_id || 1
       });
     }
-    response.data = dep;
+
+    // Resolve printer details for immediate response
+    let assignedPrinter = null;
+    if (dep && dep.printer_id) {
+      assignedPrinter = await global.serverdbConnection.Printer.findByPk(dep.printer_id, { raw: true });
+    }
+
+    response.data = {
+      id: dep.id,
+      name: dep.name || dep.kitchen_dept_name,
+      department_name: dep.name || dep.kitchen_dept_name,
+      printer_id: dep.printer_id,
+      printerId: dep.printer_id,
+      printer_name: assignedPrinter ? assignedPrinter.printer_name : null,
+      printerName: assignedPrinter ? assignedPrinter.printer_name : null,
+      printer: assignedPrinter,
+      status: 'Active',
+      store_id: dep.store_id
+    };
     response.setMessage('Production category saved successfully in PostgreSQL');
     response.setStatus(200);
   } catch (err) {
@@ -826,6 +911,32 @@ router.delete('/product-groups/:id', async (req, res) => {
   } catch (err) {
     response.setStatus(400);
     response.setMessage(err.message || 'Failed to delete product group');
+  }
+  res.json(response);
+});
+
+// ==========================================
+// 12. FLOOR MASTER CRUD
+// ==========================================
+router.get('/menu/floors', async (req, res) => {
+  const response = new ResponseMessage(200, '');
+  try {
+    const floors = await global.serverdbConnection.Floor.findAll({
+      order: [['id', 'ASC']],
+      raw: true
+    });
+    const mapped = floors.map(f => ({
+      id: f.id,
+      name: f.name || '',
+      active: f.active === 'No' ? 'No' : 'Yes'
+    }));
+    response.data = mapped;
+    response.floors = mapped;
+    response.setStatus(200);
+  } catch (err) {
+    console.error('Error fetching floors in PosMasters:', err);
+    response.setStatus(400);
+    response.setMessage(err.message || 'Failed to fetch floors');
   }
   res.json(response);
 });

@@ -79,9 +79,16 @@ function mapTable(t) {
       kotStatus = extra.kot_status || 'CUT';
       availableActions = ['print_kot']; // View KOT is REMOVED!
     }
+  } else if (rawState === 'RESERVED' || extra.status === 'Reserved' || String(extra.status || '').toLowerCase() === 'reserved') {
+    status = 'Reserved';
+    color = 'orange';
+    kotStatus = 'NONE';
+    paymentStatus = 'UNPAID';
+    availableActions = [];
+    remainingSeconds = 0;
   } else if (rawState === 'KOT_CUT' || rawState === 'RUNNING' || rawState === 'OCCUPIED' || rawState === 'ORDERED') {
     status = rawState === 'ORDERED' ? 'ORDERED' : 'KOT_CUT';
-    color = 'orange';
+    color = 'yellow';
     kotStatus = 'CUT';
     paymentStatus = 'UNPAID';
     availableActions = ['print_kot', 'view_kot'];
@@ -112,7 +119,7 @@ function mapTable(t) {
     remaining_seconds: remainingSeconds,
     color: color,
     available_actions: availableActions,
-    floor: extra.floor || 'Ground',
+    floor: extra.floor || 'Ground Floor',
     section: extra.section || 'Main Area',
     amount: status === 'AVAILABLE' ? 0 : Number(extra.amount || 0),
     waiter: status === 'AVAILABLE' ? null : (extra.waiter || null),
@@ -131,8 +138,44 @@ function getExtra(t, key, fallback) {
 router.get('/', async (req, res) => {
   const response = new ResponseMessage(200, '');
   try {
-    const targetStoreId = req.query.store_id || req.user?.store_id || (req.user?.assigned_outlets && req.user.assigned_outlets[0]);
-    const whereData = targetStoreId ? { store_id: targetStoreId } : {};
+    const userRole = String(req.user?.role || req.user?.type || '').toUpperCase();
+    const isAdmin = userRole === 'ADMIN' || req.user?.username === 'admin';
+    const targetStoreId = (req.query.store_id && req.query.store_id.toLowerCase() !== 'all')
+      ? req.query.store_id
+      : (!isAdmin ? (req.user?.store_id || (req.user?.assigned_outlets && req.user.assigned_outlets[0])) : null);
+
+    let whereData = {};
+    if (targetStoreId) {
+      const qStore = targetStoreId;
+      if (qStore === 'STORE_1' || qStore === '1') {
+        whereData = {
+          [global.serverdbConnection.Sequelize.Op.or]: [
+            { store_id: qStore },
+            { store_id: 'STORE_1' },
+            { store_id: '1' },
+            { store_id: null }
+          ]
+        };
+      } else {
+        whereData = { store_id: qStore };
+      }
+    } else if (!req.query.store_id && !isAdmin) {
+      const userStore = req.user?.store_id || (req.user?.assigned_outlets && req.user.assigned_outlets[0]);
+      if (userStore) {
+        if (userStore === 'STORE_1' || userStore === '1') {
+          whereData = {
+            [global.serverdbConnection.Sequelize.Op.or]: [
+              { store_id: userStore },
+              { store_id: 'STORE_1' },
+              { store_id: '1' },
+              { store_id: null }
+            ]
+          };
+        } else {
+          whereData = { store_id: userStore };
+        }
+      }
+    }
 
     const dbTables = await global.serverdbConnection.Table.findAll({
       where: whereData,

@@ -138,6 +138,7 @@ expressApp.use(ROUTES.DEPARTMENT, auth, depRouter);
 
 expressApp.use(ROUTES.ORDER, auth, orderRouter);
 expressApp.use('/api/orders', auth, orderRouter);
+expressApp.use('/api/dashboard', auth, orderRouter);
 
 expressApp.use(ROUTES.KOT, auth, kotRouter);
 expressApp.use('/api/kots', auth, kotRouter);
@@ -150,12 +151,17 @@ const recipeRouter = require('../routes/Recipe');
 const purchaseModuleRouter = require('../routes/Purchase');
 const posMastersRouter = require('../routes/PosMasters');
 const userCrudRouter = require('../routes/UserCrud');
+const floorRouter = require('../routes/Floor');
+const companyProfileRouter = require('../routes/CompanyProfile');
 
 expressApp.use('/api', auth, recipeRouter);
 expressApp.use('/api', auth, purchaseModuleRouter);
 expressApp.use('/api', auth, posMastersRouter);
 expressApp.use('/api/users', userCrudRouter);
 expressApp.use('/api/reservations', auth, reservationRouter);
+expressApp.use('/api/floors', floorRouter);
+expressApp.use('/api/company-profile', companyProfileRouter);
+expressApp.use('/company-profile', companyProfileRouter);
 
 expressApp.use('/api', auth, menuCatalogRouter);
 expressApp.use('/api/billing', auth, billingRouter);

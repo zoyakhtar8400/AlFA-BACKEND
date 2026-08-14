@@ -79,6 +79,14 @@ function getModel(sequelize, type) {
         type: type.STRING,
         allowNull: true,
       },
+      booking_date: {
+        type: type.STRING,
+        allowNull: true,
+      },
+      booking_time: {
+        type: type.STRING,
+        allowNull: true,
+      },
     },
     {
       timestamps: false,

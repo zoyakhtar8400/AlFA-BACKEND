@@ -14,6 +14,10 @@ function mapReservation(r) {
     phone: r.phone || '—',
     persons: Number(r.persons || 1),
     occasion: r.occasion || '',
+    bookingDate: r.booking_date || null,
+    booking_date: r.booking_date || null,
+    bookingTime: r.booking_time || r.check_in || null,
+    booking_time: r.booking_time || r.check_in || null,
     checkIn: r.check_in || null,
     checkOut: r.check_out || null,
     status: r.status || 'Reserved',
@@ -21,11 +25,19 @@ function mapReservation(r) {
   };
 }
 
-// GET all reservations
+// GET all reservations (supports ?date=YYYY-MM-DD and ?store_id=...)
 router.get('/', async (req, res) => {
   const response = new ResponseMessage(200, '');
   try {
+    const where = {};
+    if (req.query.date) {
+      where.booking_date = req.query.date;
+    }
+    if (req.query.store_id && req.query.store_id !== 'all') {
+      where.store_id = req.query.store_id;
+    }
     const reservations = await global.serverdbConnection.TableReservation.findAll({
+      where,
       order: [['id', 'DESC']],
       raw: true
     });
@@ -67,6 +79,8 @@ router.post('/', async (req, res) => {
     const b = req.body;
     const tableNoStr = String(b.tableNo || b.table_no || b.tableId || '').replace(/[^0-9]/g, '') || String(b.tableId || '');
     const resId = b.reservationId || `RES-${Date.now()}`;
+    const todayStr = new Date().toISOString().split('T')[0];
+    const bDate = b.bookingDate || b.booking_date || b.date || todayStr;
 
     const formatTime = (v) => {
       if (!v) return new Date().toTimeString().split(' ')[0];
@@ -78,6 +92,8 @@ router.post('/', async (req, res) => {
       return new Date().toTimeString().split(' ')[0];
     };
 
+    const bTime = b.bookingTime || b.booking_time || b.time || formatTime(b.checkIn || b.check_in);
+
     const created = await global.serverdbConnection.TableReservation.create({
       reservation_id: resId,
       store_id: b.store_id || 'STORE_1',
@@ -87,23 +103,27 @@ router.post('/', async (req, res) => {
       phone: b.phone || '',
       persons: Number(b.persons || b.guestsCount || 1),
       occasion: b.occasion || '',
-      check_in: formatTime(b.checkIn || b.check_in),
-      check_out: formatTime(b.checkOut || b.check_out),
+      booking_date: bDate,
+      booking_time: bTime,
+      check_in: formatTime(b.checkIn || bTime),
+      check_out: formatTime(b.checkOut || bTime),
       status: b.status || 'Reserved',
       created_at: formatTime(new Date()),
       created_time: formatTime(new Date())
     });
 
-    // Mark table as Reserved in PostgreSQL
-    if (b.tableId || b.table_id) {
+    // Mark table as Reserved in PostgreSQL if booking is for today
+    const isToday = b.isToday !== undefined ? b.isToday : (bDate === todayStr);
+    if ((b.tableId || b.table_id) && isToday) {
       const tid = b.tableId || b.table_id;
       const table = await global.serverdbConnection.Table.findByPk(tid);
       if (table) {
         const extra = table.extra_details || {};
         await table.update({
-          order_state: 'ORDERED',
+          order_state: 'RESERVED',
           extra_details: {
             ...extra,
+            status: 'Reserved',
             customer: b.customerName || b.name || 'Walk-in',
             waiter: b.waiter || extra.waiter || null,
             kot_status: 'NONE',

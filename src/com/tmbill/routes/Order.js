@@ -33,6 +33,83 @@ const { isDayClosed } = require('../main_controllers/Utils/ExtendCloseDayTime');
 
 const router = express.Router();
 
+router.get(['/getdashboardstats', '/dashboard/stats', '/dashboard-stats'], async (req, res) => {
+  const response = new ResponseMessage(200, 'Dashboard statistics fetched successfully');
+  try {
+    const { Bill, Table, Item } = require('../js/database');
+
+    // 1. Tables stats
+    const allTables = await Table.findAll({ raw: true }).catch(() => []);
+    const totalTables = allTables.length;
+    const activeTables = allTables.filter(t => {
+      const st = String(t.status || t.order_state || '').toUpperCase();
+      return ['RUNNING', 'KOT_CUT', 'ORDERED', 'OCCUPIED', 'PAID', 'KOT GENERATED'].includes(st) || Number(t.amount || 0) > 0;
+    });
+    const liveDiningSales = activeTables.reduce((acc, t) => acc + Number(t.amount || 0), 0);
+
+    // 2. Menu items count
+    const totalItems = await Item.count().catch(() => 0);
+
+    // 3. Orders / Revenue stats
+    const allOrders = await Bill.findAll({
+      order: [['id', 'DESC']],
+      limit: 100,
+      raw: true
+    }).catch(() => []);
+
+    const totalOrdersCount = allOrders.length;
+    let totalRevenue = 0;
+    let cashCollection = 0;
+    let upiCollection = 0;
+    let cardCollection = 0;
+    let dueCollection = 0;
+
+    allOrders.forEach(o => {
+      const amt = Number(o.paid_amount || o.net_amount || o.gross_amount || 0);
+      totalRevenue += amt;
+      const pType = String(o.payment_type || '').toLowerCase();
+      if (pType.includes('cash')) cashCollection += amt;
+      else if (pType.includes('upi') || pType.includes('online')) upiCollection += amt;
+      else if (pType.includes('card')) cardCollection += amt;
+      else if (pType.includes('due') || pType.includes('credit')) dueCollection += amt;
+    });
+
+    const recentOrders = allOrders.slice(0, 10).map(o => ({
+      id: o.id,
+      billNo: o.bill_no || o.order_id || `BILL-${o.id}`,
+      table: o.table_name || (o.table_id ? `Table T${o.table_id}` : 'Direct Sale'),
+      customer: o.cust_name || 'Walk-in',
+      amount: `₹${Number(o.paid_amount || o.net_amount || o.gross_amount || 0).toLocaleString('en-IN')}`,
+      rawAmount: Number(o.paid_amount || o.net_amount || o.gross_amount || 0),
+      paymentType: o.payment_type || 'Cash',
+      status: o.status || 'Paid',
+      createdAt: o.created_at || o.order_date || 'Today'
+    }));
+
+    response.setData({
+      todaySales: totalRevenue + liveDiningSales,
+      monthlySales: totalRevenue + liveDiningSales,
+      cashCollection,
+      upiCollection,
+      cardCollection,
+      dueCollection,
+      totalOrdersCount,
+      activeTablesCount: activeTables.length,
+      availableTablesCount: Math.max(0, totalTables - activeTables.length),
+      totalTablesCount: totalTables,
+      totalMenuItems: totalItems,
+      liveDiningSales,
+      recentOrders
+    });
+    return res.status(200).json(response);
+  } catch (err) {
+    console.error('Error in getdashboardstats:', err);
+    response.setStatus(500);
+    response.setMessage(err.message);
+    return res.status(500).json(response);
+  }
+});
+
 router.get('/getorderdata', async (req, res) => {
   const response = new ResponseMessage(200, '');
   const targetStoreId = req.query?.store_id || req.query?.outletId || 'STORE_1';
@@ -372,7 +449,7 @@ router.get('/', async (req, res) => {
           waiter: b.waiter || b.waiter_name || 'Staff',
           order_status: b.order_state || 'completed',
           status: b.order_state || 'completed',
-          payment_status: b.order_state === 'completed' ? 'Paid' : 'Unpaid',
+          payment_status: (b.order_state === 'completed' || b.payment_status === 'Paid' || b.payment_status === 'PAID') ? 'Paid' : (b.payment_status || 'Unpaid'),
           payment_method: b.payment_mode || 'Cash',
           items: items.map(i => ({
             itemId: i.item_id,
@@ -391,7 +468,11 @@ router.get('/', async (req, res) => {
 
       const billTableIds = bills.map(b => b.table_id).filter(Boolean);
       const standaloneKots = await global.serverdbConnection.KOT.findAll({
-        where: { is_active: 1, ...(targetStoreId && { store_id: targetStoreId }) },
+        where: {
+          is_active: 1,
+          status: { [global.serverdbConnection.Sequelize.Op.ne]: 6 },
+          ...(targetStoreId && { store_id: targetStoreId })
+        },
         order: [['kot_id', 'DESC']],
         raw: true
       });
@@ -605,7 +686,7 @@ router.get('/:id/invoice', async (req, res) => {
       try {
         const tbl = await global.serverdbConnection.Table.findByPk(bill.table_id, { raw: true });
         if (tbl) tableNo = String(tbl.table_no || tbl.table_name || tbl.id);
-      } catch (e) {}
+      } catch (e) { }
     }
 
     let paymentMethod = bill.payment || 'Cash';
@@ -616,7 +697,7 @@ router.get('/:id/invoice', async (req, res) => {
         raw: true
       });
       if (pm && pm.payment_mode) paymentMethod = pm.payment_mode;
-    } catch (e) {}
+    } catch (e) { }
 
     const itemsFormatted = billItems.map(item => {
       const qty = Number(item.quantity || item.qty || 1);
@@ -717,6 +798,10 @@ router.post('/', async (req, res) => {
     const rawMobile = payload.mobileNo || payload.customer_phone || payload.mobile || '';
     const resolvedMobile = (rawMobile && rawMobile !== '—') ? rawMobile : '';
 
+    const isCompletedPayment = payload.status === 'completed' || payload.payment_status === 'Paid' || payload.payment_status === 'PAID';
+    const resolvedPayStatus = isCompletedPayment ? 'Paid' : (payload.payment_status || 'Unpaid');
+    const resolvedOrderState = isCompletedPayment ? 'completed' : (payload.status || 'pending');
+
     let createdBill;
     if (existingBill) {
       const updateFields = {
@@ -725,7 +810,8 @@ router.post('/', async (req, res) => {
         total_tax: taxAmount || existingBill.total_tax,
         total_amount: totalAmount || existingBill.total_amount,
         order_total: totalAmount || existingBill.order_total,
-        order_state: payload.status || existingBill.order_state,
+        order_state: resolvedOrderState,
+        payment_status: resolvedPayStatus,
         waiter: payload.waiter || payload.waiter_name || existingBill.waiter
       };
       if (resolvedCustName && resolvedCustName !== 'Walk-in') {
@@ -759,8 +845,8 @@ router.post('/', async (req, res) => {
         total_tax: taxAmount,
         total_amount: totalAmount,
         order_total: totalAmount,
-        order_state: payload.status || 'pending',
-        payment_status: 'Unpaid',
+        order_state: resolvedOrderState,
+        payment_status: resolvedPayStatus,
         cust_name: resolvedCustName,
         phone: resolvedMobile || '—',
         waiter: payload.waiter || payload.waiter_name || 'Staff',
@@ -777,8 +863,6 @@ router.post('/', async (req, res) => {
       for (const item of items) {
         const qty = Number(item.qty || item.quantity || 1);
         const price = Number(item.unitPrice || item.price || item.rate || 0);
-        // FIX D: write bill_id (integer PK FK) and orderMasterId (string FK = Bill.order_id).
-        // The mpos_order_child model has NO order_id column — removed that dead write.
         await global.serverdbConnection.BillItem.create({
           bill_id: Number(billId) || 0,
           orderMasterId: String(createdBill.order_id || billId),
@@ -795,10 +879,30 @@ router.post('/', async (req, res) => {
 
     // Update table status in PostgreSQL
     if (payload.tableId || payload.table_id) {
-      await global.serverdbConnection.Table.update(
-        { order_state: 'Running' },
-        { where: { id: payload.tableId || payload.table_id } }
-      );
+      const tId = payload.tableId || payload.table_id;
+      if (isCompletedPayment) {
+        await global.serverdbConnection.Table.update(
+          {
+            order_state: 'PAYMENT_COMPLETED',
+            extra_details: {
+              payment_status: 'PAID',
+              payment_completed_at: Date.now(),
+              cleanedAt: Date.now()
+            }
+          },
+          { where: { id: tId } }
+        ).catch(() => { });
+        // Close KOTs for this table
+        await global.serverdbConnection.KOT.update(
+          { status: 6 },
+          { where: { table_id: tId, is_active: 1 } }
+        ).catch(() => { });
+      } else {
+        await global.serverdbConnection.Table.update(
+          { order_state: 'Running' },
+          { where: { id: tId } }
+        ).catch(() => { });
+      }
     }
 
     response.setStatus(201);
@@ -874,7 +978,7 @@ const settleOrderHandler = async (req, res) => {
   try {
     const orderId = req.params.id;
     const numericOrderId = Number(String(orderId).replace(/[^0-9]/g, ''));
-    
+
     let bill = await global.serverdbConnection.Bill.findOne({
       where: {
         [global.serverdbConnection.Sequelize.Op.or]: [
@@ -950,7 +1054,7 @@ const settleOrderHandler = async (req, res) => {
     response.data = bill;
   } catch (err) {
     if (transaction && !transaction.finished) {
-      await transaction.rollback().catch(() => {});
+      await transaction.rollback().catch(() => { });
     }
     console.error('Error settling order:', err);
     response.setStatus(400);

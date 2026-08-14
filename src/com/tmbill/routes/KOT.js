@@ -43,13 +43,17 @@ router.get('/', async (req, res) => {
     }
     if (active === '1' || active === 'true') {
       whereCondition.is_active = 1;
+      whereCondition.status = { [global.serverdbConnection.Sequelize.Op.ne]: 6 };
     } else if (active === '0' || active === 'false') {
-      whereCondition.is_active = 0;
+      whereCondition[global.serverdbConnection.Sequelize.Op.or] = [
+        { is_active: 0 },
+        { status: 6 }
+      ];
     } else if (!active || active === 'all') {
       // No is_active filter — return everything
     } else {
-      // Default: only active KOTs (backwards compatible)
       whereCondition.is_active = 1;
+      whereCondition.status = { [global.serverdbConnection.Sequelize.Op.ne]: 6 };
     }
 
     if (tableIdParam) {
@@ -469,13 +473,15 @@ const createKotHandler = async (req, res) => {
           order_state: 'KOT_CUT',
           extra_details: {
             ...extra,
+            status: 'Running',
             kot_status: 'CUT',
             payment_status: 'UNPAID',
             amount: totalAmount || extra.amount || 0,
+            available_actions: ['print_kot', 'view_kot'],
             customer: payload.customerName || extra.customer || 'Walk-in'
           }
         });
-        console.log(`✅ Backend KOT.js automatically updated Table ${table.table_name || table.id} to KOT_CUT in PostgreSQL DB`);
+        console.log(`✅ Backend KOT.js automatically updated Table ${table.table_name || table.id} to KOT_CUT (Yellow) in PostgreSQL DB`);
       }
     }
 

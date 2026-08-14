@@ -53,6 +53,7 @@ const OrderTipModel = require('../model/OrderTip');
 const ItemDiscountModel = require('../model/ItemDiscount');
 const WaiterNotificationModel = require('../model/WaiterNotifications');
 const TableReservationModel = require('../model/TableReservation');
+const FloorModel = require('../model/Floor');
 const TaxModel = require('../model/Tax');
 const ModifierGroupItemsMappingModel = require('../model/ModifierGroupItemsMapping');
 const ModifierGroupsModel = require('../model/ModifierGroups');
@@ -83,6 +84,7 @@ const PurchaseQuotationModel = require('../model/PurchaseQuotation');
 const PurchaseReturnModel = require('../model/PurchaseReturn');
 const DepartmentIssueModel = require('../model/DepartmentIssue');
 const UserOutletModel = require('../model/UserOutlet');
+const CompanyProfileModel = require('../model/CompanyProfile');
 
 const { Config } = require('../config/config');
 
@@ -191,6 +193,7 @@ const WaiterNotification = WaiterNotificationModel.getModel(
 );
 
 const TableReservation = TableReservationModel.getModel(sequelize, Sequelize);
+const Floor = FloorModel.getModel(sequelize, Sequelize);
 const Tax = TaxModel.getModel(sequelize, Sequelize);
 const NCType = NCTypeModel.getModel(sequelize, Sequelize);
 const ModifierGroupItemsMapping = ModifierGroupItemsMappingModel.getModel(
@@ -228,6 +231,7 @@ const PurchaseQuotation = PurchaseQuotationModel.getModel(sequelize, Sequelize);
 const PurchaseReturn = PurchaseReturnModel.getModel(sequelize, Sequelize);
 const DepartmentIssue = DepartmentIssueModel.getModel(sequelize, Sequelize);
 const UserOutlet = UserOutletModel.getModel(sequelize, Sequelize);
+const CompanyProfile = CompanyProfileModel.getModel(sequelize, Sequelize);
 
 // Associations for Purchase & Inventory
 PurchaseOrder.belongsTo(Supplier, { foreignKey: 'supplier_id' });
@@ -562,6 +566,7 @@ module.exports = {
   OrderTip,
   WaiterNotification,
   TableReservation,
+  Floor,
   Tax,
   NCType,
   ModifierGroupItemsMapping,
@@ -593,4 +598,5 @@ module.exports = {
   PurchaseReturn,
   DepartmentIssue,
   UserOutlet,
+  CompanyProfile,
 };
