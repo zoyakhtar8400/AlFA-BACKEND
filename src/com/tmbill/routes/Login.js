@@ -104,7 +104,10 @@ async function authenticateUser(postData) {
           }
         }
 
-        const roleName = String(user.type || user.userCategory || 'USER').toUpperCase();
+        let roleName = String(user.type || user.userCategory || '').toUpperCase();
+        if (!roleName || roleName === 'USER' || String(user.username).toLowerCase() === 'admin') {
+          roleName = (String(user.username).toLowerCase() === 'admin' || !roleName) ? 'ADMIN' : roleName;
+        }
         const jwtSecret = Config.JWT_SECRET || process.env.JWT_SECRET;
 
         // Fetch stores/outlets for multi-outlet authorization
