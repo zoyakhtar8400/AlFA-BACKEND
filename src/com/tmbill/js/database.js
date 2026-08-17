@@ -54,6 +54,8 @@ const ItemDiscountModel = require('../model/ItemDiscount');
 const WaiterNotificationModel = require('../model/WaiterNotifications');
 const TableReservationModel = require('../model/TableReservation');
 const FloorModel = require('../model/Floor');
+const AreaModel = require('../model/Area');
+const PaymentModeModel = require('../model/PaymentMode');
 const TaxModel = require('../model/Tax');
 const ModifierGroupItemsMappingModel = require('../model/ModifierGroupItemsMapping');
 const ModifierGroupsModel = require('../model/ModifierGroups');
@@ -194,6 +196,8 @@ const WaiterNotification = WaiterNotificationModel.getModel(
 
 const TableReservation = TableReservationModel.getModel(sequelize, Sequelize);
 const Floor = FloorModel.getModel(sequelize, Sequelize);
+const Area = AreaModel.getModel(sequelize, Sequelize);
+const PaymentMode = PaymentModeModel.getModel(sequelize, Sequelize);
 const Tax = TaxModel.getModel(sequelize, Sequelize);
 const NCType = NCTypeModel.getModel(sequelize, Sequelize);
 const ModifierGroupItemsMapping = ModifierGroupItemsMappingModel.getModel(
@@ -253,6 +257,8 @@ UserOutlet.belongsTo(User, { foreignKey: 'user_id', constraints: false });
 (async () => {
   try {
     await UserOutlet.sync({ alter: true });
+    await Area.sync({ alter: true });
+    await PaymentMode.sync({ alter: true });
     await InventoryItem.sync({ alter: true });
     await RecipeMaster.sync({ alter: true });
     await RecipeItems.sync({ alter: true });
@@ -567,6 +573,8 @@ module.exports = {
   WaiterNotification,
   TableReservation,
   Floor,
+  Area,
+  PaymentMode,
   Tax,
   NCType,
   ModifierGroupItemsMapping,

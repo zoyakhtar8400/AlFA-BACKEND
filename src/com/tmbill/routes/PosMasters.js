@@ -397,10 +397,30 @@ router.delete('/nc-types/:id', async (req, res) => {
 router.get('/stores', async (req, res) => {
   const response = new ResponseMessage(200, '');
   try {
-    const stores = await global.serverdbConnection.Store.findAll({
+    let allowedStoreIds = null;
+    const isUserAdmin = req.user?.role === 'ADMIN' || req.user?.role === 'SUPERADMIN' || req.user?.type === 'ADMIN' || req.user?.type === 'SUPERADMIN';
+    if (!isUserAdmin && req.user?.assigned_outlets) {
+      allowedStoreIds = req.user.assigned_outlets.map(out => {
+        if (typeof out === 'string' && out.startsWith('STORE_')) {
+          return parseInt(out.replace('STORE_', ''), 10);
+        }
+        return Number(out);
+      }).filter(n => !isNaN(n));
+    }
+
+    const queryOptions = {
       order: [['id', 'ASC']],
       raw: true
-    });
+    };
+    if (allowedStoreIds) {
+      queryOptions.where = {
+        id: {
+          [global.serverdbConnection.Sequelize.Op.in]: allowedStoreIds
+        }
+      };
+    }
+
+    const stores = await global.serverdbConnection.Store.findAll(queryOptions);
     const mapped = (stores || []).map(s => ({
       ...s,
       id: s.id,
@@ -512,6 +532,33 @@ router.post('/stores', async (req, res) => {
   res.json(response);
 });
 
+router.delete('/stores/:id', async (req, res) => {
+  const response = new ResponseMessage(200, '');
+  try {
+    const targetId = req.params.id;
+    if (Number(targetId) === 1) {
+      response.setStatus(400);
+      response.setMessage('Primary outlet cannot be deleted.');
+      return res.status(400).json(response);
+    }
+
+    const store = await global.serverdbConnection.Store.findByPk(targetId);
+    if (!store) {
+      response.setStatus(404);
+      response.setMessage('Outlet not found.');
+      return res.status(404).json(response);
+    }
+
+    await store.destroy();
+    response.setMessage('Outlet deleted successfully.');
+    response.setStatus(200);
+  } catch (err) {
+    response.setStatus(400);
+    response.setMessage(err.message);
+  }
+  res.json(response);
+});
+
 // ==========================================
 // 7. PRINTER MASTER CRUD
 // ==========================================
@@ -559,7 +606,7 @@ router.post('/printers', async (req, res) => {
     const pName = printer_name || name || title || 'KOT Printer';
     const pIp = ip_address || printer_ip || device_address || '192.168.1.100';
     const pTypeVal = typeof printer_type === 'number' ? printer_type : (typeof type === 'number' ? type : 1);
-    
+
     let printer;
     if (targetId) {
       printer = await global.serverdbConnection.Printer.findByPk(targetId);
@@ -669,7 +716,7 @@ router.post('/production-categories', async (req, res) => {
     const { id, name, department_name, printer_id, printerId, store_id } = req.body;
     const deptName = name || department_name || 'Kitchen Section';
     const assignedPrinterId = printer_id !== undefined ? (printer_id ? Number(printer_id) : null) : (printerId ? Number(printerId) : null);
-    
+
     let dep;
     if (id) {
       dep = await global.serverdbConnection.KitchenDepartment.findByPk(id);

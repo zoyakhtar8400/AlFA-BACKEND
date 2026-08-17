@@ -1749,6 +1749,29 @@ async function settleBill(billData) {
     const { paymentDetails } = billData;
 
     if (billData && billupdateData) {
+      // Prevent settling on tables with active NC KOTs
+      if (billData.table_id) {
+        const activeKots = await connection.KOT.findAll({
+          where: {
+            table_id: billData.table_id,
+            is_active: 1
+          }
+        });
+        const hasActiveNcKot = activeKots.some(k => {
+          try {
+            const extra = typeof k.extra_details === 'string' ? JSON.parse(k.extra_details || '{}') : k.extra_details;
+            return extra?.isNC || k.isNC || k.ncType;
+          } catch (e) {
+            return false;
+          }
+        });
+        if (hasActiveNcKot) {
+          responseData.status = 'failure';
+          responseData.message = 'This table has an active Non-Chargeable KOT and cannot be billed.';
+          return responseData;
+        }
+      }
+
       console.log(
         `Message="Settle bill process" order_id=${billData.order_id}`,
       );
@@ -2487,6 +2510,32 @@ async function saveBill(billData) {
 
     if (billData) {
       const { billDetails } = billData;
+
+      // Prevent billing on tables with active NC KOTs
+      if (billDetails && billDetails.table_id) {
+        const activeKots = await connection.KOT.findAll({
+          where: {
+            table_id: billDetails.table_id,
+            is_active: 1
+          },
+          transaction
+        });
+        const hasActiveNcKot = activeKots.some(k => {
+          try {
+            const extra = typeof k.extra_details === 'string' ? JSON.parse(k.extra_details || '{}') : k.extra_details;
+            return extra?.isNC || k.isNC || k.ncType;
+          } catch (e) {
+            return false;
+          }
+        });
+        if (hasActiveNcKot) {
+          responseData.status = 'failure';
+          responseData.message = 'This table has an active Non-Chargeable KOT and cannot be billed.';
+          await transaction.rollback();
+          return responseData;
+        }
+      }
+
       busy_table.set(billDetails.table_id, true);
       global.isBillsaveinprocess = true;
       const { items } = billData;
@@ -2540,7 +2589,7 @@ async function saveBill(billData) {
       let nextOrderNumber;
       // let find count of qty
       if (billDetails?.table_id && items && items.length) {
-        const activekots = await connection.KOT.findAll({
+        const allActiveKots = await connection.KOT.findAll({
           attributes: [
             'kot_id',
             'extra_details',
@@ -2550,6 +2599,15 @@ async function saveBill(billData) {
           raw: true,
           where: { table_id: billDetails.table_id, is_active: 1 },
           transaction,
+        });
+
+        const activekots = (allActiveKots || []).filter(kot => {
+          try {
+            const extra = typeof kot.extra_details === 'string' ? JSON.parse(kot.extra_details || '{}') : kot.extra_details;
+            return !(extra?.isNC || kot.isNC || kot.ncType);
+          } catch (e) {
+            return true;
+          }
         });
 
         // get order_number from kot
@@ -5215,6 +5273,33 @@ async function settleQuickbill(billData) {
     global.dbOperationisinprogress = true;
     if (billData) {
       let { billDetails } = billData;
+
+      // Prevent settling quick bill on tables with active NC KOTs
+      if (billDetails && billDetails.table_id) {
+        const activeKots = await connection.KOT.findAll({
+          where: {
+            table_id: billDetails.table_id,
+            is_active: 1
+          },
+          transaction
+        });
+        const hasActiveNcKot = activeKots.some(k => {
+          try {
+            const extra = typeof k.extra_details === 'string' ? JSON.parse(k.extra_details || '{}') : k.extra_details;
+            return extra?.isNC || k.isNC || k.ncType;
+          } catch (e) {
+            return false;
+          }
+        });
+        if (hasActiveNcKot) {
+          responseData.status = 'failure';
+          responseData.message = 'This table has an active Non-Chargeable KOT and cannot be billed.';
+          if (timeoutHandle) clearTimeout(timeoutHandle);
+          await transaction.rollback();
+          return responseData;
+        }
+      }
+
       const { items } = billData;
       const { charges } = billData;
       const { paymentDetails } = billData;

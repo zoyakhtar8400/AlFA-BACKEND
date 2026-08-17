@@ -152,16 +152,24 @@ const purchaseModuleRouter = require('../routes/Purchase');
 const posMastersRouter = require('../routes/PosMasters');
 const userCrudRouter = require('../routes/UserCrud');
 const floorRouter = require('../routes/Floor');
+const areaRouter = require('../routes/Area');
+const paymentModeRouter = require('../routes/PaymentMode');
 const companyProfileRouter = require('../routes/CompanyProfile');
+
+expressApp.use('/api/floors', floorRouter);
+expressApp.use('/api/areas', areaRouter);
+expressApp.use('/areas', areaRouter);
+expressApp.use('/api/payment-modes', paymentModeRouter);
+expressApp.use('/payment-modes', paymentModeRouter);
+expressApp.use('/api/payment-master', paymentModeRouter);
+expressApp.use('/api/company-profile', companyProfileRouter);
+expressApp.use('/company-profile', companyProfileRouter);
 
 expressApp.use('/api', auth, recipeRouter);
 expressApp.use('/api', auth, purchaseModuleRouter);
 expressApp.use('/api', auth, posMastersRouter);
 expressApp.use('/api/users', userCrudRouter);
 expressApp.use('/api/reservations', auth, reservationRouter);
-expressApp.use('/api/floors', floorRouter);
-expressApp.use('/api/company-profile', companyProfileRouter);
-expressApp.use('/company-profile', companyProfileRouter);
 
 expressApp.use('/api', auth, menuCatalogRouter);
 expressApp.use('/api/billing', auth, billingRouter);

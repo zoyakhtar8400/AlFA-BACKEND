@@ -66,10 +66,7 @@ const authorize = (...allowedRoles) => {
       return next();
     }
 
-    // If allowedRoles includes ADMIN, allow any authenticated user managing the system
-    if (upperAllowed.includes('ADMIN')) {
-      return next();
-    }
+
 
     if (!upperAllowed.includes(userRole)) {
       const resp = new ResponseMessage(403, 'Forbidden: Insufficient permissions');

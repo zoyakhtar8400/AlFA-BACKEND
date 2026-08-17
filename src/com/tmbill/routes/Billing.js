@@ -63,10 +63,19 @@ router.get('/pending', async (req, res) => {
     });
 
     const billTableIds = bills.map(b => b.table_id).filter(Boolean);
-    const standaloneKots = await global.serverdbConnection.KOT.findAll({
+    const rawStandaloneKots = await global.serverdbConnection.KOT.findAll({
       where: { is_active: 1, ...(targetStoreId && { store_id: targetStoreId }) },
       order: [['kot_id', 'DESC']],
       raw: true
+    });
+
+    const standaloneKots = rawStandaloneKots.filter(k => {
+      try {
+        const extra = typeof k.extra_details === 'string' ? JSON.parse(k.extra_details || '{}') : k.extra_details;
+        return !(extra?.isNC || k.isNC || k.ncType);
+      } catch (e) {
+        return true;
+      }
     });
 
     const unbilledKots = standaloneKots.filter(k => !(k.table_id && billTableIds.includes(k.table_id)));
@@ -142,12 +151,14 @@ const paymentHandler = async (req, res) => {
       const mode = paymentMethod || paymentMode || 'Cash';
       await bill.update({
         order_state: 'completed',
+        payment: mode,
         payment_mode: mode
       }, { transaction });
 
       await global.serverdbConnection.BillPayment.create({
         order_id: bill.order_id || bill.id,
         amount: amount || bill.order_total || bill.total_amount,
+        payment_option: mode,
         payment_mode: mode,
         store_id: bill.store_id || req.body.store_id || 'STORE_1'
       }, { transaction });

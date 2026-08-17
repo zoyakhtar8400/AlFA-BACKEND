@@ -36,58 +36,381 @@ const router = express.Router();
 router.get(['/getdashboardstats', '/dashboard/stats', '/dashboard-stats'], async (req, res) => {
   const response = new ResponseMessage(200, 'Dashboard statistics fetched successfully');
   try {
-    const { Bill, Table, Item } = require('../js/database');
+    const { Bill, Table, Item, KOT, BillPayment, Store, Sequelize } = require('../js/database');
+
+    let targetStoreId = req.query.store_id || req.body?.store_id || 'STORE_1';
+    if (targetStoreId === 'undefined' || targetStoreId === 'null') {
+      targetStoreId = 'STORE_1';
+    }
+    const timeframe = req.query.timeframe || 'weekly';
+
+    const getLocalDateStr = (dateObj) => {
+      const tzOffset = dateObj.getTimezoneOffset() * 60000;
+      return (new Date(dateObj.getTime() - tzOffset)).toISOString().slice(0, 10);
+    };
+
+    const todayStr = getLocalDateStr(new Date());
+
+    const yesterday = new Date();
+    yesterday.setDate(yesterday.getDate() - 1);
+    const yesterdayStr = getLocalDateStr(yesterday);
+
+    let startDateStr = todayStr;
+    if (timeframe === 'weekly') {
+      const d = new Date();
+      d.setDate(d.getDate() - 7);
+      startDateStr = getLocalDateStr(d);
+    } else if (timeframe === 'monthly') {
+      const d = new Date();
+      d.setDate(d.getDate() - 30);
+      startDateStr = getLocalDateStr(d);
+    } else if (timeframe === 'yearly') {
+      const d = new Date();
+      d.setDate(d.getDate() - 365);
+      startDateStr = d.toISOString().slice(0, 10);
+    }
 
     // 1. Tables stats
-    const allTables = await Table.findAll({ raw: true }).catch(() => []);
+    const allTables = await Table.findAll({ where: { store_id: targetStoreId }, raw: true }).catch(() => []);
     const totalTables = allTables.length;
     const activeTables = allTables.filter(t => {
-      const st = String(t.status || t.order_state || '').toUpperCase();
-      return ['RUNNING', 'KOT_CUT', 'ORDERED', 'OCCUPIED', 'PAID', 'KOT GENERATED'].includes(st) || Number(t.amount || 0) > 0;
+      let extra = {};
+      if (t.extra_details) {
+        extra = typeof t.extra_details === 'string' ? JSON.parse(t.extra_details) : t.extra_details;
+      }
+      const amt = Number(t.amount || extra.amount || 0);
+      const st = String(t.status || t.order_state || extra.status || '').toUpperCase();
+      return ['RUNNING', 'KOT_CUT', 'ORDERED', 'OCCUPIED', 'PAID', 'KOT GENERATED'].includes(st) || amt > 0;
     });
-    const liveDiningSales = activeTables.reduce((acc, t) => acc + Number(t.amount || 0), 0);
+    const liveDiningSales = activeTables.reduce((acc, t) => {
+      let extra = {};
+      if (t.extra_details) {
+        extra = typeof t.extra_details === 'string' ? JSON.parse(t.extra_details) : t.extra_details;
+      }
+      const amt = Number(t.amount || extra.amount || 0);
+      return acc + amt;
+    }, 0);
 
     // 2. Menu items count
-    const totalItems = await Item.count().catch(() => 0);
+    const totalItems = await Item.count({
+      where: {
+        [Sequelize.Op.or]: [
+          { store_id: targetStoreId },
+          { store_id: 'STORE_1' },
+          { store_id: null }
+        ]
+      }
+    }).catch(() => 0);
 
-    // 3. Orders / Revenue stats
+    // 3. Orders / Revenue stats in the chosen timeframe
     const allOrders = await Bill.findAll({
+      where: {
+        store_id: targetStoreId,
+        my_order_date: {
+          [Sequelize.Op.between]: [startDateStr, todayStr]
+        }
+      },
       order: [['id', 'DESC']],
-      limit: 100,
       raw: true
     }).catch(() => []);
 
-    const totalOrdersCount = allOrders.length;
     let totalRevenue = 0;
     let cashCollection = 0;
     let upiCollection = 0;
     let cardCollection = 0;
     let dueCollection = 0;
+    let totalOrdersCount = 0;
+    let completedBillsCount = 0;
+    let cancelledBillsCount = 0;
+    let ncBillsCount = 0;
+
+    let restaurantRevenue = 0; // Dine-in
+    let posRevenue = 0; // Takeaway / Delivery
 
     allOrders.forEach(o => {
-      const amt = Number(o.paid_amount || o.net_amount || o.gross_amount || 0);
-      totalRevenue += amt;
-      const pType = String(o.payment_type || '').toLowerCase();
-      if (pType.includes('cash')) cashCollection += amt;
-      else if (pType.includes('upi') || pType.includes('online')) upiCollection += amt;
-      else if (pType.includes('card')) cardCollection += amt;
-      else if (pType.includes('due') || pType.includes('credit')) dueCollection += amt;
+      const state = String(o.order_state || '').toLowerCase();
+      
+      if (state === 'cancelled') {
+        cancelledBillsCount++;
+        return;
+      }
+      
+      if (state === 'nc') {
+        ncBillsCount++;
+        return;
+      }
+      
+      if (state === 'completed' || state === 'fulfilled' || state === 'paid') {
+        completedBillsCount++;
+        totalOrdersCount++;
+        
+        const amt = Number(o.order_total || 0);
+        totalRevenue += amt;
+
+        const orderType = String(o.order_type || '').toUpperCase();
+        if (orderType.includes('DINE') || orderType.includes('TABLE')) {
+          restaurantRevenue += amt;
+        } else {
+          posRevenue += amt;
+        }
+        
+        const duePayment = Number(o.due_payment || 0);
+        if (duePayment > 0 || o.hasDuepayment) {
+          dueCollection += duePayment;
+        }
+        
+        const pType = String(o.payment || o.payment_mode || 'Cash').toLowerCase();
+        if (pType.includes('cash')) {
+          cashCollection += (amt - duePayment);
+        } else if (pType.includes('upi') || pType.includes('online')) {
+          upiCollection += (amt - duePayment);
+        } else if (pType.includes('card')) {
+          cardCollection += (amt - duePayment);
+        } else {
+          cashCollection += (amt - duePayment);
+        }
+      }
     });
 
+    // 4. Today's vs Yesterday's Sales
+    const todayOrders = await Bill.findAll({
+      where: {
+        store_id: targetStoreId,
+        order_state: ['completed', 'fulfilled', 'paid'],
+        my_order_date: todayStr
+      },
+      raw: true
+    }).catch(() => []);
+    const todaySales = todayOrders.reduce((acc, o) => acc + Number(o.order_total || 0), 0) + liveDiningSales;
+
+    const yesterdayOrders = await Bill.findAll({
+      where: {
+        store_id: targetStoreId,
+        order_state: ['completed', 'fulfilled', 'paid'],
+        my_order_date: yesterdayStr
+      },
+      raw: true
+    }).catch(() => []);
+    const yesterdaySales = yesterdayOrders.reduce((acc, o) => acc + Number(o.order_total || 0), 0);
+
+    // 5. KOT Stats
+    const kots = await KOT.findAll({
+      where: {
+        store_id: targetStoreId,
+        kot_date: {
+          [Sequelize.Op.between]: [new Date(startDateStr + 'T00:00:00.000Z'), new Date(todayStr + 'T23:59:59.999Z')]
+        }
+      },
+      raw: true
+    }).catch(() => []);
+
+    const totalKotsCount = kots.length;
+    const runningKotsCount = kots.filter(k => k.is_active === 1).length;
+    const completedKotsCount = kots.filter(k => k.is_active === 0).length;
+
+    // 6. Recent orders
     const recentOrders = allOrders.slice(0, 10).map(o => ({
       id: o.id,
-      billNo: o.bill_no || o.order_id || `BILL-${o.id}`,
+      billNo: o.custom_bill_number || o.bill_no || o.order_id || `BILL-${o.id}`,
       table: o.table_name || (o.table_id ? `Table T${o.table_id}` : 'Direct Sale'),
       customer: o.cust_name || 'Walk-in',
-      amount: `₹${Number(o.paid_amount || o.net_amount || o.gross_amount || 0).toLocaleString('en-IN')}`,
-      rawAmount: Number(o.paid_amount || o.net_amount || o.gross_amount || 0),
-      paymentType: o.payment_type || 'Cash',
-      status: o.status || 'Paid',
-      createdAt: o.created_at || o.order_date || 'Today'
+      amount: `₹${Number(o.order_total || 0).toLocaleString('en-IN')}`,
+      rawAmount: Number(o.order_total || 0),
+      paymentType: o.payment || o.payment_mode || 'Cash',
+      status: o.order_state || 'Paid',
+      createdAt: o.my_order_date || 'Today'
     }));
 
-    response.setData({
-      todaySales: totalRevenue + liveDiningSales,
+    // 7. Dynamic Trend Calculation
+    let revenueLabels = [];
+    let revenueValues = [];
+    
+    if (timeframe === 'weekly') {
+      revenueLabels = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
+      revenueValues = [0, 0, 0, 0, 0, 0, 0];
+      
+      allOrders.forEach(o => {
+        const state = String(o.order_state || '').toLowerCase();
+        if (state === 'completed' || state === 'fulfilled' || state === 'paid') {
+          const amt = Number(o.order_total || 0);
+          const dateObj = new Date(o.my_order_date);
+          let dayIdx = dateObj.getDay() - 1;
+          if (dayIdx < 0) dayIdx = 6;
+          if (dayIdx >= 0 && dayIdx < 7) {
+            revenueValues[dayIdx] += amt;
+          }
+        }
+      });
+    } else if (timeframe === 'monthly') {
+      const monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+      const monthlyIndexMap = {};
+      
+      for (let i = 5; i >= 0; i--) {
+        const d = new Date();
+        d.setMonth(d.getMonth() - i);
+        const mName = monthNames[d.getMonth()];
+        revenueLabels.push(mName);
+        revenueValues.push(0);
+        monthlyIndexMap[d.getMonth()] = revenueLabels.length - 1;
+      }
+      
+      const sixMonthsAgo = new Date();
+      sixMonthsAgo.setMonth(sixMonthsAgo.getMonth() - 5);
+      sixMonthsAgo.setDate(1);
+      const sixMonthsAgoStr = sixMonthsAgo.toISOString().slice(0, 10);
+      
+      const monthlyOrders = await Bill.findAll({
+        where: {
+          store_id: targetStoreId,
+          order_state: ['completed', 'fulfilled', 'paid'],
+          my_order_date: {
+            [Sequelize.Op.between]: [sixMonthsAgoStr, todayStr]
+          }
+        },
+        raw: true
+      }).catch(() => []);
+      
+      monthlyOrders.forEach(o => {
+        const amt = Number(o.order_total || 0);
+        const dateObj = new Date(o.my_order_date);
+        const m = dateObj.getMonth();
+        if (monthlyIndexMap[m] !== undefined) {
+          revenueValues[monthlyIndexMap[m]] += amt;
+        }
+      });
+    } else if (timeframe === 'yearly') {
+      const currentYear = new Date().getFullYear();
+      revenueLabels = [
+        String(currentYear - 3),
+        String(currentYear - 2),
+        String(currentYear - 1),
+        String(currentYear)
+      ];
+      revenueValues = [0, 0, 0, 0];
+      const yearIndexMap = {
+        [currentYear - 3]: 0,
+        [currentYear - 2]: 1,
+        [currentYear - 1]: 2,
+        [currentYear]: 3
+      };
+      
+      const yearlyOrders = await Bill.findAll({
+        where: {
+          store_id: targetStoreId,
+          order_state: ['completed', 'fulfilled', 'paid'],
+          my_order_date: {
+            [Sequelize.Op.between]: [`${currentYear - 3}-01-01`, todayStr]
+          }
+        },
+        raw: true
+      }).catch(() => []);
+      
+      yearlyOrders.forEach(o => {
+        const amt = Number(o.order_total || 0);
+        const dateObj = new Date(o.my_order_date);
+        const y = dateObj.getFullYear();
+        if (yearIndexMap[y] !== undefined) {
+          revenueValues[yearIndexMap[y]] += amt;
+        }
+      });
+    } else {
+      revenueLabels = ['8AM', '10AM', '12PM', '2PM', '4PM', '6PM', '8PM'];
+      revenueValues = [0, 0, 0, 0, 0, 0, 0];
+      
+      allOrders.forEach(o => {
+        const state = String(o.order_state || '').toLowerCase();
+        if (state === 'completed' || state === 'fulfilled' || state === 'paid') {
+          const amt = Number(o.order_total || 0);
+          let hour = 12;
+          if (o.bill_date) {
+            const match = o.bill_date.match(/(\d+):(\d+)\s*(AM|PM)/i);
+            if (match) {
+              let h = parseInt(match[1], 10);
+              const ampm = match[3].toUpperCase();
+              if (ampm === 'PM' && h < 12) h += 12;
+              if (ampm === 'AM' && h === 12) h = 0;
+              hour = h;
+            }
+          }
+          
+          if (hour < 9) revenueValues[0] += amt;
+          else if (hour < 11) revenueValues[1] += amt;
+          else if (hour < 13) revenueValues[2] += amt;
+          else if (hour < 15) revenueValues[3] += amt;
+          else if (hour < 17) revenueValues[4] += amt;
+          else if (hour < 19) revenueValues[5] += amt;
+          else revenueValues[6] += amt;
+        }
+      });
+    }
+
+    const occupancyValues = revenueValues.map(v => Math.min(95, Math.max(10, Math.round((v / (totalTables * 200 || 2000)) * 100))));
+
+    // 8. Outlet summary list
+    const stores = await Store.findAll({ raw: true }).catch(() => []);
+    const outletSummary = [];
+
+    for (const store of stores) {
+      const storeId = store.store_id || `STORE_${store.id}`;
+      const storeName = store.store_name || `Outlet ${store.id}`;
+
+      // Aggregate today sales
+      const stTodayOrders = await Bill.findAll({
+        where: {
+          store_id: storeId,
+          order_state: ['completed', 'fulfilled', 'paid'],
+          my_order_date: todayStr
+        },
+        raw: true
+      }).catch(() => []);
+      const stTodaySales = stTodayOrders.reduce((acc, o) => acc + Number(o.order_total || 0), 0);
+
+      // Aggregate live dining sales & active tables
+      const stTables = await Table.findAll({ where: { store_id: storeId }, raw: true }).catch(() => []);
+      const stActiveTables = stTables.filter(t => {
+        let extra = {};
+        if (t.extra_details) {
+          extra = typeof t.extra_details === 'string' ? JSON.parse(t.extra_details) : t.extra_details;
+        }
+        const amt = Number(t.amount || extra.amount || 0);
+        const st = String(t.status || t.order_state || extra.status || '').toUpperCase();
+        return ['RUNNING', 'KOT_CUT', 'ORDERED', 'OCCUPIED', 'PAID', 'KOT GENERATED'].includes(st) || amt > 0;
+      });
+      const stLiveDiningSales = stActiveTables.reduce((acc, t) => {
+        let extra = {};
+        if (t.extra_details) {
+          extra = typeof t.extra_details === 'string' ? JSON.parse(t.extra_details) : t.extra_details;
+        }
+        const amt = Number(t.amount || extra.amount || 0);
+        return acc + amt;
+      }, 0);
+
+      // Aggregate KOT stats
+      const stKotCount = await KOT.count({
+        where: {
+          store_id: storeId,
+          kot_date: {
+            [Sequelize.Op.between]: [new Date(startDateStr + 'T00:00:00.000Z'), new Date(todayStr + 'T23:59:59.999Z')]
+          }
+        }
+      }).catch(() => 0);
+
+      outletSummary.push({
+        id: store.id,
+        store_id: storeId,
+        name: storeName,
+        todaySales: stTodaySales + stLiveDiningSales,
+        liveDiningSales: stLiveDiningSales,
+        activeTablesCount: stActiveTables.length,
+        totalTablesCount: stTables.length,
+        totalKotsCount: stKotCount,
+        totalOrdersCount: stTodayOrders.length
+      });
+    }
+
+    response.data = {
+      todaySales,
+      yesterdaySales,
       monthlySales: totalRevenue + liveDiningSales,
       cashCollection,
       upiCollection,
@@ -99,8 +422,29 @@ router.get(['/getdashboardstats', '/dashboard/stats', '/dashboard-stats'], async
       totalTablesCount: totalTables,
       totalMenuItems: totalItems,
       liveDiningSales,
-      recentOrders
-    });
+      recentOrders,
+      totalKotsCount,
+      runningKotsCount,
+      completedKotsCount,
+      cancelledBillsCount,
+      ncBillsCount,
+      revenueMix: {
+        rooms: 0,
+        restaurant: restaurantRevenue + liveDiningSales,
+        banquet: 0,
+        laundry: 0,
+        pos: posRevenue
+      },
+      revenueTrend: {
+        labels: revenueLabels,
+        values: revenueValues
+      },
+      occupancyTrend: {
+        labels: revenueLabels,
+        values: occupancyValues
+      },
+      outletSummary
+    };
     return res.status(200).json(response);
   } catch (err) {
     console.error('Error in getdashboardstats:', err);
@@ -335,6 +679,7 @@ router.get('/', async (req, res) => {
       const bills = await global.serverdbConnection.Bill.findAll({
         where: whereCondition,
         order: [['id', 'DESC']],
+        limit: 300,
         raw: true
       });
       let billItems = [];
@@ -550,48 +895,156 @@ router.get('/:id', async (req, res) => {
   const response = new ResponseMessage(200, '');
   try {
     const orderId = req.params.id;
-    const bill = await global.serverdbConnection.Bill.findByPk(orderId, { raw: true });
+    let bill = null;
+
+    if (String(orderId).startsWith('table-')) {
+      const tableId = Number(String(orderId).replace('table-', '')) || 0;
+      bill = await global.serverdbConnection.Bill.findOne({
+        where: { table_id: tableId },
+        order: [['id', 'DESC']],
+        raw: true
+      });
+    } else {
+      const cleanNum = String(orderId).replace(/[^0-9]/g, '');
+      const numVal = Number(cleanNum) || Number(orderId) || 0;
+      if (numVal > 0) {
+        bill = await global.serverdbConnection.Bill.findByPk(numVal, { raw: true });
+      }
+      if (!bill) {
+        bill = await global.serverdbConnection.Bill.findOne({
+          where: {
+            [global.serverdbConnection.Sequelize.Op.or]: [
+              { order_id: String(orderId) },
+              { custom_bill_number: String(orderId) }
+            ]
+          },
+          raw: true
+        });
+      }
+      if (!bill && numVal > 0) {
+        bill = await global.serverdbConnection.Bill.findOne({
+          where: { table_id: numVal },
+          order: [['id', 'DESC']],
+          raw: true
+        });
+      }
+    }
+
     if (!bill) {
       response.setStatus(404);
       response.setMessage('Order not found');
       return res.json(response);
     }
 
-    // FIX B: orderMasterId is the actual FK on mpos_order_child (no order_id column exists).
     const items = await global.serverdbConnection.BillItem.findAll({
       where: {
         [global.serverdbConnection.Sequelize.Op.or]: [
-          { orderMasterId: String(orderId) },
-          { bill_id: Number(orderId) || 0 }
+          { orderMasterId: String(bill.id) },
+          { orderMasterId: String(bill.order_id || '') },
+          { bill_id: bill.id }
         ]
       },
       raw: true
     });
 
+    let profile = null;
+    try {
+      if (global.serverdbConnection && global.serverdbConnection.CompanyProfile) {
+        profile = await global.serverdbConnection.CompanyProfile.findOne({
+          where: { store_id: bill.store_id || 'STORE_1' },
+          raw: true
+        });
+        if (!profile) {
+          profile = await global.serverdbConnection.CompanyProfile.findOne({ raw: true });
+        }
+      }
+    } catch (e) {
+      console.warn('CompanyProfile query failed:', e.message);
+    }
+
+    const subtotal = Number(bill.order_subtotal || bill.subtotal || 0) || items.reduce((sum, i) => sum + (Number(i.quantity || 1) * Number(i.price || 0)), 0);
+    const discount = Number(bill.discount || bill.total_external_discount || bill.couponDisount || bill.discount_amount || bill.total_discount || 0);
+    const taxableAmount = Math.max(0, subtotal - discount);
+
+    // Fetch ALL active taxes from Tax master for breakdown
+    let taxMaster = [];
+    try {
+      taxMaster = await global.serverdbConnection.Tax.findAll({ where: { is_active: 1 }, raw: true });
+    } catch (_) {}
+
+    let taxesBreakdown = [];
+    let totalTax = 0;
+    if (bill.order_level_total_taxes !== undefined && Number(bill.order_level_total_taxes) > 0 && taxMaster.length > 0) {
+      // Recalculate each tax line from master rates
+      taxesBreakdown = taxMaster.map(t => {
+        const rate = Number(t.tax_percentage || 0);
+        const amt = Math.round((taxableAmount * rate / 100) * 100) / 100;
+        return { name: t.tax_name || t.tax_display_name, rate, amount: amt };
+      });
+      totalTax = taxesBreakdown.reduce((s, t) => s + t.amount, 0);
+    } else if (taxMaster.length > 0) {
+      taxesBreakdown = taxMaster.map(t => {
+        const rate = Number(t.tax_percentage || 0);
+        const amt = Math.round((taxableAmount * rate / 100) * 100) / 100;
+        return { name: t.tax_name || t.tax_display_name, rate, amount: amt };
+      });
+      totalTax = taxesBreakdown.reduce((s, t) => s + t.amount, 0);
+    } else {
+      // No tax master: fallback to stored value
+      totalTax = Number(bill.order_level_total_taxes || 0);
+    }
+    totalTax = Math.round(totalTax * 100) / 100;
+    const grandTotal = Math.round((taxableAmount + totalTax) * 100) / 100;
+
+    // Legacy cgst/sgst for backward compat
+    const cgstEntry = taxesBreakdown.find(t => t.name?.toUpperCase().includes('CGST'));
+    const sgstEntry = taxesBreakdown.find(t => t.name?.toUpperCase().includes('SGST'));
+    const cgst = cgstEntry ? cgstEntry.amount : Math.round((totalTax / 2) * 100) / 100;
+    const sgst = sgstEntry ? sgstEntry.amount : Math.round((totalTax / 2) * 100) / 100;
+
     const formatted = {
-      id: bill.order_id,
-      order_id: bill.order_id,
-      billNo: String(bill.custom_bill_number || bill.order_number || bill.order_id),
+      id: bill.order_id || bill.id,
+      order_id: bill.order_id || bill.id,
+      billNo: String(bill.custom_bill_number || bill.order_number || bill.order_id || bill.id),
       table_id: bill.table_id,
       table_name: bill.table_name || `Table ${bill.table_id || ''}`,
-      tableNo: bill.table_name || `T${bill.table_id || bill.order_id}`,
+      tableNo: bill.table_name || `T${bill.table_id || bill.order_id || bill.id}`,
       order_type: bill.order_type || 'DINE_IN',
       billType: bill.order_type || 'DINE_IN',
       billDate: new Date(bill.createdAt || bill.bill_date || Date.now()).toLocaleDateString(),
-      orderNo: String(bill.order_number || bill.order_id),
-      amount: Number(bill.total_amount || bill.subtotal || bill.order_total || 0),
-      customerName: bill.customer_name || 'Walk-in',
-      mobileNo: bill.phone || '—',
+      orderNo: String(bill.order_number || bill.order_id || bill.id),
+      subtotal: subtotal,
+      discount: discount,
+      discount_amount: discount,
+      taxes: {
+        cgst: cgst,
+        sgst: sgst,
+        total_tax: totalTax
+      },
+      taxes_breakdown: taxesBreakdown,
+      tax_amount: totalTax,
+      amount: grandTotal,
+      total_amount: grandTotal,
+      grand_total: grandTotal,
+      customerName: bill.cust_name || bill.customer_name || 'Walk-in',
+      customer_name: bill.cust_name || bill.customer_name || 'Walk-in',
+      mobileNo: bill.phone || bill.mobile || '—',
+      mobile_no: bill.phone || bill.mobile || '—',
       waiter: bill.waiter || 'Staff',
-      order_status: bill.order_state || 'pending',
+      waiter_name: bill.waiter || 'Staff',
+      order_status: bill.order_state || 'completed',
       payment_status: bill.payment_status || (bill.order_state === 'completed' ? 'Paid' : 'Unpaid'),
+      restaurant_name: profile?.company_name || 'ALFA HOTEL & RESTAURANT',
+      address: profile?.address || 'Main Dining Area',
+      phone: profile?.phone || '+91 98765 43210',
+      gstin: profile?.gstin || '27AAAAA0000A1Z5',
+      fssai: profile?.fssai || '10020021000123',
       items: items.map(i => ({
         itemId: i.item_id,
-        // OrderChild model uses 'title' — not 'item_name'
         itemName: i.title || i.item_name || i.name || 'Item',
         variantName: i.alternative_title || '',
         qty: Number(i.quantity || 1),
-        unitPrice: Number(i.price || 0),
+        unitPrice: Number(i.price || i.rate || 0),
         total: Number(i.total || (i.quantity * i.price) || 0)
       }))
     };
@@ -776,8 +1229,9 @@ router.post('/', async (req, res) => {
       subtotal += (Number(it.qty || it.quantity || 1) * Number(it.unitPrice || it.price || it.rate || 0));
     });
 
+    const discount = Number(payload.discount || payload.discount_amount || 0);
     const taxAmount = payload.tax || payload.taxes || (subtotal * 0.05); // default 5% tax if not specified
-    const totalAmount = subtotal + taxAmount;
+    const totalAmount = Math.max(0, subtotal + taxAmount - discount);
 
     const targetTableId = Number(payload.tableId || payload.table_id || 0);
     const targetStoreId = payload.store_id || payload.outletId || req.body?.store_id || req.body?.outletId || req.query?.store_id || req.query?.outletId || req.user?.store_id || (req.user?.assigned_outlets && req.user.assigned_outlets[0]) || 'STORE_1';
@@ -806,8 +1260,9 @@ router.post('/', async (req, res) => {
     if (existingBill) {
       const updateFields = {
         store_id: targetStoreId,
-        subtotal: subtotal || existingBill.subtotal,
-        total_tax: taxAmount || existingBill.total_tax,
+        order_subtotal: subtotal || existingBill.order_subtotal,
+        order_level_total_taxes: taxAmount || existingBill.order_level_total_taxes,
+        discount: String(discount),
         total_amount: totalAmount || existingBill.total_amount,
         order_total: totalAmount || existingBill.order_total,
         order_state: resolvedOrderState,
@@ -834,15 +1289,18 @@ router.post('/', async (req, res) => {
         });
       }
     } else {
-      const existingBillCount = await global.serverdbConnection.Bill.count();
+      const existingBillCount = await global.serverdbConnection.Bill.count({
+        where: { store_id: targetStoreId }
+      }).catch(() => 0);
       const seqNum = existingBillCount + 1;
 
       createdBill = await global.serverdbConnection.Bill.create({
         table_id: targetTableId || 1,
         table_name: payload.tableNo || payload.table_name || `Table ${targetTableId || 1}`,
         store_id: targetStoreId,
-        subtotal: subtotal,
-        total_tax: taxAmount,
+        order_subtotal: subtotal,
+        order_level_total_taxes: taxAmount,
+        discount: String(discount),
         total_amount: totalAmount,
         order_total: totalAmount,
         order_state: resolvedOrderState,

@@ -12,7 +12,13 @@ const router = express.Router();
 
 async function getCategories(params = {}) {
   const catwhereData = { is_active: 1 };
-  if (params.store_id) catwhereData.store_id = params.store_id;
+  if (params.store_id) {
+    catwhereData[global.serverdbConnection.Sequelize.Op.or] = [
+      { store_id: params.store_id },
+      { store_id: 'STORE_1' },
+      { store_id: null }
+    ];
+  }
   const rawcatstoInclude = params.includeCategories;
   if (rawcatstoInclude) {
     const catstoInclude = String(rawcatstoInclude).split(',');
@@ -80,7 +86,13 @@ async function getCatalogues(params) {
 
     const categories = await getCategories(params);
     const itemWhere = { active: 1 };
-    if (params.store_id) itemWhere.store_id = params.store_id;
+    if (params.store_id) {
+      itemWhere[global.serverdbConnection.Sequelize.Op.or] = [
+        { store_id: params.store_id },
+        { store_id: 'STORE_1' },
+        { store_id: null }
+      ];
+    }
 
     const items = await global.serverdbConnection.Item.findAll({
       include: [
@@ -98,7 +110,13 @@ async function getCatalogues(params) {
       where: itemWhere,
     });
 
-    const storeWhere = params.store_id ? { store_id: params.store_id } : {};
+    const storeWhere = params.store_id ? {
+      [global.serverdbConnection.Sequelize.Op.or]: [
+        { store_id: params.store_id },
+        { store_id: 'STORE_1' },
+        { store_id: null }
+      ]
+    } : {};
 
     const option_group = await global.serverdbConnection.OptionGroup.findAll({
       where: storeWhere,
@@ -134,9 +152,26 @@ async function getCatalogues(params) {
       where: storeWhere,
     });
 
+    let kitchenStoreWhere = {};
+    if (params.store_id) {
+      let numStoreId = null;
+      if (typeof params.store_id === 'string' && params.store_id.startsWith('STORE_')) {
+        numStoreId = parseInt(params.store_id.replace('STORE_', ''), 10);
+      } else if (!isNaN(Number(params.store_id))) {
+        numStoreId = Number(params.store_id);
+      }
+      kitchenStoreWhere = {
+        [global.serverdbConnection.Sequelize.Op.or]: [
+          ...(numStoreId !== null ? [{ store_id: numStoreId }] : []),
+          { store_id: 1 },
+          { store_id: null }
+        ]
+      };
+    }
+
     const kitchen_dept =
       await global.serverdbConnection.KitchenDepartment.findAll({
-        where: storeWhere,
+        where: kitchenStoreWhere,
       });
 
     const expense_categories =

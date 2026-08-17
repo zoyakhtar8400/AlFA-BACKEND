@@ -86,6 +86,20 @@ function mapTable(t) {
     paymentStatus = 'UNPAID';
     availableActions = [];
     remainingSeconds = 0;
+  } else if (rawState === 'UNPAID_BILL' || rawState === 'UNPAID' || extra.status === 'UNPAID_BILL' || extra.color === 'blue' || extra.color === 'red') {
+    status = 'UNPAID_BILL';
+    color = 'blue';
+    kotStatus = 'CUT';
+    paymentStatus = 'UNPAID';
+    availableActions = ['print_kot', 'view_kot'];
+    remainingSeconds = 0;
+  } else if (rawState === 'NC_BLOCKED' || rawState === 'NC' || extra.status === 'NC_BLOCKED' || extra.color === 'purple') {
+    status = 'NC_BLOCKED';
+    color = 'purple';
+    kotStatus = 'CUT';
+    paymentStatus = 'PAID';
+    availableActions = ['view_kot'];
+    remainingSeconds = 0;
   } else if (rawState === 'KOT_CUT' || rawState === 'RUNNING' || rawState === 'OCCUPIED' || rawState === 'ORDERED') {
     status = rawState === 'ORDERED' ? 'ORDERED' : 'KOT_CUT';
     color = 'yellow';
@@ -119,7 +133,8 @@ function mapTable(t) {
     remaining_seconds: remainingSeconds,
     color: color,
     available_actions: availableActions,
-    floor: extra.floor || 'Ground Floor',
+    floor: extra.area || extra.floor || 'Main Area',
+    area: extra.area || extra.floor || 'Main Area',
     section: extra.section || 'Main Area',
     amount: status === 'AVAILABLE' ? 0 : Number(extra.amount || 0),
     waiter: status === 'AVAILABLE' ? null : (extra.waiter || null),
@@ -203,9 +218,24 @@ router.get('/', async (req, res) => {
         });
 
         mapped.forEach(tbl => {
-          const tblKots = activeKots.filter(k => Number(k.table_id) === Number(tbl.id));
+          const cleanTblId = String(tbl.id || '').replace(/[^0-9]/g, '');
+          const cleanTblNo = String(tbl.no || tbl.table_no || tbl.table_name || '').replace(/[^0-9]/g, '');
+          const tblKots = activeKots.filter(k => {
+            const cleanKotTableId = String(k.table_id || '').replace(/[^0-9]/g, '');
+            const cleanKotTableName = String(k.table_name || '').replace(/[^0-9]/g, '');
+            return (
+              (cleanTblId && cleanKotTableId === cleanTblId) ||
+              (cleanTblNo && cleanKotTableId === cleanTblNo) ||
+              (cleanTblNo && cleanKotTableName === cleanTblNo) ||
+              (cleanTblId && cleanKotTableName === cleanTblId)
+            );
+          });
 
-          if (tblKots.length === 0 && (tbl.status === 'KOT_CUT' || tbl.order_state === 'KOT_CUT')) {
+          if (tblKots.length === 0 && (
+            tbl.status === 'KOT_CUT' || tbl.order_state === 'KOT_CUT' ||
+            tbl.status === 'UNPAID_BILL' || tbl.order_state === 'UNPAID_BILL' ||
+            tbl.status === 'UNPAID' || tbl.order_state === 'UNPAID'
+          )) {
             tbl.status = 'AVAILABLE';
             tbl.color = 'white';
             tbl.amount = 0;
@@ -239,19 +269,46 @@ router.get('/', async (req, res) => {
             };
           });
 
+          const ncKots = tblKots.filter(k => {
+            try {
+              const extra = typeof k.extra_details === 'string' ? JSON.parse(k.extra_details || '{}') : k.extra_details;
+              return extra?.isNC || k.isNC || k.ncType;
+            } catch (e) {
+              return false;
+            }
+          });
+          const normalKots = tblKots.filter(k => !ncKots.includes(k));
+
           tbl.kotCount = tbl.kots.length;
-          const kotsSum = tbl.kots.reduce((sum, k) => {
+          
+          const chargeableKots = tbl.kots.filter(k => {
+            const matchKot = tblKots.find(tk => String(tk.kot_id) === String(k.numericKotId));
+            return matchKot && !ncKots.includes(matchKot);
+          });
+          
+          const kotsSum = chargeableKots.reduce((sum, k) => {
             const itemsSum = (k.items || []).reduce((is, it) => is + Number(it.total || 0), 0);
             return sum + (Number(k.amount || 0) || itemsSum);
           }, 0);
 
           if (tbl.kotCount > 0) {
-            tbl.amount = kotsSum > 0 ? kotsSum : tbl.amount;
-            if (tbl.status === 'AVAILABLE' || tbl.status === 'BLANK') {
-              tbl.status = 'KOT_CUT';
-              tbl.color = 'orange';
+            tbl.amount = kotsSum;
+            if (normalKots.length === 0 && ncKots.length > 0) {
+              tbl.status = 'NC_BLOCKED';
+              tbl.color = 'purple';
               tbl.kot_status = 'CUT';
-              tbl.available_actions = ['print_kot', 'view_kot'];
+              tbl.available_actions = ['view_kot'];
+              if (ncKots[0]) {
+                tbl.customer = ncKots[0].customer_name || 'Walk-in';
+                tbl.waiter = ncKots[0].waiter || 'Staff';
+              }
+            } else {
+              if (tbl.status === 'AVAILABLE' || tbl.status === 'BLANK' || tbl.status === 'NC_BLOCKED') {
+                tbl.status = 'KOT_CUT';
+                tbl.color = 'yellow';
+                tbl.kot_status = 'CUT';
+                tbl.available_actions = ['print_kot', 'view_kot'];
+              }
             }
           }
         });
@@ -303,9 +360,27 @@ router.get('/:id', async (req, res) => {
 router.post('/', async (req, res) => {
   const response = new ResponseMessage(200, '');
   try {
-    const tableNum  = req.body.no || req.body.table_no || req.body.table_number;
+    const tableNum = req.body.no || req.body.table_no || req.body.table_number;
     const tableName = req.body.table_name || req.body.name || `Table ${tableNum || ''}`;
-    const targetStoreId = req.body.store_id || req.query.store_id || req.user?.store_id || (req.user?.assigned_outlets && req.user.assigned_outlets[0]) || 'STORE_1';
+    let targetStoreId = req.body.store_id || req.query.store_id;
+    if (!targetStoreId && (req.body.department || req.body.section) && global.serverdbConnection.Store) {
+      const deptName = req.body.department || req.body.section;
+      const storeMatch = await global.serverdbConnection.Store.findOne({
+        where: {
+          [global.serverdbConnection.Sequelize.Op.or]: [
+            { store_name: deptName },
+            { store_id: deptName }
+          ]
+        },
+        raw: true
+      });
+      if (storeMatch) {
+        targetStoreId = storeMatch.store_id || `STORE_${storeMatch.id}`;
+      }
+    }
+    if (!targetStoreId) {
+      targetStoreId = req.user?.store_id || (req.user?.assigned_outlets && req.user.assigned_outlets[0]) || 'STORE_1';
+    }
 
     // 'department' DB column is INTEGER (FK). Store the readable name in extra_details.section
     const sectionName = req.body.section || req.body.department || 'Restaurant';
@@ -321,8 +396,10 @@ router.post('/', async (req, res) => {
       return res.status(409).json(response);
     }
 
+    const tableArea = req.body.area || req.body.floor || 'Main Area';
     const extraDetails = {
-      floor: req.body.floor || 'Ground Floor',
+      area: tableArea,
+      floor: tableArea,
       section: sectionName,
       amount: req.body.amount || 0,
       waiter: req.body.waiter || null,
@@ -358,7 +435,22 @@ router.post('/', async (req, res) => {
 router.put('/:id', async (req, res) => {
   const response = new ResponseMessage(200, '');
   try {
-    const table = await global.serverdbConnection.Table.findByPk(req.params.id);
+    let table = await global.serverdbConnection.Table.findByPk(req.params.id);
+    if (!table) {
+      const cleanNum = String(req.params.id).replace(/[^0-9]/g, '');
+      const paddedNo = cleanNum.padStart(2, '0');
+      table = await global.serverdbConnection.Table.findOne({
+        where: {
+          [global.serverdbConnection.Sequelize.Op.or]: [
+            { table_name: `Table ${cleanNum}` },
+            { table_name: `Table ${paddedNo}` },
+            { table_name: `T${cleanNum}` },
+            { table_name: `T${paddedNo}` },
+            { table_name: req.params.id }
+          ]
+        }
+      });
+    }
     if (!table) {
       response.setStatus(404);
       response.setMessage('Table not found');
@@ -366,9 +458,10 @@ router.put('/:id', async (req, res) => {
     }
 
     const currentExtra = table.extra_details || {};
+    const reqArea = req.body.area || req.body.floor;
     const updatedExtra = {
       ...currentExtra,
-      ...(req.body.floor && { floor: req.body.floor }),
+      ...(reqArea && { area: reqArea, floor: reqArea }),
       ...(req.body.section && { section: req.body.section }),
       ...(req.body.department && { section: req.body.department }),
       ...(req.body.amount !== undefined && { amount: req.body.amount }),
@@ -406,11 +499,16 @@ const patchStatusHandler = async (req, res) => {
   try {
     let table = await global.serverdbConnection.Table.findByPk(req.params.id);
     if (!table) {
+      const cleanNum = String(req.params.id).replace(/[^0-9]/g, '');
+      const paddedNo = cleanNum.padStart(2, '0');
       table = await global.serverdbConnection.Table.findOne({
         where: {
           [global.serverdbConnection.Sequelize.Op.or]: [
-            { table_no: String(req.params.id) },
-            { table_name: `Table ${req.params.id}` }
+            { table_name: `Table ${cleanNum}` },
+            { table_name: `Table ${paddedNo}` },
+            { table_name: `T${cleanNum}` },
+            { table_name: `T${paddedNo}` },
+            { table_name: req.params.id }
           ]
         }
       });
@@ -427,6 +525,8 @@ const patchStatusHandler = async (req, res) => {
     const rawUpper = String(rawStatus).toUpperCase();
     if (['KOT_CUT', 'RUNNING', 'OCCUPIED', 'ORDERED', 'KOT GENERATED', 'KOT_GENERATED'].includes(rawUpper)) {
       status = rawUpper === 'ORDERED' ? 'ORDERED' : 'KOT_CUT';
+    } else if (['UNPAID_BILL', 'UNPAID'].includes(rawUpper)) {
+      status = 'UNPAID_BILL';
     } else if (['PAYMENT_COMPLETED', 'CLEANUP_RUNNING', 'PAID', 'CLEANING', 'BILL GENERATED'].includes(rawUpper)) {
       status = 'PAYMENT_COMPLETED';
     }
@@ -446,6 +546,9 @@ const patchStatusHandler = async (req, res) => {
     } else if (status === 'KOT_CUT' || status === 'ORDERED') {
       updatedExtra.kot_status = 'CUT';
       updatedExtra.payment_status = 'UNPAID';
+    } else if (status === 'UNPAID_BILL') {
+      updatedExtra.kot_status = 'CUT';
+      updatedExtra.payment_status = 'UNPAID';
     } else if (status === 'AVAILABLE') {
       updatedExtra.payment_completed_at = null;
       updatedExtra.kot_status = 'NONE';
@@ -453,6 +556,9 @@ const patchStatusHandler = async (req, res) => {
       updatedExtra.amount = 0;
       updatedExtra.waiter = null;
       updatedExtra.customer = 'Walk-in';
+      delete updatedExtra.status;
+      delete updatedExtra.color;
+      delete updatedExtra.available_actions;
 
       const cleanId = String(table.table_no || table.id).replace(/[^0-9]/g, '') || String(table.id);
       if (global.serverdbConnection && global.serverdbConnection.KOT) {

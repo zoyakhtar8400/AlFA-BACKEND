@@ -17,6 +17,9 @@ function getRateLimitKey(req) {
 }
 
 function checkRateLimit(req, res) {
+  if (process.env.NODE_ENV !== 'production') {
+    return true;
+  }
   const key = getRateLimitKey(req);
   const now = Date.now();
   const entry = loginAttempts.get(key);

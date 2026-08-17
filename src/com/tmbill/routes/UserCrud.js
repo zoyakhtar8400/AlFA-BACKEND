@@ -113,6 +113,10 @@ router.post('/', async (req, res) => {
 
     const statusVal = status === 'Inactive' || status === 0 || status === '0' ? 0 : 1;
     const targetOutlets = Array.isArray(outlets) ? outlets : (Array.isArray(assigned_outlets) ? assigned_outlets : ['STORE_1']);
+    let firstStoreId = String(targetOutlets[0] || 'STORE_1');
+    if (!firstStoreId.startsWith('STORE_')) {
+      firstStoreId = `STORE_${firstStoreId}`;
+    }
 
     const newUser = await userModel.create({
       username: cleanUsername,
@@ -122,16 +126,20 @@ router.post('/', async (req, res) => {
       phone: phone ? String(phone).trim() : '',
       type: userRole,
       status: statusVal,
-      store_id: targetOutlets[0] || 'STORE_1'
+      store_id: firstStoreId
     });
 
     // Save user-outlet mapping
     const userOutletModel = global.serverdbConnection.UserOutlet;
     if (userOutletModel && targetOutlets.length > 0) {
       for (const storeId of targetOutlets) {
+        let normalizedStoreId = String(storeId);
+        if (!normalizedStoreId.startsWith('STORE_')) {
+          normalizedStoreId = `STORE_${normalizedStoreId}`;
+        }
         await userOutletModel.create({
           user_id: newUser.id,
-          store_id: String(storeId)
+          store_id: normalizedStoreId
         });
       }
     }
@@ -230,7 +238,11 @@ router.put('/:id', async (req, res) => {
 
     const targetOutlets = Array.isArray(outlets) ? outlets : (Array.isArray(assigned_outlets) ? assigned_outlets : null);
     if (targetOutlets && targetOutlets.length > 0) {
-      updateData.store_id = targetOutlets[0];
+      let firstStoreId = String(targetOutlets[0]);
+      if (!firstStoreId.startsWith('STORE_')) {
+        firstStoreId = `STORE_${firstStoreId}`;
+      }
+      updateData.store_id = firstStoreId;
     }
 
     await user.update(updateData);
@@ -240,9 +252,13 @@ router.put('/:id', async (req, res) => {
     if (userOutletModel && targetOutlets) {
       await userOutletModel.destroy({ where: { user_id: user.id } });
       for (const storeId of targetOutlets) {
+        let normalizedStoreId = String(storeId);
+        if (!normalizedStoreId.startsWith('STORE_')) {
+          normalizedStoreId = `STORE_${normalizedStoreId}`;
+        }
         await userOutletModel.create({
           user_id: user.id,
-          store_id: String(storeId)
+          store_id: normalizedStoreId
         });
       }
     }
