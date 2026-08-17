@@ -197,7 +197,22 @@ const paymentHandler = async (req, res) => {
 
       // Close KOT in PostgreSQL (set is_active: 0 so old KOT items don't accumulate in future sessions)
       if (bill.table_id) {
+        let tableNo = '';
+        let tableName = '';
+        try {
+          const table = await global.serverdbConnection.Table.findByPk(bill.table_id, { transaction });
+          if (table) {
+            tableName = table.table_name || '';
+            tableNo = String(table.table_no || tableName || '').replace(/[^0-9]/g, '');
+          }
+        } catch (e) {
+          console.warn('Error fetching table details for KOT deactivation:', e.message);
+        }
+
         const cleanId = String(bill.table_id).replace(/[^0-9]/g, '') || String(bill.table_id);
+        const cleanNo = tableNo || cleanId;
+        const paddedNo = cleanNo.padStart(2, '0');
+
         await global.serverdbConnection.KOT.update(
           { is_active: 0, status: 6 },
           {
@@ -205,9 +220,13 @@ const paymentHandler = async (req, res) => {
               is_active: 1,
               [global.serverdbConnection.Sequelize.Op.or]: [
                 { table_id: Number(cleanId) || 0 },
-                { table_name: `Table ${cleanId}` },
-                { table_name: `T${cleanId}` },
-                { table_name: `T0${cleanId}` }
+                { table_id: Number(cleanNo) || 0 },
+                { table_name: `Table ${cleanNo}` },
+                { table_name: `Table ${paddedNo}` },
+                { table_name: `T${cleanNo}` },
+                { table_name: `T${paddedNo}` },
+                { table_name: `T0${cleanNo}` },
+                ...(tableName ? [{ table_name: tableName }, { table_name: `Table ${tableName}` }] : [])
               ]
             },
             transaction
