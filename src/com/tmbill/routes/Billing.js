@@ -83,7 +83,10 @@ router.get('/pending', async (req, res) => {
     let kotItemsForUnbilled = [];
     if (unbilledKotIds.length > 0) {
       kotItemsForUnbilled = await global.serverdbConnection.KOTItem.findAll({
-        where: { kot_id: { [global.serverdbConnection.Sequelize.Op.in]: unbilledKotIds } },
+        where: { 
+          kot_id: { [global.serverdbConnection.Sequelize.Op.in]: unbilledKotIds },
+          status: { [global.serverdbConnection.Sequelize.Op.ne]: 5 }
+        },
         raw: true
       });
     }
@@ -202,7 +205,12 @@ const paymentHandler = async (req, res) => {
           });
         }
         if (table) {
-          const currentExtra = table.extra_details || {};
+          let currentExtra = {};
+          if (typeof table.extra_details === 'string') {
+            try { currentExtra = JSON.parse(table.extra_details || '{}'); } catch(e) {}
+          } else {
+            currentExtra = table.extra_details || {};
+          }
           await table.update({
             order_state: 'AVAILABLE',
             status: 'Blank',

@@ -620,7 +620,10 @@ router.get('/', async (req, res) => {
         if (kots && kots.length > 0) {
           const kotIds = kots.map(k => k.kot_id);
           const kotItems = await global.serverdbConnection.KOTItem.findAll({
-            where: { kot_id: { [global.serverdbConnection.Sequelize.Op.in]: kotIds } },
+            where: { 
+              kot_id: { [global.serverdbConnection.Sequelize.Op.in]: kotIds },
+              status: { [global.serverdbConnection.Sequelize.Op.ne]: 5 }
+            },
             raw: true
           });
 
@@ -717,7 +720,10 @@ router.get('/', async (req, res) => {
           const kIds = kotsForTables.map(k => k.kot_id);
           if (kIds.length > 0) {
             kotItems = await global.serverdbConnection.KOTItem.findAll({
-              where: { kot_id: { [global.serverdbConnection.Sequelize.Op.in]: kIds } },
+              where: { 
+                kot_id: { [global.serverdbConnection.Sequelize.Op.in]: kIds },
+                status: { [global.serverdbConnection.Sequelize.Op.ne]: 5 }
+              },
               raw: true
             });
           }
@@ -830,7 +836,10 @@ router.get('/', async (req, res) => {
       let kotItemsForUnbilled = [];
       if (unbilledKotIds.length > 0) {
         kotItemsForUnbilled = await global.serverdbConnection.KOTItem.findAll({
-          where: { kot_id: { [global.serverdbConnection.Sequelize.Op.in]: unbilledKotIds } },
+          where: { 
+            kot_id: { [global.serverdbConnection.Sequelize.Op.in]: unbilledKotIds },
+            status: { [global.serverdbConnection.Sequelize.Op.ne]: 5 }
+          },
           raw: true
         });
       }
@@ -953,7 +962,10 @@ router.get('/:id', async (req, res) => {
         if (kots && kots.length > 0) {
           const kotIds = kots.map(k => k.kot_id);
           const kotItems = await global.serverdbConnection.KOTItem.findAll({
-            where: { kot_id: { [global.serverdbConnection.Sequelize.Op.in]: kotIds } },
+            where: { 
+              kot_id: { [global.serverdbConnection.Sequelize.Op.in]: kotIds },
+              status: { [global.serverdbConnection.Sequelize.Op.ne]: 5 }
+            },
             raw: true
           });
 
@@ -1235,7 +1247,10 @@ router.get('/:id/invoice', async (req, res) => {
         const kIds = kots.map(k => k.kot_id);
         if (kIds.length > 0) {
           const kItems = await global.serverdbConnection.KOTItem.findAll({
-            where: { kot_id: { [global.serverdbConnection.Sequelize.Op.in]: kIds } },
+            where: { 
+              kot_id: { [global.serverdbConnection.Sequelize.Op.in]: kIds },
+              status: { [global.serverdbConnection.Sequelize.Op.ne]: 5 }
+            },
             raw: true
           });
           billItems = kItems.map(ki => ({
@@ -1566,10 +1581,20 @@ router.post('/', async (req, res) => {
     if (payload.tableId || payload.table_id) {
       const tId = payload.tableId || payload.table_id;
       if (isCompletedPayment) {
+        const tbl = await global.serverdbConnection.Table.findByPk(tId);
+        let extra = {};
+        if (tbl) {
+          if (typeof tbl.extra_details === 'string') {
+            try { extra = JSON.parse(tbl.extra_details || '{}'); } catch(e) {}
+          } else {
+            extra = tbl.extra_details || {};
+          }
+        }
         await global.serverdbConnection.Table.update(
           {
             order_state: 'PAYMENT_COMPLETED',
             extra_details: {
+              ...extra,
               payment_status: 'PAID',
               payment_completed_at: Date.now(),
               cleanedAt: Date.now()
@@ -1712,7 +1737,12 @@ const settleOrderHandler = async (req, res) => {
     if (bill.table_id) {
       const tbl = await global.serverdbConnection.Table.findByPk(bill.table_id, { transaction });
       if (tbl) {
-        const extra = tbl.extra_details || {};
+        let extra = {};
+        if (typeof tbl.extra_details === 'string') {
+          try { extra = JSON.parse(tbl.extra_details || '{}'); } catch(e) {}
+        } else {
+          extra = tbl.extra_details || {};
+        }
         await tbl.update({
           order_state: 'PAYMENT_COMPLETED',
           extra_details: {

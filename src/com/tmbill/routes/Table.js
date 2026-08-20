@@ -226,7 +226,10 @@ router.get('/', async (req, res) => {
       if (activeKots && activeKots.length > 0) {
         const activeKotIds = activeKots.map(k => k.kot_id);
         const allKotItems = await global.serverdbConnection.KOTItem.findAll({
-          where: { kot_id: activeKotIds },
+          where: { 
+            kot_id: activeKotIds,
+            status: { [global.serverdbConnection.Sequelize.Op.ne]: 5 }
+          },
           raw: true
         });
 

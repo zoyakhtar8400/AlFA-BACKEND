@@ -1330,7 +1330,25 @@ const updateStatusHandler = async (req, res) => {
     if (statusInt === 5 || String(nextStatus).toLowerCase().includes('cancel')) {
       await global.serverdbConnection.sequelize.transaction(async (t) => {
         reversalResult = await reverseKotStockIfDeducted(kot, t);
-        await kot.update({ status: 5 }, { transaction: t });
+        await kot.update({ status: 5, is_active: 0 }, { transaction: t });
+
+        const kotItemsToCancel = await global.serverdbConnection.KOTItem.findAll({
+          where: {
+            kot_id: kot.kot_id,
+            status: { [global.serverdbConnection.Sequelize.Op.ne]: 5 }
+          },
+          transaction: t
+        });
+        
+        for (const item of kotItemsToCancel) {
+          const currentExtra = typeof item.extra_details === 'string' ? JSON.parse(item.extra_details || '{}') : (item.extra_details || {});
+          currentExtra.cancelled_at = new Date().toISOString();
+          
+          await item.update({
+            status: 5,
+            extra_details: currentExtra
+          }, { transaction: t });
+        }
       });
     } else {
       await kot.update({ status: statusInt });
@@ -1472,6 +1490,26 @@ router.delete('/:id', async (req, res) => {
           note: cancelReason,
           extra_details: nextExtra
         }, { transaction: t });
+
+        // Update all related KOTItem records to status 5 so they are excluded from active POS billing
+        const kotItemsToCancel = await global.serverdbConnection.KOTItem.findAll({
+          where: {
+            kot_id: kot.kot_id,
+            status: { [global.serverdbConnection.Sequelize.Op.ne]: 5 }
+          },
+          transaction: t
+        });
+        
+        for (const item of kotItemsToCancel) {
+          const currentExtra = typeof item.extra_details === 'string' ? JSON.parse(item.extra_details || '{}') : (item.extra_details || {});
+          currentExtra.cancel_reason = cancelReason;
+          currentExtra.cancelled_at = new Date().toISOString();
+          
+          await item.update({
+            status: 5,
+            extra_details: currentExtra
+          }, { transaction: t });
+        }
       });
 
       response.setStatus(200);
