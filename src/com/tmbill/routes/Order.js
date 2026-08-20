@@ -562,9 +562,7 @@ router.get('/', async (req, res) => {
           where: {
             [global.serverdbConnection.Sequelize.Op.or]: [
               { orderMasterId: String(activeBill.id) },
-              { orderMasterId: String(activeBill.order_id || '') },
-              { order_id: String(activeBill.id) },
-              { order_id: String(activeBill.order_id || '') },
+              { orderMasterId: String(activeBill.order_id || activeBill.id || '') },
               { bill_id: activeBill.id }
             ]
           },
@@ -697,7 +695,6 @@ router.get('/', async (req, res) => {
         const orConditions = [];
         if (stringIds.length > 0) {
           orConditions.push({ orderMasterId: { [global.serverdbConnection.Sequelize.Op.in]: stringIds } });
-          orConditions.push({ order_id: { [global.serverdbConnection.Sequelize.Op.in]: stringIds } });
         }
         if (numericIds.length > 0) {
           orConditions.push({ bill_id: { [global.serverdbConnection.Sequelize.Op.in]: numericIds } });
@@ -1017,10 +1014,7 @@ router.get('/:id', async (req, res) => {
     const items = await global.serverdbConnection.BillItem.findAll({
       where: {
         [global.serverdbConnection.Sequelize.Op.or]: [
-          { orderMasterId: String(bill.id) },
-          { orderMasterId: String(bill.order_id || '') },
-          { order_id: String(bill.id) },
-          { order_id: String(bill.order_id || '') },
+          { orderMasterId: String(bill.order_id || bill.id || '') },
           { bill_id: bill.id }
         ]
       },
@@ -1162,6 +1156,7 @@ router.get('/:id', async (req, res) => {
       gstin: resolvedGstin,
       hsn: resolvedHsn,
       fssai: profile?.fssai || '10020021000123',
+      extra_details: typeof bill.extra_details === 'string' ? JSON.parse(bill.extra_details || '{}') : (bill.extra_details || {}),
       items: items.map(i => ({
         itemId: i.item_id,
         itemName: i.title || i.item_name || i.name || 'Item',
@@ -1488,7 +1483,13 @@ router.post('/', async (req, res) => {
         order_total: totalAmount || existingBill.order_total,
         order_state: resolvedOrderState,
         payment_status: resolvedPayStatus,
-        waiter: payload.waiter || payload.waiter_name || existingBill.waiter
+        waiter: payload.waiter || payload.waiter_name || existingBill.waiter,
+        extra_details: JSON.stringify({
+          ...(typeof existingBill.extra_details === 'string' ? JSON.parse(existingBill.extra_details || '{}') : (existingBill.extra_details || {})),
+          order_type: payload.order_type || payload.billType || 'DINE_IN',
+          takeaway_no: payload.takeaway_no || null,
+          delivery_no: payload.delivery_no || null
+        })
       };
       if (resolvedCustName && resolvedCustName !== 'Walk-in') {
         updateFields.cust_name = resolvedCustName;
@@ -1532,7 +1533,12 @@ router.post('/', async (req, res) => {
         order_type: payload.order_type || payload.billType || 'DINE_IN',
         custom_bill_number: payload.billNo || `Bill ${seqNum}`,
         order_number: seqNum,
-        bill_date: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+        bill_date: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+        extra_details: JSON.stringify({
+          order_type: payload.order_type || payload.billType || 'DINE_IN',
+          takeaway_no: payload.takeaway_no || null,
+          delivery_no: payload.delivery_no || null
+        })
       });
     }
 
@@ -1750,7 +1756,14 @@ router.delete('/:id', async (req, res) => {
   const response = new ResponseMessage(200, '');
   try {
     const orderId = req.params.id;
-    await global.serverdbConnection.BillItem.destroy({ where: { order_id: orderId } });
+    await global.serverdbConnection.BillItem.destroy({
+      where: {
+        [global.serverdbConnection.Sequelize.Op.or]: [
+          { bill_id: Number(orderId) || 0 },
+          { orderMasterId: String(orderId) }
+        ]
+      }
+    });
     await global.serverdbConnection.Bill.destroy({ where: { order_id: orderId } });
     response.setStatus(200);
     response.setMessage('Order deleted successfully');

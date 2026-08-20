@@ -11,7 +11,15 @@ router.use(authorizeOutlet);
 
 // Helper to map DB record to frontend friendly format
 function mapTable(t) {
-  const extra = t.extra_details || {};
+  let extra = {};
+  try {
+    extra = typeof t.extra_details === 'string' ? JSON.parse(t.extra_details || '{}') : (t.extra_details || {});
+  } catch(e) {
+    extra = {};
+  }
+  if (extra && extra['0'] === '{' && extra['1'] === '"') {
+    extra = { area: 'Main Area', floor: 'Main Area' };
+  }
   const rawState = (t.order_state || 'AVAILABLE').toUpperCase();
   const now = Date.now();
 
@@ -451,7 +459,12 @@ router.put('/:id', async (req, res) => {
       return res.json(response);
     }
 
-    const currentExtra = table.extra_details || {};
+    let currentExtra = {};
+    if (typeof table.extra_details === 'string') {
+      try { currentExtra = JSON.parse(table.extra_details || '{}'); } catch(e) {}
+    } else {
+      currentExtra = table.extra_details || {};
+    }
     const reqArea = req.body.area || req.body.floor;
     const updatedExtra = {
       ...currentExtra,
@@ -526,7 +539,12 @@ const patchStatusHandler = async (req, res) => {
       status = 'PAYMENT_COMPLETED';
     }
 
-    const currentExtra = table.extra_details || {};
+    let currentExtra = {};
+    if (typeof table.extra_details === 'string') {
+      try { currentExtra = JSON.parse(table.extra_details || '{}'); } catch(e) {}
+    } else {
+      currentExtra = table.extra_details || {};
+    }
     const updatedExtra = {
       ...currentExtra,
       ...(req.body.amount !== undefined && { amount: req.body.amount }),

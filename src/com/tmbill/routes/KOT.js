@@ -355,10 +355,13 @@ const createKotHandler = async (req, res) => {
       waiter: payload.waiter || payload.waiter_name || 'Staff',
       amount: totalAmount,
       is_active: 1,
-      extra_details: {
+      extra_details: JSON.stringify({
         isNC,
-        ncType
-      }
+        ncType,
+        order_type: payload.order_type || 'DINE_IN',
+        takeaway_no: payload.takeaway_no || null,
+        delivery_no: payload.delivery_no || null
+      })
     };
     let createdKot;
     
