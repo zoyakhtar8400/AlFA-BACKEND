@@ -1,9 +1,9 @@
 /* eslint-disable func-names */
 /* eslint-disable no-console */
-const { app, BrowserWindow, ipcMain, dialog, Menu } = require('electron');
+// const { app, BrowserWindow, ipcMain, dialog, Menu } = require('electron');
 const fileSystem = require('fs');
 const { debounce } = require('lodash');
-const { machineId } = require('node-machine-id');
+
 const {
   setupTitlebar,
   attachTitlebarToWindow,
@@ -24,8 +24,6 @@ const { initSentryformain } = require('./src/com/tmbill/main/sentry');
 // const registerPrintIPC = require('./src/com/tmbill/main/IPC/printIPC');
 
 global.Config = appConfig;
-// eslint-disable-next-line no-use-before-define
-initialize();
 
 // require('@electron/remote/main').initialize();
 
@@ -351,7 +349,11 @@ function openSplashscren() {
   createWindow();
 }
 
-app.on('ready', openSplashscren);
+app.on('ready', () => {
+  // eslint-disable-next-line no-use-before-define
+  initialize();
+  openSplashscren();
+});
 // app.on('ready', createWindow);
 
 app.on('window-all-closed', () => {
@@ -524,7 +526,14 @@ async function loginPostprocessing(arg) {
 
       // add user in login status
       // if(window.addLoginValidationForCskTerminalUsers){
-      const MACHINE_ID = await machineId();
+      let MACHINE_ID = 'fallback_machine_id';
+      try {
+        // eslint-disable-next-line global-require
+        const { machineId } = require('node-machine-id');
+        MACHINE_ID = await machineId();
+      } catch (err) {
+        console.error('Failed to retrieve machineId:', err);
+      }
       const userDetails = {
         id: arg.storedetails.id,
         username: arg.storedetails.username,

@@ -441,18 +441,39 @@ router.post('/stores', async (req, res) => {
   const response = new ResponseMessage(200, '');
   try {
     const {
-      id, store_id, store_name, name, address, phone,
+      id, store_id, store_name, name, address, phone, gstin,
       shortName, companyTitle, outletTitle, customerInfo, autoSettlement,
       focusOn, kot, kotPrint, roomService, noOfKOT, noOfBills, hsnSac,
       general, billHeader1, billHeader2, billHeader3, billSlogan1, billSlogan2, billSlogan3, status
     } = req.body || {};
 
-    const newStoreName = store_name || name || 'New Outlet';
+    const newStoreName = (store_name || name || '').trim();
+    const cleanShortName = (shortName || '').trim();
+    const cleanGstin = (gstin || '').trim();
+    const cleanPhone = (phone || '').trim();
+    const cleanHsnSac = (hsnSac || '').trim();
+
+    if (!newStoreName) {
+      throw new Error('Outlet Name is mandatory.');
+    }
+    if (!cleanShortName) {
+      throw new Error('Short Name is mandatory.');
+    }
+    if (!cleanGstin) {
+      throw new Error('GST No / GSTIN is mandatory.');
+    }
+    if (!cleanPhone) {
+      throw new Error('Phone No is mandatory.');
+    }
+    if (!cleanHsnSac) {
+      throw new Error('HSN No is mandatory.');
+    }
+
     const targetId = id || store_id;
     const isInactive = status === 'Inactive';
 
     const settingsObj = {
-      shortName: shortName || '',
+      shortName: cleanShortName,
       companyTitle: companyTitle || '',
       outletTitle: outletTitle || '',
       customerInfo: customerInfo || 'Optional',
@@ -463,7 +484,8 @@ router.post('/stores', async (req, res) => {
       roomService: roomService || 'Disabled',
       noOfKOT: String(noOfKOT || '1'),
       noOfBills: String(noOfBills || '1'),
-      hsnSac: hsnSac || '',
+      hsnSac: cleanHsnSac,
+      gstin: cleanGstin,
       general: general || '',
       billHeader1: billHeader1 || address || '',
       billHeader2: billHeader2 || '',
@@ -565,13 +587,19 @@ router.delete('/stores/:id', async (req, res) => {
 router.get('/printers', async (req, res) => {
   const response = new ResponseMessage(200, '');
   try {
+    const qStoreId = req.query.store_id || req.body?.store_id;
+    const whereClause = {
+      [global.serverdbConnection.Sequelize.Op.or]: [
+        { is_active: 1 },
+        { is_active: null }
+      ]
+    };
+    if (qStoreId) {
+      whereClause.store_id = qStoreId;
+    }
+
     const printers = await global.serverdbConnection.Printer.findAll({
-      where: {
-        [global.serverdbConnection.Sequelize.Op.or]: [
-          { is_active: 1 },
-          { is_active: null }
-        ]
-      },
+      where: whereClause,
       raw: true
     });
     const mapped = printers.map(p => ({
@@ -586,7 +614,7 @@ router.get('/printers', async (req, res) => {
       device_address: p.device_address || '192.168.1.100',
       printer_type: p.printer_type || 1,
       type: p.printer_type || 1,
-      store_id: p.store_id || 1,
+      store_id: p.store_id || 'STORE_1',
       is_active: p.is_active !== 0 ? 1 : 0
     }));
     response.data = mapped;
@@ -616,6 +644,7 @@ router.post('/printers', async (req, res) => {
           device_name: pName,
           device_address: pIp,
           printer_type: pTypeVal,
+          store_id: store_id ? String(store_id) : printer.store_id,
           is_active: 1
         });
       }
@@ -627,7 +656,7 @@ router.post('/printers', async (req, res) => {
         printer_type: pTypeVal,
         is_active: 1,
         activate: 1,
-        store_id: store_id ? String(store_id) : '1'
+        store_id: store_id ? String(store_id) : 'STORE_1'
       });
     }
     response.data = {
@@ -853,7 +882,8 @@ router.post('/items/csv-upload', async (req, res) => {
           sale_price: Number(it.price || it.sale_price || 0),
           category_ref_ids: 1,
           food_type: it.type === 'Non-Veg' ? 2 : 1,
-          active: 1
+          active: 1,
+          store_id: it.store_id || it.outlet || 'STORE_1'
         });
         createdCount++;
       }

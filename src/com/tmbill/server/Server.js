@@ -165,7 +165,10 @@ expressApp.use('/api/payment-master', paymentModeRouter);
 expressApp.use('/api/company-profile', companyProfileRouter);
 expressApp.use('/company-profile', companyProfileRouter);
 
+const expenseRouter = require('../routes/Expense');
+
 expressApp.use('/api', auth, recipeRouter);
+expressApp.use('/api/expenses', expenseRouter);
 expressApp.use('/api', auth, purchaseModuleRouter);
 expressApp.use('/api', auth, posMastersRouter);
 expressApp.use('/api/users', userCrudRouter);
@@ -174,6 +177,7 @@ expressApp.use('/api/reservations', auth, reservationRouter);
 expressApp.use('/api', auth, menuCatalogRouter);
 expressApp.use('/api/billing', auth, billingRouter);
 expressApp.use('/api/payments', auth, billingRouter);
+expressApp.use('/api/pos/calculate', require('../routes/posCalculate'));
 
 expressApp.use(ROUTES.KDS, auth, kdsRouter);
 expressApp.use(ROUTES.TERMINAL, auth, terminalRouter);

@@ -96,7 +96,11 @@ router.get('/menu-items', async (req, res) => {
         categoryId: i.category_ref_ids,
         category: cat ? cat.category_name : 'General',
         foodType: i.food_type === 1 ? 'Veg' : 'Non-Veg',
-        taxPercent: 5
+        taxPercent: 5,
+        store_id: i.store_id || 'STORE_1',
+        short_code: i.short_code || '',
+        is_open_item: i.is_open_item || 0,
+        open_price: i.open_price || 0
       };
     });
 
@@ -115,10 +119,12 @@ router.get('/menu-items', async (req, res) => {
 router.post('/menu-items', async (req, res) => {
   const response = new ResponseMessage(200, '');
   try {
-    const { id, item_id, title, name, price, sale_price, category_ref_ids, food_type, inventory_type, direct_inventory_item_id } = req.body;
+    console.log('\n[MenuRoutes] POST /menu-items received body:', req.body);
+    const { id, item_id, title, name, price, sale_price, category_ref_ids, food_type, inventory_type, direct_inventory_item_id, store_id, outlet, short_code, is_open_item, open_price, kitchen_dept, tax_name, tax_per } = req.body;
     const targetId = id || item_id;
     const itemTitle = title || name || 'Menu Item';
     const itemPrice = Number(price !== undefined ? price : (sale_price || 0));
+    const finalStoreId = store_id || outlet || 'STORE_1';
 
     let item;
     if (targetId && Number(targetId) > 0) {
@@ -132,7 +138,14 @@ router.post('/menu-items', async (req, res) => {
           itemsub_total: itemPrice,
           ...(category_ref_ids && { category_ref_ids }),
           ...(food_type && { food_type: food_type === 'Non-Veg' ? 2 : (food_type === 'Veg' ? 1 : food_type) }),
-          ...(inventory_type && { inventory_type })
+          ...(inventory_type && { inventory_type }),
+          ...(kitchen_dept && { kitchen_dept }),
+          store_id: finalStoreId,
+          short_code: short_code !== undefined ? short_code : item.short_code,
+          is_open_item: is_open_item !== undefined ? Number(is_open_item) : item.is_open_item,
+          open_price: open_price !== undefined ? Number(open_price) : item.open_price,
+          ...(tax_name && { tax_name }),
+          ...(tax_per !== undefined && { tax_per: Number(tax_per) })
         });
       }
     } else {
@@ -184,10 +197,10 @@ router.post('/menu-items', async (req, res) => {
         item_name: itemTitle,
         price: itemPrice,
         sale_price: itemPrice,
-        tax_per: 0,
+        tax_per: tax_per !== undefined ? Number(tax_per) : 5,
         tax_value: 0,
         itemsub_total: itemPrice,
-        tax_name: 'GST 0%',
+        tax_name: tax_name || 'Default 5%',
         kitchen_dept: validKdId,
         product_group: validPgId,
         tax_discount_method: 1,
@@ -197,7 +210,10 @@ router.post('/menu-items', async (req, res) => {
         direct_inventory_item_id: direct_inventory_item_id || null,
         active: 1,
         is_active: 1,
-        store_id: 'STORE_1'
+        store_id: finalStoreId,
+        short_code: short_code || '',
+        is_open_item: is_open_item !== undefined ? Number(is_open_item) : 0,
+        open_price: open_price !== undefined ? Number(open_price) : 0
       });
     }
     const plainItem = item ? (typeof item.get === 'function' ? item.get({ plain: true }) : item) : null;

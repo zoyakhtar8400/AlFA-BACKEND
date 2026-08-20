@@ -122,6 +122,9 @@ router.get('/pending', async (req, res) => {
     response.data = formatted;
     response.pendingBills = formatted;
     response.orders = formatted;
+    response.data = finalFormatted;
+    response.pendingBills = finalFormatted;
+    response.orders = finalFormatted;
     response.setStatus(200);
   } catch (err) {
     console.error('Error fetching pending bills:', err);
@@ -136,7 +139,7 @@ const paymentHandler = async (req, res) => {
   const response = new ResponseMessage(200, '');
   const transaction = await global.serverdbConnection.sequelize.transaction();
   try {
-    const { orderId, order_id, amount, paymentMethod, paymentMode } = req.body;
+    const { orderId, order_id, amount, paymentMethod, paymentMode, payments } = req.body;
     const targetOrderId = orderId || order_id;
 
     if (!targetOrderId) {
@@ -148,23 +151,44 @@ const paymentHandler = async (req, res) => {
 
     const bill = await global.serverdbConnection.Bill.findByPk(targetOrderId, { transaction });
     if (bill) {
-      const mode = paymentMethod || paymentMode || 'Cash';
+      // Support array of payments or single payment fallback
+      const paymentList = Array.isArray(payments) && payments.length > 0 
+        ? payments 
+        : [{ method: paymentMethod || paymentMode || 'Cash', amount: Number(amount) || bill.order_total || bill.total_amount }];
+
+      let calculatedTotalPaid = 0;
+      for (const p of paymentList) {
+        if (Number(p.amount) > 0) {
+          calculatedTotalPaid += Number(p.amount);
+          await global.serverdbConnection.BillPayment.create({
+            order_id: bill.order_id || bill.id,
+            amount: Number(p.amount),
+            payment_option: p.method,
+            payment_mode: p.method,
+            store_id: bill.store_id || req.body.store_id || 'STORE_1'
+          }, { transaction });
+        }
+      }
+
+      // Calculate total amounts
+      const previousTotalPaid = Number(bill.paid_amount || 0);
+      const newTotalPaid = previousTotalPaid + calculatedTotalPaid;
+      const billTotal = Number(bill.order_total || bill.total_amount || 0);
+      const remainingDue = Math.max(0, billTotal - newTotalPaid);
+      
+      const newStatus = remainingDue > 0 ? 'partial' : 'completed';
+      const mainMode = paymentList.length > 0 ? paymentList.sort((a,b) => b.amount - a.amount)[0].method : 'Cash';
+
       await bill.update({
-        order_state: 'completed',
-        payment: mode,
-        payment_mode: mode
+        order_state: newStatus,
+        payment: mainMode,
+        payment_mode: mainMode,
+        paid_amount: newTotalPaid,
+        due_amount: remainingDue
       }, { transaction });
 
-      await global.serverdbConnection.BillPayment.create({
-        order_id: bill.order_id || bill.id,
-        amount: amount || bill.order_total || bill.total_amount,
-        payment_option: mode,
-        payment_mode: mode,
-        store_id: bill.store_id || req.body.store_id || 'STORE_1'
-      }, { transaction });
-
-      // Set Table status in PostgreSQL to 'PAYMENT_COMPLETED' with payment_completed_at timestamp
-      if (bill.table_id) {
+      // If fully paid, clear table and close KOTs
+      if (newStatus === 'completed' && bill.table_id) {
         let table = await global.serverdbConnection.Table.findByPk(bill.table_id, { transaction });
         if (!table) {
           table = await global.serverdbConnection.Table.findOne({
@@ -180,27 +204,25 @@ const paymentHandler = async (req, res) => {
         if (table) {
           const currentExtra = table.extra_details || {};
           await table.update({
-            order_state: 'PAYMENT_COMPLETED',
+            order_state: 'AVAILABLE',
+            status: 'Blank',
             extra_details: {
               ...currentExtra,
-              payment_completed_at: Date.now(),
-              cleanup_after_seconds: 60,
+              payment_completed_at: null,
+              cleanup_after_seconds: 0,
               payment_status: 'PAID',
               kot_status: 'CUT',
               amount: 0,
-              customer: 'Walk-in',
+              customer: '',
               waiter: null
             }
           }, { transaction });
         }
-      }
 
-      // Close KOT in PostgreSQL (set is_active: 0 so old KOT items don't accumulate in future sessions)
-      if (bill.table_id) {
+        // Close KOT in PostgreSQL
         let tableNo = '';
         let tableName = '';
         try {
-          const table = await global.serverdbConnection.Table.findByPk(bill.table_id, { transaction });
           if (table) {
             tableName = table.table_name || '';
             tableNo = String(table.table_no || tableName || '').replace(/[^0-9]/g, '');
@@ -232,6 +254,20 @@ const paymentHandler = async (req, res) => {
             transaction
           }
         );
+      } else if (newStatus === 'partial' && bill.table_id) {
+        // Table remains occupied, but update payment status
+        let table = await global.serverdbConnection.Table.findByPk(bill.table_id, { transaction });
+        if (table) {
+          const currentExtra = table.extra_details || {};
+          await table.update({
+             extra_details: {
+               ...currentExtra,
+               payment_status: 'PARTIAL',
+               paid_amount: newTotalPaid,
+               due_amount: remainingDue
+             }
+          }, { transaction });
+        }
       }
     }
 

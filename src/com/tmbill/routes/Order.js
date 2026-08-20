@@ -563,6 +563,8 @@ router.get('/', async (req, res) => {
             [global.serverdbConnection.Sequelize.Op.or]: [
               { orderMasterId: String(activeBill.id) },
               { orderMasterId: String(activeBill.order_id || '') },
+              { order_id: String(activeBill.id) },
+              { order_id: String(activeBill.order_id || '') },
               { bill_id: activeBill.id }
             ]
           },
@@ -624,19 +626,22 @@ router.get('/', async (req, res) => {
             raw: true
           });
 
-          const activeKotItems = kotItems.map((i, idx) => ({
-            lineId: `kot-item-${i.id || idx}`,
-            itemId: i.item_id,
-            itemName: i.item_name || 'Item',
-            name: i.item_name || 'Item',
-            variantName: i.alternative_title || '',
-            qty: Number(i.quantity || 1),
-            unitPrice: Number(i.item_price || 0),
-            price: Number(i.item_price || 0),
-            rate: Number(i.item_price || 0),
-            total: Number(i.amount || (i.quantity * i.item_price) || 0),
-            remark: i.notes || ''
-          }));
+          const activeKotItems = kotItems.map((i, idx) => {
+            const rawPrice = Number(i.item_price || i.price || i.rate || i.unitPrice || 0);
+            return {
+              lineId: `kot-item-${i.id || idx}`,
+              itemId: i.item_id,
+              itemName: i.item_name || 'Item',
+              name: i.item_name || 'Item',
+              variantName: i.alternative_title || '',
+              qty: Number(i.quantity || 1),
+              unitPrice: rawPrice,
+              price: rawPrice,
+              rate: rawPrice,
+              total: Number(i.amount || i.total || (Number(i.quantity || 1) * rawPrice) || 0),
+              remark: i.notes || ''
+            };
+          });
 
           const subtotal = activeKotItems.reduce((acc, curr) => acc + curr.total, 0);
 
@@ -692,6 +697,7 @@ router.get('/', async (req, res) => {
         const orConditions = [];
         if (stringIds.length > 0) {
           orConditions.push({ orderMasterId: { [global.serverdbConnection.Sequelize.Op.in]: stringIds } });
+          orConditions.push({ order_id: { [global.serverdbConnection.Sequelize.Op.in]: stringIds } });
         }
         if (numericIds.length > 0) {
           orConditions.push({ bill_id: { [global.serverdbConnection.Sequelize.Op.in]: numericIds } });
@@ -931,6 +937,78 @@ router.get('/:id', async (req, res) => {
     }
 
     if (!bill) {
+      // Fallback: If querying by table-X and no bill is found, check for active KOTs!
+      if (String(orderId).startsWith('table-')) {
+        const tableId = Number(String(orderId).replace('table-', '')) || 0;
+        const kots = await global.serverdbConnection.KOT.findAll({
+          where: {
+            [global.serverdbConnection.Sequelize.Op.or]: [
+              { table_id: tableId },
+              { table_name: `Table ${tableId}` },
+              { table_name: `T${tableId}` }
+            ],
+            is_active: 1
+          },
+          order: [['kot_id', 'DESC']],
+          raw: true
+        });
+
+        if (kots && kots.length > 0) {
+          const kotIds = kots.map(k => k.kot_id);
+          const kotItems = await global.serverdbConnection.KOTItem.findAll({
+            where: { kot_id: { [global.serverdbConnection.Sequelize.Op.in]: kotIds } },
+            raw: true
+          });
+
+          const items = kotItems.map((i, idx) => {
+            const rawPrice = Number(i.item_price || i.price || i.rate || i.unitPrice || 0);
+            return {
+              itemId: i.item_id,
+              itemName: i.item_name || 'Item',
+              name: i.item_name || 'Item',
+              variantName: i.alternative_title || '',
+              qty: Number(i.quantity || 1),
+              unitPrice: rawPrice,
+              rate: rawPrice,
+              price: rawPrice,
+              total: Number(i.amount || i.total || (Number(i.quantity || 1) * rawPrice) || 0),
+              remark: i.notes || ''
+            };
+          });
+
+          const subtotal = items.reduce((sum, i) => sum + i.total, 0);
+
+          const formattedKotAsBill = {
+            id: `kot-${kots[0].kot_id}`,
+            order_id: kots[0].kot_id,
+            billNo: `KOT-${kots[0].kot_id}`,
+            table_id: tableId,
+            table_name: `Table ${tableId}`,
+            tableNo: `Table ${tableId}`,
+            order_type: 'DINE_IN',
+            billType: 'DINE_IN',
+            billDate: new Date().toLocaleDateString(),
+            amount: subtotal,
+            total_amount: subtotal,
+            subtotal: subtotal,
+            tax_amount: 0,
+            discount_amount: 0,
+            customer_name: kots[0].customer_name || 'Walk-in',
+            customerName: kots[0].customer_name || 'Walk-in',
+            mobileNo: kots[0].customer_mobile || '—',
+            waiter_name: kots[0].waiter || 'Staff',
+            order_status: 'running',
+            status: 'running',
+            payment_status: 'Unpaid',
+            items: items
+          };
+
+          response.data = formattedKotAsBill;
+          response.order = formattedKotAsBill;
+          return res.json(response);
+        }
+      }
+
       response.setStatus(404);
       response.setMessage('Order not found');
       return res.json(response);
@@ -941,6 +1019,8 @@ router.get('/:id', async (req, res) => {
         [global.serverdbConnection.Sequelize.Op.or]: [
           { orderMasterId: String(bill.id) },
           { orderMasterId: String(bill.order_id || '') },
+          { order_id: String(bill.id) },
+          { order_id: String(bill.order_id || '') },
           { bill_id: bill.id }
         ]
       },
@@ -961,6 +1041,47 @@ router.get('/:id', async (req, res) => {
     } catch (e) {
       console.warn('CompanyProfile query failed:', e.message);
     }
+
+    let store = null;
+    let extra = {};
+    try {
+      if (global.serverdbConnection && global.serverdbConnection.Store) {
+        store = await global.serverdbConnection.Store.findOne({
+          where: { store_id: bill.store_id || 'STORE_1' },
+          raw: true
+        });
+        if (store && store.settings) {
+          extra = typeof store.settings === 'string' ? JSON.parse(store.settings) : store.settings;
+        }
+      }
+    } catch (e) {
+      console.warn('Store query failed:', e.message);
+    }
+
+    let resolvedTableNo = bill.table_name || `Table ${bill.table_id || ''}`;
+    if (bill.table_id && global.serverdbConnection && global.serverdbConnection.Table) {
+      try {
+        const tableObj = await global.serverdbConnection.Table.findByPk(bill.table_id, { raw: true });
+        if (tableObj) {
+          const tExtra = typeof tableObj.extra_details === 'string' ? JSON.parse(tableObj.extra_details || '{}') : (tableObj.extra_details || {});
+          const tPrefix = tExtra.prefix || '';
+          if (tPrefix) {
+            const tableNoStr = String(tableObj.table_no || tableObj.table_name || tableObj.id).replace(/[^0-9]/g, '') || String(tableObj.id);
+            resolvedTableNo = `${tPrefix}${parseInt(tableNoStr, 10) || tableNoStr}`;
+          } else {
+            resolvedTableNo = tableObj.table_name;
+          }
+        }
+      } catch (e) {
+        console.warn('Error resolving table prefix for bill:', e.message);
+      }
+    }
+
+    const addrParts = [store?.user_line_1, store?.user_line_2, store?.user_sub_locality].filter(p => p && p.trim().length > 0);
+    const resolvedAddress = addrParts.length > 0 ? addrParts.join(', ') : (profile?.address || 'Main Dining Area');
+    const resolvedPhone = store?.store_phone || store?.user_phone || profile?.phone || '+91 98765 43210';
+    const resolvedGstin = extra.gstin || profile?.gstin || '27AAAAA0000A1Z5';
+    const resolvedHsn = extra.hsnSac || '9963';
 
     const subtotal = Number(bill.order_subtotal || bill.subtotal || 0) || items.reduce((sum, i) => sum + (Number(i.quantity || 1) * Number(i.price || 0)), 0);
     const discount = Number(bill.discount || bill.total_external_discount || bill.couponDisount || bill.discount_amount || bill.total_discount || 0);
@@ -1007,8 +1128,8 @@ router.get('/:id', async (req, res) => {
       order_id: bill.order_id || bill.id,
       billNo: String(bill.custom_bill_number || bill.order_number || bill.order_id || bill.id),
       table_id: bill.table_id,
-      table_name: bill.table_name || `Table ${bill.table_id || ''}`,
-      tableNo: bill.table_name || `T${bill.table_id || bill.order_id || bill.id}`,
+      table_name: resolvedTableNo,
+      tableNo: resolvedTableNo,
       order_type: bill.order_type || 'DINE_IN',
       billType: bill.order_type || 'DINE_IN',
       billDate: new Date(bill.createdAt || bill.bill_date || Date.now()).toLocaleDateString(),
@@ -1034,10 +1155,12 @@ router.get('/:id', async (req, res) => {
       waiter_name: bill.waiter || 'Staff',
       order_status: bill.order_state || 'completed',
       payment_status: bill.payment_status || (bill.order_state === 'completed' ? 'Paid' : 'Unpaid'),
-      restaurant_name: profile?.company_name || 'ALFA HOTEL & RESTAURANT',
-      address: profile?.address || 'Main Dining Area',
-      phone: profile?.phone || '+91 98765 43210',
-      gstin: profile?.gstin || '27AAAAA0000A1Z5',
+      restaurant_name: (extra.companyTitle !== 'No' ? (profile?.company_name || 'ALFA HOTEL & RESTAURANT') : ''),
+      outlet_name: (extra.outletTitle !== 'No' ? (store?.store_name || '') : ''),
+      address: resolvedAddress,
+      phone: resolvedPhone,
+      gstin: resolvedGstin,
+      hsn: resolvedHsn,
       fssai: profile?.fssai || '10020021000123',
       items: items.map(i => ({
         itemId: i.item_id,
@@ -1134,13 +1257,61 @@ router.get('/:id/invoice', async (req, res) => {
       console.warn('Invoice items query fallback:', e.message);
     }
 
-    let tableNo = String(bill.table_name || bill.table_id || '1');
-    if (bill.table_id) {
-      try {
-        const tbl = await global.serverdbConnection.Table.findByPk(bill.table_id, { raw: true });
-        if (tbl) tableNo = String(tbl.table_no || tbl.table_name || tbl.id);
-      } catch (e) { }
+    let profile = null;
+    try {
+      if (global.serverdbConnection && global.serverdbConnection.CompanyProfile) {
+        profile = await global.serverdbConnection.CompanyProfile.findOne({
+          where: { store_id: bill.store_id || 'STORE_1' },
+          raw: true
+        });
+        if (!profile) {
+          profile = await global.serverdbConnection.CompanyProfile.findOne({ raw: true });
+        }
+      }
+    } catch (e) {
+      console.warn('CompanyProfile query failed:', e.message);
     }
+
+    let store = null;
+    let extra = {};
+    try {
+      if (global.serverdbConnection && global.serverdbConnection.Store) {
+        store = await global.serverdbConnection.Store.findOne({
+          where: { store_id: bill.store_id || 'STORE_1' },
+          raw: true
+        });
+        if (store && store.settings) {
+          extra = typeof store.settings === 'string' ? JSON.parse(store.settings) : store.settings;
+        }
+      }
+    } catch (e) {
+      console.warn('Store query failed:', e.message);
+    }
+
+    let resolvedTableNo = String(bill.table_name || bill.table_id || '1');
+    if (bill.table_id && global.serverdbConnection && global.serverdbConnection.Table) {
+      try {
+        const tableObj = await global.serverdbConnection.Table.findByPk(bill.table_id, { raw: true });
+        if (tableObj) {
+          const tExtra = typeof tableObj.extra_details === 'string' ? JSON.parse(tableObj.extra_details || '{}') : (tableObj.extra_details || {});
+          const tPrefix = tExtra.prefix || '';
+          if (tPrefix) {
+            const tableNoStr = String(tableObj.table_no || tableObj.table_name || tableObj.id).replace(/[^0-9]/g, '') || String(tableObj.id);
+            resolvedTableNo = `${tPrefix}${parseInt(tableNoStr, 10) || tableNoStr}`;
+          } else {
+            resolvedTableNo = tableObj.table_name;
+          }
+        }
+      } catch (e) {
+        console.warn('Error resolving table prefix for invoice:', e.message);
+      }
+    }
+
+    const addrParts = [store?.user_line_1, store?.user_line_2, store?.user_sub_locality].filter(p => p && p.trim().length > 0);
+    const resolvedAddress = addrParts.length > 0 ? addrParts.join(', ') : (profile?.address || 'Main Dining Area');
+    const resolvedPhone = store?.store_phone || store?.user_phone || profile?.phone || '+91 98765 43210';
+    const resolvedGstin = extra.gstin || profile?.gstin || '27AAAAA0000A1Z5';
+    const resolvedHsn = extra.hsnSac || '9963';
 
     let paymentMethod = bill.payment || 'Cash';
     try {
@@ -1178,13 +1349,17 @@ router.get('/:id/invoice', async (req, res) => {
       : (now.toLocaleDateString('en-IN') + ' ' + now.toLocaleTimeString('en-IN', { hour: '2-digit', minute: '2-digit', hour12: true }));
 
     const invoiceObj = {
-      restaurant_name: 'ALFA HMS RESTAURANT',
-      address: 'Main Dining Area',
-      phone: '+91 98765 43210',
+      restaurant_name: (extra.companyTitle !== 'No' ? (profile?.company_name || 'ALFA HMS RESTAURANT') : ''),
+      outlet_name: (extra.outletTitle !== 'No' ? (store?.store_name || '') : ''),
+      address: resolvedAddress,
+      phone: resolvedPhone,
+      gstin: resolvedGstin,
+      hsn: resolvedHsn,
+      fssai: profile?.fssai || '10020021000123',
       invoice_number: bill.custom_bill_number || `INV-${orderMasterId}`,
       bill_number: bill.custom_bill_number || `BILL-${orderMasterId}`,
       order_number: `ORD-${orderMasterId}`,
-      table_number: tableNo,
+      table_number: resolvedTableNo,
       table_id: bill.table_id,
       date_time: dateTimeStr,
       customer_name: bill.cust_name || 'Walk-in Guest',
@@ -1246,6 +1421,52 @@ router.post('/', async (req, res) => {
         },
         order: [['id', 'DESC']]
       });
+    }
+
+    // Enforce outlet-specific Bill limit (Section 9, 10)
+    if (!existingBill && targetTableId > 0) {
+      try {
+        const store = await global.serverdbConnection.Store.findOne({
+          where: { store_id: targetStoreId },
+          raw: true
+        });
+        if (store) {
+          const extra = typeof store.settings === 'string' ? JSON.parse(store.settings) : (store.settings || {});
+          const allowedBillLimit = parseInt(extra.noOfBills || '1', 10);
+
+          const oldestActiveKot = await global.serverdbConnection.KOT.findOne({
+            where: {
+              table_id: targetTableId,
+              store_id: targetStoreId,
+              is_active: 1,
+              status: { [global.serverdbConnection.Sequelize.Op.ne]: 6 }
+            },
+            order: [['kot_id', 'ASC']],
+            raw: true
+          });
+
+          if (oldestActiveKot) {
+            const todayStr = new Date().toISOString().split('T')[0];
+            const activeBillsCount = await global.serverdbConnection.Bill.count({
+              where: {
+                table_id: targetTableId,
+                store_id: targetStoreId,
+                my_order_date: todayStr
+              }
+            });
+
+            if (activeBillsCount >= allowedBillLimit && allowedBillLimit > 0) {
+              // Disable this check to allow multiple bills per table per day
+              // response.setStatus(400);
+              // response.setMessage(`No more bills are allowed for this transaction. Limit reached: ${allowedBillLimit}`);
+              // return res.status(400).json(response);
+              console.log(`Bypassing Bill limit of ${allowedBillLimit} for table ${targetTableId}`);
+            }
+          }
+        }
+      } catch (e) {
+        console.warn('Error checking Bill limits:', e.message);
+      }
     }
 
     const resolvedCustName = payload.customerName || payload.customer_name || 'Walk-in';

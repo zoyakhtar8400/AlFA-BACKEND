@@ -116,13 +116,18 @@ function mapTable(t) {
     remainingSeconds = 0;
   }
 
-  const tableNoStr = String(t.table_no || t.table_name || t.id).replace(/[^0-9]/g, '') || String(t.id);
+  const prefix = extra.prefix || t.prefix || '';
+  const digits = String(t.table_no || t.table_name || '').replace(/[^0-9]/g, '');
+  const tableNoStr = digits || String(t.id);
+  const cleanNum = parseInt(tableNoStr, 10) || tableNoStr;
+  const displayName = (prefix && digits) ? `${prefix}${parseInt(digits, 10) || digits}` : (t.table_name || `Table ${tableNoStr}`);
 
   return {
     id: t.id,
     table_id: t.id,
     no: tableNoStr,
-    table_name: t.table_name || `Table ${tableNoStr}`,
+    table_name: displayName,
+    prefix: prefix,
     seats: parseInt(t.max_person, 10) || 4,
     status: status,
     current_order_id: Number(extra.current_order_id || 0),
@@ -222,13 +227,10 @@ router.get('/', async (req, res) => {
           const cleanTblNo = String(tbl.no || tbl.table_no || tbl.table_name || '').replace(/[^0-9]/g, '');
           const tblKots = activeKots.filter(k => {
             const cleanKotTableId = String(k.table_id || '').replace(/[^0-9]/g, '');
-            const cleanKotTableName = String(k.table_name || '').replace(/[^0-9]/g, '');
-            return (
-              (cleanTblId && cleanKotTableId === cleanTblId) ||
-              (cleanTblNo && cleanKotTableId === cleanTblNo) ||
-              (cleanTblNo && cleanKotTableName === cleanTblNo) ||
-              (cleanTblId && cleanKotTableName === cleanTblId)
-            );
+            // STRICT RULE: Only map KOTs to a table if the actual database ID matches!
+            // Do NOT fall back to table_no or table_name, as this causes newly created 
+            // tables to wrongly inherit ghost KOTs from deleted tables with the same number.
+            return (cleanTblId && cleanKotTableId === cleanTblId);
           });
 
           if (tblKots.length === 0 && (
@@ -293,16 +295,7 @@ router.get('/', async (req, res) => {
 
           if (tbl.kotCount > 0) {
             tbl.amount = kotsSum;
-            if (normalKots.length === 0 && ncKots.length > 0) {
-              tbl.status = 'NC_BLOCKED';
-              tbl.color = 'purple';
-              tbl.kot_status = 'CUT';
-              tbl.available_actions = ['view_kot'];
-              if (ncKots[0]) {
-                tbl.customer = ncKots[0].customer_name || 'Walk-in';
-                tbl.waiter = ncKots[0].waiter || 'Staff';
-              }
-            } else {
+            if (normalKots.length > 0) {
               if (tbl.status === 'AVAILABLE' || tbl.status === 'BLANK' || tbl.status === 'NC_BLOCKED') {
                 tbl.status = 'KOT_CUT';
                 tbl.color = 'yellow';
@@ -405,7 +398,8 @@ router.post('/', async (req, res) => {
       waiter: req.body.waiter || null,
       customer: req.body.customer || 'Walk-in',
       kot_status: 'NONE',
-      payment_status: 'UNPAID'
+      payment_status: 'UNPAID',
+      prefix: req.body.prefix || ''
     };
 
     const created = await global.serverdbConnection.Table.create({
@@ -466,7 +460,8 @@ router.put('/:id', async (req, res) => {
       ...(req.body.department && { section: req.body.department }),
       ...(req.body.amount !== undefined && { amount: req.body.amount }),
       ...(req.body.waiter !== undefined && { waiter: req.body.waiter }),
-      ...(req.body.customer !== undefined && { customer: req.body.customer })
+      ...(req.body.customer !== undefined && { customer: req.body.customer }),
+      ...(req.body.prefix !== undefined && { prefix: req.body.prefix })
     };
 
     const updateFields = {
@@ -535,6 +530,10 @@ const patchStatusHandler = async (req, res) => {
     const updatedExtra = {
       ...currentExtra,
       ...(req.body.amount !== undefined && { amount: req.body.amount }),
+      ...(req.body.discount_amount !== undefined && { discount_amount: req.body.discount_amount }),
+      ...(req.body.tax_amount !== undefined && { tax_amount: req.body.tax_amount }),
+      ...(req.body.total_amount !== undefined && { total_amount: req.body.total_amount }),
+      ...(req.body.taxes_breakdown !== undefined && { taxes_breakdown: req.body.taxes_breakdown }),
       ...(req.body.waiter !== undefined && { waiter: req.body.waiter }),
       ...(req.body.customer !== undefined && { customer: req.body.customer })
     };

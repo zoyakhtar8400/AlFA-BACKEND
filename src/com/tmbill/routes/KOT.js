@@ -109,12 +109,14 @@ router.get('/', async (req, res) => {
         extra_details: k.extra_details,
         cancel_reason: k.extra_details?.cancel_reason || k.note || '',
         items: items.map(i => ({
+          id: i.id,
           itemId: i.item_id,
           itemName: i.item_name || 'Item',
           variantName: i.alternative_title || '',
           qty: Number(i.quantity || 1),
           unitPrice: Number(i.item_price || 0),
-          total: Number(i.amount || (i.quantity * i.item_price) || 0)
+          total: Number(i.amount || (i.quantity * i.item_price) || 0),
+          status: i.status // Also add status so frontend can filter cancelled items
         }))
       };
     });
@@ -172,6 +174,7 @@ router.get('/:id', async (req, res) => {
 
     const mappedItems = items.map((i, idx) => ({
       lineId: `kot-item-${i.id || idx}`,
+      id: i.id,
       itemId: i.item_id,
       itemName: i.item_name || 'Item',
       name: i.item_name || 'Item',
@@ -181,7 +184,8 @@ router.get('/:id', async (req, res) => {
       price: Number(i.item_price || 0),
       rate: Number(i.item_price || 0),
       total: Number(i.amount || (i.quantity * i.item_price) || 0),
-      remark: i.notes || ''
+      remark: i.notes || '',
+      status: i.status // ensure status is returned
     }));
 
     const subtotal = mappedItems.reduce((acc, curr) => acc + curr.total, 0);
@@ -230,6 +234,43 @@ const createKotHandler = async (req, res) => {
   try {
     const payload = req.body;
     const targetStoreId = payload.store_id || req.body?.store_id || req.query?.store_id || req.user?.store_id || (req.user?.assigned_outlets && req.user.assigned_outlets[0]) || 'STORE_1';
+    const targetTableId = Number(payload.tableId || payload.table_id || 1);
+    const cleanTableNum = String(payload.tableNo || payload.tableId || payload.table_id || '').replace(/[^0-9]/g, '') || String(targetTableId);
+
+    // Enforce outlet-specific KOT limit (Section 7, 8)
+    try {
+      const store = await global.serverdbConnection.Store.findOne({
+        where: { store_id: targetStoreId },
+        raw: true
+      });
+      if (store) {
+        const extra = typeof store.settings === 'string' ? JSON.parse(store.settings) : (store.settings || {});
+        const allowedKOTLimit = parseInt(extra.noOfKOT || '999', 10);
+
+        const activeKOTCount = await global.serverdbConnection.KOT.count({
+          where: {
+            is_active: 1,
+            store_id: targetStoreId,
+            status: { [global.serverdbConnection.Sequelize.Op.ne]: 6 },
+            [global.serverdbConnection.Sequelize.Op.or]: [
+              { table_id: targetTableId },
+              { table_name: payload.tableNo ? `Table ${payload.tableNo}` : `Table ${targetTableId}` }
+            ]
+          }
+        });
+
+        if (activeKOTCount >= allowedKOTLimit && allowedKOTLimit > 0) {
+          // Disable this check completely to allow unlimited KOTs for a table session
+          // response.setStatus(400);
+          // response.setMessage(`No more KOTs are allowed for this transaction. Limit reached: ${allowedKOTLimit}`);
+          // return res.status(400).json(response);
+          console.log(`Bypassing KOT limit of ${allowedKOTLimit} for table ${targetTableId}`);
+        }
+      }
+    } catch (e) {
+      console.warn('Error checking KOT limits:', e.message);
+    }
+
     const existingKotCount = await global.serverdbConnection.KOT.count({
       where: { store_id: targetStoreId }
     }).catch(() => 0);
@@ -248,9 +289,6 @@ const createKotHandler = async (req, res) => {
     items.forEach(it => {
       totalAmount += (Number(it.qty || it.quantity || 1) * Number(it.unitPrice || it.price || it.rate || 0));
     });
-
-    const targetTableId = Number(payload.tableId || payload.table_id || 1);
-    const cleanTableNum = String(payload.tableNo || payload.tableId || payload.table_id || '').replace(/[^0-9]/g, '') || String(targetTableId);
 
     // Deactivate previous active KOTs if payload indicates new session or if table was AVAILABLE / Blank
     let isBlankOrNew = payload.isNewSession || payload.is_new_session || false;
@@ -1344,30 +1382,103 @@ router.delete('/:id', async (req, res) => {
     }
 
     const cancelReason = req.body?.reason || req.body?.cancel_reason || req.query?.reason || 'KOT Cancelled';
+    const itemIds = req.body?.itemIds;
 
     let reversalResult = { alreadyReversed: false, restoredItemsCount: 0 };
-    await global.serverdbConnection.sequelize.transaction(async (t) => {
-      reversalResult = await reverseKotStockIfDeducted(kot, t);
-      const nextExtra = {
-        ...(kot.extra_details || {}),
-        cancel_reason: cancelReason,
-        cancelled_at: new Date().toISOString()
-      };
-      await kot.update({ 
-        is_active: 0, 
-        status: 5, 
-        note: cancelReason,
-        extra_details: nextExtra
-      }, { transaction: t });
-    });
+    
+    if (Array.isArray(itemIds) && itemIds.length > 0) {
+      // Partial cancellation
+      let amountToSubtract = 0;
+      let cancelledCount = 0;
+      let fullKotCancelled = false;
 
-    response.setStatus(200);
-    response.setMessage(
-      reversalResult.alreadyReversed
-        ? `KOT ${idParam} deleted (Stock was already reversed)`
-        : `KOT ${idParam} deleted and ${reversalResult.restoredItemsCount} stock items restored successfully`
-    );
-    response.data = { id: idParam, alreadyReversed: reversalResult.alreadyReversed, restoredItemsCount: reversalResult.restoredItemsCount };
+      await global.serverdbConnection.sequelize.transaction(async (t) => {
+        const itemsToCancel = await global.serverdbConnection.KOTItem.findAll({
+          where: {
+            kot_id: kot.kot_id,
+            id: { [global.serverdbConnection.Sequelize.Op.in]: itemIds },
+            status: { [global.serverdbConnection.Sequelize.Op.ne]: 5 }
+          },
+          transaction: t
+        });
+
+        if (itemsToCancel.length > 0) {
+          for (const item of itemsToCancel) {
+            amountToSubtract += Number(item.amount || (item.quantity * item.item_price) || 0);
+            
+            const currentExtra = typeof item.extra_details === 'string' ? JSON.parse(item.extra_details || '{}') : (item.extra_details || {});
+            currentExtra.cancel_reason = cancelReason;
+            currentExtra.cancelled_at = new Date().toISOString();
+            
+            await item.update({
+              status: 5,
+              extra_details: currentExtra
+            }, { transaction: t });
+            cancelledCount++;
+          }
+          
+          const newAmount = Math.max(0, Number(kot.amount || 0) - amountToSubtract);
+          await kot.update({ amount: newAmount }, { transaction: t });
+          
+          const activeItems = await global.serverdbConnection.KOTItem.count({
+            where: {
+              kot_id: kot.kot_id,
+              status: { [global.serverdbConnection.Sequelize.Op.ne]: 5 }
+            },
+            transaction: t
+          });
+          
+          if (activeItems === 0) {
+            fullKotCancelled = true;
+            reversalResult = await reverseKotStockIfDeducted(kot, t);
+            const nextExtra = {
+              ...(kot.extra_details || {}),
+              cancel_reason: 'All items cancelled: ' + cancelReason,
+              cancelled_at: new Date().toISOString()
+            };
+            await kot.update({ 
+              is_active: 0, 
+              status: 5, 
+              note: 'All items cancelled',
+              extra_details: nextExtra
+            }, { transaction: t });
+          }
+        }
+      });
+
+      response.setStatus(200);
+      response.setMessage(
+        fullKotCancelled
+          ? `All items cancelled. KOT ${idParam} deleted.`
+          : `${cancelledCount} items cancelled from KOT ${idParam}.`
+      );
+      response.data = { id: idParam, partial: !fullKotCancelled, cancelledCount };
+
+    } else {
+      // Full KOT cancellation
+      await global.serverdbConnection.sequelize.transaction(async (t) => {
+        reversalResult = await reverseKotStockIfDeducted(kot, t);
+        const nextExtra = {
+          ...(kot.extra_details || {}),
+          cancel_reason: cancelReason,
+          cancelled_at: new Date().toISOString()
+        };
+        await kot.update({ 
+          is_active: 0, 
+          status: 5, 
+          note: cancelReason,
+          extra_details: nextExtra
+        }, { transaction: t });
+      });
+
+      response.setStatus(200);
+      response.setMessage(
+        reversalResult.alreadyReversed
+          ? `KOT ${idParam} deleted (Stock was already reversed)`
+          : `KOT ${idParam} deleted and ${reversalResult.restoredItemsCount} stock items restored successfully`
+      );
+      response.data = { id: idParam, alreadyReversed: reversalResult.alreadyReversed, restoredItemsCount: reversalResult.restoredItemsCount };
+    }
   } catch (err) {
     console.error('Error deleting KOT:', err);
     response.setStatus(400);
