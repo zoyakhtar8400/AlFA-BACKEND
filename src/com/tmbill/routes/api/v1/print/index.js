@@ -44,6 +44,53 @@ async function printHandler(req, res) {
   }
 }
 
+
+// Forward print request to local WebSocket print server
+printRouter.post('/send-print-request', (req, res) => {
+  try {
+    const WebSocket = require('ws');
+    const data = req.body;
+    const ws = new WebSocket('ws://localhost:8989');
+
+    ws.on('open', () => {
+      const payload = {
+        ...data,
+        id: 'print-test',
+        type: 'print'
+      };
+      ws.send(JSON.stringify(payload));
+    });
+
+    ws.on('message', (message) => {
+      try {
+        const response = JSON.parse(message);
+        ws.close();
+        if (!res.headersSent) res.json(response);
+      } catch (e) {
+        ws.close();
+        if (!res.headersSent) res.json({ success: false, error: 'Invalid response from print server' });
+      }
+    });
+
+    ws.on('error', (error) => {
+      console.error("WebSocket Print Error:", error);
+      if (!res.headersSent) res.json({ success: false, error: 'Failed to connect to print server' });
+    });
+
+    // Timeout in case no response
+    setTimeout(() => {
+      if (ws.readyState !== WebSocket.CLOSED) {
+        ws.close();
+        if (!res.headersSent) res.json({ success: false, error: 'Print request timed out' });
+      }
+    }, 5000);
+
+  } catch (err) {
+    console.error('[Print API] WebSocket request failed:', err.message);
+    if (!res.headersSent) res.json({ success: false, error: err.message });
+  }
+});
+
 printRouter.post('/', printHandler);
 
 module.exports = printRouter;
