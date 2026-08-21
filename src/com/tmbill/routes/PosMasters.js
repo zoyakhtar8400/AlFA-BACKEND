@@ -872,18 +872,78 @@ router.post('/items/csv-upload', async (req, res) => {
   const response = new ResponseMessage(200, '');
   try {
     const items = Array.isArray(req.body.items) ? req.body.items : (Array.isArray(req.body) ? req.body : []);
+
+    // 1. Preload existing categories for mapping
+    const categoriesMap = {};
+    try {
+      const existingCats = await global.serverdbConnection.Category.findAll({ raw: true });
+      existingCats.forEach(c => {
+        if (c.category_name) {
+          categoriesMap[c.category_name.toLowerCase()] = c.category_refid || c.id;
+        }
+      });
+    } catch (err) {
+      console.warn("Failed to load existing categories for CSV import map:", err);
+    }
+
     let createdCount = 0;
     for (const it of items) {
       if (it.name || it.title) {
+
+        // 2. Resolve or auto-create category from 'itemGroup'
+        let categoryId = 1; // Fallback
+        const groupName = (it.itemGroup || it.group || it.category_name || '').trim();
+
+        if (groupName) {
+          const lowerName = groupName.toLowerCase();
+          if (categoriesMap[lowerName]) {
+            categoryId = categoriesMap[lowerName];
+          } else {
+            // Auto-create missing category
+            try {
+              const nextCatId = Math.floor(Date.now() / 1000) + createdCount;
+              const newCat = await global.serverdbConnection.Category.create({
+                category_refid: nextCatId,
+                category_name: groupName,
+                is_active: 1,
+                store_id: it.store_id || it.outlet || 'STORE_1'
+              });
+              categoryId = newCat.category_refid || newCat.id;
+              categoriesMap[lowerName] = categoryId; // Add to map for subsequent items
+            } catch (err) {
+              console.warn(`Failed to auto-create category '${groupName}', falling back to default.`, err);
+            }
+          }
+        }
+
+        // 3. Auto-detect Veg/Non-Veg (overrides frontend defaults)
+        const itemNameLower = (it.name || it.title || '').toLowerCase();
+        const isNonVegName = /chicken|mutton|beef|pork|fish|prawn|meat|egg|crab|squid/.test(itemNameLower);
+        const foodType = (it.type === 'Non-Veg' || isNonVegName) ? 2 : 1;
+
+        // 4. Insert the Menu Item with all required defaults for the POS menu
         await global.serverdbConnection.Item.create({
+          item_refid: Math.floor(Date.now() / 1000) + createdCount,
           title: it.name || it.title,
           item_name: it.name || it.title,
           price: Number(it.price || it.sale_price || 0),
           sale_price: Number(it.price || it.sale_price || 0),
-          category_ref_ids: 1,
-          food_type: it.type === 'Non-Veg' ? 2 : 1,
+          itemsub_total: Number(it.price || it.sale_price || 0),
+          tax_per: 5,
+          tax_value: 0,
+          tax_name: 'Default 5%',
+          kitchen_dept: 1,
+          product_group: 1,
+          tax_discount_method: 1,
+          inventory_type: 'RECIPE',
+          category_ref_ids: categoryId, // Assign resolved or created category ID
+          food_type: foodType,
           active: 1,
-          store_id: it.store_id || it.outlet || 'STORE_1'
+          is_active: 1, // Mandatory for visibility in POS
+          store_id: it.store_id || it.outlet || 'STORE_1',
+          short_code: '',
+          is_open_item: 0,
+          open_price: 0
         });
         createdCount++;
       }
