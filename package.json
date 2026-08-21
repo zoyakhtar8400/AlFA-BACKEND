@@ -62,6 +62,7 @@
     "papaparse": "^5.5.3",
     "pg": "^8.22.0",
     "pg-hstore": "^2.3.4",
+    "puppeteer": "^25.8.0",
     "qrcode": "^1.5.4",
     "ready-state": "^2.0.5",
     "request-promise": "^4.2.5",

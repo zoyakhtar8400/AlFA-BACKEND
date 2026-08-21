@@ -1,22 +1,46 @@
 const express = require('express');
-const { PRINT } = require('../../../../server/SocketEvents');
 
 const printRouter = express.Router();
 
 async function printHandler(req, res) {
-  console.log("Print Job Received:", req.body);
+  const { id, html, type } = req.body || {};
+  console.log(`[Print API] Received: id=${id}, type=${type}`);
+
+  if (!html) {
+    return res.status(400).json({ success: false, message: 'No HTML content provided' });
+  }
+
   try {
-    if (global.mainWindow && global.mainWindow.webContents) {
-      // Forward the KOT HTML payload to the existing Electron desktop print bridge
-      global.mainWindow.webContents.send(PRINT.KOT, req.body);
-      return res.json({ success: true, message: "Sent to desktop print bridge" });
-    } else {
-      // Fallback: If not running in Electron wrapper (pure web), return false so frontend uses browser preview
-      return res.json({ success: false, message: "Desktop print bridge not found" });
+    const puppeteer = require('puppeteer');
+
+    const browser = await puppeteer.launch({
+      headless: true,
+      args: ['--no-sandbox', '--disable-setuid-sandbox'],
+    });
+
+    let pdfBuffer;
+    try {
+      const page = await browser.newPage();
+      await page.setContent(html, { waitUntil: 'networkidle0' });
+      pdfBuffer = await page.pdf({
+        printBackground: true,
+        format: 'A4',
+        margin: { top: '5mm', bottom: '5mm', left: '5mm', right: '5mm' },
+      });
+      console.log(`✅ [Print API] PDF generated in memory (${pdfBuffer.length} bytes)`);
+    } finally {
+      await browser.close();
     }
+
+    // Send PDF as binary response — browser will trigger "Save As" dialog
+    const fileName = `${type || 'print'}-${id || Date.now()}.pdf`;
+    res.setHeader('Content-Type', 'application/pdf');
+    res.setHeader('Content-Disposition', `attachment; filename="${fileName}"`);
+    res.setHeader('Content-Length', pdfBuffer.length);
+    return res.end(pdfBuffer);
   } catch (err) {
-    console.error("Print API Error:", err);
-    return res.status(500).json({ success: false, message: err.message || "Print failure" });
+    console.error('[Print API] PDF generation failed:', err.message);
+    return res.status(500).json({ success: false, message: err.message || 'PDF generation failed' });
   }
 }
 
