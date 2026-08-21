@@ -886,6 +886,19 @@ router.post('/items/csv-upload', async (req, res) => {
       console.warn("Failed to load existing categories for CSV import map:", err);
     }
 
+    // Preload existing product groups for mapping
+    const productGroupsMap = {};
+    try {
+      const existingGroups = await global.serverdbConnection.ProductGroup.findAll({ raw: true });
+      existingGroups.forEach(g => {
+        if (g.product_group_name) {
+          productGroupsMap[g.product_group_name.toLowerCase()] = g.product_group_id || g.id;
+        }
+      });
+    } catch (err) {
+      console.warn("Failed to load existing product groups for CSV import map:", err);
+    }
+
     let createdCount = 0;
     for (const it of items) {
       if (it.name || it.title) {
@@ -916,6 +929,31 @@ router.post('/items/csv-upload', async (req, res) => {
           }
         }
 
+        // 2b. Resolve or auto-create product_group from 'mainGroup'
+        let productGroupId = Object.values(productGroupsMap)[0] || 1; // Fallback to an existing group if possible
+        const mainGroupName = (it.mainGroup || 'Food').trim();
+
+        if (mainGroupName) {
+          const lowerName = mainGroupName.toLowerCase();
+          if (productGroupsMap[lowerName]) {
+            productGroupId = productGroupsMap[lowerName];
+          } else {
+            // Auto-create missing product group
+            try {
+              const nextGroupId = Math.floor(Date.now() / 1000) + createdCount;
+              const newGroup = await global.serverdbConnection.ProductGroup.create({
+                product_group_id: nextGroupId,
+                product_group_name: mainGroupName,
+                store_id: 1
+              });
+              productGroupId = newGroup.product_group_id || newGroup.id;
+              productGroupsMap[lowerName] = productGroupId;
+            } catch (err) {
+              console.warn(`Failed to auto-create product group '${mainGroupName}', falling back to default.`, err);
+            }
+          }
+        }
+
         // 3. Auto-detect Veg/Non-Veg (overrides frontend defaults)
         const itemNameLower = (it.name || it.title || '').toLowerCase();
         const isNonVegName = /chicken|mutton|beef|pork|fish|prawn|meat|egg|crab|squid/.test(itemNameLower);
@@ -933,7 +971,7 @@ router.post('/items/csv-upload', async (req, res) => {
           tax_value: 0,
           tax_name: 'Default 5%',
           kitchen_dept: 1,
-          product_group: 1,
+          product_group: productGroupId, // Resolved product group ID
           tax_discount_method: 1,
           inventory_type: 'RECIPE',
           category_ref_ids: categoryId, // Assign resolved or created category ID
