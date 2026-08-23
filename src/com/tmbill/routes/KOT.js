@@ -1441,6 +1441,13 @@ router.delete('/:id', async (req, res) => {
           const newAmount = Math.max(0, Number(kot.amount || 0) - amountToSubtract);
           await kot.update({ amount: newAmount }, { transaction: t });
           
+          const table = await global.serverdbConnection.Table.findByPk(kot.table_id, { transaction: t });
+          if (table) {
+            const tableExtra = typeof table.extra_details === 'string' ? JSON.parse(table.extra_details || '{}') : (table.extra_details || {});
+            tableExtra.amount = Math.max(0, Number(tableExtra.amount || 0) - amountToSubtract);
+            await table.update({ extra_details: tableExtra }, { transaction: t });
+          }
+          
           const activeItems = await global.serverdbConnection.KOTItem.count({
             where: {
               kot_id: kot.kot_id,
@@ -1484,6 +1491,13 @@ router.delete('/:id', async (req, res) => {
           cancel_reason: cancelReason,
           cancelled_at: new Date().toISOString()
         };
+        
+        const table = await global.serverdbConnection.Table.findByPk(kot.table_id, { transaction: t });
+        if (table) {
+          const tableExtra = typeof table.extra_details === 'string' ? JSON.parse(table.extra_details || '{}') : (table.extra_details || {});
+          tableExtra.amount = Math.max(0, Number(tableExtra.amount || 0) - Number(kot.amount || 0));
+          await table.update({ extra_details: tableExtra }, { transaction: t });
+        }
         await kot.update({ 
           is_active: 0, 
           status: 5, 

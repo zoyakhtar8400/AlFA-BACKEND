@@ -129,21 +129,21 @@ router.get(['/getdashboardstats', '/dashboard/stats', '/dashboard-stats'], async
 
     allOrders.forEach(o => {
       const state = String(o.order_state || '').toLowerCase();
-      
+
       if (state === 'cancelled') {
         cancelledBillsCount++;
         return;
       }
-      
+
       if (state === 'nc') {
         ncBillsCount++;
         return;
       }
-      
+
       if (state === 'completed' || state === 'fulfilled' || state === 'paid') {
         completedBillsCount++;
         totalOrdersCount++;
-        
+
         const amt = Number(o.order_total || 0);
         totalRevenue += amt;
 
@@ -153,12 +153,12 @@ router.get(['/getdashboardstats', '/dashboard/stats', '/dashboard-stats'], async
         } else {
           posRevenue += amt;
         }
-        
+
         const duePayment = Number(o.due_payment || 0);
         if (duePayment > 0 || o.hasDuepayment) {
           dueCollection += duePayment;
         }
-        
+
         const pType = String(o.payment || o.payment_mode || 'Cash').toLowerCase();
         if (pType.includes('cash')) {
           cashCollection += (amt - duePayment);
@@ -224,11 +224,11 @@ router.get(['/getdashboardstats', '/dashboard/stats', '/dashboard-stats'], async
     // 7. Dynamic Trend Calculation
     let revenueLabels = [];
     let revenueValues = [];
-    
+
     if (timeframe === 'weekly') {
       revenueLabels = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
       revenueValues = [0, 0, 0, 0, 0, 0, 0];
-      
+
       allOrders.forEach(o => {
         const state = String(o.order_state || '').toLowerCase();
         if (state === 'completed' || state === 'fulfilled' || state === 'paid') {
@@ -244,7 +244,7 @@ router.get(['/getdashboardstats', '/dashboard/stats', '/dashboard-stats'], async
     } else if (timeframe === 'monthly') {
       const monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
       const monthlyIndexMap = {};
-      
+
       for (let i = 5; i >= 0; i--) {
         const d = new Date();
         d.setMonth(d.getMonth() - i);
@@ -253,12 +253,12 @@ router.get(['/getdashboardstats', '/dashboard/stats', '/dashboard-stats'], async
         revenueValues.push(0);
         monthlyIndexMap[d.getMonth()] = revenueLabels.length - 1;
       }
-      
+
       const sixMonthsAgo = new Date();
       sixMonthsAgo.setMonth(sixMonthsAgo.getMonth() - 5);
       sixMonthsAgo.setDate(1);
       const sixMonthsAgoStr = sixMonthsAgo.toISOString().slice(0, 10);
-      
+
       const monthlyOrders = await Bill.findAll({
         where: {
           store_id: targetStoreId,
@@ -269,7 +269,7 @@ router.get(['/getdashboardstats', '/dashboard/stats', '/dashboard-stats'], async
         },
         raw: true
       }).catch(() => []);
-      
+
       monthlyOrders.forEach(o => {
         const amt = Number(o.order_total || 0);
         const dateObj = new Date(o.my_order_date);
@@ -293,7 +293,7 @@ router.get(['/getdashboardstats', '/dashboard/stats', '/dashboard-stats'], async
         [currentYear - 1]: 2,
         [currentYear]: 3
       };
-      
+
       const yearlyOrders = await Bill.findAll({
         where: {
           store_id: targetStoreId,
@@ -304,7 +304,7 @@ router.get(['/getdashboardstats', '/dashboard/stats', '/dashboard-stats'], async
         },
         raw: true
       }).catch(() => []);
-      
+
       yearlyOrders.forEach(o => {
         const amt = Number(o.order_total || 0);
         const dateObj = new Date(o.my_order_date);
@@ -316,7 +316,7 @@ router.get(['/getdashboardstats', '/dashboard/stats', '/dashboard-stats'], async
     } else {
       revenueLabels = ['8AM', '10AM', '12PM', '2PM', '4PM', '6PM', '8PM'];
       revenueValues = [0, 0, 0, 0, 0, 0, 0];
-      
+
       allOrders.forEach(o => {
         const state = String(o.order_state || '').toLowerCase();
         if (state === 'completed' || state === 'fulfilled' || state === 'paid') {
@@ -332,7 +332,7 @@ router.get(['/getdashboardstats', '/dashboard/stats', '/dashboard-stats'], async
               hour = h;
             }
           }
-          
+
           if (hour < 9) revenueValues[0] += amt;
           else if (hour < 11) revenueValues[1] += amt;
           else if (hour < 13) revenueValues[2] += amt;
@@ -575,8 +575,8 @@ router.get('/', async (req, res) => {
           billNo: String(activeBill.custom_bill_number || activeBill.order_number || activeBill.id),
           table_id: activeBill.table_id || cleanId,
           table_name: activeBill.table_name || `Table ${cleanId}`,
-          amount: Number(activeBill.total_amount || activeBill.subtotal || activeBill.order_total || 0),
-          total_amount: Number(activeBill.total_amount || activeBill.subtotal || activeBill.order_total || 0),
+          amount: Math.round(Number(activeBill.total_amount || activeBill.subtotal || activeBill.order_total || 0)),
+          total_amount: Math.round(Number(activeBill.total_amount || activeBill.subtotal || activeBill.order_total || 0)),
           subtotal: Number(activeBill.subtotal || 0),
           customer_name: activeBill.cust_name || activeBill.customer_name || 'Walk-in',
           waiter_name: activeBill.waiter || activeBill.waiter_name || 'Staff',
@@ -605,12 +605,7 @@ router.get('/', async (req, res) => {
         // mpos_kot has NO table_no column — only table_id (int) and table_name (string).
         const kots = await global.serverdbConnection.KOT.findAll({
           where: {
-            [global.serverdbConnection.Sequelize.Op.or]: [
-              { table_id: Number(cleanId) || 0 },
-              { table_name: `Table ${cleanId}` },
-              { table_name: `T${cleanId}` },
-              { table_name: `T0${cleanId}` }
-            ],
+            table_id: Number(cleanId) || 0, // STRICT RULE: Only match exactly by database table ID
             is_active: 1
           },
           order: [['kot_id', 'DESC']],
@@ -620,7 +615,7 @@ router.get('/', async (req, res) => {
         if (kots && kots.length > 0) {
           const kotIds = kots.map(k => k.kot_id);
           const kotItems = await global.serverdbConnection.KOTItem.findAll({
-            where: { 
+            where: {
               kot_id: { [global.serverdbConnection.Sequelize.Op.in]: kotIds },
               status: { [global.serverdbConnection.Sequelize.Op.ne]: 5 }
             },
@@ -720,7 +715,7 @@ router.get('/', async (req, res) => {
           const kIds = kotsForTables.map(k => k.kot_id);
           if (kIds.length > 0) {
             kotItems = await global.serverdbConnection.KOTItem.findAll({
-              where: { 
+              where: {
                 kot_id: { [global.serverdbConnection.Sequelize.Op.in]: kIds },
                 status: { [global.serverdbConnection.Sequelize.Op.ne]: 5 }
               },
@@ -836,7 +831,7 @@ router.get('/', async (req, res) => {
       let kotItemsForUnbilled = [];
       if (unbilledKotIds.length > 0) {
         kotItemsForUnbilled = await global.serverdbConnection.KOTItem.findAll({
-          where: { 
+          where: {
             kot_id: { [global.serverdbConnection.Sequelize.Op.in]: unbilledKotIds },
             status: { [global.serverdbConnection.Sequelize.Op.ne]: 5 }
           },
@@ -948,11 +943,7 @@ router.get('/:id', async (req, res) => {
         const tableId = Number(String(orderId).replace('table-', '')) || 0;
         const kots = await global.serverdbConnection.KOT.findAll({
           where: {
-            [global.serverdbConnection.Sequelize.Op.or]: [
-              { table_id: tableId },
-              { table_name: `Table ${tableId}` },
-              { table_name: `T${tableId}` }
-            ],
+            table_id: tableId, // STRICT RULE: Only match exactly by database table ID
             is_active: 1
           },
           order: [['kot_id', 'DESC']],
@@ -962,19 +953,32 @@ router.get('/:id', async (req, res) => {
         if (kots && kots.length > 0) {
           const kotIds = kots.map(k => k.kot_id);
           const kotItems = await global.serverdbConnection.KOTItem.findAll({
-            where: { 
+            where: {
               kot_id: { [global.serverdbConnection.Sequelize.Op.in]: kotIds },
               status: { [global.serverdbConnection.Sequelize.Op.ne]: 5 }
             },
             raw: true
           });
 
+          const allItemIds = kotItems.map(k => k.item_id);
+          let itemMasterMap = {};
+          if (allItemIds.length > 0) {
+            try {
+              const itemMasters = await global.serverdbConnection.Item.findAll({
+                where: { item_id: { [global.serverdbConnection.Sequelize.Op.in]: allItemIds } },
+                raw: true
+              });
+              itemMasters.forEach(im => { itemMasterMap[im.item_id] = im.title; });
+            } catch (e) { }
+          }
+
           const items = kotItems.map((i, idx) => {
             const rawPrice = Number(i.item_price || i.price || i.rate || i.unitPrice || 0);
+            const realName = (i.item_name && i.item_name !== 'Item') ? i.item_name : (itemMasterMap[i.item_id] || i.item_name || 'Item');
             return {
               itemId: i.item_id,
-              itemName: i.item_name || 'Item',
-              name: i.item_name || 'Item',
+              itemName: realName,
+              name: realName,
               variantName: i.alternative_title || '',
               qty: Number(i.quantity || 1),
               unitPrice: rawPrice,
@@ -1097,7 +1101,7 @@ router.get('/:id', async (req, res) => {
     let taxMaster = [];
     try {
       taxMaster = await global.serverdbConnection.Tax.findAll({ where: { is_active: 1 }, raw: true });
-    } catch (_) {}
+    } catch (_) { }
 
     let taxesBreakdown = [];
     let totalTax = 0;
@@ -1247,7 +1251,7 @@ router.get('/:id/invoice', async (req, res) => {
         const kIds = kots.map(k => k.kot_id);
         if (kIds.length > 0) {
           const kItems = await global.serverdbConnection.KOTItem.findAll({
-            where: { 
+            where: {
               kot_id: { [global.serverdbConnection.Sequelize.Op.in]: kIds },
               status: { [global.serverdbConnection.Sequelize.Op.ne]: 5 }
             },
@@ -1416,7 +1420,7 @@ router.post('/', async (req, res) => {
 
     const discount = Number(payload.discount || payload.discount_amount || 0);
     const taxAmount = payload.tax || payload.taxes || (subtotal * 0.05); // default 5% tax if not specified
-    const totalAmount = Math.max(0, subtotal + taxAmount - discount);
+    const totalAmount = Math.round(Math.max(0, subtotal + taxAmount - discount));
 
     const targetTableId = Number(payload.tableId || payload.table_id || 0);
     const targetStoreId = payload.store_id || payload.outletId || req.body?.store_id || req.body?.outletId || req.query?.store_id || req.query?.outletId || req.user?.store_id || (req.user?.assigned_outlets && req.user.assigned_outlets[0]) || 'STORE_1';
@@ -1585,7 +1589,7 @@ router.post('/', async (req, res) => {
         let extra = {};
         if (tbl) {
           if (typeof tbl.extra_details === 'string') {
-            try { extra = JSON.parse(tbl.extra_details || '{}'); } catch(e) {}
+            try { extra = JSON.parse(tbl.extra_details || '{}'); } catch (e) { }
           } else {
             extra = tbl.extra_details || {};
           }
@@ -1739,7 +1743,7 @@ const settleOrderHandler = async (req, res) => {
       if (tbl) {
         let extra = {};
         if (typeof tbl.extra_details === 'string') {
-          try { extra = JSON.parse(tbl.extra_details || '{}'); } catch(e) {}
+          try { extra = JSON.parse(tbl.extra_details || '{}'); } catch (e) { }
         } else {
           extra = tbl.extra_details || {};
         }

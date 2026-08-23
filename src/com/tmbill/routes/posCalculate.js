@@ -47,15 +47,13 @@ router.post('/', async (req, res) => {
         });
         taxes.forEach(t => {
           const rate = Number(t.tax_percentage || 0);
-          if (rate > 0) {
-            const amt = Math.round((taxableAmount * rate) / 100);
-            tax_amount += amt;
-            tax_breakdown.push({
-              name: t.tax_name || 'Tax',
-              rate,
-              amount: amt
-            });
-          }
+          const amt = Math.round((taxableAmount * rate / 100) * 100) / 100;
+          tax_amount += amt;
+          tax_breakdown.push({
+            name: t.tax_name || 'Tax',
+            rate,
+            amount: amt
+          });
         });
       } catch (err) {
         console.warn('Error fetching taxes:', err.message);
@@ -65,11 +63,11 @@ router.post('/', async (req, res) => {
     const net_amount = Math.round(taxableAmount + tax_amount);
 
     response.data = {
-      subtotal: Math.round(subtotal),
-      discount: Math.round(discount),
-      tax_amount: Math.round(tax_amount),
-      tax_breakdown,
-      net_amount
+      subtotal: Math.round(subtotal * 100) / 100,
+      discount: Math.round(discount * 100) / 100,
+      tax_amount: Math.round(tax_amount * 100) / 100,
+      net_amount: net_amount,
+      tax_breakdown
     };
     response.setStatus(200);
   } catch (err) {

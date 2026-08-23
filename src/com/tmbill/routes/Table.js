@@ -233,6 +233,18 @@ router.get('/', async (req, res) => {
           raw: true
         });
 
+        const allItemIds = allKotItems.map(k => k.item_id);
+        let itemMasterMap = {};
+        if (allItemIds.length > 0) {
+          try {
+            const itemMasters = await global.serverdbConnection.Item.findAll({
+              where: { item_id: { [global.serverdbConnection.Sequelize.Op.in]: allItemIds } },
+              raw: true
+            });
+            itemMasters.forEach(im => { itemMasterMap[im.item_id] = im.title; });
+          } catch (e) { }
+        }
+
         mapped.forEach(tbl => {
           const cleanTblId = String(tbl.id || '').replace(/[^0-9]/g, '');
           const cleanTblNo = String(tbl.no || tbl.table_no || tbl.table_name || '').replace(/[^0-9]/g, '');
@@ -259,16 +271,23 @@ router.get('/', async (req, res) => {
           tbl.kots = tblKots.map(k => {
             const items = (allKotItems || [])
               .filter(i => Number(i.kot_id) === Number(k.kot_id))
-              .map(i => ({
-                itemId: i.item_id,
-                name: i.item_name || 'Item',
-                itemName: i.item_name || 'Item',
-                qty: Number(i.quantity || 1),
-                quantity: Number(i.quantity || 1),
-                unitPrice: Number(i.item_price || 0),
-                price: Number(i.item_price || 0),
-                total: Number(i.amount || (i.quantity * i.item_price) || 0)
-              }));
+              .map(i => {
+                const realName = (i.item_name && i.item_name !== 'Item') ? i.item_name : (itemMasterMap[i.item_id] || i.item_name || 'Item');
+                return {
+                  id: i.id,
+                  itemId: i.item_id,
+                  name: realName,
+                  itemName: realName,
+                  variantName: i.alternative_title || '',
+                  variant: i.alternative_title || '',
+                  qty: Number(i.quantity || 1),
+                  quantity: Number(i.quantity || 1),
+                  unitPrice: Number(i.item_price || 0),
+                  price: Number(i.item_price || 0),
+                  total: Number(i.amount || (i.quantity * i.item_price) || 0),
+                  status: i.status
+                };
+              });
             return {
               id: k.custom_bill_number || `KOT-${k.kot_id}`,
               kot_id: k.kot_id,
@@ -558,6 +577,21 @@ const patchStatusHandler = async (req, res) => {
       ...(req.body.waiter !== undefined && { waiter: req.body.waiter }),
       ...(req.body.customer !== undefined && { customer: req.body.customer })
     };
+
+    // Calculate rounded tax-inclusive total from backend
+    if (req.body.amount !== undefined && req.body.total_amount === undefined) {
+      try {
+        const taxCats = await global.serverdbConnection.Tax.findAll({ where: { is_active: 1 } });
+        let taxPercent = 0;
+        taxCats.forEach(t => { taxPercent += Number(t.tax_percentage || 0); });
+        const taxAmt = Number(req.body.amount) * (taxPercent / 100);
+        const totalAmt = Math.round(Number(req.body.amount) + taxAmt);
+        updatedExtra.tax_amount = taxAmt;
+        updatedExtra.total_amount = totalAmt;
+      } catch (e) {
+        console.error('Failed to calculate backend tax:', e);
+      }
+    }
 
     if (status === 'PAYMENT_COMPLETED') {
       updatedExtra.payment_completed_at = Date.now();
