@@ -169,6 +169,7 @@ const expenseRouter = require('../routes/Expense');
 
 expressApp.use('/api', auth, recipeRouter);
 expressApp.use('/api/expenses', expenseRouter);
+expressApp.use('/expenses', expenseRouter);
 expressApp.use('/api', auth, purchaseModuleRouter);
 expressApp.use('/api', auth, posMastersRouter);
 expressApp.use('/api/users', userCrudRouter);

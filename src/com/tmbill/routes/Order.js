@@ -1507,7 +1507,9 @@ router.post('/', async (req, res) => {
           ...(typeof existingBill.extra_details === 'string' ? JSON.parse(existingBill.extra_details || '{}') : (existingBill.extra_details || {})),
           order_type: payload.order_type || payload.billType || 'DINE_IN',
           takeaway_no: payload.takeaway_no || null,
-          delivery_no: payload.delivery_no || null
+          delivery_no: payload.delivery_no || null,
+          customer_address: payload.customer_address || payload.address || '',
+          customer_locality: payload.customer_locality || payload.locality || ''
         })
       };
       if (resolvedCustName && resolvedCustName !== 'Walk-in') {
@@ -1556,7 +1558,9 @@ router.post('/', async (req, res) => {
         extra_details: JSON.stringify({
           order_type: payload.order_type || payload.billType || 'DINE_IN',
           takeaway_no: payload.takeaway_no || null,
-          delivery_no: payload.delivery_no || null
+          delivery_no: payload.delivery_no || null,
+          customer_address: payload.customer_address || payload.address || '',
+          customer_locality: payload.customer_locality || payload.locality || ''
         })
       });
     }
@@ -1612,8 +1616,9 @@ router.post('/', async (req, res) => {
           { where: { table_id: tId, is_active: 1 } }
         ).catch(() => { });
       } else {
+        const nextState = (payload.status === 'unpaid' || payload.status === 'UNPAID_BILL') ? 'UNPAID_BILL' : 'Running';
         await global.serverdbConnection.Table.update(
-          { order_state: 'Running' },
+          { order_state: nextState },
           { where: { id: tId } }
         ).catch(() => { });
       }

@@ -2,16 +2,16 @@ const express = require('express');
 const { ResponseMessage } = require('../error/ResponseMessage');
 const router = express.Router();
 
-// ==========================================
-// 1. STEWARD / WAITER MASTER CRUD
-// ==========================================
-// ==========================================
-// 1. STEWARD / WAITER MASTER CRUD
-// ==========================================
+
 router.get('/menu/waiters', async (req, res) => {
   const response = new ResponseMessage(200, '');
   try {
+    const where = {};
+    if (req.query.store_id && req.query.store_id !== 'All') {
+      where.store_id = req.query.store_id;
+    }
     const waiters = await global.serverdbConnection.Waiter.findAll({
+      where,
       order: [['id', 'DESC']],
       raw: true,
     });
@@ -19,6 +19,7 @@ router.get('/menu/waiters', async (req, res) => {
       id: w.id,
       name: w.name || `Steward ${w.id}`,
       phone: w.phone || '',
+      store_id: w.store_id || 'STORE_1',
       active: 'Yes',
       status: 'Active'
     }));
@@ -36,8 +37,9 @@ router.get('/menu/waiters', async (req, res) => {
 router.post('/menu/waiters', async (req, res) => {
   const response = new ResponseMessage(200, '');
   try {
-    const { id, name, waiter_name, phone } = req.body;
+    const { id, name, waiter_name, phone, store_id } = req.body;
     const stewardName = name || waiter_name || 'Steward';
+    const targetStoreId = store_id || 'STORE_1';
 
     let waiter;
     if (id && Number(id) > 0) {
@@ -45,7 +47,8 @@ router.post('/menu/waiters', async (req, res) => {
       if (waiter) {
         await waiter.update({
           name: stewardName,
-          phone: phone || waiter.phone
+          phone: phone || waiter.phone,
+          store_id: targetStoreId
         });
       }
     } else {
@@ -53,7 +56,7 @@ router.post('/menu/waiters', async (req, res) => {
         name: stewardName,
         username: `steward_${Date.now().toString().slice(-6)}`,
         phone: phone || '',
-        store_id: 'STORE_1'
+        store_id: targetStoreId
       });
     }
     response.data = waiter;
@@ -89,7 +92,12 @@ router.delete('/menu/waiters/:id', async (req, res) => {
 router.get('/delivery-boys', async (req, res) => {
   const response = new ResponseMessage(200, '');
   try {
+    const where = {};
+    if (req.query.store_id && req.query.store_id !== 'All') {
+      where.store_id = req.query.store_id;
+    }
     const boys = await global.serverdbConnection.DeliveryBoy.findAll({
+      where,
       order: [['id', 'DESC']],
       raw: true
     });
@@ -98,6 +106,7 @@ router.get('/delivery-boys', async (req, res) => {
       partner: d.username || d.partner || 'Direct Delivery',
       name: d.name || `Delivery Boy ${d.id}`,
       phone: d.phone || '',
+      store_id: d.store_id || 'STORE_1',
       status: 'Active'
     }));
     response.data = mapped;
@@ -113,7 +122,8 @@ router.get('/delivery-boys', async (req, res) => {
 router.post('/delivery-boys', async (req, res) => {
   const response = new ResponseMessage(200, '');
   try {
-    const { id, partner, name, phone } = req.body;
+    const { id, partner, name, phone, store_id } = req.body;
+    const targetStoreId = store_id || 'STORE_1';
     let delBoy;
     if (id && Number(id) > 0) {
       delBoy = await global.serverdbConnection.DeliveryBoy.findByPk(id);
@@ -121,7 +131,8 @@ router.post('/delivery-boys', async (req, res) => {
         await delBoy.update({
           username: partner || delBoy.username,
           name: name || delBoy.name,
-          phone: phone || delBoy.phone
+          phone: phone || delBoy.phone,
+          store_id: targetStoreId
         });
       }
     } else {
@@ -129,7 +140,7 @@ router.post('/delivery-boys', async (req, res) => {
         username: partner || 'Direct Delivery',
         name: name || 'Delivery Staff',
         phone: phone || '',
-        store_id: 'STORE_1'
+        store_id: targetStoreId
       });
     }
     response.data = delBoy;
@@ -175,7 +186,8 @@ router.get('/taxes', async (req, res) => {
       percentage: Number(t.tax_percentage || t.percentage || 5),
       cgst: Number(t.cgst || (t.tax_percentage ? t.tax_percentage / 2 : 2.5)),
       sgst: Number(t.sgst || (t.tax_percentage ? t.tax_percentage / 2 : 2.5)),
-      status: t.is_active === 1 ? 'Active' : 'Inactive'
+      status: t.is_active === 1 ? 'Active' : 'Inactive',
+      extra_details: t.extra_details
     }));
     response.data = mapped;
     response.setStatus(200);
@@ -189,18 +201,30 @@ router.get('/taxes', async (req, res) => {
 router.post('/taxes', async (req, res) => {
   const response = new ResponseMessage(200, '');
   try {
-    const { id, name, tax_name, percentage, tax_percentage } = req.body;
+    const { id, name, tax_name, percentage, tax_percentage, taxes_json } = req.body;
     const taxVal = Number(percentage !== undefined ? percentage : (tax_percentage || 5));
     const tName = name || tax_name || 'GST 5%';
+    let extraDetails = {};
+    if (taxes_json) {
+      try {
+        extraDetails.taxes = typeof taxes_json === 'string' ? JSON.parse(taxes_json) : taxes_json;
+      } catch(e){}
+    }
+
     let tax;
     if (id && Number(id) > 0) {
       tax = await global.serverdbConnection.Tax.findByPk(id);
       if (tax) {
+        let currentExtra = tax.extra_details;
+        if (typeof currentExtra === 'string') {
+          try { currentExtra = JSON.parse(currentExtra); } catch(e){ currentExtra = {}; }
+        }
         await tax.update({
           tax_name: tName,
           tax_display_name: tName,
           tax_percentage: taxVal,
-          is_active: 1
+          is_active: 1,
+          extra_details: { ...(currentExtra || {}), ...extraDetails }
         });
       }
     }
@@ -210,7 +234,8 @@ router.post('/taxes', async (req, res) => {
         tax_display_name: tName,
         tax_percentage: taxVal,
         is_active: 1,
-        store_id: 'STORE_1'
+        store_id: 'STORE_1',
+        extra_details: extraDetails
       });
     }
     response.data = tax;
@@ -318,15 +343,68 @@ router.delete('/rate-categories/:id', async (req, res) => {
 router.get('/nc-types', async (req, res) => {
   const response = new ResponseMessage(200, '');
   try {
+    const { Op } = require('sequelize');
+    const andConditions = [
+      {
+        [Op.or]: [
+          { is_active: 1 },
+          { is_active: null }
+        ]
+      }
+    ];
+
+    let reqStoreId = req.query.store_id;
+    if (reqStoreId && reqStoreId !== 'All') {
+      // Resolve store from Store table if name / string was passed
+      try {
+        const storeMatch = await global.serverdbConnection.Store.findOne({
+          where: {
+            [Op.or]: [
+              { store_id: reqStoreId },
+              { id: isNaN(Number(reqStoreId)) ? -1 : Number(reqStoreId) },
+              { store_name: reqStoreId },
+              { name: reqStoreId }
+            ]
+          },
+          raw: true
+        });
+        if (storeMatch) {
+          reqStoreId = storeMatch.store_id || `STORE_${storeMatch.id}`;
+        }
+      } catch (e) { }
+
+      const cleanNum = String(reqStoreId).replace(/\D/g, '') || '1';
+      const storeVariants = [reqStoreId, cleanNum, `STORE_${cleanNum}`, `store_${cleanNum}`].filter(Boolean);
+      if (reqStoreId === 'STORE_1' || cleanNum === '1' || String(reqStoreId).toLowerCase().includes('main')) {
+        andConditions.push({
+          [Op.or]: [
+            ...storeVariants.map(v => ({ store_id: v })),
+            { store_id: null },
+            { store_id: '' }
+          ]
+        });
+      } else {
+        andConditions.push({
+          [Op.or]: storeVariants.map(v => ({ store_id: v }))
+        });
+      }
+    }
+
     const ncTypes = await global.serverdbConnection.NCType.findAll({
-      where: { is_active: 1 },
+      where: {
+        [Op.and]: andConditions
+      },
       order: [['id', 'DESC']],
       raw: true
     });
-    const mapped = ncTypes.map(nc => ({
+
+    console.log(`[PosMasters] GET /nc-types store_id=${req.query.store_id} resolved=${reqStoreId} returned ${ncTypes?.length || 0} rows`);
+
+    const mapped = (ncTypes || []).map(nc => ({
       id: nc.id,
       code: nc.code || `NC${nc.id}`,
       name: nc.name,
+      store_id: nc.store_id || 'STORE_1',
       status: nc.status || 'Active'
     }));
     response.data = mapped;
@@ -342,8 +420,9 @@ router.get('/nc-types', async (req, res) => {
 router.post('/nc-types', async (req, res) => {
   const response = new ResponseMessage(200, '');
   try {
-    const { id, code, name, status } = req.body;
+    const { id, code, name, status, store_id } = req.body;
     const ncName = name || 'NC Type';
+    const targetStoreId = store_id || 'STORE_1';
     let nc;
     if (id && Number(id) > 0) {
       nc = await global.serverdbConnection.NCType.findByPk(id);
@@ -351,7 +430,9 @@ router.post('/nc-types', async (req, res) => {
         await nc.update({
           code: code || nc.code,
           name: ncName,
-          status: status || nc.status
+          status: status || nc.status,
+          store_id: targetStoreId,
+          is_active: 1
         });
       }
     }
@@ -361,7 +442,7 @@ router.post('/nc-types', async (req, res) => {
         name: ncName,
         status: status || 'Active',
         is_active: 1,
-        store_id: 'STORE_1'
+        store_id: targetStoreId
       });
     }
     response.data = nc;
@@ -380,11 +461,12 @@ router.delete('/nc-types/:id', async (req, res) => {
   try {
     const nc = await global.serverdbConnection.NCType.findByPk(req.params.id);
     if (nc) {
-      await nc.update({ is_active: 0, status: 'Inactive' });
+      await nc.destroy();
     }
-    response.setMessage('NC Type deactivated successfully');
+    response.setMessage('NC Type deleted successfully');
     response.setStatus(200);
   } catch (err) {
+    console.error('Error deleting NC type:', err);
     response.setStatus(400);
     response.setMessage(err.message || 'Failed to delete NC type');
   }
@@ -588,6 +670,7 @@ router.get('/printers', async (req, res) => {
   const response = new ResponseMessage(200, '');
   try {
     const qStoreId = req.query.store_id || req.body?.store_id;
+    const qType = req.query.printer_type || req.query.type;
     const whereClause = {
       [global.serverdbConnection.Sequelize.Op.or]: [
         { is_active: 1 },
@@ -597,26 +680,36 @@ router.get('/printers', async (req, res) => {
     if (qStoreId) {
       whereClause.store_id = qStoreId;
     }
+    if (qType) {
+      whereClause.printer_type = String(qType).trim().toUpperCase();
+    }
 
     const printers = await global.serverdbConnection.Printer.findAll({
       where: whereClause,
+      order: [['id', 'ASC']],
       raw: true
     });
-    const mapped = printers.map(p => ({
-      id: p.id,
-      printer_id: p.id,
-      name: p.title || p.device_name || `Printer ${p.id}`,
-      printer_name: p.title || p.device_name || `Printer ${p.id}`,
-      title: p.title || p.device_name || `Printer ${p.id}`,
-      device_name: p.device_name || p.title || `Printer ${p.id}`,
-      ip_address: p.device_address || '192.168.1.100',
-      printer_ip: p.device_address || '192.168.1.100',
-      device_address: p.device_address || '192.168.1.100',
-      printer_type: p.printer_type || 1,
-      type: p.printer_type || 1,
-      store_id: p.store_id || 'STORE_1',
-      is_active: p.is_active !== 0 ? 1 : 0
-    }));
+    const mapped = printers.map(p => {
+      const pType = String(p.printer_type || '').toUpperCase() === 'BILL' ? 'BILL' : 'KOT';
+      const pPort = p.printer_port_number || 9100;
+      return {
+        id: p.id,
+        printer_id: p.id,
+        name: p.title || p.device_name || `Printer ${p.id}`,
+        printer_name: p.title || p.device_name || `Printer ${p.id}`,
+        title: p.title || p.device_name || `Printer ${p.id}`,
+        device_name: p.device_name || p.title || `Printer ${p.id}`,
+        ip_address: p.device_address || '192.168.1.100',
+        printer_ip: p.device_address || '192.168.1.100',
+        device_address: p.device_address || '192.168.1.100',
+        port: pPort,
+        printer_port_number: pPort,
+        printer_type: pType,
+        type: pType,
+        store_id: p.store_id || 'STORE_1',
+        is_active: p.is_active !== 0 ? 1 : 0
+      };
+    });
     response.data = mapped;
     response.setStatus(200);
   } catch (err) {
@@ -629,11 +722,14 @@ router.get('/printers', async (req, res) => {
 router.post('/printers', async (req, res) => {
   const response = new ResponseMessage(200, '');
   try {
-    const { id, printer_id, printer_name, name, title, ip_address, printer_ip, device_address, type, printer_type, store_id } = req.body;
+    const { id, printer_id, printer_name, name, title, ip_address, printer_ip, device_address, port, printer_port_number, type, printer_type, store_id } = req.body;
     const targetId = id || printer_id;
     const pName = printer_name || name || title || 'KOT Printer';
     const pIp = ip_address || printer_ip || device_address || '192.168.1.100';
-    const pTypeVal = typeof printer_type === 'number' ? printer_type : (typeof type === 'number' ? type : 1);
+    const pPort = String(port || printer_port_number || '9100');
+    const rawType = String(printer_type !== undefined ? printer_type : (type || '')).trim().toUpperCase();
+    const pTypeVal = rawType === 'BILL' ? 'BILL' : 'KOT';
+    const pStoreId = store_id ? String(store_id) : 'STORE_1';
 
     let printer;
     if (targetId) {
@@ -643,8 +739,9 @@ router.post('/printers', async (req, res) => {
           title: pName,
           device_name: pName,
           device_address: pIp,
+          printer_port_number: pPort,
           printer_type: pTypeVal,
-          store_id: store_id ? String(store_id) : printer.store_id,
+          store_id: pStoreId,
           is_active: 1
         });
       }
@@ -653,10 +750,11 @@ router.post('/printers', async (req, res) => {
         title: pName,
         device_name: pName,
         device_address: pIp,
+        printer_port_number: pPort,
         printer_type: pTypeVal,
         is_active: 1,
         activate: 1,
-        store_id: store_id ? String(store_id) : 'STORE_1'
+        store_id: pStoreId
       });
     }
     response.data = {
@@ -666,7 +764,10 @@ router.post('/printers', async (req, res) => {
       printer_name: printer.title || printer.device_name,
       ip_address: printer.device_address,
       printer_ip: printer.device_address,
+      printer_port_number: printer.printer_port_number || '9100',
+      port: printer.printer_port_number || '9100',
       printer_type: printer.printer_type,
+      type: printer.printer_type,
       store_id: printer.store_id,
       is_active: 1
     };
@@ -701,13 +802,19 @@ router.delete('/printers/:id', async (req, res) => {
 router.get('/production-categories', async (req, res) => {
   const response = new ResponseMessage(200, '');
   try {
+    const qStoreId = req.query.store_id || req.body?.store_id;
+    const deptWhere = { is_active: 1 };
+    if (qStoreId) {
+      deptWhere.store_id = qStoreId;
+    }
+
     const [deps, printers] = await Promise.all([
       global.serverdbConnection.KitchenDepartment.findAll({
-        where: { is_active: 1 },
+        where: deptWhere,
         raw: true
       }),
       global.serverdbConnection.Printer.findAll({
-        where: { is_active: 1 },
+        where: { is_active: 1, printer_type: 'KOT' },
         raw: true
       })
     ]);
@@ -723,11 +830,11 @@ router.get('/production-categories', async (req, res) => {
         department_name: d.name || d.kitchen_dept_name || `Category ${d.id}`,
         printer_id: d.printer_id || null,
         printerId: d.printer_id || null,
-        printer_name: assignedPrinter ? assignedPrinter.printer_name : null,
-        printerName: assignedPrinter ? assignedPrinter.printer_name : null,
+        printer_name: assignedPrinter ? assignedPrinter.title || assignedPrinter.device_name : null,
+        printerName: assignedPrinter ? assignedPrinter.title || assignedPrinter.device_name : null,
         printer: assignedPrinter || null,
         status: d.is_active === 1 ? 'Active' : 'Inactive',
-        store_id: d.store_id || 1
+        store_id: d.store_id || 'STORE_1'
       };
     });
     response.data = mapped;
@@ -745,6 +852,28 @@ router.post('/production-categories', async (req, res) => {
     const { id, name, department_name, printer_id, printerId, store_id } = req.body;
     const deptName = name || department_name || 'Kitchen Section';
     const assignedPrinterId = printer_id !== undefined ? (printer_id ? Number(printer_id) : null) : (printerId ? Number(printerId) : null);
+    const parsedStoreId = store_id ? (isNaN(Number(store_id)) ? (parseInt(String(store_id).replace(/\D/g, ''), 10) || 1) : Number(store_id)) : 1;
+
+    // Strict validation if a printer is assigned
+    let assignedPrinter = null;
+    if (assignedPrinterId) {
+      assignedPrinter = await global.serverdbConnection.Printer.findByPk(assignedPrinterId, { raw: true });
+      if (!assignedPrinter || assignedPrinter.is_active === 0) {
+        return res.status(400).json({
+          success: false,
+          code: 400,
+          message: 'Selected printer does not exist or is inactive.'
+        });
+      }
+      const pType = String(assignedPrinter.printer_type || '').toUpperCase();
+      if (pType !== 'KOT') {
+        return res.status(400).json({
+          success: false,
+          code: 400,
+          message: 'Selected printer is not configured as a KOT printer.'
+        });
+      }
+    }
 
     let dep;
     if (id) {
@@ -755,7 +884,8 @@ router.post('/production-categories', async (req, res) => {
           kitchen_dept_name: deptName,
           printer_id: assignedPrinterId,
           is_active: 1,
-          isactive: 1
+          isactive: 1,
+          store_id: parsedStoreId
         });
       }
     } else {
@@ -765,14 +895,8 @@ router.post('/production-categories', async (req, res) => {
         printer_id: assignedPrinterId,
         is_active: 1,
         isactive: 1,
-        store_id: store_id || 1
+        store_id: parsedStoreId
       });
-    }
-
-    // Resolve printer details for immediate response
-    let assignedPrinter = null;
-    if (dep && dep.printer_id) {
-      assignedPrinter = await global.serverdbConnection.Printer.findByPk(dep.printer_id, { raw: true });
     }
 
     response.data = {
@@ -781,8 +905,8 @@ router.post('/production-categories', async (req, res) => {
       department_name: dep.name || dep.kitchen_dept_name,
       printer_id: dep.printer_id,
       printerId: dep.printer_id,
-      printer_name: assignedPrinter ? assignedPrinter.printer_name : null,
-      printerName: assignedPrinter ? assignedPrinter.printer_name : null,
+      printer_name: assignedPrinter ? assignedPrinter.title || assignedPrinter.device_name : null,
+      printerName: assignedPrinter ? assignedPrinter.title || assignedPrinter.device_name : null,
       printer: assignedPrinter,
       status: 'Active',
       store_id: dep.store_id

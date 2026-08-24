@@ -35,15 +35,16 @@ function getModel(sequelize, type) {
             },
             printer_port_number: {
                 type: type.STRING,
-                allowNull: true
+                allowNull: true,
+                defaultValue: '9100'
             },
             printer_type: {
-                type: type.INTEGER,
-                defaultValue: 0// 0-Wired 1-bluetooth , 2-wifi 
+                type: type.STRING,
+                defaultValue: 'KOT' // 'KOT' or 'BILL'
             },
             action_type: {
                 type: type.INTEGER,
-                defaultValue: 2// 1-kot, 2-dine in, 3-takeawy, 4-home delivery 5-Quick Bill 6-Label printer 7-Report Printer 8-Online KOT 9-Online bill printer
+                defaultValue: 2
             },
             no_of_prints: {
                 type: type.INTEGER,
@@ -55,7 +56,12 @@ function getModel(sequelize, type) {
             },
             store_id: {
                 type: type.STRING,
-                allowNull: true
+                allowNull: true,
+                defaultValue: 'STORE_1'
+            },
+            is_active: {
+                type: type.INTEGER,
+                defaultValue: 1
             }
         },
         {

@@ -1,6 +1,5 @@
-/* eslint-disable no-await-in-loop */
-// Auto-generate Bill on KOT creation active
 const express = require('express');
+const { Op } = require('sequelize');
 const ResponseMessage = require('../error/ResponseMessage').ResponseMessage;
 const { convertQuantity } = require('../util/unitConverter');
 const router = express.Router();
@@ -88,6 +87,7 @@ router.get('/', async (req, res) => {
     const formatted = kots.map(k => {
       const items = kotItems.filter(ki => String(ki.kot_id) === String(k.kot_id));
       const kotDate = k.kot_date || k.createdAt || null;
+      const parsedExtra = typeof k.extra_details === 'string' ? (() => { try { return JSON.parse(k.extra_details); } catch(e) { return {}; } })() : (k.extra_details || {});
       return {
         id: k.custom_bill_number || `KOT-${k.kot_id}`,
         kotId: k.kot_id,
@@ -106,8 +106,11 @@ router.get('/', async (req, res) => {
           mobile: k.customer_mobile || k.phone || '—'
         },
         waiter: k.waiter || 'Staff',
+        pax: parsedExtra.pax || parsedExtra.guests || 1,
+        guests: parsedExtra.guests || parsedExtra.pax || 1,
+        paxCount: parsedExtra.pax || parsedExtra.guests || 1,
         extra_details: k.extra_details,
-        cancel_reason: k.extra_details?.cancel_reason || k.note || '',
+        cancel_reason: parsedExtra.cancel_reason || k.note || '',
         items: items.map(i => ({
           id: i.id,
           itemId: i.item_id,
@@ -191,6 +194,8 @@ router.get('/:id', async (req, res) => {
     const subtotal = mappedItems.reduce((acc, curr) => acc + curr.total, 0);
     const cleanTableNo = String(kot.table_no || kot.table_id || '').replace(/[^0-9]/g, '') || String(kot.table_id || '1');
 
+    const parsedExtra = typeof kot.extra_details === 'string' ? (() => { try { return JSON.parse(kot.extra_details); } catch(e) { return {}; } })() : (kot.extra_details || {});
+
     const formatted = {
       kotId: kot.custom_bill_number || kot.kot_no || `KOT-${kot.kot_id}`,
       numericKotId: kot.kot_id,
@@ -209,8 +214,11 @@ router.get('/:id', async (req, res) => {
       paymentStatus: 'UNPAID',
       createdAt: kot.in_time || new Date(kot.createdAt || Date.now()).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
       waiter: kot.waiter || kot.waiter_name || 'Staff',
+      pax: parsedExtra.pax || parsedExtra.guests || 1,
+      guests: parsedExtra.guests || parsedExtra.pax || 1,
+      paxCount: parsedExtra.pax || parsedExtra.guests || 1,
       extra_details: kot.extra_details,
-      cancel_reason: kot.extra_details?.cancel_reason || kot.note || '',
+      cancel_reason: parsedExtra.cancel_reason || kot.note || '',
       items: mappedItems,
       subtotal: subtotal,
       tax: 0,
@@ -233,11 +241,10 @@ const createKotHandler = async (req, res) => {
   const response = new ResponseMessage(200, '');
   try {
     const payload = req.body;
-    const targetStoreId = payload.store_id || req.body?.store_id || req.query?.store_id || req.user?.store_id || (req.user?.assigned_outlets && req.user.assigned_outlets[0]) || 'STORE_1';
+    const targetStoreId = payload.store_id || req.user?.store_id || 'STORE_1';
     const targetTableId = Number(payload.tableId || payload.table_id || 1);
     const cleanTableNum = String(payload.tableNo || payload.tableId || payload.table_id || '').replace(/[^0-9]/g, '') || String(targetTableId);
 
-    // Enforce outlet-specific KOT limit (Section 7, 8)
     try {
       const store = await global.serverdbConnection.Store.findOne({
         where: { store_id: targetStoreId },
@@ -251,8 +258,8 @@ const createKotHandler = async (req, res) => {
           where: {
             is_active: 1,
             store_id: targetStoreId,
-            status: { [global.serverdbConnection.Sequelize.Op.ne]: 6 },
-            [global.serverdbConnection.Sequelize.Op.or]: [
+            status: { [Op.ne]: 6 },
+            [Op.or]: [
               { table_id: targetTableId },
               { table_name: payload.tableNo ? `Table ${payload.tableNo}` : `Table ${targetTableId}` }
             ]
@@ -260,10 +267,6 @@ const createKotHandler = async (req, res) => {
         });
 
         if (activeKOTCount >= allowedKOTLimit && allowedKOTLimit > 0) {
-          // Disable this check completely to allow unlimited KOTs for a table session
-          // response.setStatus(400);
-          // response.setMessage(`No more KOTs are allowed for this transaction. Limit reached: ${allowedKOTLimit}`);
-          // return res.status(400).json(response);
           console.log(`Bypassing KOT limit of ${allowedKOTLimit} for table ${targetTableId}`);
         }
       }
@@ -271,12 +274,27 @@ const createKotHandler = async (req, res) => {
       console.warn('Error checking KOT limits:', e.message);
     }
 
-    const existingKotCount = await global.serverdbConnection.KOT.count({
-      where: { store_id: targetStoreId }
-    }).catch(() => 0);
-    const seqNum = existingKotCount + 1;
-    const generatedNo = `KOT-${seqNum}`;
-    const kotNo = generatedNo;
+    const isNC = !!(payload.isNC || payload.ncType || payload.order_type === 'NC');
+    let generatedNo;
+    if (isNC) {
+      const ncCount = await global.serverdbConnection.KOT.count({
+        where: {
+          store_id: targetStoreId,
+          custom_bill_number: { [Op.like]: 'NC-KOT-%' }
+        }
+      }).catch(() => 0);
+      const ncSeq = String(ncCount + 1).padStart(2, '0');
+      generatedNo = `NC-KOT-${ncSeq}`;
+    } else {
+      const existingKotCount = await global.serverdbConnection.KOT.count({
+        where: {
+          store_id: targetStoreId,
+          custom_bill_number: { [Op.notLike]: 'NC-KOT-%' }
+        }
+      }).catch(() => 0);
+      const seqNum = String(existingKotCount + 1).padStart(2, '0');
+      generatedNo = `KOT-${seqNum}`;
+    }
     const customBillNo = generatedNo;
     const items = Array.isArray(payload.items) ? payload.items : (Array.isArray(payload.rows) ? payload.rows : []);
     if (!Array.isArray(items) || items.length === 0) {
@@ -290,7 +308,6 @@ const createKotHandler = async (req, res) => {
       totalAmount += (Number(it.qty || it.quantity || 1) * Number(it.unitPrice || it.price || it.rate || 0));
     });
 
-    // Deactivate previous active KOTs if payload indicates new session or if table was AVAILABLE / Blank
     let isBlankOrNew = payload.isNewSession || payload.is_new_session || false;
     if (!isBlankOrNew && targetTableId) {
       try {
@@ -298,7 +315,7 @@ const createKotHandler = async (req, res) => {
         if (!existingTable) {
           existingTable = await global.serverdbConnection.Table.findOne({
             where: {
-              [global.serverdbConnection.Sequelize.Op.or]: [
+              [Op.or]: [
                 { table_name: `Table ${cleanTableNum}` },
                 { table_name: `T${cleanTableNum}` },
                 { table_name: `T0${cleanTableNum}` }
@@ -317,8 +334,6 @@ const createKotHandler = async (req, res) => {
       }
     }
 
-
-
     if (isBlankOrNew) {
       console.log(`🧹 Deactivating old KOTs for table ${targetTableId} (Table ${cleanTableNum}) in outlet ${targetStoreId} for new session...`);
       await global.serverdbConnection.KOT.update(
@@ -327,7 +342,7 @@ const createKotHandler = async (req, res) => {
           where: {
             is_active: 1,
             store_id: targetStoreId,
-            [global.serverdbConnection.Sequelize.Op.or]: [
+            [Op.or]: [
               { table_id: targetTableId },
               { table_name: `Table ${cleanTableNum}` },
               { table_name: `T${cleanTableNum}` },
@@ -338,8 +353,7 @@ const createKotHandler = async (req, res) => {
       );
     }
 
-    const isNC = !!(payload.isNC || payload.ncType);
-    const ncType = payload.ncType || '';
+    const ncType = payload.ncType || payload.nc_type || '';
     const kotData = {
       // mpos_kot model columns: kot_id, table_id, table_name, custom_bill_number, in_time, waiter, amount, is_active, store_id, status, kot_date, customer_name
       // NO kot_no or table_no columns exist in mpos_kot
@@ -358,9 +372,13 @@ const createKotHandler = async (req, res) => {
       extra_details: JSON.stringify({
         isNC,
         ncType,
+        pax: payload.pax || payload.guests || 1,
+        guests: payload.guests || payload.pax || 1,
         order_type: payload.order_type || 'DINE_IN',
         takeaway_no: payload.takeaway_no || null,
-        delivery_no: payload.delivery_no || null
+        delivery_no: payload.delivery_no || null,
+        customer_address: payload.customer_address || payload.address || '',
+        customer_locality: payload.customer_locality || payload.locality || ''
       })
     };
     let createdKot;
@@ -516,7 +534,7 @@ const createKotHandler = async (req, res) => {
       if (!table) {
         table = await global.serverdbConnection.Table.findOne({
           where: {
-            [global.serverdbConnection.Sequelize.Op.or]: [
+            [Op.or]: [
               { id: numId },
               { table_name: `Table ${numId}` },
               { table_name: `Table ${paddedNo}` },
@@ -528,35 +546,22 @@ const createKotHandler = async (req, res) => {
       }
       if (table) {
         const extra = table.extra_details || {};
-        if (isNC) {
-          await table.update({
-            order_state: 'NC_BLOCKED',
-            extra_details: {
-              ...extra,
-              status: 'NC_BLOCKED',
-              color: 'purple',
-              kot_status: 'CUT',
-              available_actions: ['view_kot'],
-              customer: payload.customerName || extra.customer || 'Walk-in',
-              waiter: payload.waiter || extra.waiter || 'Staff',
-              amount: 0
-            }
-          });
-          console.log(`✅ Backend KOT.js updated Table ${table.table_name || table.id} to NC_BLOCKED (Purple) in PostgreSQL DB`);
-        } else {
+        if (!isNC) {
           await table.update({
             order_state: 'KOT_CUT',
             extra_details: {
               ...extra,
               status: 'Running',
               kot_status: 'CUT',
-              payment_status: 'UNPAID',
-              amount: totalAmount || extra.amount || 0,
-              available_actions: ['print_kot', 'view_kot'],
-              customer: payload.customerName || extra.customer || 'Walk-in'
+              color: 'yellow',
+              available_actions: ['print_kot', 'view_kot', 'quick_pay'],
+              customer: payload.customerName || extra.customer || 'Walk-in',
+              waiter: payload.waiter || extra.waiter || 'Staff'
             }
           });
-          console.log(`✅ Backend KOT.js automatically updated Table ${table.table_name || table.id} to KOT_CUT (Yellow) in PostgreSQL DB`);
+          console.log(`✅ Backend KOT.js updated Table ${table.table_name || table.id} to KOT_CUT (Running/Yellow) in PostgreSQL DB`);
+        } else {
+          console.log(`ℹ️ Backend KOT.js skipped updating Table ${table.table_name || table.id} status because KOT is NC.`);
         }
       }
     }
@@ -600,7 +605,7 @@ router.post('/close-table/:tableId', async (req, res) => {
       const paddedNo = cleanNum.padStart(2, '0');
       dbTable = await global.serverdbConnection.Table.findOne({
         where: {
-          [global.serverdbConnection.Sequelize.Op.or]: [
+          [Op.or]: [
             { table_name: `Table ${cleanNum}` },
             { table_name: `Table ${paddedNo}` },
             { table_name: `T${cleanNum}` },
@@ -636,7 +641,7 @@ router.post('/close-table/:tableId', async (req, res) => {
       {
         where: {
           is_active: 1,
-          [global.serverdbConnection.Sequelize.Op.or]: matchConditions
+          [Op.or]: matchConditions
         }
       }
     );
@@ -675,7 +680,7 @@ router.post('/:id/move', async (req, res) => {
     // Find the KOT record
     let kot = await global.serverdbConnection.KOT.findOne({
       where: {
-        [global.serverdbConnection.Sequelize.Op.or]: [
+        [Op.or]: [
           { custom_bill_number: kotIdParam },
           ...(isNaN(Number(kotIdParam)) ? [] : [{ kot_id: Number(kotIdParam) }]),
           ...(!isNaN(numericKotId) && numericKotId > 0 ? [{ kot_id: numericKotId }] : [])
@@ -717,7 +722,7 @@ router.post('/:id/move', async (req, res) => {
       const cleanNo = String(toTableNo).replace(/[^0-9]/g, '');
       destTable = await global.serverdbConnection.Table.findOne({
         where: {
-          [global.serverdbConnection.Sequelize.Op.or]: [
+          [Op.or]: [
             { table_name: `Table ${cleanNo}` },
             { table_name: `T${cleanNo}` }
           ]
@@ -861,7 +866,7 @@ router.post('/move-table', async (req, res) => {
       const cleanNo = String(toTableNo).replace(/[^0-9]/g, '');
       destTable = await global.serverdbConnection.Table.findOne({
         where: {
-          [global.serverdbConnection.Sequelize.Op.or]: [
+          [Op.or]: [
             { table_name: `Table ${cleanNo}` },
             { table_name: `T${cleanNo}` }
           ]
@@ -888,7 +893,7 @@ router.post('/move-table', async (req, res) => {
     const rawKots = await global.serverdbConnection.KOT.findAll({
       where: {
         is_active: 1,
-        [global.serverdbConnection.Sequelize.Op.or]: [
+        [Op.or]: [
           { table_id: srcTable.id },
           { table_name: srcTable.table_name },
           ...(srcNumStr ? [{ table_name: `Table ${srcNumStr}` }, { table_name: `T${srcNumStr}` }] : [])
@@ -1312,7 +1317,7 @@ const updateStatusHandler = async (req, res) => {
 
     let kot = await global.serverdbConnection.KOT.findOne({
       where: {
-        [global.serverdbConnection.Sequelize.Op.or]: [
+        [Op.or]: [
           { custom_bill_number: idParam },
           ...(isNaN(Number(idParam)) ? [] : [{ kot_id: Number(idParam) }])
         ]
@@ -1335,7 +1340,7 @@ const updateStatusHandler = async (req, res) => {
         const kotItemsToCancel = await global.serverdbConnection.KOTItem.findAll({
           where: {
             kot_id: kot.kot_id,
-            status: { [global.serverdbConnection.Sequelize.Op.ne]: 5 }
+            status: { [Op.ne]: 5 }
           },
           transaction: t
         });
@@ -1389,7 +1394,7 @@ router.delete('/:id', async (req, res) => {
     const idParam = req.params.id;
     let kot = await global.serverdbConnection.KOT.findOne({
       where: {
-        [global.serverdbConnection.Sequelize.Op.or]: [
+        [Op.or]: [
           { custom_bill_number: idParam },
           ...(isNaN(Number(idParam)) ? [] : [{ kot_id: Number(idParam) }])
         ]
@@ -1417,8 +1422,8 @@ router.delete('/:id', async (req, res) => {
         const itemsToCancel = await global.serverdbConnection.KOTItem.findAll({
           where: {
             kot_id: kot.kot_id,
-            id: { [global.serverdbConnection.Sequelize.Op.in]: itemIds },
-            status: { [global.serverdbConnection.Sequelize.Op.ne]: 5 }
+            id: { [Op.in]: itemIds },
+            status: { [Op.ne]: 5 }
           },
           transaction: t
         });
@@ -1451,7 +1456,7 @@ router.delete('/:id', async (req, res) => {
           const activeItems = await global.serverdbConnection.KOTItem.count({
             where: {
               kot_id: kot.kot_id,
-              status: { [global.serverdbConnection.Sequelize.Op.ne]: 5 }
+              status: { [Op.ne]: 5 }
             },
             transaction: t
           });
@@ -1509,7 +1514,7 @@ router.delete('/:id', async (req, res) => {
         const kotItemsToCancel = await global.serverdbConnection.KOTItem.findAll({
           where: {
             kot_id: kot.kot_id,
-            status: { [global.serverdbConnection.Sequelize.Op.ne]: 5 }
+            status: { [Op.ne]: 5 }
           },
           transaction: t
         });

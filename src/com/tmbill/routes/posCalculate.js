@@ -37,26 +37,60 @@ router.post('/', async (req, res) => {
 
     let tax_amount = 0;
     let tax_breakdown = [];
-    
-    // Fetch active taxes
+    // Calculate per-item tax based on taxCategory
     if (global.serverdbConnection && global.serverdbConnection.Tax) {
       try {
         const taxes = await global.serverdbConnection.Tax.findAll({
           where: { is_active: 1 },
           raw: true
         });
-        taxes.forEach(t => {
-          const rate = Number(t.tax_percentage || 0);
-          const amt = Math.round((taxableAmount * rate / 100) * 100) / 100;
-          tax_amount += amt;
-          tax_breakdown.push({
-            name: t.tax_name || 'Tax',
-            rate,
-            amount: amt
-          });
+
+        let taxBreakdownMap = {};
+
+        items.forEach(item => {
+          const qty = Number(item.qty || item.quantity || 1);
+          const price = Number(item.unitPrice || item.price || item.rate || 0);
+          const itemSubtotal = qty * price;
+          
+          // Apply proportion of total discount to this item
+          let itemDiscount = 0;
+          if (subtotal > 0) {
+            itemDiscount = (itemSubtotal / subtotal) * discount;
+          }
+          const itemTaxable = Math.max(0, itemSubtotal - itemDiscount);
+
+          let itemTaxRate = 5; // Fallback default 5%
+          let itemTaxName = 'GST';
+
+          if (item.taxCategory && item.taxCategory.trim() !== '') {
+            const taxObj = taxes.find(t => String(t.tax_name).toLowerCase() === String(item.taxCategory).toLowerCase());
+            if (taxObj) {
+               itemTaxRate = Number(taxObj.tax_percentage || 0);
+               itemTaxName = taxObj.tax_name;
+            }
+          }
+
+          if (itemTaxRate > 0) {
+             const amt = (itemTaxable * itemTaxRate) / 100;
+             tax_amount += amt;
+             if (!taxBreakdownMap[itemTaxName]) {
+                 taxBreakdownMap[itemTaxName] = { rate: itemTaxRate, amount: 0 };
+             }
+             taxBreakdownMap[itemTaxName].amount += amt;
+          }
         });
+
+        Object.keys(taxBreakdownMap).forEach(k => {
+           tax_breakdown.push({
+              name: k,
+              rate: taxBreakdownMap[k].rate,
+              amount: Math.round(taxBreakdownMap[k].amount * 100) / 100
+           });
+        });
+        tax_amount = Math.round(tax_amount * 100) / 100;
+
       } catch (err) {
-        console.warn('Error fetching taxes:', err.message);
+        console.warn('Error fetching taxes for calculation:', err.message);
       }
     }
 

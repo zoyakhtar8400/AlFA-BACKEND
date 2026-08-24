@@ -152,6 +152,9 @@ function mapTable(t) {
     amount: status === 'AVAILABLE' ? 0 : Number(extra.amount || 0),
     waiter: status === 'AVAILABLE' ? null : (extra.waiter || null),
     customer: status === 'AVAILABLE' ? 'Walk-in' : (extra.customer || 'Walk-in'),
+    pax: extra.pax || extra.guests || null,
+    guests: extra.guests || extra.pax || null,
+    paxCount: extra.pax || extra.guests || null,
     store_id: t.store_id || 'STORE_1',
     isactive: t.isactive
   };
@@ -575,7 +578,9 @@ const patchStatusHandler = async (req, res) => {
       ...(req.body.total_amount !== undefined && { total_amount: req.body.total_amount }),
       ...(req.body.taxes_breakdown !== undefined && { taxes_breakdown: req.body.taxes_breakdown }),
       ...(req.body.waiter !== undefined && { waiter: req.body.waiter }),
-      ...(req.body.customer !== undefined && { customer: req.body.customer })
+      ...(req.body.customer !== undefined && { customer: req.body.customer }),
+      ...(req.body.pax !== undefined && { pax: req.body.pax }),
+      ...(req.body.guests !== undefined && { guests: req.body.guests })
     };
 
     // Calculate rounded tax-inclusive total from backend
