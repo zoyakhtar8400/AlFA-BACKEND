@@ -107,16 +107,16 @@ async function getReportData(params) {
       switch (Number(params.reportType)) {
         case REPORT_TYPES.SALES_REPORT:
         case REPORT_TYPES.TODAYS_REPORT:
-          const currentStoreId = String(global.storeDetails?.store_id || '1');
+          let currentStoreId = String(global.storeDetails?.store_id || '1'); if (currentStoreId !== 'ALL' && !currentStoreId.startsWith('STORE_')) { currentStoreId = 'STORE_' + currentStoreId; }
           const whereData = {
             [connection.Sequelize.Op.and]: [
-              {
+              ...(currentStoreId === 'ALL' ? [] : [{
                 [connection.Sequelize.Op.or]: [
                   { store_id: currentStoreId },
                   { store_id: 'STORE_1' },
                   { store_id: '1' }
                 ]
-              },
+              }]),
               {
                 [connection.Sequelize.Op.or]: [
                   { my_order_date: { [connection.Sequelize.Op.between]: [startDateOnly, endDateOnly] } },
@@ -172,11 +172,22 @@ async function getReportData(params) {
                 as: 'tmpos_order_charges',
                 model: connection.BillCharges,
               },
+              {
+                as: 'tmpos_order_payment',
+                model: connection.BillPayment,
+              },
             ],
           });
 
           let orderIds = [];
           bills.map((ele) => {
+            if (ele.tmpos_order_payment && ele.tmpos_order_payment.length) {
+              let payment_modes = ele.tmpos_order_payment.map(p => p.payment_option).filter(Boolean).join(', ');
+              if (payment_modes) {
+                ele.setDataValue('payment_mode', payment_modes);
+                ele.payment = payment_modes;
+              }
+            }
             if (ele.tmpos_order_charges && ele.tmpos_order_charges.length) {
               let order_level_total_charges_without_tax = 0;
               ele.tmpos_order_charges.forEach((charge) => {
@@ -1869,16 +1880,16 @@ async function getDeliveryboySummarybydate(whereData) {
 
 async function getDuePaymentSummarybydate(fromDate, toDate, user_id) {
   let deuPaymentList = [];
-  const currentStoreId = String(global.storeDetails?.store_id || '1');
+  let currentStoreId = String(global.storeDetails?.store_id || '1'); if (currentStoreId !== 'ALL' && !currentStoreId.startsWith('STORE_')) { currentStoreId = 'STORE_' + currentStoreId; }
   const duePaymentWhereData = {
     [connection.Sequelize.Op.and]: [
-      {
-        [connection.Sequelize.Op.or]: [
-          { store_id: currentStoreId },
-          { store_id: 'STORE_1' },
-          { store_id: '1' }
-        ]
-      },
+      ...(currentStoreId === 'ALL' ? [] : [{
+                [connection.Sequelize.Op.or]: [
+                  { store_id: currentStoreId },
+                  { store_id: 'STORE_1' },
+                  { store_id: '1' }
+                ]
+              }]),
       {
         received_amount: {
           [connection.Sequelize.Op.ne]: 0
@@ -1996,6 +2007,7 @@ async function getDiscountSummarybydate(whereData) {
       where: {
         ...whereData,
         [connection.Sequelize.Op.and]: [
+          ...(whereData[connection.Sequelize.Op.and] || []),
           connection.Sequelize.literal('CAST(COALESCE("discount", \'0\') AS numeric) > 0')
         ]
       },
@@ -2145,17 +2157,17 @@ async function getSolditemsbydate({
   let soldItems = [];
   const startDateOnly = String(fromDate).slice(0, 10);
   const endDateOnly = String(toDate).slice(0, 10);
-  const currentStoreId = String(global.storeDetails?.store_id || '1');
+  let currentStoreId = String(global.storeDetails?.store_id || '1'); if (currentStoreId !== 'ALL' && !currentStoreId.startsWith('STORE_')) { currentStoreId = 'STORE_' + currentStoreId; }
 
   const billWhereData = {
     [connection.Sequelize.Op.and]: [
-      {
-        [connection.Sequelize.Op.or]: [
-          { store_id: currentStoreId },
-          { store_id: 'STORE_1' },
-          { store_id: '1' }
-        ]
-      },
+      ...(currentStoreId === 'ALL' ? [] : [{
+                [connection.Sequelize.Op.or]: [
+                  { store_id: currentStoreId },
+                  { store_id: 'STORE_1' },
+                  { store_id: '1' }
+                ]
+              }]),
       {
         [connection.Sequelize.Op.or]: [
           { my_order_date: { [connection.Sequelize.Op.between]: [startDateOnly, endDateOnly] } },

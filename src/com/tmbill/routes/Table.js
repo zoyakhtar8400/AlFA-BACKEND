@@ -580,7 +580,8 @@ const patchStatusHandler = async (req, res) => {
       ...(req.body.waiter !== undefined && { waiter: req.body.waiter }),
       ...(req.body.customer !== undefined && { customer: req.body.customer }),
       ...(req.body.pax !== undefined && { pax: req.body.pax }),
-      ...(req.body.guests !== undefined && { guests: req.body.guests })
+      ...(req.body.guests !== undefined && { guests: req.body.guests }),
+      ...(req.body.current_order_id !== undefined && { current_order_id: req.body.current_order_id })
     };
 
     // Calculate rounded tax-inclusive total from backend
