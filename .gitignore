@@ -2,10 +2,9 @@
 node_modules/
 jspm_packages/
 
-# Environment & Secrets
+# Environment & Secrets (ignored)
 .env
-.env.local
-.env.*.local
+.env.*
 *.env
 
 # Logs & Debug
