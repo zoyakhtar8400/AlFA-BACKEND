@@ -10,7 +10,7 @@ const isterminal = !window.__IS_MASTER_POS__;
 
 const terminalType = isterminal ? APP_TYPE.TERMINAL : APP_TYPE.MASTER_POS;
 
-let baseURL = `http://localhost:3000/`;
+let baseURL = `http://localhost:8000/`;
 
 if (isterminal) {
   // Overrite the master POS address

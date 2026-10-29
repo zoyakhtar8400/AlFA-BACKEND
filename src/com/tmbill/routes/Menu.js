@@ -148,9 +148,16 @@ async function getCatalogues(params) {
       where: storeWhere,
     });
 
-    const delivery_boys = await global.serverdbConnection.DeliveryBoy.findAll({
-      where: storeWhere,
-    });
+    let delivery_boys = [];
+    try {
+      if (global.serverdbConnection.DeliveryBoy) {
+        delivery_boys = await global.serverdbConnection.DeliveryBoy.findAll({
+          where: storeWhere,
+        });
+      }
+    } catch (dErr) {
+      console.warn('⚠️ Could not load delivery boys in catalogue:', dErr.message);
+    }
 
     let kitchenStoreWhere = {};
     if (params.store_id) {
@@ -178,11 +185,18 @@ async function getCatalogues(params) {
       await global.serverdbConnection.ExpensesCategory.findAll({
         where: storeWhere,
       });
-    const waiters = await global.serverdbConnection.Waiter.findAll({
-      raw: true,
-      where: storeWhere,
-      attributes: ['id', 'name', 'phone', 'username'],
-    });
+    let waiters = [];
+    try {
+      if (global.serverdbConnection.Waiter) {
+        waiters = await global.serverdbConnection.Waiter.findAll({
+          raw: true,
+          where: storeWhere,
+          attributes: ['id', 'name', 'phone', 'username'],
+        });
+      }
+    } catch (wErr) {
+      console.warn('⚠️ Could not load waiters in catalogue:', wErr.message);
+    }
 
     const multipricing_settings =
       await global.serverdbConnection.MultipricingSettings.findAll({
@@ -216,9 +230,24 @@ async function getCatalogues(params) {
       raw: true,
       where: storeWhere,
     });
+
+    let units = [];
+    try {
+      if (global.serverdbConnection.Unit) {
+        units = await global.serverdbConnection.Unit.findAll({
+          where: { is_active: 1 },
+          raw: true,
+          order: [['unit_name', 'ASC']],
+        });
+      }
+    } catch (uErr) {
+      console.warn('Could not load units in catalogue:', uErr.message);
+    }
+
     const catalouge = {
       categories,
       items,
+      units,
       option_group,
       options,
       discount,

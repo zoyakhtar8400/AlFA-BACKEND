@@ -419,7 +419,7 @@ async function sendImageToCSK(printData) {
       buffer,
     });
 
-    const publicUrl = `http://localhost:3000/invoices/${fileName}`;
+    const publicUrl = `http://localhost:8000/invoices/${fileName}`;
     logger.info('CSK image captured and saved', {
       fileName,
       table_id: printData.table_id,

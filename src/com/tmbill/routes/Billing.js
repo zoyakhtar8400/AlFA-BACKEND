@@ -152,7 +152,36 @@ const paymentHandler = async (req, res) => {
       return res.json(response);
     }
 
-    const bill = await global.serverdbConnection.Bill.findByPk(targetOrderId, { transaction });
+    let bill = null;
+    if (!isNaN(targetOrderId) && Number(targetOrderId) > 0) {
+      bill = await global.serverdbConnection.Bill.findByPk(Number(targetOrderId), { transaction });
+    }
+    if (!bill) {
+      bill = await global.serverdbConnection.Bill.findOne({
+        where: {
+          [global.serverdbConnection.Sequelize.Op.or]: [
+            { order_id: String(targetOrderId) },
+            { custom_bill_number: String(targetOrderId) }
+          ]
+        },
+        transaction
+      });
+    }
+
+    if (!bill && (req.body.tableId || req.body.table_id)) {
+      const tId = Number(req.body.tableId || req.body.table_id);
+      bill = await global.serverdbConnection.Bill.findOne({
+        where: {
+          table_id: tId,
+          order_state: {
+            [global.serverdbConnection.Sequelize.Op.in]: ['pending', 'unpaid', 'UNPAID_BILL', 'UNPAID', 'Running', 'running']
+          }
+        },
+        order: [['id', 'DESC']],
+        transaction
+      });
+    }
+
     if (bill) {
       // Support array of payments or single payment fallback
       const paymentList = Array.isArray(payments) && payments.length > 0 
@@ -164,30 +193,41 @@ const paymentHandler = async (req, res) => {
         if (Number(p.amount) > 0) {
           calculatedTotalPaid += Number(p.amount);
           await global.serverdbConnection.BillPayment.create({
-            order_id: bill.order_id || bill.id,
+            order_id: String(bill.order_id || bill.id),
             amount: Number(p.amount),
-            payment_option: p.method,
-            payment_mode: p.method,
-            store_id: bill.store_id || req.body.store_id || 'STORE_1'
-          }, { transaction });
+            payment_option: p.method || 'Cash'
+          }, { transaction }).catch(err => console.warn('BillPayment create warning:', err.message));
         }
       }
 
       // Calculate total amounts
-      const previousTotalPaid = Number(bill.paid_amount || 0);
+      const previousTotalPaid = Number(bill.cust_paid_amount || 0);
       const newTotalPaid = previousTotalPaid + calculatedTotalPaid;
       const billTotal = Number(bill.order_total || bill.total_amount || 0);
       const remainingDue = Math.max(0, billTotal - newTotalPaid);
       
       const newStatus = remainingDue > 0 ? 'partial' : 'completed';
-      const mainMode = paymentList.length > 0 ? paymentList.sort((a,b) => b.amount - a.amount)[0].method : 'Cash';
+      const mainMode = paymentList.length > 0 ? paymentList.sort((a,b) => b.amount - a.amount)[0].method : (paymentMethod || paymentMode || 'Cash');
+
+      const existingExtra = typeof bill.extra_details === 'string'
+        ? JSON.parse(bill.extra_details || '{}')
+        : (bill.extra_details || {});
 
       await bill.update({
         order_state: newStatus,
         payment: mainMode,
-        payment_mode: mainMode,
-        paid_amount: newTotalPaid,
-        due_amount: remainingDue
+        cust_paid_amount: newTotalPaid,
+        due_payment: remainingDue,
+        hasDuepayment: remainingDue > 0,
+        extra_details: {
+          ...existingExtra,
+          payment_mode: mainMode,
+          paymentMode: mainMode,
+          paymentMethod: mainMode,
+          payment: mainMode,
+          payment_status: newStatus === 'completed' ? 'Paid' : 'Partially Paid',
+          status: newStatus
+        }
       }, { transaction });
 
       // If fully paid, clear table and close KOTs

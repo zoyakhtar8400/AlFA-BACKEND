@@ -32,7 +32,7 @@ async function seedRealReportData() {
     if (!waiter) {
       waiter = await connection.Waiter.create({
         name: 'John Steward',
-        username: `steward_${timestamp.toString().slice(-4)}`,
+        username: `steward_${orderId.toString().slice(-4)}`,
         phone: '9876543210',
         store_id: 'STORE_1'
       });
@@ -75,16 +75,15 @@ async function seedRealReportData() {
 
     // 4. Create OrderChild Item
     const billItem = await connection.BillItem.create({
-      orderMasterId: orderId,
-      item_id: 101,
+      bill_id: bill.id,
+      orderMasterId: String(orderId),
+      item_id: '101',
       title: 'Paneer Butter Masala',
-      item_name: 'Paneer Butter Masala',
       quantity: 2,
       price: 250.00,
       total: 500.00,
       total_with_tax: 525.00,
       discount: 50.00,
-      category_ref_ids: 1,
       createdBy: 'admin'
     });
     console.log('✅ Real Bill Item created:', billItem.title);

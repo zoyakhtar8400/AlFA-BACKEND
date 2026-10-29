@@ -9,8 +9,48 @@ const router = express.Router();
 router.use(auth);
 router.use(authorizeOutlet);
 
+const NOISE_WORDS = new Set(['OUTLET', 'STORE', 'BRANCH', 'COUNTER', 'POS', 'RESTAURANT_OUTLET']);
+
+function getStorePrefix(store) {
+  if (!store) return 'T';
+  if (store.shortName && store.shortName !== 'T') {
+    return String(store.shortName).replace(/[^A-Za-z0-9]/g, '').toUpperCase();
+  }
+  const name = store.store_name || store.name || '';
+  if (!name) return 'T';
+  const clean = name.replace(/&/g, ' and ').replace(/[^a-zA-Z0-9\s]/g, ' ').trim();
+  let tokens = clean.split(/\s+/).filter(Boolean);
+  let meaningfulTokens = tokens.filter(t => !NOISE_WORDS.has(t.toUpperCase()));
+  if (meaningfulTokens.length === 0) meaningfulTokens = tokens;
+  if (meaningfulTokens.length >= 2) {
+    return meaningfulTokens.map(w => w[0].toUpperCase()).join('').slice(0, 4);
+  } else if (meaningfulTokens.length === 1) {
+    const word = meaningfulTokens[0];
+    const match = word.match(/^([a-zA-Z]+)(\d+)$/);
+    if (match) return `${match[1][0].toUpperCase()}${match[2]}`;
+    return word[0].toUpperCase();
+  }
+  return 'T';
+}
+
+async function getStoreMap() {
+  try {
+    if (!global.serverdbConnection || !global.serverdbConnection.Store) return {};
+    const stores = await global.serverdbConnection.Store.findAll({ raw: true });
+    const storeMap = {};
+    for (const s of stores) {
+      if (s.id) storeMap[s.id] = s;
+      if (s.store_id) storeMap[s.store_id] = s;
+      storeMap[`STORE_${s.id}`] = s;
+    }
+    return storeMap;
+  } catch (e) {
+    return {};
+  }
+}
+
 // Helper to map DB record to frontend friendly format
-function mapTable(t) {
+function mapTable(t, storeMap = {}) {
   let extra = {};
   try {
     extra = typeof t.extra_details === 'string' ? JSON.parse(t.extra_details || '{}') : (t.extra_details || {});
@@ -124,11 +164,44 @@ function mapTable(t) {
     remainingSeconds = 0;
   }
 
-  const prefix = extra.prefix || t.prefix || '';
-  const digits = String(t.table_no || t.table_name || '').replace(/[^0-9]/g, '');
-  const tableNoStr = digits || String(t.id);
-  const cleanNum = parseInt(tableNoStr, 10) || tableNoStr;
-  const displayName = (prefix && digits) ? `${prefix}${parseInt(digits, 10) || digits}` : (t.table_name || `Table ${tableNoStr}`);
+  const rawName = String(t.table_name || '').trim();
+  const rawNo = String(t.table_no || '').trim();
+  let displayName = rawName;
+  let tableNoStr = rawNo;
+
+  // 1. If user explicitly set a prefix in the Table Form (M, T, B, VIP, etc.), respect it directly!
+  let prefix = '';
+  if (extra.prefix !== undefined && extra.prefix !== null && String(extra.prefix).trim() !== '') {
+    prefix = String(extra.prefix).trim();
+  } else if (t.prefix !== undefined && t.prefix !== null && String(t.prefix).trim() !== '') {
+    prefix = String(t.prefix).trim();
+  } else {
+    // 2. If table_name has an existing letter prefix (e.g. M1, T01, B5)
+    const nameMatch = rawName.match(/^([A-Za-z]+)[-_\s]*\d+$/);
+    if (nameMatch) {
+      prefix = nameMatch[1];
+    } else {
+      const targetStore = storeMap[t.store_id] || storeMap['STORE_1'] || storeMap['1'] || Object.values(storeMap)[0];
+      prefix = getStorePrefix(targetStore);
+    }
+  }
+  if (!prefix) prefix = 'T';
+
+  if (/^TK[-_\s]?\d+/i.test(rawName) || /^TK[-_\s]?\d+/i.test(rawNo)) {
+    const num = (rawName || rawNo).replace(/\D/g, '') || '1';
+    displayName = `TK-${num}`;
+    tableNoStr = displayName;
+    prefix = 'TK-';
+  } else if (/^DL[-_\s]?\d+/i.test(rawName) || /^DL[-_\s]?\d+/i.test(rawNo)) {
+    const num = (rawName || rawNo).replace(/\D/g, '') || '1';
+    displayName = `DL-${num}`;
+    tableNoStr = displayName;
+    prefix = 'DL-';
+  } else {
+    const digits = (rawNo || rawName || String(t.id)).replace(/[^0-9]/g, '') || String(t.id);
+    tableNoStr = digits;
+    displayName = `${prefix}${parseInt(digits, 10) || digits}`;
+  }
 
   return {
     id: t.id,
@@ -138,7 +211,7 @@ function mapTable(t) {
     prefix: prefix,
     seats: parseInt(t.max_person, 10) || 4,
     status: status,
-    current_order_id: Number(extra.current_order_id || 0),
+    current_order_id: extra.current_order_id || null,
     payment_status: paymentStatus,
     kot_status: kotStatus,
     payment_completed_at: paymentCompletedAt,
@@ -213,7 +286,8 @@ router.get('/', async (req, res) => {
       order: [['id', 'ASC']],
       raw: true
     });
-    const mapped = dbTables.map(mapTable);
+    const storeMap = await getStoreMap();
+    const mapped = dbTables.map(t => mapTable(t, storeMap));
 
     // Fetch active KOTs and KOT items to populate table.kots for UI
     try {
@@ -298,6 +372,9 @@ router.get('/', async (req, res) => {
               numericKotId: k.kot_id,
               table_id: k.table_id,
               time: k.in_time || 'Now',
+              in_time: k.in_time || k.actual_in_time || null,
+              created_at: k.created_at || k.createdAt || k.kot_date || null,
+              createdAt: k.createdAt || k.created_at || null,
               waiter: k.waiter || 'Staff',
               amount: Number(k.amount || 0),
               items: items
@@ -370,7 +447,8 @@ router.get('/:id', async (req, res) => {
       response.setStatus(404);
       response.setMessage('Table not found');
     } else {
-      const mapped = mapTable(table);
+      const storeMap = await getStoreMap();
+      const mapped = mapTable(table, storeMap);
       response.table = mapped;
       response.data = mapped;
       response.setStatus(200);
@@ -435,17 +513,22 @@ router.post('/', async (req, res) => {
       prefix: req.body.prefix || ''
     };
 
+    const isTableActive = req.body.isactive !== undefined ? (req.body.isactive ? 1 : 0) :
+      (req.body.isActive !== undefined ? (req.body.isActive ? 1 : 0) :
+      (req.body.status ? (String(req.body.status).toUpperCase() === 'INACTIVE' ? 0 : 1) : 1));
+
     const created = await global.serverdbConnection.Table.create({
       table_name: tableName,
       max_person: String(req.body.max_person || req.body.seats || 4),
       department: 1,           // Always integer — section name stored in extra_details
       store_id: targetStoreId,
-      isactive: 1,
-      order_state: 'AVAILABLE',
+      isactive: isTableActive,
+      order_state: String(req.body.status || 'AVAILABLE').toUpperCase() === 'INACTIVE' ? 'AVAILABLE' : (req.body.status || 'AVAILABLE'),
       extra_details: extraDetails
     });
 
-    const mapped = mapTable(created.get({ plain: true }));
+    const storeMap = await getStoreMap();
+    const mapped = mapTable(created.get({ plain: true }), storeMap);
     response.setStatus(201);
     response.setMessage('Table created successfully');
     response.table = mapped;
@@ -502,18 +585,24 @@ router.put('/:id', async (req, res) => {
       ...(req.body.prefix !== undefined && { prefix: req.body.prefix })
     };
 
+    const isStatusInactive = req.body.status && String(req.body.status).toUpperCase() === 'INACTIVE';
     const updateFields = {
       ...(req.body.table_name && { table_name: req.body.table_name }),
       ...(req.body.name && { table_name: req.body.name }),
       ...(req.body.seats && { max_person: String(req.body.seats) }),
       ...(req.body.max_person && { max_person: String(req.body.max_person) }),
-      ...(req.body.status && { order_state: req.body.status }),
+      ...(req.body.status && !isStatusInactive && { order_state: req.body.status }),
+      ...(req.body.store_id && { store_id: req.body.store_id }),
+      ...(req.body.isactive !== undefined ? { isactive: req.body.isactive ? 1 : 0 } :
+          req.body.isActive !== undefined ? { isactive: req.body.isActive ? 1 : 0 } :
+          isStatusInactive ? { isactive: 0 } : {}),
       // department stays as integer 1 — section name goes in extra_details
       extra_details: updatedExtra
     };
 
     await table.update(updateFields);
-    const updated = mapTable(table.get({ plain: true }));
+    const storeMap = await getStoreMap();
+    const updated = mapTable(table.get({ plain: true }), storeMap);
     response.setStatus(200);
     response.setMessage('Table updated successfully');
     response.table = updated;
@@ -558,9 +647,9 @@ const patchStatusHandler = async (req, res) => {
     const rawUpper = String(rawStatus).toUpperCase();
     if (['KOT_CUT', 'RUNNING', 'OCCUPIED', 'ORDERED', 'KOT GENERATED', 'KOT_GENERATED'].includes(rawUpper)) {
       status = rawUpper === 'ORDERED' ? 'ORDERED' : 'KOT_CUT';
-    } else if (['UNPAID_BILL', 'UNPAID'].includes(rawUpper)) {
+    } else if (['UNPAID_BILL', 'UNPAID', 'BILL GENERATED', 'BILLED', 'BILL_GENERATED', 'PRINT_BILL', 'PRINTED'].includes(rawUpper)) {
       status = 'UNPAID_BILL';
-    } else if (['PAYMENT_COMPLETED', 'CLEANUP_RUNNING', 'PAID', 'CLEANING', 'BILL GENERATED'].includes(rawUpper)) {
+    } else if (['PAYMENT_COMPLETED', 'CLEANUP_RUNNING', 'PAID', 'CLEANING'].includes(rawUpper)) {
       status = 'PAYMENT_COMPLETED';
     }
 
@@ -640,7 +729,8 @@ const patchStatusHandler = async (req, res) => {
     }
 
     await table.update({ order_state: status, extra_details: updatedExtra });
-    const updated = mapTable(table.get({ plain: true }));
+    const storeMap = await getStoreMap();
+    const updated = mapTable(table.get({ plain: true }), storeMap);
     response.setStatus(200);
     response.setMessage('Table status updated successfully');
     response.table = updated;

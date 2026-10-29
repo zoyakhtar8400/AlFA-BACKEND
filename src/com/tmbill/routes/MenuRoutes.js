@@ -25,15 +25,16 @@ router.get('/categories', async (req, res) => {
   res.json(response);
 });
 
-// POST /api/categories
-router.post('/categories', async (req, res) => {
+// POST & PUT /api/categories
+const saveCategoryHandler = async (req, res) => {
   const response = new ResponseMessage(200, '');
   try {
-    const { id, category_name, name } = req.body;
+    const targetId = req.params.id || req.body.id;
+    const { category_name, name } = req.body;
     const catName = category_name || name || 'New Category';
     let cat;
-    if (id) {
-      cat = await global.serverdbConnection.Category.findByPk(id);
+    if (targetId) {
+      cat = await global.serverdbConnection.Category.findByPk(targetId);
       if (cat) {
         await cat.update({ category_name: catName });
       }
@@ -46,7 +47,7 @@ router.post('/categories', async (req, res) => {
       });
     }
     response.data = cat;
-    response.category_id = cat.category_refid || cat.id;
+    response.category_id = cat ? (cat.category_refid || cat.id) : targetId;
     response.setMessage('Category saved successfully in PostgreSQL');
     response.setStatus(200);
   } catch (err) {
@@ -54,7 +55,11 @@ router.post('/categories', async (req, res) => {
     response.setMessage(err.message || 'Failed to save category');
   }
   res.json(response);
-});
+};
+
+router.post('/categories', saveCategoryHandler);
+router.put('/categories/:id', saveCategoryHandler);
+router.put('/categories', saveCategoryHandler);
 
 // DELETE /api/categories/:id
 router.delete('/categories/:id', async (req, res) => {
@@ -77,15 +82,61 @@ router.delete('/categories/:id', async (req, res) => {
 router.get('/menu-items', async (req, res) => {
   const response = new ResponseMessage(200, '');
   try {
-    const items = await global.serverdbConnection.Item.findAll({
-      where: { active: 1 },
+    const Op = global.serverdbConnection.Sequelize?.Op;
+    const whereCond = Op ? {
+      [Op.or]: [
+        { active: 1 },
+        { active: null }
+      ]
+    } : {};
+    let items = await global.serverdbConnection.Item.findAll({
+      where: whereCond,
       raw: true
     });
 
+    if (!items || items.length === 0) {
+      items = await global.serverdbConnection.Item.findAll({ raw: true });
+    }
+    console.log('[MenuRoutes] GET /menu-items total DB items found:', items?.length);
+
     const categories = await global.serverdbConnection.Category.findAll({ raw: true });
+    let dbUnits = [];
+    try {
+      if (global.serverdbConnection.Unit) {
+        dbUnits = await global.serverdbConnection.Unit.findAll({ where: { is_active: 1 }, raw: true });
+      }
+    } catch (e) { }
+
+    let billedItemIds = new Set();
+    try {
+      if (global.serverdbConnection.BillItem) {
+        const billedRows = await global.serverdbConnection.BillItem.findAll({
+          attributes: ['item_id'],
+          raw: true
+        });
+        billedRows.forEach(r => {
+          if (r.item_id) billedItemIds.add(Number(r.item_id));
+        });
+      }
+    } catch (e) { }
 
     const mapped = items.map(i => {
       const cat = categories.find(c => String(c.category_refid) === String(i.category_ref_ids) || c.id === i.category_ref_ids);
+      const isOpenItem = Number(i.is_open_item || 0);
+      const unitLabel = i.alternative_title || 'Plate';
+      let parsedVariants = [];
+      if (Array.isArray(i.discounted_items)) {
+        parsedVariants = i.discounted_items;
+      } else if (typeof i.discounted_items === 'string' && i.discounted_items.trim()) {
+        try {
+          const parsed = JSON.parse(i.discounted_items);
+          if (Array.isArray(parsed)) parsedVariants = parsed;
+        } catch (e) {
+          parsedVariants = [];
+        }
+      }
+      const isBilled = (isOpenItem === 1 && (i.description === 'BILLED' || billedItemIds.has(Number(i.item_id || i.id)))) ? 1 : 0;
+
       return {
         id: i.item_id || i.id,
         item_id: i.item_id || i.id,
@@ -93,20 +144,37 @@ router.get('/menu-items', async (req, res) => {
         title: i.title || i.item_name || 'Item',
         price: Number(i.sale_price || i.price || 0),
         sale_price: Number(i.sale_price || i.price || 0),
+        sale_price_1: Number(i.sale_price_1 || i.sale_price || i.price || 0),
+        sale_price_2: Number(i.sale_price_2 || i.sale_price || i.price || 0),
+        sale_price_3: Number(i.sale_price_3 || i.sale_price || i.price || 0),
+        sale_price_4: Number(i.sale_price_4 || i.sale_price || i.price || 0),
+        sale_price_5: Number(i.sale_price_5 || i.sale_price || i.price || 0),
+        unit: unitLabel,
+        unit_name: unitLabel,
+        alternative_title: i.alternative_title || '',
+        has_modifiers: i.has_modifiers || 0,
+        option_group_ref_id: i.option_group_ref_id || '',
+        variants: parsedVariants,
+        portions: parsedVariants,
         categoryId: i.category_ref_ids,
         category: cat ? cat.category_name : 'General',
         foodType: i.food_type === 1 ? 'Veg' : 'Non-Veg',
-        taxPercent: 5,
+        taxPercent: i.tax_per !== undefined ? Number(i.tax_per) : 5,
+        tax_name: i.tax_name || 'GST',
+        tax_per: i.tax_per !== undefined ? Number(i.tax_per) : 5,
         store_id: i.store_id || 'STORE_1',
         short_code: i.short_code || '',
-        is_open_item: i.is_open_item || 0,
-        open_price: i.open_price || 0
+        is_open_item: isOpenItem,
+        open_price: i.open_price || 0,
+        description: i.description || null,
+        is_billed: isBilled
       };
     });
 
     response.data = mapped;
     response.menuItems = mapped;
     response.items = mapped;
+    response.units = dbUnits;
     response.setStatus(200);
   } catch (err) {
     response.setStatus(400);
@@ -120,11 +188,21 @@ router.post('/menu-items', async (req, res) => {
   const response = new ResponseMessage(200, '');
   try {
     console.log('\n[MenuRoutes] POST /menu-items received body:', req.body);
-    const { id, item_id, title, name, price, sale_price, category_ref_ids, food_type, inventory_type, direct_inventory_item_id, store_id, outlet, short_code, is_open_item, open_price, kitchen_dept, tax_name, tax_per } = req.body;
+    const {
+      id, item_id, title, name, price, sale_price,
+      sale_price_1, sale_price_2, sale_price_3, sale_price_4, sale_price_5,
+      unit, unit_name, unitType, alternative_title, has_modifiers, option_group_ref_id,
+      variants, portions,
+      category_ref_ids, food_type, inventory_type, direct_inventory_item_id,
+      store_id, outlet, short_code, is_open_item, open_price, kitchen_dept,
+      tax_name, tax_per
+    } = req.body;
     const targetId = id || item_id;
     const itemTitle = title || name || 'Menu Item';
     const itemPrice = Number(price !== undefined ? price : (sale_price || 0));
     const finalStoreId = store_id || outlet || 'STORE_1';
+    const finalUnit = unit || unit_name || unitType || alternative_title || 'Plate';
+    const finalVariants = variants || portions || null;
 
     let item;
     if (targetId && Number(targetId) > 0) {
@@ -136,6 +214,15 @@ router.post('/menu-items', async (req, res) => {
           price: itemPrice,
           sale_price: itemPrice,
           itemsub_total: itemPrice,
+          alternative_title: finalUnit,
+          ...(sale_price_1 !== undefined && { sale_price_1: Number(sale_price_1) }),
+          ...(sale_price_2 !== undefined && { sale_price_2: Number(sale_price_2) }),
+          ...(sale_price_3 !== undefined && { sale_price_3: Number(sale_price_3) }),
+          ...(sale_price_4 !== undefined && { sale_price_4: Number(sale_price_4) }),
+          ...(sale_price_5 !== undefined && { sale_price_5: Number(sale_price_5) }),
+          ...(has_modifiers !== undefined && { has_modifiers: Number(has_modifiers) }),
+          ...(option_group_ref_id !== undefined && { option_group_ref_id: String(option_group_ref_id) }),
+          ...(finalVariants && { discounted_items: finalVariants }),
           ...(category_ref_ids && { category_ref_ids }),
           ...(food_type && { food_type: food_type === 'Non-Veg' ? 2 : (food_type === 'Veg' ? 1 : food_type) }),
           ...(inventory_type && { inventory_type }),
@@ -212,6 +299,15 @@ router.post('/menu-items', async (req, res) => {
         is_active: 1,
         store_id: finalStoreId,
         short_code: short_code || '',
+        alternative_title: finalUnit,
+        sale_price_1: sale_price_1 !== undefined ? Number(sale_price_1) : itemPrice,
+        sale_price_2: sale_price_2 !== undefined ? Number(sale_price_2) : itemPrice,
+        sale_price_3: sale_price_3 !== undefined ? Number(sale_price_3) : itemPrice,
+        sale_price_4: sale_price_4 !== undefined ? Number(sale_price_4) : itemPrice,
+        sale_price_5: sale_price_5 !== undefined ? Number(sale_price_5) : itemPrice,
+        has_modifiers: has_modifiers !== undefined ? Number(has_modifiers) : 0,
+        option_group_ref_id: option_group_ref_id ? String(option_group_ref_id) : null,
+        discounted_items: finalVariants,
         is_open_item: is_open_item !== undefined ? Number(is_open_item) : 0,
         open_price: open_price !== undefined ? Number(open_price) : 0
       });
@@ -234,15 +330,99 @@ router.post('/menu-items', async (req, res) => {
 router.delete('/menu-items/:id', async (req, res) => {
   const response = new ResponseMessage(200, '');
   try {
-    const item = await global.serverdbConnection.Item.findByPk(req.params.id);
-    if (item) {
-      await item.update({ active: 0, is_active: 0 });
+    let item = await global.serverdbConnection.Item.findByPk(req.params.id);
+    if (!item) {
+      item = await global.serverdbConnection.Item.findOne({
+        where: {
+          [global.serverdbConnection.Sequelize.Op.or]: [
+            { item_id: req.params.id },
+            { item_refid: req.params.id }
+          ]
+        }
+      });
     }
-    response.setMessage('Menu item deactivated successfully');
+    if (item) {
+      try {
+        await item.destroy();
+      } catch (dErr) {
+        await item.update({ active: 0 });
+      }
+    }
+    response.setMessage('Menu item deleted successfully');
     response.setStatus(200);
   } catch (err) {
     response.setStatus(400);
     response.setMessage(err.message || 'Failed to delete menu item');
+  }
+  res.json(response);
+});
+
+// POST /api/menu-items/bulk-delete — Bulk delete or clear all menu items
+router.post('/menu-items/bulk-delete', async (req, res) => {
+  const response = new ResponseMessage(200, '');
+  try {
+    const { ids, deleteAll, store_id } = req.body || {};
+    const Op = global.serverdbConnection.Sequelize.Op;
+
+    if (deleteAll) {
+      const deleteWhere = store_id ? {
+        [Op.or]: [
+          { store_id: store_id },
+          { store_id: 'STORE_1' },
+          { store_id: null }
+        ]
+      } : {};
+      
+      try {
+        await global.serverdbConnection.Item.destroy({ where: deleteWhere });
+      } catch (dErr) {
+        await global.serverdbConnection.Item.update({ active: 0 }, { where: deleteWhere });
+      }
+      response.setMessage('All menu items deleted successfully');
+    } else if (Array.isArray(ids) && ids.length > 0) {
+      const deleteWhere = {
+        [Op.or]: [
+          { item_id: { [Op.in]: ids } },
+          { item_refid: { [Op.in]: ids } }
+        ]
+      };
+      try {
+        await global.serverdbConnection.Item.destroy({ where: deleteWhere });
+      } catch (dErr) {
+        await global.serverdbConnection.Item.update({ active: 0 }, { where: deleteWhere });
+      }
+      response.setMessage(`Deleted ${ids.length} menu items successfully`);
+    } else {
+      response.setStatus(400);
+      response.setMessage('No item IDs provided for bulk deletion');
+      return res.json(response);
+    }
+
+    response.setStatus(200);
+  } catch (err) {
+    response.setStatus(400);
+    response.setMessage(err.message || 'Failed to bulk delete menu items');
+  }
+  res.json(response);
+});
+
+// POST /api/menu-items/:id/mark-billed — marks temporary item as billed in database
+router.post('/menu-items/:id/mark-billed', async (req, res) => {
+  const response = new ResponseMessage(200, '');
+  try {
+    const item = await global.serverdbConnection.Item.findByPk(req.params.id);
+    if (item && (item.is_open_item === 1 || item.is_open_item === '1')) {
+      await item.update({ active: 0, description: 'BILLED' });
+      response.setMessage('Temporary item deleted from POS menu after billing');
+      response.setStatus(200);
+    } else {
+      response.setMessage('Item not found or not temporary');
+      response.setStatus(200);
+    }
+  } catch (err) {
+    console.warn('Error marking temp item as billed:', err);
+    response.setStatus(400);
+    response.setMessage(err.message || 'Error marking item as billed');
   }
   res.json(response);
 });

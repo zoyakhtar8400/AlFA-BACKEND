@@ -252,20 +252,26 @@ router.get('/api/auth/me', auth, async (req, res) => {
   }
 });
 
-router.post('/logout', async (req, res) => {
+const handleLogoutReq = async (req, res) => {
   try {
-    const postData = req.body || {};
-    if (postData.username && global.serverdbConnection.UserLoginStatus) {
+    const postData = req.body || req.query || {};
+    const username = postData.username || req.user?.username;
+    if (username && global.serverdbConnection.UserLoginStatus) {
       await global.serverdbConnection.UserLoginStatus.update(
         { status: 0 },
-        { where: { username: postData.username } }
-      );
+        { where: { username: username } }
+      ).catch(() => {});
     }
     return res.status(200).json(new ResponseMessage(200, 'Logged out successfully'));
   } catch (error) {
     return res.status(200).json(new ResponseMessage(200, 'Logged out successfully'));
   }
-});
+};
+
+router.post('/logout', handleLogoutReq);
+router.post('/api/logout', handleLogoutReq);
+router.get('/logout', handleLogoutReq);
+router.get('/api/logout', handleLogoutReq);
 
 router.get('/ping', (req, res) => {
   res.json({ message: 'pong' });

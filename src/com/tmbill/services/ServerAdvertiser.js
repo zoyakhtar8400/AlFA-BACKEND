@@ -11,10 +11,10 @@ function getServiceoptions() {
   return {
     name: `TMBill Altantic ${uniqid()}`,
     type: 'http',
-    port: 3000,
+    port: Config.server_port || 8000,
     txt: {
       secretKey: Config.cipherKey,
-      url: `http://${ip.address()}:3000/`,
+      url: `http://${ip.address()}:${Config.server_port || 8000}/`,
       storeName: (global.storeDetails && global.storeDetails.store_name) || '',
       username: (global.storeDetails && global.storeDetails.username) || '',
     },

@@ -3,7 +3,7 @@ const { ResponseMessage } = require('../error/ResponseMessage');
 const router = express.Router();
 
 
-router.get('/menu/waiters', async (req, res) => {
+const getWaitersHandler = async (req, res) => {
   const response = new ResponseMessage(200, '');
   try {
     const where = {};
@@ -19,6 +19,7 @@ router.get('/menu/waiters', async (req, res) => {
       id: w.id,
       name: w.name || `Steward ${w.id}`,
       phone: w.phone || '',
+      area: w.area || '',
       store_id: w.store_id || 'STORE_1',
       active: 'Yes',
       status: 'Active'
@@ -32,12 +33,16 @@ router.get('/menu/waiters', async (req, res) => {
     response.setMessage(err.message || 'Failed to fetch stewards');
   }
   res.json(response);
-});
+};
+
+router.get('/menu/waiters', getWaitersHandler);
+router.get('/waiters', getWaitersHandler);
+router.get('/stewards', getWaitersHandler);
 
 router.post('/menu/waiters', async (req, res) => {
   const response = new ResponseMessage(200, '');
   try {
-    const { id, name, waiter_name, phone, store_id } = req.body;
+    const { id, name, waiter_name, phone, area, store_id } = req.body;
     const stewardName = name || waiter_name || 'Steward';
     const targetStoreId = store_id || 'STORE_1';
 
@@ -47,7 +52,8 @@ router.post('/menu/waiters', async (req, res) => {
       if (waiter) {
         await waiter.update({
           name: stewardName,
-          phone: phone || waiter.phone,
+          phone: phone !== undefined ? phone : waiter.phone,
+          area: area !== undefined ? area : (waiter.area || ''),
           store_id: targetStoreId
         });
       }
@@ -56,6 +62,7 @@ router.post('/menu/waiters', async (req, res) => {
         name: stewardName,
         username: `steward_${Date.now().toString().slice(-6)}`,
         phone: phone || '',
+        area: area || '',
         store_id: targetStoreId
       });
     }
@@ -106,6 +113,7 @@ router.get('/delivery-boys', async (req, res) => {
       partner: d.username || d.partner || 'Direct Delivery',
       name: d.name || `Delivery Boy ${d.id}`,
       phone: d.phone || '',
+      area: d.area || '',
       store_id: d.store_id || 'STORE_1',
       status: 'Active'
     }));
@@ -113,7 +121,8 @@ router.get('/delivery-boys', async (req, res) => {
     response.setStatus(200);
   } catch (err) {
     console.error('Error fetching delivery boys:', err);
-    response.setStatus(400);
+    response.data = [];
+    response.setStatus(200);
     response.setMessage(err.message);
   }
   res.json(response);
@@ -122,7 +131,7 @@ router.get('/delivery-boys', async (req, res) => {
 router.post('/delivery-boys', async (req, res) => {
   const response = new ResponseMessage(200, '');
   try {
-    const { id, partner, name, phone, store_id } = req.body;
+    const { id, partner, name, phone, area, store_id } = req.body;
     const targetStoreId = store_id || 'STORE_1';
     let delBoy;
     if (id && Number(id) > 0) {
@@ -131,7 +140,8 @@ router.post('/delivery-boys', async (req, res) => {
         await delBoy.update({
           username: partner || delBoy.username,
           name: name || delBoy.name,
-          phone: phone || delBoy.phone,
+          phone: phone !== undefined ? phone : delBoy.phone,
+          area: area !== undefined ? area : (delBoy.area || ''),
           store_id: targetStoreId
         });
       }
@@ -140,6 +150,7 @@ router.post('/delivery-boys', async (req, res) => {
         username: partner || 'Direct Delivery',
         name: name || 'Delivery Staff',
         phone: phone || '',
+        area: area || '',
         store_id: targetStoreId
       });
     }
@@ -208,7 +219,7 @@ router.post('/taxes', async (req, res) => {
     if (taxes_json) {
       try {
         extraDetails.taxes = typeof taxes_json === 'string' ? JSON.parse(taxes_json) : taxes_json;
-      } catch(e){}
+      } catch (e) { }
     }
 
     let tax;
@@ -217,7 +228,7 @@ router.post('/taxes', async (req, res) => {
       if (tax) {
         let currentExtra = tax.extra_details;
         if (typeof currentExtra === 'string') {
-          try { currentExtra = JSON.parse(currentExtra); } catch(e){ currentExtra = {}; }
+          try { currentExtra = JSON.parse(currentExtra); } catch (e) { currentExtra = {}; }
         }
         await tax.update({
           tax_name: tName,
@@ -560,7 +571,7 @@ router.post('/stores', async (req, res) => {
       outletTitle: outletTitle || '',
       customerInfo: customerInfo || 'Optional',
       autoSettlement: autoSettlement || 'No',
-      focusOn: focusOn || 'Item Search',
+      focusOn: focusOn || 'BOTH',
       kot: kot || 'Print & Save',
       kotPrint: kotPrint || 'Immediate',
       roomService: roomService || 'Disabled',
@@ -590,6 +601,11 @@ router.post('/stores', async (req, res) => {
     }
 
     if (store) {
+      const existingSettings = typeof store.settings === 'object' && store.settings ? store.settings : {};
+      const mergedSettings = { ...existingSettings, ...settingsObj };
+      if (req.body.numbering) mergedSettings.numbering = req.body.numbering;
+      if (req.body.generalConfig) mergedSettings.generalConfig = req.body.generalConfig;
+
       await store.update({
         store_name: newStoreName,
         store_phone: phone || store.store_phone,
@@ -599,9 +615,13 @@ router.post('/stores', async (req, res) => {
         user_sub_locality: billHeader3 || store.user_sub_locality,
         footer_note: billSlogan1 || store.footer_note,
         disable_ordering: isInactive ? 1 : 0,
-        settings: settingsObj
+        settings: mergedSettings
       });
     } else {
+      const baseSettings = { ...settingsObj };
+      if (req.body.numbering) baseSettings.numbering = req.body.numbering;
+      if (req.body.generalConfig) baseSettings.generalConfig = req.body.generalConfig;
+
       store = await global.serverdbConnection.Store.create({
         store_name: newStoreName,
         store_phone: phone || '',
@@ -611,7 +631,7 @@ router.post('/stores', async (req, res) => {
         user_sub_locality: billHeader3 || '',
         footer_note: billSlogan1 || '',
         disable_ordering: isInactive ? 1 : 0,
-        settings: settingsObj
+        settings: baseSettings
       });
       const generatedStoreId = `STORE_${store.id}`;
       await store.update({ store_id: generatedStoreId });
@@ -625,9 +645,48 @@ router.post('/stores', async (req, res) => {
       store_name: store.store_name,
       name: store.store_name,
       phone: store.store_phone || store.user_phone || '',
-      settings: settingsObj
+      settings: store.settings
     };
     response.setMessage('Outlet saved successfully in PostgreSQL');
+    response.setStatus(200);
+  } catch (err) {
+    response.setStatus(400);
+    response.setMessage(err.message);
+  }
+  res.json(response);
+});
+
+router.post('/stores/:id/config', async (req, res) => {
+  const response = new ResponseMessage(200, '');
+  try {
+    const targetId = req.params.id;
+    const { numbering, general, generalConfig, settings } = req.body || {};
+    const store = await global.serverdbConnection.Store.findOne({
+      where: {
+        [global.serverdbConnection.Sequelize.Op.or]: [
+          { id: Number(targetId) || 0 },
+          { store_id: String(targetId) }
+        ]
+      }
+    });
+    if (!store) {
+      response.setStatus(404);
+      response.setMessage(`Outlet ID '${targetId}' not found in database.`);
+      return res.status(404).json(response);
+    }
+    const existingSettings = typeof store.settings === 'object' && store.settings ? store.settings : {};
+    const mergedSettings = { ...existingSettings };
+    if (numbering) mergedSettings.numbering = numbering;
+    if (general || generalConfig) mergedSettings.generalConfig = general || generalConfig;
+    if (settings && typeof settings === 'object') Object.assign(mergedSettings, settings);
+
+    await store.update({ settings: mergedSettings });
+
+    response.data = {
+      ...store.get({ plain: true }),
+      settings: mergedSettings
+    };
+    response.setMessage('Outlet configuration persisted successfully in PostgreSQL');
     response.setStatus(200);
   } catch (err) {
     response.setStatus(400);
@@ -1083,30 +1142,125 @@ router.post('/items/csv-upload', async (req, res) => {
         const isNonVegName = /chicken|mutton|beef|pork|fish|prawn|meat|egg|crab|squid/.test(itemNameLower);
         const foodType = (it.type === 'Non-Veg' || isNonVegName) ? 2 : 1;
 
-        // 4. Insert the Menu Item with all required defaults for the POS menu
-        await global.serverdbConnection.Item.create({
-          item_refid: Math.floor(Date.now() / 1000) + createdCount,
-          title: it.name || it.title,
-          item_name: it.name || it.title,
-          price: Number(it.price || it.sale_price || 0),
-          sale_price: Number(it.price || it.sale_price || 0),
-          itemsub_total: Number(it.price || it.sale_price || 0),
-          tax_per: 5,
-          tax_value: 0,
-          tax_name: 'Default 5%',
-          kitchen_dept: 1,
-          product_group: productGroupId, // Resolved product group ID
-          tax_discount_method: 1,
-          inventory_type: 'RECIPE',
-          category_ref_ids: categoryId, // Assign resolved or created category ID
-          food_type: foodType,
-          active: 1,
-          is_active: 1, // Mandatory for visibility in POS
-          store_id: it.store_id || it.outlet || 'STORE_1',
-          short_code: '',
-          is_open_item: 0,
-          open_price: 0
+        // 4. Insert or update the Menu Item with all required defaults for the POS menu
+        const itemTitle = (it.name || it.title || '').trim();
+        const itemStoreId = it.store_id || it.outlet || 'STORE_1';
+        const finalVariants = Array.isArray(it.variants) && it.variants.length > 0
+          ? it.variants
+          : (Array.isArray(it.portions) && it.portions.length > 0 ? it.portions : null);
+
+        let itemPrice = Number(it.price || it.sale_price || 0);
+        if ((!itemPrice || itemPrice <= 0) && finalVariants && finalVariants.length > 0) {
+          itemPrice = Number(finalVariants[0].price || 0);
+        }
+
+        const cleanTitle = itemTitle.trim();
+        const existingItem = await global.serverdbConnection.Item.findOne({
+          where: {
+            [global.serverdbConnection.Sequelize.Op.and]: [
+              global.serverdbConnection.Sequelize.where(
+                global.serverdbConnection.Sequelize.fn('LOWER', global.serverdbConnection.Sequelize.fn('TRIM', global.serverdbConnection.Sequelize.col('title'))),
+                cleanTitle.toLowerCase()
+              ),
+              {
+                [global.serverdbConnection.Sequelize.Op.or]: [
+                  { store_id: itemStoreId },
+                  { store_id: 'STORE_1' },
+                  { store_id: null },
+                  { store_id: '' }
+                ]
+              }
+            ]
+          }
         });
+
+        if (existingItem) {
+          let mergedVariants = null;
+          let currentVariants = [];
+          if (Array.isArray(existingItem.discounted_items)) {
+            currentVariants = existingItem.discounted_items;
+          } else if (typeof existingItem.discounted_items === 'string' && existingItem.discounted_items.trim()) {
+            try { currentVariants = JSON.parse(existingItem.discounted_items); } catch (e) {}
+          }
+          if (!Array.isArray(currentVariants)) currentVariants = [];
+
+          if (finalVariants && finalVariants.length > 0) {
+            const variantMap = new Map();
+            currentVariants.forEach(cv => {
+              if (cv && cv.name) {
+                variantMap.set(cv.name.trim().toLowerCase(), { ...cv });
+              }
+            });
+            finalVariants.forEach(iv => {
+              if (iv && iv.name) {
+                const key = iv.name.trim().toLowerCase();
+                const existingV = variantMap.get(key);
+                if (existingV) {
+                  variantMap.set(key, {
+                    ...existingV,
+                    price: Number(iv.price) > 0 ? Number(iv.price) : existingV.price,
+                    serving: iv.serving || iv.description || existingV.serving || '',
+                    description: iv.description || iv.serving || existingV.description || '',
+                    code: iv.code || existingV.code || '',
+                    active: iv.active !== undefined ? iv.active : existingV.active
+                  });
+                } else {
+                  variantMap.set(key, {
+                    id: iv.id || `v_${Date.now()}_${Math.random().toString(36).substr(2, 4)}`,
+                    name: iv.name,
+                    serving: iv.serving || iv.description || '',
+                    description: iv.description || iv.serving || '',
+                    price: Number(iv.price) || 0,
+                    code: iv.code || '',
+                    active: iv.active !== false
+                  });
+                }
+              }
+            });
+            mergedVariants = Array.from(variantMap.values());
+          } else {
+            mergedVariants = currentVariants.length > 0 ? currentVariants : null;
+          }
+
+          const resolvedPrice = (mergedVariants && mergedVariants.length > 0)
+            ? Number(mergedVariants[0].price || itemPrice || existingItem.price)
+            : (itemPrice > 0 ? itemPrice : existingItem.price);
+
+          await existingItem.update({
+            price: resolvedPrice,
+            sale_price: resolvedPrice,
+            itemsub_total: resolvedPrice,
+            category_ref_ids: categoryId || existingItem.category_ref_ids,
+            product_group: productGroupId || existingItem.product_group,
+            food_type: foodType,
+            active: 1,
+            discounted_items: mergedVariants
+          });
+        } else {
+          await global.serverdbConnection.Item.create({
+            item_refid: Math.floor(Date.now() / 1000) + createdCount,
+            title: itemTitle,
+            item_name: itemTitle,
+            price: itemPrice,
+            sale_price: itemPrice,
+            itemsub_total: itemPrice,
+            tax_per: 5,
+            tax_value: 0,
+            tax_name: 'Default 5%',
+            kitchen_dept: 1,
+            product_group: productGroupId, // Resolved product group ID
+            tax_discount_method: 1,
+            inventory_type: 'RECIPE',
+            category_ref_ids: categoryId, // Assign resolved or created category ID
+            food_type: foodType,
+            active: 1,
+            store_id: itemStoreId,
+            short_code: it.dispCode || '',
+            is_open_item: 0,
+            open_price: 0,
+            discounted_items: finalVariants
+          });
+        }
         createdCount++;
       }
     }

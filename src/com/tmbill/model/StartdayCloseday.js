@@ -56,7 +56,7 @@ function getModel(sequelize, type) {
         defaultValue: 0,
       },
       created_date: {
-        type: type.TIME,
+        type: type.DATE,
         allowNull: true,
         defaultValue: type.NOW,
       },
@@ -130,6 +130,26 @@ function getModel(sequelize, type) {
       },
       unique_id: {
         type: type.STRING,
+        allowNull: true,
+      },
+      business_date: {
+        type: type.STRING(30),
+        allowNull: true,
+      },
+      audit_status: {
+        type: type.STRING(50),
+        defaultValue: 'Not Started',
+      },
+      audit_report: {
+        type: type.JSON,
+        allowNull: true,
+      },
+      opened_at: {
+        type: type.DATE,
+        allowNull: true,
+      },
+      closed_at: {
+        type: type.DATE,
         allowNull: true,
       },
     },

@@ -261,17 +261,17 @@ async function seedTestData() {
 
       if (o.items && o.items.length > 0) {
         for (const it of o.items) {
-          const existingItem = await db.BillItem.findOne({ where: { order_id: createdBill.order_id, item_name: it.name } });
+          const existingItem = await db.BillItem.findOne({ where: { bill_id: createdBill.id, title: it.name } });
           if (!existingItem) {
             await db.BillItem.create({
-              order_id: createdBill.order_id,
-              orderMasterId: createdBill.order_id,
-              item_id: 1,
-              item_name: it.name,
+              bill_id: createdBill.id,
+              orderMasterId: String(createdBill.id),
+              item_id: '1',
+              title: it.name,
               quantity: it.qty,
               price: it.price,
               total: it.qty * it.price,
-              store_id: defaultStore
+              total_with_tax: it.qty * it.price
             });
           }
         }

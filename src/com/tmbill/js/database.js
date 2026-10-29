@@ -256,28 +256,49 @@ UserOutlet.belongsTo(User, { foreignKey: 'user_id', constraints: false });
 // Automatically ensure tables exist in PostgreSQL
 (async () => {
   try {
-    await UserOutlet.sync({ alter: true });
-    await Area.sync({ alter: true });
-    await PaymentMode.sync({ alter: true });
-    await InventoryItem.sync({ alter: true });
-    await RecipeMaster.sync({ alter: true });
-    await RecipeItems.sync({ alter: true });
-    await StockLedger.sync({ alter: true });
-    await Item.sync({ alter: true });
-    await Supplier.sync({ alter: true });
-    await ItemGroup.sync({ alter: true });
-    await Unit.sync({ alter: true });
-    await PurchaseOrder.sync({ alter: true });
-    await PurchaseOrderItem.sync({ alter: true });
-    await PurchaseGRN.sync({ alter: true });
-    await PurchaseGRNItem.sync({ alter: true });
-    await PurchaseBill.sync({ alter: true });
-    await PurchaseIndent.sync({ alter: true });
-    await PurchaseIndentItem.sync({ alter: true });
-    await PurchaseQuotation.sync({ alter: true });
-    await PurchaseReturn.sync({ alter: true });
-    await DepartmentIssue.sync({ alter: true });
-    console.log('✅ Inventory, Recipe, Purchase, and Stock Ledger PostgreSQL tables synchronized successfully.');
+    await sequelize.sync();
+    console.log('✅ Core PostgreSQL database tables verified/created successfully.');
+
+    const modelsToSync = [
+      UserOutlet,
+      Area,
+      PaymentMode,
+      InventoryItem,
+      RecipeMaster,
+      RecipeItems,
+      StockLedger,
+      Item,
+      Supplier,
+      ItemGroup,
+      Unit,
+      PurchaseOrder,
+      PurchaseOrderItem,
+      PurchaseGRN,
+      PurchaseGRNItem,
+      PurchaseBill,
+      PurchaseIndent,
+      PurchaseIndentItem,
+      PurchaseQuotation,
+      PurchaseReturn,
+      DepartmentIssue,
+      DeliveryBoy,
+      Waiter,
+      Floor,
+      TableReservation,
+      NCType,
+      CompanyProfile
+    ];
+
+    for (const model of modelsToSync) {
+      if (model && typeof model.sync === 'function') {
+        try {
+          await model.sync({ alter: true });
+        } catch (modelErr) {
+          console.warn(`⚠️ Warning syncing model ${model.name || 'unknown'}:`, modelErr.message);
+        }
+      }
+    }
+    console.log('✅ Inventory, Recipe, Purchase, Master, and DeliveryBoy PostgreSQL tables synchronized successfully.');
   } catch (syncErr) {
     console.warn('⚠️ Table sync warning:', syncErr.message);
   }

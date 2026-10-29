@@ -887,7 +887,7 @@ function initTerminalsetup() {
           );
           return;
         }
-        const masterPOSURL = `http://${enteredIP}:3000/`;
+        const masterPOSURL = `http://${enteredIP}:8000/`;
         setLocalStorage('MASTER_POS_URL', masterPOSURL);
       }
     }

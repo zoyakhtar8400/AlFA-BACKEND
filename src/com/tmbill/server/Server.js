@@ -121,20 +121,31 @@ const invoicesDir = (app && typeof app.getPath === 'function')
 expressApp.use(express.static(path.join(invoicesDir)));
 expressApp.use(bodyParser.json({ limit: '10mb' }));
 expressApp.use(bodyParser.urlencoded({ extended: true, limit: '10mb' }));
+expressApp.set('etag', false);
+expressApp.use((req, res, next) => {
+  res.set('Cache-Control', 'no-store, no-cache, must-revalidate, private');
+  res.set('Pragma', 'no-cache');
+  res.set('Expires', '0');
+  next();
+});
 expressApp.use(cors());
+expressApp.use((req, res, next) => {
+  if (req.url) req.url = req.url.trim();
+  next();
+});
 // expressApp.use(convertQueryParams);
 
 const menuCatalogRouter = require('../routes/MenuRoutes');
 const billingRouter = require('../routes/Billing');
 const reservationRouter = require('../routes/Reservation');
 
-
-expressApp.use(errorHandler);
 expressApp.use(loginRouter);
 expressApp.use(ROUTES.TABLE, auth, tableRouter);
 expressApp.use('/api/tables', auth, tableRouter);
 
 expressApp.use(ROUTES.DEPARTMENT, auth, depRouter);
+expressApp.use('/api/departments', auth, depRouter);
+expressApp.use('/departments', auth, depRouter);
 
 expressApp.use(ROUTES.ORDER, auth, orderRouter);
 expressApp.use('/api/orders', auth, orderRouter);
@@ -142,6 +153,8 @@ expressApp.use('/api/dashboard', auth, orderRouter);
 
 expressApp.use(ROUTES.KOT, auth, kotRouter);
 expressApp.use('/api/kots', auth, kotRouter);
+expressApp.use('/kot', auth, kotRouter);
+expressApp.use('/kots', auth, kotRouter);
 
 expressApp.use(ROUTES.CUSTOMER, auth, customerRouter);
 expressApp.use(ROUTES.OLD_KOT, auth, oldkotRouter);
@@ -157,6 +170,7 @@ const paymentModeRouter = require('../routes/PaymentMode');
 const companyProfileRouter = require('../routes/CompanyProfile');
 
 expressApp.use('/api/floors', floorRouter);
+expressApp.use('/floors', floorRouter);
 expressApp.use('/api/areas', areaRouter);
 expressApp.use('/areas', areaRouter);
 expressApp.use('/api/payment-modes', paymentModeRouter);
@@ -178,6 +192,7 @@ expressApp.use('/api/reservations', auth, reservationRouter);
 expressApp.use('/api', auth, menuCatalogRouter);
 expressApp.use('/api/billing', auth, billingRouter);
 expressApp.use('/api/payments', auth, billingRouter);
+expressApp.use('/api/night-audit', auth, require('../routes/NightAudit'));
 expressApp.use('/api/pos/calculate', require('../routes/posCalculate'));
 
 expressApp.use(ROUTES.KDS, auth, kdsRouter);
@@ -189,17 +204,29 @@ expressApp.use(ROUTES.API, internalAuth, apiRouter);
 const { setupSwagger } = require('../docs');
 setupSwagger(expressApp);
 
-// eslint-disable-next-line no-unused-vars
-expressApp.get('*', (req, res, next) => {
-  res.json(new ResponseMessage(404, 'No Mapping Found'));
+// System Server Control Endpoints
+expressApp.get('/api/system/status', (req, res) => {
+  res.json({ status: 'online', port: PORT, uptime: Math.floor(process.uptime()), nodeVersion: process.version });
 });
+expressApp.post('/api/system/stop-server', (req, res) => {
+  res.json({ success: true, message: 'Server shutdown initiated.' });
+  console.log('[ALFA Server] Shutdown requested from client. Exiting...');
+  setTimeout(() => process.exit(0), 400);
+});
+
+// eslint-disable-next-line no-unused-vars
+expressApp.all('*', (req, res, next) => {
+  res.status(404).json(new ResponseMessage(404, 'No Mapping Found'));
+});
+
+expressApp.use(errorHandler);
 
 const { Config } = require('../config/config');
 if (!global.Config) {
   global.Config = Config;
 }
 
-const PORT = (global.Config && global.Config.server_port) || process.env.PORT || 3000;
+const PORT = (global.Config && global.Config.server_port) || process.env.PORT || 8000;
 
 server.on('error', (err) => {
   if (err.code === 'EADDRINUSE') {

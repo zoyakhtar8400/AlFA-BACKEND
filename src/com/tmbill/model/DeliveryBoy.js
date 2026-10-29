@@ -21,6 +21,10 @@ function getModel(sequelize, type) {
                 type: type.STRING,
                 allowNull: true
             },
+            area: {
+                type: type.STRING,
+                allowNull: true
+            },
             store_id: {
                 type: type.STRING,
                 allowNull: true

@@ -43,3 +43,11 @@ dist/
 build/
 coverage/
 .nyc_output/
+*.exe
+*.zip
+*.pdf
+*.tmp
+
+# Scratch & Dev experiments
+scratch/
+test/

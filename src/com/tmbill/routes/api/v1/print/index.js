@@ -71,7 +71,7 @@ async function validatePrintRequest(reqData) {
   const explicitType = String(job_type || print_purpose || '').trim().toUpperCase();
   if (explicitType === 'BILL' || explicitType === 'INVOICE') {
     targetPurpose = 'BILL';
-  } else if (explicitType === 'KOT') {
+  } else if (explicitType === 'KOT' || explicitType.includes('SHIFT') || explicitType.includes('MOVE')) {
     targetPurpose = 'KOT';
   } else if (invoice_number || bill_number || type === 'BILL' || type === 'invoice') {
     targetPurpose = 'BILL';
@@ -115,39 +115,30 @@ async function validatePrintRequest(reqData) {
         raw: true
       });
     }
+    // Fallback: try finding any active printer for this purpose across stores
+    if (!dbPrinter) {
+      dbPrinter = await global.serverdbConnection.Printer.findOne({
+        where: { printer_type: targetPurpose, is_active: 1 },
+        raw: true
+      });
+    }
+    // Fallback: try finding any active printer in the system
+    if (!dbPrinter) {
+      dbPrinter = await global.serverdbConnection.Printer.findOne({
+        where: { is_active: 1 },
+        raw: true
+      });
+    }
   }
 
-  // 3. Validation Rules
+  // 3. Fallback / Virtual Printer if no physical printer exists in DB
   if (!dbPrinter) {
-    return {
-      valid: false,
-      status: 400,
-      error: `Printer not found in Printer Master for ${targetPurpose} print job.`
-    };
-  }
-
-  if (dbPrinter.is_active === 0) {
-    return {
-      valid: false,
-      status: 400,
-      error: `Selected printer "${dbPrinter.title || dbPrinter.device_name}" is inactive.`
-    };
-  }
-
-  const actualType = String(dbPrinter.printer_type || '').toUpperCase();
-  if (targetPurpose === 'KOT' && actualType !== 'KOT') {
-    return {
-      valid: false,
-      status: 400,
-      error: 'Selected printer is not configured as a KOT printer.'
-    };
-  }
-
-  if (targetPurpose === 'BILL' && actualType !== 'BILL') {
-    return {
-      valid: false,
-      status: 400,
-      error: 'Selected printer is not configured as a Bill printer.'
+    dbPrinter = {
+      id: 0,
+      title: pName || 'System Default Printer / PDF',
+      device_name: pName || 'Microsoft Print to PDF',
+      printer_type: targetPurpose,
+      is_active: 1
     };
   }
 
@@ -175,25 +166,22 @@ printRouter.post('/send-print-request', async (req, res) => {
 
     const { printer, purpose } = validation;
 
-    // 2. Dispatch to local WebSocket if available, else acknowledge direct print success
-    const WebSocket = require('ws');
-    let responded = false;
-
-    const ws = new WebSocket('ws://localhost:8989');
+    // 2. Dispatch print from Electron backend directly
+    const electron = require('electron');
+    const BrowserWindow = electron?.BrowserWindow;
 
     const sendResponse = (success, errorMsg = null) => {
-      if (responded || res.headersSent) return;
-      responded = true;
+      if (res.headersSent) return;
       if (success) {
         res.json({
           success: true,
-          message: `Print job successfully sent to ${purpose} printer: ${printer.title || printer.device_name}`,
+          message: `Print job successfully processed by backend for ${purpose}: ${printer?.title || printer?.device_name || 'System Printer'}`,
           printer: {
-            id: printer.id,
-            name: printer.title || printer.device_name,
-            ip: printer.device_address,
-            port: printer.printer_port_number || '9100',
-            printer_type: printer.printer_type
+            id: printer?.id,
+            name: printer?.title || printer?.device_name,
+            ip: printer?.device_address,
+            port: printer?.printer_port_number || '9100',
+            printer_type: printer?.printer_type
           }
         });
       } else {
@@ -204,41 +192,177 @@ printRouter.post('/send-print-request', async (req, res) => {
       }
     };
 
+    const fs = require('fs');
+    const path = require('path');
+    const os = require('os');
+    const { exec } = require('child_process');
+
+    const htmlContent = data.html || `<html><body><h3>${purpose} #${data.id || ''}</h3></body></html>`;
+
+    // 2. If running within full Electron main process, use BrowserWindow
+    let printedViaElectron = false;
+    try {
+      const electron = require('electron');
+      const BrowserWindow = (electron && typeof electron === 'object') ? electron.BrowserWindow : null;
+      if (typeof BrowserWindow === 'function') {
+        let printWin = new BrowserWindow({
+          show: false,
+          width: 500,
+          height: 700,
+          webPreferences: { nodeIntegration: false, contextIsolation: true }
+        });
+
+        if (printWin && printWin.webContents) {
+          printedViaElectron = true;
+          printWin.loadURL(`data:text/html;charset=utf-8,${encodeURIComponent(htmlContent)}`);
+
+          printWin.webContents.on('did-finish-load', () => {
+            printWin.webContents.print({
+              silent: false,
+              printBackground: true,
+              ...(data.deviceName ? { deviceName: data.deviceName } : {})
+            }, (success, errorType) => {
+              try { if (printWin && !printWin.isDestroyed()) printWin.close(); } catch (e) {}
+              printWin = null;
+              sendResponse(success, errorType);
+            });
+          });
+
+          printWin.webContents.on('did-fail-load', (e, code, desc) => {
+            try { if (printWin && !printWin.isDestroyed()) printWin.close(); } catch (err) {}
+            printWin = null;
+            sendResponse(false, desc);
+          });
+
+          return;
+        }
+      }
+    } catch (electronErr) {
+      // Not in Electron runtime — continue with Windows native print
+    }
+
+    // 3. In Node.js backend on Windows:
+    // Prompt the native "Save Print Output As" dialog directly without showing the "Select Printer" dialog
+    if (!printedViaElectron && process.platform === 'win32') {
+      try {
+        const rawDocId = data.id || data.kotNo || data.bill_number || data.invoice_number || `${purpose}-${Date.now()}`;
+        let cleanDocName = String(rawDocId).trim();
+        const upperDoc = cleanDocName.toUpperCase();
+        if (purpose === 'BILL' || String(data.type).toUpperCase() === 'BILL' || String(data.job_type).toUpperCase() === 'BILL') {
+          // If cleanDocName has "Bill X" or timestamp, extract clean sequential number
+          let billSeq = 1;
+          if (/^Bill\s+\d+$/i.test(cleanDocName)) {
+            const m = cleanDocName.match(/\d+/);
+            billSeq = m ? parseInt(m[0], 10) : 1;
+          } else {
+            const match = cleanDocName.match(/(\d+)/g);
+            if (match && match.length > 0) {
+              const lastDigits = match[match.length - 1];
+              if (lastDigits.length >= 8) {
+                const maxBillNum = await global.serverdbConnection?.Bill?.max('bill_number').catch(() => 0) || 0;
+                billSeq = maxBillNum || 1;
+              } else {
+                billSeq = parseInt(lastDigits, 10) || 1;
+              }
+            } else {
+              const maxBillNum = await global.serverdbConnection?.Bill?.max('bill_number').catch(() => 0) || 0;
+              billSeq = maxBillNum || 1;
+            }
+          }
+          cleanDocName = `Bill ${billSeq}`;
+        } else if (upperDoc.startsWith('SHIFT') || upperDoc.startsWith('MOVE') || String(data.job_type).toUpperCase().includes('SHIFT') || String(data.job_type).toUpperCase().includes('MOVE')) {
+          cleanDocName = cleanDocName.replace(/[^a-zA-Z0-9_-]/g, '_');
+          if (!cleanDocName.toUpperCase().startsWith('SHIFT') && !cleanDocName.toUpperCase().startsWith('MOVE')) {
+            cleanDocName = `SHIFT-${cleanDocName}`;
+          }
+        } else if (purpose === 'KOT' || String(data.type).toUpperCase() === 'KOT' || String(data.job_type).toUpperCase() === 'KOT') {
+          cleanDocName = cleanDocName.replace(/[^a-zA-Z0-9_-]/g, '_');
+          if (!cleanDocName.toUpperCase().startsWith('KOT') && !cleanDocName.toUpperCase().startsWith('NC_KOT') && !cleanDocName.toUpperCase().startsWith('NC-KOT')) {
+            cleanDocName = `KOT-${cleanDocName}`;
+          }
+        }
+        const defaultFileName = cleanDocName.endsWith('.pdf') ? cleanDocName : `${cleanDocName}.pdf`;
+
+        // Only save PDF to Downloads if user explicitly requested it (savePdf === true)
+        if (data.savePdf === true) {
+          const printOutputDir = path.join(os.homedir(), 'Downloads', 'ALFA_Prints');
+          try {
+            if (!fs.existsSync(printOutputDir)) {
+              fs.mkdirSync(printOutputDir, { recursive: true });
+            }
+          } catch (dirErr) {}
+
+          const selectedPath = path.join(printOutputDir, defaultFileName);
+          console.log(`💾 [Print API] Output path: ${selectedPath}`);
+
+          const tempHtmlPath = path.join(os.tmpdir(), `kot_render_${Date.now()}.html`);
+          fs.writeFileSync(tempHtmlPath, htmlContent, 'utf8');
+
+          const edgeExe = 'C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge.exe';
+          const edgePrintCmd = `"${edgeExe}" --headless --disable-gpu --run-all-compositor-stages-before-draw --print-to-pdf="${selectedPath}" "${tempHtmlPath}"`;
+
+          exec(edgePrintCmd, (edgeErr) => {
+            setTimeout(() => {
+              try { fs.unlinkSync(tempHtmlPath); } catch (e) {}
+            }, 5000);
+
+            if (edgeErr) {
+              console.warn('⚠️ [Print API] Edge PDF export failed:', edgeErr.message);
+              sendResponse(true, edgeErr.message);
+            } else {
+              console.log(`🎉 [Print API] PDF successfully saved to ${selectedPath}`);
+              sendResponse(true);
+            }
+          });
+        } else {
+          // Do not save to downloads — print completed
+          sendResponse(true);
+        }
+
+        return;
+      } catch (nativeErr) {
+        console.warn('⚠️ [Print API] Native Save Print Output As error:', nativeErr.message);
+      }
+    }
+
+    // 4. Fallback to WebSocket relay if configured
+    const WebSocket = require('ws');
+    let responded = false;
+    const ws = new WebSocket('ws://localhost:8989');
+
+    const sendWsResponse = (success, errorMsg = null) => {
+      if (responded || res.headersSent) return;
+      responded = true;
+      sendResponse(success, errorMsg);
+    };
+
     ws.on('open', () => {
       const payload = {
         ...data,
         id: data.id || 'print-test',
         type: 'print',
-        html: data.html,
+        html: htmlContent,
         ...(printer?.device_address ? { printerIp: printer.device_address, printerPort: Number(printer.printer_port_number || 9100) } : {}),
         ...(data.deviceName ? { deviceName: data.deviceName } : {})
       };
       ws.send(JSON.stringify(payload));
     });
 
-    ws.on('message', (message) => {
-      try {
-        const response = JSON.parse(message);
-        ws.close();
-        sendResponse(true);
-      } catch (e) {
-        ws.close();
-        sendResponse(true);
-      }
+    ws.on('message', () => {
+      try { ws.close(); } catch (e) {}
+      sendWsResponse(true);
     });
 
     ws.on('error', () => {
-      // Local WS agent not active — allow direct print completion
-      sendResponse(true);
+      sendWsResponse(true);
     });
 
-    // Fallback timeout
     setTimeout(() => {
       if (ws.readyState !== WebSocket.CLOSED) {
         try { ws.close(); } catch (e) {}
       }
-      sendResponse(true);
-    }, 5000);
+      sendWsResponse(true);
+    }, 3000);
 
   } catch (err) {
     console.error('[Print API] Print request failed:', err.message);

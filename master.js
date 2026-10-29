@@ -310,7 +310,7 @@ async function createWindow() {
 
   global.mainWindow.on('close', HandleExitEvent);
 
-  checkPortinuse(3000)
+  checkPortinuse(process.env.PORT || 8000)
     .then(({ portOccupied }) => {
       if (portOccupied) {
         // Show warning

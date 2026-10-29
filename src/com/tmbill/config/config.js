@@ -23,8 +23,8 @@ if (process.env.FORCE_STAGING) {
 
 const APP_CONFIG = {
   DBConfig: {
-    username: process.env.DB_USER || 'postgres',
-    password: process.env.DB_PASSWORD || 'postgres',
+    username: process.env.DB_USER || 'openpg',
+    password: process.env.DB_PASSWORD || 'openpgpwd',
     host: process.env.DB_HOST || 'localhost',
     port: parseInt(process.env.DB_PORT || '5432', 10),
     DBName: process.env.DB_NAME || 'alfa_restaurant',
@@ -154,7 +154,7 @@ const APP_CONFIG = {
   basePath: '',
   sourcePath: '',
   senderId: '992602538917', // 697935885051 992602538917
-  server_port: 3000,
+  server_port: process.env.PORT ? parseInt(process.env.PORT, 10) : 8000,
   cipherKey: process.env.CIPHER_KEY || 'ep6nEwGhdNKSJZLXR5Q',
   JWT_SECRET: process.env.JWT_SECRET,
   baseUrl,

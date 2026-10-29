@@ -309,6 +309,14 @@ function getModel(sequelize, type) {
         type: type.INTEGER,
         defaultValue: 0,
       },
+      business_date: {
+        type: type.STRING(30),
+        allowNull: true,
+      },
+      night_audit_id: {
+        type: type.INTEGER,
+        allowNull: true,
+      },
       // item_level_total_discount: {
       //   type: type.DECIMAL(10, 2),
       //   allowNull: false,

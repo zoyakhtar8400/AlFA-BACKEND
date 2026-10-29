@@ -59,11 +59,17 @@ router.post('/', async (req, res) => {
           }
           const itemTaxable = Math.max(0, itemSubtotal - itemDiscount);
 
-          let itemTaxRate = 5; // Fallback default 5%
-          let itemTaxName = 'GST';
+          let itemTaxRate = item.tax_per !== undefined ? Number(item.tax_per) : (item.taxRate !== undefined ? Number(item.taxRate) : 5);
+          let itemTaxName = item.tax_name || item.taxCategory || 'GST';
 
           if (item.taxCategory && item.taxCategory.trim() !== '') {
             const taxObj = taxes.find(t => String(t.tax_name).toLowerCase() === String(item.taxCategory).toLowerCase());
+            if (taxObj) {
+               itemTaxRate = Number(taxObj.tax_percentage || 0);
+               itemTaxName = taxObj.tax_name;
+            }
+          } else if (item.tax_name && item.tax_name.trim() !== '') {
+            const taxObj = taxes.find(t => String(t.tax_name).toLowerCase() === String(item.tax_name).toLowerCase());
             if (taxObj) {
                itemTaxRate = Number(taxObj.tax_percentage || 0);
                itemTaxName = taxObj.tax_name;

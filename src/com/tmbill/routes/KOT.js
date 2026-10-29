@@ -56,18 +56,20 @@ router.get('/', async (req, res) => {
     }
 
     if (tableIdParam) {
-      const cleanId = String(tableIdParam).replace(/[^0-9]/g, '') || String(tableIdParam);
-      whereCondition[global.serverdbConnection.Sequelize.Op.or] = [
-        { table_id: Number(cleanId) || 0 },
-        { table_id: cleanId },
-        { table_name: `Table ${cleanId}` },
-        { table_name: `Table 0${cleanId}` },
-        { table_name: `Table ${tableIdParam}` },
-        { table_name: `T${cleanId}` },
-        { table_name: `T0${cleanId}` },
-        { table_name: `Table T${cleanId}` },
-        { table_name: `Table T0${cleanId}` }
+      const rawParam = String(tableIdParam).trim();
+      const numOnly = /^\d+$/.test(rawParam) ? parseInt(rawParam, 10) : null;
+      
+      const orClauses = [
+        { table_name: rawParam },
+        { table_name: `Table ${rawParam}` },
+        { table_name: rawParam.startsWith('Table ') ? rawParam.replace(/^Table\s+/i, '') : `Table ${rawParam}` }
       ];
+
+      if (numOnly !== null) {
+        orClauses.push({ table_id: numOnly });
+      }
+
+      whereCondition[global.serverdbConnection.Sequelize.Op.or] = orClauses;
     }
 
     const kots = await global.serverdbConnection.KOT.findAll({
@@ -242,7 +244,14 @@ const createKotHandler = async (req, res) => {
   try {
     const payload = req.body;
     const targetStoreId = payload.store_id || req.user?.store_id || 'STORE_1';
-    const targetTableId = Number(payload.tableId || payload.table_id || 1);
+
+    const rawOrderType = String(payload.order_type || payload.serviceType || '').toUpperCase();
+    const isDelivery = rawOrderType.includes('DELIV');
+    const isTakeaway = rawOrderType.includes('TAKE');
+    const calculatedBillingType = isDelivery ? 3 : (isTakeaway ? 2 : 1);
+    const isDineIn = calculatedBillingType === 1;
+
+    const targetTableId = isDineIn ? Number(payload.tableId || payload.table_id || 1) : 0;
     const cleanTableNum = String(payload.tableNo || payload.tableId || payload.table_id || '').replace(/[^0-9]/g, '') || String(targetTableId);
 
     try {
@@ -274,7 +283,8 @@ const createKotHandler = async (req, res) => {
       console.warn('Error checking KOT limits:', e.message);
     }
 
-    const isNC = !!(payload.isNC || payload.ncType || payload.order_type === 'NC');
+    const hasValidNCType = Boolean(payload.ncType && String(payload.ncType).trim().toLowerCase() !== 'none');
+    const isNC = Boolean(payload.isNC === true || payload.isNC === 1 || hasValidNCType || payload.order_type === 'NC');
     let generatedNo;
     if (isNC) {
       const ncCount = await global.serverdbConnection.KOT.count({
@@ -308,8 +318,9 @@ const createKotHandler = async (req, res) => {
       totalAmount += (Number(it.qty || it.quantity || 1) * Number(it.unitPrice || it.price || it.rate || 0));
     });
 
-    let isBlankOrNew = payload.isNewSession || payload.is_new_session || false;
-    if (!isBlankOrNew && targetTableId) {
+    const isSupplementary = Boolean(payload.is_supplementary || payload.isSupplementary);
+    let isBlankOrNew = !isSupplementary && (payload.isNewSession || payload.is_new_session || false);
+    if (!isSupplementary && !isBlankOrNew && targetTableId) {
       try {
         let existingTable = await global.serverdbConnection.Table.findByPk(targetTableId);
         if (!existingTable) {
@@ -334,7 +345,7 @@ const createKotHandler = async (req, res) => {
       }
     }
 
-    if (isBlankOrNew) {
+    if (!isSupplementary && isBlankOrNew) {
       console.log(`🧹 Deactivating old KOTs for table ${targetTableId} (Table ${cleanTableNum}) in outlet ${targetStoreId} for new session...`);
       await global.serverdbConnection.KOT.update(
         { is_active: 0, status: 6 },
@@ -353,13 +364,74 @@ const createKotHandler = async (req, res) => {
       );
     }
 
+    // Enforce: Do not create KOT for Takeaway and Delivery - only create Bill
+    if (calculatedBillingType === 2 || calculatedBillingType === 3) {
+      const seqNum = Date.now().toString().slice(-4);
+      const orderIdStr = `ORD-${Date.now()}-${seqNum}`;
+      const rawType = calculatedBillingType === 3 ? 'DELIVERY' : 'TAKEAWAY';
+      const timeStr = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+
+      const createdBill = await global.serverdbConnection.Bill.create({
+        order_id: orderIdStr,
+        table_id: 0,
+        table_name: payload.tableNo || payload.table_name || (calculatedBillingType === 3 ? 'Delivery' : 'Takeaway'),
+        billing_type: calculatedBillingType,
+        delivery_type: rawType,
+        store_id: targetStoreId,
+        payment: payload.paymentMode || payload.payment || 'Cash',
+        order_subtotal: totalAmount,
+        order_level_total_taxes: payload.tax !== undefined ? Number(payload.tax) : Math.round(totalAmount * 0.05 * 100) / 100,
+        discount: String(payload.discount || 0),
+        order_total: Math.round(totalAmount + (payload.tax !== undefined ? Number(payload.tax) : (totalAmount * 0.05)) - Number(payload.discount || 0)),
+        order_state: 'completed',
+        cust_name: payload.customerName || payload.customer_name || 'Walk-in',
+        phone: payload.mobileNo || payload.customer_phone || payload.mobile || '—',
+        custom_bill_number: `Bill ${seqNum}`,
+        bill_number: Number(seqNum),
+        created_time: timeStr,
+        actual_created_time: timeStr,
+        extra_details: {
+          payment_mode: payload.paymentMode || payload.payment || 'Cash',
+          payment_status: 'Paid',
+          status: 'completed',
+          order_type: rawType,
+          takeaway_no: payload.takeaway_no || null,
+          delivery_no: payload.delivery_no || null
+        }
+      });
+
+      if (items.length > 0) {
+        for (const item of items) {
+          const qty = Number(item.qty || item.quantity || 1);
+          const price = Number(item.unitPrice || item.price || item.rate || 0);
+          await global.serverdbConnection.BillItem.create({
+            bill_id: Number(createdBill.id) || 0,
+            orderMasterId: String(createdBill.order_id || createdBill.id),
+            item_id: Number(item.itemId || item.id || 1),
+            title: item.itemName || item.name || 'Item',
+            quantity: qty,
+            price: price,
+            total: qty * price,
+            store_id: targetStoreId
+          }).catch(() => {});
+        }
+      }
+
+      response.setStatus(200);
+      response.setMessage(`${rawType} Bill created successfully`);
+      response.data = createdBill;
+      response.bill = createdBill;
+      return res.json(response);
+    }
+
     const ncType = payload.ncType || payload.nc_type || '';
     const kotData = {
       // mpos_kot model columns: kot_id, table_id, table_name, custom_bill_number, in_time, waiter, amount, is_active, store_id, status, kot_date, customer_name
       // NO kot_no or table_no columns exist in mpos_kot
       custom_bill_number: customBillNo,
       table_id: targetTableId,
-      table_name: payload.tableNo ? `Table ${payload.tableNo}` : (payload.table_name || `Table ${targetTableId}`),
+      table_name: isDineIn ? (payload.tableNo ? `Table ${payload.tableNo}` : (payload.table_name || `Table ${targetTableId}`)) : (payload.tableNo || payload.table_name || (calculatedBillingType === 3 ? 'Delivery' : 'Takeaway')),
+      billing_type: calculatedBillingType,
       customer_name: payload.customerName || payload.customer_name || 'Walk-in',
       customer_mobile: payload.mobileNo || payload.customer_phone || payload.mobile || '',
       store_id: targetStoreId,
@@ -372,9 +444,12 @@ const createKotHandler = async (req, res) => {
       extra_details: JSON.stringify({
         isNC,
         ncType,
+        is_supplementary: isSupplementary ? 1 : 0,
+        order_id: payload.order_id || payload.orderId || null,
+        bill_no: payload.bill_no || payload.billNo || null,
         pax: payload.pax || payload.guests || 1,
         guests: payload.guests || payload.pax || 1,
-        order_type: payload.order_type || 'DINE_IN',
+        order_type: calculatedBillingType === 3 ? 'DELIVERY' : (calculatedBillingType === 2 ? 'TAKEAWAY' : 'DINE_IN'),
         takeaway_no: payload.takeaway_no || null,
         delivery_no: payload.delivery_no || null,
         customer_address: payload.customer_address || payload.address || '',
@@ -518,14 +593,14 @@ const createKotHandler = async (req, res) => {
             quantity: qty,
             item_price: price,
             amount: qty * price,
-            store_id: 'STORE_1'
+            store_id: targetStoreId
           }, { transaction: t });
         }
       }
     });
 
-    // Update table status to KOT_CUT in PostgreSQL
-    if (payload.tableId || payload.table_id || payload.tableNo) {
+    // Update table status to KOT_CUT in PostgreSQL strictly for Dine-In only
+    if (isDineIn && (payload.tableId || payload.table_id || payload.tableNo)) {
       const cleanNum = String(payload.tableNo || payload.tableId || payload.table_id || '').replace(/[^0-9]/g, '');
       const numId = Number(cleanNum) || 1;
       const paddedNo = String(numId).padStart(2, '0');
@@ -1385,6 +1460,21 @@ router.post('/:id/status', updateStatusHandler);
 router.post('/:id/cancel', (req, res, next) => {
   req.body.status = 'Cancelled';
   return updateStatusHandler(req, res, next);
+});
+
+// DELETE /all — delete all KOTs
+router.delete('/all', async (req, res) => {
+  const response = new ResponseMessage(200, '');
+  try {
+    await global.serverdbConnection.KOTItem.destroy({ where: {} }).catch(() => {});
+    await global.serverdbConnection.KOT.destroy({ where: {} }).catch(() => {});
+    response.setStatus(200);
+    response.setMessage('All KOTs deleted successfully');
+  } catch (err) {
+    response.setStatus(400);
+    response.setMessage(err.message);
+  }
+  res.json(response);
 });
 
 // DELETE /:id
